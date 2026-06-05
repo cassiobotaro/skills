@@ -29,6 +29,13 @@ Two plugins bundle an MCP server configuration used for validation and rendering
 - **mermaid-sequence** — connects to the public [Mermaid MCP server](https://mcp.mermaid.ai/mcp) to validate and preview diagrams. Works out of the box.
 - **structurizr** — expects a Structurizr MCP server at `http://localhost:3000/mcp` to parse, validate, and export workspaces. You need to run that server locally; without it the skill still authors DSL, but cannot validate it.
 
+If you prefer to register the MCP servers yourself (e.g. to use the skills without the bundled config, or to make the servers available outside the plugins), add them at user scope:
+
+```bash
+claude mcp add --scope user --transport http structurizr http://localhost:3000/mcp
+claude mcp add --scope user --transport http mermaid https://mcp.mermaid.ai/mcp
+```
+
 ## Repository layout
 
 Each plugin lives in its own directory (`adr/`, `structurizr/`, `mermaid-sequence/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
