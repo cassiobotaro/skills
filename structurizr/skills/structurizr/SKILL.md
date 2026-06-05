@@ -218,8 +218,9 @@ are none, simply don't emit `!adrs`.
 
 ### 6. Validate — always, before declaring done
 
-Prefer the **Structurizr MCP server** (the user runs it via `c4_mcp`, exposing DSL
-validate/parse/inspect tools and Mermaid/PlantUML export at `http://localhost:3000/mcp`):
+Prefer the **Structurizr MCP server** (exposes DSL validate/parse/inspect tools and
+Mermaid/PlantUML export; this plugin's bundled MCP config expects it at
+`http://localhost:3000/mcp`):
 
 1. Check whether Structurizr MCP tools are available in the session (e.g. via ToolSearch —
    tool names contain "structurizr"). If yes, run the DSL validation tool on the workspace
@@ -227,8 +228,11 @@ validate/parse/inspect tools and Mermaid/PlantUML export at `http://localhost:30
 2. If MCP tools are not connected, fall back to the Docker image:
    `docker run --rm -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes -v "$PWD":/usr/local/structurizr structurizr/structurizr validate -workspace workspace.dsl`
    (the env var lets bundled theme names like `amazon-web-services-2025.07` resolve)
-3. If neither is available, say so explicitly and give the user both commands — never imply
-   the file was validated when it wasn't.
+3. If neither is available, say so explicitly and give the user both the `validate`
+   command above and the command that starts the MCP server, so the next session can
+   validate through it:
+   `docker run --rm -p 3000:3000 -e PORT=3000 -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes structurizr/mcp -dsl -mermaid -plantuml`
+   — and never imply the file was validated when it wasn't.
 
 Common parse errors: referencing an element before it is defined (the DSL has no forward
 references — define first, or use `this` inside the element's own block), an opening `{`
@@ -246,18 +250,34 @@ descriptions, technologies, label direction/specificity, legend coverage). Fix w
 
 ### 8. Hand off
 
-Tell the user how to see and export the result with their own tooling:
+Tell the user how to see and export the result. The image for both is
+`structurizr/structurizr` (current, consolidated) — never suggest `structurizr/lite`,
+it is deprecated.
 
-- `c4_local` → Structurizr UI at `http://localhost:8080` (live-reloads on DSL changes;
-  saves layout + `workspace.json`).
-- `c4_export <format>` → exports `workspace.json` to `diagrams/` (formats include
-  `plantuml`, `mermaid`, `json`, `dot`, `ilograph`, `d2`, `static`). Note it reads
-  `workspace.json`, so preview with `c4_local` at least once first (or export from the
-  `.dsl` directly with `-workspace workspace.dsl`).
-- `c4_mcp` → MCP server for validation/export tools, `c4_update` → refresh images.
+- **Preview UI** at `http://localhost:8080` — live-reloads on DSL changes and saves
+  manual layout into `workspace.json`:
 
-The images in play are `structurizr/structurizr` (current, consolidated) and
-`structurizr/mcp`. Never suggest `structurizr/lite` — it is deprecated.
+  ```
+  docker run --rm -it -p 8080:8080 -u $(id -u):$(id -g) \
+      -v "$PWD":/usr/local/structurizr \
+      -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
+      structurizr/structurizr local
+  ```
+
+- **Export** to `diagrams/` in another format (`plantuml`, `mermaid`, `json`, `dot`,
+  `ilograph`, `d2`, `static`):
+
+  ```
+  docker run --rm -u $(id -u):$(id -g) \
+      -v "$PWD":/usr/local/structurizr \
+      -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
+      structurizr/structurizr export -workspace workspace.json -format <format> -output diagrams
+  ```
+
+  This reads `workspace.json` (where saved layout lives), so preview with the UI at
+  least once first — or export straight from the DSL with `-workspace workspace.dsl`.
+
+If the user has their own wrappers/aliases around these images, respect those instead.
 
 ## Reference files
 
