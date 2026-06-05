@@ -1,0 +1,45 @@
+{
+  "skill_name": "adr",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "clear-decision-fresh-repo",
+      "prompt": "No nosso serviço de pedidos a gente decidiu usar PostgreSQL em vez de MongoDB. O motivo principal é que o fluxo de criação de pedido atualiza estoque, pagamento e pedido juntos e precisa de transação ACID; além disso o time já tem experiência com Postgres e a empresa já paga RDS. A desvantagem que discutimos é que o schema fica mais rígido e migrações viram um passo de deploy. Escreve um ADR documentando essa decisão. O repositório ainda não tem nenhum ADR.",
+      "expected_output": "Cria doc/adr com seed estilo adr init: 0001-record-architecture-decisions.md (conteúdo canônico do adr-tools) e a decisão como 0002-use-postgresql-...md em inglês no formato adr-tools/Nygard: título numerado sem zero-padding no H1, Date ISO, Status (Accepted), Context neutro descrevendo as forças (transações ACID, experiência do time, RDS), Decision em 'We will...', Consequences cobrindo positivas e negativas (schema rígido, migrações). Nome de arquivo NNNN-titulo-em-kebab.md. Não inventa fatos não citados.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "eval_name": "vague-decision-asks-instead-of-inventing",
+      "prompt": "escreve um adr ai dizendo que vamos trocar o redis",
+      "expected_output": "Não escreve um ADR completo inventando contexto. Identifica que a decisão está vaga e faz perguntas direcionadas: trocar o Redis por quê (custo, operação, limitação)? trocar por qual tecnologia? qual o papel do Redis hoje (cache, sessão, fila)? quais consequências/trade-offs foram considerados? Só depois (ou se o usuário responder) escreveria o ADR. Se gerar algum esqueleto, deixa explícito o que está pendente em vez de preencher com suposições.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "eval_name": "supersede-existing-adr",
+      "prompt": "Esse repositório já tem ADRs em doc/adr. A gente decidiu abandonar a decisão do ADR 2 (sessões no Redis): vamos passar a usar tokens JWT stateless, porque o cluster Redis virou ponto único de falha nos deploys multi-região e o custo de manter ele replicado não compensa; com JWT a gente aceita o trade-off de não conseguir revogar sessão imediatamente (vamos usar expiração curta de 15 minutos). Escreve o novo ADR substituindo o antigo.",
+      "expected_output": "Cria doc/adr/0004-... em inglês com Status 'Accepted' seguido de linha em branco e 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' (texto do link = H1 do alvo sem '# ', href = basename), e EDITA o 0002 removendo a linha 'Accepted' e deixando o Status como 'Superseded by [4. ...](0004-...)' sem alterar nada mais do ADR antigo (ADRs são imutáveis fora do Status). Grafia correta 'Superseded/Supersedes' (não a legada 'Superceded'). Numeração continua do maior existente (0004). Contexto e consequências refletem só o que foi dito (SPOF multi-região, custo, expiração de 15min).",
+      "files": [
+        "files/session-service/doc/adr/0001-record-architecture-decisions.md",
+        "files/session-service/doc/adr/0002-store-sessions-in-redis.md",
+        "files/session-service/doc/adr/0003-use-grpc-for-internal-communication.md"
+      ],
+      "assertions": []
+    },
+    {
+      "id": 4,
+      "eval_name": "custom-dir-detection-and-numbering",
+      "prompt": "Documenta como ADR a decisão que tomamos hoje: a API pública vai ser versionada por URL (/v1, /v2) em vez de header de versão. Motivos: é o que nossos clientes de SDK já esperam, dá pra rotear por versão no gateway, e fica óbvio em logs e curl. O contra que anotamos: URLs proliferam e a gente vai ter que manter no máximo duas versões ativas ao mesmo tempo.",
+      "expected_output": "Detecta via .adr-dir que os ADRs ficam em docs/architecture/decisions (não usa doc/adr default), continua a numeração existente criando 0003-version-public-api-via-url.md (ou slug equivalente) em inglês, no formato adr-tools, sem tocar nos ADRs existentes. Consequences inclui o limite de duas versões ativas.",
+      "files": [
+        "files/api-platform/.adr-dir",
+        "files/api-platform/docs/architecture/decisions/0001-record-architecture-decisions.md",
+        "files/api-platform/docs/architecture/decisions/0002-expose-public-api-as-rest.md"
+      ],
+      "assertions": []
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "validator": "mcp.mermaid.ai validate_and_render_mermaid_diagram",
+  "blocks": 4,
+  "all_valid": true,
+  "results": [
+    {
+      "block": "eval-3-delivery-saga/without_skill#0",
+      "lines": 89,
+      "messages": 56,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/iD6lkm"
+    },
+    {
+      "block": "eval-3-delivery-saga/without_skill#1",
+      "lines": 33,
+      "messages": 17,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/cVT1vU"
+    },
+    {
+      "block": "eval-3-delivery-saga/without_skill#2",
+      "lines": 33,
+      "messages": 17,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/MNuBTe"
+    },
+    {
+      "block": "eval-3-delivery-saga/without_skill#3",
+      "lines": 38,
+      "messages": 22,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/9INfKF"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "cassiobotaro-skills",
+  "owner": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
+  "description": "Architecture documentation skills: ADRs, C4/Structurizr models, Mermaid sequence diagrams",
+  "plugins": [
+    {
+      "name": "adr",
+      "source": "./adr",
+      "description": "Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format, file-compatible with adr-tools"
+    },
+    {
+      "name": "structurizr",
+      "source": "./structurizr",
+      "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL"
+    },
+    {
+      "name": "mermaid-sequence",
+      "source": "./mermaid-sequence",
+      "description": "Write and edit Mermaid sequence diagrams as fenced code blocks that render directly in Markdown"
+    }
+  ]
+}

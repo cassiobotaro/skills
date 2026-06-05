@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-2-complete-workspace-with_skill-iteration3",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0."
+    },
+    {
+      "text": "Model matches the spec exactly; nothing invented",
+      "passed": true,
+      "evidence": "6 containers + external Google Workspace; nginx folded into SPA tech; 2 confirmations asked (Redis style, redirect path)."
+    },
+    {
+      "text": "Requested views present incl. dynamic redirect flow",
+      "passed": true,
+      "evidence": "SystemContext, Containers, dynamic 'Redirecionamento' with 4 backed steps."
+    },
+    {
+      "text": "Styles differentiate database/queue/external",
+      "passed": true,
+      "evidence": "cylinder, pipe, grey external, browser shape for SPA."
+    },
+    {
+      "text": "Modern syntax only",
+      "passed": true,
+      "evidence": "No legacy keywords; scope softwaresystem present."
+    },
+    {
+      "text": "Conditional reference reading (token discipline)",
+      "passed": true,
+      "evidence": "Read only SKILL.md + dsl-reference.md + modeling-patterns.md (queue present, justified); skipped deployment/advanced/classification/diagrams. 22,933 tokens vs 33,942 in iteration 1 (-32%)."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

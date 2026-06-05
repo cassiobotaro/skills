@@ -1,0 +1,31 @@
+{
+  "run_id": "eval-2-with_skill",
+  "expectations": [
+    {
+      "text": "Does NOT deliver a finished ADR padded with invented context, replacement technology, or consequences",
+      "passed": true,
+      "evidence": "No ADR file created; the agent declined to write and explained why (record-don't-invent)."
+    },
+    {
+      "text": "Final response asks targeted clarifying questions covering at least two of: what replaces Redis, why the change (forces), Redis's current role (cache/session/queue), accepted trade-offs",
+      "passed": true,
+      "evidence": "Asks all four: replacement technology + current role of Redis (Q1), why now/forces (Q2), accepted trade-off (Q3), plus Accepted vs Proposed status."
+    },
+    {
+      "text": "If any ADR file is created at all, it is explicitly a draft/skeleton with pending markers — not fabricated content presented as fact",
+      "passed": true,
+      "evidence": "No file created at all (vacuously satisfied); agent grounded its summary in the repo (redis:7 in docker-compose.yml) without fabricating."
+    },
+    {
+      "text": "Final response is in Portuguese, matching the user's conversation language",
+      "passed": true,
+      "evidence": "final_response.md is entirely in Portuguese."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

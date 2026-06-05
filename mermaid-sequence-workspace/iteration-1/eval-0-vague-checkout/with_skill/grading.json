@@ -1,0 +1,26 @@
+{
+  "run_id": "eval-0-vague-checkout-with_skill",
+  "expectations": [
+    {
+      "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+      "passed": true,
+      "evidence": "answer.md is exactly a set of 5 numbered clarifying questions (participants/humans-vs-systems, trigger+call order+returns, sync vs async, error paths in/out, real details vs conceptual notes); no diagram delivered."
+    },
+    {
+      "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+      "passed": true,
+      "evidence": "No invented flow; the only endpoint mentioned (POST /v1/orders) is explicitly marked as an example ('ex.:')."
+    },
+    {
+      "text": "Any mermaid code included parses successfully (validated)",
+      "passed": true,
+      "evidence": "Vacuously true — no mermaid code included (correct behavior for a vague request)."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

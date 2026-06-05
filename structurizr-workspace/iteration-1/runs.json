@@ -1,0 +1,10 @@
+{
+  "a20829050810fa872": "eval-1-ambiguous-spec/with_skill",
+  "a68b715532326bdde": "eval-1-ambiguous-spec/without_skill",
+  "a7b4f5c191bdd6a02": "eval-2-complete-workspace/with_skill",
+  "a2945cb22442db9fe": "eval-2-complete-workspace/without_skill",
+  "a236cb78d6aad9216": "eval-3-evolve-existing/with_skill",
+  "a74df70f5d53e0417": "eval-3-evolve-existing/without_skill",
+  "ae79734a90c0f7ae2": "eval-4-landscape/with_skill",
+  "a5270283e088f7daa": "eval-4-landscape/without_skill"
+}

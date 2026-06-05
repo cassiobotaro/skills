@@ -1,0 +1,13 @@
+{
+  "eval_id": 4,
+  "eval_name": "eval-4-landscape",
+  "prompt": "Nosso time de arquitetura quer uma visão geral de todos os sistemas da empresa (somos uma fintech de crédito). Tem o Portal do Cliente (web e app), o Motor de Crédito que avalia as propostas, o sistema de Cobrança, o Core Bancário que é um produto terceirizado da Matera, e o Data Lake do time de dados. Clientes usam o Portal; analistas de crédito usam o backoffice do Motor de Crédito; o time de cobrança usa o sistema de Cobrança. Propostas aprovadas no Motor de Crédito viram contratos no Core Bancário; a Cobrança lê os contratos do Core; e todos os sistemas internos mandam eventos pro Data Lake. Faz um diagrama de landscape disso num workspace.dsl.",
+  "assertions": [
+    "DSL validates cleanly with the Structurizr CLI",
+    "Right abstraction for a landscape: people + the 5 described software systems, no containers defined",
+    "systemLandscape view present and workspace scoped as landscape (configuration { scope landscape })",
+    "Core Bancário (Matera) distinguished as third-party (tag + distinct style)",
+    "No silently invented relationships — Portal→Motor de Crédito (never stated) must be absent or explicitly questioned",
+    "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)"
+  ]
+}

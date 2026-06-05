@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-4-landscape-with_skill",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0."
+    },
+    {
+      "text": "Right abstraction for a landscape: people + the 5 described software systems, no containers defined",
+      "passed": true,
+      "evidence": "3 people + 5 systems, zero container keywords; web/app and backoffice correctly collapsed into system descriptions with rationale."
+    },
+    {
+      "text": "systemLandscape view present and workspace scoped as landscape (configuration { scope landscape })",
+      "passed": true,
+      "evidence": "systemLandscape 'Landscape' view + configuration { scope landscape }."
+    },
+    {
+      "text": "Core Bancário (Matera) distinguished as third-party (tag + distinct style)",
+      "passed": true,
+      "evidence": "tags 'External' + grey style; description notes it is a Matera product / closed box."
+    },
+    {
+      "text": "No silently invented relationships — Portal→Motor de Crédito (never stated) must be absent or explicitly questioned",
+      "passed": true,
+      "evidence": "Relationship omitted from the model AND raised as an explicit open question with the exact DSL line ready if confirmed."
+    },
+    {
+      "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+      "passed": true,
+      "evidence": "No legacy keywords; validation and preview instructions use structurizr/structurizr and c4_local."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

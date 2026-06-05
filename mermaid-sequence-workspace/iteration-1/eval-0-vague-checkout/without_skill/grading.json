@@ -1,0 +1,26 @@
+{
+  "run_id": "eval-0-vague-checkout-without_skill",
+  "expectations": [
+    {
+      "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+      "passed": false,
+      "evidence": "Delivered a complete invented checkout diagram (8 participants, POST /checkout, stock-reservation flow) as the primary deliverable; questions appear only at the end as refinements."
+    },
+    {
+      "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+      "passed": true,
+      "evidence": "The invention is disclosed ('modelei um fluxo de checkout típico', 'Premissas que adotei'), so the specifics are framed as assumptions rather than facts — though a paste-ready plausible-but-unverified diagram for a README is exactly the risk the disclosure only partially mitigates."
+    },
+    {
+      "text": "Any mermaid code included parses successfully (validated)",
+      "passed": true,
+      "evidence": "Validated via mcp.mermaid.ai: 1 block, parses (23 messages)."
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 1,
+    "total": 3,
+    "pass_rate": 0.6667
+  }
+}

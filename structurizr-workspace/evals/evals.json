@@ -1,0 +1,69 @@
+{
+  "skill_name": "structurizr",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "ambiguous-spec-asks-instead-of-inventing",
+      "prompt": "Preciso documentar a arquitetura do nosso sistema de pedidos usando structurizr. A gente tem o OrderHub, que é o sistema principal; ele conversa com um negócio de pagamentos que outro time daqui mantém; tem um job que roda de madrugada pra conciliar notas fiscais; um Redis; e tem também a 'plataforma de notificações' que manda email e push pros clientes. Cria o workspace.dsl pra mim com os diagramas.",
+      "expected_output": "Não inventa detalhes. Identifica as ambiguidades (pagamentos: sistema externo vs interno? job de conciliação: container do OrderHub ou sistema separado? Redis: cache de quem? plataforma de notificações: sistema de outro time?) e faz perguntas de classificação fundamentadas no modelo C4 (propriedade/time, unidade de deploy, fronteira de sistema) antes de gerar — ou gera apenas o que está claro, marcando explicitamente as pendências e perguntando. Não atribui tecnologias não informadas.",
+      "files": [],
+      "assertions": [
+        "Generated DSL validates cleanly with the Structurizr CLI",
+        "Does not invent technologies or elements the user never stated",
+        "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+        "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+        "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "complete-workspace-from-clear-spec",
+      "prompt": "Quero criar o workspace.dsl na raiz deste repositório para o sistema Encurtaí, nosso encurtador de URLs interno. Funciona assim: usuários da empresa acessam um SPA em React (servido por nginx) que chama uma API REST escrita em Go (Gin). A API grava e lê os links num PostgreSQL 16 e usa um Redis 7 como cache de redirecionamentos. Existe também um worker em Go que consome eventos de clique de uma fila RabbitMQ (publicados pela API) e grava métricas agregadas no mesmo PostgreSQL. O sistema todo é do nosso time; o único sistema externo é o Google Workspace, que a API usa para autenticação SSO dos usuários. Gere o diagrama de contexto e o de containers, com estilos pra diferenciar banco, fila e sistema externo, e um diagrama dinâmico mostrando o fluxo de redirecionamento de um link (usuário acessa link curto, API consulta cache, em caso de miss consulta o Postgres, e publica o evento de clique na fila).",
+      "expected_output": "workspace.dsl completo e sintaticamente válido na raiz: person, softwareSystem Encurtaí com containers (SPA React, API Go, worker Go, PostgreSQL, Redis, RabbitMQ), Google Workspace como sistema externo, relacionamentos com descrição e tecnologia, views systemContext + container + dynamic (fluxo de redirecionamento), estilos diferenciando banco (cylinder), fila (pipe) e sistema externo, sintaxe moderna (sem keywords obsoletas), autoLayout. Não inventa elementos não citados.",
+      "files": [],
+      "assertions": [
+        "DSL validates cleanly with the Structurizr CLI",
+        "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+        "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+        "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+        "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+        "Relationship labels are specific and inter-process links carry technology/protocol"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "evolve-existing-dsl-deployment-dynamic-adrs",
+      "prompt": "Esse repositório já tem um workspace.dsl que descreve nosso sistema de faturamento. Precisamos evoluir ele: (1) adicionar o ambiente de produção na AWS — o Portal e a API rodam em ECS Fargate (a API com 2 instâncias), o banco é um RDS PostgreSQL, e tem um Application Load Balancer na frente da API; o worker também roda no ECS Fargate; (2) criar um diagrama dinâmico do fluxo 'emissão de fatura': o atendente emite pelo portal, o portal chama a API, a API grava no banco e publica na fila, o worker consome a fila e envia pro ERP; (3) a gente mantém ADRs em docs/adr — vincula eles no workspace. Não mude o que já existe além do necessário.",
+      "expected_output": "workspace.dsl editado preservando o conteúdo existente (identificadores hierárquicos, estilos, views atuais): adiciona deploymentEnvironment de produção com nós AWS (ECS Fargate com containerInstances, API com 2 instâncias, RDS, ALB como infrastructureNode), uma view deployment, uma view dynamic do fluxo de emissão usando os relacionamentos já existentes no modelo, e a diretiva !adrs apontando para docs/adr. Sintaxe válida e mínima alteração do que já existia.",
+      "files": [
+        "files/legacy-billing/workspace.dsl",
+        "files/legacy-billing/docs/adr/0001-registrar-decisoes-de-arquitetura.md",
+        "files/legacy-billing/docs/adr/0002-usar-postgresql-como-banco-de-dados.md",
+        "files/legacy-billing/docs/adr/0003-processamento-assincrono-com-rabbitmq.md"
+      ],
+      "assertions": [
+        "Edited DSL validates cleanly with the Structurizr CLI",
+        "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+        "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+        "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+        "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+        "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "system-landscape-fintech",
+      "prompt": "Nosso time de arquitetura quer uma visão geral de todos os sistemas da empresa (somos uma fintech de crédito). Tem o Portal do Cliente (web e app), o Motor de Crédito que avalia as propostas, o sistema de Cobrança, o Core Bancário que é um produto terceirizado da Matera, e o Data Lake do time de dados. Clientes usam o Portal; analistas de crédito usam o backoffice do Motor de Crédito; o time de cobrança usa o sistema de Cobrança. Propostas aprovadas no Motor de Crédito viram contratos no Core Bancário; a Cobrança lê os contratos do Core; e todos os sistemas internos mandam eventos pro Data Lake. Faz um diagrama de landscape disso num workspace.dsl.",
+      "expected_output": "workspace.dsl válido modelando o landscape: pessoas (Cliente, Analista de Crédito, Time de Cobrança), softwareSystems sem containers (Portal do Cliente, Motor de Crédito, Cobrança, Data Lake) e Core Bancário marcado como externo/terceiro (Matera), relacionamentos entre sistemas conforme descrito, view systemLandscape, estilos distinguindo interno de externo, escopo de workspace apropriado para landscape. Não inventa sistemas nem detalhes de containers que não foram pedidos.",
+      "files": [],
+      "assertions": [
+        "DSL validates cleanly with the Structurizr CLI",
+        "Right abstraction for a landscape: people + the 5 described software systems, no containers defined",
+        "systemLandscape view present and workspace scoped as landscape (configuration { scope landscape })",
+        "Core Bancário (Matera) distinguished as third-party (tag + distinct style)",
+        "No silently invented relationships — Portal→Motor de Crédito (never stated) must be absent or explicitly questioned",
+        "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-2-order-api-code-with_skill",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+      "passed": true,
+      "evidence": "Validated via mcp.mermaid.ai: parses (9-message diagram)."
+    },
+    {
+      "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+      "passed": true,
+      "evidence": "Exact chain present; 201 Created with the real response body {order_id, status: \"confirmed\", total_cents}."
+    },
+    {
+      "text": "The declined-payment branch from the code is shown (declined -> 402)",
+      "passed": true,
+      "evidence": "alt branch status == \"declined\" -> 402 Payment Required with detail \"payment declined\"; also covers the PayGate 4xx/5xx -> 500 path that is genuinely in payments.py (raise_for_status + docstring)."
+    },
+    {
+      "text": "Notes/messages carry details actually present in the code and contain nothing absent from the code",
+      "passed": true,
+      "evidence": "Bearer PAYGATE_API_KEY, Idempotency-Key (uuid4), timeout 10s, {card_token, amount, currency BRL, capture true}, INSERT...RETURNING id with status='confirmed', exchange \"orders\" (topic — from the events.py docstring), routing_key order.created, content_type application/json — all traceable to the code."
+    },
+    {
+      "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment",
+      "passed": true,
+      "evidence": "API-)MQ async arrow with note 'fire-and-forget: response does not wait'."
+    },
+    {
+      "text": "Did not ask the user questions that the provided code answers",
+      "passed": true,
+      "evidence": "No questions; the only open point (include the 422 validation branch?) is offered as an optional refinement, which the code alone cannot decide."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

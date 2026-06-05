@@ -1,0 +1,448 @@
+{
+  "metadata": {
+    "skill_name": "structurizr",
+    "skill_path": "/home/cassiobotaro/Projetos/skills/structurizr",
+    "executor_model": "claude-opus-4-8[1m]",
+    "analyzer_model": "claude-opus-4-8[1m]",
+    "timestamp": "2026-06-04T18:07:07Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 110.3,
+        "tokens": 34068,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Generated DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "docker run structurizr/structurizr validate -workspace workspace.dsl → exit 0."
+        },
+        {
+          "text": "Does not invent technologies or elements the user never stated",
+          "passed": true,
+          "evidence": "Container technologies left generic ('Aplicação', 'Job agendado (cron)'); only Redis (stated) is concrete. No extra people/systems. Explicitly lists what it did NOT invent (no relational DB, no SEFAZ, no deployment)."
+        },
+        {
+          "text": "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+          "passed": true,
+          "evidence": "Both modeled as external softwareSystem with tag 'External' (ownership argument cited: 'outro time mantém'); notifications ownership additionally raised as open question #1."
+        },
+        {
+          "text": "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+          "passed": true,
+          "evidence": "4 questions asked, each tied to a classification decision (notifications ownership, job ownership+counterpart, Redis as only store, app technology)."
+        },
+        {
+          "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+          "passed": true,
+          "evidence": "No legacy keywords in DSL; hands off with c4_mcp / structurizr/structurizr validate / c4_local / c4_export. structurizr/lite never mentioned."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 114.8,
+        "tokens": 33942,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "docker validate → exit 0."
+        },
+        {
+          "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+          "passed": true,
+          "evidence": "6 containers + external Google Workspace, exactly as described. nginx folded into SPA technology with explicit rationale (deployment detail), offered to promote if preferred."
+        },
+        {
+          "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+          "passed": true,
+          "evidence": "Views SystemContext, Containers, dynamic RedirectFlow with all 4 described steps; routing-through-SPA interpretation flagged to the user with offer to switch to direct-to-API."
+        },
+        {
+          "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+          "passed": true,
+          "evidence": "Database→cylinder, Queue→pipe, External→grey #999999, person shape; styles driven by tags."
+        },
+        {
+          "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+          "passed": true,
+          "evidence": "grep for legacy keywords → none. configuration { scope softwaresystem } present."
+        },
+        {
+          "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+          "passed": true,
+          "evidence": "All relationships labeled with specific verbs and protocols (HTTPS/JSON, Redis protocol, SQL/TCP, AMQP, HTTPS/OIDC)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8333,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "time_seconds": 107.0,
+        "tokens": 34141,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Edited DSL validates cleanly with the Structurizr CLI",
+          "passed": false,
+          "evidence": "validate → exit 1: 'The destination element \"alb\" does not exist at line 71: faturamento.portal -> alb'. With !identifiers hierarchical, the alb infrastructureNode is nested in unbound deploymentNodes and is not addressable as bare 'alb' — ancestor nodes need identifiers (e.g. region.alb)."
+        },
+        {
+          "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+          "passed": true,
+          "evidence": "All original elements, relationships, views and styles intact; changes are purely additive (!adrs, deploymentEnvironment, 2 views, AWS theme)."
+        },
+        {
+          "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+          "passed": true,
+          "evidence": "All present: ECS tasks as Docker Container nodes, 'instances 2' on API Task, Amazon RDS→PostgreSQL with instanceOf banco, ALB as infrastructureNode with -/> rerouting, view Deployment-Producao. (Wiring broken per assertion 1.)"
+        },
+        {
+          "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+          "passed": true,
+          "evidence": "dynamic view EmissaoDeFatura: atendente→portal→api→banco, api→fila, worker→fila, worker→erp — all six steps reuse existing model relationships."
+        },
+        {
+          "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+          "passed": true,
+          "evidence": "'!adrs docs/adr' added at workspace level; response correctly identified the Nygard/adr-tools format and chose the default importer."
+        },
+        {
+          "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+          "passed": true,
+          "evidence": "us-east-1 flagged as placeholder; ALB routing decision flagged for review; queue hosting omitted rather than invented (though asking about it would have been even better)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 88.0,
+        "tokens": 36128,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "docker validate → exit 0."
+        },
+        {
+          "text": "Right abstraction for a landscape: people + the 5 described software systems, no containers defined",
+          "passed": true,
+          "evidence": "3 people + 5 systems, zero container keywords; web/app and backoffice correctly collapsed into system descriptions with rationale."
+        },
+        {
+          "text": "systemLandscape view present and workspace scoped as landscape (configuration { scope landscape })",
+          "passed": true,
+          "evidence": "systemLandscape 'Landscape' view + configuration { scope landscape }."
+        },
+        {
+          "text": "Core Bancário (Matera) distinguished as third-party (tag + distinct style)",
+          "passed": true,
+          "evidence": "tags 'External' + grey style; description notes it is a Matera product / closed box."
+        },
+        {
+          "text": "No silently invented relationships — Portal→Motor de Crédito (never stated) must be absent or explicitly questioned",
+          "passed": true,
+          "evidence": "Relationship omitted from the model AND raised as an explicit open question with the exact DSL line ready if confirmed."
+        },
+        {
+          "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+          "passed": true,
+          "evidence": "No legacy keywords; validation and preview instructions use structurizr/structurizr and c4_local."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6,
+        "passed": 3,
+        "failed": 2,
+        "total": 5,
+        "time_seconds": 63.6,
+        "tokens": 11370,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Generated DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "docker validate → exit 0."
+        },
+        {
+          "text": "Does not invent technologies or elements the user never stated",
+          "passed": false,
+          "evidence": "Invented a person 'Time de Pagamentos' (never mentioned as an actor); technology field carries speculative stacks ('Aplicação (ex.: Java/Spring, Node, etc.)'); assumed the conciliation job reads from Redis and reconciles against Pagamentos without flagging it as the central unknown."
+        },
+        {
+          "text": "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+          "passed": true,
+          "evidence": "Both modeled as separate systems tagged 'Time Interno'; decision #2 explicitly asks to confirm."
+        },
+        {
+          "text": "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+          "passed": true,
+          "evidence": "4 refinement questions asked (Redis scope, main database, sync/async integration, job data source)."
+        },
+        {
+          "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+          "passed": false,
+          "evidence": "Recommends the deprecated structurizr/lite Docker image ('docker run … structurizr/lite'); image is EOL/frozen — modern equivalent is structurizr/structurizr local."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8333,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "time_seconds": 81.8,
+        "tokens": 13388,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "docker validate → exit 0, but with repeated EOL warnings caused by 'theme default' pulling the cloud-service theme (service EOL 2026-09-30)."
+        },
+        {
+          "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+          "passed": true,
+          "evidence": "6 containers + external Google Workspace. Added a direct usuario→api redirect relationship (reasonable reading of the redirect flow)."
+        },
+        {
+          "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+          "passed": true,
+          "evidence": "Views Contexto, Containers, dynamic Redirecionamento with the 4 steps (user hits API directly)."
+        },
+        {
+          "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+          "passed": true,
+          "evidence": "Banco de Dados→cylinder, Fila→pipe (purple), Sistema Externo→grey; cache also cylinder (orange)."
+        },
+        {
+          "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+          "passed": false,
+          "evidence": "Line 118: 'theme default' — removed in Structurizr DSL v6.0.0; triggers cloud-service EOL warnings on validation and will not render after 2026-09-30."
+        },
+        {
+          "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+          "passed": true,
+          "evidence": "Labels specific with protocols (HTTPS/JSON via 'JSON/HTTPS', RESP, AMQP, SQL/TCP, OAuth 2.0/OIDC)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8333,
+        "passed": 5,
+        "failed": 1,
+        "total": 6,
+        "time_seconds": 92.3,
+        "tokens": 16946,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Edited DSL validates cleanly with the Structurizr CLI",
+          "passed": false,
+          "evidence": "validate → exit 1: 'The source element \"portalInstance\" does not exist at line 60: portalInstance -> alb'. Same hierarchical-identifier trap: identifiers bound inside nested deployment nodes are not addressable bare."
+        },
+        {
+          "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+          "passed": true,
+          "evidence": "Original model/views/styles intact; additions only (deployment environment, dynamic view, deployment view, !adrs at end of workspace block)."
+        },
+        {
+          "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+          "passed": true,
+          "evidence": "Fargate nodes for portal/api/worker, API node with instance count 2 (positional '\"\" 2' args), RDS→PostgreSQL, ALB as infrastructureNode, deployment view 'Producao'. (Wiring broken per assertion 1.)"
+        },
+        {
+          "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+          "passed": true,
+          "evidence": "dynamic view EmissaoDeFatura with the six described steps, all matching existing relationships."
+        },
+        {
+          "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+          "passed": true,
+          "evidence": "'!adrs docs/adr' present (placed after the views block; directive itself correct)."
+        },
+        {
+          "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+          "passed": true,
+          "evidence": "Invented Amazon MQ as the queue's production host but explicitly flagged it as a decision to review, along with the us-east-1 placeholder."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 69.2,
+        "tokens": 12097,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "docker validate → exit 0."
+        },
+        {
+          "text": "Right abstraction for a landscape: people + the 5 described software systems, no containers defined",
+          "passed": true,
+          "evidence": "3 people + 5 systems, zero container keywords."
+        },
+        {
+          "text": "systemLandscape view present and workspace scoped as landscape (configuration { scope landscape })",
+          "passed": false,
+          "evidence": "systemLandscape view present, but no configuration/scope block — workspace left unscoped, so landscape-rule validation is not enabled."
+        },
+        {
+          "text": "Core Bancário (Matera) distinguished as third-party (tag + distinct style)",
+          "passed": true,
+          "evidence": "tags 'Externo' + grey style."
+        },
+        {
+          "text": "No silently invented relationships — Portal→Motor de Crédito (never stated) must be absent or explicitly questioned",
+          "passed": false,
+          "evidence": "Added 'portalCliente -> motorCredito \"Envia propostas de crédito\"' without listing it among the assumptions to review (only backoffice placement, 'Streaming' tech and externality were flagged)."
+        },
+        {
+          "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+          "passed": false,
+          "evidence": "No legacy DSL keywords, but recommends the deprecated structurizr/lite image for visualization."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9583,
+        "stddev": 0.0833,
+        "min": 0.8333,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 105.025,
+        "stddev": 11.7916,
+        "min": 88.0,
+        "max": 114.8
+      },
+      "tokens": {
+        "mean": 34569.75,
+        "stddev": 1042.0801,
+        "min": 33942,
+        "max": 36128
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.6916,
+        "stddev": 0.1686,
+        "min": 0.5,
+        "max": 0.8333
+      },
+      "time_seconds": {
+        "mean": 76.725,
+        "stddev": 12.8741,
+        "min": 63.6,
+        "max": 92.3
+      },
+      "tokens": {
+        "mean": 13450.25,
+        "stddev": 2475.4036,
+        "min": 11370,
+        "max": 16946
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.27",
+      "time_seconds": "+28.3",
+      "tokens": "+21120"
+    }
+  },
+  "notes": [
+    "Eval 3 ('validates cleanly') fails in BOTH configurations — both runs hit the identical hierarchical-identifier trap: identifiers defined inside nested deployment nodes ('alb', 'portalInstance') were referenced bare and are unreachable under !identifiers hierarchical. This is the single biggest correctness gap and it is skill-addressable (bind identifiers to ancestor deployment nodes, reference full dotted paths).",
+    "'Asks clarifying questions' (eval 1) passes in both configurations — the baseline also asks good questions. What actually discriminates is inventing-while-asking: the baseline put speculative stacks in a technology field ('ex.: Java/Spring, Node') and invented an actor ('Time de Pagamentos'); the with-skill run kept unknown technologies generic and asked.",
+    "Tooling currency fully discriminates: every baseline run that gave tooling advice (3/4) recommended the deprecated structurizr/lite image; 0/4 with-skill runs did. The eval-2 baseline additionally emitted 'theme default', removed in DSL v6 (validation prints cloud-EOL warnings).",
+    "Landscape modeling discriminates on best practices: with-skill set 'configuration { scope landscape }' and explicitly questioned the unstated Portal→Motor relationship; the baseline omitted the scope and silently added that relationship (only flagging other assumptions).",
+    "Cost of the skill: ~2.6× tokens (mean 34.6k vs 13.5k) and +28s wall time (mean 105.0s vs 76.7s), spent reading SKILL.md + references and on self-review. Pass-rate gain: +26.6pp.",
+    "Harness caveat: background subagents had Write/Bash auto-denied, so no run could write files or self-validate; DSLs were extracted from final responses by the orchestrator and validated by the grader. The skill mandates validation before delivery — with write/exec allowed, the with-skill eval-3 run would likely have caught its own validation error. Interpret eval-3 results with that in mind.",
+    "Eval 3 is otherwise the least discriminating eval (5/6 vs 5/6): both configurations modeled the AWS deployment structurally well; the deciding differences elsewhere were minimal-diff discipline and ADR importer reasoning (with-skill identified the adr-tools format explicitly)."
+  ]
+}

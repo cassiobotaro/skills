@@ -1,0 +1,46 @@
+{
+  "run_id": "eval-1-without_skill",
+  "expectations": [
+    {
+      "text": "Fresh log seeded like adr init: doc/adr/0001-record-architecture-decisions.md created with the canonical adr-tools init content (Nygard link, adr-tools mention)",
+      "passed": false,
+      "evidence": "No seed ADR created; the only file is docs/adr/0001-use-postgresql-instead-of-mongodb-for-the-orders-service.md (also note docs/adr, not the adr-tools default doc/adr)."
+    },
+    {
+      "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
+      "passed": false,
+      "evidence": "Decision ADR is docs/adr/0001-... — wrong directory (docs/adr vs doc/adr) and numbered 0001 since no seed was created."
+    },
+    {
+      "text": "ADR is in English with exactly the four sections in order (Status, Context, Decision, Consequences), H1 uses the un-padded number ('# 2. ...'), and a 'Date: YYYY-MM-DD' line with today's date",
+      "passed": false,
+      "evidence": "Four ## sections in order with H1 '# 1. ...' and ISO date, BUT adds non-canonical '### Positive'/'### Negative' subsections inside Consequences and markdown bold/bullet styling not present in adr-tools format."
+    },
+    {
+      "text": "Status section is 'Accepted'",
+      "passed": true,
+      "evidence": "Status section contains 'Accepted'."
+    },
+    {
+      "text": "Decision section is active voice ('We will ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS",
+      "passed": true,
+      "evidence": "Decision: 'We will use **PostgreSQL** (hosted on Amazon RDS)...'. Context covers all three stated forces."
+    },
+    {
+      "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives",
+      "passed": true,
+      "evidence": "Negative section lists rigid schema and migrations as an explicit deployment step."
+    },
+    {
+      "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated",
+      "passed": false,
+      "evidence": "Invented claims in Context: 'the team has less operational experience running and tuning them [MongoDB transactions] in production' and 'transactions... are not its primary design center' — neither stated by the user."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 4,
+    "total": 7,
+    "pass_rate": 0.4286
+  }
+}

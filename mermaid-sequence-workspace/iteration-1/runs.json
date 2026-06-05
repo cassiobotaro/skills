@@ -1,0 +1,15 @@
+{
+  "iteration": 1,
+  "skill": "mermaid-sequence",
+  "runs": [
+    {"agent_id": "a5e710be596a5f982", "eval": "eval-0-vague-checkout", "config": "with_skill"},
+    {"agent_id": "a3fbb6e56b843ecad", "eval": "eval-0-vague-checkout", "config": "without_skill"},
+    {"agent_id": "a3b0fdb3030c28267", "eval": "eval-1-password-reset", "config": "with_skill"},
+    {"agent_id": "a5b024116a7faf1ad", "eval": "eval-1-password-reset", "config": "without_skill"},
+    {"agent_id": "a803183f513def208", "eval": "eval-2-order-api-code", "config": "with_skill"},
+    {"agent_id": "a699a6182457ef14f", "eval": "eval-2-order-api-code", "config": "without_skill"},
+    {"agent_id": "a2b4b0c556a1c945b", "eval": "eval-3-delivery-saga", "config": "with_skill"},
+    {"agent_id": "ad2aea71f7b723407", "eval": "eval-3-delivery-saga", "config": "without_skill"}
+  ],
+  "notes": "No Mermaid MCP connected in this session; with_skill runs are expected to exercise the mermaid-cli (npx --no-install) fallback validation path."
+}

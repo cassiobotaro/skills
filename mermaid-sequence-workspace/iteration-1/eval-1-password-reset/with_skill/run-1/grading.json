@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-1-password-reset-with_skill",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+      "passed": true,
+      "evidence": "Validated via mcp.mermaid.ai: parses. Agent avoided raw angle brackets ('redacted values are written as ...'), the exact gotcha that broke the baseline."
+    },
+    {
+      "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+      "passed": true,
+      "evidence": "All present: POST /v1/password-resets message + note (no auth header, {\"email\"}, 5 req/h/IP); 202 in both legs; 429 + Retry-After note; reset_requested via RabbitMQ; SendGrid POST /v3/mail/send with Authorization: Bearer note."
+    },
+    {
+      "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+      "passed": true,
+      "evidence": "alt 'within rate limit' / else 'rate limit exceeded' with 429 + Retry-After."
+    },
+    {
+      "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+      "passed": true,
+      "evidence": "202 is returned before/outside the 'opt user exists' block, with note 'Always 202 (exists or not) to prevent email enumeration' — structurally correct."
+    },
+    {
+      "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+      "passed": true,
+      "evidence": "actor U as User; A-)Q publish and Q-)N deliver are async open-arrow."
+    },
+    {
+      "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+      "passed": true,
+      "evidence": "The two additions (reset_requested event body; generic SendGrid v3 body shape) are explicitly flagged in a dedicated 'placeholders' section as illustrative, not facts."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

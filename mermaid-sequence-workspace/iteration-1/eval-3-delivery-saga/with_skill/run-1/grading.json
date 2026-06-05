@@ -1,0 +1,46 @@
+{
+  "run_id": "eval-3-delivery-saga-with_skill",
+  "expectations": [
+    {
+      "text": "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram",
+      "passed": true,
+      "evidence": "4 diagrams by phase: placement+payment, restaurant acceptance, courier+delivery, notifications."
+    },
+    {
+      "text": "Every mermaid block parses successfully (validated)",
+      "passed": true,
+      "evidence": "All 4 validated via mcp.mermaid.ai."
+    },
+    {
+      "text": "No single diagram exceeds roughly 25 messages",
+      "passed": true,
+      "evidence": "Largest diagram has 18 message arrows (18/13/9/15)."
+    },
+    {
+      "text": "Participant names/labels are consistent across the diagrams",
+      "passed": true,
+      "evidence": "Same id+label pairs across all four (OS as Order Service, K as Kafka, PS as Payment Service, etc.); participant roster listed up front."
+    },
+    {
+      "text": "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit",
+      "passed": true,
+      "evidence": "Numbered headings with one-paragraph intros; explicit 'Continues from step 9 (approved) of diagram 1' prose plus in-diagram continuity notes."
+    },
+    {
+      "text": "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier",
+      "passed": false,
+      "evidence": "Declined->FAILED (d1) and courier retry loop (d3) are drawn; reject->refund+CANCELLED is drawn (d2), but the prompt-established 'customer notified' on cancellation is never drawn — diagram 2's note defers it to diagram 4, and diagram 4 omits order.cancelled, asking the user instead. The fact of notification was established; only its mechanism was open."
+    },
+    {
+      "text": "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested",
+      "passed": true,
+      "evidence": "participants/actors, alt, opt-free, loop, -) async, notes, autonumber; no typed participants, central connections, or other version-gated features."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 1,
+    "total": 7,
+    "pass_rate": 0.8571
+  }
+}

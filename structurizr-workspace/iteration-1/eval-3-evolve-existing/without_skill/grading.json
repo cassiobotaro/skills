@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-3-evolve-existing-without_skill",
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": false,
+      "evidence": "validate → exit 1: 'The source element \"portalInstance\" does not exist at line 60: portalInstance -> alb'. Same hierarchical-identifier trap: identifiers bound inside nested deployment nodes are not addressable bare."
+    },
+    {
+      "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+      "passed": true,
+      "evidence": "Original model/views/styles intact; additions only (deployment environment, dynamic view, deployment view, !adrs at end of workspace block)."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+      "passed": true,
+      "evidence": "Fargate nodes for portal/api/worker, API node with instance count 2 (positional '\"\" 2' args), RDS→PostgreSQL, ALB as infrastructureNode, deployment view 'Producao'. (Wiring broken per assertion 1.)"
+    },
+    {
+      "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+      "passed": true,
+      "evidence": "dynamic view EmissaoDeFatura with the six described steps, all matching existing relationships."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+      "passed": true,
+      "evidence": "'!adrs docs/adr' present (placed after the views block; directive itself correct)."
+    },
+    {
+      "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+      "passed": true,
+      "evidence": "Invented Amazon MQ as the queue's production host but explicitly flagged it as a decision to review, along with the us-east-1 placeholder."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.8333
+  }
+}

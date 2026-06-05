@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-2-complete-workspace-with_skill",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0."
+    },
+    {
+      "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+      "passed": true,
+      "evidence": "6 containers + external Google Workspace, exactly as described. nginx folded into SPA technology with explicit rationale (deployment detail), offered to promote if preferred."
+    },
+    {
+      "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+      "passed": true,
+      "evidence": "Views SystemContext, Containers, dynamic RedirectFlow with all 4 described steps; routing-through-SPA interpretation flagged to the user with offer to switch to direct-to-API."
+    },
+    {
+      "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+      "passed": true,
+      "evidence": "Database→cylinder, Queue→pipe, External→grey #999999, person shape; styles driven by tags."
+    },
+    {
+      "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+      "passed": true,
+      "evidence": "grep for legacy keywords → none. configuration { scope softwaresystem } present."
+    },
+    {
+      "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+      "passed": true,
+      "evidence": "All relationships labeled with specific verbs and protocols (HTTPS/JSON, Redis protocol, SQL/TCP, AMQP, HTTPS/OIDC)."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

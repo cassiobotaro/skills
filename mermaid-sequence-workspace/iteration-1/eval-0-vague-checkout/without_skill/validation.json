@@ -1,0 +1,15 @@
+{
+  "validator": "mcp.mermaid.ai validate_and_render_mermaid_diagram",
+  "blocks": 1,
+  "all_valid": true,
+  "results": [
+    {
+      "block": "eval-0-vague-checkout/without_skill#0",
+      "lines": 40,
+      "messages": 23,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/Xh9bWR"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "run_id": "eval-1-ambiguous-spec-without_skill",
+  "expectations": [
+    {
+      "text": "Generated DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0."
+    },
+    {
+      "text": "Does not invent technologies or elements the user never stated",
+      "passed": false,
+      "evidence": "Invented a person 'Time de Pagamentos' (never mentioned as an actor); technology field carries speculative stacks ('Aplicação (ex.: Java/Spring, Node, etc.)'); assumed the conciliation job reads from Redis and reconciles against Pagamentos without flagging it as the central unknown."
+    },
+    {
+      "text": "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+      "passed": true,
+      "evidence": "Both modeled as separate systems tagged 'Time Interno'; decision #2 explicitly asks to confirm."
+    },
+    {
+      "text": "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+      "passed": true,
+      "evidence": "4 refinement questions asked (Redis scope, main database, sync/async integration, job data source)."
+    },
+    {
+      "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+      "passed": false,
+      "evidence": "Recommends the deprecated structurizr/lite Docker image ('docker run … structurizr/lite'); image is EOL/frozen — modern equivalent is structurizr/structurizr local."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 2,
+    "total": 5,
+    "pass_rate": 0.6
+  }
+}

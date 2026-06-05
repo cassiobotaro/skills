@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-2-complete-workspace-without_skill",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0, but with repeated EOL warnings caused by 'theme default' pulling the cloud-service theme (service EOL 2026-09-30)."
+    },
+    {
+      "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+      "passed": true,
+      "evidence": "6 containers + external Google Workspace. Added a direct usuario→api redirect relationship (reasonable reading of the redirect flow)."
+    },
+    {
+      "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+      "passed": true,
+      "evidence": "Views Contexto, Containers, dynamic Redirecionamento with the 4 steps (user hits API directly)."
+    },
+    {
+      "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+      "passed": true,
+      "evidence": "Banco de Dados→cylinder, Fila→pipe (purple), Sistema Externo→grey; cache also cylinder (orange)."
+    },
+    {
+      "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+      "passed": false,
+      "evidence": "Line 118: 'theme default' — removed in Structurizr DSL v6.0.0; triggers cloud-service EOL warnings on validation and will not render after 2026-09-30."
+    },
+    {
+      "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+      "passed": true,
+      "evidence": "Labels specific with protocols (HTTPS/JSON via 'JSON/HTTPS', RESP, AMQP, SQL/TCP, OAuth 2.0/OIDC)."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.8333
+  }
+}

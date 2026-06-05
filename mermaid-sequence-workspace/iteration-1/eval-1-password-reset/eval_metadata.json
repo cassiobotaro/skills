@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "detailed-password-reset-flow",
+  "prompt": "Create a sequence diagram of our password reset flow for the API docs (it will live in our GitLab wiki, which renders mermaid). The flow: the user submits their email on the web app's forgot-password page. The web app calls POST /v1/password-resets on the Auth API with JSON body {\"email\": \"...\"} — no auth header, it's a public endpoint, but rate-limited: more than 5 requests per hour per IP returns 429 with a Retry-After header. The Auth API looks the user up in Postgres, and whether or not the user exists it always returns 202 Accepted so attackers can't enumerate emails. If the user exists, the Auth API publishes a reset_requested event to RabbitMQ; the Notification worker consumes it and sends the email through SendGrid (POST /v3/mail/send with an Authorization: Bearer header). Please show the rate-limit case too, and add notes with the endpoints/headers/payloads I mentioned.",
+  "assertions": [
+    "Output contains a fenced mermaid sequenceDiagram block that parses successfully with mermaid-cli (exit 0)",
+    "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+    "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+    "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+    "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+    "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)"
+  ]
+}

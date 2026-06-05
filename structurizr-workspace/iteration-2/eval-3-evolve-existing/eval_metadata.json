@@ -1,0 +1,13 @@
+{
+  "eval_id": 3,
+  "eval_name": "eval-3-evolve-existing",
+  "prompt": "Esse repositório já tem um workspace.dsl que descreve nosso sistema de faturamento. Precisamos evoluir ele: (1) adicionar o ambiente de produção na AWS — o Portal e a API rodam em ECS Fargate (a API com 2 instâncias), o banco é um RDS PostgreSQL, e tem um Application Load Balancer na frente da API; o worker também roda no ECS Fargate; (2) criar um diagrama dinâmico do fluxo 'emissão de fatura': o atendente emite pelo portal, o portal chama a API, a API grava no banco e publica na fila, o worker consome a fila e envia pro ERP; (3) a gente mantém ADRs em docs/adr — vincula eles no workspace. Não mude o que já existe além do necessário.",
+  "assertions": [
+    "Edited DSL validates cleanly with the Structurizr CLI",
+    "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+    "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+    "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+    "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+    "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)"
+  ]
+}

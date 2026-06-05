@@ -1,0 +1,7 @@
+{
+  "total_tokens": 22162,
+  "duration_ms": 57483,
+  "total_duration_seconds": 57.5,
+  "tool_uses": 8,
+  "note": "Focused re-run after hierarchical-identifier fix; DSL extracted from final response."
+}

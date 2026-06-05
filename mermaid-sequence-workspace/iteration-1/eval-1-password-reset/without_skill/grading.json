@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-1-password-reset-without_skill",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+      "passed": false,
+      "evidence": "Validated via mcp.mermaid.ai: PARSE ERROR — raw angle brackets in notes ('Retry-After: <seconds>', 'Bearer <SENDGRID_API_KEY>') are read as HTML and break the parser (\"Expecting 'NEWLINE'...\"). The diagram would not render in the GitLab wiki."
+    },
+    {
+      "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+      "passed": true,
+      "evidence": "All listed details are present in messages/notes."
+    },
+    {
+      "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+      "passed": true,
+      "evidence": "alt 'Rate limit exceeded' / else 'Within rate limit'."
+    },
+    {
+      "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+      "passed": true,
+      "evidence": "202 returned after the user-exists alt with note 'Always 202 regardless of whether the user exists (anti-enumeration)'."
+    },
+    {
+      "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+      "passed": false,
+      "evidence": "actor User is correct, but the RabbitMQ legs are sync arrows: Auth->>MQ publish and MQ-->>Worker (drawn as a reply); no -) async arrows anywhere."
+    },
+    {
+      "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+      "passed": false,
+      "evidence": "SendGrid replying '202 Accepted' to the worker and the email body fields (to, subject, reset link) are presented unflagged; neither was established by the prompt."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 3,
+    "total": 6,
+    "pass_rate": 0.5
+  }
+}

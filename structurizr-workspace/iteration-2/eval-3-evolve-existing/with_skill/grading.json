@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-3-evolve-existing-with_skill-iteration2",
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0 (only theme-URL EOL warnings). The -/> reroute now uses the full bound path 'aws.region.alb', applying the fixed skill guidance."
+    },
+    {
+      "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+      "passed": true,
+      "evidence": "All original content intact; additions only (!adrs, deploymentEnvironment Producao, dynamic + deployment views, AWS theme). Explicitly declined to add a scope block to keep the diff minimal."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+      "passed": true,
+      "evidence": "All present, with ancestors bound (aws, region, ecs, rds) and ALB rerouting portal→api via -/>."
+    },
+    {
+      "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+      "passed": true,
+      "evidence": "dynamic view EmissaoFatura; agent explicitly cross-checked each of the 6 steps against existing model relationships before writing."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+      "passed": true,
+      "evidence": "'!adrs docs/adr' at workspace level; adr-tools format identified."
+    },
+    {
+      "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+      "passed": true,
+      "evidence": "ALB scoped to the API only (as stated); queue hosting not invented; open question raised about how the Portal is served in production."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

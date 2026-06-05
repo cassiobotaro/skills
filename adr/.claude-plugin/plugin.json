@@ -1,0 +1,9 @@
+{
+  "name": "adr",
+  "description": "Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format, file-compatible with Nat Pryce's adr-tools",
+  "version": "1.0.0",
+  "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
+  "repository": "https://github.com/cassiobotaro/skills",
+  "license": "MIT",
+  "keywords": ["adr", "architecture", "decision-records", "documentation"]
+}

@@ -1,0 +1,7 @@
+{
+  "total_tokens": 34141,
+  "duration_ms": 107010,
+  "total_duration_seconds": 107.0,
+  "tool_uses": 13,
+  "note": "Write/Bash permissions auto-denied for background agent; DSL delivered in final response text and extracted to outputs/ by the orchestrator."
+}

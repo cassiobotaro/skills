@@ -1,0 +1,46 @@
+{
+  "run_id": "eval-3-evolve-existing-with_skill-iteration3",
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker validate → exit 0 (with STRUCTURIZR_THEMES set for the bundled theme)."
+    },
+    {
+      "text": "Existing content preserved; minimal diff",
+      "passed": true,
+      "evidence": "Original model/views/styles intact; additions only."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested",
+      "passed": true,
+      "evidence": "Fargate tasks portal/api/worker, instances 2 on API, RDS PostgreSQL, ALB as infrastructureNode, -/> reroute via full path aws.region.alb, Deployment-Producao view, bundled theme amazon-web-services-2025.07."
+    },
+    {
+      "text": "Dynamic emission flow backed by model relationships",
+      "passed": true,
+      "evidence": "6 steps, all pre-checked against the model by the agent."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr",
+      "passed": true,
+      "evidence": "adr-tools format identified; workspace scope."
+    },
+    {
+      "text": "No silently invented infrastructure",
+      "passed": true,
+      "evidence": "Queue hosting explicitly NOT invented — left out of deployment view AND asked as the first open question (improvement over iterations 1-2); region flagged as placeholder."
+    },
+    {
+      "text": "Conditional reference reading (token discipline)",
+      "passed": true,
+      "evidence": "Read only SKILL.md + dsl-reference.md + deployment-patterns.md + repo files; skipped modeling/advanced/classification/diagrams. 24,408 tokens vs 34,141 in iteration 1 (-29%)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

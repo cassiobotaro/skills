@@ -1,0 +1,39 @@
+{
+  "validator": "mcp.mermaid.ai validate_and_render_mermaid_diagram",
+  "blocks": 4,
+  "all_valid": true,
+  "results": [
+    {
+      "block": "eval-3-delivery-saga/with_skill#0",
+      "lines": 36,
+      "messages": 18,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/PGpIMO"
+    },
+    {
+      "block": "eval-3-delivery-saga/with_skill#1",
+      "lines": 29,
+      "messages": 13,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/XcYW6l"
+    },
+    {
+      "block": "eval-3-delivery-saga/with_skill#2",
+      "lines": 22,
+      "messages": 9,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/bpPik4"
+    },
+    {
+      "block": "eval-3-delivery-saga/with_skill#3",
+      "lines": 27,
+      "messages": 15,
+      "valid": true,
+      "error": "",
+      "preview_link": "https://l.mermaid.ai/zSWgdj"
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "metadata": {
+    "skill_name": "adr",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-04T23:16:59Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 3,
+    "runs_per_eval": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 63.4,
+        "tokens": 18951,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Fresh log seeded like adr init: doc/adr/0001-record-architecture-decisions.md created with the canonical adr-tools init content (Nygard link, adr-tools mention)",
+          "passed": true,
+          "evidence": "doc/adr/0001-record-architecture-decisions.md created; diff against canonical content (ignoring date) is empty — verbatim match."
+        },
+        {
+          "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
+          "passed": true,
+          "evidence": "doc/adr/0002-use-postgresql-for-the-orders-service.md; slug correctly derived from 'Use PostgreSQL for the orders service'."
+        },
+        {
+          "text": "ADR is in English with exactly the four sections in order (Status, Context, Decision, Consequences), H1 uses the un-padded number ('# 2. ...'), and a 'Date: YYYY-MM-DD' line with today's date",
+          "passed": true,
+          "evidence": "H1 '# 2. Use PostgreSQL for the orders service'; Date: 2026-06-04; exactly ## Status/## Context/## Decision/## Consequences in order; single-blank-line discipline verified (no double blanks)."
+        },
+        {
+          "text": "Status section is 'Accepted'",
+          "passed": true,
+          "evidence": "Status section contains exactly 'Accepted'."
+        },
+        {
+          "text": "Decision section is active voice ('We will ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS",
+          "passed": true,
+          "evidence": "Decision: 'We will use PostgreSQL as the datastore for the orders service, running on the existing Amazon RDS instance, rather than MongoDB.' Context covers all three forces."
+        },
+        {
+          "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives",
+          "passed": true,
+          "evidence": "Both negatives present as standalone paragraphs: 'The schema becomes more rigid...' and 'Schema changes turn into migrations that must run as a step of the deploy...'."
+        },
+        {
+          "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated",
+          "passed": true,
+          "evidence": "Every claim in Context/Consequences maps to the prompt (ACID flow, team experience, RDS paid, rigid schema, deploy migrations). MongoDB mentioned only as the stated alternative."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 48.5,
+        "tokens": 17267,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Does NOT deliver a finished ADR padded with invented context, replacement technology, or consequences",
+          "passed": true,
+          "evidence": "No ADR file created; the agent declined to write and explained why (record-don't-invent)."
+        },
+        {
+          "text": "Final response asks targeted clarifying questions covering at least two of: what replaces Redis, why the change (forces), Redis's current role (cache/session/queue), accepted trade-offs",
+          "passed": true,
+          "evidence": "Asks all four: replacement technology + current role of Redis (Q1), why now/forces (Q2), accepted trade-off (Q3), plus Accepted vs Proposed status."
+        },
+        {
+          "text": "If any ADR file is created at all, it is explicitly a draft/skeleton with pending markers — not fabricated content presented as fact",
+          "passed": true,
+          "evidence": "No file created at all (vacuously satisfied); agent grounded its summary in the repo (redis:7 in docker-compose.yml) without fabricating."
+        },
+        {
+          "text": "Final response is in Portuguese, matching the user's conversation language",
+          "passed": true,
+          "evidence": "final_response.md is entirely in Portuguese."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 62.6,
+        "tokens": 21055,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+          "passed": true,
+          "evidence": "doc/adr/0004-use-stateless-jwt-sessions.md created."
+        },
+        {
+          "text": "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+          "passed": true,
+          "evidence": "Status section: 'Accepted' + blank line + 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)'. Bracket text matches target H1 exactly; bare basename href."
+        },
+        {
+          "text": "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+          "passed": true,
+          "evidence": "diff vs fixture shows exactly one changed line (line 7): 'Accepted' → 'Superseded by [4. Use stateless JWT sessions](0004-use-stateless-jwt-sessions.md)'. Rest byte-identical."
+        },
+        {
+          "text": "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+          "passed": true,
+          "evidence": "Both link lines use the modern spelling."
+        },
+        {
+          "text": "New ADR is in English, four sections in order, ISO date, and reflects only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+          "passed": true,
+          "evidence": "All format checks pass; Date: 2026-06-04. Content limited to stated facts plus repo-grounded detail ('read on every authenticated request' comes from fixture ADR 2)."
+        },
+        {
+          "text": "ADRs 0001 and 0003 are untouched",
+          "passed": true,
+          "evidence": "diff -q against fixtures: identical."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 59.2,
+        "tokens": 17674,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR created inside docs/architecture/decisions/ (the directory named by .adr-dir) — NOT in doc/adr/ or docs/adr/",
+          "passed": true,
+          "evidence": "docs/architecture/decisions/0003-version-the-public-api-by-url-path.md; agent explicitly honored .adr-dir."
+        },
+        {
+          "text": "Numbered 0003 with a kebab-case slug; H1 reads '# 3. <Title>' (un-padded)",
+          "passed": true,
+          "evidence": "H1 '# 3. Version the public API by URL path' matches filename 0003-version-the-public-api-by-url-path.md."
+        },
+        {
+          "text": "English, four sections in order (Status, Context, Decision, Consequences), 'Date:' in ISO 8601, Status 'Accepted'",
+          "passed": true,
+          "evidence": "All present; Date: 2026-06-04; no double blank lines."
+        },
+        {
+          "text": "Context/Decision capture URL-path versioning over header versioning with the stated motives (SDK client expectations, gateway routing, visibility in logs/curl)",
+          "passed": true,
+          "evidence": "Context lists the two options and all three forces; Decision: 'We will version the public API by URL path...'."
+        },
+        {
+          "text": "Consequences include URL proliferation and the cap of at most two active versions",
+          "passed": true,
+          "evidence": "'URLs proliferate as versions accumulate. ... we will maintain at most two active versions at any one time.'"
+        },
+        {
+          "text": "Existing 0001, 0002 and the .adr-dir file are unmodified",
+          "passed": true,
+          "evidence": "diff -q against fixtures: identical."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4286,
+        "passed": 3,
+        "failed": 4,
+        "total": 7,
+        "time_seconds": 50.1,
+        "tokens": 11376,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Fresh log seeded like adr init: doc/adr/0001-record-architecture-decisions.md created with the canonical adr-tools init content (Nygard link, adr-tools mention)",
+          "passed": false,
+          "evidence": "No seed ADR created; the only file is docs/adr/0001-use-postgresql-instead-of-mongodb-for-the-orders-service.md (also note docs/adr, not the adr-tools default doc/adr)."
+        },
+        {
+          "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
+          "passed": false,
+          "evidence": "Decision ADR is docs/adr/0001-... — wrong directory (docs/adr vs doc/adr) and numbered 0001 since no seed was created."
+        },
+        {
+          "text": "ADR is in English with exactly the four sections in order (Status, Context, Decision, Consequences), H1 uses the un-padded number ('# 2. ...'), and a 'Date: YYYY-MM-DD' line with today's date",
+          "passed": false,
+          "evidence": "Four ## sections in order with H1 '# 1. ...' and ISO date, BUT adds non-canonical '### Positive'/'### Negative' subsections inside Consequences and markdown bold/bullet styling not present in adr-tools format."
+        },
+        {
+          "text": "Status section is 'Accepted'",
+          "passed": true,
+          "evidence": "Status section contains 'Accepted'."
+        },
+        {
+          "text": "Decision section is active voice ('We will ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS",
+          "passed": true,
+          "evidence": "Decision: 'We will use **PostgreSQL** (hosted on Amazon RDS)...'. Context covers all three stated forces."
+        },
+        {
+          "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives",
+          "passed": true,
+          "evidence": "Negative section lists rigid schema and migrations as an explicit deployment step."
+        },
+        {
+          "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated",
+          "passed": false,
+          "evidence": "Invented claims in Context: 'the team has less operational experience running and tuning them [MongoDB transactions] in production' and 'transactions... are not its primary design center' — neither stated by the user."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 53.6,
+        "tokens": 11869,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Does NOT deliver a finished ADR padded with invented context, replacement technology, or consequences",
+          "passed": false,
+          "evidence": "Created and numbered docs/adr/0001-replace-redis.md in the decision log. Although marked Proposed with TODOs, it occupies number 0001 with a non-decision ('We will replace Redis' with undefined target) and asserts 'Redis most likely holds session data' as context. A log entry was delivered where questions were the right deliverable."
+        },
+        {
+          "text": "Final response asks targeted clarifying questions covering at least two of: what replaces Redis, why the change (forces), Redis's current role (cache/session/queue), accepted trade-offs",
+          "passed": true,
+          "evidence": "Final response asks 4 questions: why, replacement, current data/requirements, migration plan."
+        },
+        {
+          "text": "If any ADR file is created at all, it is explicitly a draft/skeleton with pending markers — not fabricated content presented as fact",
+          "passed": true,
+          "evidence": "The created ADR is status Proposed with explicit TODO markers and an 'Open questions' section; assumptions are hedged ('most likely')."
+        },
+        {
+          "text": "Final response is in Portuguese, matching the user's conversation language",
+          "passed": true,
+          "evidence": "final_response.md is in Portuguese."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 43.1,
+        "tokens": 12481,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+          "passed": true,
+          "evidence": "doc/adr/0004-use-stateless-jwt-tokens-for-sessions.md created."
+        },
+        {
+          "text": "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+          "passed": true,
+          "evidence": "Status section matches the expected exact format."
+        },
+        {
+          "text": "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+          "passed": true,
+          "evidence": "diff vs fixture shows exactly one changed line: 'Accepted' → 'Superseded by [4. Use stateless JWT tokens for sessions](0004-use-stateless-jwt-tokens-for-sessions.md)'."
+        },
+        {
+          "text": "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+          "passed": true,
+          "evidence": "Both link lines use the modern spelling."
+        },
+        {
+          "text": "New ADR is in English, four sections in order, ISO date, and reflects only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+          "passed": true,
+          "evidence": "Format correct; content grounded in prompt + fixture ADR 2 (e.g. 'no longer a single DELETE operation' derives from ADR 2's consequences). Adds an inline '[ADR 2](...)' link in Context — grounded, though not part of the canonical link scheme."
+        },
+        {
+          "text": "ADRs 0001 and 0003 are untouched",
+          "passed": true,
+          "evidence": "diff -q against fixtures: identical."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 41.3,
+        "tokens": 11546,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR created inside docs/architecture/decisions/ (the directory named by .adr-dir) — NOT in doc/adr/ or docs/adr/",
+          "passed": true,
+          "evidence": "docs/architecture/decisions/0003-version-the-public-api-by-url.md; agent detected .adr-dir."
+        },
+        {
+          "text": "Numbered 0003 with a kebab-case slug; H1 reads '# 3. <Title>' (un-padded)",
+          "passed": true,
+          "evidence": "H1 '# 3. Version the public API by URL' matches filename 0003-version-the-public-api-by-url.md."
+        },
+        {
+          "text": "English, four sections in order (Status, Context, Decision, Consequences), 'Date:' in ISO 8601, Status 'Accepted'",
+          "passed": true,
+          "evidence": "All present; Date: 2026-06-04; clean blank-line discipline."
+        },
+        {
+          "text": "Context/Decision capture URL-path versioning over header versioning with the stated motives (SDK client expectations, gateway routing, visibility in logs/curl)",
+          "passed": true,
+          "evidence": "All three motives present; adds a grounded cross-reference link to ADR 2 in Context."
+        },
+        {
+          "text": "Consequences include URL proliferation and the cap of at most two active versions",
+          "passed": true,
+          "evidence": "'URLs will proliferate... we will support at most two active versions at the same time.'"
+        },
+        {
+          "text": "Existing 0001, 0002 and the .adr-dir file are unmodified",
+          "passed": true,
+          "evidence": "diff -q against fixtures: identical."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 58.425,
+        "stddev": 6.8626,
+        "min": 48.5,
+        "max": 63.4
+      },
+      "tokens": {
+        "mean": 18736.75,
+        "stddev": 1703.8964,
+        "min": 17267,
+        "max": 21055
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.7946,
+        "stddev": 0.271,
+        "min": 0.4286,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 47.025,
+        "stddev": 5.7985,
+        "min": 41.3,
+        "max": 53.6
+      },
+      "tokens": {
+        "mean": 11818.0,
+        "stddev": 487.0038,
+        "min": 11376,
+        "max": 12481
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.21",
+      "time_seconds": "+11.4",
+      "tokens": "+6919"
+    }
+  },
+  "notes": [
+    "Each configuration ran once per eval (the '3 runs each' label is the script's default text; n=1).",
+    "Evals 3 (supersede) and 4 (.adr-dir detection) passed 6/6 in BOTH configs — with a strong baseline model and existing ADRs in the repo to imitate, these scenarios do not discriminate. They still guard against regressions.",
+    "The skill's value concentrates where there is no example to imitate: eval 1 fresh repo (7/7 vs 3/7 — baseline skipped the adr init seed, used docs/adr instead of doc/adr, added non-canonical ### subsections, and invented two claims about MongoDB/team experience) and eval 2 vague request (4/4 vs 3/4 — baseline wrote a numbered skeleton ADR into the log instead of asking first; it did ask good questions and marked TODOs).",
+    "Baseline's eval-1 fabrications ('team has less operational experience with MongoDB transactions', 'not its primary design center') are exactly the failure mode the skill's record-don't-invent contract targets.",
+    "Cost of the skill: +6.9k tokens (~+59%) and +11.4s per invocation, from reading SKILL.md + references/examples.md.",
+    "All four with-skill runs produced byte-clean adr-tools format (single-blank-line discipline, exact supersede link scheme with modern 'Superseded' spelling, minimal one-line diff to the old ADR)."
+  ]
+}

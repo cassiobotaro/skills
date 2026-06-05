@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-3-evolve-existing-with_skill",
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": false,
+      "evidence": "validate → exit 1: 'The destination element \"alb\" does not exist at line 71: faturamento.portal -> alb'. With !identifiers hierarchical, the alb infrastructureNode is nested in unbound deploymentNodes and is not addressable as bare 'alb' — ancestor nodes need identifiers (e.g. region.alb)."
+    },
+    {
+      "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+      "passed": true,
+      "evidence": "All original elements, relationships, views and styles intact; changes are purely additive (!adrs, deploymentEnvironment, 2 views, AWS theme)."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+      "passed": true,
+      "evidence": "All present: ECS tasks as Docker Container nodes, 'instances 2' on API Task, Amazon RDS→PostgreSQL with instanceOf banco, ALB as infrastructureNode with -/> rerouting, view Deployment-Producao. (Wiring broken per assertion 1.)"
+    },
+    {
+      "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+      "passed": true,
+      "evidence": "dynamic view EmissaoDeFatura: atendente→portal→api→banco, api→fila, worker→fila, worker→erp — all six steps reuse existing model relationships."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+      "passed": true,
+      "evidence": "'!adrs docs/adr' added at workspace level; response correctly identified the Nygard/adr-tools format and chose the default importer."
+    },
+    {
+      "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+      "passed": true,
+      "evidence": "us-east-1 flagged as placeholder; ALB routing decision flagged for review; queue hosting omitted rather than invented (though asking about it would have been even better)."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.8333
+  }
+}

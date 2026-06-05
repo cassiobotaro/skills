@@ -1,0 +1,439 @@
+{
+  "metadata": {
+    "skill_name": "mermaid-sequence",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-05T00:56:35Z",
+    "evals_run": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 101.6,
+        "tokens": 21940,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+          "passed": true,
+          "evidence": "answer.md is exactly a set of 5 numbered clarifying questions (participants/humans-vs-systems, trigger+call order+returns, sync vs async, error paths in/out, real details vs conceptual notes); no diagram delivered."
+        },
+        {
+          "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+          "passed": true,
+          "evidence": "No invented flow; the only endpoint mentioned (POST /v1/orders) is explicitly marked as an example ('ex.:')."
+        },
+        {
+          "text": "Any mermaid code included parses successfully (validated)",
+          "passed": true,
+          "evidence": "Vacuously true — no mermaid code included (correct behavior for a vague request)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 82.9,
+        "tokens": 20130,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+          "passed": true,
+          "evidence": "Validated via mcp.mermaid.ai: parses. Agent avoided raw angle brackets ('redacted values are written as ...'), the exact gotcha that broke the baseline."
+        },
+        {
+          "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+          "passed": true,
+          "evidence": "All present: POST /v1/password-resets message + note (no auth header, {\"email\"}, 5 req/h/IP); 202 in both legs; 429 + Retry-After note; reset_requested via RabbitMQ; SendGrid POST /v3/mail/send with Authorization: Bearer note."
+        },
+        {
+          "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+          "passed": true,
+          "evidence": "alt 'within rate limit' / else 'rate limit exceeded' with 429 + Retry-After."
+        },
+        {
+          "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+          "passed": true,
+          "evidence": "202 is returned before/outside the 'opt user exists' block, with note 'Always 202 (exists or not) to prevent email enumeration' — structurally correct."
+        },
+        {
+          "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+          "passed": true,
+          "evidence": "actor U as User; A-)Q publish and Q-)N deliver are async open-arrow."
+        },
+        {
+          "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+          "passed": true,
+          "evidence": "The two additions (reset_requested event body; generic SendGrid v3 body shape) are explicitly flagged in a dedicated 'placeholders' section as illustrative, not facts."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 83.9,
+        "tokens": 22161,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+          "passed": true,
+          "evidence": "Validated via mcp.mermaid.ai: parses (9-message diagram)."
+        },
+        {
+          "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+          "passed": true,
+          "evidence": "Exact chain present; 201 Created with the real response body {order_id, status: \"confirmed\", total_cents}."
+        },
+        {
+          "text": "The declined-payment branch from the code is shown (declined -> 402)",
+          "passed": true,
+          "evidence": "alt branch status == \"declined\" -> 402 Payment Required with detail \"payment declined\"; also covers the PayGate 4xx/5xx -> 500 path that is genuinely in payments.py (raise_for_status + docstring)."
+        },
+        {
+          "text": "Notes/messages carry details actually present in the code and contain nothing absent from the code",
+          "passed": true,
+          "evidence": "Bearer PAYGATE_API_KEY, Idempotency-Key (uuid4), timeout 10s, {card_token, amount, currency BRL, capture true}, INSERT...RETURNING id with status='confirmed', exchange \"orders\" (topic — from the events.py docstring), routing_key order.created, content_type application/json — all traceable to the code."
+        },
+        {
+          "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment",
+          "passed": true,
+          "evidence": "API-)MQ async arrow with note 'fire-and-forget: response does not wait'."
+        },
+        {
+          "text": "Did not ask the user questions that the provided code answers",
+          "passed": true,
+          "evidence": "No questions; the only open point (include the 422 validation branch?) is offered as an optional refinement, which the code alone cannot decide."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 97.8,
+        "tokens": 19758,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram",
+          "passed": true,
+          "evidence": "4 diagrams by phase: placement+payment, restaurant acceptance, courier+delivery, notifications."
+        },
+        {
+          "text": "Every mermaid block parses successfully (validated)",
+          "passed": true,
+          "evidence": "All 4 validated via mcp.mermaid.ai."
+        },
+        {
+          "text": "No single diagram exceeds roughly 25 messages",
+          "passed": true,
+          "evidence": "Largest diagram has 18 message arrows (18/13/9/15)."
+        },
+        {
+          "text": "Participant names/labels are consistent across the diagrams",
+          "passed": true,
+          "evidence": "Same id+label pairs across all four (OS as Order Service, K as Kafka, PS as Payment Service, etc.); participant roster listed up front."
+        },
+        {
+          "text": "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit",
+          "passed": true,
+          "evidence": "Numbered headings with one-paragraph intros; explicit 'Continues from step 9 (approved) of diagram 1' prose plus in-diagram continuity notes."
+        },
+        {
+          "text": "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier",
+          "passed": false,
+          "evidence": "Declined->FAILED (d1) and courier retry loop (d3) are drawn; reject->refund+CANCELLED is drawn (d2), but the prompt-established 'customer notified' on cancellation is never drawn — diagram 2's note defers it to diagram 4, and diagram 4 omits order.cancelled, asking the user instead. The fact of notification was established; only its mechanism was open."
+        },
+        {
+          "text": "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested",
+          "passed": true,
+          "evidence": "participants/actors, alt, opt-free, loop, -) async, notes, autonumber; no typed participants, central connections, or other version-gated features."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6667,
+        "passed": 2,
+        "failed": 1,
+        "total": 3,
+        "time_seconds": 103.8,
+        "tokens": 16409,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+          "passed": false,
+          "evidence": "Delivered a complete invented checkout diagram (8 participants, POST /checkout, stock-reservation flow) as the primary deliverable; questions appear only at the end as refinements."
+        },
+        {
+          "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+          "passed": true,
+          "evidence": "The invention is disclosed ('modelei um fluxo de checkout típico', 'Premissas que adotei'), so the specifics are framed as assumptions rather than facts — though a paste-ready plausible-but-unverified diagram for a README is exactly the risk the disclosure only partially mitigates."
+        },
+        {
+          "text": "Any mermaid code included parses successfully (validated)",
+          "passed": true,
+          "evidence": "Validated via mcp.mermaid.ai: 1 block, parses (23 messages)."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5,
+        "passed": 3,
+        "failed": 3,
+        "total": 6,
+        "time_seconds": 61.3,
+        "tokens": 12350,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+          "passed": false,
+          "evidence": "Validated via mcp.mermaid.ai: PARSE ERROR — raw angle brackets in notes ('Retry-After: <seconds>', 'Bearer <SENDGRID_API_KEY>') are read as HTML and break the parser (\"Expecting 'NEWLINE'...\"). The diagram would not render in the GitLab wiki."
+        },
+        {
+          "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+          "passed": true,
+          "evidence": "All listed details are present in messages/notes."
+        },
+        {
+          "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+          "passed": true,
+          "evidence": "alt 'Rate limit exceeded' / else 'Within rate limit'."
+        },
+        {
+          "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+          "passed": true,
+          "evidence": "202 returned after the user-exists alt with note 'Always 202 regardless of whether the user exists (anti-enumeration)'."
+        },
+        {
+          "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+          "passed": false,
+          "evidence": "actor User is correct, but the RabbitMQ legs are sync arrows: Auth->>MQ publish and MQ-->>Worker (drawn as a reply); no -) async arrows anywhere."
+        },
+        {
+          "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+          "passed": false,
+          "evidence": "SendGrid replying '202 Accepted' to the worker and the email body fields (to, subject, reset link) are presented unflagged; neither was established by the prompt."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.6667,
+        "passed": 4,
+        "failed": 2,
+        "total": 6,
+        "time_seconds": 71.8,
+        "tokens": 14942,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+          "passed": true,
+          "evidence": "Validated via mcp.mermaid.ai: parses."
+        },
+        {
+          "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+          "passed": true,
+          "evidence": "Exact chain present with the real success body."
+        },
+        {
+          "text": "The declined-payment branch from the code is shown (declined -> 402)",
+          "passed": true,
+          "evidence": "alt status == \"declined\" -> 402 Payment Required; 4xx/5xx -> 500 also shown."
+        },
+        {
+          "text": "Notes/messages carry details actually present in the code and contain nothing absent from the code",
+          "passed": false,
+          "evidence": "Two details are not in the code: PayGate's response drawn as '200 {payment_id, status}' (the code never pins the status code — could be 200 or 201) and an 'MQ-->>API: ack publish' reply arrow (no such interaction in events.py)."
+        },
+        {
+          "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment",
+          "passed": false,
+          "evidence": "The note says fire-and-forget, but the arrows contradict it: sync API->>MQ plus an invented MQ-->>API ack reply — the opposite of fire-and-forget."
+        },
+        {
+          "text": "Did not ask the user questions that the provided code answers",
+          "passed": true,
+          "evidence": "No questions asked."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 134.3,
+        "tokens": 18449,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram",
+          "passed": true,
+          "evidence": "4 blocks — but structured as one giant end-to-end overview plus 3 focused repeats, rather than a true split."
+        },
+        {
+          "text": "Every mermaid block parses successfully (validated)",
+          "passed": true,
+          "evidence": "All 4 validated via mcp.mermaid.ai."
+        },
+        {
+          "text": "No single diagram exceeds roughly 25 messages",
+          "passed": false,
+          "evidence": "Diagram 1 ('End-to-end overview') has 56 message arrows with 12 participants and 3 levels of nesting — the wall-of-diagram the split was supposed to avoid."
+        },
+        {
+          "text": "Participant names/labels are consistent across the diagrams",
+          "passed": true,
+          "evidence": "Same aliases across all blocks (Ord, Pay, Rest, Cour, Notif, etc.)."
+        },
+        {
+          "text": "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit",
+          "passed": false,
+          "evidence": "Headings exist but diagrams 2-4 have no introduction text and no continuity links ('continues from...'); the focused views silently duplicate the overview instead of chaining."
+        },
+        {
+          "text": "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier",
+          "passed": true,
+          "evidence": "All three present, including the cancellation push 'Order cancelled & refunded'; invented event names are disclosed in the assumptions section."
+        },
+        {
+          "text": "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested",
+          "passed": true,
+          "evidence": "Safe-core syntax throughout."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9643,
+        "stddev": 0.0715,
+        "min": 0.8571,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 91.55,
+        "stddev": 9.5466,
+        "min": 82.9,
+        "max": 101.6
+      },
+      "tokens": {
+        "mean": 20997.25,
+        "stddev": 1228.9501,
+        "min": 19758,
+        "max": 22161
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.6369,
+        "stddev": 0.094,
+        "min": 0.5,
+        "max": 0.7143
+      },
+      "time_seconds": {
+        "mean": 92.8,
+        "stddev": 33.0479,
+        "min": 61.3,
+        "max": 134.3
+      },
+      "tokens": {
+        "mean": 15537.5,
+        "stddev": 2565.8735,
+        "min": 12350,
+        "max": 18449
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.33",
+      "time_seconds": "-1.2",
+      "tokens": "+5460"
+    }
+  },
+  "notes": [],
+  "observations": [
+    "Validity is the sharpest discriminator: the baseline's eval-1 diagram does not parse (raw angle brackets '<seconds>'/'<SENDGRID_API_KEY>' in notes) — exactly the gotcha references/syntax.md documents; the with-skill run explicitly avoided it and passed.",
+    "Arrow semantics discriminate: baseline drew RabbitMQ legs as sync request arrows (eval-1) and invented an 'MQ-->>API: ack publish' reply while calling it fire-and-forget (eval-2); with-skill used -) async arrows consistently.",
+    "Size discipline discriminates: baseline's eval-3 'overview' diagram has 56 message arrows; with-skill's largest is 18.",
+    "Ask-vs-invent discriminates: in eval-0 the baseline shipped a plausible invented checkout (disclosed as 'typical'), the with-skill run asked 5 targeted questions and shipped nothing fabricated.",
+    "The only with-skill failure (eval-3) is over-conservatism: the prompt established 'customer notified' on cancellation, but the agent deferred it to a question instead of drawing the fact and flagging only the mechanism. Improvement candidate for the contract wording.",
+    "Non-discriminating assertions this round: 'given details appear', 'real flow shown', '402 branch', 'participants consistent', 'safe-core syntax' — both configs pass these; keep them as regression floor.",
+    "Infra caveat: no validator was reachable inside the runs (no MCP in session; background subagents had Bash/Write denied; mermaid-cli lacks puppeteer Chrome on this machine). With-skill agents correctly reported 'not validated' per the honesty rule; validity was graded post-hoc via mcp.mermaid.ai. Next iteration should run agents in the foreground so the allowlist applies, and/or with the mermaid MCP connected."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "mermaid-sequence",
+  "description": "Write and edit Mermaid sequence diagrams as fenced code blocks that render directly in Markdown (GitHub, GitLab, most wikis)",
+  "version": "1.0.0",
+  "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
+  "repository": "https://github.com/cassiobotaro/skills",
+  "license": "MIT",
+  "keywords": ["mermaid", "sequence-diagram", "diagrams", "markdown"]
+}

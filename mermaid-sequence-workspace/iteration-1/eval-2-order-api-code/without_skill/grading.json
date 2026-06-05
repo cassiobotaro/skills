@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-2-order-api-code-without_skill",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully (validated)",
+      "passed": true,
+      "evidence": "Validated via mcp.mermaid.ai: parses."
+    },
+    {
+      "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+      "passed": true,
+      "evidence": "Exact chain present with the real success body."
+    },
+    {
+      "text": "The declined-payment branch from the code is shown (declined -> 402)",
+      "passed": true,
+      "evidence": "alt status == \"declined\" -> 402 Payment Required; 4xx/5xx -> 500 also shown."
+    },
+    {
+      "text": "Notes/messages carry details actually present in the code and contain nothing absent from the code",
+      "passed": false,
+      "evidence": "Two details are not in the code: PayGate's response drawn as '200 {payment_id, status}' (the code never pins the status code — could be 200 or 201) and an 'MQ-->>API: ack publish' reply arrow (no such interaction in events.py)."
+    },
+    {
+      "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment",
+      "passed": false,
+      "evidence": "The note says fire-and-forget, but the arrows contradict it: sync API->>MQ plus an invented MQ-->>API ack reply — the opposite of fire-and-forget."
+    },
+    {
+      "text": "Did not ask the user questions that the provided code answers",
+      "passed": true,
+      "evidence": "No questions asked."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 2,
+    "total": 6,
+    "pass_rate": 0.6667
+  }
+}

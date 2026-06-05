@@ -1,0 +1,68 @@
+{
+  "skill_name": "mermaid-sequence",
+  "evals": [
+    {
+      "id": 0,
+      "name": "vague-checkout-asks-questions",
+      "prompt": "Preciso de um diagrama de sequência do fluxo de checkout do nosso e-commerce pra colocar no README. Pode fazer?",
+      "expected_output": "Asks 2-4 targeted clarifying questions (participants, trigger, sync vs async, failure handling, level of technical detail) instead of delivering a diagram built on invented endpoints, payloads, or services. No fabricated technical details presented as the user's system.",
+      "files": [],
+      "assertions": [
+        "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+        "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+        "Any mermaid code included parses successfully with mermaid-cli (exit 0)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "detailed-password-reset-flow",
+      "prompt": "Create a sequence diagram of our password reset flow for the API docs (it will live in our GitLab wiki, which renders mermaid). The flow: the user submits their email on the web app's forgot-password page. The web app calls POST /v1/password-resets on the Auth API with JSON body {\"email\": \"...\"} — no auth header, it's a public endpoint, but rate-limited: more than 5 requests per hour per IP returns 429 with a Retry-After header. The Auth API looks the user up in Postgres, and whether or not the user exists it always returns 202 Accepted so attackers can't enumerate emails. If the user exists, the Auth API publishes a reset_requested event to RabbitMQ; the Notification worker consumes it and sends the email through SendGrid (POST /v3/mail/send with an Authorization: Bearer header). Please show the rate-limit case too, and add notes with the endpoints/headers/payloads I mentioned.",
+      "expected_output": "A single fenced ```mermaid block that parses, with autonumber, an actor for the user, notes carrying the given endpoint/header/payload details (POST /v1/password-resets, 429 + Retry-After, always-202, SendGrid POST /v3/mail/send with Bearer), the RabbitMQ event drawn async, the rate-limit branch shown, and nothing technical that the prompt did not establish. Validated, or an explicit notice of how to validate (GitHub/GitLab render natively, mermaid.live to edit) if no validator is available.",
+      "files": [],
+      "assertions": [
+        "Output contains a fenced mermaid sequenceDiagram block that parses successfully with mermaid-cli (exit 0)",
+        "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+        "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+        "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+        "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+        "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "order-api-from-code",
+      "prompt": "Dá uma olhada no código da nossa API de pedidos em /home/cassiobotaro/Projetos/skills/mermaid-sequence-workspace/evals/files/order-api e gera um diagrama de sequência do que acontece quando chega um POST /orders, pra eu colocar no README do serviço. Usa os detalhes reais do código.",
+      "expected_output": "Reads the code and produces a fenced ```mermaid block with the real flow: client -> Order API (POST /orders, 201), Order API -> PayGate (POST /v2/charges with Authorization: Bearer and Idempotency-Key, approved/declined), declined -> 402 branch, Postgres INSERT, RabbitMQ order.created published fire-and-forget. Notes carry details actually present in the code; no invented headers/fields; no unnecessary questions back to the user.",
+      "files": [
+        "files/order-api/main.py",
+        "files/order-api/payments.py",
+        "files/order-api/db.py",
+        "files/order-api/events.py"
+      ],
+      "assertions": [
+        "Output contains a fenced mermaid sequenceDiagram block that parses successfully with mermaid-cli (exit 0)",
+        "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+        "The declined-payment branch from the code is shown (declined -> 402)",
+        "Notes/messages carry details actually present in the code (e.g. Authorization: Bearer, Idempotency-Key, card_token/amount/currency payload fields, orders exchange/routing key) and contain nothing absent from the code",
+        "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment that the response does not wait for consumers",
+        "Did not ask the user questions that the provided code answers"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "large-delivery-saga-split",
+      "prompt": "Document our food delivery order lifecycle as sequence diagram(s) for the engineering wiki (GitHub renders mermaid). The flow: the customer places an order in the mobile app; the app calls the API gateway, which forwards to the Order Service (POST /orders); the Order Service persists the order as PENDING in its Postgres, then calls the Payment Service (POST /payments), which authorizes the card with Stripe and replies approved or declined; if declined, the Order Service marks the order FAILED and the app shows the error. If approved, the Order Service publishes order.paid to Kafka; the Restaurant Service consumes it and pushes the order to the restaurant's tablet, and the restaurant accepts or rejects — reject means refund via the Payment Service, order CANCELLED, customer notified. When accepted, the Restaurant Service publishes order.accepted; the Courier Service consumes it, finds the nearest available courier, offers the job (a courier can decline, in which case it retries with the next courier), and assigns it; the courier picks up and delivers, marking PICKED_UP and DELIVERED through the Courier Service, which publishes status events. The Notification Service consumes all order.* events and sends a push notification to the customer at each stage (paid, accepted, courier assigned, picked up, delivered). Show the whole thing including the failure branches I mentioned.",
+      "expected_output": "Multiple smaller fenced ```mermaid blocks (split by phase or scenario) rather than one giant diagram: e.g. placement+payment, restaurant acceptance, courier assignment+delivery, notifications handled inline or explained. Identical participant names/aliases across diagrams, a heading and one-line intro per diagram, explicit continuity between them, the described failure branches (declined payment, restaurant reject+refund, courier decline retry) present, portable (safe-core) syntax, nothing invented.",
+      "files": [],
+      "assertions": [
+        "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram",
+        "Every mermaid block parses successfully with mermaid-cli (exit 0)",
+        "No single diagram exceeds roughly 25 messages",
+        "Participant names/labels are consistent across the diagrams (the same service uses the same label everywhere)",
+        "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit",
+        "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier",
+        "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested"
+      ]
+    }
+  ]
+}

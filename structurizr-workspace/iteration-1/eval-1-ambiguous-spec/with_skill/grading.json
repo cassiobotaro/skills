@@ -1,0 +1,36 @@
+{
+  "run_id": "eval-1-ambiguous-spec-with_skill",
+  "expectations": [
+    {
+      "text": "Generated DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "docker run structurizr/structurizr validate -workspace workspace.dsl → exit 0."
+    },
+    {
+      "text": "Does not invent technologies or elements the user never stated",
+      "passed": true,
+      "evidence": "Container technologies left generic ('Aplicação', 'Job agendado (cron)'); only Redis (stated) is concrete. No extra people/systems. Explicitly lists what it did NOT invent (no relational DB, no SEFAZ, no deployment)."
+    },
+    {
+      "text": "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+      "passed": true,
+      "evidence": "Both modeled as external softwareSystem with tag 'External' (ownership argument cited: 'outro time mantém'); notifications ownership additionally raised as open question #1."
+    },
+    {
+      "text": "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+      "passed": true,
+      "evidence": "4 questions asked, each tied to a classification decision (notifications ownership, job ownership+counterpart, Redis as only store, app technology)."
+    },
+    {
+      "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+      "passed": true,
+      "evidence": "No legacy keywords in DSL; hands off with c4_mcp / structurizr/structurizr validate / c4_local / c4_export. structurizr/lite never mentioned."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  }
+}
