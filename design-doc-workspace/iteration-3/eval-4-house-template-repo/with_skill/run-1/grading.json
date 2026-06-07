@@ -1,0 +1,117 @@
+{
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008 uses exactly the house sections in order: '## Resumo' (L13), '## Contexto' (L17), '## Proposta' (L25) with '### Compensações' subsection (L37), '## Riscos' (L56), '## Plano de entrega' (L62). Compensações uses the same ✓/✗ bullet convention as the reference dd-2026-007 (L39-43). No catalog-style default headings appear. Extra subsections (Alternativas consideradas L45, Critério de sucesso L51) were nested under Proposta to avoid breaking the house structure, as the executor explained in response.md."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "Filename is docs/design/dd-2026-008-rate-limiting-api-publica.md (next sequential after the existing dd-2026-007). Title line 'DD-2026-008 · Rate limiting da API pública' (L1) and metadata table row '| **Documento** | DD-2026-008 |' (L6) both carry the correct ID."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "The Riscos table (L58-60) contains exactly one row — Redis de sessão contention. NAT does not appear there. It is mentioned only in Proposta (L35) as explicitly NOT applicable: 'Chegamos a anotar o risco de falso positivo com NAT compartilhado, mas ele não se aplica aqui — como o limite é por token, dois clientes atrás do mesmo NAT têm contadores independentes.' Correctly handled per the prompt's retraction."
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "INC-4412 in Resumo (L15) and Contexto (L21); '40x o tráfego normal' (L15, L21); 'por 25 minutos' / 'por 25 minutos' (L15, L21); per-plan limits 'free: 10 rps', 'pro: 100 rps', 'enterprise: negociado por contrato' (L30-31); '429 Too Many Requests com o header Retry-After' (L33). All present and accurate."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "Compensações cost bullet L42: '✗ Um cliente legítimo em pico (ex.: Black Friday) pode tomar 429 ao ultrapassar o limite do seu plano. Mitigamos com o Retry-After para que o cliente recue de forma ordenada e com um alerta para o time de contas avisar os clientes enterprise antecipadamente.' Marked as ✗ cost with both mitigations from the prompt (Retry-After + accounts-team alert)."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Riscos table L60: 'O Redis de sessão virar ponto de contenção ao assumir também os contadores de rate limit | Medir o impacto antes de ativar o enforcing (ver Plano de entrega — o shadow mode existe justamente para essa medição)'. Matches the war-room risk and the 'vamos medir antes' mitigation, tied to shadow mode in the delivery plan."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "File saved at docs/design/dd-2026-008-rate-limiting-api-publica.md (confirmed via directory listing). Entire content is written in Portuguese (Resumo, Contexto, Proposta, Riscos, Plano de entrega, etc.)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 4910,
+    "transcript_chars": null,
+    "note": "No metrics.json present in outputs_dir; tool-call/step counts unavailable. output_chars is the size of the produced doc dd-2026-008."
+  },
+  "timing": {
+    "total_tokens": 24103,
+    "duration_ms": 239838,
+    "total_duration_seconds": 239.8
+  },
+  "claims": [
+    {
+      "claim": "The next sequential house ID after DD-2026-007 is DD-2026-008",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Reference doc dd-2026-007-cache-de-catalogo.md is the only existing doc; new doc correctly increments to 008."
+    },
+    {
+      "claim": "Alternativas consideradas and Critério de sucesso were added as Proposta subsections because the reference doc has no dedicated sections for them",
+      "type": "process",
+      "verified": true,
+      "evidence": "Reference dd-2026-007 has no Alternativas or Critério de sucesso headings; executor nested them under Proposta (L45, L51) as ### subsections, preserving the house top-level structure. Reasoning stated in response.md L10-11."
+    },
+    {
+      "claim": "Both discarded alternatives from the prompt are captured (per-service limiting; paid managed-gateway module)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "L48 'Limitar dentro de cada serviço. Descartado: é tarde demais...' and L49 'Módulo pago de rate limiting do gateway gerenciado. Descartado por custo e por lock-in...'. An additional 'Não fazer nada' option (L47) was added but does not contradict the prompt."
+    },
+    {
+      "claim": "The success objective is restated faithfully (no token exceeds limit >1s; API absorbs an abusive client without degrading others)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Critério de sucesso L53-54 mirrors the prompt's objective verbatim in substance."
+    },
+    {
+      "claim": "Author/reviewer/state metadata fields were filled with placeholders and surfaced to the user for confirmation",
+      "type": "process",
+      "verified": true,
+      "evidence": "Header table sets Autores 'Cássio Botaro', Revisores '_a definir_', Estado 'Em revisão' (L6-8); response.md L15-18 flags these as defaults for the user to adjust. Reasonable handling of unspecified fields."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Whether war-room participants should be added as reviewers (left as 'a definir')",
+      "Whether Estado should be 'Aprovado' if the decision is already final (left as 'Em revisão')",
+      "Whether concrete API capacity numbers (peak rps / what INC-4412 reached) should be added to Contexto to match the reference doc's rps/P99 detail"
+    ],
+    "needs_review": [
+      "Reviewer names and areas",
+      "Document state (Em revisão vs Aprovado)"
+    ],
+    "workarounds": [
+      "Alternativas consideradas and Critério de sucesso nested under Proposta because the house reference has no dedicated sections for them"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "No assertion checks that the two discarded alternatives (per-service limiting and the paid managed-gateway module) are captured with their stated reasons. This is a substantive part of the war-room decision and the executor had to make a judgment call about where to put it (it nested an 'Alternativas consideradas' subsection under Proposta). An assertion verifying both alternatives appear with their discard rationale would discriminate a faithful doc from one that drops the reasoning."
+      },
+      {
+        "assertion": "The new doc follows the house structure ... instead of the skill's default catalog",
+        "reason": "This assertion passes here, but it could also pass for a doc that mechanically copied headings while inventing content. It is well complemented by the content-fidelity assertions (3-6), so the suite is sound — flagging only that structure-alone is not discriminating in isolation."
+      }
+    ],
+    "overall": "Strong, discriminating eval suite — assertions cover structure, ID convention, the retraction trap (NAT), content fidelity, the trade-off shape, and the specific risk+mitigation. All 7 passed on a high-quality output. Only gap: no explicit check on the discarded alternatives' rationale, which required executor judgment to place."
+  }
+}

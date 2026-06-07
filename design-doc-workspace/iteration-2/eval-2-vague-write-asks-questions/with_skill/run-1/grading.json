@@ -1,0 +1,77 @@
+{
+  "expectations": [
+    {
+      "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+      "passed": true,
+      "evidence": "The entire response.md is in Portuguese and is structured as five numbered questions. Current pain & why now: section 1 'O problema (o que dói hoje?)... O que motiva a migração *agora*?'. Measurable goals: section 2 'Como vão saber que deu certo? (de preferência com número)... Qual é o objetivo mensurável?'. Alternatives: 'do nothing' (não migrar) in section 1 and migration strategies (Strangler Fig, big bang) in section 4. Trade-offs: opening paragraph 'o valor de um design doc está justamente em registrar os *trade-offs* reais — o que melhora e o que piora'. Impacted teams: section 5 'Quem é afetado fora do time?... segurança, infraestrutura/plataforma, ou outros times que consomem APIs do monólito? Quem deveria revisar este documento'. All five required topics are covered."
+    },
+    {
+      "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+      "passed": true,
+      "evidence": "The response explicitly refuses to invent facts: 'Eu não consigo inventar esses dados com honestidade: o repositório está vazio, então não tenho como inferir a arquitetura atual nem o que está doendo hoje. Se eu chutasse métricas, restrições e razões, o documento viraria ficção'. No concrete stack, metrics, domain boundaries, or team names are asserted; the only technologies named (Strangler Fig, big bang, banco por serviço) are presented as options to ask about, not as facts about the project. Examples are clearly framed as examples ('Exemplos do tipo de coisa que ajuda')."
+    },
+    {
+      "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+      "passed": true,
+      "evidence": "Section 1 explicitly raises the do-nothing option as something the doc must justify against: 'Sem um problema concreto, \"do nothing\" (não migrar) pode ser a melhor opção — e o doc precisa conseguir refutar isso.' The opening paragraph reinforces that the doc's value is recording why migrate 'em vez das alternativas'."
+    },
+    {
+      "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+      "passed": true,
+      "evidence": "The project directory outputs/project/ is empty — no file was created at all. The response states this explicitly: 'Por isso, ainda não criei o arquivo.' No finished design doc was delivered and there is therefore zero invented content in any artifact."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 3103,
+    "transcript_chars": null,
+    "note": "metrics.json not present in outputs_dir; tool-call/step counts unavailable. output_chars is the size of response.md (the only output file; project/ is empty)."
+  },
+  "timing": {
+    "total_tokens": 21753,
+    "duration_ms": 124068,
+    "total_duration_seconds": 124.1
+  },
+  "claims": [
+    {
+      "claim": "The repository is empty so the current architecture and pain points cannot be inferred",
+      "type": "factual",
+      "verified": true,
+      "evidence": "outputs/project/ contains no files, confirming the empty-repository premise the executor relied on."
+    },
+    {
+      "claim": "No design doc file was created",
+      "type": "process",
+      "verified": true,
+      "evidence": "find on outputs/project/ returns only the directory itself; the response states 'ainda não criei o arquivo'."
+    },
+    {
+      "claim": "The response avoids fabricating any project-specific facts",
+      "type": "quality",
+      "verified": true,
+      "evidence": "All concrete numbers/stack/teams appear only inside questions or clearly-labeled examples ('Por exemplo', 'Exemplos do tipo de coisa que ajuda'); nothing is stated as an established fact about this project."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+        "reason": "The 'or' makes this satisfiable by a single mention of 'do nothing'. The executor mentioned 'do nothing' but never the modular-monolith option, which is often the strongest alternative to a microservices migration. If you want to reward surfacing that specific alternative, consider a separate, stricter assertion for it; as written, this passes on the weakest of the three listed options."
+      },
+      {
+        "assertion": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+        "reason": "Because the executor created no file, the second clause (about pending markers / zero invented content) is never exercised. The assertion passes trivially. A run that does scaffold a skeleton with TODO markers is arguably the more desirable behavior, yet this assertion treats 'created nothing' and 'created a clean skeleton' identically. Consider an assertion that distinguishes or credits a well-marked skeleton, so the eval can tell the two apart."
+      }
+    ],
+    "overall": "All four assertions pass on genuine substance — the response is a well-targeted, Portuguese clarifying-question reply that explicitly refuses to fabricate and creates no premature artifact. Two assertions are satisfiable in their weakest form (single-alternative mention; no-file-created bypasses the content-quality clause); tightening those would make the eval more discriminating."
+  }
+}

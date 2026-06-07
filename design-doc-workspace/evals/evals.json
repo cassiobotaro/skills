@@ -1,0 +1,89 @@
+{
+  "skill_name": "design-doc",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "rich-write-new-doc",
+      "prompt": "Preciso escrever um design doc pro projeto que a gente vai tirar do papel: um serviço de exportação de relatórios em background. Hoje os relatórios grandes são gerados na própria request da API e estouram o timeout de 30s no gateway — uns 12% das exportações acima de 50 mil linhas falham, e o suporte abre ticket disso toda semana. A ideia é: a API passa a enfileirar um job num worker separado (a gente já tem RabbitMQ na infra), o worker gera o CSV/XLSX em streaming e sobe pro S3, e o usuário recebe um link assinado por e-mail quando termina. Alternativas que discutimos: gerar síncrono com timeout maior (descartado, só empurra o problema) e usar uma ferramenta de BI externa (descartado por custo e por expor dado de cliente). Trade-off que aceitamos: o usuário perde o download imediato — exportação pequena que hoje funciona na hora vai virar assíncrona também, pra ter um caminho só. Isso impacta o time de plataforma (fila compartilhada) e o de segurança (link assinado com PII). Objetivo: zerar os timeouts de exportação e aguentar 100 mil linhas. Cria o doc em docs/design/ por favor.",
+      "expected_output": "Cria docs/design/<slug>.md em português com: cabeçalho (estado rascunho, data real), visão geral de 1–2 parágrafos sem detalhes, contexto/problema com os números dados (timeout 30s, 12% acima de 50 mil linhas), objetivo mensurável (zerar timeouts, 100 mil linhas), design como série de seções (solução, arquitetura/fluxos com diagrama mermaid seguido de texto explicativo), compensações com contras explícitos (perda do download imediato), alternativas incluindo as citadas e 'não fazer nada', preocupações transversais (plataforma/fila compartilhada, segurança/PII) e glossário sugerido no início (CSV, XLSX, S3, PII, BI). Nada inventado além do que o usuário disse.",
+      "files": [],
+      "assertions": [
+        "Creates a Markdown design doc under docs/design/ in the project",
+        "The document is written in Portuguese, matching the conversation language",
+        "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+        "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+        "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+        "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+        "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+        "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+        "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "vague-write-asks-questions",
+      "prompt": "escreve um design doc pra migração do nosso monolito pra microserviços",
+      "expected_output": "Não inventa um design doc completo. Faz perguntas direcionadas em português: qual a dor atual do monolito e por que migrar agora, objetivos mensuráveis, o que fica fora de escopo, alternativas consideradas (incluindo não migrar / modularizar o monolito), trade-offs aceitos, times impactados. Se esboçar uma estrutura, deixa explícito o que está pendente de resposta em vez de preencher com suposições.",
+      "files": [],
+      "assertions": [
+        "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+        "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+        "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+        "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "review-flawed-doc",
+      "prompt": "Dá uma revisada nesse design doc que eu escrevi: docs/design/fanout-de-notificacoes.md. Pode aplicar direto as melhorias que não dependem de mim; o que precisar de informação minha, lista pra eu responder.",
+      "expected_output": "Apresenta achados em dois grupos: (a) perguntas pro autor — contras/trade-offs da solução escolhida, alternativas consideradas (incluindo não fazer nada), objetivos mensuráveis, times/sistemas impactados; (b) edições aplicadas no arquivo — visão geral enxuta (detalhes movidos pro design), fora de escopo deixa de ser negação de objetivo, texto explicativo depois do diagrama, estado/data do cabeçalho atualizados, glossário sugerido no INÍCIO do documento com DLQ/TPS/CDC/SLA (pedindo as definições que não puder derivar do próprio doc). Mantém o português e a voz do autor. NÃO inventa contras, alternativas, métricas nem números.",
+      "files": [
+        "files/notify/docs/design/fanout-de-notificacoes.md"
+      ],
+      "assertions": [
+        "The reply separates findings into questions for the author versus edits applied",
+        "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+        "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+        "The mermaid diagram is now followed by explanatory text",
+        "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+        "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+        "The edited document remains in Portuguese and preserves the author's structure and voice",
+        "The header is honestly refreshed (Última atualização set to the real current date)"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "house-template-repo",
+      "prompt": "A gente segue um padrão de design docs em docs/design/ — dá uma olhada no que já tem lá. Preciso do doc novo pro rate limiting da API pública. Contexto: ontem um cliente com integração mal feita mandou 40x o tráfego normal e derrubou a API pra todo mundo por 25 minutos (incidente INC-4412); hoje não existe nenhum limite por cliente. Proposta que fechamos no war room: rate limit por token de API no gateway (Kong), janela deslizante com contadores no Redis que já usamos pra sessão, limites por plano (free: 10 rps, pro: 100 rps, enterprise: negociado), respondendo 429 com header Retry-After. Alternativas: limitar dentro de cada serviço (descartado — tarde demais, a requisição já consumiu gateway e malha) e o módulo pago do gateway gerenciado (descartado — custo e lock-in). Trade-off aceito: cliente legítimo em pico tipo Black Friday pode tomar 429; mitigamos com o Retry-After e alerta pro time de contas avisar os enterprise. Risco que levantamos: o Redis de sessão virar ponto de contenção (vamos medir antes). Cheguei a anotar falso positivo com NAT compartilhado, mas na real esse não existe, porque o limite é por token, não por IP. Objetivo: nenhum token excede seu limite por mais de 1s e a API aguenta um cliente abusivo sem degradar os demais. Entrega em fases: shadow mode só medindo → enforcing no plano free → enforcing geral. Escreve o doc seguindo nosso padrão.",
+      "expected_output": "Lê o DD-2026-007 existente e segue o padrão da casa: mesmas seções (Resumo, Contexto, Proposta com subseção Compensações, Riscos, Plano de entrega), cabeçalho no mesmo formato de tabela, ID continuando a sequência (DD-2026-008), português, salvo em docs/design/. Conteúdo fiel ao prompt (INC-4412, 40x, 25 min, planos free/pro/enterprise, 429 + Retry-After, alternativas com motivos, trade-off da Black Friday, risco de contenção do Redis). NÃO inclui o risco de NAT — o usuário se corrigiu. Não impõe o catálogo padrão da skill por cima do padrão da casa.",
+      "files": [
+        "files/ratelimit/docs/design/dd-2026-007-cache-de-catalogo.md"
+      ],
+      "assertions": [
+        "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+        "The house ID convention continues: DD-2026-008 in the filename and header table",
+        "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+        "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+        "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+        "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+        "The doc is in Portuguese and saved under docs/design/"
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "template-gaps-asks-to-fill",
+      "prompt": "Seguindo o padrão dos nossos design docs em docs/design/, escreve o doc da busca por similaridade no catálogo. O problema: a busca atual é por texto exato (LIKE no Postgres) e cerca de 30% das buscas terminam sem resultado mesmo quando o produto existe — o cliente digita 'tênis de corrida amortecido' e a gente não encontra o 'tênis running com amortecimento'. A proposta que aprovamos no refinamento: gerar embeddings dos títulos e descrições dos produtos com um modelo de similaridade de sentenças, armazenar no pgvector (extensão do Postgres que a gente já usa) e fazer a busca vetorial, com fallback pro LIKE atual quando o score vier baixo.",
+      "expected_output": "Identifica o template da casa (DD-2026-007) e o trata como obrigatório. Faltando substância para Compensações (contras), Riscos e Plano de entrega, questiona o usuário para preenchê-las (uma pergunta por seção faltante) em vez de pular as seções ou inventar riscos/fases/contras. Fiel aos fatos dados (LIKE, 30%, pgvector, fallback). Aceitável não criar o arquivo ainda, ou criar deixando explícito o que está pendente — nunca um doc 'completo' com seções fabricadas ou silenciosamente omitidas.",
+      "files": [
+        "files/ratelimit/docs/design/dd-2026-007-cache-de-catalogo.md"
+      ],
+      "assertions": [
+        "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+        "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+        "Does not fabricate risks, delivery phases, or cons the user never stated",
+        "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+        "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers"
+      ]
+    }
+  ]
+}

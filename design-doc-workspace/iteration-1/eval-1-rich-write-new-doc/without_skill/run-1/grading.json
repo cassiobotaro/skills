@@ -1,0 +1,128 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/project/docs/design/exportacao-relatorios-background.md, a complete Markdown design doc (275 lines, title 'Design Doc: Serviço de Exportação de Relatórios em Background')."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire document is in Portuguese, e.g. '## 1. Resumo', 'Hoje os relatórios são gerados de forma síncrona, dentro da própria request da API.'"
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Section 4.3 'Mudança de comportamento aceita (trade-off)': 'Hoje exportações pequenas funcionam na hora (download imediato). Com esta proposta, toda exportação vira assíncrona, inclusive as pequenas. O usuário perde o download imediato em troca de um caminho único e confiável.' Reinforced in §8 and §12 risk table."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": false,
+      "evidence": "Section 5 lists only 'Alternativa A — Síncrono com timeout maior', 'Alternativa B — Ferramenta de BI externa', and the chosen alternative. There is no 'do nothing' / 'não fazer nada' / 'manter como está' / status-quo alternative. Grep for 'não fazer|status quo|manter como|do nothing' returned no matching alternative. §2.3 'Por que resolver agora' explains urgency but is not framed as a considered do-nothing alternative in the alternatives section."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "Section 7 'Impacto em outros times' has §7.1 'Time de Plataforma — fila compartilhada' (capacity, isolation/vhost, retry/DLQ, worker provisioning) and §7.2 'Time de Segurança — link assinado com PII' (link expiration, retention, encryption, access audit, download auth). Also surfaced in the header metadata and §12 risks."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+      "passed": false,
+      "evidence": "No glossary section exists and none is suggested. Grep for 'glossário|siglas|acrônimo|terminologia' returned nothing. Acronyms PII, S3, CSV, XLSX, BI, API, DLQ, UX, UUID are used heavily throughout (e.g. PII at lines 9/124/172/191/217, S3 ~20 times, BI at 58/118/120) but are never defined, expanded, or assembled into a glossary at the beginning or anywhere."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Two ASCII diagrams. The current-state diagram (lines 30-32) is followed by prose at line 34 ('A geração acontece dentro do ciclo request/response...'). The proposed solution flow diagram (lines 69-88) is followed by §4.2 'Fluxo detalhado' with seven numbered prose steps. No orphan diagrams."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "All numeric metrics map to the prompt: 30s timeout, 12% failures, 50 mil and 100 mil rows. Unknowns are left as placeholders or open questions rather than fabricated: retry count is 'N tentativas' (line 160), S3 retention is 'X dias' (167) and 'quantos dias' open question (273), link expiration is 'expiração curta' with no invented number, author header is '_(preencher)_'. §13 collects open questions. No invented stack/language for the worker (confirmed in response.md)."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and free of implementation detail",
+      "passed": false,
+      "evidence": "Section 1 'Resumo' has two prose paragraphs (lines 15, 17) plus a 'Objetivos mensuráveis' bullet list (19-22). The second paragraph is dense with implementation detail, naming the concrete mechanism and technologies: 'enfileirar um job no RabbitMQ', 'um worker gera o arquivo (CSV/XLSX) em streaming', 'faz upload para o S3', 'recebe por e-mail um link assinado'. This is the 'how' (specific infra and flow) rather than a high-level problem/goal summary, violating the 'free of implementation detail' condition."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 3,
+    "total": 9,
+    "pass_rate": 0.67
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 11876,
+    "transcript_chars": null
+  },
+  "timing": {
+    "executor_duration_seconds": 333.8,
+    "total_duration_seconds": 333.8
+  },
+  "claims": [
+    {
+      "claim": "About 12% of exports over 50k rows fail due to the 30s gateway timeout",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Stated in §1 and §2.2; matches the eval prompt exactly (no fabrication)."
+    },
+    {
+      "claim": "RabbitMQ already exists in the infra and is reused by the proposed solution",
+      "type": "factual",
+      "verified": true,
+      "evidence": "§1 and §5.3 state RabbitMQ is reused ('já existente na infra'), consistent with the prompt ('a gente já tem RabbitMQ na infra')."
+    },
+    {
+      "claim": "No specific worker stack/language was invented",
+      "type": "process",
+      "verified": true,
+      "evidence": "Technical detail sections describe the worker generically (separate process, streaming, multipart upload) without naming a language/framework; response.md explicitly confirms 'não inventei stack/linguagem específica do worker'."
+    },
+    {
+      "claim": "The doc covers both impacted teams as the executor stated",
+      "type": "quality",
+      "verified": true,
+      "evidence": "§7 dedicates a subsection to each of Plataforma (shared queue) and Segurança (signed link with PII), as claimed in response.md."
+    },
+    {
+      "claim": "The doc includes a glossary of acronyms",
+      "type": "quality",
+      "verified": false,
+      "evidence": "Not claimed by the executor and not present; acronyms (PII, S3, CSV/XLSX, BI) are used undefined throughout."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Author/reviewer header left as '_(preencher)_'",
+      "Whether to ship UI polling in v1 or email-only first",
+      "Signed-link validity and whether extra download auth is needed (to settle with Security)",
+      "S3 file retention period (days until purge)",
+      "Concurrency limit / number of workers and queue isolation (to settle with Platform)",
+      "Behavior above 100k rows (block, split into multiple files, or defer)"
+    ],
+    "needs_review": [
+      "Document should be reviewed by Platform (queue) and Security (PII/link) before circulation"
+    ],
+    "workarounds": [
+      "Left stack/language of the worker unspecified pending input from the user"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+        "reason": "This is a discriminating assertion that correctly caught a real gap — the doc uses many acronyms (PII, S3, BI, CSV/XLSX, DLQ, UX, UUID) with none defined. Good as-is."
+      },
+      {
+        "assertion": "The overview section is at most two paragraphs and free of implementation detail",
+        "reason": "The 'at most two paragraphs' and 'free of implementation detail' conditions can pull in opposite directions and the verdict hinges on a judgment of how much tech-naming counts as 'implementation detail'. Consider clarifying the threshold (e.g. 'must not name specific technologies like RabbitMQ/S3') so the assertion is less subjective."
+      }
+    ],
+    "overall": "Assertions are mostly discriminating and caught genuine omissions (do-nothing alternative, glossary, overview implementation detail). Suggest tightening the overview assertion's definition of 'implementation detail' to reduce grader subjectivity."
+  }
+}

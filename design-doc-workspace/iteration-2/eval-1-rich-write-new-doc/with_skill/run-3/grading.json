@@ -1,0 +1,117 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/project/docs/design/background-report-export-service.md — a complete Markdown design doc (242 lines) with a metadata header table, glossary, overview, scope, solution, trade-offs, alternatives, cross-cutting concerns, testability and open questions. response.md confirms: 'Criei o design doc em docs/design/background-report-export-service.md'."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire document is in Brazilian Portuguese. Section headings: 'Glossário', 'Visão geral', 'Escopo e contexto', 'Objetivos e fora de escopo', 'A solução', 'Trade-offs da solução escolhida', 'Alternativas consideradas', 'Cross-cutting concerns', 'Questões em aberto'. Prose throughout is Portuguese (e.g., line 37: 'Hoje os relatórios são gerados dentro da própria request da API...')."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Stated explicitly in multiple places. Overview (line 37): 'aceitando como custo que toda exportação — inclusive as pequenas que hoje baixam na hora — passe a ser assíncrona'. Solution (line 72): 'o usuário perde o download imediato — inclusive nas exportações pequenas que hoje funcionam na hora. Aceitamos esse custo...'. Trade-offs section (line 184) lists it with a ✗ marker: 'Perda do download imediato — exportações pequenas que hoje retornam na hora passam a chegar por e-mail; é uma regressão de experiência... aceita em troca do caminho único.'"
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "The 'Alternativas consideradas' section (lines 189-200) has a comparison table and prose covering all three: 'Síncrono com timeout maior' (line 194/198, 'Descartada por só empurrar o problema'), 'Ferramenta de BI externa' (line 195/199, descartada por custo e PII), and 'Não fazer nada' (line 196/200, 'manter o síncrono atual deixa os 12% de falha... e os tickets semanais intactos')."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "The 'Cross-cutting concerns' section has a 'Segurança' subsection (lines 204-213) addressing PII and signed links: 'Os relatórios contêm PII e a entrega passa a ser por link assinado... TTL curto... Bucket S3 privado... Política de retenção... Sugerimos o time de Segurança como revisor.' And an 'Infraestrutura / Plataforma' subsection (lines 215-223): 'O worker passa a usar uma fila compartilhada no RabbitMQ, que é responsabilidade do time de Plataforma... Sugerimos o time de Plataforma como revisor.'"
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+      "passed": true,
+      "evidence": "A 'Glossário' section appears near the top (lines 14-33), immediately after the header table and before the overview. It defines all four required acronyms: PII ('Personally Identifiable Information — dados pessoais identificáveis'), S3 ('Object storage onde o arquivo gerado é armazenado'), CSV/XLSX ('Formatos de arquivo de saída suportados'), and BI ('Business Intelligence — categoria de ferramentas de análise/relatório'), plus API, HTTP, URL, RabbitMQ, TTL, DLQ, etc."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "The doc contains exactly two Mermaid diagrams. The architecture flowchart (lines 78-101) is followed by 'Os componentes:' with a bulleted explanation of each node (lines 103-110). The sequence diagram (lines 114-142) is followed by 'Pontos do fluxo que sustentam os objetivos:' with explanatory bullets (lines 144-148). No orphan diagrams. Note: the doc discloses (line 76) the Mermaid validation server was unavailable so diagrams were not machine-validated; the grader independently confirmed the MCP mermaid server returns 'Invalid Request' errors, and the diagram syntax is standard and well-formed by inspection."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "grep of all numeric facts returns only: the 30s gateway timeout, 12% failure rate above 50k rows, and 100k-row target — all directly from the prompt. No fabricated metrics found (no invented latencies, throughput, costs, percentages). HTTP 202 is a standard status code, not a metric. Unknowns are explicitly left blank or deferred: header authors/reviewers '(a preencher)', signed-link TTL is 'valor a definir com Segurança', S3 retention, and current API consumers all appear under 'Questões em aberto' (lines 234-241) rather than being invented."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "Re-judged under the sharpened assertion: the single-paragraph overview names the core mechanism (queue/worker via RabbitMQ, streaming to S3, signed link by e-mail) but contains no schemas, payloads, endpoints, retry policies, or config values — solution-shape altitude. (Original grader evidence confirmed exactly this content.)"
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 11890,
+    "transcript_chars": null,
+    "note": "No metrics.json present in outputs_dir; tool-call breakdown unavailable. output_chars is the size of the design doc plus response.md."
+  },
+  "timing": {
+    "total_tokens": 33402,
+    "duration_ms": 504034,
+    "total_duration_seconds": 504.0,
+    "note": "From run-3/timing.json. No separate executor/grader split available."
+  },
+  "claims": [
+    {
+      "claim": "The Mermaid validation/diagram server was unavailable at write time, so diagrams were not machine-validated",
+      "type": "process",
+      "verified": true,
+      "evidence": "Grader independently called the mermaid MCP tool (validate_and_render_mermaid_diagram) for both diagrams and received 'Streamable HTTP error: Invalid Request' both times, confirming the server is down as the doc (line 76) and response.md state."
+    },
+    {
+      "claim": "The doc proposes API enqueues to RabbitMQ and responds 202; worker generates CSV/XLSX in streaming to S3 and emails a signed link",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Matches the solution section (lines 63-110) and both diagrams; also faithfully restates the prompt's proposed design without alteration."
+    },
+    {
+      "claim": "Both Mermaid diagrams are syntactically valid standard Mermaid",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Could not be machine-verified (server down), but by inspection the flowchart (balanced subgraph block, valid node/edge syntax) and sequenceDiagram (balanced loop block, valid participant/message syntax) are well-formed standard Mermaid that renders on GitHub/GitLab."
+    },
+    {
+      "claim": "The doc invents no facts beyond the prompt",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Confirmed by exhaustive grep of numeric/quantitative content: only the prompt's 30s, 12%, 50k, 100k figures appear; all other unknowns are deferred to 'Questões em aberto' or marked '(a preencher)'."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Signed-link TTL, S3 retention period, and named authors/reviewers left open for the user to fill",
+      "Mermaid diagrams not machine-validated because the validation server was down"
+    ],
+    "needs_review": [
+      "Current consumers of POST /exports must be mapped before the contract change to 202 (compatibility break)"
+    ],
+    "workarounds": [
+      "Diagrams written as standard Mermaid and shipped unvalidated since the MCP mermaid server was unavailable"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The overview section is at most two paragraphs and free of implementation detail",
+        "reason": "This assertion conjoins two distinct criteria (length AND no implementation detail). 'Free of implementation detail' is subjective — a strong overview that names the central proposal (queue + worker + signed link) reads as good practice yet trips the 'no implementation detail' clause. Consider splitting into two assertions, or rewording to 'free of low-level implementation detail (no API schemas, retry/DLQ mechanics, multipart upload)' so it discriminates a bloated overview from a crisp one rather than penalizing any technology name."
+      }
+    ],
+    "overall": "Assertions are mostly discriminating and well-targeted — the trade-off, alternatives (including 'do nothing'), cross-cutting, glossary, and no-invented-facts checks all require genuine work and are hard to fake. The only soft spot is the overview assertion's subjective 'free of implementation detail' clause."
+  }
+}

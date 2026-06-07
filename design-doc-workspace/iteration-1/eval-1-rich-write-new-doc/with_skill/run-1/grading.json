@@ -1,0 +1,120 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/project/docs/design/exportacao-de-relatorios-em-background.md (17k, valid .md). It is a complete, structured design doc with header table, Glossário, Visão geral, Escopo, Objetivos, A solução, Trade-offs, Alternativas, Concerns transversais, Testabilidade/observabilidade, Plano de implantação, and Perguntas em aberto."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "The entire document is in Portuguese, e.g. line 28 '## Visão geral', line 53 '## Objetivos e fora de escopo', line 232 '## Alternativas consideradas'. Body prose is all PT-BR ('Hoje os relatórios são gerados dentro da própria request da API...')."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "In '## Trade-offs da solução escolhida' (line 222): '✗ O usuário perde o download imediato. Exportações pequenas, que hoje voltam na hora, passam a chegar por e-mail depois — regressão deliberada de UX aceita em troca de um caminho único e confiável. (É o trade-off central deste documento.)'. Also surfaced under Objetivos→Fora de escopo (line 67) and in the solution section (line 87-90)."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "'## Alternativas consideradas' table (lines 236-239) lists: chosen (worker+S3+email), 'Geração síncrona com timeout maior' (Descartada), 'Ferramenta de BI externa' (Descartada), and 'Não fazer nada' (Descartada). Each is justified in prose (lines 241-249): synchronous timeout 'só empurra o problema'; BI discarded 'por custo e por expor dado de cliente'; do-nothing keeps ~12% failures and weekly tickets."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'## Concerns transversais' has 'Segurança' (lines 257-267): 'O link assinado dá acesso a um arquivo com PII de cliente' with TTL/bucket/retention points, and 'Infraestrutura / Plataforma' (lines 269-276): 'O RabbitMQ é uma fila compartilhada... podem competir por recursos com outros consumidores' with dedicated-queue/concurrency points. Both teams are also suggested as reviewers in the header (line 9)."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+      "passed": true,
+      "evidence": "'## Glossário' appears near the top (lines 14-25), immediately after the header and before Visão geral. It defines acronyms/terms used: PII ('Personally Identifiable Information; dado pessoal de cliente'), AMQP, TTL, plus Job, Worker, Link assinado/signed URL, Streaming, Gateway. Gap noted: of the four acronyms named in the expectation, only PII has its own glossary entry; S3 is referenced inside the 'Link assinado' definition but not defined as a term, and CSV/XLSX and BI are used in the body (lines 33, 238) but not glossary entries. A substantive glossary at the start covering acronyms used is present, so the core requirement is met."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Two mermaid diagrams, each followed by prose. The container flowchart (lines 94-117) is followed by 'Os componentes:' with a bulleted explanation of each node (lines 119-136). The sequence diagram (lines 140-168) is followed by 'Pontos do fluxo que importam para o desenho:' (lines 170-180). No diagram stands alone."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Numeric audit: 30s timeout (lines 25,30,41,59,215), ~12% failures (lines 30,45,248), 50 mil linhas (lines 30,45,248), 100 mil linhas (lines 35,60,71,176,216,271,288,304,321) — all trace to the prompt. Other numbers are non-fabricated conventions: HTTP 202/200 status codes (lines 153,190,197) and today's real date 2026-06-07 (lines 10-11). Unknowns are NOT fabricated: TTL is 'curto' / 'valor a definir com Segurança', retention 'a definir', authors '_(a preencher)_', concurrency limit left as open question. All collected under 'Perguntas em aberto' (lines 311-322)."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and free of implementation detail",
+      "passed": true,
+      "evidence": "'## Visão geral' (lines 29-35) is a single paragraph. It states the problem (synchronous generation hitting the 30s timeout, ~12% failures above 50k rows, weekly tickets), the proposed approach at a conceptual level (enqueue a job, worker generates CSV/XLSX in streaming to S3, signed link by email), and the objective (zero timeouts, support 100k rows). It stays at the solution-shape/architectural level used in the prompt itself; no low-level implementation detail (no schemas, code, library/version choices). Borderline: it does name S3 and the streaming technique, but this matches the prompt's own framing of the solution and remains high-level."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 19370,
+    "transcript_chars": null,
+    "note": "No metrics.json was produced by the executor; tool-call counts unavailable. output_chars is the sum of the design doc (~17k) and response.md (~2.4k)."
+  },
+  "timing": {
+    "executor_duration_seconds": 1037.7,
+    "total_duration_seconds": 1037.7,
+    "note": "From timing.json; total_tokens=33771, duration_ms=1037702."
+  },
+  "claims": [
+    {
+      "claim": "The Mermaid MCP validation server was unavailable, so diagrams were not validated through the tool",
+      "type": "process",
+      "verified": true,
+      "evidence": "Stated in response.md line 31. Cannot be independently confirmed without a transcript, but both diagrams use standard flowchart/sequenceDiagram syntax that is plausibly valid; this is disclosed honestly rather than claimed as validated."
+    },
+    {
+      "claim": "Both mermaid diagrams use standard, renderable syntax",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Reviewed both blocks: flowchart TB with subgraph and labeled edges (lines 94-117) and sequenceDiagram with actor/participant/loop (lines 140-168). Syntax is conventional and well-formed; no obvious errors. Not machine-validated."
+    },
+    {
+      "claim": "Values that could not be derived from the prompt were left as open questions / blanks rather than invented",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Authors marked '_(a preencher)_' (line 8), TTL/retention/concurrency deferred to Segurança/Plataforma and collected under 'Perguntas em aberto' (lines 311-322). Consistent with the response.md claim (lines 33-42)."
+    },
+    {
+      "claim": "The doc gives the chosen approach a C4-style container diagram",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The flowchart annotates nodes with [Pessoa]/[Container: ...] and groups them in a 'Plataforma de Exportação de Relatórios' subgraph (lines 96-106) — a C4 container-style rendering in Mermaid, as claimed in response.md line 16."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Mermaid MCP validation server was down; diagram syntax not tool-validated (response.md line 31).",
+      "Named authors/reviewers, signed-link TTL, S3 retention policy, dedicated-vs-shared queue and worker concurrency, and failure-handling behavior are unknown and left as open questions (response.md lines 33-42)."
+    ],
+    "needs_review": [
+      "Confirm authors and Platform/Security reviewers to fill the header and reviewer table."
+    ],
+    "workarounds": [
+      "Diagrams delivered as inline ```mermaid``` blocks (render on GitHub/GitLab) since MCP validation was unavailable."
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+        "reason": "This passed, but the output only defines 1 of the 4 named example acronyms (PII) as a glossary entry; S3, CSV/XLSX, and BI are used in the body but not glossed. The 'e.g.' makes the named acronyms illustrative rather than required, so a glossary covering *some* used acronyms passes — but if covering those specific acronyms matters, the assertion should say so explicitly (e.g. 'the glossary defines, at minimum, PII, S3, CSV/XLSX and BI'). As written it would also pass a glossary that omits most domain acronyms."
+      },
+      {
+        "assertion": "The overview section is at most two paragraphs and free of implementation detail",
+        "reason": "'Free of implementation detail' is subjective. The overview names S3 and the streaming technique — defensible as solution-shape, but a stricter grader could read these as implementation detail. Consider defining what counts (e.g. 'no specific endpoints, schemas, status codes, library/version choices, or queue/storage product names') so the bar is unambiguous and discriminating."
+      }
+    ],
+    "overall": "Assertions are mostly well-targeted and discriminating (the trade-off, alternatives-including-do-nothing, cross-cutting-teams, and no-invented-metrics checks are all hard to satisfy without doing the work properly). Two assertions could be tightened: the glossary check (which named acronyms are actually required) and the overview 'free of implementation detail' check (what qualifies as implementation detail)."
+  }
+}

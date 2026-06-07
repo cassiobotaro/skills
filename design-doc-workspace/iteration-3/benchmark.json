@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "design-doc/skills/design-doc",
+    "executor_model": "claude-opus-4-8[1m]",
+    "analyzer_model": "claude-opus-4-8[1m]",
+    "timestamp": "2026-06-07T18:20:13Z",
+    "evals_run": [
+      2,
+      4,
+      5
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 196.6,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+          "passed": true,
+          "evidence": "response.md is entirely in Portuguese and poses 5 numbered questions. Q1 (lines 7-8): 'O problema — por que migrar, e por que agora?' with concrete pain examples (deploys lentos, build/CI demorado) — covers current pain + why now. Q2 (lines 10-11): 'Tem alguma meta mensurável (ex.: reduzir o tempo de deploy de 2h pra 10min...)' — measurable goals, plus out-of-scope. Q4 (lines 16-17): 'As alternativas — o que mais foi considerado?' — alternatives. Q5 (lines 19-20): 'O raio de impacto — quem é afetado além do seu time?' with 'Quantos times vão tocar nisso?' — impacted teams. Trade-offs are explicitly named in the intro (line 1: 'os trade-offs que vocês estão aceitando') and surfaced concretely in Q3 (line 14: 'REST síncrono, mensageria/eventos... banco de dados continua compartilhado, um por serviço') — the canonical microservices trade-offs."
+        },
+        {
+          "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+          "passed": true,
+          "evidence": "No project facts are asserted as true. Every concrete detail is framed as a hypothetical request to the user ('ex.:', 'por exemplo', 'Se der, traga números'). The executor explicitly states it cannot invent (line 1: 'é justamente o que eu não posso inventar'; line 29: 'sempre mantendo só o que você de fato me passar (não vou preencher buracos com suposições)'). No stack, metrics, domain boundaries, or team names are presented as facts about the project."
+        },
+        {
+          "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+          "passed": true,
+          "evidence": "Line 17: 'Microserviços não é a única saída. Vocês chegaram a pensar em: modularizar o monolito sem quebrá-lo (modular monolith), extrair só 1–2 serviços críticos em vez de tudo, ou simplesmente não fazer nada e conviver com a dor? Saber por que essas opções perderam é o que torna a decisão auditável depois.' Both 'modular monolith' and 'não fazer nada' (do nothing) are explicitly raised as alternatives to weigh."
+        },
+        {
+          "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+          "passed": true,
+          "evidence": "The working repository outputs/project/ is empty — no files were created (confirmed by find and ls). Line 31 confirms the deliberate choice: 'Por enquanto não criei nenhum arquivo, justamente pra não gerar um doc cheio de placeholders inventados. Assim que você me der a substância, eu escrevo.' No finished doc and no invented content exist."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 239.8,
+        "tokens": 4910,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+          "passed": true,
+          "evidence": "dd-2026-008 uses exactly the house sections in order: '## Resumo' (L13), '## Contexto' (L17), '## Proposta' (L25) with '### Compensações' subsection (L37), '## Riscos' (L56), '## Plano de entrega' (L62). Compensações uses the same ✓/✗ bullet convention as the reference dd-2026-007 (L39-43). No catalog-style default headings appear. Extra subsections (Alternativas consideradas L45, Critério de sucesso L51) were nested under Proposta to avoid breaking the house structure, as the executor explained in response.md."
+        },
+        {
+          "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+          "passed": true,
+          "evidence": "Filename is docs/design/dd-2026-008-rate-limiting-api-publica.md (next sequential after the existing dd-2026-007). Title line 'DD-2026-008 · Rate limiting da API pública' (L1) and metadata table row '| **Documento** | DD-2026-008 |' (L6) both carry the correct ID."
+        },
+        {
+          "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+          "passed": true,
+          "evidence": "The Riscos table (L58-60) contains exactly one row — Redis de sessão contention. NAT does not appear there. It is mentioned only in Proposta (L35) as explicitly NOT applicable: 'Chegamos a anotar o risco de falso positivo com NAT compartilhado, mas ele não se aplica aqui — como o limite é por token, dois clientes atrás do mesmo NAT têm contadores independentes.' Correctly handled per the prompt's retraction."
+        },
+        {
+          "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+          "passed": true,
+          "evidence": "INC-4412 in Resumo (L15) and Contexto (L21); '40x o tráfego normal' (L15, L21); 'por 25 minutos' / 'por 25 minutos' (L15, L21); per-plan limits 'free: 10 rps', 'pro: 100 rps', 'enterprise: negociado por contrato' (L30-31); '429 Too Many Requests com o header Retry-After' (L33). All present and accurate."
+        },
+        {
+          "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+          "passed": true,
+          "evidence": "Compensações cost bullet L42: '✗ Um cliente legítimo em pico (ex.: Black Friday) pode tomar 429 ao ultrapassar o limite do seu plano. Mitigamos com o Retry-After para que o cliente recue de forma ordenada e com um alerta para o time de contas avisar os clientes enterprise antecipadamente.' Marked as ✗ cost with both mitigations from the prompt (Retry-After + accounts-team alert)."
+        },
+        {
+          "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+          "passed": true,
+          "evidence": "Riscos table L60: 'O Redis de sessão virar ponto de contenção ao assumir também os contadores de rate limit | Medir o impacto antes de ativar o enforcing (ver Plano de entrega — o shadow mode existe justamente para essa medição)'. Matches the war-room risk and the 'vamos medir antes' mitigation, tied to shadow mode in the delivery plan."
+        },
+        {
+          "text": "The doc is in Portuguese and saved under docs/design/",
+          "passed": true,
+          "evidence": "File saved at docs/design/dd-2026-008-rate-limiting-api-publica.md (confirmed via directory listing). Entire content is written in Portuguese (Resumo, Contexto, Proposta, Riscos, Plano de entrega, etc.)."
+        }
+      ],
+      "notes": [
+        "Whether war-room participants should be added as reviewers (left as 'a definir')",
+        "Whether Estado should be 'Aprovado' if the decision is already final (left as 'Em revisão')",
+        "Whether concrete API capacity numbers (peak rps / what INC-4412 reached) should be added to Contexto to match the reference doc's rps/P99 detail",
+        "Reviewer names and areas",
+        "Document state (Em revisão vs Aprovado)",
+        "Alternativas consideradas and Critério de sucesso nested under Proposta because the house reference has no dedicated sections for them"
+      ]
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 232.8,
+        "tokens": 6043,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+          "passed": true,
+          "evidence": "The new doc dd-2026-008 reproduces the full house template in order: '## Resumo', '## Contexto', '## Proposta' with '### Compensações' subsection, '## Riscos' (with the same 'Risco | Mitigação' table layout as DD-2026-007), and '## Plano de entrega'. It also mirrors DD-2026-007's header table (Documento, Estado, Autores, Revisores, Criado em, Última atualização, Tags) and continues the numbering (DD-2026-008). response.md confirms it followed 'o mesmo formato do DD-2026-007 (Resumo → Contexto → Proposta → Compensações → Riscos → Plano de entrega)'. None of the required sections were dropped — each is present and the empty ones are explicitly held as required-but-pending rather than omitted."
+        },
+        {
+          "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+          "passed": true,
+          "evidence": "response.md is in Portuguese and asks for exactly these three categories: under '**Compensações (o custo aceito ...)**' it asks 'O que ficou pior/mais arriscado/mais caro em troca de recuperar as buscas?'; under '**Riscos + mitigações:**' it asks 'Quais riscos a equipe enxerga ... e como mitigar cada um?'; under '**Plano de entrega:**' it asks about backfill, flag/percentual rollout, shadow measurement, and rollback. The same questions are embedded as blockquotes inside the doc's Compensações, Riscos, and Plano de entrega sections."
+        },
+        {
+          "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+          "passed": true,
+          "evidence": "The Riscos table contains only '_A preencher_ | _A preencher_' — no invented risks. Plano de entrega has a single placeholder item '1. _A preencher_' — no invented phases. In Compensações the only concrete '✗' (con) is '✗ _A preencher com o autor (ver perguntas acima)._' — no fabricated cost. The two '✓' entries (recovers empty searches; reuses existing Postgres/pgvector) are restatements of given facts/logical benefits, not invented downsides. Questions in blockquotes are framed as prompts for the author, not as asserted content."
+        },
+        {
+          "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+          "passed": true,
+          "evidence": "Resumo: 'a busca do catálogo hoje é por texto exato (LIKE no Postgres) e cerca de 30% das buscas terminam sem resultado mesmo quando o produto existe ... mantendo o LIKE atual como fallback quando o score da busca vetorial vier baixo.' Contexto repeats the 30% figure and the 'tênis de corrida amortecido' vs 'tênis running com amortecimento' example verbatim from the prompt, and states 'já temos a extensão pgvector disponível ... sem introduzir uma nova peça de infraestrutura' (existing Postgres). Proposta's Fallback bullet: 'quando o score da melhor correspondência vetorial vier abaixo de um limiar, recorrer à busca LIKE atual.' All four given facts are represented accurately with no distortion."
+        },
+        {
+          "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+          "passed": true,
+          "evidence": "Every required section exists; none is silently skipped. The three sections lacking input each open with an explicit blockquote marker: Compensações — '> _A preencher com o autor — esta seção é o cerne do documento e não pode ser inventada._'; Riscos — '> _A preencher com o autor — riscos e mitigações ainda não foram estabelecidos._' with a placeholder table row; Plano de entrega — '> _A preencher com o autor — a sequência de entrega ainda não foi estabelecida._' with item '1. _A preencher_'. The header Autores/Revisores fields are also marked '_A preencher_'. response.md states unanswered items will be moved to a 'Pendências' section 'em vez de inventar.'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 227.1,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+          "passed": true,
+          "evidence": "The created file dd-2026-008-busca-por-similaridade-no-catalogo.md mirrors the house template from dd-2026-007: identical header table (Documento/Estado/Autores/Revisores/Criado em/Última atualização/Tags) and the same section set — Resumo, Contexto, Proposta with a '### Compensações' subsection, Riscos (as a Risco|Mitigação table), and Plano de entrega (numbered phases). It even continues the sequential numbering from 007 to 008. response.md confirms: 'Escrevi o design doc seguindo o padrão da pasta docs/design/ (mesmo cabeçalho, mesmas seções ...)'."
+        },
+        {
+          "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+          "passed": false,
+          "evidence": "The questions asked (in Portuguese, in both response.md and the doc's 'Questões em aberto') cover authors/reviewers, a numeric target, which sentence-similarity model, where embeddings are regenerated, threshold calibration, and which alternatives were discarded — but they do NOT ask the user for the accepted trade-offs/cons, the risks, or the delivery plan/phases. Those three required template sections were instead filled with self-derived content rather than queried. The specific substance this expectation requires the executor to ask for was supplied by the executor itself, not requested."
+        },
+        {
+          "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+          "passed": false,
+          "evidence": "All three sections were fabricated/inferred. Compensações lists 6 bullets (e.g. 'Passa a existir um modelo de embeddings a operar e versionar', 'O limiar de score ... precisa ser calibrado e revisitado') none of which the user stated. Riscos is a 3-row table with risks and mitigations (limiar mal calibrado, custo/latência do embedding da consulta, embeddings desatualizados) invented by the executor. Plano de entrega is a 3-phase plan (backfill+validação, shadow mode, rollout fracionado) the user never described. The prompt note is explicit: 'Deriving/inferring trade-offs, risks, or phases the user never stated counts as fabrication ... even when plausible.' response.md openly frames this as deriving from the proposal ('as compensações que decorrem da própria proposta')."
+        },
+        {
+          "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+          "passed": true,
+          "evidence": "Resumo/Contexto state the search today is exact-text 'LIKE no Postgres', that '~30% das buscas terminam sem resultado mesmo quando o produto existe', that 'O pgvector já está disponível na nossa instância do Postgres', and the proposal includes 'Fallback para o LIKE atual quando o melhor score vier abaixo de um limiar'. The given tênis example is reproduced faithfully ('tênis de corrida amortecido' → 'tênis running com amortecimento'). No factual distortions found."
+        },
+        {
+          "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+          "passed": false,
+          "evidence": "A complete file was produced and the three sections lacking user-provided substance (Compensações, Riscos, Plano de entrega) are NOT marked as pending the user's answers — they are filled with fabricated content and presented as finished prose. Only the header fields show explicit placeholders ('Autores: _a definir_', 'Estado: Rascunho'). The required substance sections are silently completed with invented material instead of being left explicitly open, which is the failure mode this expectation guards against."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 223.0667,
+        "stddev": 23.1865,
+        "min": 196.6,
+        "max": 239.8
+      },
+      "tokens": {
+        "mean": 3651.0,
+        "stddev": 3212.2069,
+        "min": 0,
+        "max": 6043
+      }
+    },
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.4,
+        "stddev": 0.0,
+        "min": 0.4,
+        "max": 0.4
+      },
+      "time_seconds": {
+        "mean": 227.1,
+        "stddev": 0.0,
+        "min": 227.1,
+        "max": 227.1
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.60",
+      "time_seconds": "-4.0",
+      "tokens": "+3651"
+    }
+  },
+  "notes": [
+    "Revision iteration: skill refocused on interactive discovery, scoped to design docs only (RFC/ADR removed from identity), and a new rule — a governing template (user-supplied or house) makes its sections required, filled by asking the user, never skipped or fabricated.",
+    "The new eval-5 (template with substance gaps for Compensações/Riscos/Plano de entrega) is the discriminator: revised skill 5/5 — sections left explicitly pending with one question per gap; previous skill version (old_skill baseline) 2/5 — it derived plausible cons, risks, and phases the user never stated and presented them as content.",
+    "No regression on re-run evals: eval-2 (vague ask → questions, no file) 4/4 and eval-4 (house template, full substance) 7/7. In eval-4 the executor nested Alternativas/Critério de sucesso under Proposta to honor both the house top-level structure and the user's real substance — exactly the intended balance.",
+    "old_skill ran from design-doc-workspace/skill-snapshot-v1 (the pre-revision version that scored 100% in iterations 1-2): the 40% column here measures the delta on the NEW behavior, not a regression of the old version on its own goals.",
+    "n=1 per configuration; per-eval conclusions are directional."
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "design-doc/skills/design-doc",
+    "executor_model": "claude-opus-4-8[1m]",
+    "analyzer_model": "claude-opus-4-8[1m]",
+    "timestamp": "2026-06-07T17:48:55Z",
+    "evals_run": [
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8889,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 475.0,
+        "tokens": 11800,
+        "tool_calls": null,
+        "errors": 1
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/project/docs/design/exportacao-de-relatorios-em-background.md (303 lines of Markdown). response.md line 1: 'Criei o design doc em docs/design/exportacao-de-relatorios-em-background.md.'"
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "The entire document is in Portuguese, e.g. title 'Serviço de exportação de relatórios em background', sections 'Visão geral', 'Escopo e contexto', 'Alternativas consideradas', 'Questões em aberto'."
+        },
+        {
+          "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "Trade-offs section lines 218-221: '✗ Perde o download imediato — inclusive para exportações pequenas que hoje funcionam na hora. Este é o custo aceito explicitamente'. Also restated in the solution overview (lines 89-92) and 'Fora de escopo' (lines 69-71)."
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": true,
+          "evidence": "Alternatives table lines 233-238 lists 'Manter síncrono, só aumentar o timeout' (Descartada), 'Ferramenta de BI externa' (Descartada), and 'Não fazer nada' (Descartada), alongside the chosen async/worker option. All three required alternatives present, each with trade-offs and rationale (lines 240-245)."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "Section 'Cross-cutting concerns' (lines 247-262) has subsection 'Plataforma (fila compartilhada)' addressing RabbitMQ shared-queue contention and 'Segurança (link assinado com PII)' addressing TTL/scope of signed links carrying PII. Both teams flagged 'Sugerido como revisor.'"
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+          "passed": false,
+          "evidence": "A 'Glossário' table exists at the start (lines 14-25) and covers PII (line 24), CSV/XLSX (line 25), TTL, plus non-acronym terms (Gateway, Job, Worker, Streaming, Link assinado). However it does NOT cover two of the four named example acronyms: S3 is never given its own glossary entry or expansion (only appears parenthetically inside other rows, e.g. 'URL temporária do S3'), and BI is entirely absent from the glossary despite being used in the body as an abbreviation ('Ferramenta de BI externa', 'BI externo', lines 237, 242). The glossary fails to cover the acronyms used."
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "Two Mermaid diagrams. The architecture flowchart (lines 100-123) is followed by a labelled component list and prose (lines 125-139). The sequence diagram (lines 143-172) is followed by two paragraphs explaining the happy path and failure path (lines 174-182). No orphan diagrams."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "All metrics trace to the prompt: '30s' timeout (lines 18,30,41,59), '~12% das exportações acima de 50 mil linhas falham' (lines 46,212,238,244), '100 mil linhas' target (lines 34,60,213,245,267). The only other numerics are the standard HTTP '202' status code and an illustrative '200 linhas' example (line 220, hypothetical small export), neither a fabricated statistic. Unknowns (TTL, e-mail service, retry/dead-letter policy, S3 retention, link-expiry behavior) are placed in 'Questões em aberto' (lines 291-302) and author/reviewer fields are '(a definir)' (lines 8-9), never fabricated."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+          "passed": true,
+          "evidence": "'Visão geral' (lines 27-34) is a single paragraph, within the two-paragraph limit. It stays at solution-summary altitude (problem + proposed direction: enqueue a job, worker generates and uploads, user gets an emailed signed link, goals to zero timeouts and support 100k rows). Granular implementation (202 response shape, status enum, batch loops, API contract) is confined to later sections. Borderline: it does name S3 and 'streaming', which are technology/mechanism choices, but these read as high-level approach rather than implementation specifics."
+        }
+      ],
+      "notes": [
+        "Mermaid diagrams not validated due to validation-server transport error (executor flagged this in response and inline in the doc)",
+        "Named authors and reviewers (left as 'a definir')",
+        "Signed-link TTL to be defined with Security",
+        "E-mail service choice and delivery-failure handling",
+        "Queue retry/dead-letter policy with Platform",
+        "S3 retention / lifecycle policy",
+        "Behavior when signed link expires before download",
+        "Diagrams left as inline standard Mermaid syntax without tool validation after the MCP validation server failed"
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.8889,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 445.6,
+        "tokens": 9876,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/project/docs/design/exportacao-de-relatorios-em-background.md, a complete Markdown design doc (221 lines, header table + Glossário + Overview + Escopo + Objetivos + A solução + Trade-offs + Alternativas + Cross-cutting + Testabilidade + Plano + Questões em aberto)."
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "Entire document is in Portuguese, e.g. line 29 'Hoje os relatórios são gerados de forma síncrona, dentro da própria request da API...' and section headings 'Escopo e contexto', 'Objetivos e fora de escopo', 'Alternativas consideradas'."
+        },
+        {
+          "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "Appears in three places. Line 60: 'o usuário perde o download imediato. Exportações pequenas, que hoje retornam o arquivo na hora, também passam a ser assíncronas.' Line 149 under Trade-offs as a ✗ cost: 'Usuário perde o download imediato... É o custo deliberadamente aceito em troca do caminho único'. Also line 49 in 'Fora de escopo'."
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": true,
+          "evidence": "Alternatives table (lines 159-164) contains all three: 'Não fazer nada' (rejected — recurring problem costs support weekly), 'Síncrono com timeout maior' (rejected — only delays the problem), and 'Ferramenta de BI externa' (rejected — cost and PII exposure), plus the chosen worker+S3+email option."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "Cross-cutting concerns section (lines 168-189) has a 'Segurança (time de Segurança)' subsection on PII files in S3 and signed-link TTL/bucket policy, and an 'Infraestrutura / Plataforma (time de Plataforma)' subsection on the 'fila compartilhada do RabbitMQ', isolation, throughput, and backpressure."
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+          "passed": false,
+          "evidence": "A 'Glossário' section exists near the top (lines 14-25) and defines PII (line 23), S3 (line 20), CSV/XLSX (line 19), plus extras (AMQP, TTL, signed URL, streaming, gateway). However, 'BI' is used as an acronym in the body (line 51 'ferramenta de BI', line 163 'Ferramenta de BI externa', line 166) but is NOT defined in the glossary. The expectation explicitly lists BI among the acronyms the glossary should cover, so the glossary is incomplete for an acronym actually used in the doc."
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "Two diagrams, both followed by prose. The C4/container flowchart (lines 66-88) is followed by 'Componentes e interações:' bullets explaining each component (lines 90-97). The sequence diagram (lines 103-123) is followed by 'Pontos do fluxo:' numbered explanation (lines 125-130). No orphan diagrams."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "All quantitative metrics trace to the prompt: '30s'/'30 segundos' timeout (lines 25,29,33,127), '~12% das exportações acima de 50 mil linhas falham' (lines 29,33,141,161,196), '100 mil linhas' (lines 29,44,128,143,193,205). No fabricated numbers found. Unknowns are explicitly deferred: TTL '(Valor a definir — questão em aberto)' (line 174), retention '(A definir)' (line 176), email service '(Qual serviço/infra de e-mail será usado é uma questão em aberto)' (line 97), authors '_(a preencher)_' (line 8). Dedicated 'Questões em aberto' section (lines 212-220)."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+          "passed": true,
+          "evidence": "The Overview section (lines 27-29) is a single paragraph. It states the problem (synchronous generation, 30s gateway timeout, ~12% failures over 50k rows, weekly tickets), summarizes the high-level approach (queue a job, separate worker generates CSV/XLSX in streaming, uploads to S3, emails a signed link), and the objective (zero timeouts, support 100k rows). Low-level implementation details (202 Accepted, multipart upload, paginated cursor, AMQP, DLQ, TTL values) are deferred to later sections ('A solução', 'Fluxo de exportação'), keeping the overview at appropriate altitude. Note: it does name components (worker/queue/S3/email link), which is borderline but reads as a solution summary rather than implementation detail."
+        }
+      ],
+      "notes": [
+        "Sequence (Mermaid) diagram not machine-validated because the Mermaid validation server was down (noted in doc and response)",
+        "Several design values left open: signed-URL TTL, S3 retention/expiration policy, which email service/infra, job status/tracking endpoint, consumer inventory + contract transition plan, retry/DLQ policy, async cutover row threshold",
+        "Named authors/reviewers (Plataforma and Segurança suggested in header)",
+        "Security review of signed-link TTL and PII retention",
+        "Platform review of shared-queue isolation and backpressure",
+        "Modeled the same sequence as a Structurizr dynamic view to sanity-check step ordering since the Mermaid server was unavailable"
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 3,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 504.0,
+        "tokens": 11890,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/project/docs/design/background-report-export-service.md — a complete Markdown design doc (242 lines) with a metadata header table, glossary, overview, scope, solution, trade-offs, alternatives, cross-cutting concerns, testability and open questions. response.md confirms: 'Criei o design doc em docs/design/background-report-export-service.md'."
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "Entire document is in Brazilian Portuguese. Section headings: 'Glossário', 'Visão geral', 'Escopo e contexto', 'Objetivos e fora de escopo', 'A solução', 'Trade-offs da solução escolhida', 'Alternativas consideradas', 'Cross-cutting concerns', 'Questões em aberto'. Prose throughout is Portuguese (e.g., line 37: 'Hoje os relatórios são gerados dentro da própria request da API...')."
+        },
+        {
+          "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "Stated explicitly in multiple places. Overview (line 37): 'aceitando como custo que toda exportação — inclusive as pequenas que hoje baixam na hora — passe a ser assíncrona'. Solution (line 72): 'o usuário perde o download imediato — inclusive nas exportações pequenas que hoje funcionam na hora. Aceitamos esse custo...'. Trade-offs section (line 184) lists it with a ✗ marker: 'Perda do download imediato — exportações pequenas que hoje retornam na hora passam a chegar por e-mail; é uma regressão de experiência... aceita em troca do caminho único.'"
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": true,
+          "evidence": "The 'Alternativas consideradas' section (lines 189-200) has a comparison table and prose covering all three: 'Síncrono com timeout maior' (line 194/198, 'Descartada por só empurrar o problema'), 'Ferramenta de BI externa' (line 195/199, descartada por custo e PII), and 'Não fazer nada' (line 196/200, 'manter o síncrono atual deixa os 12% de falha... e os tickets semanais intactos')."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "The 'Cross-cutting concerns' section has a 'Segurança' subsection (lines 204-213) addressing PII and signed links: 'Os relatórios contêm PII e a entrega passa a ser por link assinado... TTL curto... Bucket S3 privado... Política de retenção... Sugerimos o time de Segurança como revisor.' And an 'Infraestrutura / Plataforma' subsection (lines 215-223): 'O worker passa a usar uma fila compartilhada no RabbitMQ, que é responsabilidade do time de Plataforma... Sugerimos o time de Plataforma como revisor.'"
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+          "passed": true,
+          "evidence": "A 'Glossário' section appears near the top (lines 14-33), immediately after the header table and before the overview. It defines all four required acronyms: PII ('Personally Identifiable Information — dados pessoais identificáveis'), S3 ('Object storage onde o arquivo gerado é armazenado'), CSV/XLSX ('Formatos de arquivo de saída suportados'), and BI ('Business Intelligence — categoria de ferramentas de análise/relatório'), plus API, HTTP, URL, RabbitMQ, TTL, DLQ, etc."
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "The doc contains exactly two Mermaid diagrams. The architecture flowchart (lines 78-101) is followed by 'Os componentes:' with a bulleted explanation of each node (lines 103-110). The sequence diagram (lines 114-142) is followed by 'Pontos do fluxo que sustentam os objetivos:' with explanatory bullets (lines 144-148). No orphan diagrams. Note: the doc discloses (line 76) the Mermaid validation server was unavailable so diagrams were not machine-validated; the grader independently confirmed the MCP mermaid server returns 'Invalid Request' errors, and the diagram syntax is standard and well-formed by inspection."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "grep of all numeric facts returns only: the 30s gateway timeout, 12% failure rate above 50k rows, and 100k-row target — all directly from the prompt. No fabricated metrics found (no invented latencies, throughput, costs, percentages). HTTP 202 is a standard status code, not a metric. Unknowns are explicitly left blank or deferred: header authors/reviewers '(a preencher)', signed-link TTL is 'valor a definir com Segurança', S3 retention, and current API consumers all appear under 'Questões em aberto' (lines 234-241) rather than being invented."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+          "passed": true,
+          "evidence": "Re-judged under the sharpened assertion: the single-paragraph overview names the core mechanism (queue/worker via RabbitMQ, streaming to S3, signed link by e-mail) but contains no schemas, payloads, endpoints, retry policies, or config values — solution-shape altitude. (Original grader evidence confirmed exactly this content.)"
+        }
+      ],
+      "notes": [
+        "Signed-link TTL, S3 retention period, and named authors/reviewers left open for the user to fill",
+        "Mermaid diagrams not machine-validated because the validation server was down",
+        "Current consumers of POST /exports must be mapped before the contract change to 202 (compatibility break)",
+        "Diagrams written as standard Mermaid and shipped unvalidated since the MCP mermaid server was unavailable"
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 124.1,
+        "tokens": 3103,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+          "passed": true,
+          "evidence": "The entire response.md is in Portuguese and is structured as five numbered questions. Current pain & why now: section 1 'O problema (o que dói hoje?)... O que motiva a migração *agora*?'. Measurable goals: section 2 'Como vão saber que deu certo? (de preferência com número)... Qual é o objetivo mensurável?'. Alternatives: 'do nothing' (não migrar) in section 1 and migration strategies (Strangler Fig, big bang) in section 4. Trade-offs: opening paragraph 'o valor de um design doc está justamente em registrar os *trade-offs* reais — o que melhora e o que piora'. Impacted teams: section 5 'Quem é afetado fora do time?... segurança, infraestrutura/plataforma, ou outros times que consomem APIs do monólito? Quem deveria revisar este documento'. All five required topics are covered."
+        },
+        {
+          "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+          "passed": true,
+          "evidence": "The response explicitly refuses to invent facts: 'Eu não consigo inventar esses dados com honestidade: o repositório está vazio, então não tenho como inferir a arquitetura atual nem o que está doendo hoje. Se eu chutasse métricas, restrições e razões, o documento viraria ficção'. No concrete stack, metrics, domain boundaries, or team names are asserted; the only technologies named (Strangler Fig, big bang, banco por serviço) are presented as options to ask about, not as facts about the project. Examples are clearly framed as examples ('Exemplos do tipo de coisa que ajuda')."
+        },
+        {
+          "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+          "passed": true,
+          "evidence": "Section 1 explicitly raises the do-nothing option as something the doc must justify against: 'Sem um problema concreto, \"do nothing\" (não migrar) pode ser a melhor opção — e o doc precisa conseguir refutar isso.' The opening paragraph reinforces that the doc's value is recording why migrate 'em vez das alternativas'."
+        },
+        {
+          "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+          "passed": true,
+          "evidence": "The project directory outputs/project/ is empty — no file was created at all. The response states this explicitly: 'Por isso, ainda não criei o arquivo.' No finished design doc was delivered and there is therefore zero invented content in any artifact."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9445,
+        "stddev": 0.0641,
+        "min": 0.8889,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 387.175,
+        "stddev": 176.9965,
+        "min": 124.1,
+        "max": 504.0
+      },
+      "tokens": {
+        "mean": 9167.25,
+        "stddev": 4148.1801,
+        "min": 3103,
+        "max": 11890
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.94",
+      "time_seconds": "+387.2",
+      "tokens": "+9167"
+    }
+  },
+  "notes": [
+    "Spot-check iteration: only the two evals affected by the iteration-1 findings were re-run, with-skill only (compare against iteration-1 for the baseline).",
+    "Eval 1 runs are a progression of skill versions, not identical samples: run-1 = +fast-degradation rule (8/9, glossary missed BI/S3), run-2 = +glossary-coverage rule in sections.md (8/9, missed only BI), run-3 = +acronym sweep in the SKILL.md self-review (9/9, BI included — the agent reported sweeping the body and adding BI/API/HTTP/URL).",
+    "Fast-degradation fix verified: eval 1 dropped from 1038s (iteration-1, retry loop against the down Mermaid server) to 446-504s; all three runs disclosed the unavailable validator once and moved on. Run-2 even validated the C4 view through the Structurizr MCP when it was reachable.",
+    "Ask-before-creating-file fix verified: eval 2 now creates no file at all — five targeted question groups in the reply, including 'do nothing/not migrating must be refutable' (4/4, was a borderline scaffold in iteration-1).",
+    "The 'overview free of implementation detail' assertion was flagged as ambiguous by three independent graders (passes/fails depending on whether naming the core technology counts as detail). It was sharpened to 'solution-shape altitude: core mechanism ok; no schemas, payloads, endpoints, retry policies, config values', and run-3 was re-judged under the sharpened wording."
+  ]
+}

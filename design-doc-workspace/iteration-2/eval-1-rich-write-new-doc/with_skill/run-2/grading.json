@@ -1,0 +1,122 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/project/docs/design/exportacao-de-relatorios-em-background.md, a complete Markdown design doc (221 lines, header table + Glossário + Overview + Escopo + Objetivos + A solução + Trade-offs + Alternativas + Cross-cutting + Testabilidade + Plano + Questões em aberto)."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire document is in Portuguese, e.g. line 29 'Hoje os relatórios são gerados de forma síncrona, dentro da própria request da API...' and section headings 'Escopo e contexto', 'Objetivos e fora de escopo', 'Alternativas consideradas'."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Appears in three places. Line 60: 'o usuário perde o download imediato. Exportações pequenas, que hoje retornam o arquivo na hora, também passam a ser assíncronas.' Line 149 under Trade-offs as a ✗ cost: 'Usuário perde o download imediato... É o custo deliberadamente aceito em troca do caminho único'. Also line 49 in 'Fora de escopo'."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "Alternatives table (lines 159-164) contains all three: 'Não fazer nada' (rejected — recurring problem costs support weekly), 'Síncrono com timeout maior' (rejected — only delays the problem), and 'Ferramenta de BI externa' (rejected — cost and PII exposure), plus the chosen worker+S3+email option."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "Cross-cutting concerns section (lines 168-189) has a 'Segurança (time de Segurança)' subsection on PII files in S3 and signed-link TTL/bucket policy, and an 'Infraestrutura / Plataforma (time de Plataforma)' subsection on the 'fila compartilhada do RabbitMQ', isolation, throughput, and backpressure."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+      "passed": false,
+      "evidence": "A 'Glossário' section exists near the top (lines 14-25) and defines PII (line 23), S3 (line 20), CSV/XLSX (line 19), plus extras (AMQP, TTL, signed URL, streaming, gateway). However, 'BI' is used as an acronym in the body (line 51 'ferramenta de BI', line 163 'Ferramenta de BI externa', line 166) but is NOT defined in the glossary. The expectation explicitly lists BI among the acronyms the glossary should cover, so the glossary is incomplete for an acronym actually used in the doc."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Two diagrams, both followed by prose. The C4/container flowchart (lines 66-88) is followed by 'Componentes e interações:' bullets explaining each component (lines 90-97). The sequence diagram (lines 103-123) is followed by 'Pontos do fluxo:' numbered explanation (lines 125-130). No orphan diagrams."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "All quantitative metrics trace to the prompt: '30s'/'30 segundos' timeout (lines 25,29,33,127), '~12% das exportações acima de 50 mil linhas falham' (lines 29,33,141,161,196), '100 mil linhas' (lines 29,44,128,143,193,205). No fabricated numbers found. Unknowns are explicitly deferred: TTL '(Valor a definir — questão em aberto)' (line 174), retention '(A definir)' (line 176), email service '(Qual serviço/infra de e-mail será usado é uma questão em aberto)' (line 97), authors '_(a preencher)_' (line 8). Dedicated 'Questões em aberto' section (lines 212-220)."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "The Overview section (lines 27-29) is a single paragraph. It states the problem (synchronous generation, 30s gateway timeout, ~12% failures over 50k rows, weekly tickets), summarizes the high-level approach (queue a job, separate worker generates CSV/XLSX in streaming, uploads to S3, emails a signed link), and the objective (zero timeouts, support 100k rows). Low-level implementation details (202 Accepted, multipart upload, paginated cursor, AMQP, DLQ, TTL values) are deferred to later sections ('A solução', 'Fluxo de exportação'), keeping the overview at appropriate altitude. Note: it does name components (worker/queue/S3/email link), which is borderline but reads as a solution summary rather than implementation detail."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 1,
+    "total": 9,
+    "pass_rate": 0.8889
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 9876,
+    "transcript_chars": 0,
+    "note": "No metrics.json present in outputs; tool-call counts unavailable. output_chars is the size of the design doc."
+  },
+  "timing": {
+    "executor_duration_seconds": 445.6,
+    "total_duration_seconds": 445.6,
+    "note": "From timing.json (total_tokens 38641, duration_ms 445628). Grader timing not separately recorded."
+  },
+  "claims": [
+    {
+      "claim": "The C4 container diagram was modeled and validated in Structurizr before embedding",
+      "type": "process",
+      "verified": false,
+      "evidence": "Doc line 64 and response.md line 14 claim the structure was validated via Structurizr, but no Structurizr workspace.dsl artifact was saved to outputs/ to corroborate. The claim is plausible and the embedded Mermaid is well-formed, but it cannot be independently verified from the available outputs."
+    },
+    {
+      "claim": "The sequence diagram was not machine-validated because the Mermaid validation server was unavailable",
+      "type": "process",
+      "verified": true,
+      "evidence": "Disclosed honestly in the doc (line 101) and response.md (line 14): 'o servidor de validação de Mermaid estava indisponível, então este diagrama não foi validado por máquina.' This is a transparent limitation note rather than a fabricated success claim."
+    },
+    {
+      "claim": "Every metric in the doc comes from the prompt; nothing was invented",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Confirmed by grep: only 30s, 12%, 50k, 100k appear as hard numbers, all from the prompt. Other quantities (TTL, worker count, retention) are left as open questions, not fabricated."
+    },
+    {
+      "claim": "Alternatives include 'do nothing' in addition to the two discussed",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Verified in the alternatives table line 161 ('Não fazer nada'), beyond the two the user listed."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Sequence (Mermaid) diagram not machine-validated because the Mermaid validation server was down (noted in doc and response)",
+      "Several design values left open: signed-URL TTL, S3 retention/expiration policy, which email service/infra, job status/tracking endpoint, consumer inventory + contract transition plan, retry/DLQ policy, async cutover row threshold"
+    ],
+    "needs_review": [
+      "Named authors/reviewers (Plataforma and Segurança suggested in header)",
+      "Security review of signed-link TTL and PII retention",
+      "Platform review of shared-queue isolation and backpressure"
+    ],
+    "workarounds": [
+      "Modeled the same sequence as a Structurizr dynamic view to sanity-check step ordering since the Mermaid server was unavailable"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+        "reason": "This is the only failing assertion and it is a near-miss: the glossary covers PII, S3, CSV/XLSX (and extras) but omits BI, which is used as an acronym in the body. The assertion as written conflates 'has a glossary' with 'glossary is exhaustive over every acronym used'. If the intent is the latter (a strong, discriminating check), consider making it explicit — e.g., 'every acronym appearing in the body has a glossary entry'. If a representative glossary is sufficient, consider softening the BI requirement, since an otherwise excellent glossary fails on a single missing term."
+      },
+      {
+        "assertion": "The overview section is at most two paragraphs and free of implementation detail",
+        "reason": "'Free of implementation detail' is subjective at the boundary — this overview names the worker, queue, S3, and signed link, which a strict reader could call implementation detail while a lenient reader calls it a solution summary. Consider sharpening to a concrete, discriminating criterion (e.g., 'the overview does not specify protocols, status codes, or storage/streaming mechanics' vs. 'may name the high-level components') so graders apply it consistently across runs."
+      }
+    ],
+    "overall": "Assertions are mostly strong and discriminating, and the output is high quality: it would be hard to pass assertions 3, 4, 5, and 8 without genuinely doing the work. Two boundary assertions (glossary completeness, overview 'implementation detail') would benefit from sharper wording."
+  }
+}

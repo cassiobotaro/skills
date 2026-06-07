@@ -1,0 +1,94 @@
+{
+  "expectations": [
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "response.md has two explicit sections: '## O que já apliquei' (7 bullets of edits actually applied) and '## O que preciso de você (não dá pra preencher sem inventar)' (7 numbered questions). The closing line reinforces the split: 'Me responde os pontos que conseguir e eu incorporo no documento — em especial 1, 2 e 3'."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Trade-offs (#1) and alternatives incl. 'não fazer nada' (#2) are posed as questions in response.md. A grep of the edited doc for metrics/percentiles/broker names (RabbitMQ/SQS/Kafka)/'Alternativas'/'Trade-off'/'Contras' returned nothing — those terms appear only in response.md as questions. The doc's 'Solução' section was rewritten to describe the design honestly and adds a reviewer note: 'o documento ainda não diz o que essa escolha custa nem o que mais foi considerado'. No cons/alternatives/numbers were invented."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "A '## Glossário' section was inserted immediately after the header table and before 'Visão geral' (diff lines 11-21 of edited doc). It defines SLA, CDC, DLQ, TPS (plus Fanout, Provider, Exchange) — all four required terms covered."
+    },
+    {
+      "text": "The mermaid diagram is now followed by explanatory text",
+      "passed": true,
+      "evidence": "Immediately after the closing ``` of the flowchart, the doc adds a prose paragraph: 'O ganho central vem de desacoplar os canais: como cada worker consome sua própria fila, um provider lento (ou indisponível) afeta apenas o seu canal... A DLQ por canal isola as falhas...' Originally the diagram was followed directly by the '## Plano' heading with no explanation."
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+      "passed": true,
+      "evidence": "Original 'Fora de escopo' was 'O sistema não deve ser lento' / 'não deve perder notificações' (negated goals). Rewritten to real exclusions: 'Mudanças na lógica de montagem de payload ou na integração com cada provider' and 'Novos canais de notificação (ex.: SMS, WhatsApp)', plus a reviewer note explicitly explaining the change and asking the author to confirm: 'os itens anteriores apenas negavam os objetivos ... Substituí por exclusões reais — confirme se estão corretas'."
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Objetivos section gains a reviewer note: 'os objetivos abaixo ainda não são verificáveis — não dizem quanto nem como medir'. Goals were reworded to name the mechanism but deliberately kept without numbers. response.md #3 asks for concrete numbers: 'Qual é o SLA de entrega (ex.: 95% em até X minutos)? Qual a vazão atual e a meta (ex.: de N para M envios/min)?' — the X/N/M are placeholders, not invented targets."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "Entire edited doc is in Portuguese. Original sections (Visão geral, Objetivos, Fora de escopo, Solução, Plano) are all preserved in order; the additions ('Contexto' split out of Visão geral, plus 'Glossário') are complementary. Header table format and the 4-step plan are kept. Tone remains that of a design doc."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Diff shows 'Última atualização' changed from 2026-02-10 to 2026-06-07, which matches today's real date. response.md also flags that 'Estado' has been 'Em revisão' since February and suggests promoting it when review closes, rather than silently changing it — honest refresh."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "errors_encountered": 0,
+    "output_chars": 4279,
+    "transcript_chars": null
+  },
+  "timing": {
+    "total_tokens": 28198,
+    "duration_ms": 523066,
+    "total_duration_seconds": 523.1
+  },
+  "claims": [
+    {
+      "claim": "The in-app channel was missing a DLQ in the original diagram and was completed to match the 'DLQ por canal' intent",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Original mermaid had DLQP and DLQE but no DLQI. Edited diagram adds 'WI --> DLQI[DLQ in-app]' (diff). This is a faithful correction toward stated intent, not a fabrication."
+    },
+    {
+      "claim": "No invented broker, metric, alternative, or trade-off was added to the document body",
+      "type": "factual",
+      "verified": true,
+      "evidence": "grep for metrics/percentiles/RabbitMQ/SQS/Kafka/Alternativas/Trade-off/Contras over the edited doc returned no matches; such terms exist only in response.md framed as open questions."
+    },
+    {
+      "claim": "Plan step 2 now keeps the cron running in parallel as a fallback during migration",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Edited Plano step 2: 'Migrar o canal de e-mail, mantendo o cron atual em paralelo como fallback.' This is a reasonable migration-safety improvement, and the absence of rollback is flagged rather than fabricated."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+        "reason": "The assertion accepts 'added or suggested'. A doc that merely listed the terms in a question without defining them, or defined them at the bottom, could pass the looser reading. Consider tightening to require the glossary placed before 'Visão geral' AND containing actual definitions for all four terms (which this output does), so a surface mention can't slip through."
+      },
+      {
+        "reason": "No assertion checks the diagram-correction behavior (the missing in-app DLQ). This is a strong positive signal — the executor reconciled the diagram with the doc's stated 'DLQ por canal' intent without inventing new components. An assertion rewarding internal-consistency fixes (vs. fabrication) would be discriminating."
+      }
+    ],
+    "overall": "Assertions are well-targeted and discriminating — they jointly force the hard behavior (flag gaps as questions, add no fabricated cons/metrics/alternatives) and the output genuinely satisfies all eight. Minor tightening possible on the glossary wording."
+  }
+}

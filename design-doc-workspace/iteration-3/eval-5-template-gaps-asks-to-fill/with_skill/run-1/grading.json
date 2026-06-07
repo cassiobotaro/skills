@@ -1,0 +1,105 @@
+{
+  "expectations": [
+    {
+      "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+      "passed": true,
+      "evidence": "The new doc dd-2026-008 reproduces the full house template in order: '## Resumo', '## Contexto', '## Proposta' with '### Compensações' subsection, '## Riscos' (with the same 'Risco | Mitigação' table layout as DD-2026-007), and '## Plano de entrega'. It also mirrors DD-2026-007's header table (Documento, Estado, Autores, Revisores, Criado em, Última atualização, Tags) and continues the numbering (DD-2026-008). response.md confirms it followed 'o mesmo formato do DD-2026-007 (Resumo → Contexto → Proposta → Compensações → Riscos → Plano de entrega)'. None of the required sections were dropped — each is present and the empty ones are explicitly held as required-but-pending rather than omitted."
+    },
+    {
+      "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+      "passed": true,
+      "evidence": "response.md is in Portuguese and asks for exactly these three categories: under '**Compensações (o custo aceito ...)**' it asks 'O que ficou pior/mais arriscado/mais caro em troca de recuperar as buscas?'; under '**Riscos + mitigações:**' it asks 'Quais riscos a equipe enxerga ... e como mitigar cada um?'; under '**Plano de entrega:**' it asks about backfill, flag/percentual rollout, shadow measurement, and rollback. The same questions are embedded as blockquotes inside the doc's Compensações, Riscos, and Plano de entrega sections."
+    },
+    {
+      "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+      "passed": true,
+      "evidence": "The Riscos table contains only '_A preencher_ | _A preencher_' — no invented risks. Plano de entrega has a single placeholder item '1. _A preencher_' — no invented phases. In Compensações the only concrete '✗' (con) is '✗ _A preencher com o autor (ver perguntas acima)._' — no fabricated cost. The two '✓' entries (recovers empty searches; reuses existing Postgres/pgvector) are restatements of given facts/logical benefits, not invented downsides. Questions in blockquotes are framed as prompts for the author, not as asserted content."
+    },
+    {
+      "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+      "passed": true,
+      "evidence": "Resumo: 'a busca do catálogo hoje é por texto exato (LIKE no Postgres) e cerca de 30% das buscas terminam sem resultado mesmo quando o produto existe ... mantendo o LIKE atual como fallback quando o score da busca vetorial vier baixo.' Contexto repeats the 30% figure and the 'tênis de corrida amortecido' vs 'tênis running com amortecimento' example verbatim from the prompt, and states 'já temos a extensão pgvector disponível ... sem introduzir uma nova peça de infraestrutura' (existing Postgres). Proposta's Fallback bullet: 'quando o score da melhor correspondência vetorial vier abaixo de um limiar, recorrer à busca LIKE atual.' All four given facts are represented accurately with no distortion."
+    },
+    {
+      "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+      "passed": true,
+      "evidence": "Every required section exists; none is silently skipped. The three sections lacking input each open with an explicit blockquote marker: Compensações — '> _A preencher com o autor — esta seção é o cerne do documento e não pode ser inventada._'; Riscos — '> _A preencher com o autor — riscos e mitigações ainda não foram estabelecidos._' with a placeholder table row; Plano de entrega — '> _A preencher com o autor — a sequência de entrega ainda não foi estabelecida._' with item '1. _A preencher_'. The header Autores/Revisores fields are also marked '_A preencher_'. response.md states unanswered items will be moved to a 'Pendências' section 'em vez de inventar.'"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 6043,
+    "transcript_chars": null,
+    "note": "metrics.json not present in outputs_dir; transcript not available. output_chars is the byte size of response.md plus the created dd-2026-008 doc."
+  },
+  "timing": {
+    "total_tokens": 27648,
+    "duration_ms": 232822,
+    "total_duration_seconds": 232.8,
+    "note": "timing.json present at run-1 level; executor/grader split not recorded."
+  },
+  "claims": [
+    {
+      "claim": "The new doc continues sequential numbering as DD-2026-008 (after the existing DD-2026-007)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "File named dd-2026-008-busca-por-similaridade-no-catalogo.md sits beside dd-2026-007-cache-de-catalogo.md; header shows '| Documento | DD-2026-008 |'."
+    },
+    {
+      "claim": "The doc adds a Glossário section not present in DD-2026-007",
+      "type": "factual",
+      "verified": true,
+      "evidence": "dd-2026-008 contains a '## Glossário' table (Embedding, pgvector, etc.) that DD-2026-007 does not have. response.md flags this proactively: 'Acrescentei só um Glossário ... se preferir manter idêntico ao 007, eu removo.' This is a benign, disclosed deviation that does not violate any expectation."
+    },
+    {
+      "claim": "Estado is set to 'Rascunho' rather than copying DD-2026-007's 'Aprovado'",
+      "type": "factual",
+      "verified": true,
+      "evidence": "dd-2026-008 header: '| Estado | Rascunho |'. Correct, since the document is incomplete and pending author input."
+    },
+    {
+      "claim": "Created date 2026-06-07 matches today's real date",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Header shows 'Criado em | 2026-06-07' and 'Última atualização | 2026-06-07', matching the provided real date."
+    },
+    {
+      "claim": "The doc avoids inventing the similarity model, score threshold, and ranking strategy (proposal details not given)",
+      "type": "quality",
+      "verified": true,
+      "evidence": "The Proposta section adds a blockquote '_A detalhar com o autor_' listing the unspecified model, threshold, and combine/rerank questions instead of fabricating answers — consistent with the no-fabrication intent beyond the three core sections."
+    },
+    {
+      "claim": "The deliverable copy at outputs/doc--dd-2026-008... is identical to the in-repo file",
+      "type": "process",
+      "verified": true,
+      "evidence": "diff of outputs/doc--dd-2026-008-busca-por-similaridade-no-catalogo.md against outputs/project/docs/design/dd-2026-008-busca-por-similaridade-no-catalogo.md returned IDENTICAL."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "The desired behavior described in the eval note offers two acceptable shapes — 'no file yet (questions are the deliverable)' OR 'a file with unfilled sections explicitly pending.' The executor chose to create a fully-templated file with placeholders AND ask. Both the no-fabrication and ask-the-user goals were met, but expectation 5's disjunction means a borderline run that drafts a file but omits one required section (e.g., no Plano de entrega heading at all) could still arguably 'pass' under the first disjunct ('no file yet') reasoning. Consider tightening to: 'If a file is produced, every required section heading is present and any unsubstantiated section is explicitly marked pending.'"
+      },
+      {
+        "assertion": "Does not fabricate risks, delivery phases, or cons the user never stated",
+        "reason": "This is the most discriminating assertion and it held well. To make it even harder to game, consider adding a positive check that the ✓ benefit lines trace only to given facts (recall recovery / reuse of pgvector) and contain no invented metrics — a weaker skill might invent a latency number or a percentage target, which this run correctly avoided ('Se quiser um alvo explícito ... me diz o X')."
+      }
+    ],
+    "overall": "Evals are solid and discriminating; this run is a clean pass on all five. The skill genuinely asked for the missing Compensações/Riscos/Plano substance in Portuguese, stayed faithful to the four given facts, and avoided fabricating any cons, risks, or delivery phases while keeping every required template section present-but-pending."
+  }
+}

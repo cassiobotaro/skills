@@ -1,0 +1,116 @@
+{
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008-rate-limiting-api-publica.md mirrors the dd-2026-007 layout: '## Resumo' (l.22), '## Contexto' (l.26), '## Proposta' (l.46) with the '### Compensações' subsection (l.52) using the same ✓/✗ bullet convention, '## Riscos' as a table (l.69), and '## Plano de entrega' as a numbered list (l.75). No generic catalog-style template was produced."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "Filename is 'docs/design/dd-2026-008-rate-limiting-api-publica.md'; title line is '# DD-2026-008 · Rate limiting da API pública' and the header key-value table row reads '| **Documento** | DD-2026-008 |' (l.6), correctly continuing from the existing DD-2026-007."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "The '## Riscos' table (l.69-73) contains only the Redis-contention row; NAT/IP is absent from it. The shared-IP point is correctly relocated to '## Objetivos e fora de escopo' as 'Limite por IP. O limite é por token de API; compartilhamento de IP (NAT) não influencia a contagem.' (l.42), explicitly framed as out-of-scope/non-issue rather than a risk."
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "Contexto (l.28): 'Em INC-4412, um cliente com integração mal feita disparou cerca de 40x o tráfego normal e degradou a API para todos os demais por 25 minutos.' Per-plan limits 'free 10 rps, pro 100 rps, enterprise negociado' appear in Resumo/Objetivos/Proposta (l.38, l.48). '429' with 'Retry-After' appears throughout (l.24, l.48, l.57, l.78)."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "Compensações bullet (l.57): '✗ Cliente legítimo em pico (ex.: Black Friday) pode tomar 429. Mitigação: Retry-After para o backoff automático do cliente, e alerta para o time de contas avisar os clientes enterprise antes de eventos previstos.' — marked as a ✗ cost with both the Retry-After and account-team-alert mitigations from the prompt."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "The single Riscos row (l.73): 'O Redis de sessão vira ponto de contenção ao entrar no caminho crítico de toda requisição | Medir o impacto antes do enforcing (latência e carga adicional no Redis), começando pelo shadow mode'. This is exactly the war-room risk plus the 'measure before rollout' mitigation."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "File path is 'docs/design/dd-2026-008-rate-limiting-api-publica.md' and the entire content is written in Portuguese (section headers Resumo/Contexto/Proposta/Riscos/Plano de entrega, prose throughout)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 8358,
+    "transcript_chars": null,
+    "note": "metrics.json not present in outputs_dir; tool-call/step counts unavailable. output_chars is the sum of response.md (~2.4k) and the created doc (~5.9k)."
+  },
+  "timing": {
+    "executor_duration_seconds": 326.1,
+    "total_tokens": 26232,
+    "total_duration_seconds": 326.1,
+    "note": "From timing.json; grader_duration not tracked here."
+  },
+  "claims": [
+    {
+      "claim": "The executor continued the ID numbering correctly (007 -> 008)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Only dd-2026-007 existed; the new file/header use DD-2026-008. Numbering is sequential and correct."
+    },
+    {
+      "claim": "Only the real risk (Redis contention) was kept; the retracted NAT false positive was excluded from Riscos",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Riscos has exactly one row (Redis). NAT/IP is handled in 'Fora de escopo' as a non-issue, matching the user's explicit statement that the false positive does not exist because limiting is per-token."
+    },
+    {
+      "claim": "The doc adds sections not present in DD-2026-007 (Glossário, Objetivos e fora de escopo, Alternativas table, Questões em aberto)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "DD-2026-007 had no Glossário, no Objetivos section, expressed alternatives as inline 'Compensações' bullets (no dedicated section), and had no Questões em aberto. DD-2026-008 adds a Glossário (l.13), 'Objetivos e fora de escopo' (l.32), an '## Alternativas consideradas' table (l.60), and '## Questões em aberto' (l.81). These are reasonable, prompt-driven additions (the prompt gives explicit objetivos and two discarded alternatives), and the executor flagged the Glossário addition transparently in response.md. They do not break the house structure; the core house sections are all present and in order."
+    },
+    {
+      "claim": "All three rollout phases (shadow mode, enforcing free, enforcing geral) are present",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Plano de entrega (l.77-79) lists 1) Shadow mode (só medindo), 2) Enforcing no plano free (429 acima de 10 rps), 3) Enforcing geral (pro 100 rps, enterprise negociado) — matching the prompt's phased delivery."
+    },
+    {
+      "claim": "The two discarded alternatives are captured with their rejection reasons",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Alternativas table (l.65-66): limiting inside each service rejected as 'tarde demais' (request already consumed gateway+malha); managed paid module rejected for 'custo recorrente e lock-in'. Both match the prompt; a '(do nothing)' option was also added (l.67)."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Reviewers left as 'a definir' with suggestions (Plataforma/Gateway, SRE, Contas/CS) — needs human to assign",
+      "Phase-promotion criterion (e.g., acceptable added Redis latency to move from shadow to enforcing) recorded as an open question",
+      "Author defaulted to Cássio Botaro; should be adjusted if someone else"
+    ],
+    "needs_review": [
+      "Confirm formal reviewers",
+      "Decide the shadow-to-enforcing promotion threshold"
+    ],
+    "workarounds": [
+      "Glossário section added beyond the 007 template; executor noted it can be removed to match 007 exactly"
+    ],
+    "note": "No user_notes.md file existed; the above is drawn from the 'Decisões que vale você revisar' / 'O que eu não preenchi' sections of response.md."
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The new doc follows the house structure ... instead of the skill's default catalog",
+        "reason": "The assertion would pass even though the executor added several sections absent from DD-2026-007 (Glossário, Objetivos e fora de escopo, a dedicated Alternativas table, Questões em aberto). Here the additions are sensible and the core house sections are intact, so the pass is justified — but the assertion does not actually test fidelity to the house template's section *set*. If strict template conformance matters, consider an assertion that the doc adds no sections beyond the house pattern (or only ones explicitly justified by the prompt). As written, a doc that bolted on a large default-catalog scaffold could still pass."
+      }
+    ],
+    "overall": "Assertions are well-targeted and discriminating overall — they jointly catch the hardest things (continuing the ID convention, dropping the retracted risk while keeping the real one, the Black Friday cost-with-mitigation). All 7 pass on genuine substance. The one gap is that 'follows the house structure' checks presence of the right sections but not the absence of extra/default ones."
+  }
+}

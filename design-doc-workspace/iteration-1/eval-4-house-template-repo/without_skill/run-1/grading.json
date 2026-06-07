@@ -1,0 +1,102 @@
+{
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008 reproduces the house sections in the same order as the reference dd-2026-007: '## Resumo' (l.13), '## Contexto' (l.17), '## Proposta' (l.30) containing '### Compensações' (l.47) with ✓/✗ bullets, '## Riscos' (l.54) as a 'Risco | Mitigação' table, and '## Plano de entrega' (l.60). It also matches the title format '# DD-2026-008 · Rate limiting da API pública' and the metadata table. No catalog/default skill structure is present (the executor ran without_skill). The only deviation is an added '## Objetivos' section (l.25), which the executor explicitly flagged and which does not break the house structure."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "Filename is dd-2026-008-rate-limiting-api-publica.md (continuing from dd-2026-007). The title is '# DD-2026-008 · Rate limiting da API pública' (l.1) and the metadata table row reads '| **Documento** | DD-2026-008 |' (l.5), matching the reference doc's convention."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "The Riscos table (l.56-58) lists only the Redis contention risk. There is no mention of NAT or shared IP anywhere in the doc. The executor confirms in response.md l.19: 'Deixei de fora o falso positivo com NAT compartilhado de propósito — você mesmo disse que esse não existe porque o limite é por token e não por IP.'"
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "INC-4412 (l.15, l.21), '40x o tráfego normal' (l.15, l.21), '25 minutos'/'por 25 minutos' (l.15, l.21), per-plan limits 'Free: 10 rps / Pro: 100 rps / Enterprise: negociado' (l.37-39), and 'HTTP 429 Too Many Requests com header Retry-After' (l.40) are all present and accurate."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "In the Compensações subsection, l.52: '✗ Um cliente legítimo em pico (ex.: Black Friday) pode tomar 429. Mitigamos com o Retry-After e com alerta para o time de contas avisar os clientes enterprise antecipadamente.' — marked as a cost (✗) with the stated mitigation."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Riscos table l.58: 'O Redis de sessão virar ponto de contenção sob a carga adicional dos contadores de rate limit | Medir o impacto antes da ativação geral (durante o shadow mode)'. This matches the prompt's risk ('o Redis de sessão virar ponto de contenção (vamos medir antes)')."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "File saved at outputs/project/docs/design/dd-2026-008-rate-limiting-api-publica.md. Content is entirely in Portuguese (e.g., 'A API pública não tem nenhum limite de tráfego por cliente', 'Plano de entrega')."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "total_tokens": 14800,
+    "output_chars": 4396,
+    "note": "No metrics.json present in outputs_dir; token count taken from timing.json."
+  },
+  "timing": {
+    "executor_duration_seconds": 304.4,
+    "duration_ms": 304438
+  },
+  "claims": [
+    {
+      "claim": "DD-2026-008 is the correct next ID in sequence after the existing DD-2026-007",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Only dd-2026-007-cache-de-catalogo.md existed in docs/design/; 008 is the correct increment."
+    },
+    {
+      "claim": "The doc faithfully reproduces the per-plan limits from the prompt",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Free 10 rps, Pro 100 rps, Enterprise negotiated — matches the prompt exactly (free: 10 rps, pro: 100 rps, enterprise: negociado)."
+    },
+    {
+      "claim": "Both discarded alternatives are documented with their rejection reasons",
+      "type": "factual",
+      "verified": true,
+      "evidence": "l.44-45 document 'Limitar dentro de cada serviço — descartada (tarde demais)' and 'Módulo pago do gateway gerenciado — descartada por custo e lock-in', faithful to the prompt though not a graded expectation."
+    },
+    {
+      "claim": "An extra 'Objetivos' section was added that is not part of the house template",
+      "type": "factual",
+      "verified": true,
+      "evidence": "l.25-28 add '## Objetivos'. The reference dd-2026-007 has no such section. The executor flagged this deviation in response.md l.22 and offered to fold it into Resumo/Proposta. It does not violate any expectation but is a minor departure from strict house structure."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Estado marked 'Proposto' and Autores/Revisores left blank ('—') because names were not provided",
+      "Numbering assumed DD-2026-008 based on the single existing doc; flagged that other docs/conventions could change this"
+    ],
+    "needs_review": [
+      "Executor offered to record the NAT false positive as 'considered and not applicable' if desired",
+      "Executor offered to fold the added Objetivos section into Resumo/Proposta to match dd-2026-007 exactly"
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "reason": "All seven assertions passed cleanly, and they are well-targeted: they discriminate house-structure adherence, ID continuity, the negative case (retracted NAT risk omitted), prompt fidelity, the trade-off-as-cost framing, and the specific risk+mitigation. No assertion is trivially satisfiable by a wrong output."
+      },
+      {
+        "reason": "One observed outcome no assertion covers: the executor added an extra 'Objetivos' section not present in the house template dd-2026-007. The prompt's objectives ('nenhum token excede seu limite por mais de 1s'; 'API aguenta um cliente abusivo sem degradar os demais') must appear somewhere, but an assertion could test that strict house-structure fidelity is maintained (no sections beyond the template), or alternatively that the measurable objectives are captured wherever placed. As-is, structural drift like this could pass unnoticed."
+      }
+    ],
+    "overall": "Evals are solid and discriminating. Consider one assertion on strict section fidelity (no extra sections vs. the house template) to catch structural drift like the added Objetivos section."
+  }
+}

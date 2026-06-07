@@ -1,0 +1,81 @@
+{
+  "expectations": [
+    {
+      "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+      "passed": true,
+      "evidence": "response.md poses 5 numbered questions in Portuguese. Q1 'O problema (o que dói hoje)' covers current pain and motivation to migrate now ('o que está ruim no monolito agora que motiva mexer? Deploys lentos/arriscados...'). Q3 'Como saber que deu certo (de preferência um número)' covers measurable goals and explicit out-of-scope. Q5 'Quem é impactado fora do time (segurança, plataforma/infra, times que consomem APIs do monolito)' covers impacted teams. Alternatives are raised in the prose ('\"manter o monolito\" (ou modularizá-lo sem distribuir) costuma ser uma alternativa séria') and the skeleton has a dedicated 'Alternativas consideradas' section. Trade-offs are addressed via the 'Trade-offs da solução escolhida' section ('O que piora em troca dos benefícios? Microsserviços cobram um preço real: complexidade operacional, latência de rede...'). All five required topics are covered."
+    },
+    {
+      "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+      "passed": true,
+      "evidence": "Neither response.md nor the skeleton doc invents any concrete fact. The doc header shows '**Autores** | _(a definir)_' and '**Revisores** | _(a definir...)_'. Every content section is a '> ❓' prompt asking the user to supply stack, modules, DB, traffic, teams, metrics, and services — e.g. 'qual linguagem/stack', 'principais módulos ou domínios', '_(a definir)_'. response.md explicitly refuses to fabricate: 'vou ter que inventar o problema, as metas, a arquitetura atual e as alternativas — e aí vira propaganda, não engenharia'. No stack name, number, domain boundary, or team name appears anywhere."
+    },
+    {
+      "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+      "passed": true,
+      "evidence": "Raised in both files. response.md: '\"manter o monolito\" (ou modularizá-lo sem distribuir) costuma ser uma alternativa séria, e eu não vou escrever justificativas a favor de microsserviços que você não tenha estabelecido' and closing line 'se em algum ponto a conclusão for \"na real, o monolito modular resolve\", o doc também serve pra registrar isso'. The doc's 'Alternativas consideradas' section lists '**Não fazer nada / manter o monolito como está** — por que isso não basta?' and '**Modularizar o monolito (monólito modular) sem distribuir** — por que não?'. The doc's top warning also flags this explicitly."
+    },
+    {
+      "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+      "passed": true,
+      "evidence": "One file was created (docs/design/migracao-monolito-microsservicos.md). It opens with '> **Estado deste documento: ESQUELETO / RASCUNHO INICIAL.**' and '| **Estado** | Rascunho |'. Every substantive section contains only a '> ❓' pending marker describing what the user must supply (Visão geral, Escopo e contexto, Objetivos e fora de escopo, A solução proposta, Trade-offs, Alternativas consideradas, Concerns transversais, Plano de implantação, Questões em aberto). No section contains invented prose, decisions, metrics, or architecture. The only concrete values are the current date (2026-06-07, matching today) and generic tags ('migração, arquitetura, microsserviços') derived directly from the request — not fabricated project facts. This is a scaffold, not a finished doc."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 6543,
+    "transcript_chars": null,
+    "note": "metrics.json not present in outputs_dir; transcript not available. output_chars is the sum of response.md and the skeleton doc."
+  },
+  "timing": {
+    "executor_duration_seconds": 551.7,
+    "total_duration_seconds": 551.7,
+    "note": "From timing.json: total_tokens 24177, duration_ms 551679. No separate grader timing recorded."
+  },
+  "claims": [
+    {
+      "claim": "The repository was empty, so the current state cannot be discovered automatically",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The eval setup states the executor's repository was empty. response.md asserts 'O repositório está vazio' and the only file under outputs/project/ is the newly created skeleton doc — consistent with an empty starting repo."
+    },
+    {
+      "claim": "A skeleton document was created with each section marking exactly what is missing",
+      "type": "process",
+      "verified": true,
+      "evidence": "docs/design/migracao-monolito-microsservicos.md exists; all 9 content sections carry '> ❓' markers stating the information the user must provide. Matches the claim in response.md line 5."
+    },
+    {
+      "claim": "The executor will not write pro-microservices justifications the user has not established",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Honored throughout: no benefit of microservices is asserted as established. The 'Trade-offs' section even foregrounds the costs of microservices, and the doc warns that any 'por que microsserviços' without the real problem 'seria propaganda, não engenharia'."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Asks targeted clarifying questions in Portuguese covering at least: ... trade-offs ...",
+        "reason": "In this output 'trade-offs' is satisfied by a skeleton section heading + '> ❓' prompt rather than by a direct question in the conversational reply. The assertion is framed as 'asks ... questions ... covering ... trade-offs', so a reader could argue a section prompt is not strictly a clarifying question. The output clearly intends to elicit trade-offs, so I passed it, but the eval could be sharpened by specifying whether topic coverage may be satisfied via skeleton prompts as well as direct questions, to avoid ambiguity for borderline outputs."
+      },
+      {
+        "reason": "No assertion guards against the inverse failure mode of over-asking — e.g. dumping a generic question template unrelated to the request. This output is well-targeted (questions reference the monolith/microservices framing specifically), but an assertion rewarding question specificity to the request would make expectation 1 more discriminating against a canned questionnaire."
+      }
+    ],
+    "overall": "Evals are solid and well-aligned with the desired behavior (clarify, don't fabricate, weigh staying on the monolith, no finished doc). The output passes all four cleanly. Minor sharpening possible around whether skeleton section prompts count as 'questions' for topic coverage."
+  }
+}

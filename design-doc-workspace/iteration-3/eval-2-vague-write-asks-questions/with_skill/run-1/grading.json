@@ -1,0 +1,64 @@
+{
+  "expectations": [
+    {
+      "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+      "passed": true,
+      "evidence": "response.md is entirely in Portuguese and poses 5 numbered questions. Q1 (lines 7-8): 'O problema — por que migrar, e por que agora?' with concrete pain examples (deploys lentos, build/CI demorado) — covers current pain + why now. Q2 (lines 10-11): 'Tem alguma meta mensurável (ex.: reduzir o tempo de deploy de 2h pra 10min...)' — measurable goals, plus out-of-scope. Q4 (lines 16-17): 'As alternativas — o que mais foi considerado?' — alternatives. Q5 (lines 19-20): 'O raio de impacto — quem é afetado além do seu time?' with 'Quantos times vão tocar nisso?' — impacted teams. Trade-offs are explicitly named in the intro (line 1: 'os trade-offs que vocês estão aceitando') and surfaced concretely in Q3 (line 14: 'REST síncrono, mensageria/eventos... banco de dados continua compartilhado, um por serviço') — the canonical microservices trade-offs."
+    },
+    {
+      "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+      "passed": true,
+      "evidence": "No project facts are asserted as true. Every concrete detail is framed as a hypothetical request to the user ('ex.:', 'por exemplo', 'Se der, traga números'). The executor explicitly states it cannot invent (line 1: 'é justamente o que eu não posso inventar'; line 29: 'sempre mantendo só o que você de fato me passar (não vou preencher buracos com suposições)'). No stack, metrics, domain boundaries, or team names are presented as facts about the project."
+    },
+    {
+      "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+      "passed": true,
+      "evidence": "Line 17: 'Microserviços não é a única saída. Vocês chegaram a pensar em: modularizar o monolito sem quebrá-lo (modular monolith), extrair só 1–2 serviços críticos em vez de tudo, ou simplesmente não fazer nada e conviver com a dor? Saber por que essas opções perderam é o que torna a decisão auditável depois.' Both 'modular monolith' and 'não fazer nada' (do nothing) are explicitly raised as alternatives to weigh."
+    },
+    {
+      "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+      "passed": true,
+      "evidence": "The working repository outputs/project/ is empty — no files were created (confirmed by find and ls). Line 31 confirms the deliberate choice: 'Por enquanto não criei nenhum arquivo, justamente pra não gerar um doc cheio de placeholders inventados. Assim que você me der a substância, eu escrevo.' No finished doc and no invented content exist."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 196.6,
+    "total_tokens": 22645,
+    "duration_ms": 196557
+  },
+  "claims": [
+    {
+      "claim": "The repository is empty (no existing code or design docs)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "outputs/project/ contains zero files; matches the eval setup which states the executor's repository was empty."
+    },
+    {
+      "claim": "No file was created by the executor",
+      "type": "process",
+      "verified": true,
+      "evidence": "find on outputs/project returned nothing; ls shows an empty directory. Consistent with response.md line 31."
+    },
+    {
+      "claim": "Trade-offs of the migration are surfaced for the user to weigh",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Trade-offs are named in the intro and made concrete in Q3 (sync REST vs. messaging/events; shared DB vs. DB-per-service), which are the defining trade-offs of a microservices migration."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Asks targeted clarifying questions in Portuguese covering at least: ... trade-offs ...",
+        "reason": "Trade-offs is the softest item in this assertion. A response could plausibly pass by merely uttering the word 'trade-offs' in passing. Here the coverage is genuine (concrete sync/async and DB-ownership trade-offs in Q3), but the assertion would be more discriminating if it required at least one *specific* trade-off dimension to be elicited (e.g., data consistency, network/latency, operational complexity) rather than the generic term."
+      }
+    ],
+    "overall": "Evals are solid and discriminating. They jointly force the genuinely hard behavior — refuse to fabricate, surface 'do nothing'/modular-monolith, and withhold the deliverable until substance is provided — which a naive executor that just emits a templated design doc would fail. Only minor refinement suggested for the trade-offs sub-item."
+  }
+}

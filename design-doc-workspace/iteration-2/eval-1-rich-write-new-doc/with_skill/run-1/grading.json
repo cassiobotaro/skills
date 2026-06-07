@@ -1,0 +1,124 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/project/docs/design/exportacao-de-relatorios-em-background.md (303 lines of Markdown). response.md line 1: 'Criei o design doc em docs/design/exportacao-de-relatorios-em-background.md.'"
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "The entire document is in Portuguese, e.g. title 'Serviço de exportação de relatórios em background', sections 'Visão geral', 'Escopo e contexto', 'Alternativas consideradas', 'Questões em aberto'."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Trade-offs section lines 218-221: '✗ Perde o download imediato — inclusive para exportações pequenas que hoje funcionam na hora. Este é o custo aceito explicitamente'. Also restated in the solution overview (lines 89-92) and 'Fora de escopo' (lines 69-71)."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "Alternatives table lines 233-238 lists 'Manter síncrono, só aumentar o timeout' (Descartada), 'Ferramenta de BI externa' (Descartada), and 'Não fazer nada' (Descartada), alongside the chosen async/worker option. All three required alternatives present, each with trade-offs and rationale (lines 240-245)."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "Section 'Cross-cutting concerns' (lines 247-262) has subsection 'Plataforma (fila compartilhada)' addressing RabbitMQ shared-queue contention and 'Segurança (link assinado com PII)' addressing TTL/scope of signed links carrying PII. Both teams flagged 'Sugerido como revisor.'"
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+      "passed": false,
+      "evidence": "A 'Glossário' table exists at the start (lines 14-25) and covers PII (line 24), CSV/XLSX (line 25), TTL, plus non-acronym terms (Gateway, Job, Worker, Streaming, Link assinado). However it does NOT cover two of the four named example acronyms: S3 is never given its own glossary entry or expansion (only appears parenthetically inside other rows, e.g. 'URL temporária do S3'), and BI is entirely absent from the glossary despite being used in the body as an abbreviation ('Ferramenta de BI externa', 'BI externo', lines 237, 242). The glossary fails to cover the acronyms used."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Two Mermaid diagrams. The architecture flowchart (lines 100-123) is followed by a labelled component list and prose (lines 125-139). The sequence diagram (lines 143-172) is followed by two paragraphs explaining the happy path and failure path (lines 174-182). No orphan diagrams."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "All metrics trace to the prompt: '30s' timeout (lines 18,30,41,59), '~12% das exportações acima de 50 mil linhas falham' (lines 46,212,238,244), '100 mil linhas' target (lines 34,60,213,245,267). The only other numerics are the standard HTTP '202' status code and an illustrative '200 linhas' example (line 220, hypothetical small export), neither a fabricated statistic. Unknowns (TTL, e-mail service, retry/dead-letter policy, S3 retention, link-expiry behavior) are placed in 'Questões em aberto' (lines 291-302) and author/reviewer fields are '(a definir)' (lines 8-9), never fabricated."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'Visão geral' (lines 27-34) is a single paragraph, within the two-paragraph limit. It stays at solution-summary altitude (problem + proposed direction: enqueue a job, worker generates and uploads, user gets an emailed signed link, goals to zero timeouts and support 100k rows). Granular implementation (202 response shape, status enum, batch loops, API contract) is confined to later sections. Borderline: it does name S3 and 'streaming', which are technology/mechanism choices, but these read as high-level approach rather than implementation specifics."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 1,
+    "total": 9,
+    "pass_rate": 0.8889
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 1,
+    "output_chars": 11800,
+    "transcript_chars": null,
+    "note": "No metrics.json present in outputs. errors_encountered reflects the executor's reported Mermaid validation-server transport error (response.md lines 23-25, doc lines 96-98); the diagrams were written but not tool-validated."
+  },
+  "timing": {
+    "executor_duration_seconds": 475.0,
+    "total_duration_seconds": 475.0,
+    "total_tokens": 31459
+  },
+  "claims": [
+    {
+      "claim": "The Mermaid diagrams could not be validated because the validation server returned a transport error",
+      "type": "process",
+      "verified": true,
+      "evidence": "Stated in response.md lines 23-25 and disclosed inline in the doc lines 96-98. Cannot independently confirm the server error, but the diagrams are present and use standard Mermaid flowchart/sequenceDiagram syntax that appears well-formed."
+    },
+    {
+      "claim": "Each diagram is followed by an explanation",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Confirmed: both diagrams have following explanatory prose (component list lines 125-139; happy/failure path lines 174-182)."
+    },
+    {
+      "claim": "Nothing was invented; unknowns left as open questions",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Confirmed by grep of all numerics and the 'Questões em aberto' section; author/reviewer and TTL left as blanks/open questions."
+    },
+    {
+      "claim": "A glossary covering the acronyms used is included",
+      "type": "factual",
+      "verified": false,
+      "evidence": "A glossary exists but omits BI entirely and does not define S3 as an acronym, so it does not cover all acronyms used in the doc."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Mermaid diagrams not validated due to validation-server transport error (executor flagged this in response and inline in the doc)"
+    ],
+    "needs_review": [
+      "Named authors and reviewers (left as 'a definir')",
+      "Signed-link TTL to be defined with Security",
+      "E-mail service choice and delivery-failure handling",
+      "Queue retry/dead-letter policy with Platform",
+      "S3 retention / lifecycle policy",
+      "Behavior when signed link expires before download"
+    ],
+    "workarounds": [
+      "Diagrams left as inline standard Mermaid syntax without tool validation after the MCP validation server failed"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+        "reason": "This is the single discriminating assertion in the set and it worked well — it caught a real gap (BI undefined, S3 not expanded). Worth making the requirement explicit, e.g. 'glossary must expand every acronym used in the body', so graders don't have to interpret whether the parenthetical examples are mandatory or merely illustrative."
+      },
+      {
+        "assertion": "The overview section is at most two paragraphs and free of implementation detail",
+        "reason": "'Free of implementation detail' is fuzzy. The overview names S3 and 'streaming' — defensibly summary-level, but a stricter grader could fail it. Consider defining the line (e.g. 'may name the proposed approach but must not specify API contracts, status states, batch mechanics, or response codes') so this assertion is reproducibly discriminating."
+      }
+    ],
+    "overall": "Assertions are largely strong and outcome-oriented (trade-off, alternatives-incl-do-nothing, cross-cutting-by-team, no-invented-metrics, no-orphan-diagrams all require real work to pass). The two borderline ones are the glossary scope and the overview implementation-detail wording; tightening their definitions would make the set fully reproducible."
+  }
+}

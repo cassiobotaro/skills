@@ -1,0 +1,78 @@
+{
+  "expectations": [
+    {
+      "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+      "passed": true,
+      "evidence": "DESIGN-DOC Section 0 ('Perguntas em aberto') lists 16 questions in Portuguese grouped by theme. Current pain / why migrate now: Q1 'Por que migrar agora? Qual e a dor concreta? (ex.: deploys lentos, time travado por acoplamento, escala...)' and Q3 (restricao de prazo). Measurable goals: Q2 'Quais metricas de sucesso definem que a migracao valeu a pena? (frequencia de deploy, lead time, MTTR, custo, onboarding)'. Alternatives + trade-offs: Section 2.3 alternatives table + Section 2.2 'Reflexao honesta antes de seguir: microsservicos nao sao automaticamente melhores... trocam complexidade interna por complexidade operacional distribuida'. Impacted teams: Q11 'Quantas pessoas no time... Como estao organizados os times?', Q12 (experiencia com distribuidos), Q13 (plataforma/infra). response.md also restates 5 key questions including 'Por que migrar agora?' and team size/experience. All content is in Portuguese."
+    },
+    {
+      "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+      "passed": true,
+      "evidence": "All stack/db/domain references are presented as illustrative examples, never asserted as the project's: e.g. Q4 'linguagem/framework principal? (ex.: Rails, Django, Spring, .NET, Node, Laravel)'. Section 4.2 explicitly refuses to name services: 'As fronteiras concretas dependem das respostas as perguntas 9 e 10... Sem essa informacao, listar servicos especificos aqui seria invencao.' Section 8.3 'Nao estimei datas porque seriam numeros inventados.' No metrics, team names, or domain boundaries are asserted as facts. The DRAFT header warning states 'Nao inventei numeros, nomes de servicos, tecnologias ou prazos.' Reference books (Fowler, Newman, Evans) are real external sources, not fabricated project facts."
+    },
+    {
+      "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+      "passed": true,
+      "evidence": "Section 2.3 'Alternativas consideradas' table includes both 'Manter o monolito como esta' (Pros: 'Custo zero de migracao') and 'Monolito modular (modular monolith)' (Pros: 'Baixo custo operacional, melhora acoplamento'). Section 2.2 reflection: 'Se a dor for codigo bagunçado, um monolito modular bem feito pode resolver com uma fracao do custo.' response.md line 17 reinforces: 'microsservicos nao sao automaticamente melhores... Se a dor principal for codigo bagunçado, um monolito modular pode resolver com uma fracao do custo.'"
+    },
+    {
+      "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+      "passed": false,
+      "evidence": "A file WAS created (DESIGN-DOC-migracao-microservicos.md, 12k). The 'zero invented content' conjunct is satisfied (no fabricated project facts; project-specific fields use _(preencher)_). However the 'contains only structure with explicit pending markers' conjunct is NOT satisfied: several sections deliver fully-written, committed methodological content rather than skeleton-with-markers. Section 4.1 fully specifies the Strangler Fig procedure (5 steps + mermaid diagram), Section 4.2 gives concrete boundary-prioritization criteria, Section 5.2 commits to saga/outbox/CDC patterns, Section 7 lists non-negotiable observability requirements, and Section 9 'Riscos e mitigacoes' is a fully-populated table with concrete risks AND mitigations (no _(preencher)_ markers). This is substantially more than a structural template with pending markers - it reads as a near-complete generic design doc. While not project-specific invention, it goes beyond 'only structure', failing the stated bar."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 1,
+    "total": 4,
+    "pass_rate": 0.75
+  },
+  "execution_metrics": {
+    "tool_calls": {},
+    "total_tool_calls": null,
+    "total_steps": null,
+    "errors_encountered": 0,
+    "output_chars": 12000,
+    "transcript_chars": null,
+    "note": "No metrics.json present in outputs_dir; tool-call counts unavailable. output_chars is the approximate size of the created design doc plus response.md."
+  },
+  "timing": {
+    "total_duration_seconds": 539.4,
+    "total_tokens": 17686,
+    "note": "From timing.json; executor_duration_seconds and grader_duration_seconds not separately recorded."
+  },
+  "claims": [
+    {
+      "claim": "The repository was empty / no monolith code available to inspect",
+      "type": "factual",
+      "verified": true,
+      "evidence": "outputs/project/ contains only the newly created DESIGN-DOC file. The eval setup states the executor's repository was empty, consistent with the doc warning and response.md line 2 ('o repositorio esta vazio')."
+    },
+    {
+      "claim": "Nothing was invented - no numbers, service names, technologies or deadlines",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Confirmed across the full document: all project-specific slots use _(preencher)_ or <placeholder>; stack/db/broker mentions are explicitly labeled examples; the doc twice declines to invent (service boundaries in 4.2, dates in 8.3)."
+    },
+    {
+      "claim": "Delivered a 'design doc completo na estrutura' (complete in structure)",
+      "type": "quality",
+      "verified": true,
+      "evidence": "response.md line 5 claims a structurally complete doc; the file does have all standard design-doc sections (context, goals/non-goals, strategy, data, communication, infra, rollout/rollback, risks, success criteria, references). This claim is accurate but is also what undercuts expectation 4: the doc is structurally complete AND pre-fills generic methodology rather than staying a bare skeleton."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": ["Executor flagged that without repo/context it would have to invent stack, db, service names, deadlines and metrics, and deliberately avoided doing so."],
+    "needs_review": ["Section 0 (16 questions) must be answered before the doc can be considered real; executor requested repo access to fill service boundaries from real code."],
+    "workarounds": ["Used _(preencher)_ markers and example placeholders in place of any project-specific facts."]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+        "reason": "This assertion bundles two distinct properties: (a) 'only structure with pending markers' and (b) 'zero invented content'. A reasonable executor can satisfy (b) perfectly while pre-filling generic, non-project-specific methodology (Strangler Fig steps, a populated risk/mitigation table, observability requirements) - which is arguably good behavior, not a failure. The conjunction makes the verdict ambiguous and penalizes useful generic guidance. Consider splitting into two assertions: one checking 'no project-specific facts are fabricated (stack, metrics, domain boundaries, team names, dates)' and a separate, clearer one such as 'project-specific sections are left as explicit pending markers rather than filled with assumptions'. That isolates the behavior you actually care about and removes the gray zone around generic best-practice content."
+      }
+    ],
+    "overall": "Assertions 1-3 are well-targeted and discriminating. Assertion 4 is the weak one - its two-part wording creates a genuine gray area (generic methodology vs. invented project facts) that makes pass/fail subjective; splitting it would make grading deterministic."
+  }
+}

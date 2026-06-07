@@ -1,0 +1,15 @@
+{
+  "eval_id": 3,
+  "eval_name": "review-flawed-doc",
+  "prompt": "Dá uma revisada nesse design doc que eu escrevi: docs/design/fanout-de-notificacoes.md. Pode aplicar direto as melhorias que não dependem de mim; o que precisar de informação minha, lista pra eu responder.",
+  "assertions": [
+    "The reply separates findings into questions for the author versus edits applied",
+    "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+    "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+    "The mermaid diagram is now followed by explanatory text",
+    "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+    "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+    "The edited document remains in Portuguese and preserves the author's structure and voice",
+    "The header is honestly refreshed (Última atualização set to the real current date)"
+  ]
+}

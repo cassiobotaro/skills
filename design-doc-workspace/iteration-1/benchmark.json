@@ -1,0 +1,530 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "design-doc/skills/design-doc",
+    "executor_model": "claude-opus-4-8[1m]",
+    "analyzer_model": "claude-opus-4-8[1m]",
+    "timestamp": "2026-06-07T16:38:33Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 1037.7,
+        "tokens": 19370,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/project/docs/design/exportacao-de-relatorios-em-background.md (17k, valid .md). It is a complete, structured design doc with header table, Glossário, Visão geral, Escopo, Objetivos, A solução, Trade-offs, Alternativas, Concerns transversais, Testabilidade/observabilidade, Plano de implantação, and Perguntas em aberto."
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "The entire document is in Portuguese, e.g. line 28 '## Visão geral', line 53 '## Objetivos e fora de escopo', line 232 '## Alternativas consideradas'. Body prose is all PT-BR ('Hoje os relatórios são gerados dentro da própria request da API...')."
+        },
+        {
+          "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "In '## Trade-offs da solução escolhida' (line 222): '✗ O usuário perde o download imediato. Exportações pequenas, que hoje voltam na hora, passam a chegar por e-mail depois — regressão deliberada de UX aceita em troca de um caminho único e confiável. (É o trade-off central deste documento.)'. Also surfaced under Objetivos→Fora de escopo (line 67) and in the solution section (line 87-90)."
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": true,
+          "evidence": "'## Alternativas consideradas' table (lines 236-239) lists: chosen (worker+S3+email), 'Geração síncrona com timeout maior' (Descartada), 'Ferramenta de BI externa' (Descartada), and 'Não fazer nada' (Descartada). Each is justified in prose (lines 241-249): synchronous timeout 'só empurra o problema'; BI discarded 'por custo e por expor dado de cliente'; do-nothing keeps ~12% failures and weekly tickets."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "'## Concerns transversais' has 'Segurança' (lines 257-267): 'O link assinado dá acesso a um arquivo com PII de cliente' with TTL/bucket/retention points, and 'Infraestrutura / Plataforma' (lines 269-276): 'O RabbitMQ é uma fila compartilhada... podem competir por recursos com outros consumidores' with dedicated-queue/concurrency points. Both teams are also suggested as reviewers in the header (line 9)."
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+          "passed": true,
+          "evidence": "'## Glossário' appears near the top (lines 14-25), immediately after the header and before Visão geral. It defines acronyms/terms used: PII ('Personally Identifiable Information; dado pessoal de cliente'), AMQP, TTL, plus Job, Worker, Link assinado/signed URL, Streaming, Gateway. Gap noted: of the four acronyms named in the expectation, only PII has its own glossary entry; S3 is referenced inside the 'Link assinado' definition but not defined as a term, and CSV/XLSX and BI are used in the body (lines 33, 238) but not glossary entries. A substantive glossary at the start covering acronyms used is present, so the core requirement is met."
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "Two mermaid diagrams, each followed by prose. The container flowchart (lines 94-117) is followed by 'Os componentes:' with a bulleted explanation of each node (lines 119-136). The sequence diagram (lines 140-168) is followed by 'Pontos do fluxo que importam para o desenho:' (lines 170-180). No diagram stands alone."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "Numeric audit: 30s timeout (lines 25,30,41,59,215), ~12% failures (lines 30,45,248), 50 mil linhas (lines 30,45,248), 100 mil linhas (lines 35,60,71,176,216,271,288,304,321) — all trace to the prompt. Other numbers are non-fabricated conventions: HTTP 202/200 status codes (lines 153,190,197) and today's real date 2026-06-07 (lines 10-11). Unknowns are NOT fabricated: TTL is 'curto' / 'valor a definir com Segurança', retention 'a definir', authors '_(a preencher)_', concurrency limit left as open question. All collected under 'Perguntas em aberto' (lines 311-322)."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and free of implementation detail",
+          "passed": true,
+          "evidence": "'## Visão geral' (lines 29-35) is a single paragraph. It states the problem (synchronous generation hitting the 30s timeout, ~12% failures above 50k rows, weekly tickets), the proposed approach at a conceptual level (enqueue a job, worker generates CSV/XLSX in streaming to S3, signed link by email), and the objective (zero timeouts, support 100k rows). It stays at the solution-shape/architectural level used in the prompt itself; no low-level implementation detail (no schemas, code, library/version choices). Borderline: it does name S3 and the streaming technique, but this matches the prompt's own framing of the solution and remains high-level."
+        }
+      ],
+      "notes": [
+        "Mermaid MCP validation server was down; diagram syntax not tool-validated (response.md line 31).",
+        "Named authors/reviewers, signed-link TTL, S3 retention policy, dedicated-vs-shared queue and worker concurrency, and failure-handling behavior are unknown and left as open questions (response.md lines 33-42).",
+        "Confirm authors and Platform/Security reviewers to fill the header and reviewer table.",
+        "Diagrams delivered as inline ```mermaid``` blocks (render on GitHub/GitLab) since MCP validation was unavailable."
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 551.7,
+        "tokens": 6543,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+          "passed": true,
+          "evidence": "response.md poses 5 numbered questions in Portuguese. Q1 'O problema (o que dói hoje)' covers current pain and motivation to migrate now ('o que está ruim no monolito agora que motiva mexer? Deploys lentos/arriscados...'). Q3 'Como saber que deu certo (de preferência um número)' covers measurable goals and explicit out-of-scope. Q5 'Quem é impactado fora do time (segurança, plataforma/infra, times que consomem APIs do monolito)' covers impacted teams. Alternatives are raised in the prose ('\"manter o monolito\" (ou modularizá-lo sem distribuir) costuma ser uma alternativa séria') and the skeleton has a dedicated 'Alternativas consideradas' section. Trade-offs are addressed via the 'Trade-offs da solução escolhida' section ('O que piora em troca dos benefícios? Microsserviços cobram um preço real: complexidade operacional, latência de rede...'). All five required topics are covered."
+        },
+        {
+          "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+          "passed": true,
+          "evidence": "Neither response.md nor the skeleton doc invents any concrete fact. The doc header shows '**Autores** | _(a definir)_' and '**Revisores** | _(a definir...)_'. Every content section is a '> ❓' prompt asking the user to supply stack, modules, DB, traffic, teams, metrics, and services — e.g. 'qual linguagem/stack', 'principais módulos ou domínios', '_(a definir)_'. response.md explicitly refuses to fabricate: 'vou ter que inventar o problema, as metas, a arquitetura atual e as alternativas — e aí vira propaganda, não engenharia'. No stack name, number, domain boundary, or team name appears anywhere."
+        },
+        {
+          "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+          "passed": true,
+          "evidence": "Raised in both files. response.md: '\"manter o monolito\" (ou modularizá-lo sem distribuir) costuma ser uma alternativa séria, e eu não vou escrever justificativas a favor de microsserviços que você não tenha estabelecido' and closing line 'se em algum ponto a conclusão for \"na real, o monolito modular resolve\", o doc também serve pra registrar isso'. The doc's 'Alternativas consideradas' section lists '**Não fazer nada / manter o monolito como está** — por que isso não basta?' and '**Modularizar o monolito (monólito modular) sem distribuir** — por que não?'. The doc's top warning also flags this explicitly."
+        },
+        {
+          "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+          "passed": true,
+          "evidence": "One file was created (docs/design/migracao-monolito-microsservicos.md). It opens with '> **Estado deste documento: ESQUELETO / RASCUNHO INICIAL.**' and '| **Estado** | Rascunho |'. Every substantive section contains only a '> ❓' pending marker describing what the user must supply (Visão geral, Escopo e contexto, Objetivos e fora de escopo, A solução proposta, Trade-offs, Alternativas consideradas, Concerns transversais, Plano de implantação, Questões em aberto). No section contains invented prose, decisions, metrics, or architecture. The only concrete values are the current date (2026-06-07, matching today) and generic tags ('migração, arquitetura, microsserviços') derived directly from the request — not fabricated project facts. This is a scaffold, not a finished doc."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 523.1,
+        "tokens": 4279,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The reply separates findings into questions for the author versus edits applied",
+          "passed": true,
+          "evidence": "response.md has two explicit sections: '## O que já apliquei' (7 bullets of edits actually applied) and '## O que preciso de você (não dá pra preencher sem inventar)' (7 numbered questions). The closing line reinforces the split: 'Me responde os pontos que conseguir e eu incorporo no documento — em especial 1, 2 e 3'."
+        },
+        {
+          "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+          "passed": true,
+          "evidence": "Trade-offs (#1) and alternatives incl. 'não fazer nada' (#2) are posed as questions in response.md. A grep of the edited doc for metrics/percentiles/broker names (RabbitMQ/SQS/Kafka)/'Alternativas'/'Trade-off'/'Contras' returned nothing — those terms appear only in response.md as questions. The doc's 'Solução' section was rewritten to describe the design honestly and adds a reviewer note: 'o documento ainda não diz o que essa escolha custa nem o que mais foi considerado'. No cons/alternatives/numbers were invented."
+        },
+        {
+          "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+          "passed": true,
+          "evidence": "A '## Glossário' section was inserted immediately after the header table and before 'Visão geral' (diff lines 11-21 of edited doc). It defines SLA, CDC, DLQ, TPS (plus Fanout, Provider, Exchange) — all four required terms covered."
+        },
+        {
+          "text": "The mermaid diagram is now followed by explanatory text",
+          "passed": true,
+          "evidence": "Immediately after the closing ``` of the flowchart, the doc adds a prose paragraph: 'O ganho central vem de desacoplar os canais: como cada worker consome sua própria fila, um provider lento (ou indisponível) afeta apenas o seu canal... A DLQ por canal isola as falhas...' Originally the diagram was followed directly by the '## Plano' heading with no explanation."
+        },
+        {
+          "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+          "passed": true,
+          "evidence": "Original 'Fora de escopo' was 'O sistema não deve ser lento' / 'não deve perder notificações' (negated goals). Rewritten to real exclusions: 'Mudanças na lógica de montagem de payload ou na integração com cada provider' and 'Novos canais de notificação (ex.: SMS, WhatsApp)', plus a reviewer note explicitly explaining the change and asking the author to confirm: 'os itens anteriores apenas negavam os objetivos ... Substituí por exclusões reais — confirme se estão corretas'."
+        },
+        {
+          "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+          "passed": true,
+          "evidence": "Objetivos section gains a reviewer note: 'os objetivos abaixo ainda não são verificáveis — não dizem quanto nem como medir'. Goals were reworded to name the mechanism but deliberately kept without numbers. response.md #3 asks for concrete numbers: 'Qual é o SLA de entrega (ex.: 95% em até X minutos)? Qual a vazão atual e a meta (ex.: de N para M envios/min)?' — the X/N/M are placeholders, not invented targets."
+        },
+        {
+          "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+          "passed": true,
+          "evidence": "Entire edited doc is in Portuguese. Original sections (Visão geral, Objetivos, Fora de escopo, Solução, Plano) are all preserved in order; the additions ('Contexto' split out of Visão geral, plus 'Glossário') are complementary. Header table format and the 4-step plan are kept. Tone remains that of a design doc."
+        },
+        {
+          "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+          "passed": true,
+          "evidence": "Diff shows 'Última atualização' changed from 2026-02-10 to 2026-06-07, which matches today's real date. response.md also flags that 'Estado' has been 'Em revisão' since February and suggests promoting it when review closes, rather than silently changing it — honest refresh."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 326.1,
+        "tokens": 8358,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+          "passed": true,
+          "evidence": "dd-2026-008-rate-limiting-api-publica.md mirrors the dd-2026-007 layout: '## Resumo' (l.22), '## Contexto' (l.26), '## Proposta' (l.46) with the '### Compensações' subsection (l.52) using the same ✓/✗ bullet convention, '## Riscos' as a table (l.69), and '## Plano de entrega' as a numbered list (l.75). No generic catalog-style template was produced."
+        },
+        {
+          "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+          "passed": true,
+          "evidence": "Filename is 'docs/design/dd-2026-008-rate-limiting-api-publica.md'; title line is '# DD-2026-008 · Rate limiting da API pública' and the header key-value table row reads '| **Documento** | DD-2026-008 |' (l.6), correctly continuing from the existing DD-2026-007."
+        },
+        {
+          "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+          "passed": true,
+          "evidence": "The '## Riscos' table (l.69-73) contains only the Redis-contention row; NAT/IP is absent from it. The shared-IP point is correctly relocated to '## Objetivos e fora de escopo' as 'Limite por IP. O limite é por token de API; compartilhamento de IP (NAT) não influencia a contagem.' (l.42), explicitly framed as out-of-scope/non-issue rather than a risk."
+        },
+        {
+          "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+          "passed": true,
+          "evidence": "Contexto (l.28): 'Em INC-4412, um cliente com integração mal feita disparou cerca de 40x o tráfego normal e degradou a API para todos os demais por 25 minutos.' Per-plan limits 'free 10 rps, pro 100 rps, enterprise negociado' appear in Resumo/Objetivos/Proposta (l.38, l.48). '429' with 'Retry-After' appears throughout (l.24, l.48, l.57, l.78)."
+        },
+        {
+          "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+          "passed": true,
+          "evidence": "Compensações bullet (l.57): '✗ Cliente legítimo em pico (ex.: Black Friday) pode tomar 429. Mitigação: Retry-After para o backoff automático do cliente, e alerta para o time de contas avisar os clientes enterprise antes de eventos previstos.' — marked as a ✗ cost with both the Retry-After and account-team-alert mitigations from the prompt."
+        },
+        {
+          "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+          "passed": true,
+          "evidence": "The single Riscos row (l.73): 'O Redis de sessão vira ponto de contenção ao entrar no caminho crítico de toda requisição | Medir o impacto antes do enforcing (latência e carga adicional no Redis), começando pelo shadow mode'. This is exactly the war-room risk plus the 'measure before rollout' mitigation."
+        },
+        {
+          "text": "The doc is in Portuguese and saved under docs/design/",
+          "passed": true,
+          "evidence": "File path is 'docs/design/dd-2026-008-rate-limiting-api-publica.md' and the entire content is written in Portuguese (section headers Resumo/Contexto/Proposta/Riscos/Plano de entrega, prose throughout)."
+        }
+      ],
+      "notes": [
+        "Reviewers left as 'a definir' with suggestions (Plataforma/Gateway, SRE, Contas/CS) — needs human to assign",
+        "Phase-promotion criterion (e.g., acceptable added Redis latency to move from shadow to enforcing) recorded as an open question",
+        "Author defaulted to Cássio Botaro; should be adjusted if someone else",
+        "Confirm formal reviewers",
+        "Decide the shadow-to-enforcing promotion threshold",
+        "Glossário section added beyond the 007 template; executor noted it can be removed to match 007 exactly"
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 6,
+        "failed": 3,
+        "total": 9,
+        "time_seconds": 333.8,
+        "tokens": 11876,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/project/docs/design/exportacao-relatorios-background.md, a complete Markdown design doc (275 lines, title 'Design Doc: Serviço de Exportação de Relatórios em Background')."
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "Entire document is in Portuguese, e.g. '## 1. Resumo', 'Hoje os relatórios são gerados de forma síncrona, dentro da própria request da API.'"
+        },
+        {
+          "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "Section 4.3 'Mudança de comportamento aceita (trade-off)': 'Hoje exportações pequenas funcionam na hora (download imediato). Com esta proposta, toda exportação vira assíncrona, inclusive as pequenas. O usuário perde o download imediato em troca de um caminho único e confiável.' Reinforced in §8 and §12 risk table."
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": false,
+          "evidence": "Section 5 lists only 'Alternativa A — Síncrono com timeout maior', 'Alternativa B — Ferramenta de BI externa', and the chosen alternative. There is no 'do nothing' / 'não fazer nada' / 'manter como está' / status-quo alternative. Grep for 'não fazer|status quo|manter como|do nothing' returned no matching alternative. §2.3 'Por que resolver agora' explains urgency but is not framed as a considered do-nothing alternative in the alternatives section."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "Section 7 'Impacto em outros times' has §7.1 'Time de Plataforma — fila compartilhada' (capacity, isolation/vhost, retry/DLQ, worker provisioning) and §7.2 'Time de Segurança — link assinado com PII' (link expiration, retention, encryption, access audit, download auth). Also surfaced in the header metadata and §12 risks."
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+          "passed": false,
+          "evidence": "No glossary section exists and none is suggested. Grep for 'glossário|siglas|acrônimo|terminologia' returned nothing. Acronyms PII, S3, CSV, XLSX, BI, API, DLQ, UX, UUID are used heavily throughout (e.g. PII at lines 9/124/172/191/217, S3 ~20 times, BI at 58/118/120) but are never defined, expanded, or assembled into a glossary at the beginning or anywhere."
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "Two ASCII diagrams. The current-state diagram (lines 30-32) is followed by prose at line 34 ('A geração acontece dentro do ciclo request/response...'). The proposed solution flow diagram (lines 69-88) is followed by §4.2 'Fluxo detalhado' with seven numbered prose steps. No orphan diagrams."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "All numeric metrics map to the prompt: 30s timeout, 12% failures, 50 mil and 100 mil rows. Unknowns are left as placeholders or open questions rather than fabricated: retry count is 'N tentativas' (line 160), S3 retention is 'X dias' (167) and 'quantos dias' open question (273), link expiration is 'expiração curta' with no invented number, author header is '_(preencher)_'. §13 collects open questions. No invented stack/language for the worker (confirmed in response.md)."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and free of implementation detail",
+          "passed": false,
+          "evidence": "Section 1 'Resumo' has two prose paragraphs (lines 15, 17) plus a 'Objetivos mensuráveis' bullet list (19-22). The second paragraph is dense with implementation detail, naming the concrete mechanism and technologies: 'enfileirar um job no RabbitMQ', 'um worker gera o arquivo (CSV/XLSX) em streaming', 'faz upload para o S3', 'recebe por e-mail um link assinado'. This is the 'how' (specific infra and flow) rather than a high-level problem/goal summary, violating the 'free of implementation detail' condition."
+        }
+      ],
+      "notes": [
+        "Author/reviewer header left as '_(preencher)_'",
+        "Whether to ship UI polling in v1 or email-only first",
+        "Signed-link validity and whether extra download auth is needed (to settle with Security)",
+        "S3 file retention period (days until purge)",
+        "Concurrency limit / number of workers and queue isolation (to settle with Platform)",
+        "Behavior above 100k rows (block, split into multiple files, or defer)",
+        "Document should be reviewed by Platform (queue) and Security (PII/link) before circulation",
+        "Left stack/language of the worker unspecified pending input from the user"
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 539.4,
+        "tokens": 12000,
+        "tool_calls": null,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+          "passed": true,
+          "evidence": "DESIGN-DOC Section 0 ('Perguntas em aberto') lists 16 questions in Portuguese grouped by theme. Current pain / why migrate now: Q1 'Por que migrar agora? Qual e a dor concreta? (ex.: deploys lentos, time travado por acoplamento, escala...)' and Q3 (restricao de prazo). Measurable goals: Q2 'Quais metricas de sucesso definem que a migracao valeu a pena? (frequencia de deploy, lead time, MTTR, custo, onboarding)'. Alternatives + trade-offs: Section 2.3 alternatives table + Section 2.2 'Reflexao honesta antes de seguir: microsservicos nao sao automaticamente melhores... trocam complexidade interna por complexidade operacional distribuida'. Impacted teams: Q11 'Quantas pessoas no time... Como estao organizados os times?', Q12 (experiencia com distribuidos), Q13 (plataforma/infra). response.md also restates 5 key questions including 'Por que migrar agora?' and team size/experience. All content is in Portuguese."
+        },
+        {
+          "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+          "passed": true,
+          "evidence": "All stack/db/domain references are presented as illustrative examples, never asserted as the project's: e.g. Q4 'linguagem/framework principal? (ex.: Rails, Django, Spring, .NET, Node, Laravel)'. Section 4.2 explicitly refuses to name services: 'As fronteiras concretas dependem das respostas as perguntas 9 e 10... Sem essa informacao, listar servicos especificos aqui seria invencao.' Section 8.3 'Nao estimei datas porque seriam numeros inventados.' No metrics, team names, or domain boundaries are asserted as facts. The DRAFT header warning states 'Nao inventei numeros, nomes de servicos, tecnologias ou prazos.' Reference books (Fowler, Newman, Evans) are real external sources, not fabricated project facts."
+        },
+        {
+          "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+          "passed": true,
+          "evidence": "Section 2.3 'Alternativas consideradas' table includes both 'Manter o monolito como esta' (Pros: 'Custo zero de migracao') and 'Monolito modular (modular monolith)' (Pros: 'Baixo custo operacional, melhora acoplamento'). Section 2.2 reflection: 'Se a dor for codigo bagunçado, um monolito modular bem feito pode resolver com uma fracao do custo.' response.md line 17 reinforces: 'microsservicos nao sao automaticamente melhores... Se a dor principal for codigo bagunçado, um monolito modular pode resolver com uma fracao do custo.'"
+        },
+        {
+          "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+          "passed": false,
+          "evidence": "A file WAS created (DESIGN-DOC-migracao-microservicos.md, 12k). The 'zero invented content' conjunct is satisfied (no fabricated project facts; project-specific fields use _(preencher)_). However the 'contains only structure with explicit pending markers' conjunct is NOT satisfied: several sections deliver fully-written, committed methodological content rather than skeleton-with-markers. Section 4.1 fully specifies the Strangler Fig procedure (5 steps + mermaid diagram), Section 4.2 gives concrete boundary-prioritization criteria, Section 5.2 commits to saga/outbox/CDC patterns, Section 7 lists non-negotiable observability requirements, and Section 9 'Riscos e mitigacoes' is a fully-populated table with concrete risks AND mitigations (no _(preencher)_ markers). This is substantially more than a structural template with pending markers - it reads as a near-complete generic design doc. While not project-specific invention, it goes beyond 'only structure', failing the stated bar."
+        }
+      ],
+      "notes": [
+        "Executor flagged that without repo/context it would have to invent stack, db, service names, deadlines and metrics, and deliberately avoided doing so.",
+        "Section 0 (16 questions) must be answered before the doc can be considered real; executor requested repo access to fill service boundaries from real code.",
+        "Used _(preencher)_ markers and example placeholders in place of any project-specific facts."
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 6,
+        "failed": 2,
+        "total": 8,
+        "time_seconds": 538.3,
+        "tokens": 6710,
+        "tool_calls": null,
+        "errors": 1
+      },
+      "expectations": [
+        {
+          "text": "The reply separates findings into questions for the author versus edits applied",
+          "passed": true,
+          "evidence": "response.md is split into two clearly labeled sections: '## O que eu corrigi/melhorei direto' (5 numbered edits applied) and '## Preciso de você (estão como TODO no doc)' (11 numbered questions grouped under 'Números' and 'Decisões de design'). The separation is explicit and complete."
+        },
+        {
+          "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+          "passed": true,
+          "evidence": "The new 'Alternativas consideradas' section (lines 102-110) contains only placeholders: '_<TODO: alternativa A...>_', '_<TODO: alternativa B...>_', 'Tecnologia... escolhida e justificativa: _<TODO.>_'. No concrete alternative is invented; the same is asked as question 9 in response.md. All metrics in Objetivos/Contexto are '<TODO>' placeholders, not fabricated numbers. The 'Garantias e pontos de atenção' section poses trade-offs (idempotência, TPS, ordenação, DLQ) as open questions with '_<TODO.>_'."
+        },
+        {
+          "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+          "passed": false,
+          "evidence": "No glossary section exists anywhere in the edited document, and none is suggested in response.md. The acronyms are expanded inline at first mention (CDC = 'Change Data Capture' on line 22-23; TPS appears as 'controle de TPS'/'TPS máximo' without expansion; SLA never expanded; DLQ expanded once as 'DLQ daquele canal'/'Dead Letter Queue' is NOT present). There is no dedicated glossary at the beginning (or anywhere), and the response never proposes adding one."
+        },
+        {
+          "text": "The mermaid diagram is now followed by explanatory text",
+          "passed": true,
+          "evidence": "The mermaid block (lines 75-88) is immediately followed by '### Garantias e pontos de atenção' (lines 90-100), explanatory prose covering entrega/idempotência, controle de TPS, ordenação, and reprocessamento de DLQ. It is also preceded by a numbered step-by-step description of the flow (lines 63-73). In the original, the diagram was followed directly by '## Plano' with no explanation."
+        },
+        {
+          "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+          "passed": true,
+          "evidence": "The original 'Fora de escopo' was 'O sistema não deve ser lento' and 'O sistema não deve perder notificações' (negated goals). The edited section (lines 50-59) now lists genuine non-goals: providers unchanged, schema changes beyond CDC, user opt-out preferences, templates/i18n. A review note (lines 57-59) explicitly states the old items were requirements, not out-of-scope, and were moved to Objetivos. response.md item 2 documents this."
+        },
+        {
+          "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+          "passed": true,
+          "evidence": "Objetivos (lines 38-48) carries a blockquote: 'Objetivos devem ser mensuráveis. Os números abaixo são placeholders e precisam ser confirmados pelo autor (ver perguntas no final).' Each goal uses '<TODO>' placeholders (e.g. 'p95 ≤ <TODO> s', 'SLA de entrega de <TODO>%') rather than invented numbers. response.md items 1-3 explicitly ask the author for volume, latency, and SLA targets. No fabricated metric targets present."
+        },
+        {
+          "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+          "passed": true,
+          "evidence": "The entire document remains in Portuguese. The original section structure is preserved and extended: Visão geral, Objetivos, Fora de escopo, Solução (renamed 'Solução proposta'), Plano (renamed 'Plano de implementação'), with new sections added (Contexto e problema, Garantias, Alternativas, Observabilidade, Riscos). The header table, title, mermaid diagram style, and Time de Mensageria attribution are kept. Tone matches a technical design doc."
+        },
+        {
+          "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+          "passed": false,
+          "evidence": "The header table still reads '| **Última atualização** | 2026-02-10 |' (line 8), identical to the original. The real current date is 2026-06-07. The date was not updated despite substantial edits to the document. response.md makes no mention of refreshing the header."
+        }
+      ],
+      "notes": [
+        "Executor could not render/validate the Mermaid diagram via MCP (reported transport error); relied on pattern-matching existing lines for syntax correctness.",
+        "11 open TODO questions left in the doc for the author covering volume/latency/SLA numbers, idempotency, TPS strategy, ordering, DLQ reprocessing, alternatives, observability tooling, and rollback criteria.",
+        "Skipped Mermaid preview generation after MCP transport error."
+      ]
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 304.4,
+        "tokens": 14800,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+          "passed": true,
+          "evidence": "dd-2026-008 reproduces the house sections in the same order as the reference dd-2026-007: '## Resumo' (l.13), '## Contexto' (l.17), '## Proposta' (l.30) containing '### Compensações' (l.47) with ✓/✗ bullets, '## Riscos' (l.54) as a 'Risco | Mitigação' table, and '## Plano de entrega' (l.60). It also matches the title format '# DD-2026-008 · Rate limiting da API pública' and the metadata table. No catalog/default skill structure is present (the executor ran without_skill). The only deviation is an added '## Objetivos' section (l.25), which the executor explicitly flagged and which does not break the house structure."
+        },
+        {
+          "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+          "passed": true,
+          "evidence": "Filename is dd-2026-008-rate-limiting-api-publica.md (continuing from dd-2026-007). The title is '# DD-2026-008 · Rate limiting da API pública' (l.1) and the metadata table row reads '| **Documento** | DD-2026-008 |' (l.5), matching the reference doc's convention."
+        },
+        {
+          "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+          "passed": true,
+          "evidence": "The Riscos table (l.56-58) lists only the Redis contention risk. There is no mention of NAT or shared IP anywhere in the doc. The executor confirms in response.md l.19: 'Deixei de fora o falso positivo com NAT compartilhado de propósito — você mesmo disse que esse não existe porque o limite é por token e não por IP.'"
+        },
+        {
+          "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+          "passed": true,
+          "evidence": "INC-4412 (l.15, l.21), '40x o tráfego normal' (l.15, l.21), '25 minutos'/'por 25 minutos' (l.15, l.21), per-plan limits 'Free: 10 rps / Pro: 100 rps / Enterprise: negociado' (l.37-39), and 'HTTP 429 Too Many Requests com header Retry-After' (l.40) are all present and accurate."
+        },
+        {
+          "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+          "passed": true,
+          "evidence": "In the Compensações subsection, l.52: '✗ Um cliente legítimo em pico (ex.: Black Friday) pode tomar 429. Mitigamos com o Retry-After e com alerta para o time de contas avisar os clientes enterprise antecipadamente.' — marked as a cost (✗) with the stated mitigation."
+        },
+        {
+          "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+          "passed": true,
+          "evidence": "Riscos table l.58: 'O Redis de sessão virar ponto de contenção sob a carga adicional dos contadores de rate limit | Medir o impacto antes da ativação geral (durante o shadow mode)'. This matches the prompt's risk ('o Redis de sessão virar ponto de contenção (vamos medir antes)')."
+        },
+        {
+          "text": "The doc is in Portuguese and saved under docs/design/",
+          "passed": true,
+          "evidence": "File saved at outputs/project/docs/design/dd-2026-008-rate-limiting-api-publica.md. Content is entirely in Portuguese (e.g., 'A API pública não tem nenhum limite de tráfego por cliente', 'Plano de entrega')."
+        }
+      ],
+      "notes": [
+        "Estado marked 'Proposto' and Autores/Revisores left blank ('—') because names were not provided",
+        "Numbering assumed DD-2026-008 based on the single existing doc; flagged that other docs/conventions could change this",
+        "Executor offered to record the NAT false positive as 'considered and not applicable' if desired",
+        "Executor offered to fold the added Objetivos section into Resumo/Proposta to match dd-2026-007 exactly"
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 609.65,
+        "stddev": 302.4767,
+        "min": 326.1,
+        "max": 1037.7
+      },
+      "tokens": {
+        "mean": 9637.5,
+        "stddev": 6699.4559,
+        "min": 4279,
+        "max": 19370
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.7925,
+        "stddev": 0.1434,
+        "min": 0.67,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 428.975,
+        "stddev": 127.44,
+        "min": 304.4,
+        "max": 539.4
+      },
+      "tokens": {
+        "mean": 11346.5,
+        "stddev": 3372.9921,
+        "min": 6710,
+        "max": 14800
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.21",
+      "time_seconds": "+180.7",
+      "tokens": "-1709"
+    }
+  },
+  "notes": [
+    "The skill's wins land exactly on its contract: 'do nothing' alternative (eval 1), glossary suggested at the start (evals 1 and 3), overview free of implementation detail (eval 1), honest header refresh to the real date (eval 3), and a zero-content scaffold instead of pre-filled generic methodology for the vague request (eval 2).",
+    "Eval 4 is non-discriminating on pass rate (both configurations 7/7): with a strong house template in the repo, the baseline already follows it. Keep it as a do-no-harm guard that the skill does not impose its default catalog over house conventions.",
+    "The +180s mean time delta is almost entirely eval 1 with_skill (1038s vs 334s): the executor kept retrying diagram validation against an unavailable Mermaid MCP server (transport errors). The skill prose is not the overhead; consider advising fast, graceful degradation when validation tooling is down.",
+    "Both configurations chose to create a file for the vague eval-2 request rather than only asking in the reply; the with-skill run kept it an explicit skeleton with pending markers. If creating a file before answers arrive is undesired, the skill must say so explicitly.",
+    "n=1 run per configuration: stddevs reflect across-eval variance, not run-to-run noise; treat per-eval conclusions as directional."
+  ]
+}
