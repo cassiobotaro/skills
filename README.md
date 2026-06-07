@@ -29,7 +29,7 @@ Or interactively from inside Claude Code with `/plugin`.
 The diagram skills can validate and render through an MCP server, and degrade gracefully when none is connected.
 
 - **mermaid-sequence** — renders natively on GitHub, GitLab, and most wikis. It will validate and preview through the public [Mermaid MCP server](https://mcp.mermaid.ai/mcp) *if you have one registered*, but the plugin does **not** bundle it: that server renders your diagrams remotely, so opting in is left to you (see below). Without it, the skill still produces ready-to-paste diagrams and falls back to mermaid-cli or mermaid.live to preview.
-- **structurizr** — bundles a config expecting a Structurizr MCP server at `http://localhost:3000/mcp` to parse, validate, and export workspaces. You need to run that server locally; without it the skill still authors DSL, but cannot validate it.
+- **structurizr** — validates, parses, and exports workspaces through a Structurizr MCP server at `http://localhost:3000/mcp` *if you have one running and registered*. The plugin does **not** bundle it (a `localhost` config only does anything on a machine already running the server). You run the server locally (e.g. `docker run -p 3000:3000 structurizr/mcp`) and register it yourself (see below); without it, the skill still authors DSL but cannot validate it.
 
 To register an MCP server yourself, add it at user scope:
 
