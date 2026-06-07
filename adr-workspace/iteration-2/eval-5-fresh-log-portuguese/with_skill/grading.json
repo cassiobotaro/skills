@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with exactly two files: a 0001 seed ADR and a 0002 decision ADR",
+      "passed": true,
+      "evidence": "doc/adr/ contains exactly 0001-registrar-decisoes-de-arquitetura.md and 0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md"
+    },
+    {
+      "text": "The 0001 seed ADR is translated into Portuguese (title, section headings, status word, body) and its filename slug derives from the translated title",
+      "passed": true,
+      "evidence": "Title '# 1. Registrar decisões de arquitetura', headings Contexto/Decisão/Consequências, status 'Aceito', body in Portuguese; slug 'registrar-decisoes-de-arquitetura' derived from translated title (accents transliterated)"
+    },
+    {
+      "text": "ADR 0002 has its H1 title, all four section headings, status word, and body in Portuguese",
+      "passed": true,
+      "evidence": "H1 '# 2. Adotar RabbitMQ em vez de Kafka para a fila de mensagens'; headings Status/Contexto/Decisão/Consequências; status 'Aceito'; body fully Portuguese ('Vamos adotar o RabbitMQ…'). Note: 'Status' is a valid Portuguese word; 'Date:' label kept in English as part of the structural line, consistent with the SKILL's format spec"
+    },
+    {
+      "text": "ADR 0002 keeps the exact structure: H1 with un-padded number, Date: line in ISO 8601 with today's real date, four ## sections in canonical order, one blank line between every element",
+      "passed": true,
+      "evidence": "'# 2.' un-padded vs '0002' filename; 'Date: 2026-06-07'; four sections in order; one-blank-line discipline verified"
+    },
+    {
+      "text": "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title",
+      "passed": true,
+      "evidence": "0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md"
+    },
+    {
+      "text": "The Consequences section records the accepted trade-off (loss of event replay) and contains no invented facts beyond what the prompt established",
+      "passed": true,
+      "evidence": "'Abrimos mão da retenção de eventos e da capacidade de reprocessá-los (replay)… será objeto de uma nova decisão'. Mild inference: Kafka's 'maior complexidade operacional' is implied rather than stated by the user, but follows from the forces given (team experience, low volume)"
+    }
+  ]
+}

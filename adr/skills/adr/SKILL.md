@@ -31,9 +31,13 @@ one. Its whole value is the recorded *why* — an invented rationale poisons it.
    sections honestly, ask — see step 3. Polishing the user's words into good prose is
    your job; supplying missing facts is not.
 
-2. **Files are written in English** — headings and body — regardless of the conversation
-   language (keep talking to the user in their language). The log must read consistently
-   end to end, and tooling that parses ADRs expects the English section names.
+2. **Files follow the log's language.** New ADRs are written in the language of the
+   conversation — title, date label, section headings, status words, link verbs, and
+   body alike.
+   The one thing that outranks the conversation language is consistency: the log must
+   read consistently end to end, so when a decision log already exists, match its
+   language (a log in two languages is worse than either), just as step 1 matches an
+   existing log's format.
 
 3. **One ADR, one decision.** Each record describes one set of forces and a single
    decision in response to them. If the user describes two decisions, write two ADRs.
@@ -75,6 +79,11 @@ will need to be mitigated. All of them, not just the positive ones.
 
 - Exactly these four `##` sections, in this order, plus the H1 title and the `Date:`
   line. No extra sections, no YAML frontmatter.
+- The template above is in English because this skill is. In a log kept in another
+  language, translate the date label, section headings, status words, and link verbs
+  into that language (e.g. `Data:` in a Portuguese log — the date value itself stays
+  ISO 8601) — the same rendering everywhere in the log — while keeping the structure
+  identical: H1 + date line + the same four `##` sections in this order.
 - **Numbering**: sequential and monotonic — next number = highest existing numeric
   filename prefix + 1 (treat `0009` as 9, not octal). Numbers are never reused and gaps
   are never backfilled, so "ADR 9" stays a stable reference forever. The H1 uses the
@@ -107,9 +116,10 @@ e.g. `Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)`.
   both files keep their status word — only supersession removes it. Use Amends when the
   new decision adjusts part of an old one that otherwise stands; Supersedes when it
   replaces it.
-- Write the modern spelling `Superseded by` / `Supersedes`. When reading, treat the
-  legacy adr-tools spelling `Superceded by` / `Supercedes` as the same relation — and
-  leave the legacy spelling alone in files you aren't otherwise required to edit.
+- In English logs, write the modern spelling `Superseded by` / `Supersedes`. When
+  reading, treat the legacy adr-tools spelling `Superceded by` / `Supercedes` as the
+  same relation — and leave the legacy spelling alone in files you aren't otherwise
+  required to edit.
 
 ## Workflow
 
@@ -127,8 +137,9 @@ In order:
 4. Nothing found → this is a fresh log; see step 5.
 
 Peek at one existing ADR before writing. If the log visibly follows a different template
-(e.g. MADR with YAML frontmatter and "Context and Problem Statement"), match the log's
-own format and tell the user — a log in two formats is worse than either format alone.
+(e.g. MADR with YAML frontmatter and "Context and Problem Statement") or is written in a
+different language than the conversation, match the log's own format and language and
+tell the user — a log in two formats (or two languages) is worse than either alone.
 
 ### 2. Read the neighbors
 
@@ -175,10 +186,13 @@ paragraphs, good prose. Section by section:
 
 ### 5. Initialize a fresh log
 
-When no ADR log exists anywhere, mirror `adr init`: create `doc/adr/`, seed it with
-`0001-record-architecture-decisions.md` (canonical content in
-`references/examples.md` — only the date changes), and the user's decision becomes
-`0002`. Tell the user about the seed file. If the user asked for a non-default
+When no ADR log exists anywhere, mirror `adr init`: create `doc/adr/`, seed it with the
+canonical "record architecture decisions" ADR (content in `references/examples.md`),
+and the user's decision becomes `0002`. In an English conversation, use the seed
+verbatim as `0001-record-architecture-decisions.md` — only the date changes. In any
+other language, translate the seed — title, date label, headings, status, body — so the log starts
+in the language it will be kept in, and derive the filename slug from the translated
+title. Tell the user about the seed file. If the user asked for a non-default
 directory, also write a `.adr-dir` file at the repo root containing that path so
 adr-tools and future invocations find it.
 
@@ -195,11 +209,16 @@ When the new decision replaces ADR N:
 
 For Amends/Clarifies, do step 1–2 with the right verb pair but keep both status words.
 
+In a non-English log, the verb pairs are written in the log's language — pick a
+translation once and reuse it verbatim across the log. The mechanism is identical:
+links at the end of the Status section, status word removed only on supersession.
+
 ### 7. Self-review
 
 Before declaring done, check the new file and every edited file:
 
-- Four sections in order, English, one-blank-line discipline.
+- Four sections in order, one-blank-line discipline, and the whole file — date label,
+  headings, status, link verbs, body — in the log's language.
 - H1 number (un-padded) matches the filename number (padded); slug derived correctly.
 - `Date:` is today's real date, ISO 8601.
 - Context is neutral; Decision says "We will …"; Consequences include at least one
@@ -212,8 +231,11 @@ Before declaring done, check the new file and every edited file:
 
 Report every file created or edited, by path. The files are plain adr-tools format, so
 the user's existing tooling works on them unchanged: `adr list`, `adr generate toc`,
-`adr generate graph`, and Structurizr's `!adrs doc/adr`. Don't suggest installing
-anything.
+`adr generate graph`, and Structurizr's `!adrs doc/adr`. One caveat for non-English
+logs: `adr list` and the numbering conventions are language-neutral, but `adr generate
+toc` / `graph` and Structurizr's importer parse the English status words and link
+verbs, so they may not follow translated links — mention this only if the user brings
+up those tools. Don't suggest installing anything.
 
 ## Reference files
 

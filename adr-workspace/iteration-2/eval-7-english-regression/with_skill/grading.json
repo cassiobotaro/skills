@@ -1,0 +1,24 @@
+{
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with the canonical English seed verbatim (only the date substituted) and the decision as 0002",
+      "passed": true,
+      "evidence": "diff against the canonical seed with today's date: IDENTICAL. Decision at 0002-use-iso-8601-utc-timestamps-in-the-public-api.md"
+    },
+    {
+      "text": "ADR 0002 is entirely in English with the four canonical section headings in order",
+      "passed": true,
+      "evidence": "Status, Context, Decision, Consequences in order, English throughout"
+    },
+    {
+      "text": "ADR 0002 has Accepted status, ISO 8601 date with today's real date, H1 '# 2. <title>', and one-blank-line discipline",
+      "passed": true,
+      "evidence": "'Accepted'; 'Date: 2026-06-07'; '# 2. Use ISO 8601 UTC timestamps in the public API'; blank-line discipline verified"
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs, not just benefits",
+      "passed": true,
+      "evidence": "'Clients now have to parse strings… adds a parsing step' and 'Payloads get slightly bigger'"
+    }
+  ]
+}

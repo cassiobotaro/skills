@@ -1,0 +1,12 @@
+{
+  "eval_id": 6,
+  "eval_name": "existing-english-log-pt-conversation",
+  "prompt": "Registre uma decisão: decidimos usar Redis para o cache de sessões dos usuários, em vez de guardar as sessões no PostgreSQL. O motivo é tirar carga de leitura do banco principal e ter expiração automática das chaves. O trade-off aceito é que agora temos mais um componente de infraestrutura para operar e as sessões são perdidas se o Redis reiniciar sem persistência. (Project already has doc/adr/ with two English ADRs.)",
+  "assertions": [
+    {"text": "A new ADR 0003 is created in ENGLISH (headings, status word, body) even though the conversation is in Portuguese, because the existing log is in English — consistency outranks conversation language"},
+    {"text": "The agent tells the user (in Portuguese) that it matched the existing log's language"},
+    {"text": "The two existing ADR files (0001, 0002) are byte-for-byte untouched"},
+    {"text": "ADR 0003 follows exact format: # 3. <title> H1, ISO 8601 date, four sections in order, Accepted status, blank-line discipline"},
+    {"text": "The Consequences section includes the accepted trade-offs (extra infrastructure component, session loss on Redis restart)"}
+  ]
+}

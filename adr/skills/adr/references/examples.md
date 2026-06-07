@@ -3,10 +3,17 @@
 All examples below are adr-tools-exact. Note the blank-line discipline: exactly one
 blank line between every element.
 
+The examples are in English; they exemplify *structure*. In a log kept in another
+language, the date label, headings, status words, and link verbs are translated into
+that language (the date value itself stays ISO 8601) — the structure stays exactly as
+shown.
+
 ## The seed ADR (`adr init` equivalent)
 
-Create this verbatim as `0001-record-architecture-decisions.md` when initializing a
-fresh log — substitute only the date:
+When initializing a fresh log in an English conversation, create this verbatim as
+`0001-record-architecture-decisions.md` — substitute only the date. In any other
+language, translate it (title, date label, headings, status, body) and derive the
+filename slug from the translated title:
 
 ```markdown
 # 1. Record architecture decisions
