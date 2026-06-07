@@ -42,15 +42,15 @@ and the payload field in the note — an invented one sends them down the wrong 
    hand-off — don't drop the established fact or stall on a question about plumbing.
 
 3. **The deliverable is the code block.** A fenced ` ```mermaid ` block in the
-   conversation — or written into a Markdown file when the user asks or when the diagram
-   clearly belongs in the repo's docs. It must stand alone: anyone pasting it into
-   GitHub, GitLab, or mermaid.live gets the diagram. Rendered previews are a bonus on
-   top, never a substitute for the code.
+   conversation — or written into a Markdown file when the user asks or when the
+   diagram clearly belongs in the repo's docs. It must stand alone: anyone pasting it
+   into GitHub, GitLab, or mermaid.live gets the diagram; rendered previews are a
+   bonus, never a substitute.
 
 4. **Annotate with real details, in notes.** Message text stays short — `POST
    /v1/sessions`, `201 Created` — and the substance (headers, payload shape, query
-   params, token contents) goes into `Note` lines next to the message. Only details that
-   were established; a note is a contract, not an illustration.
+   params, token contents) goes into `Note` lines immediately after the message. Only
+   established details; a note is a contract, not an illustration.
 
 5. **Validate before declaring done** (step 5): Mermaid MCP first, mermaid-cli second,
    and if neither is available say explicitly that the code was not validated. Never
@@ -95,13 +95,12 @@ Pick from:
   (e.g., a public-facing doc that must not leak internals)?
 
 Don't interrogate a user who already gave the substance, and don't ask what the repo
-answers. One round of good questions beats three rounds of small ones.
+answers.
 
 ### 3. Write the diagram
 
 Read `references/syntax.md` before writing — the full arrow/block/feature syntax plus
-the text-escaping gotchas (the literal word `end`, angle brackets, semicolons) that
-produce parse errors far from the actual mistake.
+the text-escaping gotchas that produce parse errors far from the actual mistake.
 
 House conventions, and why:
 
@@ -111,18 +110,14 @@ House conventions, and why:
   short id and a readable alias: `participant api as Order API`. Implicit declaration
   scatters column order by first mention.
 - **`actor` for humans**, `participant` for everything that runs.
-- **Arrow semantics**: `->>` request, `-->>` reply (dotted = "going back"), `-)` async
-  fire-and-forget, `-x` message that is never received. A reply drawn as `->>` reads as
-  a new request.
-- **Activations** as `+`/`-` suffix pairs on request/reply. When the reply happens
-  inside an `alt`/`opt` (each branch replies), deactivate with an explicit
-  `deactivate X` line after the block's `end` — a `-` in every branch deactivates twice
-  and fails to parse.
+- **Arrows mean things**: a reply is `-->>`, never a second `->>`; async
+  fire-and-forget is `-)` — per the arrow table in syntax.md.
+- **Activations** as `+`/`-` suffix pairs on request/reply — syntax.md has the
+  deactivation pitfall when the reply sits inside an `alt`/`opt` branch, and its fix.
 - **Notes carry the contract**: `Note over A,B:` for the message's technical details,
-  `<br/>` for line breaks. Put the note immediately after the message it describes.
-- **Blocks**: `alt`/`else` for branching outcomes, `opt` for optional steps, `loop` for
-  repetition (label it with the condition), `par` for concurrency, `break` for early
-  exits/exceptions.
+  `<br/>` for line breaks.
+- **Blocks** (`alt`/`else`, `opt`, `loop`, `par`, `break`) per syntax.md — label each
+  branch and loop with its condition.
 - **`%%` comments** for context that helps the next editor of the source but shouldn't
   render.
 

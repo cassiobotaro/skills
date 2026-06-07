@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "doc/adr with exactly two files (0001 seed + 0002 decision)",
+      "passed": true,
+      "evidence": "2 files"
+    },
+    {
+      "text": "0001 seed translated to PT (headings/status/body), slug from translated title",
+      "passed": true,
+      "evidence": "PT seed headings + slug 'registrar-decisoes'"
+    },
+    {
+      "text": "0002 H1/headings/status/body in PT",
+      "passed": true,
+      "evidence": "PT headings in 0002"
+    },
+    {
+      "text": "0002 exact structure: un-padded H1, Date ISO today, four sections, blank-line discipline",
+      "passed": true,
+      "evidence": "structure ok"
+    },
+    {
+      "text": "0002 filename NNNN-slug.md from PT title",
+      "passed": true,
+      "evidence": "kebab slug ok"
+    },
+    {
+      "text": "Consequences record accepted trade-off (loss of event replay), no invented facts",
+      "passed": true,
+      "evidence": "event replay trade-off present"
+    }
+  ]
+}

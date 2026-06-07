@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Treats house sections as required for the new doc",
+      "passed": true,
+      "evidence": "house sections scaffolded as required"
+    },
+    {
+      "text": "Asks (PT) for missing template substance: cons, risks, delivery plan",
+      "passed": true,
+      "evidence": "questions for missing sections"
+    },
+    {
+      "text": "Does not fabricate risks/phases/cons",
+      "passed": true,
+      "evidence": "unfilled sections marked pending, not invented"
+    },
+    {
+      "text": "Faithful facts: LIKE, ~30% no-result, pgvector on existing Postgres, low-score fallback",
+      "passed": true,
+      "evidence": "given facts present"
+    },
+    {
+      "text": "No silently skipped template section",
+      "passed": true,
+      "evidence": "unfilled sections explicit, not omitted"
+    }
+  ]
+}

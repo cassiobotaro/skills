@@ -1,0 +1,25 @@
+{
+  "eval_id": 2,
+  "eval_name": "order-api-code",
+  "prompt": "Dá uma olhada no código da nossa API de pedidos em /home/cassiobotaro/Projetos/skills/mermaid-sequence-workspace/evals/files/order-api e gera um diagrama de sequência do que acontece quando chega um POST /orders, pra eu colocar no README do serviço. Usa os detalhes reais do código.",
+  "assertions": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block with valid syntax"
+    },
+    {
+      "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success"
+    },
+    {
+      "text": "The declined-payment branch from the code is shown (declined -> 402)"
+    },
+    {
+      "text": "Notes/messages carry details actually present in the code (e.g. Authorization: Bearer, Idempotency-Key, card_token/amount/currency payload fields, orders exchange/routing key) and contain nothing absent from the code"
+    },
+    {
+      "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment that the response does not wait for consumers"
+    },
+    {
+      "text": "Did not ask the user questions that the provided code answers"
+    }
+  ]
+}

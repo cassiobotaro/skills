@@ -1,0 +1,45 @@
+{
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Output split into 2+ fenced mermaid blocks",
+      "passed": true,
+      "evidence": "5 blocks"
+    },
+    {
+      "text": "Every mermaid block has valid syntax",
+      "passed": true,
+      "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+    },
+    {
+      "text": "No single diagram exceeds ~25 messages",
+      "passed": true,
+      "evidence": "each block within message budget"
+    },
+    {
+      "text": "Participant labels consistent across diagrams",
+      "passed": true,
+      "evidence": "same ids/labels reused (agent-confirmed)"
+    },
+    {
+      "text": "Each diagram has heading + intro; continuity explicit",
+      "passed": true,
+      "evidence": "headings + continuity notes"
+    },
+    {
+      "text": "All failure branches: declined->FAILED, reject->refund+CANCELLED+notify, courier decline->retry",
+      "passed": true,
+      "evidence": "failure branches present"
+    },
+    {
+      "text": "Only safe-core syntax (GitHub render)",
+      "passed": true,
+      "evidence": "no version-gated features"
+    }
+  ]
+}

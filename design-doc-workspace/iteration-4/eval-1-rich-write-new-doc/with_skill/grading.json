@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/",
+      "passed": true,
+      "evidence": "doc under docs/design/"
+    },
+    {
+      "text": "Document written in Portuguese",
+      "passed": true,
+      "evidence": "PT headings"
+    },
+    {
+      "text": "Accepted trade-off (loss of immediate download) explicit as a cost",
+      "passed": true,
+      "evidence": "download-imediato trade-off present"
+    },
+    {
+      "text": "Alternatives include the two discussed + 'do nothing'",
+      "passed": true,
+      "evidence": "sync-timeout + BI + do-nothing"
+    },
+    {
+      "text": "Cross-cutting covers platform (shared queue) + security (signed links/PII)",
+      "passed": true,
+      "evidence": "platform+security+PII"
+    },
+    {
+      "text": "Glossary at beginning covering acronyms (PII,S3,CSV/XLSX,BI)",
+      "passed": true,
+      "evidence": "glossary near top with acronyms"
+    },
+    {
+      "text": "Every diagram followed by explanatory prose",
+      "passed": true,
+      "evidence": "2 diagram(s), prose follows (agent-confirmed)"
+    },
+    {
+      "text": "No invented metrics: 30s/12%/50k/100k trace to prompt",
+      "passed": true,
+      "evidence": "prompt metrics present, none fabricated"
+    },
+    {
+      "text": "Overview <=2 paragraphs, solution-shape altitude (no schemas/endpoints)",
+      "passed": true,
+      "evidence": "overview at altitude (agent-confirmed; spot-checked PT headings)"
+    }
+  ]
+}

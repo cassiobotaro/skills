@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "New ADR 0003 in ENGLISH despite PT conversation (consistency wins)",
+      "passed": true,
+      "evidence": "English headings"
+    },
+    {
+      "text": "Agent tells user (in PT) it matched the existing log's language",
+      "passed": true,
+      "evidence": "PT note about English/consistency"
+    },
+    {
+      "text": "Existing 0001, 0002 byte-for-byte untouched",
+      "passed": true,
+      "evidence": "verified identical via diff (shell)"
+    },
+    {
+      "text": "0003 exact format: '# 3.' H1, ISO date, four sections, Accepted, blank-line",
+      "passed": true,
+      "evidence": "structure ok"
+    },
+    {
+      "text": "Consequences include trade-offs (extra infra component, session loss on restart)",
+      "passed": true,
+      "evidence": "trade-offs present"
+    }
+  ]
+}

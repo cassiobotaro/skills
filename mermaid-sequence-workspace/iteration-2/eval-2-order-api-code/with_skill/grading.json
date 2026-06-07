@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Contains a fenced mermaid sequenceDiagram block with valid syntax",
+      "passed": true,
+      "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+    },
+    {
+      "text": "Real flow: POST /orders -> /v2/charges -> Postgres INSERT -> order.created publish, 201",
+      "passed": true,
+      "evidence": "code flow present"
+    },
+    {
+      "text": "Declined-payment branch (declined -> 402)",
+      "passed": true,
+      "evidence": "402 declined branch"
+    },
+    {
+      "text": "Notes carry real code details (Bearer, Idempotency-Key, payload, exchange/routing)",
+      "passed": true,
+      "evidence": "real code details in notes"
+    },
+    {
+      "text": "RabbitMQ publish drawn fire-and-forget/async",
+      "passed": true,
+      "evidence": "async publish arrow"
+    },
+    {
+      "text": "Did not ask questions the code answers",
+      "passed": true,
+      "evidence": "0 questions"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Asks clarifying questions instead of only delivering a diagram",
+      "passed": true,
+      "evidence": "10 questions, no diagram"
+    },
+    {
+      "text": "No fabricated technical specifics presented as facts",
+      "passed": true,
+      "evidence": "no diagram → nothing fabricated"
+    },
+    {
+      "text": "Any mermaid code parses (n/a — none produced)",
+      "passed": true,
+      "evidence": "no diagram produced; vacuously satisfied"
+    }
+  ]
+}

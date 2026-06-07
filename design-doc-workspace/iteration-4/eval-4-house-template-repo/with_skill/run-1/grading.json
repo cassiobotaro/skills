@@ -1,0 +1,45 @@
+{
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Follows house structure (Resumo,Contexto,Proposta+Compensações,Riscos,Plano de entrega)",
+      "passed": true,
+      "evidence": "house sections present"
+    },
+    {
+      "text": "House ID DD-2026-008 in filename + header",
+      "passed": true,
+      "evidence": "DD-2026-008"
+    },
+    {
+      "text": "Retracted NAT/shared-IP false positive NOT listed as a risk",
+      "passed": true,
+      "evidence": "NAT false-positive absent"
+    },
+    {
+      "text": "Faithful facts: INC-4412, 40x, 25min, per-plan 10/100 rps, 429+Retry-After",
+      "passed": true,
+      "evidence": "facts present"
+    },
+    {
+      "text": "Black Friday trade-off as explicit cost + mitigation",
+      "passed": true,
+      "evidence": "BF cost + mitigation"
+    },
+    {
+      "text": "Redis contention as listed risk + measure-before mitigation",
+      "passed": true,
+      "evidence": "Redis risk + measure-first"
+    },
+    {
+      "text": "PT and under docs/design/",
+      "passed": true,
+      "evidence": "PT under docs/design"
+    }
+  ]
+}

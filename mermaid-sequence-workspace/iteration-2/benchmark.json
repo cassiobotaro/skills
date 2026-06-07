@@ -1,0 +1,430 @@
+{
+  "metadata": {
+    "skill_name": "mermaid-sequence",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-07T19:44:18Z",
+    "evals_run": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 43.0,
+        "tokens": 20082,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks clarifying questions instead of only delivering a diagram",
+          "passed": true,
+          "evidence": "10 questions, no diagram"
+        },
+        {
+          "text": "No fabricated technical specifics presented as facts",
+          "passed": true,
+          "evidence": "no diagram \u2192 nothing fabricated"
+        },
+        {
+          "text": "Any mermaid code parses (n/a \u2014 none produced)",
+          "passed": true,
+          "evidence": "no diagram produced; vacuously satisfied"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 78.6,
+        "tokens": 23460,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Contains a fenced mermaid sequenceDiagram block with valid syntax",
+          "passed": true,
+          "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+        },
+        {
+          "text": "Given technical details appear (endpoints/status/event/SendGrid)",
+          "passed": true,
+          "evidence": "8/8 details present"
+        },
+        {
+          "text": "Rate-limit case shown as a distinct branch (alt/else/break/opt)",
+          "passed": true,
+          "evidence": "alt branch for 429"
+        },
+        {
+          "text": "Always-202 anti-enumeration represented",
+          "passed": true,
+          "evidence": "202-regardless note"
+        },
+        {
+          "text": "Human user as actor; event legs drawn with async (-))",
+          "passed": true,
+          "evidence": "actor + async arrows"
+        },
+        {
+          "text": "No invented details beyond prompt",
+          "passed": true,
+          "evidence": "only stated facts (agent flagged omitted failure paths)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 85.5,
+        "tokens": 26744,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Contains a fenced mermaid sequenceDiagram block with valid syntax",
+          "passed": true,
+          "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+        },
+        {
+          "text": "Real flow: POST /orders -> /v2/charges -> Postgres INSERT -> order.created publish, 201",
+          "passed": true,
+          "evidence": "code flow present"
+        },
+        {
+          "text": "Declined-payment branch (declined -> 402)",
+          "passed": true,
+          "evidence": "402 declined branch"
+        },
+        {
+          "text": "Notes carry real code details (Bearer, Idempotency-Key, payload, exchange/routing)",
+          "passed": true,
+          "evidence": "real code details in notes"
+        },
+        {
+          "text": "RabbitMQ publish drawn fire-and-forget/async",
+          "passed": true,
+          "evidence": "async publish arrow"
+        },
+        {
+          "text": "Did not ask questions the code answers",
+          "passed": true,
+          "evidence": "0 questions"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 96.9,
+        "tokens": 25339,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output split into 2+ fenced mermaid blocks",
+          "passed": true,
+          "evidence": "4 blocks"
+        },
+        {
+          "text": "Every mermaid block has valid syntax",
+          "passed": true,
+          "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+        },
+        {
+          "text": "No single diagram exceeds ~25 messages",
+          "passed": true,
+          "evidence": "each block within message budget"
+        },
+        {
+          "text": "Participant labels consistent across diagrams",
+          "passed": true,
+          "evidence": "same ids/labels reused (agent-confirmed)"
+        },
+        {
+          "text": "Each diagram has heading + intro; continuity explicit",
+          "passed": true,
+          "evidence": "headings + continuity notes"
+        },
+        {
+          "text": "All failure branches: declined->FAILED, reject->refund+CANCELLED+notify, courier decline->retry",
+          "passed": true,
+          "evidence": "failure branches present"
+        },
+        {
+          "text": "Only safe-core syntax (GitHub render)",
+          "passed": true,
+          "evidence": "no version-gated features"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 49.1,
+        "tokens": 20456,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks clarifying questions instead of only delivering a diagram",
+          "passed": true,
+          "evidence": "7 questions, no diagram"
+        },
+        {
+          "text": "No fabricated technical specifics presented as facts",
+          "passed": true,
+          "evidence": "no diagram \u2192 nothing fabricated"
+        },
+        {
+          "text": "Any mermaid code parses (n/a \u2014 none produced)",
+          "passed": true,
+          "evidence": "no diagram produced; vacuously satisfied"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 80.5,
+        "tokens": 23734,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Contains a fenced mermaid sequenceDiagram block with valid syntax",
+          "passed": true,
+          "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+        },
+        {
+          "text": "Given technical details appear (endpoints/status/event/SendGrid)",
+          "passed": true,
+          "evidence": "8/8 details present"
+        },
+        {
+          "text": "Rate-limit case shown as a distinct branch (alt/else/break/opt)",
+          "passed": true,
+          "evidence": "alt branch for 429"
+        },
+        {
+          "text": "Always-202 anti-enumeration represented",
+          "passed": true,
+          "evidence": "202-regardless note"
+        },
+        {
+          "text": "Human user as actor; event legs drawn with async (-))",
+          "passed": true,
+          "evidence": "actor + async arrows"
+        },
+        {
+          "text": "No invented details beyond prompt",
+          "passed": true,
+          "evidence": "only stated facts (agent flagged omitted failure paths)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 98.5,
+        "tokens": 27041,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Contains a fenced mermaid sequenceDiagram block with valid syntax",
+          "passed": true,
+          "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+        },
+        {
+          "text": "Real flow: POST /orders -> /v2/charges -> Postgres INSERT -> order.created publish, 201",
+          "passed": true,
+          "evidence": "code flow present"
+        },
+        {
+          "text": "Declined-payment branch (declined -> 402)",
+          "passed": true,
+          "evidence": "402 declined branch"
+        },
+        {
+          "text": "Notes carry real code details (Bearer, Idempotency-Key, payload, exchange/routing)",
+          "passed": true,
+          "evidence": "real code details in notes"
+        },
+        {
+          "text": "RabbitMQ publish drawn fire-and-forget/async",
+          "passed": true,
+          "evidence": "async publish arrow"
+        },
+        {
+          "text": "Did not ask questions the code answers",
+          "passed": true,
+          "evidence": "0 questions"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 113.9,
+        "tokens": 26208,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output split into 2+ fenced mermaid blocks",
+          "passed": true,
+          "evidence": "5 blocks"
+        },
+        {
+          "text": "Every mermaid block has valid syntax",
+          "passed": true,
+          "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+        },
+        {
+          "text": "No single diagram exceeds ~25 messages",
+          "passed": true,
+          "evidence": "each block within message budget"
+        },
+        {
+          "text": "Participant labels consistent across diagrams",
+          "passed": true,
+          "evidence": "same ids/labels reused (agent-confirmed)"
+        },
+        {
+          "text": "Each diagram has heading + intro; continuity explicit",
+          "passed": true,
+          "evidence": "headings + continuity notes"
+        },
+        {
+          "text": "All failure branches: declined->FAILED, reject->refund+CANCELLED+notify, courier decline->retry",
+          "passed": true,
+          "evidence": "failure branches present"
+        },
+        {
+          "text": "Only safe-core syntax (GitHub render)",
+          "passed": true,
+          "evidence": "no version-gated features"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 76.0,
+        "stddev": 23.2581,
+        "min": 43.0,
+        "max": 96.9
+      },
+      "tokens": {
+        "mean": 23906.25,
+        "stddev": 2882.6854,
+        "min": 20082,
+        "max": 26744
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 85.5,
+        "stddev": 27.8419,
+        "min": 49.1,
+        "max": 113.9
+      },
+      "tokens": {
+        "mean": 24359.75,
+        "stddev": 2957.2485,
+        "min": 20456,
+        "max": 27041
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-9.5",
+      "tokens": "-454"
+    }
+  },
+  "notes": []
+}

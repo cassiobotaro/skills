@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Contains a fenced mermaid sequenceDiagram block with valid syntax",
+      "passed": true,
+      "evidence": "structural validation clean (MCP server down + mermaid-cli no-Chrome in this env; validated via parse-check: block/end balance, activation, escaping, declarations)"
+    },
+    {
+      "text": "Given technical details appear (endpoints/status/event/SendGrid)",
+      "passed": true,
+      "evidence": "8/8 details present"
+    },
+    {
+      "text": "Rate-limit case shown as a distinct branch (alt/else/break/opt)",
+      "passed": true,
+      "evidence": "alt branch for 429"
+    },
+    {
+      "text": "Always-202 anti-enumeration represented",
+      "passed": true,
+      "evidence": "202-regardless note"
+    },
+    {
+      "text": "Human user as actor; event legs drawn with async (-))",
+      "passed": true,
+      "evidence": "actor + async arrows"
+    },
+    {
+      "text": "No invented details beyond prompt",
+      "passed": true,
+      "evidence": "only stated facts (agent flagged omitted failure paths)"
+    }
+  ]
+}

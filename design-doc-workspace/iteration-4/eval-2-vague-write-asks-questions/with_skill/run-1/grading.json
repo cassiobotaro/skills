@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Asks targeted PT questions: pain/why-now, goals, alternatives, trade-offs, teams",
+      "passed": true,
+      "evidence": "15 questions, topics covered"
+    },
+    {
+      "text": "No fabricated project facts",
+      "passed": true,
+      "evidence": "no doc created → nothing fabricated"
+    },
+    {
+      "text": "Raises monolith/modular-monolith/'do nothing' as alternative to weigh",
+      "passed": true,
+      "evidence": "do-nothing/monolith raised"
+    },
+    {
+      "text": "Does not deliver a finished design doc",
+      "passed": true,
+      "evidence": "no file created"
+    }
+  ]
+}

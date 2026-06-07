@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Reviews doc in place (same file, not rewritten to new structure/language)",
+      "passed": true,
+      "evidence": "fixture edited in place, PT"
+    },
+    {
+      "text": "Splits findings into edits-applied vs questions-for-author",
+      "passed": true,
+      "evidence": "two groups present"
+    },
+    {
+      "text": "Identifies missing trade-offs/alternatives as highest-value",
+      "passed": true,
+      "evidence": "trade-off/alternatives flagged"
+    },
+    {
+      "text": "Applies non-substantive edits preserving voice + PT",
+      "passed": true,
+      "evidence": "edits applied (glossary etc.), PT preserved"
+    },
+    {
+      "text": "Does not fabricate substance to fill gaps",
+      "passed": true,
+      "evidence": "gaps became questions, not invented content"
+    }
+  ]
+}

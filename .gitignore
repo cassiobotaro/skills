@@ -1,2 +1,3 @@
 .claude/settings.local.json
 *-workspace/**/viewer.log
+*-workspace/**/review.html

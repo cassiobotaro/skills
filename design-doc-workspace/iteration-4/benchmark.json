@@ -1,0 +1,547 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-07T19:44:17Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 157.7,
+        "tokens": 31431,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/",
+          "passed": true,
+          "evidence": "doc under docs/design/"
+        },
+        {
+          "text": "Document written in Portuguese",
+          "passed": true,
+          "evidence": "PT headings"
+        },
+        {
+          "text": "Accepted trade-off (loss of immediate download) explicit as a cost",
+          "passed": true,
+          "evidence": "download-imediato trade-off present"
+        },
+        {
+          "text": "Alternatives include the two discussed + 'do nothing'",
+          "passed": true,
+          "evidence": "sync-timeout + BI + do-nothing"
+        },
+        {
+          "text": "Cross-cutting covers platform (shared queue) + security (signed links/PII)",
+          "passed": true,
+          "evidence": "platform+security+PII"
+        },
+        {
+          "text": "Glossary at beginning covering acronyms (PII,S3,CSV/XLSX,BI)",
+          "passed": true,
+          "evidence": "glossary near top with acronyms"
+        },
+        {
+          "text": "Every diagram followed by explanatory prose",
+          "passed": true,
+          "evidence": "2 diagram(s), prose follows (agent-confirmed)"
+        },
+        {
+          "text": "No invented metrics: 30s/12%/50k/100k trace to prompt",
+          "passed": true,
+          "evidence": "prompt metrics present, none fabricated"
+        },
+        {
+          "text": "Overview <=2 paragraphs, solution-shape altitude (no schemas/endpoints)",
+          "passed": true,
+          "evidence": "overview at altitude (agent-confirmed; spot-checked PT headings)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 44.8,
+        "tokens": 21332,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks targeted PT questions: pain/why-now, goals, alternatives, trade-offs, teams",
+          "passed": true,
+          "evidence": "14 questions, topics covered"
+        },
+        {
+          "text": "No fabricated project facts",
+          "passed": true,
+          "evidence": "no doc created \u2192 nothing fabricated"
+        },
+        {
+          "text": "Raises monolith/modular-monolith/'do nothing' as alternative to weigh",
+          "passed": true,
+          "evidence": "do-nothing/monolith raised"
+        },
+        {
+          "text": "Does not deliver a finished design doc",
+          "passed": true,
+          "evidence": "no file created"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 116.1,
+        "tokens": 28670,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Reviews doc in place (same file, not rewritten to new structure/language)",
+          "passed": true,
+          "evidence": "fixture edited in place, PT"
+        },
+        {
+          "text": "Splits findings into edits-applied vs questions-for-author",
+          "passed": true,
+          "evidence": "two groups present"
+        },
+        {
+          "text": "Identifies missing trade-offs/alternatives as highest-value",
+          "passed": true,
+          "evidence": "trade-off/alternatives flagged"
+        },
+        {
+          "text": "Applies non-substantive edits preserving voice + PT",
+          "passed": true,
+          "evidence": "edits applied (glossary etc.), PT preserved"
+        },
+        {
+          "text": "Does not fabricate substance to fill gaps",
+          "passed": true,
+          "evidence": "gaps became questions, not invented content"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 59.1,
+        "tokens": 20774,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Follows house structure (Resumo,Contexto,Proposta+Compensa\u00e7\u00f5es,Riscos,Plano de entrega)",
+          "passed": true,
+          "evidence": "house sections present"
+        },
+        {
+          "text": "House ID DD-2026-008 in filename + header",
+          "passed": true,
+          "evidence": "DD-2026-008"
+        },
+        {
+          "text": "Retracted NAT/shared-IP false positive NOT listed as a risk",
+          "passed": true,
+          "evidence": "NAT false-positive absent"
+        },
+        {
+          "text": "Faithful facts: INC-4412, 40x, 25min, per-plan 10/100 rps, 429+Retry-After",
+          "passed": true,
+          "evidence": "facts present"
+        },
+        {
+          "text": "Black Friday trade-off as explicit cost + mitigation",
+          "passed": true,
+          "evidence": "BF cost + mitigation"
+        },
+        {
+          "text": "Redis contention as listed risk + measure-before mitigation",
+          "passed": true,
+          "evidence": "Redis risk + measure-first"
+        },
+        {
+          "text": "PT and under docs/design/",
+          "passed": true,
+          "evidence": "PT under docs/design"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 51.9,
+        "tokens": 20082,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Treats house sections as required for the new doc",
+          "passed": true,
+          "evidence": "house sections scaffolded as required"
+        },
+        {
+          "text": "Asks (PT) for missing template substance: cons, risks, delivery plan",
+          "passed": true,
+          "evidence": "questions for missing sections"
+        },
+        {
+          "text": "Does not fabricate risks/phases/cons",
+          "passed": true,
+          "evidence": "unfilled sections marked pending, not invented"
+        },
+        {
+          "text": "Faithful facts: LIKE, ~30% no-result, pgvector on existing Postgres, low-score fallback",
+          "passed": true,
+          "evidence": "given facts present"
+        },
+        {
+          "text": "No silently skipped template section",
+          "passed": true,
+          "evidence": "unfilled sections explicit, not omitted"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 205.8,
+        "tokens": 35366,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/",
+          "passed": true,
+          "evidence": "doc under docs/design/"
+        },
+        {
+          "text": "Document written in Portuguese",
+          "passed": true,
+          "evidence": "PT headings"
+        },
+        {
+          "text": "Accepted trade-off (loss of immediate download) explicit as a cost",
+          "passed": true,
+          "evidence": "download-imediato trade-off present"
+        },
+        {
+          "text": "Alternatives include the two discussed + 'do nothing'",
+          "passed": true,
+          "evidence": "sync-timeout + BI + do-nothing"
+        },
+        {
+          "text": "Cross-cutting covers platform (shared queue) + security (signed links/PII)",
+          "passed": true,
+          "evidence": "platform+security+PII"
+        },
+        {
+          "text": "Glossary at beginning covering acronyms (PII,S3,CSV/XLSX,BI)",
+          "passed": true,
+          "evidence": "glossary near top with acronyms"
+        },
+        {
+          "text": "Every diagram followed by explanatory prose",
+          "passed": true,
+          "evidence": "2 diagram(s), prose follows (agent-confirmed)"
+        },
+        {
+          "text": "No invented metrics: 30s/12%/50k/100k trace to prompt",
+          "passed": true,
+          "evidence": "prompt metrics present, none fabricated"
+        },
+        {
+          "text": "Overview <=2 paragraphs, solution-shape altitude (no schemas/endpoints)",
+          "passed": true,
+          "evidence": "overview at altitude (agent-confirmed; spot-checked PT headings)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 47.7,
+        "tokens": 21379,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Asks targeted PT questions: pain/why-now, goals, alternatives, trade-offs, teams",
+          "passed": true,
+          "evidence": "15 questions, topics covered"
+        },
+        {
+          "text": "No fabricated project facts",
+          "passed": true,
+          "evidence": "no doc created \u2192 nothing fabricated"
+        },
+        {
+          "text": "Raises monolith/modular-monolith/'do nothing' as alternative to weigh",
+          "passed": true,
+          "evidence": "do-nothing/monolith raised"
+        },
+        {
+          "text": "Does not deliver a finished design doc",
+          "passed": true,
+          "evidence": "no file created"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 104.5,
+        "tokens": 27236,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Reviews doc in place (same file, not rewritten to new structure/language)",
+          "passed": true,
+          "evidence": "fixture edited in place, PT"
+        },
+        {
+          "text": "Splits findings into edits-applied vs questions-for-author",
+          "passed": true,
+          "evidence": "two groups present"
+        },
+        {
+          "text": "Identifies missing trade-offs/alternatives as highest-value",
+          "passed": true,
+          "evidence": "trade-off/alternatives flagged"
+        },
+        {
+          "text": "Applies non-substantive edits preserving voice + PT",
+          "passed": true,
+          "evidence": "edits applied (glossary etc.), PT preserved"
+        },
+        {
+          "text": "Does not fabricate substance to fill gaps",
+          "passed": true,
+          "evidence": "gaps became questions, not invented content"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 83.0,
+        "tokens": 22399,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Follows house structure (Resumo,Contexto,Proposta+Compensa\u00e7\u00f5es,Riscos,Plano de entrega)",
+          "passed": true,
+          "evidence": "house sections present"
+        },
+        {
+          "text": "House ID DD-2026-008 in filename + header",
+          "passed": true,
+          "evidence": "DD-2026-008"
+        },
+        {
+          "text": "Retracted NAT/shared-IP false positive NOT listed as a risk",
+          "passed": true,
+          "evidence": "NAT false-positive absent"
+        },
+        {
+          "text": "Faithful facts: INC-4412, 40x, 25min, per-plan 10/100 rps, 429+Retry-After",
+          "passed": true,
+          "evidence": "facts present"
+        },
+        {
+          "text": "Black Friday trade-off as explicit cost + mitigation",
+          "passed": true,
+          "evidence": "BF cost + mitigation"
+        },
+        {
+          "text": "Redis contention as listed risk + measure-before mitigation",
+          "passed": true,
+          "evidence": "Redis risk + measure-first"
+        },
+        {
+          "text": "PT and under docs/design/",
+          "passed": true,
+          "evidence": "PT under docs/design"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 58.3,
+        "tokens": 24080,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Treats house sections as required for the new doc",
+          "passed": true,
+          "evidence": "house sections scaffolded as required"
+        },
+        {
+          "text": "Asks (PT) for missing template substance: cons, risks, delivery plan",
+          "passed": true,
+          "evidence": "questions for missing sections"
+        },
+        {
+          "text": "Does not fabricate risks/phases/cons",
+          "passed": true,
+          "evidence": "unfilled sections marked pending, not invented"
+        },
+        {
+          "text": "Faithful facts: LIKE, ~30% no-result, pgvector on existing Postgres, low-score fallback",
+          "passed": true,
+          "evidence": "given facts present"
+        },
+        {
+          "text": "No silently skipped template section",
+          "passed": true,
+          "evidence": "unfilled sections explicit, not omitted"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 85.92,
+        "stddev": 49.0681,
+        "min": 44.8,
+        "max": 157.7
+      },
+      "tokens": {
+        "mean": 24457.8,
+        "stddev": 5216.7226,
+        "min": 20082,
+        "max": 31431
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 99.86,
+        "stddev": 63.2,
+        "min": 47.7,
+        "max": 205.8
+      },
+      "tokens": {
+        "mean": 26092.0,
+        "stddev": 5639.4719,
+        "min": 21379,
+        "max": 35366
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-13.9",
+      "tokens": "-1634"
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,22 @@
+{
+  "eval_id": 3,
+  "eval_name": "review-flawed-doc",
+  "prompt": "Dá uma revisada nesse design doc que eu escrevi: docs/design/fanout-de-notificacoes.md. Pode aplicar direto as melhorias que não dependem de mim; o que precisar de informação minha, lista pra eu responder.",
+  "assertions": [
+    {
+      "text": "Reads the existing doc and reviews it in place (does not rewrite it into a different structure or language)"
+    },
+    {
+      "text": "Separates findings into edits applied now vs questions for the author (substance gaps not invented)"
+    },
+    {
+      "text": "Identifies missing/weak trade-offs or alternatives as the highest-value finding"
+    },
+    {
+      "text": "Applies non-substantive improvements directly (clarity, structure, glossary, diagram explanations, header state) while preserving the author's voice and Portuguese language"
+    },
+    {
+      "text": "Does not fabricate substance (metrics, alternatives, risks) to fill gaps — those become questions for the author"
+    }
+  ]
+}
