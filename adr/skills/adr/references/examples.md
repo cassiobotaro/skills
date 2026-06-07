@@ -4,16 +4,18 @@ All examples below are adr-tools-exact. Note the blank-line discipline: exactly 
 blank line between every element.
 
 The examples are in English; they exemplify *structure*. In a log kept in another
-language, the date label, headings, status words, and link verbs are translated into
-that language (the date value itself stays ISO 8601) — the structure stays exactly as
-shown.
+language, only the prose is translated — the H1 title text and the section bodies. The
+`Date:` label, the four `##` headings, the status word, and the link verbs stay canonical
+English (adr-tools has no localization, and Structurizr's `!adrs` importer parses those exact
+literals); the date value itself stays ISO 8601. The structure stays exactly as shown.
 
 ## The seed ADR (`adr init` equivalent)
 
 When initializing a fresh log in an English conversation, create this verbatim as
 `0001-record-architecture-decisions.md` — substitute only the date. In any other
-language, translate it (title, date label, headings, status, body) and derive the
-filename slug from the translated title:
+language, translate only its **title and body** (keeping the `Date:` label, the `##`
+headings, and the status word English) and derive the filename slug from the translated
+title:
 
 ```markdown
 # 1. Record architecture decisions
@@ -35,6 +37,37 @@ We will use Architecture Decision Records, as [described by Michael Nygard](http
 ## Consequences
 
 See Michael Nygard's article, linked above. For a lightweight ADR toolset, see Nat Pryce's [adr-tools](https://github.com/npryce/adr-tools).
+```
+
+## A Portuguese-language ADR (scaffolding stays English)
+
+A log kept in Portuguese: the H1 title text and the section bodies are Portuguese, but the
+`Date:` label, the four `##` headings, and the status word stay exactly as adr-tools emits
+them — so Structurizr's `!adrs` importer reads the date and status (and follows the links)
+instead of silently defaulting them:
+
+```markdown
+# 2. Adotar RabbitMQ em vez de Kafka para a fila de mensagens
+
+Date: 2026-06-07
+
+## Status
+
+Accepted
+
+## Context
+
+A equipe já tem experiência operacional com RabbitMQ, o volume é baixo (menos de 100
+mensagens por segundo) e não precisamos de retenção de eventos para replay.
+
+## Decision
+
+Vamos adotar o RabbitMQ como fila de mensagens entre os serviços.
+
+## Consequences
+
+Abrimos mão do replay de eventos: se um dia precisarmos disso, será uma nova decisão. Em
+troca, a operação fica mais simples e apoiada na experiência que o time já tem.
 ```
 
 ## A model well-written ADR

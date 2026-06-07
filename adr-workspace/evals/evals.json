@@ -40,6 +40,26 @@
         "files/api-platform/docs/architecture/decisions/0002-expose-public-api-as-rest.md"
       ],
       "assertions": []
+    },
+    {
+      "id": 5,
+      "eval_name": "fresh-log-portuguese",
+      "prompt": "Documente esta decisão de arquitetura: decidimos adotar o RabbitMQ em vez do Kafka para a fila de mensagens entre os serviços. A equipe já tem experiência operacional com RabbitMQ, nosso volume é baixo (menos de 100 mensagens/segundo) e não precisamos de retenção de eventos. Aceitamos abrir mão do replay de eventos — se um dia precisarmos disso, será uma nova decisão. O repositório ainda não tem nenhum ADR.",
+      "expected_output": "Cria doc/adr com seed estilo adr init (0001) e a decisão como 0002. O texto humano — o título do H1 e o corpo das seções — fica em português, mas o scaffolding fica em inglês canônico para que os arquivos importem no Structurizr (!adrs) e funcionem com adr generate: '# 2. Adotar RabbitMQ em vez de Kafka para a fila de mensagens' (título em português), o label 'Date:' (em inglês) com data ISO, '## Status' seguido da palavra 'Accepted', e os cabeçalhos '## Context' / '## Decision' / '## Consequences' em inglês com o conteúdo em português. O seed 0001 também tem título e corpo em português mas mantém 'Date:', os cabeçalhos '##' e o status em inglês. Arquivos NNNN-slug.md com slug derivado do título em português, acentos transliterados (ex.: 0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md). NÃO traduz 'Data:', nem '## Estado/Contexto/Decisão/Consequências', nem o status para 'Aceito' — traduzir esses literais faria o importador do Structurizr cair na data de hoje por engano e no status padrão 'Proposed', e perderia eventuais links de supersede/amend. Consequences cobre o trade-off citado (abrir mão do replay/retenção). Não inventa fatos além do que foi dito (experiência com RabbitMQ, volume baixo, sem retenção).",
+      "files": [],
+      "assertions": [
+        {"text": "Fresh log initialized: doc/adr/ contains a 0001 seed ADR and the decision as 0002"},
+        {"text": "0002 filename is NNNN-slug.md with the slug derived from the Portuguese title (accents transliterated)"},
+        {"text": "0002 H1 is '# 2. <Portuguese title>' and the un-padded H1 number matches the padded filename number"},
+        {"text": "Date: label is canonical English 'Date: ' with an ISO 8601 date (today), not translated to 'Data:'"},
+        {"text": "Status heading is English '## Status' followed by the canonical English status word 'Accepted' (not '## Estado'/'Aceito')"},
+        {"text": "The other headings are English '## Context'/'## Decision'/'## Consequences' (not translated)"},
+        {"text": "Section bodies (Context/Decision/Consequences) are written in Portuguese"},
+        {"text": "Consequences records the accepted trade-off (giving up event replay/retention)"},
+        {"text": "Seed 0001 keeps English scaffolding (Date:/##/Accepted) with Portuguese title and body"},
+        {"text": "Structurizr adr-tools importer compatibility: the 'Date: ', '## Status', '## Context' literals are present so date and status parse instead of silently defaulting (today / Proposed)"},
+        {"text": "No invented facts beyond the prompt (RabbitMQ experience, low volume <100 msg/s, no retention/replay)"}
+      ]
     }
   ]
 }

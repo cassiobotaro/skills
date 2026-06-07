@@ -3,7 +3,9 @@ name: adr
 description: >
   Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format,
   file-compatible with Nat Pryce's adr-tools (sequential numbering, NNNN-slug.md filenames,
-  supersede/amend links in the Status section, .adr-dir discovery). Use this skill whenever
+  supersede/amend links in the Status section, .adr-dir discovery) and importable into
+  Structurizr's decision log — the parsed scaffolding (Date: label, ## headings, status words)
+  stays English even when the prose is in another language. Use this skill whenever
   the user wants to record, document, revise, supersede, or amend an architecture or
   technology decision — "write an ADR", "document this decision", "we decided to use X
   over Y", "record why we chose Z", "replace ADR N", "start a decision log" — even if
@@ -31,11 +33,19 @@ one. Its whole value is the recorded *why* — an invented rationale poisons it.
    sections honestly, ask — see step 3. Polishing the user's words into good prose is
    your job; supplying missing facts is not.
 
-2. **Files follow the log's language.** New ADRs are written in the language of the
-   conversation — title, date label, section headings, status words, link verbs, and
-   body alike. One thing outranks the conversation language: consistency. When a log
-   already exists, match its language (a log in two languages is worse than either),
-   just as step 1 matches an existing log's format.
+2. **Prose follows the log's language; the adr-tools scaffolding stays canonical English.**
+   Write the *human prose* in the language of the conversation — the H1 title text and the
+   Context / Decision / Consequences bodies. But the *scaffolding* stays exactly as adr-tools
+   emits it, in English: the `Date:` label, the four `## Status` / `## Context` / `## Decision`
+   / `## Consequences` headings, the status word (`Accepted`, `Proposed`, …), and the
+   supersede/amend/clarify verbs. adr-tools has no localization — its template is English — and
+   Structurizr's `!adrs` importer and `adr generate` parse those exact English literals: a
+   translated `Data:` makes the date silently default to today, and a translated `## Status`
+   makes the status silently default to `Proposed` and drops every supersede/amend link. One
+   thing still outranks the conversation language for the prose: consistency — match an existing
+   log's title/prose language (a log in two languages is worse than either). If an existing log
+   translated its scaffolding too, keep new ADRs' scaffolding English anyway so the log stays
+   importable, and tell the user.
 
 3. **One ADR, one decision.** Each record describes one set of forces and a single
    decision in response to them. If the user describes two decisions, write two ADRs.
@@ -77,9 +87,11 @@ will need to be mitigated. All of them, not just the positive ones.
 
 - Exactly these four `##` sections, in this order, plus the H1 title and the `Date:`
   line. No extra sections, no YAML frontmatter.
-- In a non-English log, translate the whole rendering — date label (`Data:` in a
-  Portuguese log), headings, status words, link verbs — the same way everywhere in the
-  log; the date *value* stays ISO 8601 and the structure stays exactly as above.
+- In a non-English log, only the **prose** is translated — the H1 title text and the section
+  bodies. The scaffolding stays English: the `Date:` label, the four `##` headings, the status
+  word, and the link verbs. The date *value* stays ISO 8601 and the structure stays exactly as
+  above. (This is what keeps the files parseable by Structurizr's `!adrs` importer and
+  `adr generate`; see rule 2.)
 - **Numbering**: sequential and monotonic — next number = highest existing numeric
   filename prefix + 1 (treat `0009` as 9, not octal). Numbers are never reused and gaps
   are never backfilled, so "ADR 9" stays a stable reference forever. The H1 uses the
@@ -91,6 +103,8 @@ will need to be mitigated. All of them, not just the positive ones.
 - **Status word**: `Accepted` by default; `Proposed` when the user indicates the
   decision still awaits agreement; `Deprecated` when a decision is retired without a
   replacement. A superseded ADR carries a link line *instead of* a status word (below).
+  Keep this word canonical English even in a non-English log — the importer reads it as the
+  decision's status and Structurizr styles it via the `Decision:<Status>` tag.
 - **Blank-line discipline**: exactly one blank line between every element (after the H1,
   around `Date:`, around every heading, between paragraphs).
 
@@ -103,7 +117,11 @@ will need to be mitigated. All of them, not just the positive ones.
 e.g. `Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)`.
 
 - Links go at the END of the Status section, each on its own line, blank lines between.
-  The bracketed text copies the target's H1 exactly, number included.
+  The verb stays English (`Supersedes`, `Superseded by`, …) — it becomes the relationship label
+  in Structurizr's decision graph and `adr generate graph`; the bracketed text copies the
+  target's H1 exactly, number included (so its title text is in the log's language). Keep these
+  links inside the Status section: the importer scans only the lines between `## Status` and
+  `## Context` to build decision relationships.
 - Supersede pair: the new ADR keeps `Accepted` and gains `Supersedes […]`; the old ADR's
   status word is *removed* and replaced by `Superseded by […]` (the link line becomes
   its status).
@@ -179,8 +197,9 @@ When no ADR log exists anywhere, mirror `adr init`: create `doc/adr/`, seed it w
 canonical "record architecture decisions" ADR (content in `references/examples.md`),
 and the user's decision becomes `0002`. In an English conversation, use the seed
 verbatim as `0001-record-architecture-decisions.md` — only the date changes. In any
-other language, translate the seed fully (rule 2) so the log starts in the language it
-will be kept in, and derive the filename slug from the translated title. Tell the user
+other language, translate the seed's **title and body** (rule 2) so the log reads in the
+language it will be kept in — keeping its `Date:` label, `##` headings, and status word in
+English — and derive the filename slug from the translated title. Tell the user
 about the seed file. If the user asked for a non-default directory, also write a
 `.adr-dir` file at the repo root containing that path so adr-tools and future
 invocations find it.
@@ -197,17 +216,21 @@ When the new decision replaces ADR N:
    verify with a diff that only the Status section changed.
 
 For Amends/Clarifies, do step 1–2 with the right verb pair but keep both status words.
-In a non-English log, write the verb pairs in the log's language — pick a translation
-once and reuse it verbatim across the log.
+The verbs stay English in every log (`Supersedes` / `Superseded by`, `Amends` / `Amended by`,
+`Clarifies` / `Clarified by`) so the importer and `adr generate graph` label the relationship —
+only the bracketed link text (the target's H1) is in the log's language.
 
 ### 7. Self-review
 
 Before declaring done, check the new file and every edited file:
 
-- Four sections in order, one-blank-line discipline, and the whole file — date label,
-  headings, status, link verbs, body — in the log's language.
+- Four sections in order, one-blank-line discipline; the title text and section bodies in the
+  log's language, but the `Date:` label, the four headings, the status word, and the link verbs
+  in canonical English.
 - H1 number (un-padded) matches the filename number (padded); slug derived correctly.
-- `Date:` is today's real date, ISO 8601.
+- `Date:` (literal English label) is today's real date, ISO 8601; `## Status` and `## Context`
+  are the literal English headings — so Structurizr's importer and `adr generate` parse the
+  date, status, and links instead of silently defaulting them.
 - Context is neutral; Decision says "We will …"; Consequences include at least one
   negative or trade-off.
 - Nothing in the file that the user or the repository didn't establish.
@@ -217,10 +240,10 @@ Before declaring done, check the new file and every edited file:
 ### 8. Hand off
 
 Report every file created or edited, by path. The files are plain adr-tools format, so
-`adr list`, `adr generate toc` / `graph`, and Structurizr's `!adrs doc/adr` work on
-them unchanged — except that `adr generate` and the `!adrs` importer parse the English
-status words and link verbs, so they may not follow a non-English log's links; mention
-this only if the user brings those tools up. Don't suggest installing anything.
+`adr list`, `adr generate toc` / `graph`, and Structurizr's `!adrs doc/adr`
+(https://docs.structurizr.com/server/decisions) import them unchanged — dates, statuses, and
+supersede/amend links included — because the scaffolding stays English even in a non-English
+log. Mention this only if the user brings those tools up. Don't suggest installing anything.
 
 ## Reference files
 
