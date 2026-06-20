@@ -106,6 +106,11 @@ substance is missing.
 
 ### 3. Write
 
+- **Write plainly and in the active voice.** Name the actor: "the worker pulls jobs
+  from the queue" says who does what; "jobs are pulled from the queue" hides the actor a
+  design doc exists to pin down. Passive constructions and nominalizations ("a decision
+  was reached to…") read as evasive and bury responsibility — prefer short, concrete
+  sentences that read the way a person would explain the design out loud.
 - Start the design with an **overview, then details**. The design is not one section
   but a *series* of sections, each with its own heading: the solution itself, the
   architecture (typically a C4 container diagram), the flows (sequence diagrams),
@@ -136,10 +141,13 @@ Before declaring done, check:
 - Every significant decision carries its trade-offs; alternatives include "do
   nothing"; at least one accepted cost is stated plainly.
 - Every diagram is followed by explanatory text.
+- The prose reads in plain, active language — no sentence hides its actor behind the
+  passive, no decision floats without an owner.
 - Acronyms and domain terms are defined. If the doc carries a glossary, sweep the
   finished body for stray acronyms (the short ones hide in tables and alternative
   names — BI, SLA, DLQ): every acronym the body uses appears in the glossary.
 - Length is proportionate to the problem's ambiguity.
+- A final spelling and typo pass, in the document's own language.
 
 ## Reviewing an existing document
 
@@ -164,7 +172,7 @@ Look for, roughly in order of importance:
   anything in the architecture.
 - **Reader experience** — unexplained acronyms or domain terms (suggest a glossary at
   the beginning of the document), inlined detail that should be a link, a stale header
-  state.
+  state, passive or evasive prose that hides who does what, and spelling slips.
 - **Template gaps** — required sections the document's template demands but lacks:
   substance gaps, asked of the author exactly like a missing trade-off.
 - **Sections that would add clarity** — for documents without a template, framed as
@@ -179,7 +187,8 @@ Report findings in two groups before touching the file:
    trade-off, the unstated alternative, the unmeasured goal. Ask; don't fill these
    with invented content or placeholders.
 2. **Proposed edits** — improvements you can make now (clarity, structure, glossary,
-   diagram explanations, header state), each with its reason.
+   diagram explanations, header state, active-voice and spelling fixes), each with its
+   reason.
 
 Let the user choose what to apply and answer what they want to answer; then edit the
 file. Edits preserve the author's voice and language. Content for the substance gaps
@@ -208,22 +217,72 @@ for each section live in `references/sections.md`):
 
 ## Diagrams
 
-Two diagram types earn their place in most design docs: a **C4 container diagram**
-for the architecture (the executable processes, data stores, and how they
-communicate) and **sequence diagrams** for flows with temporal order (API call
-chains, pipelines, batch processes).
+Two diagram types earn their place in most design docs: a **C4 container diagram** for
+the architecture — the executable processes, the data stores, and how they communicate —
+and **sequence diagrams** for flows with temporal order (API call chains, pipelines,
+batch processes). A diagram never stands on its own: follow each one with prose that
+names the components and explains how they interact, since the reader needs to know what
+the boxes mean, not merely that they exist.
 
-- In a Markdown doc, prefer fenced ```` ```mermaid ```` blocks — they render directly
-  on GitHub, GitLab, and most wikis.
-- When the `mermaid-sequence` skill is available, use it for sequence diagrams. When
-  the `structurizr` skill is available and the project keeps a `workspace.dsl`, evolve
-  the model there and embed an exported view. Without them, write the Mermaid inline.
-- Validation tooling is best-effort. If a validation server or CLI is unavailable or
-  erroring, don't retry and don't block the document on it: write the diagram inline,
-  mention once that it wasn't machine-validated, and move on. The diagram is an
-  illustration inside a prose document, not the deliverable.
-- A diagram is never self-explanatory, even when it feels clear: always follow it
-  with text describing the components and their interactions.
+### Author the C4 architecture diagram as Structurizr DSL
+
+The DSL is the C4 model written as text: it makes every box declare what it is and every
+arrow say what flows along it — the discipline the architecture section needs. When the
+repository keeps a `workspace.dsl`, evolve the model there so the doc and the source of
+truth move together; otherwise write a self-contained snippet that lives in the doc. When
+the `structurizr` skill is available, hand your draft to it — it classifies elements at
+the right C4 level, writes idiomatic DSL, validates the result, and sharpens what you
+wrote, so defer to it rather than restating its conventions here.
+
+Write **sequence diagrams as Mermaid**, through the `mermaid-sequence` skill when it is
+available and inline otherwise. A fenced ```` ```mermaid ```` block renders straight on
+GitHub, GitLab, and most wikis, so a flow diagram is already its own picture and needs no
+extra step.
+
+### Embed the diagram: rendered image first, source folded beneath
+
+Structurizr DSL doesn't render by itself inside Markdown, so lead with the **rendered
+image** and tuck the **source** into a `<details>` block — the reader sees the picture,
+and whoever edits the model finds the source one click away:
+
+````markdown
+![Container diagram — Report export service](diagrams/architecture.svg)
+
+<details>
+<summary>Diagram source (Structurizr DSL)</summary>
+
+```
+workspace {
+    ...
+}
+```
+
+</details>
+````
+
+The image line holds the space the diagram occupies, and it is always a Markdown image
+reference — never a second diagram drawn by hand. Render it when you can and the path
+points at a real file; when you can't, leave the reference as a placeholder marking
+exactly where the rendered image belongs for the manual pass. The folded DSL is the
+single source of truth for the architecture, so resist pasting an inline Mermaid copy of
+the same view alongside it: that leaves two diagrams to keep in step, and they drift.
+
+### Render the C4 diagram to an image when the tooling is there
+
+The image in that slot is a real **PNG or SVG** rendered from the Structurizr DSL — not a
+Mermaid block. Turning a C4 model into an image is the `structurizr` skill's domain, so
+when that skill (or its tooling) is available, lean on it: the Structurizr CLI/Docker
+`export` produces the picture (a static PNG/SVG, or PlantUML/DOT that a PlantUML renderer
+turns into PNG/SVG), and the Structurizr Lite UI exports the same. Save the result under
+the doc's `diagrams/` folder so the image reference resolves to the file you generated.
+
+Rendering and validation are both best-effort. Validate the DSL when the tooling is there
+and fix what it reports; but when an exporter, renderer, or validator is missing or
+erroring, don't retry and don't hold the document hostage to it — keep the `![…](…)`
+placeholder (a one-line "render this in the manual pass" note beside it is fine), embed
+the folded DSL, and move on. The line never to write is a *validation* disclaimer that
+implies the design itself wasn't checked: the diagrams get the same manual review as the
+prose around them, so they don't need one.
 
 ## Reference files
 

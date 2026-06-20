@@ -1,0 +1,24 @@
+flowchart TB
+    internos["Serviços Internos<br/>[Sistema externo]<br/>Precisam notificar clientes"]
+    cliente["Endpoint do Cliente<br/>[Sistema externo]<br/>Recebe os webhooks via HTTPS"]
+
+    subgraph webhooks["Serviço de Webhooks"]
+        direction TB
+        fila["RabbitMQ<br/>[Fila]<br/>Eventos, retry c/ backoff, DLQ"]
+        dispatcher["Dispatcher<br/>[Container: Go]<br/>Consome, assina HMAC, faz POST"]
+        admin["Admin API<br/>[Container: Go]<br/>Histórico e reenvio manual"]
+        db[("PostgreSQL<br/>[Banco de dados]<br/>Assinaturas, segredos, histórico")]
+    end
+
+    internos -->|"Publica eventos (AMQP)"| fila
+    dispatcher -->|"Consome / retry / DLQ (AMQP)"| fila
+    dispatcher -->|"Lê assinatura e segredo;<br/>grava resultado (SQL)"| db
+    dispatcher -->|"POST assinado com HMAC (HTTPS)"| cliente
+    admin -->|"Lê histórico; enfileira reenvio (SQL)"| db
+    cliente -->|"Consulta histórico /<br/>solicita reenvio (HTTPS)"| admin
+
+    classDef external fill:#999999,stroke:#6b6b6b,color:#ffffff;
+    classDef container fill:#1168bd,stroke:#0b4884,color:#ffffff;
+    class internos,cliente external;
+    class dispatcher,admin,fila container;
+    class db container;

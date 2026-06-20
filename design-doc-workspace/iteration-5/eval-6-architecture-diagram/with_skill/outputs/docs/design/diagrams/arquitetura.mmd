@@ -1,0 +1,24 @@
+flowchart LR
+    cliente["Cliente externo<br/><i>[Pessoa/Sistema]</i><br/>Recebe os webhooks no seu endpoint HTTP"]
+    servico["Serviço interno<br/><i>[Sistema existente]</i><br/>Precisa notificar um cliente externo"]
+
+    subgraph webhooks["Serviço de Webhooks"]
+        filaEventos[/"Fila de eventos<br/><i>[RabbitMQ]</i>"/]
+        filaRetry[/"Fila de retry<br/><i>[RabbitMQ]</i><br/>Backoff exponencial"/]
+        dlq[/"DLQ<br/><i>[RabbitMQ]</i><br/>Após 5 tentativas"/]
+        dispatcher["Dispatcher<br/><i>[Go]</i><br/>Assina com HMAC e faz o POST"]
+        adminApi["Admin API<br/><i>[Go]</i><br/>Histórico e reenvio manual"]
+        banco[("Banco de dados<br/><i>[PostgreSQL]</i><br/>Assinaturas e histórico")]
+    end
+
+    servico -->|"Publica eventos (AMQP)"| filaEventos
+    filaEventos -->|"Entrega a despachar (AMQP)"| dispatcher
+    dispatcher -->|"Lê config da assinatura (SQL/TLS)"| banco
+    dispatcher -->|"Registra cada tentativa (SQL/TLS)"| banco
+    dispatcher -->|"POST assinado com HMAC (HTTPS)"| cliente
+    dispatcher -->|"Reenfileira em falha, com backoff (AMQP)"| filaRetry
+    filaRetry -->|"Reentrega após backoff (AMQP)"| dispatcher
+    dispatcher -->|"Após 5 falhas (AMQP)"| dlq
+    cliente -->|"Consulta histórico e dispara reenvio (HTTPS)"| adminApi
+    adminApi -->|"Lê histórico e assinaturas (SQL/TLS)"| banco
+    adminApi -->|"Reenfileira p/ reenvio manual (AMQP)"| filaEventos

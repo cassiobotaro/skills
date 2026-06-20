@@ -1,0 +1,34 @@
+{
+  "expectations": [
+    {
+      "text": "Architecture diagram authored as Structurizr DSL (workspace + softwareSystem + container keywords), not a Mermaid graph.",
+      "passed": true,
+      "evidence": "Idiomatic v6 DSL (workspace/model/views, softwareSystem with container children, tags + styles, directional relationship labels) folded under the architecture section."
+    },
+    {
+      "text": "Diagram source folded inside an HTML <details> block with a <summary>.",
+      "passed": true,
+      "evidence": "`<details><summary>Fonte do diagrama (Structurizr DSL)</summary>` wraps the DSL fence; closed with `</details>`."
+    },
+    {
+      "text": "Markdown image reference (![...](...)) for the architecture diagram — the space for the rendered image.",
+      "passed": false,
+      "evidence": "No ![](...) reference. Render tooling was denied in-sandbox, so the agent put a hand-authored Mermaid flowchart as the visible picture above the folded DSL instead of an image placeholder. Defensible (a picture renders on GitHub) but diverges from the 'space for the rendered image' instruction and adds a second, drift-prone representation."
+    },
+    {
+      "text": "No machine-validation disclaimer note.",
+      "passed": true,
+      "evidence": "No disclaimer phrasing anywhere in the document."
+    },
+    {
+      "text": "Prose reads in natural, active voice — names the actors doing things.",
+      "passed": true,
+      "evidence": "\"o dispatcher consome a fila... assina o payload com HMAC e faz o POST\", \"a Admin API lê o histórico\" — actors are named, not hidden behind the passive."
+    },
+    {
+      "text": "Real design doc: explicit accepted trade-off + 'do nothing' alternative.",
+      "passed": true,
+      "evidence": "States the accepted cost (asynchronous delivery delay in exchange for retry/durability/visibility) and an alternatives section including 'não fazer nada'."
+    }
+  ]
+}

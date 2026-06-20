@@ -1,0 +1,31 @@
+{
+  "eval_id": 6,
+  "eval_name": "architecture-diagram",
+  "prompt": "Preciso de um design doc para um novo serviço de entrega de webhooks que o time de Plataforma vai construir. Contexto: hoje cada serviço interno que precisa avisar um cliente externo faz um POST direto, sem retry e sem visibilidade. Quando o endpoint do cliente cai, a gente perde o evento — já aconteceu em produção mais de uma vez. Proposta: um serviço central de webhooks. Os serviços internos publicam eventos numa fila no RabbitMQ. Um dispatcher escrito em Go consome essa fila, busca a configuração da assinatura do cliente no Postgres e faz o POST para o endpoint do cliente assinando o payload com HMAC. Quando a entrega falha, o evento vai para uma fila de retry com backoff exponencial; depois de 5 tentativas vai para uma DLQ. Um admin API, também em Go, deixa o cliente consultar o histórico de entregas e reenviar manualmente. O histórico fica no Postgres. Trade-off que aceitamos: a entrega passa a ser assíncrona (antes era inline na request), então o cliente pode ver o evento com alguns segundos de atraso. Em troca ganhamos retry, durabilidade e visibilidade. Alternativas que consideramos: (a) cada serviço com sua própria lógica de retry — rejeitada por duplicar código e gerar comportamento inconsistente; (b) um SaaS tipo Svix — rejeitada por custo e por mandar dado sensível para fora do nosso ambiente. Não fazer nada não serve porque já estamos perdendo eventos. Times impactados: SRE (nova fila e novo serviço para operar) e Segurança (assinatura HMAC e segredos por cliente). Escreve o design doc com o diagrama de arquitetura e salva em docs/design/.",
+  "assertions": [
+    {
+      "text": "The architecture diagram is authored as Structurizr DSL — the doc contains a `workspace` block using C4 keywords (softwareSystem / container), not a Mermaid graph for the architecture.",
+      "kind": "scriptable"
+    },
+    {
+      "text": "The diagram source is folded inside an HTML <details> block (with a <summary>), so the source is collapsed rather than inline.",
+      "kind": "scriptable"
+    },
+    {
+      "text": "The doc includes a Markdown image reference (![...](...)) for the architecture diagram — the space left for the rendered image.",
+      "kind": "scriptable"
+    },
+    {
+      "text": "The doc does NOT contain a machine-validation disclaimer note (e.g. 'não validado por ferramenta' / 'not machine-validated' / 'not validated by a tool').",
+      "kind": "scriptable"
+    },
+    {
+      "text": "The prose reads in natural, active voice — it names the actors (dispatcher, admin API, worker) doing things, rather than leaning on passive constructions that hide who acts.",
+      "kind": "judged"
+    },
+    {
+      "text": "The doc is a real design doc: it states the accepted trade-off explicitly (asynchronous delivery delay in exchange for retry/durability/visibility) and includes the 'do nothing' alternative.",
+      "kind": "judged"
+    }
+  ]
+}

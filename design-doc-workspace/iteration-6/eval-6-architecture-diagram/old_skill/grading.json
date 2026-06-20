@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Architecture diagram authored as Structurizr DSL (workspace + softwareSystem + container keywords), not a Mermaid graph.",
+      "passed": false,
+      "evidence": "Architecture is a Mermaid `flowchart TB` block; no Structurizr DSL anywhere (old skill only used the structurizr path when a workspace.dsl already existed)."
+    },
+    {
+      "text": "Diagram source folded inside an HTML <details> block with a <summary>.",
+      "passed": false,
+      "evidence": "No <details> block; the diagram is inline."
+    },
+    {
+      "text": "Markdown image reference (![...](...)) for the architecture diagram — the space for the rendered image.",
+      "passed": false,
+      "evidence": "No ![](...) reference; the fenced mermaid block is the diagram."
+    },
+    {
+      "text": "No machine-validation disclaimer note.",
+      "passed": false,
+      "evidence": "Line 100 blockquote: 'O diagrama não foi validado por ferramenta automática nesta sessão (...) ele é uma ilustração do texto abaixo.' — the exact disclaimer (and 'ilustração do texto' phrasing) the revision removes."
+    },
+    {
+      "text": "Prose reads in natural, active voice — names the actors doing things.",
+      "passed": true,
+      "evidence": "Not a discriminating assertion — the old skill also writes natural design-doc prose; included for fairness."
+    },
+    {
+      "text": "Real design doc: explicit accepted trade-off + 'do nothing' alternative.",
+      "passed": true,
+      "evidence": "Trade-off-focused with alternatives including 'do nothing' (same rich prompt). Core design-doc behavior is unchanged by this revision."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.3333333333333333,
+    "passed": 2,
+    "failed": 4,
+    "total": 6
+  }
+}

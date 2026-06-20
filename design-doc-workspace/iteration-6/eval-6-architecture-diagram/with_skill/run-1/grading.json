@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Architecture diagram authored as Structurizr DSL (workspace + softwareSystem + container keywords), not a Mermaid graph.",
+      "passed": true,
+      "evidence": "Idiomatic DSL (workspace/model/views, softwareSystem with container children, tags, directional labels) folded under the architecture section."
+    },
+    {
+      "text": "Diagram source folded inside an HTML <details> block with a <summary>.",
+      "passed": true,
+      "evidence": "`<details><summary>Fonte do diagrama (Structurizr DSL)</summary>` ... `</details>` wraps the DSL."
+    },
+    {
+      "text": "Markdown image reference (![...](...)) for the architecture diagram — the space for the rendered image.",
+      "passed": true,
+      "evidence": "Line 74: `![Diagrama de containers — Serviço de entrega de webhooks](diagrams/architecture.svg)` above the folded DSL. No parallel hand-authored Mermaid — the clarified embed instruction held."
+    },
+    {
+      "text": "No machine-validation disclaimer note.",
+      "passed": true,
+      "evidence": "No validation disclaimer. (There is a one-line note that the image is a placeholder to render in the manual pass — a rendering note, not a 'not validated by a tool' caveat.)"
+    },
+    {
+      "text": "Prose reads in natural, active voice — names the actors doing things.",
+      "passed": true,
+      "evidence": "\"o dispatcher consome a fila... assina o payload\", \"a Admin API ... lê o histórico ... reenfileira o evento\"."
+    },
+    {
+      "text": "Real design doc: explicit accepted trade-off + 'do nothing' alternative.",
+      "passed": true,
+      "evidence": "Accepted cost (async delay) stated plainly; alternatives include 'do nothing'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 6,
+    "failed": 0,
+    "total": 6
+  }
+}

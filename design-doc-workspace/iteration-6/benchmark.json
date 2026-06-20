@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-20T14:30:59Z",
+    "evals_run": [
+      6
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 6,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.3333333333333333,
+        "passed": 2,
+        "failed": 4,
+        "total": 6,
+        "time_seconds": 215.4,
+        "tokens": 40917,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Architecture diagram authored as Structurizr DSL (workspace + softwareSystem + container keywords), not a Mermaid graph.",
+          "passed": false,
+          "evidence": "Architecture is a Mermaid `flowchart TB` block; no Structurizr DSL anywhere (old skill only used the structurizr path when a workspace.dsl already existed)."
+        },
+        {
+          "text": "Diagram source folded inside an HTML <details> block with a <summary>.",
+          "passed": false,
+          "evidence": "No <details> block; the diagram is inline."
+        },
+        {
+          "text": "Markdown image reference (![...](...)) for the architecture diagram \u2014 the space for the rendered image.",
+          "passed": false,
+          "evidence": "No ![](...) reference; the fenced mermaid block is the diagram."
+        },
+        {
+          "text": "No machine-validation disclaimer note.",
+          "passed": false,
+          "evidence": "Line 100 blockquote: 'O diagrama n\u00e3o foi validado por ferramenta autom\u00e1tica nesta sess\u00e3o (...) ele \u00e9 uma ilustra\u00e7\u00e3o do texto abaixo.' \u2014 the exact disclaimer (and 'ilustra\u00e7\u00e3o do texto' phrasing) the revision removes."
+        },
+        {
+          "text": "Prose reads in natural, active voice \u2014 names the actors doing things.",
+          "passed": true,
+          "evidence": "Not a discriminating assertion \u2014 the old skill also writes natural design-doc prose; included for fairness."
+        },
+        {
+          "text": "Real design doc: explicit accepted trade-off + 'do nothing' alternative.",
+          "passed": true,
+          "evidence": "Trade-off-focused with alternatives including 'do nothing' (same rich prompt). Core design-doc behavior is unchanged by this revision."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 146.3,
+        "tokens": 35902,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Architecture diagram authored as Structurizr DSL (workspace + softwareSystem + container keywords), not a Mermaid graph.",
+          "passed": true,
+          "evidence": "Idiomatic DSL (workspace/model/views, softwareSystem with container children, tags, directional labels) folded under the architecture section."
+        },
+        {
+          "text": "Diagram source folded inside an HTML <details> block with a <summary>.",
+          "passed": true,
+          "evidence": "`<details><summary>Fonte do diagrama (Structurizr DSL)</summary>` ... `</details>` wraps the DSL."
+        },
+        {
+          "text": "Markdown image reference (![...](...)) for the architecture diagram \u2014 the space for the rendered image.",
+          "passed": true,
+          "evidence": "Line 74: `![Diagrama de containers \u2014 Servi\u00e7o de entrega de webhooks](diagrams/architecture.svg)` above the folded DSL. No parallel hand-authored Mermaid \u2014 the clarified embed instruction held."
+        },
+        {
+          "text": "No machine-validation disclaimer note.",
+          "passed": true,
+          "evidence": "No validation disclaimer. (There is a one-line note that the image is a placeholder to render in the manual pass \u2014 a rendering note, not a 'not validated by a tool' caveat.)"
+        },
+        {
+          "text": "Prose reads in natural, active voice \u2014 names the actors doing things.",
+          "passed": true,
+          "evidence": "\"o dispatcher consome a fila... assina o payload\", \"a Admin API ... l\u00ea o hist\u00f3rico ... reenfileira o evento\"."
+        },
+        {
+          "text": "Real design doc: explicit accepted trade-off + 'do nothing' alternative.",
+          "passed": true,
+          "evidence": "Accepted cost (async delay) stated plainly; alternatives include 'do nothing'."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.3333,
+        "stddev": 0.0,
+        "min": 0.3333,
+        "max": 0.3333
+      },
+      "time_seconds": {
+        "mean": 215.4,
+        "stddev": 0.0,
+        "min": 215.4,
+        "max": 215.4
+      },
+      "tokens": {
+        "mean": 40917.0,
+        "stddev": 0.0,
+        "min": 40917,
+        "max": 40917
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 146.3,
+        "stddev": 0.0,
+        "min": 146.3,
+        "max": 146.3
+      },
+      "tokens": {
+        "mean": 35902.0,
+        "stddev": 0.0,
+        "min": 35902,
+        "max": 35902
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.67",
+      "time_seconds": "+69.1",
+      "tokens": "+5015"
+    }
+  },
+  "notes": []
+}
