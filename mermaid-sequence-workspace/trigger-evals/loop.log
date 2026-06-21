@@ -1,0 +1,33 @@
+Split: 12 train, 8 test (holdout=0.4)
+
+============================================================
+Iteration 1/5
+Description: Write and edit Mermaid sequence diagrams, delivered as fenced ```mermaid code blocks that render directly in Markdown (GitHub, GitLab, most wikis), validated and previewed through a Mermaid MCP server when one is connected (mermaid-cli or mermaid.live otherwise). Use this skill whenever the user wants to show how parts of a system interact over time — "sequence diagram", "draw the login flow", "diagram how the frontend talks to the API", "document this request/response chain", "show what happens when a user checks out", "diagram this webhook" — even if they never say "Mermaid" or "sequence diagram".
+============================================================
+Train: 36/36 correct, precision=100% recall=100% accuracy=100% (80.3s)
+  [PASS] rate=3/3 expected=True: desenha um diagrama de sequência mostrando a comunicação ent
+  [PASS] rate=3/3 expected=True: create a diagram of the request/response chain when our API 
+  [PASS] rate=3/3 expected=True: diagram the retry/backoff interaction between our worker and
+  [PASS] rate=3/3 expected=True: i need a sequence diagram for the password reset: user reque
+  [PASS] rate=3/3 expected=True: draw a sequence diagram of our login flow: browser → BFF → K
+  [PASS] rate=3/3 expected=True: diagram how the frontend talks to the API and the API talks 
+  [PASS] rate=0/3 expected=False: draw an ER diagram of our orders database in mermaid — table
+  [PASS] rate=0/3 expected=False: draw our team's org chart
+  [PASS] rate=0/3 expected=False: explain how the OAuth authorization code flow works
+  [PASS] rate=0/3 expected=False: create the C4 container diagram for our platform in workspac
+  [PASS] rate=0/3 expected=False: record our decision to use Mermaid for all docs diagrams as 
+  [PASS] rate=0/3 expected=False: set up mermaid-cli in our build so diagrams render in CI
+Test : 24/24 correct, precision=100% recall=100% accuracy=100% (0.0s)
+  [PASS] rate=3/3 expected=True: show the message flow for our async order processing: produc
+  [PASS] rate=3/3 expected=True: document this webhook flow as a diagram — Stripe sends us th
+  [PASS] rate=3/3 expected=True: show what happens step by step when a customer checks out: c
+  [PASS] rate=3/3 expected=True: i want to visualize the OAuth authorization code flow with P
+  [PASS] rate=0/3 expected=False: create a gantt chart in mermaid for our Q3 roadmap
+  [PASS] rate=0/3 expected=False: make a flowchart in mermaid of our deployment decision logic
+  [PASS] rate=0/3 expected=False: write a design doc for the new event pipeline, with the flow
+  [PASS] rate=0/3 expected=False: document how our microservices are structured and connected 
+
+All train queries passed on iteration 1!
+
+Exit reason: all_passed (iteration 1)
+Best score: 8/8 (iteration 1)

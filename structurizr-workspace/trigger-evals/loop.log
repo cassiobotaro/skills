@@ -1,0 +1,153 @@
+Split: 12 train, 8 test (holdout=0.4)
+
+============================================================
+Iteration 1/5
+Description: Author, evolve, and validate C4 model architecture documentation as Structurizr DSL (workspace.dsl). Use this skill whenever the user mentions Structurizr, C4, architecture diagrams, system context / container / component diagrams, deployment or dynamic diagrams, system landscape, documenting how a system or its microservices are structured, or asks to create or edit a .dsl workspace — even if they never say the word "Structurizr". Also use it when linking ADRs (architecture decision records) into architecture documentation.
+============================================================
+Train: 31/36 correct, precision=84% recall=89% accuracy=86% (73.8s)
+  [FAIL] rate=1/3 expected=True: link our decision records from doc/adr into the architecture
+  [PASS] rate=3/3 expected=True: document our system landscape — we have like 8 internal syst
+  [PASS] rate=3/3 expected=True: i have an architecture i want to capture as proper C4 with s
+  [PASS] rate=3/3 expected=True: diagram the static architecture of our microservices: how th
+  [PASS] rate=3/3 expected=True: i want to document how our platform is structured using C4 —
+  [PASS] rate=3/3 expected=True: create a workspace.dsl for our order-management system — mod
+  [PASS] rate=0/3 expected=False: convert our existing PlantUML diagrams to Mermaid
+  [PASS] rate=0/3 expected=False: review our microservices for tight coupling and suggest wher
+  [PASS] rate=0/3 expected=False: we decided to adopt the C4 model as our documentation standa
+  [FAIL] rate=3/3 expected=False: generate an AWS architecture diagram with the actual service
+  [PASS] rate=0/3 expected=False: draw a sequence diagram showing how the checkout request flo
+  [PASS] rate=0/3 expected=False: document the REST API of the catalog service — endpoints, pa
+Test : 24/24 correct, precision=100% recall=100% accuracy=100% (0.0s)
+  [PASS] rate=3/3 expected=True: modela em Structurizr DSL a arquitetura do nosso sistema de 
+  [PASS] rate=3/3 expected=True: we use Structurizr — model the deployment of our app across 
+  [PASS] rate=3/3 expected=True: add a component diagram for the new payments service to our 
+  [PASS] rate=3/3 expected=True: set up the C4 model for our new SaaS — i want it as DSL so w
+  [PASS] rate=0/3 expected=False: create an ER diagram of our database schema — tables, column
+  [PASS] rate=0/3 expected=False: draw a flowchart of our CI/CD pipeline stages
+  [PASS] rate=0/3 expected=False: write a design doc for the new recommendations service, incl
+  [PASS] rate=0/3 expected=False: explain what the C4 model is and how it differs from UML
+
+Improving description...
+Proposed (31.1s): Use this skill to model software architecture at C4 abstraction levels as Structurizr DSL (workspace.dsl): people, software systems, containers, components, and their relationships, rendered as system context, container, component, deployment, dynamic, or system-landscape views. Trigger it to create or edit a .dsl workspace, to capture how a system or its microservices are structured, or to author/evolve/validate C4 diagrams — even if the user never says "Structurizr" or "C4". Also trigger when the user wants existing architecture decision records (ADRs in doc/adr or similar) linked into or surfaced within the architecture documentation, C4 views, or workspace. Do NOT trigger for cloud-infrastructure pictures built from real vendor service icons or logos (e.g. AWS diagrams with EC2/RDS/S3 boxes, draw.io / diagrams.net-style art), for sequence/flow diagrams, or for writing, revising, or superseding the ADR decision content itself.
+
+============================================================
+Iteration 2/5
+Description: Use this skill to model software architecture at C4 abstraction levels as Structurizr DSL (workspace.dsl): people, software systems, containers, components, and their relationships, rendered as system context, container, component, deployment, dynamic, or system-landscape views. Trigger it to create or edit a .dsl workspace, to capture how a system or its microservices are structured, or to author/evolve/validate C4 diagrams — even if the user never says "Structurizr" or "C4". Also trigger when the user wants existing architecture decision records (ADRs in doc/adr or similar) linked into or surfaced within the architecture documentation, C4 views, or workspace. Do NOT trigger for cloud-infrastructure pictures built from real vendor service icons or logos (e.g. AWS diagrams with EC2/RDS/S3 boxes, draw.io / diagrams.net-style art), for sequence/flow diagrams, or for writing, revising, or superseding the ADR decision content itself.
+============================================================
+Train: 33/36 correct, precision=100% recall=83% accuracy=92% (75.0s)
+  [FAIL] rate=0/3 expected=True: link our decision records from doc/adr into the architecture
+  [PASS] rate=3/3 expected=True: i have an architecture i want to capture as proper C4 with s
+  [PASS] rate=3/3 expected=True: document our system landscape — we have like 8 internal syst
+  [PASS] rate=3/3 expected=True: diagram the static architecture of our microservices: how th
+  [PASS] rate=3/3 expected=True: i want to document how our platform is structured using C4 —
+  [PASS] rate=3/3 expected=True: create a workspace.dsl for our order-management system — mod
+  [PASS] rate=0/3 expected=False: convert our existing PlantUML diagrams to Mermaid
+  [PASS] rate=0/3 expected=False: review our microservices for tight coupling and suggest wher
+  [PASS] rate=0/3 expected=False: we decided to adopt the C4 model as our documentation standa
+  [PASS] rate=0/3 expected=False: draw a sequence diagram showing how the checkout request flo
+  [PASS] rate=0/3 expected=False: document the REST API of the catalog service — endpoints, pa
+  [PASS] rate=0/3 expected=False: generate an AWS architecture diagram with the actual service
+Test : 24/24 correct, precision=100% recall=100% accuracy=100% (0.0s)
+  [PASS] rate=3/3 expected=True: modela em Structurizr DSL a arquitetura do nosso sistema de 
+  [PASS] rate=3/3 expected=True: we use Structurizr — model the deployment of our app across 
+  [PASS] rate=3/3 expected=True: add a component diagram for the new payments service to our 
+  [PASS] rate=3/3 expected=True: set up the C4 model for our new SaaS — i want it as DSL so w
+  [PASS] rate=0/3 expected=False: create an ER diagram of our database schema — tables, column
+  [PASS] rate=0/3 expected=False: write a design doc for the new recommendations service, incl
+  [PASS] rate=0/3 expected=False: draw a flowchart of our CI/CD pipeline stages
+  [PASS] rate=0/3 expected=False: explain what the C4 model is and how it differs from UML
+
+Improving description...
+Proposed (53.2s): Use this skill when someone wants to map out, document, or visualize how a software system is built — its users, systems, services/containers, components, and how they connect — as a C4 model written in Structurizr DSL (workspace.dsl). This covers creating or editing a .dsl workspace; producing system-context, container, component, deployment, dynamic, or system-landscape views; and modeling how microservices fit together — even if they never name "Structurizr" or "C4". It also covers pulling existing decision records (ADRs from doc/adr or similar) INTO that architecture documentation, so the C4 views or workspace surface the related decisions — i.e. wiring ADRs into the diagrams, not writing the decisions. Skip it for cloud pictures drawn with real vendor service icons (AWS EC2/RDS/S3 boxes, draw.io / diagrams.net art), for sequence or flow diagrams, and for writing, revising, or superseding the ADR content itself.
+
+============================================================
+Iteration 3/5
+Description: Use this skill when someone wants to map out, document, or visualize how a software system is built — its users, systems, services/containers, components, and how they connect — as a C4 model written in Structurizr DSL (workspace.dsl). This covers creating or editing a .dsl workspace; producing system-context, container, component, deployment, dynamic, or system-landscape views; and modeling how microservices fit together — even if they never name "Structurizr" or "C4". It also covers pulling existing decision records (ADRs from doc/adr or similar) INTO that architecture documentation, so the C4 views or workspace surface the related decisions — i.e. wiring ADRs into the diagrams, not writing the decisions. Skip it for cloud pictures drawn with real vendor service icons (AWS EC2/RDS/S3 boxes, draw.io / diagrams.net art), for sequence or flow diagrams, and for writing, revising, or superseding the ADR content itself.
+============================================================
+Train: 33/36 correct, precision=100% recall=83% accuracy=92% (77.3s)
+  [PASS] rate=3/3 expected=True: i have an architecture i want to capture as proper C4 with s
+  [PASS] rate=3/3 expected=True: document our system landscape — we have like 8 internal syst
+  [FAIL] rate=0/3 expected=True: link our decision records from doc/adr into the architecture
+  [PASS] rate=3/3 expected=True: diagram the static architecture of our microservices: how th
+  [PASS] rate=3/3 expected=True: i want to document how our platform is structured using C4 —
+  [PASS] rate=3/3 expected=True: create a workspace.dsl for our order-management system — mod
+  [PASS] rate=0/3 expected=False: convert our existing PlantUML diagrams to Mermaid
+  [PASS] rate=0/3 expected=False: we decided to adopt the C4 model as our documentation standa
+  [PASS] rate=0/3 expected=False: review our microservices for tight coupling and suggest wher
+  [PASS] rate=0/3 expected=False: document the REST API of the catalog service — endpoints, pa
+  [PASS] rate=0/3 expected=False: draw a sequence diagram showing how the checkout request flo
+  [PASS] rate=0/3 expected=False: generate an AWS architecture diagram with the actual service
+Test : 24/24 correct, precision=100% recall=100% accuracy=100% (0.0s)
+  [PASS] rate=3/3 expected=True: modela em Structurizr DSL a arquitetura do nosso sistema de 
+  [PASS] rate=3/3 expected=True: we use Structurizr — model the deployment of our app across 
+  [PASS] rate=3/3 expected=True: add a component diagram for the new payments service to our 
+  [PASS] rate=3/3 expected=True: set up the C4 model for our new SaaS — i want it as DSL so w
+  [PASS] rate=0/3 expected=False: create an ER diagram of our database schema — tables, column
+  [PASS] rate=0/3 expected=False: draw a flowchart of our CI/CD pipeline stages
+  [PASS] rate=0/3 expected=False: write a design doc for the new recommendations service, incl
+  [PASS] rate=0/3 expected=False: explain what the C4 model is and how it differs from UML
+
+Improving description...
+Proposed (38.7s): Use this skill to capture how a software system is structured — its people, software systems, containers, components, and how they connect — as a C4 model in Structurizr DSL (workspace.dsl). Trigger it to create or edit a .dsl workspace; produce system-context, container, component, deployment, dynamic, or system-landscape views; or model how microservices fit together — even when the user never says "Structurizr" or "C4". Equally, trigger it to link, show, surface, or reference EXISTING decision records (ADRs in doc/adr or similar) inside the architecture documentation, C4 views, or workspace — i.e. connecting already-written ADRs to the diagrams, not authoring the decisions. Don't trigger for cloud diagrams built from real vendor service icons (AWS EC2/RDS/S3, draw.io art), for sequence or flow diagrams, or for writing, revising, or superseding an ADR's decision text itself.
+
+============================================================
+Iteration 4/5
+Description: Use this skill to capture how a software system is structured — its people, software systems, containers, components, and how they connect — as a C4 model in Structurizr DSL (workspace.dsl). Trigger it to create or edit a .dsl workspace; produce system-context, container, component, deployment, dynamic, or system-landscape views; or model how microservices fit together — even when the user never says "Structurizr" or "C4". Equally, trigger it to link, show, surface, or reference EXISTING decision records (ADRs in doc/adr or similar) inside the architecture documentation, C4 views, or workspace — i.e. connecting already-written ADRs to the diagrams, not authoring the decisions. Don't trigger for cloud diagrams built from real vendor service icons (AWS EC2/RDS/S3, draw.io art), for sequence or flow diagrams, or for writing, revising, or superseding an ADR's decision text itself.
+============================================================
+Train: 33/36 correct, precision=100% recall=83% accuracy=92% (72.3s)
+  [FAIL] rate=0/3 expected=True: link our decision records from doc/adr into the architecture
+  [PASS] rate=3/3 expected=True: i have an architecture i want to capture as proper C4 with s
+  [PASS] rate=3/3 expected=True: document our system landscape — we have like 8 internal syst
+  [PASS] rate=3/3 expected=True: diagram the static architecture of our microservices: how th
+  [PASS] rate=3/3 expected=True: i want to document how our platform is structured using C4 —
+  [PASS] rate=3/3 expected=True: create a workspace.dsl for our order-management system — mod
+  [PASS] rate=0/3 expected=False: convert our existing PlantUML diagrams to Mermaid
+  [PASS] rate=0/3 expected=False: we decided to adopt the C4 model as our documentation standa
+  [PASS] rate=0/3 expected=False: review our microservices for tight coupling and suggest wher
+  [PASS] rate=0/3 expected=False: draw a sequence diagram showing how the checkout request flo
+  [PASS] rate=0/3 expected=False: document the REST API of the catalog service — endpoints, pa
+  [PASS] rate=0/3 expected=False: generate an AWS architecture diagram with the actual service
+Test : 24/24 correct, precision=100% recall=100% accuracy=100% (0.0s)
+  [PASS] rate=3/3 expected=True: modela em Structurizr DSL a arquitetura do nosso sistema de 
+  [PASS] rate=3/3 expected=True: we use Structurizr — model the deployment of our app across 
+  [PASS] rate=3/3 expected=True: add a component diagram for the new payments service to our 
+  [PASS] rate=3/3 expected=True: set up the C4 model for our new SaaS — i want it as DSL so w
+  [PASS] rate=0/3 expected=False: create an ER diagram of our database schema — tables, column
+  [PASS] rate=0/3 expected=False: draw a flowchart of our CI/CD pipeline stages
+  [PASS] rate=0/3 expected=False: write a design doc for the new recommendations service, incl
+  [PASS] rate=0/3 expected=False: explain what the C4 model is and how it differs from UML
+
+Improving description...
+Proposed (39.3s): Use this skill for two jobs on a C4 architecture model in Structurizr DSL (workspace.dsl). (1) Model how a software system is structured — its people, software systems, containers, components, and connections — as system-context, container, component, deployment, dynamic, or system-landscape views; create or edit a .dsl workspace; or map how microservices fit together, even when the user never says "Structurizr" or "C4". (2) Wire EXISTING decision records (ADRs in doc/adr or similar) into that architecture documentation so the C4 views or workspace link to and show the related decisions — attaching already-written ADRs, not authoring them. Don't use it for cloud diagrams made of real vendor icons (AWS EC2/RDS/S3, draw.io art), for sequence or flow diagrams, or for writing, revising, or superseding an ADR's decision text.
+
+============================================================
+Iteration 5/5
+Description: Use this skill for two jobs on a C4 architecture model in Structurizr DSL (workspace.dsl). (1) Model how a software system is structured — its people, software systems, containers, components, and connections — as system-context, container, component, deployment, dynamic, or system-landscape views; create or edit a .dsl workspace; or map how microservices fit together, even when the user never says "Structurizr" or "C4". (2) Wire EXISTING decision records (ADRs in doc/adr or similar) into that architecture documentation so the C4 views or workspace link to and show the related decisions — attaching already-written ADRs, not authoring them. Don't use it for cloud diagrams made of real vendor icons (AWS EC2/RDS/S3, draw.io art), for sequence or flow diagrams, or for writing, revising, or superseding an ADR's decision text.
+============================================================
+Train: 33/36 correct, precision=100% recall=83% accuracy=92% (81.9s)
+  [PASS] rate=3/3 expected=True: document our system landscape — we have like 8 internal syst
+  [PASS] rate=3/3 expected=True: i have an architecture i want to capture as proper C4 with s
+  [FAIL] rate=0/3 expected=True: link our decision records from doc/adr into the architecture
+  [PASS] rate=3/3 expected=True: diagram the static architecture of our microservices: how th
+  [PASS] rate=3/3 expected=True: i want to document how our platform is structured using C4 —
+  [PASS] rate=3/3 expected=True: create a workspace.dsl for our order-management system — mod
+  [PASS] rate=0/3 expected=False: convert our existing PlantUML diagrams to Mermaid
+  [PASS] rate=0/3 expected=False: we decided to adopt the C4 model as our documentation standa
+  [PASS] rate=0/3 expected=False: review our microservices for tight coupling and suggest wher
+  [PASS] rate=0/3 expected=False: draw a sequence diagram showing how the checkout request flo
+  [PASS] rate=0/3 expected=False: document the REST API of the catalog service — endpoints, pa
+  [PASS] rate=0/3 expected=False: generate an AWS architecture diagram with the actual service
+Test : 24/24 correct, precision=100% recall=100% accuracy=100% (0.0s)
+  [PASS] rate=3/3 expected=True: modela em Structurizr DSL a arquitetura do nosso sistema de 
+  [PASS] rate=3/3 expected=True: we use Structurizr — model the deployment of our app across 
+  [PASS] rate=3/3 expected=True: add a component diagram for the new payments service to our 
+  [PASS] rate=3/3 expected=True: set up the C4 model for our new SaaS — i want it as DSL so w
+  [PASS] rate=0/3 expected=False: create an ER diagram of our database schema — tables, column
+  [PASS] rate=0/3 expected=False: draw a flowchart of our CI/CD pipeline stages
+  [PASS] rate=0/3 expected=False: write a design doc for the new recommendations service, incl
+  [PASS] rate=0/3 expected=False: explain what the C4 model is and how it differs from UML
+
+Max iterations reached (5).
+
+Exit reason: max_iterations (5)
+Best score: 8/8 (iteration 1)

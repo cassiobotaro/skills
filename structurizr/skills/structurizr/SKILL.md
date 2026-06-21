@@ -6,7 +6,11 @@ description: >
   diagrams, system context / container / component diagrams, deployment or dynamic diagrams,
   system landscape, documenting how a system or its microservices are structured, or asks to
   create or edit a .dsl workspace — even if they never say the word "Structurizr". Also use it
-  when linking ADRs (architecture decision records) into architecture documentation.
+  when linking existing ADRs (architecture decision records, e.g. in doc/adr) into the
+  architecture documentation or C4 views. Do NOT use it for cloud-infrastructure pictures
+  drawn from real vendor service icons (e.g. an AWS diagram with EC2/RDS/S3 boxes), for
+  sequence or behavior-over-time diagrams (that belongs to a Mermaid sequence diagram), or
+  for writing the ADR decision content itself.
 ---
 
 # Structurizr / C4 architecture documentation

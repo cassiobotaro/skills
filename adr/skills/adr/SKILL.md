@@ -8,8 +8,9 @@ description: >
   stays English even when the prose is in another language. Use this skill whenever
   the user wants to record, document, revise, supersede, or amend an architecture or
   technology decision — "write an ADR", "document this decision", "we decided to use X
-  over Y", "record why we chose Z", "replace ADR N", "start a decision log" — even if
-  they never say the acronym "ADR".
+  over Y", "record why we chose Z", "replace or supersede ADR N", "ADR N is out of date,
+  mark it superseded and write the replacement", "start a decision log" — even if they
+  never say the acronym "ADR".
 ---
 
 # Architecture Decision Records (adr-tools compatible)

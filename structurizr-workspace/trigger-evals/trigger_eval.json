@@ -1,0 +1,23 @@
+[
+  { "query": "i want to document how our platform is structured using C4 — start with the system context and then the containers. we've got a React app, a Go API, Postgres, and we call Stripe and SendGrid", "should_trigger": true, "note": "C4 context + containers" },
+  { "query": "create a workspace.dsl for our order-management system — model the containers and their relationships", "should_trigger": true, "note": "explicit workspace.dsl" },
+  { "query": "add a component diagram for the new payments service to our existing C4 model in workspace.dsl", "should_trigger": true, "note": "edit existing model" },
+  { "query": "we use Structurizr — model the deployment of our app across the staging and prod AWS environments", "should_trigger": true, "note": "deployment diagram, names Structurizr" },
+  { "query": "diagram the static architecture of our microservices: how the gateway, the user-service, the catalog-service and the order-service relate to each other and to the shared message bus", "should_trigger": true, "note": "static structure of microservices — must beat mermaid-sequence" },
+  { "query": "document our system landscape — we have like 8 internal systems and i want one view showing how they all connect at a high level", "should_trigger": true, "note": "system landscape" },
+  { "query": "i have an architecture i want to capture as proper C4 with system context, containers, and a couple of dynamic views for the key flows", "should_trigger": true, "note": "dynamic VIEW inside C4 (not a mermaid sequence)" },
+  { "query": "modela em Structurizr DSL a arquitetura do nosso sistema de cobrança, com containers e componentes", "should_trigger": true, "note": "PT, Structurizr DSL" },
+  { "query": "set up the C4 model for our new SaaS — i want it as DSL so we can render it in Structurizr and keep it in git", "should_trigger": true, "note": "C4 as DSL" },
+  { "query": "link our decision records from doc/adr into the architecture documentation so the C4 views show the related ADRs", "should_trigger": true, "note": "ADR linking is a structurizr feature — must beat adr" },
+
+  { "query": "draw a sequence diagram showing how the checkout request flows through the gateway, order service and payment service over time — as a mermaid block for the README", "should_trigger": false, "note": "belongs to mermaid-sequence (over-time + mermaid format) — THE key boundary" },
+  { "query": "we decided to adopt the C4 model as our documentation standard — record that decision", "should_trigger": false, "note": "mentions C4 but task is recording a decision (adr)" },
+  { "query": "write a design doc for the new recommendations service, including an architecture overview", "should_trigger": false, "note": "belongs to design-doc (whole doc; it may delegate internally)" },
+  { "query": "create an ER diagram of our database schema — tables, columns, foreign keys", "should_trigger": false, "note": "near-miss: data model diagram, not C4" },
+  { "query": "draw a flowchart of our CI/CD pipeline stages", "should_trigger": false, "note": "near-miss: flowchart, not C4" },
+  { "query": "explain what the C4 model is and how it differs from UML", "should_trigger": false, "note": "conceptual Q&A; mentions C4 but Claude answers directly" },
+  { "query": "generate an AWS architecture diagram with the actual service icons (boxes for EC2, RDS, S3)", "should_trigger": false, "note": "DEBATABLE near-miss: 'architecture diagram' but wants cloud-icon diagram, not C4. Flag for review." },
+  { "query": "review our microservices for tight coupling and suggest where to split them", "should_trigger": false, "note": "near-miss: architecture analysis, not authoring a model" },
+  { "query": "convert our existing PlantUML diagrams to Mermaid", "should_trigger": false, "note": "near-miss: diagram conversion to mermaid" },
+  { "query": "document the REST API of the catalog service — endpoints, params, responses", "should_trigger": false, "note": "near-miss: API docs" }
+]

@@ -1,0 +1,23 @@
+[
+  { "query": "i'm about to build a real-time presence service (who's online) for our chat app. before i write code i want to think through the design — write a design doc with me, we can figure out the approach and trade-offs", "should_trigger": true, "note": "interactive design discovery" },
+  { "query": "review my design doc for the new rate-limiter, it's in docs/designs/rate-limiter.md — i think it's missing the failure modes and i'm not sure the alternatives section is honest", "should_trigger": true, "note": "review an existing design doc" },
+  { "query": "write an RFC for migrating our monolith's billing module into a separate service — cover the why, the cutover plan, and what could go wrong", "should_trigger": true, "note": "RFC = design doc" },
+  { "query": "the team needs to align on how we'll do multi-region failover for the API. help me draft a design we can circulate for feedback", "should_trigger": true, "note": "align the team on a design" },
+  { "query": "document the approach for the new search feature — we're considering Elasticsearch vs Postgres full-text vs Algolia, and i want the trade-offs laid out for each", "should_trigger": true, "note": "document approach + trade-offs across alternatives" },
+  { "query": "preciso escrever um documento de design pra nova pipeline de ingestão de eventos, com as alternativas que a gente considerou", "should_trigger": true, "note": "PT, design doc with alternatives" },
+  { "query": "help me think through the design of our webhook delivery system before we build it — retries, ordering, idempotency, the whole thing", "should_trigger": true, "note": "think through design before building" },
+  { "query": "we're redesigning auth to support SSO and SCIM. i need a technical design document the security team can review and sign off on", "should_trigger": true, "note": "technical design document for review" },
+  { "query": "draft a design proposal for sharding our Postgres — i want it to honestly weigh the operational cost against the scaling benefit", "should_trigger": true, "note": "design proposal w/ trade-offs" },
+  { "query": "my manager asked for a one-pager design before i start the caching layer work. can you help me write it so it covers the problem and the options?", "should_trigger": true, "note": "lightweight design doc" },
+
+  { "query": "we decided to go with Terraform over Pulumi for IaC — record that decision with the rationale", "should_trigger": false, "note": "belongs to adr" },
+  { "query": "create the C4 component diagram for the billing service in our workspace.dsl", "should_trigger": false, "note": "belongs to structurizr" },
+  { "query": "draw the sequence diagram for the OAuth login flow as a mermaid block for the wiki", "should_trigger": false, "note": "belongs to mermaid-sequence" },
+  { "query": "write the API reference docs for our public REST endpoints, with example requests and responses", "should_trigger": false, "note": "near-miss: API docs, not a design" },
+  { "query": "write a PRD for the new referral program — target users, success metrics, scope", "should_trigger": false, "note": "DEBATABLE near-miss: product requirements vs technical design. Flag for review." },
+  { "query": "implement the rate limiter we designed last week — here's the doc, just write the code", "should_trigger": false, "note": "mentions a doc but wants implementation" },
+  { "query": "review this pull request for the payments refactor and leave comments", "should_trigger": false, "note": "near-miss: code review, not design review" },
+  { "query": "summarize this 40-page design doc into a few bullet points for the exec update", "should_trigger": false, "note": "near-miss: about a design doc but task is summarization" },
+  { "query": "create a project plan with milestones and timelines for the Q3 platform work", "should_trigger": false, "note": "near-miss: project plan, not technical design" },
+  { "query": "what makes a good design doc? give me some tips", "should_trigger": false, "note": "conceptual Q&A; Claude answers directly" }
+]
