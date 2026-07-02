@@ -6,7 +6,7 @@
     {
       "name": "adr",
       "source": "./adr",
-      "description": "Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format, file-compatible with adr-tools"
+      "description": "Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format, file-compatible with Nat Pryce's adr-tools and importable into Structurizr's decision log even when written in another language"
     },
     {
       "name": "design-doc",
@@ -16,12 +16,12 @@
     {
       "name": "structurizr",
       "source": "./structurizr",
-      "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL"
+      "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL (workspace.dsl): system context, container, component, deployment, and dynamic diagrams"
     },
     {
       "name": "mermaid-sequence",
       "source": "./mermaid-sequence",
-      "description": "Write and edit Mermaid sequence diagrams as fenced code blocks that render directly in Markdown"
+      "description": "Write and edit Mermaid sequence diagrams as fenced code blocks that render directly in Markdown (GitHub, GitLab, most wikis)"
     }
   ]
 }
