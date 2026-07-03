@@ -1,8 +1,8 @@
 # cassiobotaro-skills
 
-A [Claude Code](https://code.claude.com) plugin marketplace with skills for software architecture documentation. Each skill is an independently installable plugin.
+Agent skills for software architecture documentation: decision records, design docs, and diagrams. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
 
-| Plugin | What it does |
+| Skill | What it does |
 |---|---|
 | `adr` | Write and maintain Architecture Decision Records in the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), file-compatible with [adr-tools](https://github.com/npryce/adr-tools) (sequential numbering, `NNNN-slug.md` filenames, supersede/amend links, `.adr-dir` discovery). |
 | `design-doc` | Write and review software design documents through interactive discovery — targeted questions about the problem, trade-offs, alternatives, and impacted teams — producing trade-off-focused Markdown, condensing the [Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/) and industry practice (Google, Pragmatic Engineer). |
@@ -10,6 +10,8 @@ A [Claude Code](https://code.claude.com) plugin marketplace with skills for soft
 | `mermaid-sequence` | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced ```` ```mermaid ```` code blocks that render directly in Markdown (GitHub, GitLab, most wikis). |
 
 ## Installation
+
+### Claude Code
 
 Add the marketplace, then install the skills you want:
 
