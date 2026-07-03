@@ -28,7 +28,7 @@ Or interactively from inside Claude Code with `/plugin`.
 
 ### Other agents (Copilot CLI, Antigravity, OpenCode, …)
 
-The skills follow the open [Agent Skills](https://agentskills.io) standard, so they also work outside Claude Code. The [skills CLI](https://github.com/vercel-labs/skills) installs into whichever agents it detects — GitHub Copilot, Google Antigravity (IDE and CLI), OpenCode, and many others:
+The [skills CLI](https://github.com/vercel-labs/skills) (requires Node.js) installs into whichever agents it detects — GitHub Copilot, Google Antigravity (IDE and CLI), OpenCode, and many others:
 
 ```bash
 npx skills add cassiobotaro/skills                 # interactive: pick skills and agents
@@ -41,7 +41,7 @@ With the [GitHub CLI](https://cli.github.com/manual/gh_skill) (v2.90.0+, preview
 gh skill install cassiobotaro/skills adr
 ```
 
-Any other Agent Skills host works too: copy a skill folder (e.g. `adr/skills/adr/`) into the agent's skills directory. The MCP servers below are registered through Claude Code; in other hosts the diagram skills degrade gracefully without them.
+Any other Agent Skills host works too: copy a skill folder (e.g. `adr/skills/adr/`) into the agent's skills directory. The MCP servers below are shown with Claude Code registration commands; other hosts register MCP servers through their own configuration, and the diagram skills degrade gracefully when no server is connected.
 
 ## MCP servers
 
@@ -59,7 +59,7 @@ claude mcp add --scope user --transport http mermaid https://mcp.mermaid.ai/mcp
 
 ## Repository layout
 
-Each plugin lives in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
+Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
 
 ## License and attribution
 
