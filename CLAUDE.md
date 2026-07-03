@@ -4,10 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-`cassiobotaro-skills` — a Claude Code **plugin marketplace** of architecture-documentation skills.
-There is no application code: the "source" is the skills' Markdown instructions (`SKILL.md` +
-`references/`). Each plugin is independently installable. The four plugins are `adr`,
-`design-doc`, `structurizr`, and `mermaid-sequence`.
+`cassiobotaro-skills` — architecture-documentation skills in the open **Agent Skills** standard
+(`SKILL.md`), installable in any compatible host (Claude Code, GitHub Copilot, Google Antigravity,
+OpenCode, … — via `npx skills add` or `gh skill install`). The repository is also a Claude Code
+**plugin marketplace** where each skill ships as an independently installable plugin. There is no
+application code: the "source" is the skills' Markdown instructions (`SKILL.md` + `references/`).
+The four plugins are `adr`, `design-doc`, `structurizr`, and `mermaid-sequence`.
 
 ## Layout
 
