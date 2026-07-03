@@ -24,6 +24,23 @@ claude plugin install mermaid-sequence@cassiobotaro-skills
 
 Or interactively from inside Claude Code with `/plugin`.
 
+### Other agents (Copilot CLI, Antigravity, OpenCode, …)
+
+The skills follow the open [Agent Skills](https://agentskills.io) standard, so they also work outside Claude Code. The [skills CLI](https://github.com/vercel-labs/skills) installs into whichever agents it detects — GitHub Copilot, Google Antigravity (IDE and CLI), OpenCode, and many others:
+
+```bash
+npx skills add cassiobotaro/skills                 # interactive: pick skills and agents
+npx skills add cassiobotaro/skills --skill adr -g  # a specific skill, globally
+```
+
+With the [GitHub CLI](https://cli.github.com/manual/gh_skill) (v2.90.0+, preview), which installs for Copilot by default or another host via `--agent`:
+
+```bash
+gh skill install cassiobotaro/skills adr
+```
+
+Any other Agent Skills host works too: copy a skill folder (e.g. `adr/skills/adr/`) into the agent's skills directory. The MCP servers below are registered through Claude Code; in other hosts the diagram skills degrade gracefully without them.
+
 ## MCP servers
 
 The diagram skills can validate and render through an MCP server, and degrade gracefully when none is connected.
