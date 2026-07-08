@@ -1,0 +1,60 @@
+{
+  "expectations": [
+    {
+      "text": "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+      "passed": true,
+      "evidence": "Question 1 in final_message.md: 'o time tem um template de design doc (wiki, drive)? O repositório não mostra nenhum, mas isso é só um indício. Enquanto não houver um confirmado, medi a revisão pelo catálogo padrão'."
+    },
+    {
+      "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+      "passed": true,
+      "evidence": "'e aí os itens estruturais abaixo são sugestões, não exigências' (question 1); missing sections are requested from the author, not scaffolded in."
+    },
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "final_message.md has '## O que apliquei' (5 edits) and '## Perguntas para você' (8 numbered questions)."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Questions 2 and 3 ask for trade-offs (with supporting data) and alternatives including 'não fazer nada'. The doc gains no Trade-offs/Alternativas content and no invented metrics; the unsupported sales sentence was removed."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "'## Glossário' right after the header covers CDC, DLQ, SLA, TPS plus the domain terms Exchange and Fanout — all legitimate stumble terms (no trivial entries), so the wider list is consistent with either version of the rule."
+    },
+    {
+      "text": "The mermaid diagram is now followed by explanatory text",
+      "passed": true,
+      "evidence": "The flowchart is followed by 'O CDC captura os eventos de domínio e os entrega ao dispatcher, que publica cada evento na exchange...'."
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+      "passed": true,
+      "evidence": "Turned into a question (the allowed path): question 5 — '\"não deve ser lento\" e \"não deve perder notificações\" são objetivos negados, não exclusões... O que... está deliberadamente excluído?'. Section left pending the author's answer."
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Question 4: 'não são verificáveis. O que é a \"lentidão\" hoje em número... e qual é o SLA-alvo (ex.: p99 de entrega em X minutos)?'. No invented targets in the doc."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "Doc stays Portuguese; original sections and order preserved; edits are additive (Glossário as table, Escopo e contexto, diagram prose) or reorganizations; final message states 'Mantive sua estrutura, voz e idioma'."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Header shows 'Última atualização | 2026-07-07' — the run's real date; Criado em and Estado preserved."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1
+  }
+}

@@ -145,11 +145,7 @@ Before declaring done, check:
   passive, no decision floats without an owner.
 - Acronyms and domain terms are defined. If the doc carries a glossary, sweep the
   finished body for stray acronyms (the short ones hide in tables and alternative
-  names — BI, SLA, DLQ): every acronym the body uses appears in the glossary —
-  except terms every plausible reviewer already knows (API, HTTP, PDF) and terms
-  that live only in the document's authoring scaffolding (the diagram's DSL source,
-  render notes). The test is whether a named reviewer would stumble, not whether
-  it's an acronym.
+  names — BI, SLA, DLQ): every acronym the body uses appears in the glossary.
 - Length is proportionate to the problem's ambiguity.
 - A final spelling and typo pass, in the document's own language.
 
@@ -185,10 +181,8 @@ Look for, roughly in order of importance:
   the context, diagrams without explanatory text, top-level sections that don't map to
   anything in the architecture.
 - **Reader experience** — unexplained acronyms or domain terms (suggest a glossary at
-  the beginning of the document), glossary entries nobody needs (universally known
-  terms, the doc's own diagram tooling — flag them for removal), inlined detail that
-  should be a link, a stale header state, passive or evasive prose that hides who
-  does what, and spelling slips.
+  the beginning of the document), inlined detail that should be a link, a stale header
+  state, passive or evasive prose that hides who does what, and spelling slips.
 - **Template gaps** — required sections the governing template demands but the
   document lacks: substance gaps, asked of the author exactly like a missing
   trade-off.

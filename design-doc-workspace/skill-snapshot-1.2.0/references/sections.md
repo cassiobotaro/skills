@@ -55,19 +55,7 @@ Definitions for the acronyms and domain-specific terms the document relies on.
 - Once the document carries a glossary, cover *every* acronym and domain term the body
   actually uses — readers who needed the glossary stumble precisely on the entry that
   was skipped, and an undefined acronym sitting next to a glossary reads as an
-  oversight. Sweep the finished document for acronyms before closing the list, with
-  two exclusions:
-  - **The document's own scaffolding is not its vocabulary.** Terms that appear only
-    in authoring apparatus — the diagram source folded in a `<details>` block, render
-    notes, meta-commentary about how the document was produced (C4, DSL, Structurizr)
-    — get no entry: the glossary serves the design being proposed, not the tooling
-    that drew its pictures. If such a term leaks into the prose proper, reword the
-    prose rather than gloss the tooling.
-  - **The stumble test decides, not "is it an acronym".** Terms every plausible
-    reviewer already knows (API, HTTP, URL, JSON, PDF) earn no entry — a definition
-    nobody needs is noise that buries the entries someone does need. Calibrate against
-    the named reviewers: S3 is skippable for an infrastructure audience but earns its
-    line when non-technical reviewers are on the list.
+  oversight. Sweep the finished document for acronyms before closing the list.
 - When writing or reviewing: if undefined acronyms or domain terms accumulate,
   *suggest* adding a glossary — point at the specific terms that triggered the
   suggestion.

@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/docs/design/exportacao-relatorios-background.md."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire doc is Portuguese ('## Visão geral', '## Questões em aberto', 'Este documento propõe mover a geração...'). Only tool-canonical fragments (Structurizr DSL keywords, mermaid syntax) are English."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "'Trade-offs da solução escolhida' lists '✗ O usuário perde o download imediato — a exportação pequena que hoje resolve na hora passa a chegar por e-mail. Custo aceito em troca do caminho único.' Also stated in Visão geral and Visão da solução."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "'Alternativas consideradas' has all three: 'Gerar síncrono com timeout maior — descartada... só empurra o problema', 'Ferramenta de BI externa — descartada... pelo custo e por expor dado de cliente', 'Não fazer nada — descartada... ~12% de falha... tickets semanais'."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'## Preocupações transversais' covers 'Segurança' (link assinado dá acesso a arquivo com PII fora do ciclo autenticado) and 'Plataforma' (fila de exportação no RabbitMQ compartilhado, alinhar volume e limites). Both suggested as reviewers in the header."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": true,
+      "evidence": "Glossary right after the header has exactly three entries: BI, PII, Link assinado. No API/HTTP/URL/CSV entries and no C4/DSL/Structurizr entries. S3 from the assertion's example list is omitted — consistent with the skill's audience calibration, since the suggested reviewers (Plataforma, Segurança) are technical teams that would not stumble on S3."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "The container diagram (placeholder image + DSL in <details>) is followed by 'O diagrama mostra quatro containers. A API continua sendo a porta de entrada...'; the mermaid sequence diagram is followed by 'O fluxo acima cobre o caminho feliz...'."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Only prompt metrics appear (30s, 12%, 50 mil, 100 mil). Unknowns (autores/revisores, falha do worker, expiração do link, mecanismo de e-mail, limites da fila, observabilidade, transição) live in 7 'Questões em aberto'. No fabricated retry policies, link TTLs or volumes."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "Visão geral is exactly two paragraphs naming the mechanism (enfileirar job, worker em streaming, S3, e-mail com link assinado) and the accepted cost; no schemas, payloads, endpoints, retry policies or config values."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1
+  }
+}

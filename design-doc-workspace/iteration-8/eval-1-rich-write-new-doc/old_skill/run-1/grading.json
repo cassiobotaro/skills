@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/docs/design/exportacao-de-relatorios-em-background.md."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire doc is Portuguese ('## Visão geral', '## Questões em aberto'). Only tool-canonical fragments (Structurizr DSL keywords, mermaid syntax) are English."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "'Trade-offs da solução escolhida' lists '✗ O usuário perde o download imediato — custo aceito pelo time. Exportações pequenas que hoje terminam na hora passam a chegar por e-mail.' Also present in Visão da solução."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "'Alternativas consideradas' lists 'Não fazer nada', 'Gerar síncrono com timeout maior', 'Ferramenta de BI externa' (custo + exposição de PII) and the chosen async worker option."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'## Preocupações transversais' has subsections 'Plataforma (infraestrutura compartilhada)' — carga no RabbitMQ compartilhado — and 'Segurança' — PII acessível por link assinado, validade e retenção a revisar."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": false,
+      "evidence": "The glossary sits at the beginning and covers PII, BI and S3, but it carries 10 entries including **API** ('interface HTTP do produto...') — a universally known term the assertion explicitly bans — plus borderline-trivial CSV/XLSX. This is the pre-1.2.1 exhaustive-sweep behavior: every acronym in the body got an entry regardless of whether a reviewer would stumble on it. (No C4/DSL/Structurizr entries in this run.)"
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "The container diagram is followed by 'O diagrama mostra cinco contêineres e um ator:' plus a per-container list; the mermaid sequence diagram is followed by 'O fluxo tem duas metades desacopladas pela fila...'."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Only prompt metrics appear. Unknowns (autores/revisores, falha de job, validade do link, envio do e-mail, fonte de leitura, acompanhamento, capacidade da fila, tecnologias) live in 'Questões em aberto'. The extra 'Base de dados da aplicação' container is a reasonable existing-source reference, flagged with its open question (primário vs réplica), not an invented fact."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "Visão geral is two paragraphs: problem numbers plus the mechanism (enfileirar no RabbitMQ, worker em streaming, S3, link assinado). No schemas, payloads, endpoints, retry policies or config values."
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 1,
+    "total": 9,
+    "pass_rate": 0.8888888888888888
+  }
+}

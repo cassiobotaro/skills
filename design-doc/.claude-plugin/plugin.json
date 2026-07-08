@@ -1,7 +1,7 @@
 {
   "name": "design-doc",
   "description": "Write and review software design documents through interactive discovery: targeted questions about problem, trade-offs, alternatives, and impacted teams, producing trade-off-focused Markdown",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
   "repository": "https://github.com/cassiobotaro/skills",
   "license": "MIT",

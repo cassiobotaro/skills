@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-07-08T22:37:13Z",
+    "evals_run": [
+      1,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8888888888888888,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 643.4,
+        "tokens": 73465,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/docs/design/exportacao-de-relatorios-em-background.md."
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "Entire doc is Portuguese ('## Vis\u00e3o geral', '## Quest\u00f5es em aberto'). Only tool-canonical fragments (Structurizr DSL keywords, mermaid syntax) are English."
+        },
+        {
+          "text": "The accepted trade-off \u2014 loss of immediate download for small exports \u2014 appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "'Trade-offs da solu\u00e7\u00e3o escolhida' lists '\u2717 O usu\u00e1rio perde o download imediato \u2014 custo aceito pelo time. Exporta\u00e7\u00f5es pequenas que hoje terminam na hora passam a chegar por e-mail.' Also present in Vis\u00e3o da solu\u00e7\u00e3o."
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": true,
+          "evidence": "'Alternativas consideradas' lists 'N\u00e3o fazer nada', 'Gerar s\u00edncrono com timeout maior', 'Ferramenta de BI externa' (custo + exposi\u00e7\u00e3o de PII) and the chosen async worker option."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "'## Preocupa\u00e7\u00f5es transversais' has subsections 'Plataforma (infraestrutura compartilhada)' \u2014 carga no RabbitMQ compartilhado \u2014 and 'Seguran\u00e7a' \u2014 PII acess\u00edvel por link assinado, validade e reten\u00e7\u00e3o a revisar."
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+          "passed": false,
+          "evidence": "The glossary sits at the beginning and covers PII, BI and S3, but it carries 10 entries including **API** ('interface HTTP do produto...') \u2014 a universally known term the assertion explicitly bans \u2014 plus borderline-trivial CSV/XLSX. This is the pre-1.2.1 exhaustive-sweep behavior: every acronym in the body got an entry regardless of whether a reviewer would stumble on it. (No C4/DSL/Structurizr entries in this run.)"
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "The container diagram is followed by 'O diagrama mostra cinco cont\u00eaineres e um ator:' plus a per-container list; the mermaid sequence diagram is followed by 'O fluxo tem duas metades desacopladas pela fila...'."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "Only prompt metrics appear. Unknowns (autores/revisores, falha de job, validade do link, envio do e-mail, fonte de leitura, acompanhamento, capacidade da fila, tecnologias) live in 'Quest\u00f5es em aberto'. The extra 'Base de dados da aplica\u00e7\u00e3o' container is a reasonable existing-source reference, flagged with its open question (prim\u00e1rio vs r\u00e9plica), not an invented fact."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+          "passed": true,
+          "evidence": "Vis\u00e3o geral is two paragraphs: problem numbers plus the mechanism (enfileirar no RabbitMQ, worker em streaming, S3, link assinado). No schemas, payloads, endpoints, retry policies or config values."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 174.1,
+        "tokens": 39064,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The review asks the author for a template reference before judging structure \u2014 since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+          "passed": true,
+          "evidence": "Question 1 in final_message.md: 'o time tem um template de design doc (wiki, drive)? O reposit\u00f3rio n\u00e3o mostra nenhum, mas isso \u00e9 s\u00f3 um ind\u00edcio. Enquanto n\u00e3o houver um confirmado, medi a revis\u00e3o pelo cat\u00e1logo padr\u00e3o'."
+        },
+        {
+          "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+          "passed": true,
+          "evidence": "'e a\u00ed os itens estruturais abaixo s\u00e3o sugest\u00f5es, n\u00e3o exig\u00eancias' (question 1); missing sections are requested from the author, not scaffolded in."
+        },
+        {
+          "text": "The reply separates findings into questions for the author versus edits applied",
+          "passed": true,
+          "evidence": "final_message.md has '## O que apliquei' (5 edits) and '## Perguntas para voc\u00ea' (8 numbered questions)."
+        },
+        {
+          "text": "Missing trade-offs and alternatives become questions to the author \u2014 the edited doc gains no fabricated cons, alternatives, or metrics",
+          "passed": true,
+          "evidence": "Questions 2 and 3 ask for trade-offs (with supporting data) and alternatives including 'n\u00e3o fazer nada'. The doc gains no Trade-offs/Alternativas content and no invented metrics; the unsupported sales sentence was removed."
+        },
+        {
+          "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+          "passed": true,
+          "evidence": "'## Gloss\u00e1rio' right after the header covers CDC, DLQ, SLA, TPS plus the domain terms Exchange and Fanout \u2014 all legitimate stumble terms (no trivial entries), so the wider list is consistent with either version of the rule."
+        },
+        {
+          "text": "The mermaid diagram is now followed by explanatory text",
+          "passed": true,
+          "evidence": "The flowchart is followed by 'O CDC captura os eventos de dom\u00ednio e os entrega ao dispatcher, que publica cada evento na exchange...'."
+        },
+        {
+          "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+          "passed": true,
+          "evidence": "Turned into a question (the allowed path): question 5 \u2014 '\"n\u00e3o deve ser lento\" e \"n\u00e3o deve perder notifica\u00e7\u00f5es\" s\u00e3o objetivos negados, n\u00e3o exclus\u00f5es... O que... est\u00e1 deliberadamente exclu\u00eddo?'. Section left pending the author's answer."
+        },
+        {
+          "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers \u2014 no invented targets",
+          "passed": true,
+          "evidence": "Question 4: 'n\u00e3o s\u00e3o verific\u00e1veis. O que \u00e9 a \"lentid\u00e3o\" hoje em n\u00famero... e qual \u00e9 o SLA-alvo (ex.: p99 de entrega em X minutos)?'. No invented targets in the doc."
+        },
+        {
+          "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+          "passed": true,
+          "evidence": "Doc stays Portuguese; original sections and order preserved; edits are additive (Gloss\u00e1rio as table, Escopo e contexto, diagram prose) or reorganizations; final message states 'Mantive sua estrutura, voz e idioma'."
+        },
+        {
+          "text": "The header is honestly refreshed (\u00daltima atualiza\u00e7\u00e3o set to the real current date)",
+          "passed": true,
+          "evidence": "Header shows '\u00daltima atualiza\u00e7\u00e3o | 2026-07-07' \u2014 the run's real date; Criado em and Estado preserved."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 561.9,
+        "tokens": 72238,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/ in the project",
+          "passed": true,
+          "evidence": "File exists at outputs/docs/design/exportacao-relatorios-background.md."
+        },
+        {
+          "text": "The document is written in Portuguese, matching the conversation language",
+          "passed": true,
+          "evidence": "Entire doc is Portuguese ('## Vis\u00e3o geral', '## Quest\u00f5es em aberto', 'Este documento prop\u00f5e mover a gera\u00e7\u00e3o...'). Only tool-canonical fragments (Structurizr DSL keywords, mermaid syntax) are English."
+        },
+        {
+          "text": "The accepted trade-off \u2014 loss of immediate download for small exports \u2014 appears explicitly as a cost of the chosen solution",
+          "passed": true,
+          "evidence": "'Trade-offs da solu\u00e7\u00e3o escolhida' lists '\u2717 O usu\u00e1rio perde o download imediato \u2014 a exporta\u00e7\u00e3o pequena que hoje resolve na hora passa a chegar por e-mail. Custo aceito em troca do caminho \u00fanico.' Also stated in Vis\u00e3o geral and Vis\u00e3o da solu\u00e7\u00e3o."
+        },
+        {
+          "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+          "passed": true,
+          "evidence": "'Alternativas consideradas' has all three: 'Gerar s\u00edncrono com timeout maior \u2014 descartada... s\u00f3 empurra o problema', 'Ferramenta de BI externa \u2014 descartada... pelo custo e por expor dado de cliente', 'N\u00e3o fazer nada \u2014 descartada... ~12% de falha... tickets semanais'."
+        },
+        {
+          "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+          "passed": true,
+          "evidence": "'## Preocupa\u00e7\u00f5es transversais' covers 'Seguran\u00e7a' (link assinado d\u00e1 acesso a arquivo com PII fora do ciclo autenticado) and 'Plataforma' (fila de exporta\u00e7\u00e3o no RabbitMQ compartilhado, alinhar volume e limites). Both suggested as reviewers in the header."
+        },
+        {
+          "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+          "passed": true,
+          "evidence": "Glossary right after the header has exactly three entries: BI, PII, Link assinado. No API/HTTP/URL/CSV entries and no C4/DSL/Structurizr entries. S3 from the assertion's example list is omitted \u2014 consistent with the skill's audience calibration, since the suggested reviewers (Plataforma, Seguran\u00e7a) are technical teams that would not stumble on S3."
+        },
+        {
+          "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+          "passed": true,
+          "evidence": "The container diagram (placeholder image + DSL in <details>) is followed by 'O diagrama mostra quatro containers. A API continua sendo a porta de entrada...'; the mermaid sequence diagram is followed by 'O fluxo acima cobre o caminho feliz...'."
+        },
+        {
+          "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+          "passed": true,
+          "evidence": "Only prompt metrics appear (30s, 12%, 50 mil, 100 mil). Unknowns (autores/revisores, falha do worker, expira\u00e7\u00e3o do link, mecanismo de e-mail, limites da fila, observabilidade, transi\u00e7\u00e3o) live in 7 'Quest\u00f5es em aberto'. No fabricated retry policies, link TTLs or volumes."
+        },
+        {
+          "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+          "passed": true,
+          "evidence": "Vis\u00e3o geral is exactly two paragraphs naming the mechanism (enfileirar job, worker em streaming, S3, e-mail com link assinado) and the accepted cost; no schemas, payloads, endpoints, retry policies or config values."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 159.1,
+        "tokens": 38443,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The review asks the author for a template reference before judging structure \u2014 since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+          "passed": true,
+          "evidence": "final_message.md opens with 'Como n\u00e3o encontrei outros design docs no reposit\u00f3rio nem um template confirmado, medi contra um cat\u00e1logo padr\u00e3o... a primeira pergunta \u00e9 justamente sobre isso', and question 1 asks: 'voc\u00eas t\u00eam um template de design doc do time/empresa (wiki, drive)? Se houver, ele passa a mandar na estrutura'."
+        },
+        {
+          "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+          "passed": true,
+          "evidence": "'as observa\u00e7\u00f5es estruturais abaixo s\u00e3o sugest\u00f5es, n\u00e3o exig\u00eancias'; missing Trade-offs/Alternativas sections are asked for, not scaffolded into the doc."
+        },
+        {
+          "text": "The reply separates findings into questions for the author versus edits applied",
+          "passed": true,
+          "evidence": "final_message.md has exactly two groups: '## O que apliquei' (6 edits) and '## O que preciso de voc\u00ea' (8 numbered questions)."
+        },
+        {
+          "text": "Missing trade-offs and alternatives become questions to the author \u2014 the edited doc gains no fabricated cons, alternatives, or metrics",
+          "passed": true,
+          "evidence": "Questions 2 and 3 ask for trade-offs/dados and alternatives (including why not paralelizar o cron / do nothing). The edited doc has no Trade-offs or Alternativas section and no invented numbers; the 'mais escal\u00e1vel e robusta' sales pitch was removed rather than backfilled."
+        },
+        {
+          "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+          "passed": true,
+          "evidence": "'## Gloss\u00e1rio' sits right after the header table with exactly CDC, DLQ, SLA and TPS defined one line each \u2014 the four stumble terms, with no trivial entries."
+        },
+        {
+          "text": "The mermaid diagram is now followed by explanatory text",
+          "passed": true,
+          "evidence": "The flowchart is followed by 'O CDC captura os eventos de dom\u00ednio e alimenta o dispatcher, que publica cada notifica\u00e7\u00e3o na exchange...' \u2014 components and interactions named using only facts the doc established."
+        },
+        {
+          "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+          "passed": true,
+          "evidence": "Turned into a question (the allowed path): question 5 \u2014 'os dois itens atuais... s\u00f3 negam os objetivos \u2014 s\u00e3o requisitos, n\u00e3o exclus\u00f5es. O que fica de fora de verdade...?'. The doc section was deliberately left for the author's answer rather than filled with invented exclusions."
+        },
+        {
+          "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers \u2014 no invented targets",
+          "passed": true,
+          "evidence": "Question 4: '\"melhorar a performance\", \"tornar escal\u00e1vel\" e \"garantir o SLA\" n\u00e3o s\u00e3o verific\u00e1veis. Qual \u00e9 o SLA de entrega (n\u00famero)? Qual a lat\u00eancia/volume de hoje e qual o alvo?'. Objetivos section untouched, no invented targets."
+        },
+        {
+          "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+          "passed": true,
+          "evidence": "Doc stays Portuguese; original sections (Vis\u00e3o geral, Objetivos, Fora de escopo, Solu\u00e7\u00e3o, Plano) and bullet style preserved; changes are additive (Gloss\u00e1rio, Escopo e contexto, diagram prose) or reorganizations of the author's own facts."
+        },
+        {
+          "text": "The header is honestly refreshed (\u00daltima atualiza\u00e7\u00e3o set to the real current date)",
+          "passed": true,
+          "evidence": "Header shows '\u00daltima atualiza\u00e7\u00e3o | 2026-07-07' \u2014 the run's real date; Criado em (2026-01-28) and Estado (Em revis\u00e3o) preserved."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.9444,
+        "stddev": 0.0786,
+        "min": 0.8889,
+        "max": 1
+      },
+      "time_seconds": {
+        "mean": 408.75,
+        "stddev": 331.8452,
+        "min": 174.1,
+        "max": 643.4
+      },
+      "tokens": {
+        "mean": 56264.5,
+        "stddev": 24325.1804,
+        "min": 39064,
+        "max": 73465
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1,
+        "max": 1
+      },
+      "time_seconds": {
+        "mean": 360.5,
+        "stddev": 284.8226,
+        "min": 159.1,
+        "max": 561.9
+      },
+      "tokens": {
+        "mean": 55340.5,
+        "stddev": 23896.6737,
+        "min": 38443,
+        "max": 72238
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.06",
+      "time_seconds": "+48.2",
+      "tokens": "+924"
+    }
+  },
+  "notes": []
+}
