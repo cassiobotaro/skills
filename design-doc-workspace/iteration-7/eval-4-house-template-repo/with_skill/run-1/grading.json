@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008-rate-limiting-api-publica.md reproduces the DD-2026-007 house structure in order: '## Resumo', '## Contexto', '## Proposta' with '### Compensações' as a subsection (using the house ✓/✗ bullet convention), '## Riscos' as a two-column '| Risco | Mitigação |' table, and '## Plano de entrega' as a numbered list — plus the house header table ('| **Documento** | DD-2026-008 |', Estado/Autores/Revisores/Criado em/Última atualização/Tags rows). One additive section, '## Alternativas consideradas', carries the alternatives the user explicitly supplied (per-service limiting, paid gateway module); the agent flagged the deviation in final_message.md ('essa seção não existe no DD-2026-007 ... Se o padrão da casa não permite seções extras, é só me avisar'). The skill's default section catalog (Goals/Non-goals/etc. in English) is nowhere used; objectives were folded into Proposta prose."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "File saved as docs/design/dd-2026-008-rate-limiting-api-publica.md (continuing the dd-2026-NNN-slug pattern of dd-2026-007-cache-de-catalogo.md); title '# DD-2026-008 · Rate limiting da API pública' and header table row '| **Documento** | DD-2026-008 |'."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "The '## Riscos' table contains exactly one row: 'O Redis de sessão virar ponto de contenção...'. NAT appears only in Proposta as design rationale, matching the user's retraction: 'por token de API — não por IP, então integrações distintas atrás de um mesmo NAT não interferem umas nas outras.' final_message.md confirms the intent: 'O falso positivo de NAT ficou **de fora**, como você mesmo concluiu'."
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "Contexto: 'um cliente com integração mal feita enviou 40x o tráfego normal e derrubou a API para todos os clientes por 25 minutos' and 'INC-4412' (also in Resumo). Plan table: '| Free | 10 rps |', '| Pro | 100 rps |', '| Enterprise | Negociado por contrato |'. Proposta: 'o Kong responde `429 Too Many Requests` com o header `Retry-After`'. No fabricated facts detected; open items (autores, fail-open/closed, phase exit criteria) were asked as questions instead of invented."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "Compensações: '✗ Um cliente legítimo em pico (ex.: Black Friday) pode receber `429`. Mitigação aceita no war room: o `Retry-After` orienta o cliente a reenviar, e um alerta avisa o time de contas para comunicar os clientes enterprise.' Cost marked ✗ with both mitigations attached in the same bullet."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Riscos table: '| O Redis de sessão virar ponto de contenção com a carga adicional dos contadores | Medir a carga no Redis durante o shadow mode, antes de qualquer enforcement |' — the exact risk raised in the prompt with the measure-first mitigation."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "Saved at outputs/docs/design/dd-2026-008-rate-limiting-api-publica.md. Entire document is Portuguese prose ('Este documento propõe rate limiting por token de API aplicado no gateway...'), with the house Portuguese section headings (Resumo, Contexto, Proposta, Compensações, Riscos, Plano de entrega)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

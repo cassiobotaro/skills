@@ -1,0 +1,6 @@
+{
+  "total_tokens": 46576,
+  "duration_ms": 4970884,
+  "total_duration_seconds": 4970.9,
+  "note": "duration includes queue wait; wall-clock outlier vs. other runs"
+}

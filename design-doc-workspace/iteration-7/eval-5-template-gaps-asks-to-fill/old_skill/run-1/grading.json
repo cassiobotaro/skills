@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+      "passed": true,
+      "evidence": "final_message.md line 1: 'seguindo o padrão dos docs em `docs/design/` (mesmo formato do DD-2026-007: cabeçalho, Resumo, Contexto, Proposta com Compensações, Riscos e Plano de entrega), continuando a sequência de IDs'. The new doc dd-2026-008-busca-por-similaridade-no-catalogo.md reproduces the full template: DD-2026-007-style metadata header table, '## Resumo', '## Contexto', '## Proposta' with '### Compensações' (✓/✗), '## Riscos', '## Plano de entrega'. Q5 even mirrors the house risk format: 'O DD-2026-007 usa uma tabela risco → mitigação; sigo o mesmo formato.' The extra 'alternativas consideradas' section is offered as an optional addition, not silently imposed."
+    },
+    {
+      "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+      "passed": true,
+      "evidence": "final_message.md numbered questions, all in Portuguese: Q2 (cons) 'O que piora, encarece ou fica mais arriscado com essa solução? O que o refinamento discutiu como contrapartida...?'; Q5 (risks) 'quais riscos o time levantou e quais mitigações?'; Q6 (delivery plan) 'a entrega sai de uma vez ou em fases? Haverá alguma validação antes de 100% (shadow mode, A/B...) e qual o plano de volta se uma fase der errado?'. Also asks for authors/reviewers (Q1), open proposal details (Q3), and a measurable target (Q4)."
+    },
+    {
+      "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+      "passed": true,
+      "evidence": "No cons, risks, or phases are invented: Compensações has only ✓ items plus an explicit pending ✗ slot ('✗ *(pendente — o refinamento não registrou os custos aceitos; uma lista de compensações sem ✗ não está completa...)*'); Riscos and Plano de entrega are pending markers. The three ✓ pros are strict restatements of user-given facts (semantic matching fixes the tênis case, pgvector already in use so no new infra, fallback preserves current behavior). Candidate cons/risks (custo/latência de embeddings, tamanho do índice) appear only inside questions as examples ('por exemplo: ...'), never asserted as established facts in the doc."
+    },
+    {
+      "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+      "passed": true,
+      "evidence": "Contexto: 'A busca atual do catálogo é por texto exato, implementada com `LIKE` no Postgres. Cerca de 30% das buscas terminam sem resultado mesmo quando o produto existe' with the verbatim tênis example. Proposta: 'armazena no pgvector — extensão do Postgres que o time já usa, portanto sem nova peça de infraestrutura' and 'Quando o score de similaridade vier baixo, a busca cai no fallback: a consulta `LIKE` atual'. 'A proposta deste documento foi aprovada no refinamento do time' matches the prompt ('A proposta que aprovamos no refinamento'). Undefined details (model, vector update strategy, threshold) are explicitly listed as open rather than guessed."
+    },
+    {
+      "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+      "passed": true,
+      "evidence": "The file exists and every unfilled slot has an explicit pending marker tied to the questions: Autores/Revisores '*(pendente — ver perguntas ao autor)*'; the ✗ side of Compensações '*(pendente — ... Ver perguntas ao autor.)*'; Riscos '*(pendente — riscos e mitigações não foram levantados na conversa; ver perguntas ao autor.)*'; Plano de entrega '*(pendente — a segmentação da entrega não foi definida na conversa; ver perguntas ao autor.)*'. final_message.md line 7: 'eu não vou inventar conteúdo para elas. Deixei cada uma marcada como pendente no doc'. All template sections are present."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  }
+}

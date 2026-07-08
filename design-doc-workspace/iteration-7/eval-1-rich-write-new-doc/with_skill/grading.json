@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "File exists at outputs/docs/design/exportacao-de-relatorios-em-background.md; final_message.md confirms: 'Criei o design doc em `docs/design/exportacao-de-relatorios-em-background.md`'."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire doc is Portuguese: '## Visão geral', 'Este documento descreve a mudança da exportação de relatórios de um modelo síncrono...', '## Questões em aberto'. Only tool-canonical fragments (Structurizr DSL keywords, mermaid syntax) are English."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "'Trade-offs da solução escolhida' lists as a con: '✗ O usuário perde o download imediato — custo aceito deliberadamente: exportações pequenas que hoje saem na hora passam a chegar por e-mail.' Also stated in Visão geral ('o custo aceito é que o usuário perde o download imediato, inclusive nas exportações pequenas') and in 'Visão da solução' ('O trade-off central: ... o usuário troca o download imediato pela espera do e-mail — em toda exportação, grande ou pequena')."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "'Alternativas consideradas' lists all three: '1. Geração síncrona com timeout maior — descartada: só empurra o problema', '2. Ferramenta de BI externa — descartada por custo e por expor dado de cliente a um terceiro', '3. Não fazer nada — descartada: ~12% das exportações acima de 50 mil linhas seguem falhando...'."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'## Preocupações transversais' has both bullets: 'Plataforma (fila compartilhada) — os jobs de exportação adicionam carga ao RabbitMQ que outros times usam...' and 'Segurança (link assinado com PII) — relatórios com dados de clientes ficarão no S3 e acessíveis por link assinado enviado por e-mail. Expiração do link, retenção... precisam da revisão do time de segurança.' Both teams also appear as reviewers in the header."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering acronyms used (e.g. PII, S3, CSV/XLSX, BI)",
+      "passed": true,
+      "evidence": "'## Glossário' is the first section after the metadata header and defines PII ('Personally Identifiable Information; dados pessoais de clientes...'), S3 ('serviço de armazenamento de objetos da Amazon...'), CSV / XLSX ('formatos de arquivo das exportações...'), BI ('Business Intelligence...'), plus AMQP, DSL, Gateway, Link assinado, Streaming, Worker."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Two diagrams. The architecture image + folded DSL is followed by 'O diagrama mostra três containers e dois sistemas externos: - API — ... - Fila de exportação — ...' plus a closing paragraph ('O worker não conversa com a API: a fila é o único acoplamento...'). The Mermaid sequence diagram is followed by 'Passo a passo: a request do usuário termina no passo 3...' and a failure-path caveat paragraph. (Minor flaw, not orphaning: the prose's tail step numbers drift by one — cites 'passo 9/10/12' where autonumber yields 8/9/11.)"
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "All hard numbers trace to the prompt: 'timeout de 30 s', '12% das exportações acima de 50 mil linhas falham', 'toda semana', 'até 100 mil linhas'. No fabricated SLAs, queue names, retention periods or link-expiry values — those appear as unknowns: 'Prazo de expiração do link e política de retenção dos arquivos ainda não foram definidos', 'Autores | A definir', and 7 'Questões em aberto' (contrato da API, comportamento em falha, mecanismo de e-mail, volume de jobs, rollout). Dates 2026-07-07 match the real date."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'## Visão geral' is exactly two paragraphs: (1) 'a API enfileira um job, um worker gera o CSV/XLSX em streaming e sobe o arquivo para o S3, e o usuário recebe por e-mail um link assinado' — names mechanism/technology only; (2) motivation + accepted cost. No schemas, payloads, endpoints, retry policies or config values appear in it."
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  }
+}

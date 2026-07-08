@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+      "passed": true,
+      "evidence": "Five numbered questions, all in Portuguese. Pain/why now: Q1 'O que dói hoje no monolito, e por que agora?'. Measurable goals: Q2 'Qual o objetivo mensurável e o que está fora de escopo?' ('reduzir o lead time de deploy de 2 semanas para 1 dia' é verificável). Alternatives: Q4 'Que alternativas o time considerou e por que foram descartadas?'. Trade-offs: elicited via Q4 ('por que foram descartadas' — the comparison arguments), Q3 (banco compartilhado vs um por serviço) and the framing 'os trade-offs aceitos e as alternativas descartadas'; weaker than an explicit accepted-cost question but covered. Impacted teams: Q5 'Quem fora do time é impactado' (outros times que consomem APIs, infraestrutura, segurança)."
+    },
+    {
+      "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+      "passed": true,
+      "evidence": "No project facts are asserted. All concrete items appear only as interrogative examples: 'Deploys lentos ou acoplados demais?', 'Já existe uma fronteira óbvia (ex.: faturamento, catálogo) candidata a primeiro serviço?', 'vocês já operam Kubernetes/containers ou isso é novo?'. It explicitly refuses to invent: 'seguindo o contrato da skill (registrar, não inventar), a entrega desta rodada são as perguntas'."
+    },
+    {
+      "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+      "passed": true,
+      "evidence": "Q4: 'Em particular: por que *não fazer nada* (ou apenas modularizar melhor o monolito) não resolve? Essa é a comparação que todo revisor vai fazer, e o doc precisa respondê-la com os argumentos de vocês.'"
+    },
+    {
+      "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+      "passed": true,
+      "evidence": "No file was created — the outputs directory is empty and the message states 'Nenhum arquivo foi criado.' and 'preciso que você me responda algumas perguntas antes de criar o arquivo'. No design-doc content was delivered inline either."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

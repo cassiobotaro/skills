@@ -1,0 +1,35 @@
+{
+  "expectations": [
+    {
+      "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+      "passed": true,
+      "evidence": "final_message.md line 1: 'seguindo o padrão dos design docs em `docs/design/` (mesma estrutura do DD-2026-007: cabeçalho, Resumo, Contexto, Proposta com Compensações, Riscos e Plano de entrega)'. The new doc dd-2026-008-busca-similaridade-catalogo.md reproduces every template section including the DD-2026-007 metadata header table (Documento/Estado/Autores/Revisores/Criado em/Última atualização/Tags), '## Resumo', '## Contexto', '## Proposta' with '### Compensações' (✓/✗ style), '## Riscos', '## Plano de entrega', and the next sequential ID DD-2026-008. Empty sections are kept as required-but-pending rather than dropped."
+    },
+    {
+      "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+      "passed": true,
+      "evidence": "final_message.md numbered questions, all in Portuguese: Q3 (trade-offs) 'o que mais a equipe aceitou piorar no refinamento (ex.: latência da busca, custo de inferência do modelo)?'; Q4 (risks) 'quais riscos vocês identificaram e como pretendem mitigá-los (ex.: qualidade dos resultados vetoriais, tamanho do índice, backfill...)?'; Q5 (delivery plan) 'como isso vai a produção: tudo de uma vez ou em etapas (shadow mode, % de tráfego, comparação com a busca atual)?'. Also asks for authors/reviewers (Q1) and open proposal details (Q2)."
+    },
+    {
+      "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+      "passed": true,
+      "evidence": "Riscos and Plano de entrega are left explicitly pending in the doc ('Pendente — a equipe ainda não registrou os riscos...', 'Pendente — as etapas de entrada em produção ainda não foram definidas') — nothing invented there. FLAG (judgment call): the doc's Compensações lists two ✗ cons the user never stated ('embeddings precisam acompanhar o catálogo: toda criação ou edição... exige (re)gerar o embedding' and 'dois caminhos de busca... para manter e monitorar'). Both are strictly entailed by the stated proposal (embeddings of product text + vector search with LIKE fallback), are presented as consequences of the proposal rather than as decisions the team made, and the final_message.md is transparent about their origin ('registrei os prós e os custos que decorrem diretamente da própria proposta') while Q3 still asks the user for the actually-accepted trade-offs. Judged as derivation, not fabrication."
+    },
+    {
+      "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+      "passed": true,
+      "evidence": "Contexto: 'A busca do catálogo hoje é por texto exato, implementada com LIKE no Postgres' and 'Cerca de 30% das buscas terminam sem resultado mesmo quando o produto existe no catálogo'; 'o pgvector — a extensão do Postgres para armazenamento e busca de vetores — já faz parte da nossa instalação'. Proposta: 'Quando o score do melhor resultado vem abaixo do limiar, a busca cai para o LIKE atual (fallback)'. The tênis example is quoted verbatim. Unstated details (model choice, embedding generation timing, threshold value) are explicitly marked as not yet defined instead of being guessed."
+    },
+    {
+      "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+      "passed": true,
+      "evidence": "The file exists and every unfilled slot carries an explicit pending marker pointing at the questions: Autores/Revisores '*(pendente — ver perguntas ao autor)*'; Riscos '*Pendente — ... (ver perguntas ao autor).*'; Plano de entrega '*Pendente — ... (ver perguntas ao autor).*'; open proposal details flagged in-section ('ainda não foram definidos — ver perguntas ao autor'). final_message.md line 7 states the policy: 'eu não vou inventar o conteúdo delas — deixei-as marcadas como pendentes no doc e preciso que você responda'. No template section is missing or silently left blank."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "expectations": [
+    {
+      "text": "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+      "passed": false,
+      "evidence": "No template question appears anywhere in the reply. The reviewer judges structure unilaterally — \"A estrutura geral está boa (cabeçalho, visão geral, objetivos, escopo, solução com diagrama, plano)\" — and the 8 questions to the author cover trade-offs, alternatives, numbers, scope, impacted teams, DLQ, PII and rollback, but never ask whether the team has a design-doc template (wiki, drive, house style)."
+    },
+    {
+      "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+      "passed": false,
+      "evidence": "The reply never establishes what governs the structure — no mention of a default catalog nor of the absence of a template. The structural verdict is delivered as authoritative (\"A estrutura geral está boa\") and additions like the reviewers-in-header change are phrased prescriptively (\"Esses times deveriam entrar como revisores no cabeçalho\"). Proposed sections (\"Trade-offs da solução\", \"Alternativas consideradas\", \"Preocupações transversais\") are conditional on the author's answers, which softens them, but nothing frames them as optional suggestions from a default catalog subject to a governing template."
+    },
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "The reply is split into \"## Perguntas pra você responder\" (8 numbered questions) and \"## Edições que já apliquei\" (4 numbered edits), plus an explicit note of what was deliberately not touched (\"Não mexi em Objetivos, Fora de escopo... tudo isso depende das suas respostas\")."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Question 1 asks for trade-offs (\"O que piorou em troca? Por exemplo: complexidade operacional de um broker novo, entrega at-least-once...\") and question 2 for alternatives (\"O que mais o time avaliou?... E por que continuar como está não é aceitável\"); the examples stay in the reply. The edited doc gains no trade-offs, alternatives or numbers — the reviewer states \"Não preenchi nada disso com placeholder — entra no doc só com as suas respostas\", and the diff confirms only the glossary, the Contexto split and the diagram explanation were added."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "\"## Glossário\" is the first section after the header table (line 10 of the edited doc) and defines exactly CDC, DLQ, SLA and TPS, e.g. \"**DLQ** (Dead Letter Queue): fila que recebe as mensagens que falharam no processamento, para tratamento posterior.\""
+    },
+    {
+      "text": "The mermaid diagram is now followed by explanatory text",
+      "passed": true,
+      "evidence": "Immediately after the mermaid block: \"No diagrama, o CDC entrega os eventos de domínio ao dispatcher, que publica cada notificação na exchange. A exchange roteia a mensagem para a fila do canal correspondente... As mensagens que esgotam as tentativas de processamento vão para a DLQ do canal.\""
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+      "passed": false,
+      "evidence": "The edited doc still ships the two negations verbatim: \"## Fora de escopo / - O sistema não deve ser lento / - O sistema não deve perder notificações\". The reply does flag them (question 4: \"Os dois itens atuais só negam os objetivos... isso não exclui nada\") and asks what is really out of scope, but the document itself was left unchanged — a reader of the doc alone still sees the flawed items presented as legitimate exclusions, and even a minimal honest edit (e.g. marking them as pending) did not depend on the author."
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Question 3: \"'Melhorar a performance', 'tornar escalável' e 'garantir o SLA' não são verificáveis. Qual é o SLA de entrega (número)? Qual a latência/vazão hoje e qual o alvo?\" The Objetivos section in the doc is untouched and contains no invented numbers."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "The edited doc is entirely in Portuguese; the header table, section order (Visão geral, Objetivos, Fora de escopo, Solução, Plano) and the Plano steps are preserved, with only Glossário and Contexto inserted; the Solução prose keeps the author's original sentences (\"A solução proposta é mais escalável e robusta que o modelo atual...\") and plain voice."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Header row reads \"| **Última atualização** | 2026-07-07 |\" — the real current date — and edit 4 in the reply states \"atualizei para 2026-07-07, data desta revisão\"."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 3,
+    "total": 10,
+    "pass_rate": 0.7
+  }
+}

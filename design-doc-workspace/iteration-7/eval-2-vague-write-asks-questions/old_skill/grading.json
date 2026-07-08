@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+      "passed": true,
+      "evidence": "Five numbered questions, all in Portuguese. Pain/why now: Q1 'O que dói no monólito hoje, e por que agora?'. Measurable goals: Q2 'Como vocês vão saber que a migração deu certo — existe um número?'. Alternatives: Q4 'Quais alternativas foram consideradas e por que perderam'. Trade-offs: Q5 explicitly asks the accepted cost — 'qual é o custo operacional que vocês aceitam pagar (mais serviços = mais on-call, mais latência de rede, consistência eventual)'. Impacted teams: Q5 'Quem fora do time é impactado, e quem deve revisar o documento?' (infra/plataforma, segurança, outros times que consomem APIs do monólito)."
+    },
+    {
+      "text": "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+      "passed": true,
+      "evidence": "No project facts are asserted; concrete items appear only as interrogative examples or generic domain knowledge: 'Deploy lento? Times pisando uns nos outros?', 'Se tiver números (tempo de build/deploy, frequência de release, tamanho do time)'. It explicitly refuses to invent: 'eu teria que inventar o conteúdo que dá valor ao documento... Um design doc registra o raciocínio de vocês, não o meu.'"
+    },
+    {
+      "text": "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+      "passed": true,
+      "evidence": "Q4: 'Quais alternativas foram consideradas e por que perderam — inclusive \"não fazer nada\" e o meio-termo comum, modularizar o monólito sem distribuí-lo? Se \"continuar como está\" nem merece refutação, o problema do item 1 provavelmente está mal contado.'"
+    },
+    {
+      "text": "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content",
+      "passed": true,
+      "evidence": "No file was created — the outputs directory is empty and the message states 'Não vou criar arquivo nesta rodada.' Only the intended future document structure is described ('Com essas respostas eu escrevo o documento: cabeçalho, visão geral, ...'), no doc content delivered."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}

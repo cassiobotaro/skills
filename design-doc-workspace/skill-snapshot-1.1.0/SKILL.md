@@ -151,21 +151,11 @@ Before declaring done, check:
 
 ## Reviewing an existing document
 
-### 1. Read the whole document, then establish the governing template
+### 1. Read the whole document first
 
 Identify its structure, language, intended audience, and current state before judging
-anything. Then settle which template the review measures against — the answer decides
-what counts as a gap versus a suggestion. Unless the user already supplied a
-template, always ask them for a reference to one: templates normally live in wikis
-and shared drives, not in the repository, so what the repo shows (or doesn't) is a
-hint, never the answer. Put the question among the review's questions for the author;
-it costs one line, while measuring against the wrong yardstick costs the review.
-Other design docs in the repository can corroborate a house structure meanwhile, but
-the user's answer wins. Until a template is confirmed — or when the user confirms
-there is none — the default section catalog below is the yardstick, and structural
-findings are suggestions, not demands. Either way
-the review improves *this* document: respect the author's structure and voice even
-where they differ from what the template or the catalog would prescribe.
+anything. The review improves *this* document — respect its template even when it
+differs from the catalog below.
 
 ### 2. Assess it as a reviewer would
 
@@ -183,13 +173,11 @@ Look for, roughly in order of importance:
 - **Reader experience** — unexplained acronyms or domain terms (suggest a glossary at
   the beginning of the document), inlined detail that should be a link, a stale header
   state, passive or evasive prose that hides who does what, and spelling slips.
-- **Template gaps** — required sections the governing template demands but the
-  document lacks: substance gaps, asked of the author exactly like a missing
-  trade-off.
-- **Sections that would add clarity** — when no template governs, drawn from the
-  default catalog and framed as suggestions tied to this document's content ("the
-  migration touches three other teams; a cross-cutting concerns section would give
-  them a place to review").
+- **Template gaps** — required sections the document's template demands but lacks:
+  substance gaps, asked of the author exactly like a missing trade-off.
+- **Sections that would add clarity** — for documents without a template, framed as
+  suggestions tied to this document's content ("the migration touches three other
+  teams; a cross-cutting concerns section would give them a place to review").
 
 ### 3. Present findings, then apply
 

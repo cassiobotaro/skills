@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008-rate-limiting-api-publica.md contains all house sections in house order: '## Resumo', '## Contexto', '## Proposta' with '### Compensações' as a subsection (✓/✗ bullets), '## Riscos' as a '| Risco | Mitigação |' table, '## Plano de entrega' as a numbered list, plus the house header table ('| **Documento** | DD-2026-008 |'). Two additive top-level sections not in DD-2026-007 were inserted ('## Objetivos' and '## Alternativas consideradas'), but they carry only user-supplied content (the two measurable goals; the two discarded alternatives), and final_message.md flags the deviation ('Duas seções fugiram do DD-2026-007 ... me avisa se o padrão da casa preferir esse material dentro do Contexto e da Proposta'). The skill's default English section catalog is not used."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "File saved as docs/design/dd-2026-008-rate-limiting-api-publica.md (continuing dd-2026-NNN-slug after dd-2026-007); title '# DD-2026-008 · Rate limiting da API pública' and header table row '| **Documento** | DD-2026-008 |'."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "The '## Riscos' table has a single row about Redis contention. NAT appears only in Proposta as a design property, per the user's retraction: 'Como o limite é por token e não por IP, clientes distintos atrás de um NAT compartilhado não geram falsos positivos'. final_message.md: 'registrei como característica do design ... não como risco, já que vocês concluíram que ele não existe.'"
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "Contexto: 'um cliente com integração mal feita enviou 40× o tráfego normal e derrubou a API pública para todos os clientes por 25 minutos (incidente INC-4412)'. Plan table: '| Free | 10 rps |', '| Pro | 100 rps |', '| Enterprise | Negociado por contrato |'. Proposta: 'o gateway responde `429 Too Many Requests` com o header `Retry-After`'. The date 'Em 2026-07-06' is derived from the prompt's 'ontem' relative to the run date (2026-07-07), not fabricated."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "Compensações: '✗ Cliente legítimo em pico (ex.: Black Friday) pode receber `429`; mitigamos com o `Retry-After` e com um alerta para o time de contas avisar os clientes enterprise' — cost marked ✗ with both mitigations in the same bullet."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Riscos table: '| O Redis de sessão virar ponto de contenção com os contadores de rate limit | Medir a carga no Redis antes de ativar o enforcing — a fase de shadow mode mede sem aplicar limite |' — the prompt's risk with the measure-before-enforcing mitigation."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "Saved at outputs/docs/design/dd-2026-008-rate-limiting-api-publica.md. Document is entirely Portuguese ('Este documento propõe rate limiting por token de API no gateway (Kong)...') with the house Portuguese headings (Resumo, Contexto, Proposta, Compensações, Riscos, Plano de entrega)."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}
