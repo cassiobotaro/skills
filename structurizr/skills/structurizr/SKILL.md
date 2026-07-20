@@ -119,90 +119,18 @@ invocation, and most tasks need none of them:
 - Archetypes, workspace extension (`!element`), filtered/custom/image views,
   perspectives, scripts/plugins → `references/dsl-advanced.md`
 
-House conventions for new workspaces:
+House conventions, in one breath: `!identifiers hierarchical`; every element gets a
+description and every container a technology; relationship labels are specific and
+directional ("Publishes click events to", never "Uses") and inter-process ones carry a
+protocol; encode kinds with tags plus `styles` (`Database` → cylinder, `Queue` → pipe,
+`External` → grey) instead of ad-hoc colors; stable descriptive view keys
+(`"SystemContext"`, `"Containers"`, `"Deployment-Live"`) because renaming a key orphans
+saved layout; `autoLayout` on every view; `configuration { scope softwaresystem }` for a
+single-system workspace, `scope landscape` for a landscape one. Element names and
+descriptions follow the language the user used; DSL keywords are always English.
 
-```
-workspace "Name" "One-line description." {
-
-    !identifiers hierarchical
-
-    model {
-        u = person "User" "Why they use the system."
-
-        s = softwareSystem "System" "What value it delivers." {
-            api = container "API" "What it is responsible for." "Go"
-            db = container "Database" "What it stores." "PostgreSQL" {
-                tags "Database"
-            }
-        }
-
-        ext = softwareSystem "Payment Provider" "Third-party PSP." {
-            tags "External"
-        }
-
-        u -> s.api "Manages orders using" "HTTPS"
-        s.api -> s.db "Reads from and writes to" "SQL/TCP"
-        s.api -> ext "Authorizes payments using" "HTTPS"
-    }
-
-    views {
-        systemContext s "SystemContext" {
-            include *
-            autoLayout
-        }
-
-        container s "Containers" {
-            include *
-            autoLayout
-        }
-
-        styles {
-            element "Element" {
-                background #1168bd
-                color #ffffff
-            }
-            element "Person" {
-                shape person
-            }
-            element "Database" {
-                shape cylinder
-            }
-            element "Queue" {
-                shape pipe
-            }
-            element "External" {
-                background #999999
-                color #ffffff
-            }
-        }
-    }
-
-    configuration {
-        scope softwaresystem
-    }
-}
-```
-
-Why these conventions:
-
-- `!identifiers hierarchical` — lets container names repeat across systems and keeps the
-  workspace extendable later.
-- **Every element gets a description; every container gets a technology.** The C4 review
-  checklist demands both; diagrams must be readable by someone who wasn't in the room.
-- **Relationship labels are specific and directional** — "Publishes click events to", not
-  "Uses". The label must read correctly along the arrow's direction. Inter-process
-  relationships also get a technology/protocol.
-- **Tags + styles, not ad-hoc colors**: `Database` → cylinder, `Queue` → pipe, `External` →
-  grey, person shape for people. Consistent encodings double as the diagram legend.
-- **Stable, descriptive view keys** (`"SystemContext"`, `"Containers"`,
-  `"Deployment-Live"`) — keys identify views across exports and layout sessions; changing
-  them later orphans saved layout.
-- `autoLayout` on every view (direction `lr`/`tb` as fits the flow) — the user can still
-  drag elements in the UI, which then persists to `workspace.json`.
-- `configuration { scope softwaresystem }` for one-system workspaces,
-  `scope landscape` for landscape workspaces (these must not define containers).
-- Write element names and descriptions in the language the user used to describe their
-  system; DSL keywords are always English.
+`references/dsl-reference.md` §15 carries the full skeleton to copy when you start a
+workspace from scratch, with the reasoning behind each convention.
 
 ### 5. Link ADRs
 
