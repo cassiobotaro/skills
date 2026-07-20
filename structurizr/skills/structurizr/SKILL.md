@@ -222,14 +222,15 @@ are none, simply don't emit `!adrs`.
 
 ### 6. Validate — always, before declaring done
 
-Prefer the **Structurizr MCP server** (exposes DSL validate/parse/inspect tools and
-Mermaid/PlantUML export; this plugin's bundled MCP config expects it at
-`http://localhost:3000/mcp`):
+Prefer a connected **Structurizr MCP server** — it exposes DSL validate/parse/inspect
+tools and Mermaid/PlantUML export. This plugin doesn't ship one; the user registers it
+themselves, typically at `http://localhost:3000/mcp`.
 
-1. Check whether Structurizr MCP tools are available in the session (e.g. via ToolSearch —
-   tool names contain "structurizr"). If yes, run the DSL validation tool on the workspace
-   and fix every reported error, re-validating until clean.
-2. If MCP tools are not connected, fall back to the Docker image:
+1. Check whether Structurizr MCP tools are available in this session — how you list the
+   host's tools varies; look for tool names containing "structurizr". If yes, run the DSL
+   validation tool on the workspace and fix every reported error, re-validating until
+   clean.
+2. If no such tool is connected, fall back to the Docker image:
    `docker run --rm -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes -v "$PWD":/usr/local/structurizr structurizr/structurizr validate -workspace workspace.dsl`
    (the env var lets bundled theme names like `amazon-web-services-2025.07` resolve)
 3. If neither is available, say so explicitly and give the user both the `validate`

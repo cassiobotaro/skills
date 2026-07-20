@@ -1,7 +1,7 @@
 {
   "name": "structurizr",
   "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL (workspace.dsl): system context, container, component, deployment, and dynamic diagrams",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
   "repository": "https://github.com/cassiobotaro/skills",
   "license": "MIT",
