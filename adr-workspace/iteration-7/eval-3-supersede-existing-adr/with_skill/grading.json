@@ -1,0 +1,39 @@
+{
+  "eval_id": 3,
+  "eval_name": "supersede-existing-adr",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+      "passed": true,
+      "evidence": "doc/adr/0004-use-stateless-jwt-sessions.md — continues from highest existing 0003 (script: ok)"
+    },
+    {
+      "text": "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+      "passed": true,
+      "evidence": "Status is exactly ['Accepted', 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)'] — bracket text = target H1 minus '# ', href a bare basename (script: link line well-formed)"
+    },
+    {
+      "text": "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+      "passed": true,
+      "evidence": "0002 diff vs pristine is exactly one line: 'Accepted' -> 'Superseded by [4. ...](0004-....md)'; everything outside Status byte-identical"
+    },
+    {
+      "text": "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+      "passed": true,
+      "evidence": "Modern spelling used; script checked for legacy 'Superceded' and found none"
+    },
+    {
+      "text": "New ADR prose is in English to match the existing log (consistency outranks the Portuguese conversation), four sections in order, ISO date, reflecting only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+      "passed": true,
+      "evidence": "Prose in English matching the existing log despite the Portuguese conversation; four sections in order; reflects only stated facts (multi-region SPOF, replication cost, 15-min expiry, no immediate revocation)"
+    },
+    {
+      "text": "ADRs 0001 and 0003 are untouched",
+      "passed": true,
+      "evidence": "diff -q: 0001 and 0003 byte-identical to fixtures"
+    }
+  ],
+  "passed": 6,
+  "total": 6
+}

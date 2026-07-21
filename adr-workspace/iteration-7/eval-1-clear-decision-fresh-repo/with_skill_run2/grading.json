@@ -1,0 +1,49 @@
+{
+  "eval_id": 1,
+  "eval_name": "clear-decision-fresh-repo",
+  "configuration": "with_skill_run2",
+  "expectations": [
+    {
+      "text": "Fresh log seeded like adr init: a 0001 seed ADR is created in doc/adr/ carrying the canonical adr-tools init content (the Nygard link and the adr-tools mention); its filename slug derives from its own title, which is translated when the log's prose language is not English",
+      "passed": true,
+      "evidence": "Seed 0001-registrar-decisoes-de-arquitetura.md created, translated, Nygard + adr-tools links present; slug from translated title"
+    },
+    {
+      "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
+      "passed": true,
+      "evidence": "0002-usar-postgresql-em-vez-de-mongodb-no-servico-de-pedidos.md (script: ok)"
+    },
+    {
+      "text": "Prose (H1 title text and the section bodies) is in Portuguese, matching the conversation, while the adr-tools scaffolding stays canonical English: the `Date:` label, the four `## Status` / `## Context` / `## Decision` / `## Consequences` headings in order, and the status word",
+      "passed": true,
+      "evidence": "PT prose / EN scaffolding (script: canonical headings, Date: label)"
+    },
+    {
+      "text": "H1 uses the un-padded number ('# 2. ...') and a 'Date: YYYY-MM-DD' line carries today's real date",
+      "passed": true,
+      "evidence": "H1 '# 2.' un-padded, Date: 2026-07-21 (script: ok)"
+    },
+    {
+      "text": "Status section is 'Accepted'",
+      "passed": true,
+      "evidence": "Status exactly ['Accepted'] (script)"
+    },
+    {
+      "text": "Decision section is active voice ('We will ...' / 'Vamos ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS",
+      "passed": true,
+      "evidence": "Decision 'Vamos usar PostgreSQL...'; Context carries ACID, team experience, RDS already paid"
+    },
+    {
+      "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives",
+      "passed": true,
+      "evidence": "Consequences carry both stated downsides (schema rigido, migracoes como passo de deploy)"
+    },
+    {
+      "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated",
+      "passed": true,
+      "evidence": "No invented facts. Run 2 was STRICTER than run 1 here: it kept RDS in Context only, explicitly declining to infer that the service runs ON RDS. Run 1 wrote 'hospedado no RDS' in the Decision — mild inference, within tolerance, but the one substantive difference between passes"
+    }
+  ],
+  "passed": 8,
+  "total": 8
+}

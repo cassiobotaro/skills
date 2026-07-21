@@ -1,0 +1,39 @@
+{
+  "eval_id": 4,
+  "eval_name": "custom-dir-detection",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "New ADR created inside docs/architecture/decisions/ (the directory named by .adr-dir) — NOT in doc/adr/ or docs/adr/",
+      "passed": true,
+      "evidence": "Written into docs/architecture/decisions/ per .adr-dir; no stray doc/adr or docs/adr created (checked)"
+    },
+    {
+      "text": "Numbered 0003 with a kebab-case slug; H1 reads '# 3. <Title>' (un-padded)",
+      "passed": true,
+      "evidence": "0003-version-the-public-api-in-the-url-path.md; H1 '# 3.' un-padded (script: ok)"
+    },
+    {
+      "text": "Prose is in English to match the existing log; the four sections appear in canonical order, 'Date:' is ISO 8601 with today's real date, Status is 'Accepted'",
+      "passed": true,
+      "evidence": "English prose matching the log; four canonical sections in order; Date: 2026-07-21; Status 'Accepted' (script: ok)"
+    },
+    {
+      "text": "Context/Decision capture URL-path versioning over header versioning with the stated motives (SDK client expectations, gateway routing, visibility in logs/curl)",
+      "passed": true,
+      "evidence": "Context/Decision capture URL-path over header versioning with all three stated motives (SDK expectations, gateway routing, visibility in logs/curl)"
+    },
+    {
+      "text": "Consequences include URL proliferation and the cap of at most two active versions",
+      "passed": true,
+      "evidence": "Consequences carry URL proliferation and the at-most-two-active-versions cap"
+    },
+    {
+      "text": "Existing 0001, 0002 and the .adr-dir file are unmodified",
+      "passed": true,
+      "evidence": "diff -r vs fixture: 0001, 0002 and .adr-dir all pristine"
+    }
+  ],
+  "passed": 6,
+  "total": 6
+}

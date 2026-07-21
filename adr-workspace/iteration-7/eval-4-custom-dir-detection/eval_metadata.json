@@ -1,0 +1,13 @@
+{
+  "eval_id": 4,
+  "eval_name": "custom-dir-detection",
+  "prompt": "Documenta como ADR a decisão que tomamos hoje: a API pública vai ser versionada por URL (/v1, /v2) em vez de header de versão. Motivos: é o que nossos clientes de SDK já esperam, dá pra rotear por versão no gateway, e fica óbvio em logs e curl. O contra que anotamos: URLs proliferam e a gente vai ter que manter no máximo duas versões ativas ao mesmo tempo.",
+  "assertions": [
+    "New ADR created inside docs/architecture/decisions/ (the directory named by .adr-dir) — NOT in doc/adr/ or docs/adr/",
+    "Numbered 0003 with a kebab-case slug; H1 reads '# 3. <Title>' (un-padded)",
+    "Prose is in English to match the existing log; the four sections appear in canonical order, 'Date:' is ISO 8601 with today's real date, Status is 'Accepted'",
+    "Context/Decision capture URL-path versioning over header versioning with the stated motives (SDK client expectations, gateway routing, visibility in logs/curl)",
+    "Consequences include URL proliferation and the cap of at most two active versions",
+    "Existing 0001, 0002 and the .adr-dir file are unmodified"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "eval_id": 5,
+  "eval_name": "fresh-log-portuguese",
+  "prompt": "Documente esta decisão de arquitetura: decidimos adotar o RabbitMQ em vez do Kafka para a fila de mensagens entre os serviços. A equipe já tem experiência operacional com RabbitMQ, nosso volume é baixo (menos de 100 mensagens/segundo) e não precisamos de retenção de eventos. Aceitamos abrir mão do replay de eventos — se um dia precisarmos disso, será uma nova decisão.",
+  "assertions": [
+    "doc/adr/ is created with exactly two files: a 0001 seed ADR and a 0002 decision ADR",
+    "The 0001 seed ADR has its title and body translated into Portuguese and its filename slug derives from the translated title",
+    "The seed ADR keeps the adr-tools scaffolding in canonical English: the `Date:` label, the four `##` headings, and the status word are NOT translated",
+    "ADR 0002 has its H1 title text and the four section bodies in Portuguese",
+    "ADR 0002 keeps the scaffolding canonical: the `Date:` label, the four `## Status/Context/Decision/Consequences` headings in order, and the status word all in English",
+    "ADR 0002 keeps the exact structure: H1 with un-padded number, Date: line in ISO 8601 with today's real date, one blank line between every element",
+    "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title (lowercased, non-alphanumeric runs collapsed to single hyphens)",
+    "The Consequences section records the accepted trade-off (loss of event replay) and contains no invented facts beyond what the prompt established"
+  ]
+}
