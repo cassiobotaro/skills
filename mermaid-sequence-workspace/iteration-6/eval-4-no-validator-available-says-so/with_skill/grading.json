@@ -1,0 +1,31 @@
+{
+  "eval_id": 4,
+  "eval_name": "no-validator-available-says-so",
+  "expectations": [
+    {
+      "text": "Delivers a fenced ```mermaid sequenceDiagram block covering the four steps in order",
+      "passed": true,
+      "evidence": "One ```mermaid block, in prompt order: 'U->>W: Escolhe o arquivo'; 'W->>+A: POST /v1/attachments/presign' / 'A-->>-W: 201 Created' + note 'URL pre-assinada + object key'; 'W->>+S: PUT (URL pre-assinada)' / 'S-->>-W: Upload concluido'; 'W->>+A: POST /v1/attachments/confirm' + note 'Body: object key' / 'A-->>-W: 200 OK'. Syntax review (mermaid-cli absent; not sent to the hosted MCP because the run declared a no-MCP environment): all `+`/`-` activation pairs balance per message, no blocks to close, no forbidden characters."
+    },
+    {
+      "text": "States plainly that the diagram was NOT validated in this environment",
+      "passed": true,
+      "evidence": "'**Nao foi validado aqui:** esta maquina nao tem mermaid-cli e nao ha servidor MCP de Mermaid conectado nesta sessao, entao nao consegui renderizar nem checar a sintaxe.'"
+    },
+    {
+      "text": "Points the user to native GitHub/GitLab rendering and/or mermaid.live as the way to preview",
+      "passed": true,
+      "evidence": "'O bloco ` ```mermaid ` e renderizado nativamente pelo GitHub e pelo GitLab, entao colar num `.md` do repositorio ja serve de preview; se preferir um preview interativo, <https://mermaid.live> aceita o codigo colado — so lembrando que e um renderizador remoto ... essa escolha e sua.'"
+    },
+    {
+      "text": "Does not run npm/npx install, apt, or any other command that would install mermaid-cli or a browser",
+      "passed": true,
+      "evidence": "Only with_skill/outputs/_user_facing_response.md and timing.json exist for this run; the response contains no install command, no npm/npx/apt/pip string, and no claim of having attempted one — it states outright it could not render. No evidence of any installation attempt."
+    },
+    {
+      "text": "Never claims the diagram was validated or rendered",
+      "passed": true,
+      "evidence": "The only validation statement is the negative one ('nao consegui renderizar nem checar a sintaxe'). No preview link, no render output, no 'validated'/'validado' claim anywhere in the response."
+    }
+  ]
+}

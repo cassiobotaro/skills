@@ -1,0 +1,21 @@
+{
+  "eval_id": 0,
+  "eval_name": "vague-checkout-asks-questions",
+  "expectations": [
+    {
+      "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+      "passed": true,
+      "evidence": "_user_facing_response.md delivers no diagram at all, only four numbered questions: '1. **Quem participa?**', '2. **Qual e a sequencia?** ... Se alguma etapa for assincrona (evento/fila, webhook do gateway em vez de resposta sincrona), me avise', '3. **Falhas entram no diagrama?** Cartao recusado, item sem estoque, timeout do gateway', '4. **Nivel de detalhe nas notas?**'. Covers participants, trigger/order, sync-vs-async, failure handling and detail level."
+    },
+    {
+      "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+      "passed": true,
+      "evidence": "grep of the response finds no status codes and one endpoint-shaped string, inside question 4: 'Posso anotar endpoints/payloads reais (`POST /v1/orders`, campos do corpo) ou e melhor manter conceitual' — it is offered as an illustration of the *level of detail* being asked about, not asserted as the user's route. Participant names in question 1 are explicitly hypothetical: 'Algo como cliente (pessoa) -> front/web -> API de pedidos ... Me diga a lista real'."
+    },
+    {
+      "text": "Either no mermaid code is delivered at all (the expected outcome when the flow is still unknown), or any block that is included parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+      "passed": true,
+      "evidence": "No mermaid block was delivered — the run asked four clarifying questions instead, which the reworded assertion now sanctions explicitly. Check run: neither — the response contains zero fenced mermaid blocks (`grep -c '```mermaid' _user_facing_response.md` -> 0; the only occurrence of the word mermaid is the inline literal '` ```mermaid `' describing the deliverable format). Vacuously satisfied. mermaid-cli (mmdc) is not installed on this machine; nothing needed validating."
+    }
+  ]
+}

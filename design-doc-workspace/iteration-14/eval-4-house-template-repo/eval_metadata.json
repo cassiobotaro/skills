@@ -1,0 +1,35 @@
+{
+  "eval_id": 4,
+  "eval_name": "house-template-repo",
+  "prompt": "A gente segue um padrão de design docs em docs/design/ — dá uma olhada no que já tem lá. Preciso do doc novo pro rate limiting da API pública. Contexto: ontem um cliente com integração mal feita mandou 40x o tráfego normal e derrubou a API pra todo mundo por 25 minutos (incidente INC-4412); hoje não existe nenhum limite por cliente. Proposta que fechamos no war room: rate limit por token de API no gateway (Kong), janela deslizante com contadores no Redis que já usamos pra sessão, limites por plano (free: 10 rps, pro: 100 rps, enterprise: negociado), respondendo 429 com header Retry-After. Alternativas: limitar dentro de cada serviço (descartado — tarde demais, a requisição já consumiu gateway e malha) e o módulo pago do gateway gerenciado (descartado — custo e lock-in). Trade-off aceito: cliente legítimo em pico tipo Black Friday pode tomar 429; mitigamos com o Retry-After e alerta pro time de contas avisar os enterprise. Risco que levantamos: o Redis de sessão virar ponto de contenção (vamos medir antes). Cheguei a anotar falso positivo com NAT compartilhado, mas na real esse não existe, porque o limite é por token, não por IP. Objetivo: nenhum token excede seu limite por mais de 1s e a API aguenta um cliente abusivo sem degradar os demais. Entrega em fases: shadow mode só medindo → enforcing no plano free → enforcing geral. Escreve o doc seguindo nosso padrão.",
+  "assertions": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog"
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table"
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk"
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present"
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation"
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation"
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/"
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions"
+    },
+    {
+      "text": "A governing template is a floor, not a ceiling: sections beyond the house pattern are acceptable only when the user supplied that substance, the house skeleton and its order stay intact, and the reply tells the user it stepped outside the pattern"
+    }
+  ],
+  "expected_output": "Lê o DD-2026-007 existente e segue o padrão da casa: mesmas seções (Resumo, Contexto, Proposta com subseção Compensações, Riscos, Plano de entrega), cabeçalho no mesmo formato de tabela, ID continuando a sequência (DD-2026-008), português, salvo em docs/design/. Conteúdo fiel ao prompt (INC-4412, 40x, 25 min, planos free/pro/enterprise, 429 + Retry-After, alternativas com motivos, trade-off da Black Friday, risco de contenção do Redis). NÃO inclui o risco de NAT — o usuário se corrigiu. Não impõe o catálogo padrão da skill por cima do padrão da casa."
+}

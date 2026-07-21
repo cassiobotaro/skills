@@ -1,0 +1,26 @@
+{
+  "eval_id": 2,
+  "eval_name": "vague-decision-asks",
+  "expectations": [
+    {
+      "text": "Does NOT deliver a finished ADR padded with invented context, replacement technology, or consequences",
+      "passed": true,
+      "evidence": "ls -R of eval-2 with_skill/outputs shows only _user_facing_response.md — no ADR file, no doc/adr/ directory was created."
+    },
+    {
+      "text": "Final response asks targeted clarifying questions covering at least two of: what replaces Redis, why the change (forces), Redis's current role (cache/session/queue), accepted trade-offs",
+      "passed": true,
+      "evidence": "Response asks four numbered questions: (1) 'O que entra no lugar do Redis, e para qual uso?' incl. cache/sessões/fila roles, (2) 'Por que agora?' (forces), (3) alternatives discarded, (4) 'Qual desvantagem o time aceitou junto?' — covers all four listed topics."
+    },
+    {
+      "text": "If any ADR file is created at all, it is explicitly a draft/skeleton with pending markers — not fabricated content presented as fact",
+      "passed": true,
+      "evidence": "No ADR file exists at all (ls shows only _user_facing_response.md), so the clause is satisfied vacuously; the response only *describes* the plan ('eu crio doc/adr/, semeio ... e a sua decisão fica como 0002') without writing anything."
+    },
+    {
+      "text": "Final response is in Portuguese, matching the user's conversation language",
+      "passed": true,
+      "evidence": "Response is entirely in Portuguese: 'Posso escrever, mas antes preciso de um pouco mais de substância ...'."
+    }
+  ]
+}

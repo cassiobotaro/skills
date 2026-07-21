@@ -1,0 +1,23 @@
+{
+  "eval_id": 5,
+  "eval_name": "template-gaps-asks-to-fill",
+  "prompt": "Seguindo o padrão dos nossos design docs em docs/design/, escreve o doc da busca por similaridade no catálogo. O problema: a busca atual é por texto exato (LIKE no Postgres) e cerca de 30% das buscas terminam sem resultado mesmo quando o produto existe — o cliente digita 'tênis de corrida amortecido' e a gente não encontra o 'tênis running com amortecimento'. A proposta que aprovamos no refinamento: gerar embeddings dos títulos e descrições dos produtos com um modelo de similaridade de sentenças, armazenar no pgvector (extensão do Postgres que a gente já usa) e fazer a busca vetorial, com fallback pro LIKE atual quando o score vier baixo.",
+  "assertions": [
+    {
+      "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document"
+    },
+    {
+      "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases"
+    },
+    {
+      "text": "Does not fabricate risks, delivery phases, or cons the user never stated"
+    },
+    {
+      "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE"
+    },
+    {
+      "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers"
+    }
+  ],
+  "expected_output": "Identifica o template da casa (DD-2026-007) e o trata como obrigatório. Faltando substância para Compensações (contras), Riscos e Plano de entrega, questiona o usuário para preenchê-las (uma pergunta por seção faltante) em vez de pular as seções ou inventar riscos/fases/contras. Fiel aos fatos dados (LIKE, 30%, pgvector, fallback). Aceitável não criar o arquivo ainda, ou criar deixando explícito o que está pendente — nunca um doc 'completo' com seções fabricadas ou silenciosamente omitidas."
+}

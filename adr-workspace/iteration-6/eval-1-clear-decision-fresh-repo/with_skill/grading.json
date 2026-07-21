@@ -1,0 +1,46 @@
+{
+  "eval_id": 1,
+  "eval_name": "clear-decision-fresh-repo",
+  "expectations": [
+    {
+      "text": "Fresh log seeded like adr init: a 0001 seed ADR is created in doc/adr/ carrying the canonical adr-tools init content (the Nygard link and the adr-tools mention); its filename slug derives from its own title, which is translated when the log's prose language is not English",
+      "passed": true,
+      "evidence": "doc/adr/0001-registrar-decisoes-de-arquitetura.md exists; H1 '# 1. Registrar decisões de arquitetura'; Decision links 'como [descrito por Michael Nygard](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)'; Consequences mentions '[adr-tools](https://github.com/npryce/adr-tools) de Nat Pryce'. Slug 'registrar-decisoes-de-arquitetura' derives from the translated title (accents stripped)."
+    },
+    {
+      "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
+      "passed": true,
+      "evidence": "ls shows doc/adr/0002-usar-postgresql-em-vez-de-mongodb-no-servico-de-pedidos.md — 4-digit padded, slug is the H1 title '2. Usar PostgreSQL em vez de MongoDB no serviço de pedidos' lowercased/hyphenated with accents stripped."
+    },
+    {
+      "text": "Prose (H1 title text and the section bodies) is in Portuguese, matching the conversation, while the adr-tools scaffolding stays canonical English: the `Date:` label, the four `## Status` / `## Context` / `## Decision` / `## Consequences` headings in order, and the status word",
+      "passed": true,
+      "evidence": "grep '^#|^Date:' -> '# 2. Usar PostgreSQL em vez de MongoDB no serviço de pedidos | Date: 2026-07-21 | ## Status | ## Context | ## Decision | ## Consequences' (canonical order, English headings/label); bodies are Portuguese ('O fluxo de criação de pedido ... precisam acontecer dentro de uma única transação ACID.'); status word is the English 'Accepted'."
+    },
+    {
+      "text": "H1 uses the un-padded number ('# 2. ...') and a 'Date: YYYY-MM-DD' line carries today's real date",
+      "passed": true,
+      "evidence": "Line 1 '# 2. Usar PostgreSQL...' (un-padded 2); line 3 'Date: 2026-07-21' = today's real date."
+    },
+    {
+      "text": "Status section is 'Accepted'",
+      "passed": true,
+      "evidence": "Line 7 of 0002 is exactly 'Accepted' under '## Status'."
+    },
+    {
+      "text": "Decision section is active voice ('We will ...' / 'Vamos ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS",
+      "passed": true,
+      "evidence": "Decision: 'Vamos usar PostgreSQL como banco de dados do serviço de pedidos, em vez de MongoDB.' (active voice, names PostgreSQL). Context covers all three stated forces: ACID transaction over estoque/pagamento/pedido, 'O time já tem experiência com PostgreSQL', 'a empresa já paga por RDS'."
+    },
+    {
+      "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives",
+      "passed": true,
+      "evidence": "Consequences 3rd paragraph: 'Em troca, o schema fica mais rígido: mudanças no modelo de dados exigem migrações, e as migrações passam a ser um passo do deploy.' — both stated downsides present alongside the positives."
+    },
+    {
+      "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated",
+      "passed": true,
+      "evidence": "Every claim traces to the prompt. Only extrapolations are the framing 'As duas opções consideradas ... foram PostgreSQL e MongoDB' (the prompt's own 'PostgreSQL em vez de MongoDB') and 'sem precisar de compensações na aplicação' (a restatement of the ACID benefit). No metrics, benchmarks, extra alternatives or constraints invented."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "eval_id": 1,
+  "eval_name": "detailed-password-reset-flow",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+      "passed": true,
+      "evidence": "Check run: manual syntax review against references/syntax.md ONLY — mermaid-cli is not installed and this diagram is one the run deliberately withheld from the remote renderer (it carries the user's internal endpoints and Authorization header), so it was not sent to the hosted MCP. Review: single fenced ```mermaid block opening with `sequenceDiagram` + `autonumber`; every arrow token (`->>`, `-->>`, `-)`) is in the safe-core table; blocks balance exactly (alt/else ... opt ... end ... end); activation balance is one `W->>+A` against one trailing `deactivate A` after the alt `end` — exactly the pattern syntax.md prescribes for a reply inside alt ('Activate with + on the request and put one explicit deactivate B after the block's end') — plus a self-contained `A->>+P` / `P-->>-A` pair; note text contains no bare `<`/`>`, no `;`, no standalone word `end`; only `<br/>` tags are used."
+    },
+    {
+      "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+      "passed": true,
+      "evidence": "All present: 'W->>+A: POST /v1/password-resets'; 'A-->>W: 202 Accepted'; 'A-->>W: 429 Too Many Requests' followed by 'Note over W,A: Retry-After header'; 'participant Q as RabbitMQ' + 'A-)Q: publish reset_requested'; 'N->>SG: POST /v3/mail/send' + 'Note over N,SG: Authorization: Bearer (API key)'. Body and rate limit also carried: 'Body: { \"email\": \"...\" }<br/>Rate limit: 5 requests per hour per IP'."
+    },
+    {
+      "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+      "passed": true,
+      "evidence": "'alt more than 5 requests/hour from this IP' ... 'else within rate limit' — a two-branch alt whose first branch is the 429 + Retry-After path."
+    },
+    {
+      "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+      "passed": true,
+      "evidence": "The Postgres lookup replies 'user row or no match', then unconditionally 'A-->>W: 202 Accepted' with 'Note over W,A: Always 202, whether or not the user exists —<br/>prevents email enumeration'. The user-exists split is modelled *after* the 202, as an `opt user exists` around the RabbitMQ publish only."
+    },
+    {
+      "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+      "passed": true,
+      "evidence": "'actor U as User' (only `actor` declaration; the six systems use `participant`). Both event legs are async: 'A-)Q: publish reset_requested' and 'Q-)N: consume reset_requested'. The SendGrid delivery to the user is also '-)': 'SG-)U: Password reset email'."
+    },
+    {
+      "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+      "passed": true,
+      "evidence": "Every endpoint/header/status/payload token in the block traces to the prompt (see assertion 2). No TTL, token lifetime, retry policy or extra field appears. Two soft glosses were checked and judged non-inventions: '(API key)' appended to the SendGrid Bearer note (a characterisation of the given header, not a new header) and the two UI replies 'Ask to try again later' / 'Confirm \"check your email\"' (non-technical UI wording, no route or code). The run also explicitly lists what it left out — SendGrid's reply/retry behaviour and the token-expiry half of the flow — which is the never-invent rule working, not an invention."
+    }
+  ]
+}

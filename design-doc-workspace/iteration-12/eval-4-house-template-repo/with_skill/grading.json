@@ -1,0 +1,51 @@
+{
+  "eval_id": 4,
+  "eval_name": "house-template-repo",
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008-rate-limiting-api-publica.md: header table in the DD-2026-007 format, then '## Resumo', '## Contexto', '## Proposta' containing '### Compensações' with ✓/✗ bullets, '## Riscos' as a Risco | Mitigação table, '## Plano de entrega' as a numbered list — the house order, not the skill's default catalog."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "Filename docs/design/dd-2026-008-rate-limiting-api-publica.md; title '# DD-2026-008 · Rate limiting da API pública'; header row '| **Documento** | DD-2026-008 |'."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "grep -niE 'nat|ip compartilhado' on the document matches only the word inside 'Alter**nat**ivas consideradas' (line 115); the Riscos table has a single row, about Redis. The reply confirms: 'O falso positivo de NAT compartilhado ficou de fora.'"
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "'## Contexto': 'um cliente com integração mal feita enviou 40 vezes o tráfego normal e derrubou a API para todos os clientes por 25 minutos (incidente INC-4412)'; plan table 'Free | 10 rps', 'Pro | 100 rps', 'Enterprise | Negociado por contrato'; 'o gateway responde 429 com o header `Retry-After`'."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "'### Compensações': '✗ Um cliente legítimo em pico — Black Friday, por exemplo — pode tomar 429 ... Mitigamos por dois lados: o `Retry-After` diz ao cliente quando repetir, e um alerta avisa o time de contas para procurar os clientes enterprise'."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Riscos table single row: 'O Redis de sessão virar ponto de contenção ao absorver os contadores de toda a API pública | Medir o impacto no Redis durante o shadow mode, antes de qualquer enforcement'."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "outputs/docs/design/dd-2026-008-rate-limiting-api-publica.md, entirely pt-BR; the seeded DD-2026-007 is left byte-identical (diff clean)."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": false,
+      "evidence": "Product names trace cleanly (\"Kong\" and \"Redis\" technology slots are both in the prompt; Postgres appears only in the untouched DD-2026-007), but the DSL adds a transport protocol the user never stated, line 64: 'cliente -> gateway \"Chama a API pública com um token de API\" \"HTTPS\"'. The prompt establishes HTTP semantics only through '429 com header Retry-After' and never states TLS; HTTPS is neither traceable nor raised as a question in the reply."
+    },
+    {
+      "text": "A governing template is a floor, not a ceiling: sections beyond the house pattern are acceptable only when the user supplied that substance, the house skeleton and its order stay intact, and the reply tells the user it stepped outside the pattern",
+      "passed": true,
+      "evidence": "The three conditions hold. (a) The added '## Objetivos' and '## Alternativas consideradas' (and the two diagrams) are all user-supplied substance — the 1s/abusive-client goal and the two war-room alternatives come verbatim from the prompt. (b) The house sections keep their names and relative order (Resumo → Contexto → Proposta/Compensações → Riscos → Plano de entrega); the extras are interleaved, not substituted. (c) _user_facing_response.md says so up front: 'Duas seções a mais que o DD-2026-007 não tem, porque você me deu a substância ... Se o padrão da casa for fechado nas seis seções do DD-2026-007, é só me dizer que eu dobro as duas para dentro do Resumo e da Proposta', plus a separate bullet '**Diagramas.** O DD-2026-007 não tem nenhum ... Se preferir manter o padrão sem diagramas, eu removo.'"
+    }
+  ]
+}

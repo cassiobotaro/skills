@@ -1,0 +1,29 @@
+{
+  "eval_id": 3,
+  "eval_name": "large-delivery-saga-split",
+  "prompt": "Document our food delivery order lifecycle as sequence diagram(s) for the engineering wiki (GitHub renders mermaid). The flow: the customer places an order in the mobile app; the app calls the API gateway, which forwards to the Order Service (POST /orders); the Order Service persists the order as PENDING in its Postgres, then calls the Payment Service (POST /payments), which authorizes the card with Stripe and replies approved or declined; if declined, the Order Service marks the order FAILED and the app shows the error. If approved, the Order Service publishes order.paid to Kafka; the Restaurant Service consumes it and pushes the order to the restaurant's tablet, and the restaurant accepts or rejects — reject means refund via the Payment Service, order CANCELLED, customer notified. When accepted, the Restaurant Service publishes order.accepted; the Courier Service consumes it, finds the nearest available courier, offers the job (a courier can decline, in which case it retries with the next courier), and assigns it; the courier picks up and delivers, marking PICKED_UP and DELIVERED through the Courier Service, which publishes status events. The Notification Service consumes all order.* events and sends a push notification to the customer at each stage (paid, accepted, courier assigned, picked up, delivered). Show the whole thing including the failure branches I mentioned.",
+  "assertions": [
+    {
+      "text": "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram"
+    },
+    {
+      "text": "Every mermaid block parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran"
+    },
+    {
+      "text": "No single diagram exceeds roughly 25 messages"
+    },
+    {
+      "text": "Participant names/labels are consistent across the diagrams (the same service uses the same label everywhere)"
+    },
+    {
+      "text": "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit"
+    },
+    {
+      "text": "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier"
+    },
+    {
+      "text": "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested"
+    }
+  ],
+  "expected_output": "Multiple smaller fenced ```mermaid blocks (split by phase or scenario) rather than one giant diagram: e.g. placement+payment, restaurant acceptance, courier assignment+delivery, notifications handled inline or explained. Identical participant names/aliases across diagrams, a heading and one-line intro per diagram, explicit continuity between them, the described failure branches (declined payment, restaurant reject+refund, courier decline retry) present, portable (safe-core) syntax, nothing invented."
+}

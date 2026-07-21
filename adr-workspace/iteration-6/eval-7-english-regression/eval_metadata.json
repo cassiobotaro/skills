@@ -1,0 +1,20 @@
+{
+  "eval_id": 7,
+  "eval_name": "english-regression",
+  "prompt": "Write an ADR for this: we decided that all timestamps in our public API will use ISO 8601 strings in UTC instead of unix epoch integers. Reasons: epoch integers caused repeated timezone bugs in client integrations and are unreadable in logs. Trade-off we accepted: clients now have to parse strings, and payloads get slightly bigger.",
+  "assertions": [
+    {
+      "text": "doc/adr/ is created with the canonical English seed 0001-record-architecture-decisions.md verbatim (only the date substituted) and the decision as 0002"
+    },
+    {
+      "text": "ADR 0002 is entirely in English with the four canonical section headings (Status, Context, Decision, Consequences) in order"
+    },
+    {
+      "text": "ADR 0002 has Accepted status, ISO 8601 date with today's real date, H1 '# 2. <title>', and one-blank-line discipline"
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs (string parsing for clients, larger payloads), not just benefits"
+    }
+  ],
+  "expected_output": "English prompt, fresh repo: the canonical English seed verbatim plus the decision as 0002, entirely in English. Guards against over-translating."
+}

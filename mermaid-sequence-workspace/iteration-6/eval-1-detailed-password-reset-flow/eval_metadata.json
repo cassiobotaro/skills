@@ -1,0 +1,26 @@
+{
+  "eval_id": 1,
+  "eval_name": "detailed-password-reset-flow",
+  "prompt": "Create a sequence diagram of our password reset flow for the API docs (it will live in our GitLab wiki, which renders mermaid). The flow: the user submits their email on the web app's forgot-password page. The web app calls POST /v1/password-resets on the Auth API with JSON body {\"email\": \"...\"} — no auth header, it's a public endpoint, but rate-limited: more than 5 requests per hour per IP returns 429 with a Retry-After header. The Auth API looks the user up in Postgres, and whether or not the user exists it always returns 202 Accepted so attackers can't enumerate emails. If the user exists, the Auth API publishes a reset_requested event to RabbitMQ; the Notification worker consumes it and sends the email through SendGrid (POST /v3/mail/send with an Authorization: Bearer header). Please show the rate-limit case too, and add notes with the endpoints/headers/payloads I mentioned.",
+  "assertions": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran"
+    },
+    {
+      "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer"
+    },
+    {
+      "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)"
+    },
+    {
+      "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)"
+    },
+    {
+      "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows"
+    },
+    {
+      "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)"
+    }
+  ],
+  "expected_output": "A single fenced ```mermaid block that parses, with autonumber, an actor for the user, notes carrying the given endpoint/header/payload details (POST /v1/password-resets, 429 + Retry-After, always-202, SendGrid POST /v3/mail/send with Bearer), the RabbitMQ event drawn async, the rate-limit branch shown, and nothing technical that the prompt did not establish. The notes carry the user's endpoints and headers, so the sensitivity gate is expected to fire and skip the hosted validator: either a local mermaid-cli validation, or an explicit notice that it was not validated here plus a private preview route (the repo's own GitHub/GitLab renders the block natively) — not mermaid.live, which renders remotely just like the hosted server."
+}

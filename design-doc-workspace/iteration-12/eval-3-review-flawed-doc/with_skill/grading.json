@@ -1,0 +1,61 @@
+{
+  "eval_id": 3,
+  "eval_name": "review-flawed-doc",
+  "expectations": [
+    {
+      "text": "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+      "passed": true,
+      "evidence": "_user_facing_response.md, question 1: 'Existe um template de design doc no time? Não achei outro design doc no repositório para servir de referência, e template costuma morar em wiki/drive, não no repo.'"
+    },
+    {
+      "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+      "passed": true,
+      "evidence": "Same question 1: 'até lá revisei contra o catálogo padrão, então as sugestões de estrutura são sugestões, não exigências.' The pending sections live under the heading '## Sugestões que dependem das suas respostas'."
+    },
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "Two explicit headings: '## Perguntas para você (o que eu não posso preencher sem inventar)' (11 items) and '## O que eu já apliquei' (6 items)."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Questions 2 ('Quais são os trade-offs da solução?') and 3 ('Quais alternativas foram consideradas e por que perderam? ... e, obrigatoriamente, **não fazer nada**'). `diff` of the edited doc against evals/files/notify/... shows no Trade-offs or Alternativas section and no new number anywhere."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "The diff inserts '## Glossário' immediately after the header table, before '## Visão geral', with rows for Fanout, Exchange, CDC, DLQ, TPS, SLA and In-app."
+    },
+    {
+      "text": "The architecture diagram — whichever notation it ends up in, since the skill's convention replaces a hand-drawn Mermaid architecture with Structurizr DSL — is followed by explanatory prose, and no diagram is left orphaned",
+      "passed": true,
+      "evidence": "The Mermaid flowchart was replaced by '![Diagrama de containers — Fanout de notificações](diagrams/arquitetura-fanout.svg)' plus the DSL in <details>, followed by two paragraphs: 'O serviço de mensageria continua gravando as notificações...' and 'Cada canal tem seu **worker**...'. It is the only diagram in the file."
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals: either rewritten honestly in the document, or explicitly raised to the author as a question in the reply",
+      "passed": true,
+      "evidence": "Left unchanged in the doc but raised as question 5: 'O \"Fora de escopo\" hoje só nega os objetivos. \"Não deve ser lento\" e \"não deve perder notificações\" são requisitos, não exclusões ... O que alguém razoavelmente esperaria deste trabalho e que ele *não* vai cobrir?'"
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Question 4: '\"Melhorar a performance\", \"tornar escalável\" e \"garantir o SLA\" não são verificáveis. Qual é a latência/vazão de hoje e a meta (ex.: \"p95 de entrega abaixo de 30s com 10x o volume atual\")?' The example figure stays in the question; the doc's '## Objetivos' section is untouched by the diff."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "Diff shows original headings Visão geral / Objetivos / Fora de escopo / Solução / Plano all retained in order (only Glossário and Escopo e contexto added); all new prose is pt-BR in the same register."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Diff: '-| **Última atualização** | 2026-02-10 |' / '+| **Última atualização** | 2026-07-21 |', matching today's date."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": false,
+      "evidence": "The added Structurizr DSL names a datastore product the seeded document never mentions. Line 59: 'banco = container \"Banco de notificações\" \"Tabela notifications, origem dos eventos de domínio.\" \"PostgreSQL\" \"Database\"'. grep -rniE 'postgres|mysql|sql' over evals/files/notify/ returns no match — the original only says 'lendo da tabela `notifications`', naming no database engine, and the prompt names none either. The reply never flags Postgres as an assumption (it only asks 'escolha do broker'). The broker itself was correctly left generic ('Broker de mensageria'), which shows the leak is specific to the datastore slot."
+    }
+  ]
+}

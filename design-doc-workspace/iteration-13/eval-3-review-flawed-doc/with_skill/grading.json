@@ -1,0 +1,61 @@
+{
+  "eval_id": 3,
+  "eval_name": "review-flawed-doc",
+  "expectations": [
+    {
+      "text": "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+      "passed": true,
+      "evidence": "_user_facing_response.md, first item under '## Perguntas para você': '1. **Existe um template de design doc que a casa segue?** (wiki, drive, outro repo). Templates normalmente moram fora do repositório, então o que eu encontro aqui é pista, não resposta.'"
+    },
+    {
+      "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+      "passed": true,
+      "evidence": "Same item: 'Enquanto não me disser, estou medindo o documento pelo catálogo padrão de seções — ou seja, o que eu sugerir de estrutura é sugestão, não exigência.' Missing sections (trade-offs, alternativas, preocupações transversais, observabilidade) are left as questions, not written into the doc: 'Assim que você responder as perguntas, eu escrevo as seções…'."
+    },
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "Two explicit headings in _user_facing_response.md: '## Perguntas para você' (10 items) and '## O que já apliquei' (7 bullets)."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Questions 2 ('Qual custo o time aceitou?') and 3 ('O que mais vocês consideraram… Inclusive o \"não fazer nada\"'). The edited fanout-de-notificacoes.md has no Trade-offs and no Alternativas section and no new numbers; the unsupported sales claim was removed ('Removi a frase de venda (\"mais escalável e robusta…\")')."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "'## Glossário' sits immediately after the header table, before '## Visão geral', with rows CDC, DLQ, Exchange, Fanout, In-app, Push, SLA, TPS."
+    },
+    {
+      "text": "The architecture diagram — whichever notation it ends up in, since the skill's convention replaces a hand-drawn Mermaid architecture with Structurizr DSL — is followed by explanatory prose, and no diagram is left orphaned",
+      "passed": true,
+      "evidence": "The original orphan `flowchart LR` is replaced by '![Diagrama de containers …](diagrams/fanout-de-notificacoes-containers.svg)' plus a <details> DSL block, followed by 'O CDC observa a tabela `notifications` e entrega ao **dispatcher** os eventos de domínio…'. It is the only diagram in the file."
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals: either rewritten honestly in the document, or explicitly raised to the author as a question in the reply",
+      "passed": true,
+      "evidence": "Doc '## Fora de escopo' now reads '> Nada foi explicitamente excluído ainda. Os itens que estavam aqui (\"o sistema não deve ser lento\", \"o sistema não deve perder notificações\") eram a negação dos objetivos…', and question 5 asks '**O que fica de fora de propósito?**'."
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Question 4: '**Os objetivos precisam de número.** Qual é o SLA de entrega (p. ex. \"95% em até 30s\") e qual é a latência hoje? \"Melhorar a performance\" e \"tornar escalável\" não são verificáveis'. The '95% em até 30s' is an illustrative example inside the question; the document's '## Objetivos' list is left verbatim with no target inserted."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "Whole file stays pt-BR; original section order and titles are kept (Visão geral, Objetivos, Fora de escopo, Solução, Plano — Plano list unchanged word for word), with Glossário and Escopo e contexto added and the detail moved out of Visão geral."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Header row '| **Última atualização** | 2026-07-21 |' (original file had 2026-02-10); 'Criado em | 2026-01-28' preserved. Estado left as 'Em revisão' and queried in question 8 rather than silently changed."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": true,
+      "evidence": "Full inventory of names in the edited doc: CDC, DLQ, TPS, SLA, exchange, dispatcher, workers, filas por canal, providers de push/e-mail/in-app, tabela `notifications`, cron — every one appears in the seeded original (evals/files/notify/docs/design/fanout-de-notificacoes.md). No DSL container carries a technology argument at all (e.g. `cdc = container \"CDC\" \"Captura as alterações…\"`, `exchange = container \"Exchange\" \"Replica cada evento…\"`) — no broker product (RabbitMQ/Kafka), no database product (Postgres) and no CDC product (Debezium) is named anywhere. Relationship labels are business phrases with no technology argument ('Alterações capturadas', 'Publica o evento de notificação', 'Envia a notificação') — no AMQP/HTTP/gRPC. `tags \"Database\"`/`tags \"Queue\"` are C4 classification, not products. The blanks are declared: question 7 '**Tecnologias não estabelecidas.** O texto não diz qual broker, qual ferramenta de CDC nem qual base guarda a tabela `notifications` — deixei essas caixas do diagrama sem tecnologia de propósito'. Rendered SVG text matches the DSL exactly (no extra product strings). Additions beyond the original flowchart (DLQ in-app, provider in-app) trace to the original prose 'DLQ por canal' and 'chamando os providers um a um (push, e-mail, in-app)'. No exclusivity claim in prose."
+    }
+  ]
+}

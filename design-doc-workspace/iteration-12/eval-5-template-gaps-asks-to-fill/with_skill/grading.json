@@ -1,0 +1,31 @@
+{
+  "eval_id": 5,
+  "eval_name": "template-gaps-asks-to-fill",
+  "expectations": [
+    {
+      "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+      "passed": true,
+      "evidence": "_user_facing_response.md: 'Li o `docs/design/dd-2026-007-cache-de-catalogo.md` para pegar o padrão da casa' and spells the skeleton out — 'tabela de cabeçalho ... → **Resumo** → **Contexto** → **Proposta** com uma subseção **### Compensações** (`✓` / `✗`) → **Riscos** (tabela Risco | Mitigação) → **Plano de entrega**' — then 'Vou seguir esse formato exatamente'. Questions 1–3 are each labelled '(obrigatória no template)'."
+    },
+    {
+      "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+      "passed": true,
+      "evidence": "One question per missing section: '1. **Compensações (obrigatória no template).** ... o que a busca vetorial piora?'; '2. **Riscos e mitigações (obrigatória no template).**'; '3. **Plano de entrega (obrigatória no template).** Isso vai em etapas ... ou entra de uma vez?'"
+    },
+    {
+      "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+      "passed": true,
+      "evidence": "No document was written (outputs/docs/design/ holds only the untouched seed dd-2026-007, byte-identical per diff). Candidate cons/risks appear only as interrogatives inside the questions ('Latência da consulta comparada ao `LIKE`? ... Qual desses o time decidiu aceitar conviver?')."
+    },
+    {
+      "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+      "passed": true,
+      "evidence": "'busca por `LIKE` hoje, ~30% das buscas terminando sem resultado, embeddings de título e descrição, armazenamento no pgvector (extensão que já roda no nosso Postgres) e fallback pro `LIKE` quando o score vier baixo.' No extra facts; the sentence-similarity model is explicitly asked for ('Qual modelo de similaridade de sentenças')."
+    },
+    {
+      "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+      "passed": true,
+      "evidence": "No new file: `ls -R outputs` shows only _user_facing_response.md and the pre-existing dd-2026-007. The reply says 'Antes de escrever, preciso de cinco coisas' and 'Assim que você responder eu escrevo o documento inteiro'."
+    }
+  ]
+}

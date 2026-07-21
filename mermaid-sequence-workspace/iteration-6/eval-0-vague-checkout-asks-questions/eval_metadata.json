@@ -1,0 +1,17 @@
+{
+  "eval_id": 0,
+  "eval_name": "vague-checkout-asks-questions",
+  "prompt": "Preciso de um diagrama de sequência do fluxo de checkout do nosso e-commerce pra colocar no README. Pode fazer?",
+  "assertions": [
+    {
+      "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram"
+    },
+    {
+      "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system"
+    },
+    {
+      "text": "Either no mermaid code is delivered at all (the expected outcome when the flow is still unknown), or any block that is included parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran"
+    }
+  ],
+  "expected_output": "Asks 2-4 targeted clarifying questions (participants, trigger, sync vs async, failure handling, level of technical detail) instead of delivering a diagram built on invented endpoints, payloads, or services. No fabricated technical details presented as the user's system."
+}

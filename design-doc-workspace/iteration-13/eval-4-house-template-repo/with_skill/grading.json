@@ -1,0 +1,51 @@
+{
+  "eval_id": 4,
+  "eval_name": "house-template-repo",
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "grep -n '^#' on with_skill/outputs/docs/design/dd-2026-008-rate-limiting-da-api-publica.md gives: '## Resumo' (13), '## Contexto' (17), '## Objetivos' (21), '## Proposta' (26), '### Fluxo de uma requisição' (38), '### Compensações' (64), '## Alternativas consideradas' (72), '## Riscos' (79), '## Plano de entrega' (85). Every house section from dd-2026-007 is present, spelled identically, in the same relative order, with Compensações as a '###' subsection of Proposta and Riscos as a two-column '| Risco | Mitigação |' table — same as the house doc. The header is the same key/value table ('| **Documento** | ... | **Tags** |') and the H1 uses the same 'DD-2026-NNN · Título' form with the '·' separator. None of the skill's default-catalog section names (Objetivo/Non-goals/Solução proposta/Alternativas/Impacto/Plano de teste as a catalog block) is imposed over the house pattern."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "Filename: with_skill/outputs/docs/design/dd-2026-008-rate-limiting-da-api-publica.md (lowercase 'dd-YYYY-NNN-slug.md', matching the existing dd-2026-007-cache-de-catalogo.md). Line 1: '# DD-2026-008 · Rate limiting da API pública'. Line 5: '| **Documento** | DD-2026-008 |'. 007 is the highest existing number in docs/design/, so 008 is the correct next value."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "`grep -inE \"\\bNAT\\b|compartilhad\"` over the doc returns no matches (the only hit for `\\bIP\\b` is line 28, 'a chave de contagem sendo o **token de API** do cliente — não o IP', which is the user's own correction, not a risk). The Riscos table (lines 81-83) has exactly one row, the Redis one. _user_facing_response.md line 16 states the omission was deliberate: 'Deixei o falso positivo com NAT compartilhado de fora. Você mesmo concluiu que ele não existe'."
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "Line 19: 'Ontem, no incidente INC-4412, um cliente com uma integração mal feita enviou 40 vezes o tráfego normal e derrubou a API pública para todos os clientes por 25 minutos.' Lines 30-34 table: 'Free | 10 rps', 'Pro | 100 rps', 'Enterprise | negociado por contrato'. Line 36: 'o gateway responde **429** com o header `Retry-After`'. Alternatives (lines 75-76) carry the user's reasons verbatim in substance: 'tarde demais... já consumiu o gateway e a malha' and 'Descartado por custo e por lock-in'. Phases (lines 87-89) match shadow mode → free → geral."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "Line 69: '- ✗ Um cliente legítimo em pico — uma Black Friday, por exemplo — pode tomar 429. Mitigamos com o `Retry-After` na resposta e com um alerta para o time de contas avisar os clientes enterprise.' Uses the house's ✓/✗ bullet convention from dd-2026-007 lines 27-30, and the Compensações block has 3 ✓ and 2 ✗ (non-zero cons)."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Line 83: '| O Redis de sessão virar ponto de contenção ao absorver os contadores de rate limiting | Medir a carga adicional antes de habilitar o enforcing — o shadow mode da fase 1 existe para isso |'. Reinforced as a cost at line 70: '✗ O caminho crítico de toda requisição da API pública passa a depender do Redis.'"
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "Path: with_skill/outputs/docs/design/dd-2026-008-rate-limiting-da-api-publica.md — same directory as the house doc. Body is Brazilian Portuguese throughout ('Este documento propõe rate limiting por token de API no gateway Kong', line 15); headings match the Portuguese house headings."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": false,
+      "evidence": "DIAGRAM SIDE: CLEAN. The doc contains one Mermaid sequence block (lines 40-60) and no Structurizr DSL (`grep -inE \"workspace|softwareSystem|container \"` → no matches). Its four participants (Cliente da API, Gateway (Kong), Redis, Serviços da API pública) and every message label ('Requisição autenticada por token de API', 'Incrementa o contador do token na janela deslizante', 'Contagem na janela', 'Encaminha a requisição', 'Resposta', '429', Note 'Header Retry-After...') all trace to the prompt. `grep -inE \"HTTPS?|TCP|TLS|gRPC|REST|JSON|Postgres|Kafka|Nginx|Envoy|Prometheus|AWS|Kubernetes|OAuth|JWT\"` over the whole doc returns ZERO matches — the 1.3.1 invented protocol label is gone, and unknowns are genuinely deferred (Autores/Revisores '_a definir_', enterprise limit left as 'negociado por contrato' and raised as question 2 in _user_facing_response.md). PROSE SIDE: FAILS, on two unsupported exclusivity claims. (1) Line 19: 'o único freio disponível durante o incidente foi a intervenção manual'. The prompt establishes 40x traffic, a 25-minute outage, and that 'hoje não existe nenhum limite por cliente' — it never says how INC-4412 was stopped, nor that anyone intervened manually. 'Nenhum limite por cliente' does not entail 'nenhum outro freio': a global throttle, WAF block, autoscaling, circuit breaker, or the client fixing its own integration are all neither stated nor excluded by the prompt. The doc asserts their absence as recorded incident fact. (2) Line 74: 'sem limite por cliente, uma integração mal feita derruba a API pública inteira, e a única resposta disponível é manual' — the same claim restated in the present tense as the current operational state, again unestablished. A faithful phrasing was available ('não existe hoje nenhum mecanismo automático de contenção por cliente'); the doc instead invented an incident-response fact. This is the same class of defect as the 1.3.1 'o Redis ... é a única infraestrutura de contadores rápidos já disponível' claim (note that specific sentence did NOT recur — line 68 is now the defensible 'Reaproveita duas peças que já existem em produção, o Kong e o Redis de sessão'). Also worth flagging, though lesser: the 'Não fazer nada' alternative at line 74 is a skill-added option the user never said was considered, and it is the very bullet carrying the second invented claim."
+    },
+    {
+      "text": "A governing template is a floor, not a ceiling: sections beyond the house pattern are acceptable only when the user supplied that substance, the house skeleton and its order stay intact, and the reply tells the user it stepped outside the pattern",
+      "passed": true,
+      "evidence": "All three conditions hold. (1) Substance is user-supplied: '## Objetivos' (lines 23-24) restates the prompt's 'Objetivo: nenhum token excede seu limite por mais de 1s e a API aguenta um cliente abusivo sem degradar os demais'; '## Alternativas consideradas' (lines 75-76) restates the two alternatives the prompt gave with the user's own discard reasons. (2) Skeleton and order intact: see assertion 1 — the extra H2s sit between house sections without reordering or renaming any of them. (3) The reply says so explicitly: _user_facing_response.md line 5 heading '## Onde saí do padrão (e por quê)', line 7 'Você me deu duas coisas que o padrão do DD-2026-007 não tem onde guardar... As duas ficaram na ordem natural do esqueleto da casa, que continua intacto', and line 12 offers to fold them back in ('Se vocês preferirem manter o padrão estrito, eu dobro as duas para dentro de Resumo/Proposta')."
+    }
+  ]
+}

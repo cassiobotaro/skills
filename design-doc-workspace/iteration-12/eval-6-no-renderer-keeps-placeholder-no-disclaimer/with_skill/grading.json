@@ -1,0 +1,41 @@
+{
+  "eval_id": 6,
+  "eval_name": "no-renderer-keeps-placeholder-no-disclaimer",
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/, in Portuguese",
+      "passed": true,
+      "evidence": "outputs/docs/design/servico-de-webhooks-de-saida.md, '# Serviço de webhooks de saída', all sections in pt-BR."
+    },
+    {
+      "text": "The architecture diagram is authored as Structurizr DSL, embedded as a Markdown image reference with the DSL folded inside a <details> block",
+      "passed": true,
+      "evidence": "'![Diagrama de contêineres — Serviço de webhooks de saída](diagrams/arquitetura.svg)' followed by '<details>\\n<summary>Fonte do diagrama (Structurizr DSL)</summary>' wrapping a full `workspace \"Serviço de webhooks de saída\" { model { ... } views { ... } }`."
+    },
+    {
+      "text": "The image reference is left as a placeholder (optionally with a one-line 'render in the manual pass' note) rather than the doc being blocked, retried, or the diagram redrawn by hand in Mermaid",
+      "passed": true,
+      "evidence": "No diagrams/ directory was produced; the image link is followed by a single blockquote note: '> A imagem ainda precisa ser gerada a partir do DSL abaixo (esta máquina não tem a CLI do Structurizr nem Docker) — renderizar na passada manual e commitar em `docs/design/diagrams/arquitetura.svg`.' The architecture is not a hand-drawn Mermaid flowchart."
+    },
+    {
+      "text": "The retry delivery flow is a fenced ```mermaid sequence diagram",
+      "passed": true,
+      "evidence": "'### Fluxo de entrega com retry' contains a ```mermaid fence starting 'sequenceDiagram / autonumber / participant D as Serviço de domínio' with a 'loop Reenvio com backoff exponencial, por até 24h' and 'opt Janela de 24h esgotada sem sucesso'."
+    },
+    {
+      "text": "The document contains NO validation disclaimer (no 'não validado', 'not machine-validated', 'ilustração do texto' or equivalent)",
+      "passed": true,
+      "evidence": "grep -niE 'não validad|nao validad|not machine|ilustra|sem valida' on the document returns no match. The 'não foi validado' wording occurs only in _user_facing_response.md, which the assertion allows."
+    },
+    {
+      "text": "Every diagram is followed by explanatory prose",
+      "passed": true,
+      "evidence": "After the </details> of the DSL: 'O diagrama tem quatro peças fora da nossa fronteira e três dentro dela...'; after the Mermaid fence: 'O fluxo começa fora do serviço: o serviço de domínio publica o evento no Kafka (passo 1)...'."
+    },
+    {
+      "text": "Does not attempt to install Docker, the Structurizr CLI, or any other dependency",
+      "passed": true,
+      "evidence": "No install artefacts in outputs/; the reply presents docker commands only as future instructions ('Quando tiver o ambiente, para exportar e para validar o DSL') and states 'não há servidor MCP conectado nem mermaid-cli instalado, e não instalei nada'."
+    }
+  ]
+}

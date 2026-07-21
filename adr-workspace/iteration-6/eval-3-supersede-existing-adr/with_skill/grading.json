@@ -1,0 +1,36 @@
+{
+  "eval_id": 3,
+  "eval_name": "supersede-existing-adr",
+  "expectations": [
+    {
+      "text": "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+      "passed": true,
+      "evidence": "ls doc/adr shows 0001,0002,0003 plus new 0004-use-stateless-jwt-sessions.md — next after the highest existing 0003."
+    },
+    {
+      "text": "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+      "passed": true,
+      "evidence": "0004 lines 7-9: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)'. Bracket text equals 0002's H1 minus '# '; href is the bare basename."
+    },
+    {
+      "text": "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+      "passed": true,
+      "evidence": "diff against pristine fixture evals/files/session-service/doc/adr/0002-store-sessions-in-redis.md reports exactly one hunk: '7c7  < Accepted  --- > Superseded by [4. Use stateless JWT sessions](0004-use-stateless-jwt-sessions.md)'. Every other byte identical; 'Accepted' removed."
+    },
+    {
+      "text": "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+      "passed": true,
+      "evidence": "grep shows 'Superseded by' in 0002 and 'Supersedes' in 0004; no occurrence of 'Superceded'/'Supercedes' anywhere in the outputs."
+    },
+    {
+      "text": "New ADR prose is in English to match the existing log (consistency outranks the Portuguese conversation), four sections in order, ISO date, reflecting only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+      "passed": true,
+      "evidence": "0004 prose is English matching the log; headings in order (# 4 / Date: 2026-07-21 / ## Status / ## Context / ## Decision / ## Consequences). Content maps to stated facts only: 'the Redis cluster a hard runtime dependency ... single point of failure' in multi-region, 'Keeping it replicated across regions carries a cost the team does not consider justified', 'stateless JWT tokens ... short expiration of 15 minutes', 'a session can no longer be revoked immediately'."
+    },
+    {
+      "text": "ADRs 0001 and 0003 are untouched",
+      "passed": true,
+      "evidence": "diff -r against evals/files/session-service/doc/adr reports differences only for 0002 (the Status line) and the added 0004; 0001 and 0003 are byte-identical."
+    }
+  ]
+}

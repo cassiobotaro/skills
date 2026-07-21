@@ -1,0 +1,56 @@
+{
+  "eval_id": 1,
+  "eval_name": "rich-write-new-doc",
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "iteration-13/eval-1-rich-write-new-doc/with_skill/outputs/docs/design/exportacao-de-relatorios-em-background.md (plus rendered docs/design/diagrams/arquitetura-containers.svg)"
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire doc is pt-BR: '# Exportação de relatórios em background', '## Preocupações transversais', '## Questões em aberto'."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "'## Trade-offs da solução escolhida' → '✗ **O usuário perde o download imediato.** Exportações pequenas, que hoje voltam na hora, passam a chegar por e-mail. Foi o custo que aceitamos em troca do caminho único.'"
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "'## Alternativas consideradas' table rows: 'Gerar síncrono com timeout maior no gateway', 'Ferramenta de BI externa', 'Não fazer nada' — the last with '✗ Mantém as falhas em 12% das exportações acima de 50 mil linhas e o ticket semanal do suporte'."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'## Preocupações transversais' → '**Plataforma.** Os jobs de exportação passam a ocupar a fila compartilhada do RabbitMQ, que o time de plataforma opera.' and '**Segurança.** O link assinado dá acesso a um arquivo com dados de cliente a quem tiver a URL.'"
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": true,
+      "evidence": "'## Glossário' is the first section after the header table; entries: Job de exportação, Worker, RabbitMQ, Amazon S3, Link assinado, PII, CSV/XLSX, BI, Streaming. grep shows no glossary row for API/HTTP/URL/C4/DSL/Structurizr."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Two diagrams. Container SVG + folded DSL is followed by 'Quatro peças compõem o serviço. A **API** recebe o pedido…'; the Mermaid sequence block is followed by 'O usuário pede a exportação (passo 1) e a API responde na hora…'."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Only numeric claims in the doc are '30 segundos', '12% das exportações acima de 50 mil linhas', '100 mil linhas' — all from the prompt. No TTL, retry count, throughput or SLA number invented; link validity, retry behaviour, status tracking and rollout appear under '## Questões em aberto'; Autores/Revisores are '*a definir*'."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'## Visão geral' is exactly two paragraphs; it names queue/worker/S3/signed-link-by-email and the accepted cost. The only number is the pre-existing 30s gateway limit (problem context from the prompt), not a config of the new design; no schema, payload, endpoint or retry policy."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": true,
+      "evidence": "Full inventory of named tech in prose + DSL + Mermaid + SVG: RabbitMQ (prompt: 'a gente já tem RabbitMQ'), Amazon S3 (prompt: 'sobe pro S3'), CSV/XLSX (prompt), gateway/e-mail/link assinado (prompt). DSL technology arguments appear only on two containers — 'RabbitMQ' and 'Amazon S3'; the API and Worker containers carry NO technology argument, and 'Serviço de e-mail' is a plain external softwareSystem. All relationship labels are business phrases with no technology argument ('Publica o job de exportação em', 'Envia o arquivo gerado para') — no AMQP/HTTPS/SMTP, unlike iteration-12 (see iteration-12/benchmark.md:40 'Relationship technologies AMQP and HTTPS were added'). Tags 'Queue'/'Database'/'External' are C4 classification, not products. The gap is named explicitly: 'Duas caixas do diagrama estão sem tecnologia de propósito: ainda não definimos em que a API e o worker serão escritos, nem qual serviço de e-mail fará a entrega (ver Questões em aberto)' and matching open questions. Mermaid participants carry only RabbitMQ/Amazon S3; message labels are business language with no invented protocol. Rendered SVG text matches the DSL (only 'RabbitMQ]' and 'S3]' technology strings). No exclusivity claim ('a única …') anywhere."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "eval_id": 6,
+  "eval_name": "no-renderer-keeps-placeholder-no-disclaimer",
+  "prompt": "Escreve o design doc do nosso serviço de webhooks de saída em docs/design/. Hoje cada serviço que precisa avisar um cliente externo faz o POST na mão, sem retry e sem log central — quando o endpoint do cliente cai, o evento se perde e a gente só descobre pelo suporte. A proposta: um serviço único de entrega que consome os eventos de domínio do Kafka que já temos, persiste a tentativa no Postgres, faz o POST assinado com HMAC no endpoint do cliente e reenvia com backoff exponencial por até 24h, mandando pra DLQ depois disso. Alternativa descartada: usar um SaaS de webhooks (custo por evento e o payload sairia da nossa borda). Trade-off aceito: a entrega deixa de ser imediata em alguns casos, porque passa pela fila. Objetivo: nenhum evento perdido por indisponibilidade do cliente e visibilidade de cada tentativa. Precisa do diagrama de arquitetura e do fluxo de entrega com retry. Nesta máquina não tem Docker, não tem a CLI do Structurizr e nenhum servidor MCP está conectado.",
+  "assertions": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/, in Portuguese"
+    },
+    {
+      "text": "The architecture diagram is authored as Structurizr DSL, embedded as a Markdown image reference with the DSL folded inside a <details> block"
+    },
+    {
+      "text": "The image reference is left as a placeholder (optionally with a one-line 'render in the manual pass' note) rather than the doc being blocked, retried, or the diagram redrawn by hand in Mermaid"
+    },
+    {
+      "text": "The retry delivery flow is a fenced ```mermaid sequence diagram"
+    },
+    {
+      "text": "The document contains NO validation disclaimer (no 'não validado', 'not machine-validated', 'ilustração do texto' or equivalent)"
+    },
+    {
+      "text": "Every diagram is followed by explanatory prose"
+    },
+    {
+      "text": "Does not attempt to install Docker, the Structurizr CLI, or any other dependency"
+    }
+  ],
+  "expected_output": "Escreve o doc em português com o diagrama de arquitetura autorado como Structurizr DSL — embutido como referência de imagem Markdown (placeholder, já que não há renderizador) com o DSL dobrado num bloco <details> — e o fluxo de entrega com retry como bloco ```mermaid. Não tenta instalar nada, não fica preso tentando renderizar, e NÃO escreve nenhum disclaimer de validação (nada de 'não validado por máquina' / 'apenas ilustração do texto'); no máximo uma nota de uma linha marcando que a imagem deve ser renderizada na passada manual. Todo diagrama é seguido de prosa explicativa."
+}

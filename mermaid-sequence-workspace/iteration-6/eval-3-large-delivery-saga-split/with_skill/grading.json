@@ -1,0 +1,41 @@
+{
+  "eval_id": 3,
+  "eval_name": "large-delivery-saga-split",
+  "expectations": [
+    {
+      "text": "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram",
+      "passed": true,
+      "evidence": "outputs/order-lifecycle.md contains 5 fenced ```mermaid blocks: '## 1. Overview', '## 2. Phase 1 — placing the order and paying', '## 3. Phase 2 — the restaurant accepts or rejects', '## 4. Phase 3 — courier assignment and delivery', '## 5. Notifications (cross-cutting)'."
+    },
+    {
+      "text": "Every mermaid block parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+      "passed": true,
+      "evidence": "Check run: hosted Mermaid MCP (mcp__mermaid__validate_and_render_mermaid_diagram), permitted for this eval; mermaid-cli is not installed. All 5 blocks were submitted individually and every one returned '📊 sequenceDiagram Diagram Generated / PNG: ✅ Generated' with a rendered image — no parse errors. Nested alt-inside-alt (block 1) and alt-inside-loop (block 4) both rendered, and the `deactivate P/O/G` after the alt `end` in block 2 rendered with correct activation bars."
+    },
+    {
+      "text": "No single diagram exceeds roughly 25 messages",
+      "passed": true,
+      "evidence": "Message lines counted per block (autonumber counters in the rendered PNGs confirm): block 1 = 14, block 2 = 18, block 3 = 10, block 4 = 13, block 5 = 13. Max 18, well under 25."
+    },
+    {
+      "text": "Participant names/labels are consistent across the diagrams (the same service uses the same label everywhere)",
+      "passed": true,
+      "evidence": "Ids and labels match wherever a participant recurs: C/Customer (blocks 1,2,4,5, always `actor`), M/Mobile App (1,2,5), O/Order Service (1,2,3), P/Payment Service (1,2,3), R/Restaurant Service (1,3), CO/Courier Service (1,4), N/Notification Service (1,5), K/Kafka (2,3,4,5), T/'Restaurant<br/>(tablet)' (3,4), DB/'Order DB (Postgres)', G/API Gateway, S/Stripe, V/Courier. No label drifts (e.g. Order Service is never 'Orders API')."
+    },
+    {
+      "text": "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit",
+      "passed": true,
+      "evidence": "Every block is preceded by an `##` heading plus a one-line intro, e.g. '## 2. Phase 1 ... From the tap in the app to `order.paid` on Kafka, with the declined branch.' Continuity is stated explicitly: phase 2 opens 'Continues from step 10 of phase 1 (`order.paid` published).', phase 3 opens 'Continues from step 5 of phase 2 (`order.accepted` published).', and section 5 notes 'It runs alongside phases 1–3 rather than after them.' The document preamble also states the split rationale and that participant ids are identical across the set."
+    },
+    {
+      "text": "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier",
+      "passed": true,
+      "evidence": "Block 2: 'else card declined' -> 'O->>DB: UPDATE order status = FAILED' -> 'M-->>C: Show payment error'. Block 3: 'else restaurant rejects' -> 'O->>P: Refund the payment' -> 'O->>O: Mark order CANCELLED' -> 'O-)K: publish order.cancelled'; the customer notification lands in block 5 'opt the restaurant rejected the order' -> 'N->>M: Push: order cancelled and refunded'. Block 4: 'loop until a courier accepts' wrapping 'else courier declines' -> 'V-->>CO: Decline' + 'Note over CO,V: Retry the offer with the next nearest courier'."
+    },
+    {
+      "text": "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested",
+      "passed": true,
+      "evidence": "Feature inventory across all 5 blocks: participant/actor with `as` aliases, `<br/>` in an aliased label, autonumber, notes (`Note over`), arrows `->>`, `-->>`, `-)`, activations `+`/`-`/`deactivate`, alt/else, opt, loop. Every one sits in the 'Safe core (use freely)' row of references/syntax.md; no create/destroy, bidirectional arrows, typed participants `@{...}`, half-arrows or `autonumber <start> <increment>`. The response also states 'Everything is safe-core Mermaid syntax (no version-gated features)'."
+    }
+  ]
+}

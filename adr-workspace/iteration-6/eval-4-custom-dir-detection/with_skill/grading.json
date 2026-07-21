@@ -1,0 +1,36 @@
+{
+  "eval_id": 4,
+  "eval_name": "custom-dir-detection",
+  "expectations": [
+    {
+      "text": "New ADR created inside docs/architecture/decisions/ (the directory named by .adr-dir) — NOT in doc/adr/ or docs/adr/",
+      "passed": true,
+      "evidence": "find shows the new file at docs/architecture/decisions/0003-version-the-public-api-by-url-path.md; no doc/adr/ or docs/adr/ directory exists in the outputs. .adr-dir contains 'docs/architecture/decisions'."
+    },
+    {
+      "text": "Numbered 0003 with a kebab-case slug; H1 reads '# 3. <Title>' (un-padded)",
+      "passed": true,
+      "evidence": "Filename 0003-version-the-public-api-by-url-path.md (kebab slug); line 1 is '# 3. Version the public API by URL path'."
+    },
+    {
+      "text": "Prose is in English to match the existing log; the four sections appear in canonical order, 'Date:' is ISO 8601 with today's real date, Status is 'Accepted'",
+      "passed": true,
+      "evidence": "Prose English matching the log; grep gives '# 3. ... | Date: 2026-07-21 | ## Status | ## Context | ## Decision | ## Consequences' in canonical order; Status body is 'Accepted'."
+    },
+    {
+      "text": "Context/Decision capture URL-path versioning over header versioning with the stated motives (SDK client expectations, gateway routing, visibility in logs/curl)",
+      "passed": true,
+      "evidence": "Context: 'Our SDK clients already expect the version to appear in the URL. The gateway can route on the path ... also visible in logs and in a `curl` command'. Decision: 'We will version the public API by URL path ... We will not use a version header.'"
+    },
+    {
+      "text": "Consequences include URL proliferation and the cap of at most two active versions",
+      "passed": true,
+      "evidence": "Consequences: 'URLs proliferate: every resource path exists once per active version ... we will support at most two active versions at any time'."
+    },
+    {
+      "text": "Existing 0001, 0002 and the .adr-dir file are unmodified",
+      "passed": true,
+      "evidence": "diff -r evals/files/api-platform vs the outputs dir reports only 'Somente em ... 0003-version-the-public-api-by-url-path.md' and '_user_facing_response.md' — 0001, 0002 and .adr-dir are byte-identical."
+    }
+  ]
+}

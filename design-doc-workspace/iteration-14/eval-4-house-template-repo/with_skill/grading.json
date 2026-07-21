@@ -1,0 +1,51 @@
+{
+  "eval_id": 4,
+  "eval_name": "house-template-repo",
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "dd-2026-008-rate-limiting-api-publica.md headings in order: L13 '## Resumo', L17 '## Contexto', L21 '## Objetivos', L26 '## Proposta', L63 '### Compensações', L70 '## Alternativas consideradas', L78 '## Riscos', L85 '## Plano de entrega'. All five house sections present in house order; header table replicates DD-2026-007's exact fields (Documento/Estado/Autores/Revisores/Criado em/Última atualização/Tags) and Compensações uses the same ✓/✗ bullet convention; Riscos is the same two-column Risco|Mitigação table. No skill-default catalog section (no 'Contexto e problema', 'Métricas de sucesso', 'Impacto em outros times', etc.) was imposed."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "File path docs/design/dd-2026-008-rate-limiting-api-publica.md; L1 '# DD-2026-008 · Rate limiting da API pública'; L5 '| **Documento** | DD-2026-008 |'. The pre-existing dd-2026-007 file in outputs/ is byte-identical to the fixture (diff returned no output), so it was read, not rewritten."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "grep -inE '\\bNAT\\b' on the doc returns zero matches. The Riscos table (L80-83) lists only Redis contention and legitimate-client-429. NAT appears only in _user_facing_response.md L14, as an explicit statement that it was left out ('Deixei o falso positivo de NAT compartilhado de fora ... o limite é por token, não por IP')."
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "L15 'enviou 40x o tráfego normal e derrubou a API para todos os clientes por 25 minutos (INC-4412)'; L19 repeats INC-4412 / '40 vezes' / '25 minutos'; L30-34 plan table 'Free | 10 rps', 'Pro | 100 rps', 'Enterprise | Negociado'; L36 'o gateway responde **429** com o header `Retry-After`'. Date derivation is correct: prompt says 'ontem', today is 2026-07-21, doc says 2026-07-20."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "L67 under ### Compensações: '- ✗ Cliente legítimo em pico (tipo Black Friday) pode tomar 429; mitigamos com o `Retry-After` e com alerta para o time de contas avisar os clientes enterprise'. Cost marker and mitigation are in the same bullet, matching the prompt's 'trade-off aceito'."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "L82 '| O Redis de sessão virar ponto de contenção com o tráfego de contadores | Medir o impacto antes de habilitar o enforcing (fase de shadow mode) |'. The delivery plan L87 reinforces it: shadow mode measures 'qual o impacto no Redis de sessão'."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "Path: with_skill/outputs/docs/design/dd-2026-008-rate-limiting-api-publica.md. Body is Brazilian Portuguese throughout (e.g. L28 'Rate limiting por **token de API**, aplicado no gateway Kong, antes de a requisição chegar aos serviços.'); no English prose sections. Filename slug follows the house lowercase-hyphen pattern of dd-2026-007-cache-de-catalogo.md."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": true,
+      "evidence": "DIAGRAM (only diagram is the Mermaid sequence, L38-59): participants are 'Cliente da API', 'Gateway (Kong)', 'Redis', 'Serviço interno' — Kong, Redis and internal services/malha are all prompt-given. Message labels name no protocol and no unstated product: 'Requisição com token de API', 'Incrementa o contador da janela deslizante do token', 'Contagem na janela', 'Encaminha a requisição', 'Resposta', '429 Too Many Requests'. No HTTP/HTTPS/gRPC/RESP technology label anywhere (the 1.3.1 'HTTPS' regression does not recur); '429 Too Many Requests' is the canonical reason phrase of the status code the prompt supplied, not a new protocol. PROSE — every exclusivity/superlative hit from grep -inE 'unic|únic|sempre|nunca|apenas|somente|todo|toda' adjudicated: (1) L76 'por causa de um único integrador' — FAITHFUL RESTATEMENT: the prompt says 'um cliente com integração mal feita mandou 40x o tráfego normal e derrubou a API pra todo mundo', i.e. the prompt itself establishes a single client as the cause; 'um único integrador' counts the cause the user gave and asserts nothing about what other mechanisms do or do not exist. This is categorically different from the 1.3.1/1.3.2 failures ('a única infraestrutura de contadores rápidos já disponível', 'o único freio disponível durante o incidente foi a intervenção manual', 'a única resposta disponível é manual'), which were inferences that no other option existed. No such construction appears in this doc. (2) L15/L19 'não tem nenhum limite por cliente' / 'hoje não existe nenhum limite por cliente' — verbatim from the prompt ('hoje não existe nenhum limite por cliente'). (3) L19 'qualquer token pode consumir toda a capacidade disponível' and L65 'em vez de toda a capacidade da API' — direct consequence of the prompt-stated absence of limits plus the prompt-stated outcome ('derrubou a API pra todo mundo'). (4) L68 'Coloca o Redis de sessão no caminho de toda requisição da API pública' — follows from the prompt's own design (limit enforced at the gateway with Redis counters). (5) L87 'apenas medindo' — restates the prompt's 'shadow mode só medindo'. Remaining prose facts trace to the prompt: alternatives and their rejection reasons (L72-74), objectives (L23-24), phased rollout (L87-89). Only borderline embellishment is L19 'Já operamos um Redis para sessão, compartilhado pelos serviços da plataforma' — 'compartilhado pelos serviços da plataforma' is a mild expansion of the prompt's 'o Redis que já usamos pra sessão', but it names no new product/datastore and is implied by the prompt's own contention risk; not scored as an invention. Unknowns are correctly left blank and raised rather than filled: L7-8 Autores/Revisores '_a definir_' with the question asked in _user_facing_response.md L17, and the unstated sliding-window size raised as an open question in L19 of the reply."
+    },
+    {
+      "text": "A governing template is a floor, not a ceiling: sections beyond the house pattern are acceptable only when the user supplied that substance, the house skeleton and its order stay intact, and the reply tells the user it stepped outside the pattern",
+      "passed": true,
+      "evidence": "All three conditions hold. (a) User-supplied substance: the two extra sections are '## Objetivos' (prompt: 'Objetivo: nenhum token excede seu limite por mais de 1s e a API aguenta um cliente abusivo sem degradar os demais') and '## Alternativas consideradas' (prompt: 'Alternativas: limitar dentro de cada serviço (descartado — tarde demais…) e o módulo pago do gateway gerenciado (descartado — custo e lock-in)'); both reproduce the user's own content and reasons. The third alternative 'Não fazer nada' is anchored on the prompt-stated status quo and INC-4412, not on invented facts. (b) Skeleton and order intact: Resumo → Contexto → Proposta(+Compensações) → Riscos → Plano de entrega all present in the house sequence, with the extras inserted between them, header table and ✓/✗ conventions unchanged. (c) Reply flags the deviation explicitly: _user_facing_response.md L5 '**Duas seções fora do padrão da casa.**', L10 'O esqueleto e a ordem da casa continuam intactos, mas o desvio é seu para aceitar — se o padrão for fechado, eu dobro as duas dentro de Resumo e Proposta.' It also flags the Mermaid diagram as a departure (L15: 'O DD-2026-007 não tem diagrama; se o padrão for texto puro, é só remover')."
+    }
+  ]
+}

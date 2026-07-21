@@ -1,0 +1,36 @@
+{
+  "eval_id": 2,
+  "eval_name": "order-api-from-code",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+      "passed": true,
+      "evidence": "Check run: hosted Mermaid MCP (mcp__mermaid__validate_and_render_mermaid_diagram), permitted for this eval; mermaid-cli is not installed. The block reached the renderer with no parse error — the server returned only 'Generated PNG exceeds size limit of 512000 bytes' (an output-byte cap hit by the very wide notes), i.e. Mermaid parsed and laid the diagram out. Contrast control: feeding deliberately broken input (`A ~~> B: y`) to the same tool returns 'Parse error on line 6: ... Expecting NEWLINE, ... got INVALID', a different failure class. A structurally identical trim of the same diagram also returned only the size message, never a parse error. Manual review against references/syntax.md agrees: `>` is avoided via '(gt 0)', activations balance (one `+` each for API/PG/DB against `DB-->>-API` and trailing `deactivate PG` / `deactivate API` after the alt `end`), 3-branch alt closed once."
+    },
+    {
+      "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+      "passed": true,
+      "evidence": "In order: 'C->>+API: POST /orders' (main.py:23 @app.post(\"/orders\", status_code=201)); 'API->>+PG: POST /v2/charges' (payments.py:17); 'API->>+DB: INSERT INTO orders ... RETURNING id' (db.py:19-21); 'API-)MQ: publish order.created' (events.py:24 routing_key=\"order.created\"); 'API-->>C: 201 Created'."
+    },
+    {
+      "text": "The declined-payment branch from the code is shown (declined -> 402)",
+      "passed": true,
+      "evidence": "'else pagamento recusado (status = declined)' -> 'PG-->>API: { \"payment_id\": \"...\", \"status\": \"declined\" }' -> 'API-->>C: 402 Payment Required' + note '{ \"detail\": \"payment declined\" }', matching main.py:28-29 raise HTTPException(status_code=402, detail=\"payment declined\")."
+    },
+    {
+      "text": "Notes/messages carry details actually present in the code (e.g. Authorization: Bearer, Idempotency-Key, card_token/amount/currency payload fields, orders exchange/routing key) and contain nothing absent from the code",
+      "passed": true,
+      "evidence": "Every note token traced to source: 'api.paygate.example.com' (payments.py:6), 'Authorization: Bearer PAYGATE_API_KEY' and 'Idempotency-Key: uuid4' (payments.py:25-26), 'card_token/amount/currency: BRL/capture: true' (payments.py:18-23), 'timeout de 10s' (payments.py:15 timeout=10.0), 'exchange \"orders\", routing_key \"order.created\", content_type: application/json' and the event body fields (events.py:12-24), \"status gravado como 'confirmed'\" and the insert columns (db.py:19-20), the request-body shape incl. 'quantity: (gt 0)', 'unit_price_cents: (gt 0)', 'items exige no minimo 1 item' (main.py:13-14,20), the 201 response body order_id/status/total_cents (main.py:36), and 'raise_for_status() propaga e vira 500' (payments.py:13,29). No token found that is absent from the four files."
+    },
+    {
+      "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment that the response does not wait for consumers",
+      "passed": true,
+      "evidence": "'API-)MQ: publish order.created' uses the async open-arrow `-)` (no reply leg drawn), and the note ends 'a resposta da API nao espera os consumidores' — a direct rendering of main.py:33 '# fire-and-forget: the API response does not wait for consumers'."
+    },
+    {
+      "text": "Did not ask the user questions that the provided code answers",
+      "passed": true,
+      "evidence": "The response opens 'Li os quatro arquivos ... e montei o diagrama' and delivers the finished block. The only question-shaped text is the closing paragraph about the Pydantic 422 and DB/RabbitMQ write failures — 'porque o codigo nao as estabelece explicitamente ... preciso que voces me digam o que de fato acontece' — behaviour genuinely not decided in the code."
+    }
+  ]
+}

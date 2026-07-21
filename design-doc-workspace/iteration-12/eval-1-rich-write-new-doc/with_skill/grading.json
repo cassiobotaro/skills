@@ -1,0 +1,56 @@
+{
+  "eval_id": 1,
+  "eval_name": "rich-write-new-doc",
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "outputs/docs/design/exportacao-de-relatorios-em-background.md exists (plus outputs/docs/design/diagrams/arquitetura-containers.png)."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Title '# Exportacao de relatorios em background'; all headings and prose in pt-BR ('## Visao geral', '## Alternativas consideradas')."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "'## Trade-offs da solucao escolhida': '✗ **O usuario perde o download imediato.** Exportacoes pequenas, que hoje voltam na hora, passam a chegar por e-mail.'"
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "Alternatives table rows: 'Manter tudo sincrono, aumentando o timeout', 'Usar uma ferramenta de BI externa', 'Nao fazer nada'."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'## Preocupacoes transversais' has '### Seguranca' ('O link assinado da acesso a um arquivo com PII e viaja por e-mail') and '### Plataforma' ('A fila de exportacao vai para o RabbitMQ compartilhado, que o time de plataforma opera')."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": true,
+      "evidence": "'## Glossario' sits directly after the header table with entries BI, CSV, Gateway, Job, Link assinado, PII, RabbitMQ, S3, Streaming, Worker, XLSX. No API/HTTP/URL/C4/DSL/Structurizr entries."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "Container diagram followed by 'Quatro pecas compoem a solucao...' bullet prose; the Mermaid sequence is followed by 'O usuario pede a exportacao (1) e a API apenas publica o job na fila (2)...'."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "The only numbers present are 30s, 12%, 50 mil and 100 mil, all from the prompt; unknowns are '*a definir*' in the header and seven items under '## Questoes em aberto' (link validity, retry policy, load test)."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'## Visao geral' is exactly two paragraphs ('Hoje a API gera os relatorios...' / 'A proposta troca imediatismo por confiabilidade...') with no schema, endpoint, payload or retry detail."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": false,
+      "evidence": "The Structurizr DSL invents two transport protocols the user never stated and that appear nowhere in the (empty) repo. Line 95: 'relatorios.api -> relatorios.fila \"Publica o job de exportacao na\" \"AMQP\"' (also line 96); lines 94/97/98/100 carry \"HTTPS\", e.g. 'usuario -> relatorios.api \"Solicita a exportacao de um relatorio na\" \"HTTPS\"'. The prompt names only RabbitMQ, S3, CSV/XLSX and e-mail; neither AMQP nor HTTPS is in it, and neither is left blank or raised in 'Questoes em aberto'. By contrast the container technology slots \"RabbitMQ\" and \"Amazon S3\" do trace to the prompt, and tags \"Queue\"/\"Database\" are C4 classification, not product claims."
+    }
+  ]
+}

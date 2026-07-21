@@ -47,7 +47,8 @@ scripts in this repo. Each skill has:
 Gotchas when running evals in this repo (learned the hard way):
 
 - Spawn eval subagents in the **foreground** (parallel calls in one message). Background agents (`run_in_background: true`) are blocked from Write/Edit in the main checkout regardless of allowlist; if you must, salvage outputs from their final messages.
-- The Write/Edit allowlist that lets foreground eval agents save outputs is scoped to `*-workspace/**` in `.claude/settings.local.json` (gitignored). Extend it there for new skills, not in tracked settings.
+- **Cap the fan-out at ~4-6 concurrent runs.** Launching a whole multi-skill eval sweep in one message (19 agents, iteration-6/12) had 8 of them killed by the stall watchdog with no progress for 600s, and the survivors reported wall-clock in the millions of ms — pure queueing. Batch the runs and re-seed any fixture directory before re-running a killed agent, since a partial run may have edited it. Wall clock from a contended sweep is not a comparable metric; tokens are.
+- The allowlist that lets foreground eval agents save outputs is scoped to `*-workspace/**` in `.claude/settings.local.json` (gitignored). Extend it there for new skills, not in tracked settings. Write it as an `Edit(path)` rule — file-permission checks only match `Edit(...)`, which covers every file-editing tool (Write, Edit, NotebookEdit); a `Write(path)` rule matches nothing and triggers a startup warning.
 - When transcribing Mermaid output from an agent's message, HTML-unescape `&gt;`/`&lt;`/`&amp;`.
 - The reliable token metric for an optimization A/B is the deterministic `SKILL.md` body reduction; the end-to-end subagent `total_tokens` delta is in the noise (dominated by task work + reading `references/`).
 
