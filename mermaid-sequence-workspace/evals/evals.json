@@ -10,7 +10,7 @@
       "assertions": [
         "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
         "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
-        "Any mermaid code included parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran"
+        "Either no mermaid code is delivered at all (the expected outcome when the flow is still unknown), or any block that is included parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran"
       ]
     },
     {

@@ -16,7 +16,8 @@
         "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
         "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
         "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
-        "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values"
+        "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+        "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions"
       ]
     },
     {
@@ -46,11 +47,12 @@
         "The reply separates findings into questions for the author versus edits applied",
         "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
         "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
-        "The mermaid diagram is now followed by explanatory text",
-        "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+        "The architecture diagram — whichever notation it ends up in, since the skill's convention replaces a hand-drawn Mermaid architecture with Structurizr DSL — is followed by explanatory prose, and no diagram is left orphaned",
+        "The out-of-scope items are no longer mere negations of goals: either rewritten honestly in the document, or explicitly raised to the author as a question in the reply",
         "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
         "The edited document remains in Portuguese and preserves the author's structure and voice",
-        "The header is honestly refreshed (Última atualização set to the real current date)"
+        "The header is honestly refreshed (Última atualização set to the real current date)",
+        "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions"
       ]
     },
     {
@@ -68,7 +70,9 @@
         "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
         "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
         "Redis contention is the listed risk, with the measure-before-rollout mitigation",
-        "The doc is in Portuguese and saved under docs/design/"
+        "The doc is in Portuguese and saved under docs/design/",
+        "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+        "A governing template is a floor, not a ceiling: sections beyond the house pattern are acceptable only when the user supplied that substance, the house skeleton and its order stay intact, and the reply tells the user it stepped outside the pattern"
       ]
     },
     {
