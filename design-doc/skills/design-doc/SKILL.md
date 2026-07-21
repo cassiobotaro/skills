@@ -39,7 +39,20 @@ the document under review.
    alternatives, or rationale that the user (or the repository) did not establish.
    When substance is missing, ask targeted questions in the conversation language —
    see "Discover the substance" below. Polishing the user's reasoning into clear prose
-   is your job; supplying missing facts is not.
+   is your job; supplying missing facts is not. This binds hardest inside diagrams,
+   where the notation asks for detail the author never gave — a technology under a box,
+   a protocol on an arrow; leave the slot empty and ask, rather than guessing something
+   that will read as decided (see `references/diagrams.md`).
+
+   Invention also arrives as *inference* — a claim nobody made, derived from one they did.
+   Watch the superlatives: "a única alternativa", "o único freio disponível", "sempre",
+   "nunca". They are the shape an unstated absence takes when you write it down as fact.
+   "There is no per-client limit today" does not license "manual intervention was the only
+   brake" — a global throttle, a WAF rule, or the client fixing its own integration are all
+   equally unmentioned, and you cannot rule out what was never discussed. Write what was
+   established ("there is no automatic per-client containment today") and let the reader draw
+   the rest, or make the absence a question. The cost of the stronger sentence is real: a
+   reviewer who knows about the WAF now distrusts the whole document.
 
 3. **The template governs; without one, sections are suggestions.** When the user
    supplies a template — or the repository's design docs already follow one — its
@@ -50,7 +63,11 @@ the document under review.
    from the catalog below freely by what brings clarity — recommended minimum: a
    header, the problem, and the solution, written around trade-offs — and *suggest*
    additions ("a section on X would make Y clearer") rather than demand them. Either
-   way, never fabricate content to fill a section.
+   way, never fabricate content to fill a section. A governing template is a floor, not
+   a ceiling: when the user gives you substance the template has nowhere to put — goals,
+   alternatives they weighed — add the section rather than dropping what they said, but
+   keep the house skeleton and its order intact and tell the user you stepped outside
+   the pattern, so the deviation is theirs to accept.
 
 4. **Follow the document's context.** When reviewing, keep the document's existing
    language, structure, and voice — improve the doc the author wrote, don't replace it

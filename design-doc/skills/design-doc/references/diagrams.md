@@ -22,6 +22,26 @@ available and inline otherwise. A fenced ```` ```mermaid ```` block renders stra
 GitHub, GitLab, and most wikis, so a flow diagram is already its own picture and needs no
 extra step.
 
+## A diagram is not a licence to invent
+
+Notation asks questions the author never answered. Structurizr's `container` takes a
+technology slot, a relationship takes a technology on the arrow, and a sequence message
+wants a protocol — so a doc that says only "the worker reads from the queue and writes the
+file" leaves three blanks that the syntax invites you to fill. Filling them is inventing:
+`"PostgreSQL"` under a box the author called "notifications database", `AMQP` on an arrow
+they only said carried events, `HTTPS` between two services they never described talking
+over the network. It reads as fact, it is load-bearing (a reviewer will argue about the
+database you chose for them), and it is the easiest place in the whole skill to violate
+*record, don't invent* — precisely because the DSL, not the user, asked for it.
+
+So when the source doesn't establish a technology, leave the slot out. Structurizr's
+technology arguments are optional; a `container "Notifications database"` with no
+technology is valid DSL and honest documentation. Then raise the blank where the author
+will see it — an open question, or a line in the reply — because "which database is this?"
+is exactly the question a design doc exists to force. This binds hardest when you are
+*reviewing* someone else's document: the diagram you add must contain only what their
+text already said.
+
 ## Embed the diagram: rendered image first, source folded beneath
 
 Structurizr DSL doesn't render by itself inside Markdown, so lead with the **rendered
