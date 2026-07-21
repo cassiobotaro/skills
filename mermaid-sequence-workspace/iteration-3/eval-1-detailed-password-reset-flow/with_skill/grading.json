@@ -1,0 +1,36 @@
+{
+  "eval_id": 1,
+  "eval_name": "detailed-password-reset-flow",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully with mermaid-cli (exit 0)",
+      "passed": true,
+      "evidence": "Manual syntax review against references/syntax.md passes (activation pitfall handled: single '+' on 'W->>+A', no '-' on replies inside the alt branches, one 'deactivate A' after the end; no bare angle brackets or semicolons). Cross-checked by rendering through the hosted Mermaid MCP: it parsed and produced a PNG, failing only on the server's 512000-byte image-size cap ('Generated PNG exceeds size limit'), not a parse error, and returned a working preview link. This was a render check, not an `mmdc` exit-0 run (mermaid-cli is not installed here)."
+    },
+    {
+      "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+      "passed": true,
+      "evidence": "All five appear verbatim: 'POST /v1/password-resets' (msg 2), '202 Accepted' (msg 8), '429 Too Many Requests' + a Note 'Retry-After: seconds until the window resets', 'A-)MQ: publish reset_requested' to the RabbitMQ participant, and 'N->>+SG: POST /v3/mail/send' with a Note 'Authorization: Bearer (SendGrid API key)'."
+    },
+    {
+      "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+      "passed": true,
+      "evidence": "An alt block splits 'more than 5 requests per hour per IP' (429 + Retry-After + rate-limit message to the user) from 'within the rate limit' (the normal path)."
+    },
+    {
+      "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+      "passed": true,
+      "evidence": "The DB reply is deliberately drawn as 'user row, or no match', the 202 is emitted before any user-existence branch, and a Note over W,A reads 'Always 202, whether or not the user exists (no email enumeration)'. The user-exists work is isolated in an 'opt user exists' block after the 202."
+    },
+    {
+      "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+      "passed": true,
+      "evidence": "'actor U as User' declares the human as an actor, and both event legs use the async open arrow: 'A-)MQ: publish reset_requested' and 'MQ-)N: deliver reset_requested' (the SendGrid delivery to the user is also '-)')."
+    },
+    {
+      "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+      "passed": false,
+      "evidence": "'Content-Type: application/json' appears in two Notes and was never established by the prompt — the prompt said only 'JSON body {\"email\": \"...\"}' for the Auth API and, for SendGrid, only 'POST /v3/mail/send with an Authorization: Bearer header'. Inventing a header on the third-party call is exactly what the assertion rules out, and unlike the two mechanism gaps it flagged (queue consumption, mail delivery), this addition was not disclosed to the user."
+    }
+  ]
+}

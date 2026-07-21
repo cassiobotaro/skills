@@ -1,0 +1,36 @@
+{
+  "eval_id": 2,
+  "eval_name": "order-api-from-code",
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses successfully with mermaid-cli (exit 0)",
+      "passed": true,
+      "evidence": "Manual syntax review against references/syntax.md only — mermaid-cli is not installed and the diagram was deliberately NOT sent to the hosted MCP (that is the behavior under test). Activations balance ('C->>+API' / 'API->>+PG' with 'deactivate PG' after the first alt's end, 'API->>+DB' / 'DB-->>-API', 'deactivate API' after the second end); no semicolons, no bare angle brackets (the code writes '(gt) 0' instead of '>'), '<br/>' is the only tag."
+    },
+    {
+      "text": "The real flow from the code is shown: POST /orders -> PayGate POST /v2/charges -> Postgres INSERT -> RabbitMQ order.created publish, with 201 on success",
+      "passed": true,
+      "evidence": "The chain is drawn in order: 'C->>+API: POST /orders', 'API->>+PG: POST /v2/charges', 'API->>+DB: INSERT INTO orders ... RETURNING id', 'API-)MQ: publish order.created', then 'API-->>C: 201 Created' — matching main.py/payments.py/db.py/events.py."
+    },
+    {
+      "text": "The declined-payment branch from the code is shown (declined -> 402)",
+      "passed": true,
+      "evidence": "The second alt has an 'else status == \"declined\"' branch with 'API-->>C: 402 Payment Required' and a Note '{ \"detail\": \"payment declined\" }', matching main.py's HTTPException(status_code=402, detail=\"payment declined\")."
+    },
+    {
+      "text": "Notes/messages carry details actually present in the code (e.g. Authorization: Bearer, Idempotency-Key, card_token/amount/currency payload fields, orders exchange/routing key) and contain nothing absent from the code",
+      "passed": true,
+      "evidence": "Checked every note against the source: Authorization: Bearer PAYGATE_API_KEY, Idempotency-Key uuid4(), card_token/amount/currency BRL/capture true, timeout 10s (payments.py); INSERT columns and 'confirmed' (db.py); exchange 'orders' topic, routing_key order.created, content_type application/json, order_id/customer_id/total_cents (events.py); quantity/unit_price_cents gt 0 and min 1 item (main.py). Only the illustrative sample values (1, 1000) are not literals from the code; every field, header and name is."
+    },
+    {
+      "text": "The RabbitMQ publish is drawn fire-and-forget/async, matching the code comment that the response does not wait for consumers",
+      "passed": true,
+      "evidence": "'API-)MQ: publish order.created' uses the async open arrow with no reply, and the attached Note says 'a resposta da API não espera os consumidores', mirroring main.py's '# fire-and-forget: the API response does not wait for consumers'."
+    },
+    {
+      "text": "Did not ask the user questions that the provided code answers",
+      "passed": true,
+      "evidence": "final_response.md asks no questions; it reports what was read and offers optional additions (Pydantic 422 validation, Postgres/RabbitMQ error handling) that the code genuinely leaves ambiguous."
+    }
+  ]
+}

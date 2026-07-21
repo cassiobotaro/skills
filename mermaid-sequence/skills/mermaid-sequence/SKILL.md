@@ -52,6 +52,12 @@ and the payload field in the note — an invented one sends them down the wrong 
    params, token contents) goes into `Note` lines immediately after the message. Only
    established details; a note is a contract, not an illustration.
 
+   Protocol boilerplate counts as an invented detail. `Content-Type: application/json`,
+   `Accept`, charsets, `User-Agent` — they look too obvious to be wrong, which is
+   exactly why they slip past rule 1. A reader debugging a 415 against a partner API
+   that actually wants `application/vnd.api+json` pays for the guess. If the user or
+   the code didn't state the header, leave it out.
+
 5. **Validate before declaring done** (step 5): Mermaid MCP first — unless the diagram
    carries internal detail, since the hosted server renders remotely — mermaid-cli
    second, and if neither is available say explicitly that the code was not validated.

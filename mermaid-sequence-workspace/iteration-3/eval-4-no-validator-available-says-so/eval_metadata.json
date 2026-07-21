@@ -1,0 +1,13 @@
+{
+  "eval_id": 4,
+  "eval_name": "no-validator-available-says-so",
+  "prompt": "Faz um diagrama de sequência do nosso fluxo de upload de anexo: o usuário escolhe o arquivo no app web, o app pede uma URL pré-assinada pra API (POST /v1/attachments/presign, responde 201 com a URL e o object key), o app faz o PUT direto no S3, e depois confirma pra API (POST /v1/attachments/confirm com o object key, responde 200). Aviso que esta máquina não tem mermaid-cli e não há nenhum servidor MCP conectado nesta sessão.",
+  "assertions": [
+    "Delivers a fenced ```mermaid sequenceDiagram block covering the four steps in order",
+    "States plainly that the diagram was NOT validated in this environment",
+    "Points the user to native GitHub/GitLab rendering and/or mermaid.live as the way to preview",
+    "Does not run npm/npx install, apt, or any other command that would install mermaid-cli or a browser",
+    "Never claims the diagram was validated or rendered"
+  ],
+  "expected_output": "Entrega o bloco ```mermaid pronto pra colar, com os participantes declarados, os detalhes técnicos em Notes, e diz claramente que o diagrama NÃO foi validado neste ambiente — apontando que GitHub/GitLab renderizam o bloco nativamente e que dá pra colar em mermaid.live pra pré-visualizar. Não instala nada (nem pacote nem navegador) para tentar validar."
+}

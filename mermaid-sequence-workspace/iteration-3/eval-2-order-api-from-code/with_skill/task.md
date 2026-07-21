@@ -1,0 +1,1 @@
+Dá uma olhada no código da nossa API de pedidos em /home/cassiobotaro/Projetos/skills/mermaid-sequence-workspace/evals/files/order-api e gera um diagrama de sequência do que acontece quando chega um POST /orders, pra eu colocar no README do serviço. Usa os detalhes reais do código.

@@ -1,0 +1,21 @@
+{
+  "eval_id": 0,
+  "eval_name": "vague-checkout-asks-questions",
+  "expectations": [
+    {
+      "text": "Asks the user clarifying questions about the checkout flow (participants, trigger, sync vs async, failure handling, or level of technical detail) instead of only delivering a finished diagram",
+      "passed": true,
+      "evidence": "final_response.md asks four numbered questions (participants and which are human; trigger + ordered calls with methods/routes/returns; sync vs async queue/webhook; whether failure paths belong and what really happens) plus an optional fifth about note sensitivity, and delivers no diagram at all."
+    },
+    {
+      "text": "No fabricated technical specifics (endpoint paths, header names, payload fields, status codes) are presented as facts about the user's actual system",
+      "passed": true,
+      "evidence": "No mermaid block and no assertion about the user's system: every endpoint mentioned ('POST /v1/orders', 'POST /v1/payments') is explicitly prefixed 'ex.:' inside a question, and the run states it checked the working directory and found it empty rather than inventing a flow."
+    },
+    {
+      "text": "Any mermaid code included parses successfully with mermaid-cli (exit 0)",
+      "passed": true,
+      "evidence": "Vacuously satisfied: the response contains no mermaid code block at all (transcript_notes.md confirms references/syntax.md was not even read because no diagram code was written)."
+    }
+  ]
+}

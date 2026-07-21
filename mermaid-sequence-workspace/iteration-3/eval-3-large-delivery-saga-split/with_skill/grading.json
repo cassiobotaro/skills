@@ -1,0 +1,41 @@
+{
+  "eval_id": 3,
+  "eval_name": "large-delivery-saga-split",
+  "expectations": [
+    {
+      "text": "The output is split into two or more fenced mermaid blocks (by phase or scenario), not one giant diagram",
+      "passed": true,
+      "evidence": "Five fenced mermaid blocks: '0. Overview', '1. Placement and payment', '2. Restaurant acceptance', '3. Courier assignment and delivery', '4. Notification fan-out' — in both final_response.md and outputs/docs/order-lifecycle.md."
+    },
+    {
+      "text": "Every mermaid block parses successfully with mermaid-cli (exit 0)",
+      "passed": true,
+      "evidence": "Diagrams 1, 2 and 3 were independently re-rendered through the hosted Mermaid MCP during grading: all three parsed and produced PNGs, and the returned short links (PofgdN, pavq4I, IrGSak) match exactly the links the run reported — confirming the run's own five validations. Diagrams 0 and 4 are safe-core one-screen blocks and passed manual review. Note: this is an MCP render check, not an `mmdc` exit-0 run (mermaid-cli is not installed here)."
+    },
+    {
+      "text": "No single diagram exceeds roughly 25 messages",
+      "passed": true,
+      "evidence": "Message counts: overview 6, placement+payment 14, restaurant 11, courier 12, notification 3 — the largest is 14, well under 25."
+    },
+    {
+      "text": "Participant names/labels are consistent across the diagrams (the same service uses the same label everywhere)",
+      "passed": true,
+      "evidence": "Ids and labels are identical across diagrams: ord/Order Service, db/Order Postgres, pay/Payment Service, kafka/Kafka, rest/Restaurant Service, crs/Courier Service, notif/Notification Service, app/Mobile App, cust/Customer."
+    },
+    {
+      "text": "Each diagram has its own heading and short introduction, and continuity between diagrams is made explicit",
+      "passed": true,
+      "evidence": "Each of the five has a '## N. Title' heading and a one-to-two line intro, and continuity is explicit both in prose ('Continues from order.accepted in diagram 2') and inside the diagrams as Notes ('Continues in diagram 2 — the Order Service publishes order.paid', 'Continues in diagram 3 — the Courier Service consumes order.accepted')."
+    },
+    {
+      "text": "All described failure branches appear: payment declined -> order FAILED, restaurant reject -> refund + CANCELLED + customer notified, courier decline -> retry with next courier",
+      "passed": true,
+      "evidence": "Diagram 1 'else Card declined' -> 'UPDATE order status = FAILED' -> error shown in the app; diagram 2 'else Restaurant rejects' -> 'Refund the payment' -> 'UPDATE order status = CANCELLED' -> 'order.cancelled' with a Note that the customer is notified; diagram 3 'loop Until a courier accepts' with 'alt Courier declines' and a Note 'Retry with the next nearest courier'."
+    },
+    {
+      "text": "Only widely-supported (safe-core) mermaid syntax is used, since GitHub rendering was requested",
+      "passed": true,
+      "evidence": "Only safe-core constructs appear: participant/actor with aliases, autonumber, '->>', '-->>', '-)', activations, Note over, alt/else, loop, '<br/>'. No typed participants, create/destroy, bidirectional arrows or half-arrows."
+    }
+  ]
+}
