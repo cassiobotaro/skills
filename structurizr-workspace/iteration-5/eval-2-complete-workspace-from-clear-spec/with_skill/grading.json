@@ -1,0 +1,36 @@
+{
+  "eval_id": 2,
+  "eval_name": "complete-workspace-from-clear-spec",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "I re-ran mcp__structurizr__validate on the exact content of outputs/workspace.dsl (identical to workspace/workspace.dsl) and the result was 'OK'."
+    },
+    {
+      "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+      "passed": true,
+      "evidence": "One person (Colaborador); exactly six containers inside softwareSystem Encurtaí (SPA React/nginx, API Go (Gin), Worker de Métricas Go, Banco de Dados PostgreSQL 16, Cache Redis 7, Fila RabbitMQ); Google Workspace is the only other softwareSystem, tagged External. nginx is carried as the SPA's technology rather than invented as a seventh container."
+    },
+    {
+      "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+      "passed": true,
+      "evidence": "views contains systemContext 'SystemContext', container 'Containers' and dynamic 'Redirecionamento' whose four steps are colaborador->api, api->cache ('Consulta o destino no cache'), api->banco ('Em caso de miss no cache, busca o link') and api->fila ('Publica o evento de clique')."
+    },
+    {
+      "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+      "passed": true,
+      "evidence": "styles block defines element \"Database\" { shape cylinder }, element \"Queue\" { shape pipe } and element \"External\" { background #999999 }, and the tags Database/Queue/External are applied to the Postgres+Redis, RabbitMQ and Google Workspace elements respectively."
+    },
+    {
+      "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+      "passed": true,
+      "evidence": "Grepping the file finds none of enterprise, !extend, !ref, branding, 'theme default' or 'dashed true'; it uses !identifiers hierarchical, autoLayout and configuration { scope softwaresystem }."
+    },
+    {
+      "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+      "passed": true,
+      "evidence": "Every relationship has a directional, specific label (e.g. 'Publica eventos de clique na', 'Consome eventos de clique da') and each inter-process hop carries a protocol: HTTPS, JSON/HTTPS, RESP/TCP, SQL/TCP, AMQP."
+    }
+  ]
+}

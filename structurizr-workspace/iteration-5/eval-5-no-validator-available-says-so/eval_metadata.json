@@ -1,0 +1,13 @@
+{
+  "eval_id": 5,
+  "eval_name": "no-validator-available-says-so",
+  "prompt": "Escreve o workspace.dsl pro nosso sistema de agendamento: um app mobile Flutter e um painel web em Vue conversam com uma API em Python (FastAPI); a API guarda os agendamentos num PostgreSQL 15 e dispara lembretes por SMS através da Twilio. Só o contexto e os containers. Esta máquina não tem Docker instalado e não há nenhum servidor MCP conectado nesta sessão.",
+  "assertions": [
+    "Creates workspace.dsl faithful to the spec (Flutter app, Vue panel, FastAPI, PostgreSQL 15 as containers; Twilio as external system)",
+    "Final response states plainly that the DSL was NOT validated in this environment",
+    "Never claims or implies the file was validated, and reports no fabricated validation output",
+    "Hands the user the Structurizr CLI/Docker validate command so they can validate later",
+    "Does not attempt to install Docker, the Structurizr CLI, or any other dependency"
+  ],
+  "expected_output": "Gera o workspace.dsl fiel ao spec e, por não ter validador algum disponível, declara explicitamente que o DSL NÃO foi validado neste ambiente, entregando o comando docker de validate para o usuário rodar depois (e, opcionalmente, o comando que sobe o servidor MCP). Nunca afirma nem insinua que o arquivo foi validado. Não tenta instalar Docker nem qualquer dependência."
+}

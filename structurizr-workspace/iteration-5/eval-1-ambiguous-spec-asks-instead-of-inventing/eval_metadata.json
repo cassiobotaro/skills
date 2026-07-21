@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "ambiguous-spec-asks-instead-of-inventing",
+  "prompt": "Preciso documentar a arquitetura do nosso sistema de pedidos usando structurizr. A gente tem o OrderHub, que é o sistema principal; ele conversa com um negócio de pagamentos que outro time daqui mantém; tem um job que roda de madrugada pra conciliar notas fiscais; um Redis; e tem também a 'plataforma de notificações' que manda email e push pros clientes. Cria o workspace.dsl pra mim com os diagramas.",
+  "assertions": [
+    "Generated DSL validates cleanly with the Structurizr CLI",
+    "Does not invent technologies or elements the user never stated",
+    "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+    "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+    "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)"
+  ],
+  "expected_output": "Não inventa detalhes. Identifica as ambiguidades (pagamentos: sistema externo vs interno? job de conciliação: container do OrderHub ou sistema separado? Redis: cache de quem? plataforma de notificações: sistema de outro time?) e faz perguntas de classificação fundamentadas no modelo C4 (propriedade/time, unidade de deploy, fronteira de sistema) antes de gerar — ou gera apenas o que está claro, marcando explicitamente as pendências e perguntando. Não atribui tecnologias não informadas."
+}

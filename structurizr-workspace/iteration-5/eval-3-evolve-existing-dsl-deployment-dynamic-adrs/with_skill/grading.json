@@ -1,0 +1,36 @@
+{
+  "eval_id": 3,
+  "eval_name": "evolve-existing-dsl-deployment-dynamic-adrs",
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "The MCP validator rejects !adrs (feature not enabled), so I ran the real CLI: `docker run --rm -e STRUCTURIZR_THEMES=... -v $PWD:/usr/local/structurizr structurizr/structurizr validate -workspace workspace.dsl` in the eval's workspace dir — no output, EXIT=0."
+    },
+    {
+      "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+      "passed": true,
+      "evidence": "diff against evals/files/legacy-billing/workspace.dsl is purely additive (only inserted lines, no deletions or modifications): the person, containers, all seven original relationships, the 'Contexto'/'Containers' views and the styles block are byte-identical."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+      "passed": true,
+      "evidence": "deploymentEnvironment \"Produção\" holds Amazon ECS (AWS Fargate) with Fargate tasks instanceOf portal/api/worker, the API task carrying `instances 2`; Amazon RDS → PostgreSQL node with instanceOf faturamento.banco; the ALB is declared as `infrastructureNode \"Application Load Balancer\"`; and `deployment faturamento producao \"Deployment-Producao\"` was added to views."
+    },
+    {
+      "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+      "passed": true,
+      "evidence": "dynamic faturamento \"Emissao-Fatura\" has 6 steps (atendente→portal, portal→api, api→banco, api→fila, worker→fila, worker→erp), each mapping to a relationship already present in the untouched model block; the CLI validate passing confirms no step required a new relationship."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+      "passed": true,
+      "evidence": "Line 5 of the file is `!adrs docs/adr` at workspace scope with no explicit importer argument, and the three docs/adr/000N-*.md files are in adr-tools format (Date:, ## Status/Context/Decision/Consequences) as noted in transcript_notes."
+    },
+    {
+      "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+      "passed": true,
+      "evidence": "RabbitMQ was deliberately left out of the deployment environment and flagged in the final response ('você não disse onde a fila RabbitMQ roda em produção ... deixei a fila fora da view'); the missing `configuration { scope }` was raised as an optional suggestion rather than applied."
+    }
+  ]
+}

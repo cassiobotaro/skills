@@ -1,0 +1,31 @@
+{
+  "eval_id": 1,
+  "eval_name": "ambiguous-spec-asks-instead-of-inventing",
+  "expectations": [
+    {
+      "text": "Generated DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "Not applicable: no DSL was written (transcript_notes: 'Files created/modified in workspace/: None'). The expected_output explicitly sanctions this path ('faz perguntas ... antes de gerar'), and the response states 'Ainda não escrevi nem validei nenhum arquivo' rather than claiming validation."
+    },
+    {
+      "text": "Does not invent technologies or elements the user never stated",
+      "passed": true,
+      "evidence": "The classification table covers only OrderHub, Pagamentos, Redis and the nightly job — no technology is assigned to any of them. SaaS names (SendGrid, Firebase, OneSignal) appear only inside question 2 as options for the user to pick, not as model content."
+    },
+    {
+      "text": "Payments and notifications platform classified by ownership (external software systems) or explicitly questioned — not silently absorbed as containers",
+      "passed": true,
+      "evidence": "Pagamentos is classified 'Software system externo (caixa fechada, sem containers)' with the reason 'outro time é dono'; the notifications platform is left open and question 2 asks 'quem mantém?' with the three ownership outcomes (container vs external system vs third-party SaaS)."
+    },
+    {
+      "text": "Final response asks targeted clarifying questions about the ambiguities (≥2 of: notifications ownership, conciliation job counterpart, Redis role/main store, OrderHub stack)",
+      "passed": true,
+      "evidence": "All four are asked: Q1 OrderHub internals/stack and actors, Q2 notifications ownership and call style, Q3 reconciliation job ownership and what it reads/writes, Q4 Redis readers/writers and purpose (cache vs queue vs session vs lock)."
+    },
+    {
+      "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+      "passed": true,
+      "evidence": "No DSL was emitted, so no keywords at all; the tooling mentioned is the connected Structurizr MCP server plus a preview at http://localhost:8080 — structurizr/lite is never recommended."
+    }
+  ]
+}

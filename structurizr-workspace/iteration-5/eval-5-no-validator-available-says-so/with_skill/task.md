@@ -1,0 +1,1 @@
+Escreve o workspace.dsl pro nosso sistema de agendamento: um app mobile Flutter e um painel web em Vue conversam com uma API em Python (FastAPI); a API guarda os agendamentos num PostgreSQL 15 e dispara lembretes por SMS através da Twilio. Só o contexto e os containers. Esta máquina não tem Docker instalado e não há nenhum servidor MCP conectado nesta sessão.

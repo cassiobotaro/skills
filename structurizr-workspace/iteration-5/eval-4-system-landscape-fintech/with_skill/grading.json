@@ -1,0 +1,36 @@
+{
+  "eval_id": 4,
+  "eval_name": "system-landscape-fintech",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "I re-ran mcp__structurizr__validate on the exact content of outputs/workspace.dsl (identical to workspace/workspace.dsl) and the result was 'OK'."
+    },
+    {
+      "text": "Right abstraction for a landscape: people + the 5 described software systems, no containers defined",
+      "passed": true,
+      "evidence": "Three persons (Cliente, Analista de Crédito, Time de Cobrança) and exactly five softwareSystems (Portal do Cliente, Motor de Crédito, Cobrança, Data Lake, Core Bancário); the file contains no `container` keyword — 'web e app' and 'backoffice' stay in the system descriptions."
+    },
+    {
+      "text": "systemLandscape view present and workspace scoped as landscape (configuration { scope landscape })",
+      "passed": true,
+      "evidence": "views contains `systemLandscape \"SystemLandscape\" \"Panorama dos sistemas da fintech.\"` with include * / autoLayout lr, and the file ends with `configuration { scope landscape }`."
+    },
+    {
+      "text": "Core Bancário (Matera) distinguished as third-party (tag + distinct style)",
+      "passed": true,
+      "evidence": "`coreBancario = softwareSystem \"Core Bancário\" \"Produto terceirizado da Matera que mantém os contratos.\" { tags \"External\" }` and the styles block gives element \"External\" background #999999 — it is also the only system outside the `group \"Fintech\"`."
+    },
+    {
+      "text": "No silently invented relationships — Portal→Motor de Crédito (never stated) must be absent or explicitly questioned",
+      "passed": true,
+      "evidence": "No portal -> motorCredito relationship exists in the model, and open question 1 of the final response raises it directly: 'você não disse quem envia a proposta pro Motor ... A proposta sai do Portal direto pro Motor?'. Missing relationship technologies were likewise reported (question 4) instead of invented."
+    },
+    {
+      "text": "Modern syntax and current tooling (no legacy keywords; no deprecated structurizr/lite recommendation)",
+      "passed": true,
+      "evidence": "Uses the modern `group` block instead of `enterprise`; no !extend/!ref/branding/'theme default'/'dashed true' anywhere. Tooling handed to the user is `structurizr/structurizr local` and `structurizr/structurizr export`, not structurizr/lite."
+    }
+  ]
+}

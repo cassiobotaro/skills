@@ -1,0 +1,14 @@
+{
+  "eval_id": 2,
+  "eval_name": "complete-workspace-from-clear-spec",
+  "prompt": "Quero criar o workspace.dsl na raiz deste repositório para o sistema Encurtaí, nosso encurtador de URLs interno. Funciona assim: usuários da empresa acessam um SPA em React (servido por nginx) que chama uma API REST escrita em Go (Gin). A API grava e lê os links num PostgreSQL 16 e usa um Redis 7 como cache de redirecionamentos. Existe também um worker em Go que consome eventos de clique de uma fila RabbitMQ (publicados pela API) e grava métricas agregadas no mesmo PostgreSQL. O sistema todo é do nosso time; o único sistema externo é o Google Workspace, que a API usa para autenticação SSO dos usuários. Gere o diagrama de contexto e o de containers, com estilos pra diferenciar banco, fila e sistema externo, e um diagrama dinâmico mostrando o fluxo de redirecionamento de um link (usuário acessa link curto, API consulta cache, em caso de miss consulta o Postgres, e publica o evento de clique na fila).",
+  "assertions": [
+    "DSL validates cleanly with the Structurizr CLI",
+    "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+    "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+    "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+    "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+    "Relationship labels are specific and inter-process links carry technology/protocol"
+  ],
+  "expected_output": "workspace.dsl completo e sintaticamente válido na raiz: person, softwareSystem Encurtaí com containers (SPA React, API Go, worker Go, PostgreSQL, Redis, RabbitMQ), Google Workspace como sistema externo, relacionamentos com descrição e tecnologia, views systemContext + container + dynamic (fluxo de redirecionamento), estilos diferenciando banco (cylinder), fila (pipe) e sistema externo, sintaxe moderna (sem keywords obsoletas), autoLayout. Não inventa elementos não citados."
+}
