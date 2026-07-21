@@ -1,0 +1,51 @@
+{
+  "eval_id": 1,
+  "eval_name": "rich-write-new-doc",
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "workspace/docs/design/exportacao-de-relatorios-em-background.md exists (copied to outputs/), plus the rendered diagram at docs/design/diagrams/arquitetura-exportacao.svg (35 KB, non-trivial)."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Header, all section titles (Visão geral, Escopo e contexto, Trade-offs, Alternativas consideradas, Preocupações transversais) and prose are in Portuguese; only DSL/Mermaid keywords stay English."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Under 'Trade-offs da solução escolhida': '✗ **O usuário perde o download imediato.** A exportação pequena, que hoje volta na hora, passa a exigir esperar um e-mail.'"
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "The 'Alternativas consideradas' table rows are: Não fazer nada, Gerar síncrono com timeout maior, Ferramenta de BI externa, and the chosen Fila + worker — each with ✓/✗ trade-offs and outcome."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'Preocupações transversais' has subsections Segurança (signed link with PII, validity/retention to be ruled on), Plataforma / infraestrutura (shared RabbitMQ queue, sizing/isolation impact) and Compatibilidade."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": true,
+      "evidence": "'## Glossário' sits immediately after the header table with BI, CSV, gateway, job, link assinado, PII, S3, streaming, worker, XLSX — no API/HTTP/URL entries and no C4/DSL/Structurizr entries."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "The container SVG (with folded DSL) is followed by a paragraph naming API, fila, worker, S3 and e-mail service; the Mermaid sequence block is followed by a paragraph walking steps 3, 4-8 and 9-11 plus a note that only the happy path is drawn."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Only the prompt's numbers appear (30 s gateway cut, 12% above 50 mil linhas, 100 mil linhas target); Autores/Revisores are left '*a definir*' and job state, worker failure, link validity, e-mail service and verification metric are all listed under 'Perguntas em aberto' rather than filled in."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'## Visão geral' is exactly two paragraphs describing enqueue-a-job / worker / object storage / signed link by e-mail; no endpoints, payloads, retry policy or config values — those details live in 'A solução' and the diagrams."
+    }
+  ]
+}

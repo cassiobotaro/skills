@@ -1,0 +1,41 @@
+{
+  "eval_id": 6,
+  "eval_name": "no-renderer-keeps-placeholder-no-disclaimer",
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/, in Portuguese",
+      "passed": true,
+      "evidence": "workspace/docs/design/entrega-de-webhooks-de-saida.md (16 KB, mirrored to outputs/), entirely in Portuguese from the header table through Questões em aberto."
+    },
+    {
+      "text": "The architecture diagram is authored as Structurizr DSL, embedded as a Markdown image reference with the DSL folded inside a <details> block",
+      "passed": true,
+      "evidence": "Line 62 is '![Diagrama de contêineres — …](diagrams/arquitetura-webhooks-saida.svg)', lines 66-141 are a <details><summary>Fonte do diagrama (Structurizr DSL)</summary> block holding a full workspace/model/views DSL with systemContext and container views."
+    },
+    {
+      "text": "The image reference is left as a placeholder (optionally with a one-line 'render in the manual pass' note) rather than the doc being blocked, retried, or the diagram redrawn by hand in Mermaid",
+      "passed": true,
+      "evidence": "No diagrams/ directory exists under docs/design/ (ls shows only the .md), so the image path is a placeholder, accompanied by exactly one line: '<!-- Imagem a renderizar a partir do DSL abaixo na passagem manual. -->'. The architecture is not redrawn in Mermaid; the doc was completed in one pass."
+    },
+    {
+      "text": "The retry delivery flow is a fenced ```mermaid sequence diagram",
+      "passed": true,
+      "evidence": "Section 'Fluxo de entrega com retentativa' contains a fenced ```mermaid block with sequenceDiagram, autonumber, six participants, a loop for the 24h retry, alt 2xx/erro and an opt for the DLQ."
+    },
+    {
+      "text": "The document contains NO validation disclaimer (no 'não validado', 'not machine-validated', 'ilustração do texto' or equivalent)",
+      "passed": true,
+      "evidence": "grep -inE 'não validad|nao validad|not machine-validated|ilustraç|ilustrac|não é validad|meramente|apenas ilustra|não foi validad' over the document returned no matches (exit status 1). The 'não foi validado aqui' caveat appears only in final_response.md, i.e. in the hand-off, not in the doc."
+    },
+    {
+      "text": "Every diagram is followed by explanatory prose",
+      "passed": true,
+      "evidence": "The container image + folded DSL is followed by a paragraph walking serviços de domínio → tópicos Kafka → serviço de entrega → banco de tentativas → endpoint do cliente → DLQ; the Mermaid block is followed by a paragraph narrating steps 1-11."
+    },
+    {
+      "text": "Does not attempt to install Docker, the Structurizr CLI, or any other dependency",
+      "passed": true,
+      "evidence": "Transcript notes list only read-only probes (`command -v mmdc`, `npx --no-install @mermaid-js/mermaid-cli --version`, `command -v structurizr-cli`, `command -v docker`) and state 'No docker, structurizr-cli, mmdc, or installer was executed'; the render command in the final response is offered to the user for a later machine, not run."
+    }
+  ]
+}

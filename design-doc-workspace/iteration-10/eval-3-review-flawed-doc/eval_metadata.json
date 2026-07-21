@@ -1,0 +1,18 @@
+{
+  "eval_id": 3,
+  "eval_name": "review-flawed-doc",
+  "prompt": "Dá uma revisada nesse design doc que eu escrevi: docs/design/fanout-de-notificacoes.md. Pode aplicar direto as melhorias que não dependem de mim; o que precisar de informação minha, lista pra eu responder.",
+  "assertions": [
+    "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+    "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+    "The reply separates findings into questions for the author versus edits applied",
+    "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+    "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+    "The mermaid diagram is now followed by explanatory text",
+    "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+    "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+    "The edited document remains in Portuguese and preserves the author's structure and voice",
+    "The header is honestly refreshed (Última atualização set to the real current date)"
+  ],
+  "expected_output": "Antes de julgar a estrutura, estabelece qual template governa: como o usuário não indicou nenhum, pergunta ao autor por uma referência de template (templates normalmente vivem fora do repositório — wiki/drive; o que o repo mostra é só indício) — sem inventar um; enquanto não houver template confirmado, as sugestões estruturais vêm do catálogo padrão da skill, como sugestões e não exigências. Apresenta achados em dois grupos: (a) perguntas pro autor — contras/trade-offs da solução escolhida, alternativas consideradas (incluindo não fazer nada), objetivos mensuráveis, times/sistemas impactados; (b) edições aplicadas no arquivo — visão geral enxuta (detalhes movidos pro design), fora de escopo deixa de ser negação de objetivo, texto explicativo depois do diagrama, estado/data do cabeçalho atualizados, glossário sugerido no INÍCIO do documento com DLQ/TPS/CDC/SLA (pedindo as definições que não puder derivar do próprio doc). Mantém o português e a voz do autor. NÃO inventa contras, alternativas, métricas nem números."
+}

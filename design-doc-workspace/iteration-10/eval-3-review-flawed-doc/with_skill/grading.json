@@ -1,0 +1,56 @@
+{
+  "eval_id": 3,
+  "eval_name": "review-flawed-doc",
+  "expectations": [
+    {
+      "text": "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+      "passed": true,
+      "evidence": "Question 1 of 'O que precisa de você': 'Existe um template de design doc no time? Templates normalmente moram no wiki ou no drive, não no repositório — o que eu vejo aqui é pista, não resposta.'"
+    },
+    {
+      "text": "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+      "passed": true,
+      "evidence": "Opening paragraph: 'segui o catálogo padrão de seções, e por isso as sugestões estruturais abaixo são sugestões, não exigências'; the two extra sections (Testabilidade e observabilidade, Perguntas em aberto) are offered with 'não há template governando, então são sugestões'."
+    },
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "Two explicit headings: '## O que já apliquei' (6 numbered edits) and '## O que precisa de você' (10 numbered questions)."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Questions 4 and 5 ask for the accepted costs and the alternatives incl. 'não fazer nada'; the edited fanout-de-notificacoes.md contains no Trade-offs and no Alternativas section and no new numbers — candidate cons are listed only in the reply, as prompts for the author."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "'## Glossário' was inserted directly after the header table and before 'Visão geral', with entries for CDC, DLQ, Exchange, Fanout, In-app, Provider, SLA, TPS, Worker."
+    },
+    {
+      "text": "The mermaid diagram is now followed by explanatory text",
+      "passed": true,
+      "evidence": "The author's orphan Mermaid flowchart was replaced by a validated C4 container SVG (67 KB at docs/design/diagrams/arquitetura-fanout.svg) with the DSL folded in <details>, and is followed by a paragraph explaining CDC → dispatcher → exchange → per-channel queues/workers → DLQ and TPS control."
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals (rewritten honestly or turned into a question)",
+      "passed": true,
+      "evidence": "The doc still shows the original two negations, but the assertion allows the question path: reply item 3 states 'Fora de escopo não exclui nada … são a negação dos objetivos' and asks the author what genuinely falls outside, offering candidates rather than inventing exclusions."
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Reply item 2 quotes the three goals, calls them uncheckable and asks for the SLA number, current slowness and expected peak; the doc's '## Objetivos' section is left verbatim ('Deixei os objetivos como estavam')."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "All added prose is Portuguese; original sections (Visão geral, Objetivos, Fora de escopo, Solução, Plano) and their order are kept, with only Glossário and Escopo e contexto inserted; the DSL reproduces exactly the author's elements and edges, including in-app having no DLQ."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Header row now reads '**Última atualização** | 2026-07-20', which matches the real date (`date +%Y-%m-%d` recorded in the transcript notes); Estado stayed 'Em revisão' and was raised as question 10 instead of being changed unilaterally."
+    }
+  ]
+}

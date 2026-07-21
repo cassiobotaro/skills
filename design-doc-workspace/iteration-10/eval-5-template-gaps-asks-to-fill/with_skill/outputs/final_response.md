@@ -1,0 +1,21 @@
+Li o `docs/design/dd-2026-007-cache-de-catalogo.md` para pegar o padrão da casa. A estrutura que os nossos design docs seguem é: tabela de cabeçalho (Documento, Estado, Autores, Revisores, Criado em, Última atualização, Tags) → **Resumo** → **Contexto** → **Proposta** (com a subseção **Compensações** em ✓/✗) → **Riscos** (tabela risco/mitigação) → **Plano de entrega** (fases numeradas). O novo doc vai seguir exatamente isso, e o próximo ID da sequência é **DD-2026-008** (`docs/design/dd-2026-008-busca-por-similaridade.md`).
+
+O que você me passou já preenche bem o **Resumo**, o **Contexto** (busca por LIKE, ~30% das buscas sem resultado, o exemplo do "tênis de corrida amortecido") e a **Proposta** (embeddings de título+descrição, pgvector, busca vetorial com fallback pro LIKE). O que falta são justamente as seções que o template exige e que eu não tenho como preencher sem inventar. São essas:
+
+1. **Compensações — o que piorou?** Os ✓ eu consigo escrever (menos busca sem resultado). Os ✗ eu preciso de você: o que o time aceitou pagar? Penso em candidatos como latência maior por busca, custo/tempo de gerar e reprocessar embeddings quando o catálogo muda, resultados irrelevantes porém "parecidos" (falso positivo semântico), e mais carga/armazenamento no Postgres. Quais desses são reais no nosso caso e há algum número (medição do refinamento, prova de conceito, benchmark) para sustentar tanto os ✓ quanto os ✗?
+
+2. **Meta mensurável.** Os 30% de busca sem resultado caem para quanto? E o que mais vocês vão olhar — conversão da busca, cliques no primeiro resultado, latência P99 da busca (qual o teto aceitável)? Tem algo explicitamente fora de escopo nesta rodada (busca por imagem, personalização por histórico, correção ortográfica, ranking/relevância além do zero-result)?
+
+3. **Detalhes da proposta que decidem o design.** Qual modelo de similaridade de sentenças, rodando onde (API externa ou self-hosted) e com qual dimensão de vetor? Os embeddings são gerados em lote ou por evento de atualização de produto? Quantos produtos tem o catálogo hoje (isso decide índice HNSW vs IVFFlat, e se o custo do reprocessamento é minutos ou horas)? E o fallback: qual é o limiar de score que dispara o LIKE, e como ele foi calibrado?
+
+4. **Riscos e mitigações** (o template pede a tabela). Quais riscos vocês levantaram no refinamento e o que mitiga cada um? Ex.: modelo com viés de vocabulário para categorias específicas, degradação silenciosa da relevância sem ninguém perceber, custo/indisponibilidade do provedor do modelo, embeddings desatualizados em relação ao catálogo.
+
+5. **Plano de entrega.** Isso vai em fases (indexação offline → shadow mode comparando com o LIKE → % de tráfego) ou de uma vez? Já tem alguma fase concluída, como o DD-007 marcava o "feito"? E se der ruim em produção, o rollback é só desligar a busca vetorial e voltar 100% pro LIKE?
+
+6. **Cabeçalho.** Quem assina como autor(a)? Quais revisores e de que áreas — pelo DD-007 imagino Plataforma e SRE, mas aqui talvez entrem Busca/Dados e alguém de Produto. E o estado: a proposta foi aprovada no refinamento, então já entra como **Aprovado** ou como **Em revisão** até o doc circular?
+
+**Uma sugestão além do template:** o DD-007 não tem seção de alternativas, mas o valor do doc daqui a um ano vai estar em explicar por que embeddings ganharam de opções mais baratas — full-text search nativo do Postgres (`tsvector`) com dicionário em português, lista de sinônimos, ou um Elasticsearch/OpenSearch. Se vocês avaliaram essas no refinamento (e por que "não fazer nada" não serve), eu registro isso dentro da Proposta, em um parágrafo curto antes das Compensações, sem quebrar o padrão dos outros docs. Me diga se quer.
+
+Pode responder só o que souber — com os itens 1, 4 e 5 respondidos eu já escrevo o documento inteiro; o resto eu deixo como ponto em aberto em vez de preencher com suposição.
+
+Duas notas menores: o doc vai levar um glossário curto no começo (embedding, pgvector, busca vetorial), porque revisores de fora do time da busca tropeçam nesses termos; e a Proposta fica mais fácil de ler com um diagrama de sequência Mermaid do caminho "busca → vetorial → fallback LIKE" — como o DD-007 não usa diagramas, só incluo se você achar que cabe no padrão.

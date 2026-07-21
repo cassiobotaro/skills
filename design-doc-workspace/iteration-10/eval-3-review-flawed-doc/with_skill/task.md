@@ -1,0 +1,1 @@
+Dá uma revisada nesse design doc que eu escrevi: docs/design/fanout-de-notificacoes.md. Pode aplicar direto as melhorias que não dependem de mim; o que precisar de informação minha, lista pra eu responder.

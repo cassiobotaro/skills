@@ -1,0 +1,41 @@
+{
+  "eval_id": 4,
+  "eval_name": "house-template-repo",
+  "expectations": [
+    {
+      "text": "The new doc follows the house structure (Resumo, Contexto, Proposta with a Compensações subsection, Riscos, Plano de entrega) instead of the skill's default catalog",
+      "passed": true,
+      "evidence": "DD-2026-008 carries the same header key/value table and the house sections in house order — Resumo, Contexto, Proposta with '### Compensações' in ✓/✗ style, Riscos as a Risco|Mitigação table, Plano de entrega as numbered phases. Two extra sections (Objetivos, Alternativas consideradas) hold substance the user supplied and are flagged as deviations in the reply; none of the skill's default-catalog sections (Glossário, Preocupações transversais, Testabilidade, Questões em aberto) were imposed."
+    },
+    {
+      "text": "The house ID convention continues: DD-2026-008 in the filename and header table",
+      "passed": true,
+      "evidence": "File is docs/design/dd-2026-008-rate-limiting-da-api-publica.md; H1 is '# DD-2026-008 · Rate limiting da API pública' and the header row reads '**Documento** | DD-2026-008', continuing from the existing DD-2026-007."
+    },
+    {
+      "text": "The retracted NAT/shared-IP false positive is NOT listed as a risk",
+      "passed": true,
+      "evidence": "The Riscos table has only two rows (Redis contention, legitimate client receiving 429). The only mention of IP is a positive clarification inside Proposta — 'O escopo do limite é o token, não o endereço de origem: dois clientes atrás do mesmo IP têm tokens diferentes' — i.e. the scenario is explained away, not listed as a risk."
+    },
+    {
+      "text": "Content is faithful to the prompt: INC-4412, 40x traffic, 25 minutes of outage, per-plan limits (10/100 rps), and 429 with Retry-After are all present",
+      "passed": true,
+      "evidence": "Contexto: 'No incidente INC-4412, um cliente … enviou 40 vezes o tráfego normal e a API ficou indisponível para todos os clientes por 25 minutos'; Proposta names 'free 10 rps, pro 100 rps, enterprise negociado' and the 429 with Retry-After. No metric appears that the prompt did not supply; Autores/Revisores left '_a definir_'."
+    },
+    {
+      "text": "The Black Friday trade-off appears as an explicit cost (✗) together with its mitigation",
+      "passed": true,
+      "evidence": "Compensações: '✗ Um cliente legítimo em pico (uma Black Friday, por exemplo) pode tomar 429 mesmo sem estar abusando; mitigamos com o Retry-After e com um alerta para o time de contas avisar os clientes enterprise'."
+    },
+    {
+      "text": "Redis contention is the listed risk, with the measure-before-rollout mitigation",
+      "passed": true,
+      "evidence": "Riscos row 1: 'O Redis de sessão vira ponto de contenção…' mitigated by 'Medir o impacto na fase de shadow mode, antes de qualquer enforcement'."
+    },
+    {
+      "text": "The doc is in Portuguese and saved under docs/design/",
+      "passed": true,
+      "evidence": "Written entirely in Portuguese and saved at workspace/docs/design/dd-2026-008-rate-limiting-da-api-publica.md (mirrored in outputs/docs/design/)."
+    }
+  ]
+}

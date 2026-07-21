@@ -1,0 +1,31 @@
+{
+  "eval_id": 5,
+  "eval_name": "template-gaps-asks-to-fill",
+  "expectations": [
+    {
+      "text": "Reads the existing house doc and treats its sections (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) as required for the new document",
+      "passed": true,
+      "evidence": "The reply opens by citing dd-2026-007-cache-de-catalogo.md and spells out the house shape (header table → Resumo → Contexto → Proposta with ✓/✗ Compensações → Riscos table → Plano de entrega), commits to 'seguir exatamente isso' and derives the next ID DD-2026-008; the transcript notes record the file being read in full."
+    },
+    {
+      "text": "Asks the user, in Portuguese, for the missing template substance: the accepted trade-offs/cons, the risks, and the delivery plan/phases",
+      "passed": true,
+      "evidence": "Question 1 asks for the ✗ ('o que o time aceitou pagar?'), question 4 for 'Riscos e mitigações (o template pede a tabela)', question 5 for the delivery phases and rollback — all in Portuguese, plus measurable goal and header metadata."
+    },
+    {
+      "text": "Does not fabricate risks, delivery phases, or cons the user never stated",
+      "passed": true,
+      "evidence": "No file was written (find shows only the pre-existing DD-2026-007 in workspace/), and every candidate con/risk/phase in the reply is explicitly offered as a hypothesis to confirm ('Penso em candidatos como…', 'Quais desses são reais no nosso caso')."
+    },
+    {
+      "text": "Faithful to the given facts: exact-text LIKE search, ~30% no-result rate, pgvector on the existing Postgres, low-score fallback to LIKE",
+      "passed": true,
+      "evidence": "The reply restates exactly those facts — 'busca por LIKE, ~30% das buscas sem resultado, o exemplo do \"tênis de corrida amortecido\"' and 'embeddings de título+descrição, pgvector, busca vetorial com fallback pro LIKE' — with no added numbers; open items like model choice, vector dimension and score threshold are asked, not assumed."
+    },
+    {
+      "text": "No silently skipped template section: either no file yet (the questions are the deliverable) or a file where the unfilled sections are explicitly pending the user's answers",
+      "passed": true,
+      "evidence": "Took the sanctioned no-file path: outputs/ contains only final_response.md and transcript_notes.md, the notes state 'no file was created or modified in workspace/', and each unfilled house section is represented by a question. Applied the expected_output reading that the questions are the deliverable."
+    }
+  ]
+}

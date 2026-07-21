@@ -83,10 +83,16 @@ from the title as a short slug; if the existing collection uses IDs (e.g.
 
 An honest design doc needs: **the problem** (what hurts today, why solving it matters
 now), **the boundaries** (what the work will achieve — ideally measurable — and what
-is deliberately out of scope), **the solution** (concrete enough to evaluate, with the
-trade-offs accepted), **the alternatives** (what else was considered, including "do
-nothing", and why the chosen path won), and **the blast radius** (who outside the team
-is impacted — security, infrastructure, other systems' load, compatibility).
+is deliberately out of scope), **the solution** (concrete enough to evaluate), **the
+accepted costs** (what got worse in exchange for what got better), **the alternatives**
+(what else was considered, including "do nothing", and why the chosen path won), and
+**the blast radius** (who outside the team is impacted — security, infrastructure,
+other systems' load, compatibility).
+
+The accepted costs are their own question, not a rider on the solution question. Asking
+"what does the design look like?" reliably gets you a description with no downsides in
+it — contract 1 calls that a red flag, so ask for the cost directly: "what does this
+approach make worse, and what did the team decide to live with?"
 
 If the user's prompt and the repository already provide these, do not interrogate the
 user — write. For what's missing, ask 2–5 targeted questions in the conversation
