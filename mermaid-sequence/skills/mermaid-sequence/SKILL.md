@@ -128,7 +128,7 @@ House conventions, and why:
 - **`%%` comments** for context that helps the next editor of the source but shouldn't
   render.
 
-A canonical example (validated — render at <https://l.mermaid.ai/Ogs4Y3>):
+A canonical example (validated — render at <https://l.mermaid.ai/RqMxSJ>):
 
 ```mermaid
 sequenceDiagram
@@ -140,7 +140,7 @@ sequenceDiagram
 
     U->>W: Submit login form
     W->>+A: POST /v1/sessions
-    Note over W,A: Content-Type: application/json<br/>{ "email": "...", "password": "..." }
+    Note over W,A: Body: { "email": "...", "password": "..." }
     A->>+D: SELECT user by email
     D-->>-A: user row (id, password_hash)
     alt credentials valid
@@ -207,6 +207,13 @@ browser just to validate.
 3. **Neither available**: deliver the code block and say plainly that it was **not
    validated here** — but that GitHub/GitLab render ` ```mermaid ` blocks natively, and
    the user can paste the code into <https://mermaid.live> to preview and edit it.
+
+   When you reached step 3 *because* the sensitivity check ruled out the hosted server,
+   don't offer mermaid.live: pasting there ships the same text to the same kind of remote
+   renderer, so recommending it undoes the reason you skipped the MCP. Point at a private
+   Markdown preview instead — the repo's own GitHub/GitLab, which already holds the code
+   this diagram describes — and offer the hosted validator explicitly as the user's call,
+   since it is their content and they may judge the exposure acceptable.
 
 ### 6. Hand off
 
