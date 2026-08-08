@@ -1,0 +1,386 @@
+[
+  {
+    "eval": "eval-1-rich-write-new-doc",
+    "documents": [
+      "eval-1-rich-write-new-doc/with_skill/outputs/docs/design/exportacao-de-relatorios-em-background.md"
+    ],
+    "reply_saved": true,
+    "doc_chars": 13559,
+    "doc_is_portuguese": true,
+    "reply_is_portuguese": true,
+    "exclusivity_hits": [
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "to, inclusive nas exportações pequenas que hoje funcionam na hora, em troca de um caminho único que não depende do tempo de uma request HTTP. ## Escopo e contexto A exportação de rela"
+      },
+      {
+        "where": "doc",
+        "term": "toda",
+        "context": "**12% das exportações acima de 50 mil linhas falham**, e o suporte abre ticket sobre isso toda semana. A infraestrutura já roda **RabbitMQ**, então processamento assíncrono não exige"
+      },
+      {
+        "where": "doc",
+        "term": "Todas",
+        "context": ". Quando termina, o usuário recebe um e-mail com um link assinado para baixar o arquivo. Todas as exportações passam por esse caminho, inclusive as pequenas. O time optou por um caminh"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "passa a viver — sem o limite de 30 segundos do gateway, porque não está atendendo request nenhuma. O **armazenamento de arquivos**, no S3, guarda o resultado e serve o download diretament"
+      },
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "s que cabiam na janela da request, atendendo ao objetivo de 100 mil linhas. ✓ Um caminho único de exportação — uma implementação de geração de arquivo, um comportamento para explicar a"
+      },
+      {
+        "where": "doc",
+        "term": "apenas",
+        "context": "a a existir como objeto no S3, acessível por um link que viaja por e-mail, em vez de sair apenas na resposta da chamada de API. ## Alternativas consideradas ### Manter a geração síncro"
+      },
+      {
+        "where": "doc",
+        "term": "toda",
+        "context": "xportações acima de 50 mil linhas continuam falhando, e o suporte continua abrindo ticket toda semana. **Descartada.** ### Enfileirar em background — a escolhida Atende aos dois obj"
+      },
+      {
+        "where": "reply",
+        "term": "toda",
+        "context": "request, corte de 30s no gateway, ~12% de falha acima de 50 mil linhas, ticket de suporte toda semana), os objetivos (zerar timeout e aguentar 100 mil linhas), a solução (API enfileira"
+      }
+    ],
+    "exclusivity_count": 8,
+    "validation_disclaimer": [],
+    "mermaid_blocks": 1,
+    "details_blocks": 1,
+    "image_refs": 1,
+    "dsl_workspace_blocks": 0,
+    "possible_orphan_diagrams": []
+  },
+  {
+    "eval": "eval-2-vague-write-asks-questions",
+    "documents": [],
+    "reply_saved": true,
+    "doc_chars": 0,
+    "doc_is_portuguese": null,
+    "reply_is_portuguese": true,
+    "exclusivity_hits": [],
+    "exclusivity_count": 0,
+    "validation_disclaimer": [],
+    "mermaid_blocks": 0,
+    "details_blocks": 0,
+    "image_refs": 0,
+    "dsl_workspace_blocks": 0,
+    "possible_orphan_diagrams": []
+  },
+  {
+    "eval": "eval-3-review-flawed-doc",
+    "documents": [
+      "eval-3-review-flawed-doc/repo/docs/design/fanout-de-notificacoes.md",
+      "eval-3-review-flawed-doc/with_skill/outputs/fanout-de-notificacoes.md"
+    ],
+    "reply_saved": true,
+    "doc_chars": 9723,
+    "doc_is_portuguese": true,
+    "reply_is_portuguese": true,
+    "exclusivity_hits": [
+      {
+        "where": "reply",
+        "term": "nenhum",
+        "context": "umento descreve bem *o que* será construído, mas hoje ele não registra *por que* — não há nenhum custo, nenhuma alternativa e nenhum número. Isso é o achado principal: do jeito que está,"
+      },
+      {
+        "where": "reply",
+        "term": "nenhuma",
+        "context": "e bem *o que* será construído, mas hoje ele não registra *por que* — não há nenhum custo, nenhuma alternativa e nenhum número. Isso é o achado principal: do jeito que está, o doc perde o"
+      },
+      {
+        "where": "reply",
+        "term": "nenhum",
+        "context": "struído, mas hoje ele não registra *por que* — não há nenhum custo, nenhuma alternativa e nenhum número. Isso é o achado principal: do jeito que está, o doc perde o valor no dia em que o"
+      },
+      {
+        "where": "reply",
+        "term": "nenhum",
+        "context": "tura contra ele. **Trade-offs e alternativas (o mais importante)** 2. A solução não tem nenhum custo declarado. O que o fanout com filas piorou, encareceu ou tornou mais arriscado, e c"
+      },
+      {
+        "where": "reply",
+        "term": "apenas",
+        "context": "número, dá para saber depois se o projeto funcionou. 6. Os dois itens de \"Fora de escopo\" apenas negam os objetivos (\"não deve ser lento\", \"não deve perder notificações\") — eles não excl"
+      },
+      {
+        "where": "reply",
+        "term": "nenhuma",
+        "context": "oi aprovado/implementado? E quem são os revisores nomeados, com suas áreas? Não preenchi nenhuma dessas seções com texto de exemplo — seção vazia com boilerplate é pior que seção ausente"
+      },
+      {
+        "where": "reply",
+        "term": "todos",
+        "context": ", DLQ, exchange, fanout, in-app, provider, SLA e TPS. Quem vem de outro time tropeçava em todos. - **Visão geral enxugada para um parágrafo sem detalhes.** Ela concentrava cron, tabela,"
+      },
+      {
+        "where": "reply",
+        "term": "nenhuma",
+        "context": "o que cada caixa é e o que corre em cada seta. Mantive **só o que o seu texto já dizia**: nenhuma tecnologia foi atribuída — não nomeei broker, banco nem protocolo, porque o documento não"
+      }
+    ],
+    "exclusivity_count": 8,
+    "validation_disclaimer": [],
+    "mermaid_blocks": 0,
+    "details_blocks": 2,
+    "image_refs": 2,
+    "dsl_workspace_blocks": 2,
+    "possible_orphan_diagrams": []
+  },
+  {
+    "eval": "eval-4-house-template-repo",
+    "documents": [
+      "eval-4-house-template-repo/repo/docs/design/dd-2026-007-cache-de-catalogo.md",
+      "eval-4-house-template-repo/repo/docs/design/dd-2026-008-rate-limiting-api-publica.md",
+      "eval-4-house-template-repo/with_skill/outputs/dd-2026-008-rate-limiting-api-publica.md"
+    ],
+    "reply_saved": true,
+    "doc_chars": 8296,
+    "doc_is_portuguese": true,
+    "reply_is_portuguese": true,
+    "exclusivity_hits": [
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "e com integração mal feita enviou 40 vezes o tráfego normal e derrubou a API pública para todos os clientes por 25 minutos (INC-4412). Hoje não existe nenhum limite por cliente. Este do"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "derrubou a API pública para todos os clientes por 25 minutos (INC-4412). Hoje não existe nenhum limite por cliente. Este documento propõe rate limiting por token de API no gateway Kong,"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "9 com `Retry-After`. ## Contexto A API pública é exposta pelo gateway Kong e não aplica nenhum limite de requisições por cliente: qualquer token pode consumir a capacidade compartilhad"
+      },
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "ita passou a enviar cerca de 40 vezes o seu tráfego normal; a API ficou indisponível para todos os clientes por 25 minutos (INC-4412). Os clientes são separados em planos comerciais (f"
+      },
+      {
+        "where": "doc",
+        "term": "Nenhum",
+        "context": "ee, pro e enterprise). Já existe um Redis em produção usado para sessão. ## Objetivos - Nenhum token excede o seu limite contratado por mais de 1 segundo. - A API absorve um cliente ab"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "te consuma os serviços internos - ✓ Aproveita o Kong e o Redis que já estão em produção — nenhuma peça nova de infraestrutura - ✗ Cliente legítimo em pico (por exemplo, Black Friday) pode"
+      },
+      {
+        "where": "doc",
+        "term": "toda",
+        "context": "e contas avisar os clientes enterprise - ✗ Coloca o Redis de sessão no caminho crítico de toda requisição da API pública ## Alternativas consideradas **Limitar dentro de cada serviço"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "sto e por lock-in no fornecedor. **Não fazer nada** — descartado. É o cenário atual, sem nenhum limite por cliente, e foi o que permitiu o INC-4412 derrubar a API para todos os clientes"
+      },
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "atual, sem nenhum limite por cliente, e foi o que permitiu o INC-4412 derrubar a API para todos os clientes por 25 minutos. ## Riscos | Risco | Mitigação | |---|---| | O Redis de sess"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "hadow mode | ## Plano de entrega 1. **Shadow mode** — o limite é avaliado e medido, mas nenhuma requisição é bloqueada 2. **Enforcing no plano free** 3. **Enforcing geral** (free, pro e"
+      },
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "e com integração mal feita enviou 40 vezes o tráfego normal e derrubou a API pública para todos os clientes por 25 minutos (INC-4412). Hoje não existe nenhum limite por cliente. Este do"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "derrubou a API pública para todos os clientes por 25 minutos (INC-4412). Hoje não existe nenhum limite por cliente. Este documento propõe rate limiting por token de API no gateway Kong,"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "9 com `Retry-After`. ## Contexto A API pública é exposta pelo gateway Kong e não aplica nenhum limite de requisições por cliente: qualquer token pode consumir a capacidade compartilhad"
+      },
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "ita passou a enviar cerca de 40 vezes o seu tráfego normal; a API ficou indisponível para todos os clientes por 25 minutos (INC-4412). Os clientes são separados em planos comerciais (f"
+      },
+      {
+        "where": "doc",
+        "term": "Nenhum",
+        "context": "ee, pro e enterprise). Já existe um Redis em produção usado para sessão. ## Objetivos - Nenhum token excede o seu limite contratado por mais de 1 segundo. - A API absorve um cliente ab"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "te consuma os serviços internos - ✓ Aproveita o Kong e o Redis que já estão em produção — nenhuma peça nova de infraestrutura - ✗ Cliente legítimo em pico (por exemplo, Black Friday) pode"
+      },
+      {
+        "where": "doc",
+        "term": "toda",
+        "context": "e contas avisar os clientes enterprise - ✗ Coloca o Redis de sessão no caminho crítico de toda requisição da API pública ## Alternativas consideradas **Limitar dentro de cada serviço"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "sto e por lock-in no fornecedor. **Não fazer nada** — descartado. É o cenário atual, sem nenhum limite por cliente, e foi o que permitiu o INC-4412 derrubar a API para todos os clientes"
+      },
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "atual, sem nenhum limite por cliente, e foi o que permitiu o INC-4412 derrubar a API para todos os clientes por 25 minutos. ## Riscos | Risco | Mitigação | |---|---| | O Redis de sess"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "hadow mode | ## Plano de entrega 1. **Shadow mode** — o limite é avaliado e medido, mas nenhuma requisição é bloqueada 2. **Enforcing no plano free** 3. **Enforcing geral** (free, pro e"
+      },
+      {
+        "where": "reply",
+        "term": "nenhum",
+        "context": "modelo da casa não tem onde guardar, e preferi registrar a perder: - **Objetivos** — o \"nenhum token excede o limite por mais de 1s\" e o \"aguentar um cliente abusivo sem degradar os de"
+      },
+      {
+        "where": "reply",
+        "term": "único",
+        "context": "ó (contenção no Redis de sessão). Saiu mais alguma coisa do war room, ou esse foi mesmo o único levantado? 4. **Shadow mode** — qual número vocês vão olhar nessa fase para decidir que d"
+      }
+    ],
+    "exclusivity_count": 22,
+    "validation_disclaimer": [],
+    "mermaid_blocks": 0,
+    "details_blocks": 0,
+    "image_refs": 0,
+    "dsl_workspace_blocks": 0,
+    "possible_orphan_diagrams": []
+  },
+  {
+    "eval": "eval-5-template-gaps-asks-to-fill",
+    "documents": [
+      "eval-5-template-gaps-asks-to-fill/repo/docs/design/dd-2026-007-cache-de-catalogo.md"
+    ],
+    "reply_saved": true,
+    "doc_chars": 1876,
+    "doc_is_portuguese": true,
+    "reply_is_portuguese": true,
+    "exclusivity_hits": [
+      {
+        "where": "reply",
+        "term": "nunca",
+        "context": "e o tempo de indexação no Postgres, resultados \"parecidos mas errados\" que a busca exata nunca traria, e a dependência de um modelo novo em produção. Quais desses o time discutiu e dec"
+      }
+    ],
+    "exclusivity_count": 1,
+    "validation_disclaimer": [],
+    "mermaid_blocks": 0,
+    "details_blocks": 0,
+    "image_refs": 0,
+    "dsl_workspace_blocks": 0,
+    "possible_orphan_diagrams": []
+  },
+  {
+    "eval": "eval-6-no-renderer-keeps-placeholder-no-disclaimer",
+    "documents": [
+      "eval-6-no-renderer-keeps-placeholder-no-disclaimer/with_skill/outputs/docs/design/webhooks-de-saida.md"
+    ],
+    "reply_saved": false,
+    "doc_chars": 12804,
+    "doc_is_portuguese": true,
+    "reply_is_portuguese": false,
+    "exclusivity_hits": [
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "os entregar dentro da janela combinada. ## Visão geral Este documento propõe um serviço único responsável por entregar webhooks nos endpoints dos nossos clientes externos. Hoje esse t"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "a do ar, a chamada falha e o evento se perde. Também não existe log central de entregas — nenhum lugar onde alguém consiga perguntar \"esse aviso chegou ao cliente?\" e obter resposta. A"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "cliente reclama que não recebeu o aviso. Nesse ponto o evento já não existe mais em lugar nenhum e não há como reenviá-lo. Os eventos de domínio que interessam a esses clientes já trafe"
+      },
+      {
+        "where": "doc",
+        "term": "Nenhum",
+        "context": "ue interessam a esses clientes já trafegam no Kafka que mantemos hoje. ## Objetivos - **Nenhum evento perdido por indisponibilidade do cliente**, através do reenvio automático com back"
+      },
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "e um chamado do suporte. ## O desenho ### Visão geral da solução Um serviço de entrega único consome os eventos de domínio do Kafka. Para cada evento ele registra a tentativa na base"
+      },
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "Fonte do diagrama (Structurizr DSL)</summary> ``` workspace \"Webhooks de saída\" \"Serviço único de entrega de webhooks para endpoints de clientes externos.\" { !identifiers hierarch"
+      },
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "{ scope softwaresystem } } ``` </details> O **entregador de webhooks** é o único processo novo: ele consome os eventos de domínio do Kafka, decide o que entregar, assina,"
+      },
+      {
+        "where": "doc",
+        "term": "único",
+        "context": "ntos de domínio do Kafka, decide o que entregar, assina, envia e reagenda. Ele é também o único ponto do desenho que fala com o endpoint do cliente — os serviços de domínio deixam de fa"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "como concluída else Cliente indisponível ou responde com erro C-->>E: Erro ou nenhuma resposta E->>DB: Registra a falha e agenda o reenvio loop Reenvio com bac"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "E->>C: POST do webhook assinado com HMAC C-->>E: Sucesso, erro ou nenhuma resposta E->>DB: Registra a tentativa e o resultado end opt J"
+      },
+      {
+        "where": "doc",
+        "term": "todos",
+        "context": "de tentativas e a DLQ. Alguém precisa acompanhá-las, e uma falha delas afeta a entrega de todos os clientes de uma vez, e não mais de um serviço só. ## Alternativas consideradas ### C"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "s abrir. ### Não fazer nada Manter cada serviço fazendo o POST na mão. - ✓ Custo zero, nenhuma peça nova para operar, nenhuma latência adicional. - ✗ É exatamente o que produz o proble"
+      },
+      {
+        "where": "doc",
+        "term": "nenhuma",
+        "context": "anter cada serviço fazendo o POST na mão. - ✓ Custo zero, nenhuma peça nova para operar, nenhuma latência adicional. - ✗ É exatamente o que produz o problema: sem reenvio, a queda do end"
+      },
+      {
+        "where": "doc",
+        "term": "toda",
+        "context": "r de chaves por cliente passa a ser um segredo que este serviço precisa guardar e usar em toda entrega — como essas chaves nascem, ficam guardadas e são rotacionadas está em aberto (ve"
+      },
+      {
+        "where": "doc",
+        "term": "nenhum",
+        "context": "a na base, painel, alerta — e o que verifica, antes e depois de subir, que o objetivo de \"nenhum evento perdido\" está sendo cumprido. - O que fica explicitamente fora de escopo desta ent"
+      }
+    ],
+    "exclusivity_count": 15,
+    "validation_disclaimer": [],
+    "mermaid_blocks": 1,
+    "details_blocks": 1,
+    "image_refs": 1,
+    "dsl_workspace_blocks": 0,
+    "possible_orphan_diagrams": []
+  }
+]

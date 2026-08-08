@@ -1,0 +1,8 @@
+
+=== summary ===
+eval-1-rich-write-new-doc                            docs=1 excl=  8 disclaimer=0 mermaid=1 details=1 orphans=0
+eval-2-vague-write-asks-questions                    docs=0 excl=  0 disclaimer=0 mermaid=0 details=0 orphans=0
+eval-3-review-flawed-doc                             docs=2 excl=  8 disclaimer=0 mermaid=0 details=2 orphans=0
+eval-4-house-template-repo                           docs=3 excl= 22 disclaimer=0 mermaid=0 details=0 orphans=0
+eval-5-template-gaps-asks-to-fill                    docs=1 excl=  1 disclaimer=0 mermaid=0 details=0 orphans=0
+eval-6-no-renderer-keeps-placeholder-no-disclaimer   docs=1 excl= 15 disclaimer=0 mermaid=1 details=1 orphans=0

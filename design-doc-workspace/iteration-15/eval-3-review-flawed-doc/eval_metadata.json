@@ -1,0 +1,18 @@
+{
+  "eval_id": 3,
+  "eval_name": "eval-3-review-flawed-doc",
+  "prompt": "Dá uma revisada nesse design doc que eu escrevi: docs/design/fanout-de-notificacoes.md. Pode aplicar direto as melhorias que não dependem de mim; o que precisar de informação minha, lista pra eu responder.",
+  "assertions": [
+    "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+    "Structural additions are framed as suggestions from the skill's default catalog, not imposed as requirements, since no template governs the document",
+    "The reply separates findings into questions for the author versus edits applied",
+    "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+    "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+    "The architecture diagram — whichever notation it ends up in, since the skill's convention replaces a hand-drawn Mermaid architecture with Structurizr DSL — is followed by explanatory prose, and no diagram is left orphaned",
+    "The out-of-scope items are no longer mere negations of goals: either rewritten honestly in the document, or explicitly raised to the author as a question in the reply",
+    "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+    "The edited document remains in Portuguese and preserves the author's structure and voice",
+    "The header is honestly refreshed (Última atualização set to the real current date)",
+    "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "eval_id": 2,
+  "eval_name": "eval-2-vague-write-asks-questions",
+  "prompt": "escreve um design doc pra migração do nosso monolito pra microserviços",
+  "assertions": [
+    "Asks targeted clarifying questions in Portuguese covering at least: the current pain and why migrate now, measurable goals, alternatives, trade-offs, and impacted teams",
+    "Does not fabricate project facts (no invented stack, metrics, domain boundaries, or team names)",
+    "Raises staying on the monolith (or a modular monolith / 'do nothing') as an alternative that must be weighed",
+    "Does not deliver a finished design doc: if any file is created it contains only structure with explicit pending markers and zero invented content"
+  ]
+}

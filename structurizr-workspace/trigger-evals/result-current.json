@@ -1,0 +1,171 @@
+{
+  "skill_name": "structurizr",
+  "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL (workspace.dsl). Use this skill whenever the user mentions Structurizr, C4, architecture diagrams, system context / container / component diagrams, deployment or dynamic diagrams, system landscape, documenting how a system or its microservices are structured, or asks to create or edit a .dsl workspace \u2014 even if they never say the word \"Structurizr\". Also use it when linking existing ADRs (architecture decision records, e.g. in doc/adr) into the architecture documentation or C4 views. Do NOT use it for cloud-infrastructure pictures drawn from real vendor service icons (e.g. an AWS diagram with EC2/RDS/S3 boxes), for sequence or behavior-over-time diagrams (that belongs to a Mermaid sequence diagram), or for writing the ADR decision content itself.",
+  "results": [
+    {
+      "query": "add a component diagram for the new payments service to our existing C4 model in workspace.dsl",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "i want to document how our platform is structured using C4 \u2014 start with the system context and then the containers. we've got a React app, a Go API, Postgres, and we call Stripe and SendGrid",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we use Structurizr \u2014 model the deployment of our app across the staging and prod AWS environments",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create a workspace.dsl for our order-management system \u2014 model the containers and their relationships",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "diagram the static architecture of our microservices: how the gateway, the user-service, the catalog-service and the order-service relate to each other and to the shared message bus",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "i have an architecture i want to capture as proper C4 with system context, containers, and a couple of dynamic views for the key flows",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document our system landscape \u2014 we have like 8 internal systems and i want one view showing how they all connect at a high level",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "modela em Structurizr DSL a arquitetura do nosso sistema de cobran\u00e7a, com containers e componentes",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "set up the C4 model for our new SaaS \u2014 i want it as DSL so we can render it in Structurizr and keep it in git",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "link our decision records from doc/adr into the architecture documentation so the C4 views show the related ADRs",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "draw a sequence diagram showing how the checkout request flows through the gateway, order service and payment service over time \u2014 as a mermaid block for the README",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we decided to adopt the C4 model as our documentation standard \u2014 record that decision",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write a design doc for the new recommendations service, including an architecture overview",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create an ER diagram of our database schema \u2014 tables, columns, foreign keys",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw a flowchart of our CI/CD pipeline stages",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "convert our existing PlantUML diagrams to Mermaid",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "review our microservices for tight coupling and suggest where to split them",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "generate an AWS architecture diagram with the actual service icons (boxes for EC2, RDS, S3)",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document the REST API of the catalog service \u2014 endpoints, params, responses",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "explain what the C4 model is and how it differs from UML",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "passed": 18,
+    "failed": 2
+  }
+}
