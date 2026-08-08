@@ -26,15 +26,44 @@ verbatim** — "start a decision log", "amend", and the whole superseded clause 
 written to catch. Adding more synonyms is therefore unlikely to be the fix, and could easily be
 the wrong conclusion drawn from a small sample.
 
-## What this does and does not establish
+## The A/B — settled: the hand-edit changed nothing
 
-- It **does** establish that the shipped description over-triggers on nothing.
-- It **does not** establish a regression against `f92487e`. `result.json`'s headline (train 12/12,
-  test 7/8) came from a 60/40 split of a *different* description, so the numbers are not
-  comparable. The decisive experiment — running the recorded `best_description` against this same
-  full 20-query set, same conditions, same day — **was not run**: the account hit its monthly
-  spend limit first. Until it is, whether the hand-edit helped, hurt, or did nothing is unknown.
-- Three runs per query is a thin sample for queries sitting near the trigger boundary.
+The decisive experiment has now run. Same 20-query set, same day, same conditions, 3 runs per
+query: arm **A** the shipped description, arm **B** `result.json`'s recorded `best_description`,
+passed via `--description`. Files: `ab-shipped.json` / `ab-recorded.json`.
+
+**A = 17/20. B = 17/20.** The commit `f92487e` hand-edit neither helped nor hurt.
+
+More useful than the tie: **both arms miss the same three queries, at 0.00 in both.**
+
+| A | B | Query |
+|---|---|---|
+| 0.00 | 0.00 | "ADR 0007 is out of date … mark it superseded and write the new one" |
+| 0.00 | 0.00 | "start a decision log for the platform-team repo, we don't have one yet…" |
+| 0.00 | 0.00 | "we changed our minds about the message broker. amend the existing record…" |
+
+Both descriptions already contain "start a decision log", "amend", and the whole supersede
+clause. Two different wordings, three independent runs (`result-current`, A, B), the same three
+hard zeros. **Adding synonyms is not the lever** — that hypothesis is now tested and dead, which
+is the point of having run this.
+
+What these three share is that they read as *maintenance on a log* rather than authoring a
+record — mark a status, start a directory, edit an existing file. That fits the documented
+triggering behaviour (Claude skips a skill for tasks it judges it can already handle directly)
+better than it fits any wording gap. Testing that would mean changing what the description
+*claims the work is*, not which words it lists — and it should be tested before it is believed.
+
+Run-to-run variance is about one query: the earlier `result-current.json` scored 16/20, with
+"the tech lead wants every significant tech choice written up in doc/adr…" at 0.33; in arm A it
+passed at 0.67. Treat 16 vs 17 as noise. The three zeros are not noise.
+
+## Other notes
+
+- The shipped description over-triggers on nothing: all ten should-not-trigger queries sit at
+  0.00 in both arms, including the near-misses (design doc, sequence diagram, `workspace.dsl`,
+  PRD, postmortem, "ADR vs RFC", "help me decide Kafka or RabbitMQ").
+- `result.json`'s headline (train 12/12, test 7/8) came from a 60/40 split, so it was never
+  comparable to a full-set score. It is superseded by the A/B above.
 
 ## Rerunning
 
