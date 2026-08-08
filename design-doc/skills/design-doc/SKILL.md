@@ -45,14 +45,16 @@ the document under review.
    that will read as decided (see `references/diagrams.md`).
 
    Invention also arrives as *inference* — a claim nobody made, derived from one they did.
-   Watch the superlatives: "a única alternativa", "o único freio disponível", "sempre",
-   "nunca". They are the shape an unstated absence takes when you write it down as fact.
-   "There is no per-client limit today" does not license "manual intervention was the only
-   brake" — a global throttle, a WAF rule, or the client fixing its own integration are all
-   equally unmentioned, and you cannot rule out what was never discussed. Write what was
-   established ("there is no automatic per-client containment today") and let the reader draw
-   the rest, or make the absence a question. The cost of the stronger sentence is real: a
-   reviewer who knows about the WAF now distrusts the whole document.
+   Watch every word that claims exclusivity or universality — *the only*, *the sole*, *the
+   single*, *always*, *never*, and whatever carries that force in the language you are
+   writing in. They are the shape an unstated absence takes when you write it down as fact:
+   nobody mentioned a second option, so the sentence declares there wasn't one. "There is no
+   per-client limit today" does not license "manual intervention was the only brake" — a
+   global throttle, a WAF rule, or the client fixing its own integration are all equally
+   unmentioned, and you cannot rule out what was never discussed. Write what was established
+   ("there is no automatic per-client containment today") and let the reader draw the rest,
+   or make the absence a question. The cost of the stronger sentence is real: a reviewer who
+   knows about the WAF now distrusts the whole document.
 
 3. **The template governs; without one, sections are suggestions.** When the user
    supplies a template — or the repository's design docs already follow one — its
@@ -118,10 +120,10 @@ created, and when the essentials are missing, the deliverable of the turn is you
 questions, not a skeleton of placeholder sections.
 
 When a template governs the document, also ask one question per template section the
-conversation hasn't filled — the template makes those sections required, so an
-unfilled one is a question to the user, never a silent omission. Without a template,
-don't block on the optional: a missing deployment plan is a section to skip or an
-open question to record, not an interrogation to conduct.
+conversation hasn't filled (contract 3) — an unfilled required section is a question to
+the user, never a silent omission. Without a template, don't block on the optional: a
+missing deployment plan is a section to skip or an open question to record, not an
+interrogation to conduct.
 
 Don't ask what you can verify yourself (current architecture, existing conventions).
 `references/sections.md` pairs each section with the question to ask when its
@@ -134,22 +136,13 @@ substance is missing.
   design doc exists to pin down. Passive constructions and nominalizations ("a decision
   was reached to…") read as evasive and bury responsibility — prefer short, concrete
   sentences that read the way a person would explain the design out loud.
-- Start the design with an **overview, then details**. The design is not one section
-  but a *series* of sections, each with its own heading: the solution itself, the
-  architecture (typically a C4 container diagram), the flows (sequence diagrams),
-  APIs and payloads, data and its sensitivity, pseudocode (rarely — only novel
-  algorithms). What unites them is showing why this solution best meets the goals.
+- The design is not one section but a **series** of sections — the solution overview
+  first, then only the details that earn their place. `references/sections.md` holds the
+  menu and the two tests (longevity, freedom) for whether a detail belongs in the
+  document or in the code; it also carries how to write each other section well, so
+  don't re-derive from scratch what it already spells out.
 - **Diagrams complement text, they never replace it.** Always follow a diagram with
   prose explaining the components and their interactions — see "Diagrams" below.
-- Show only the **relevant fragments** of APIs, schemas, and payloads. Copy-pasting a
-  full schema buries the decision under detail that goes stale; link to the source of
-  truth instead.
-- Prefer **measurable goals** (numbers make success verifiable) and goals that name
-  the mechanism, not just the outcome. Write out-of-scope items as explicit exclusions
-  someone might reasonably have expected, not negated goals.
-- When the document leans on acronyms or domain-specific terms, **suggest a glossary
-  at the beginning of the document** — right after the header — so readers meet the
-  terms before the terms meet them.
 - Support decisions with facts and data the user established; avoid vague
   justifications ("more scalable", "cleaner") that don't survive a reviewer's "why?".
 
@@ -167,12 +160,10 @@ Before declaring done, check:
 - The prose reads in plain, active language — no sentence hides its actor behind the
   passive, no decision floats without an owner.
 - Acronyms and domain terms are defined. If the doc carries a glossary, sweep the
-  finished body for stray acronyms (the short ones hide in tables and alternative
-  names — BI, SLA, DLQ): every acronym the body uses appears in the glossary —
-  except terms every plausible reviewer already knows (API, HTTP, PDF) and terms
-  that live only in the document's authoring scaffolding (the diagram's DSL source,
-  render notes). The test is whether a named reviewer would stumble, not whether
-  it's an acronym.
+  finished body for stray acronyms — the short ones hide in tables and alternative
+  names — and apply the two exclusions from `references/sections.md` §Glossary: terms
+  every plausible reviewer already knows, and terms that live only in the document's
+  authoring scaffolding.
 - Length is proportionate to the problem's ambiguity.
 - A final spelling and typo pass, in the document's own language.
 
@@ -182,17 +173,17 @@ Before declaring done, check:
 
 Identify its structure, language, intended audience, and current state before judging
 anything. Then settle which template the review measures against — the answer decides
-what counts as a gap versus a suggestion. Unless the user already supplied a
-template, always ask them for a reference to one: templates normally live in wikis
-and shared drives, not in the repository, so what the repo shows (or doesn't) is a
-hint, never the answer. Put the question among the review's questions for the author;
-it costs one line, while measuring against the wrong yardstick costs the review.
-Other design docs in the repository can corroborate a house structure meanwhile, but
-the user's answer wins. Until a template is confirmed — or when the user confirms
-there is none — the default section catalog below is the yardstick, and structural
-findings are suggestions, not demands. Either way
-the review improves *this* document: respect the author's structure and voice even
-where they differ from what the template or the catalog would prescribe.
+what counts as a gap versus a suggestion (contract 3). Unless the user already supplied
+a template, always ask them for a reference to one: templates normally live in wikis and
+shared drives, not in the repository, so what the repo shows (or doesn't) is a hint,
+never the answer. Put the question among the review's questions for the author; it costs
+one line, while measuring against the wrong yardstick costs the review. Other design docs
+in the repository can corroborate a house structure meanwhile, but the user's answer
+wins. Until a template is confirmed — or when the user confirms there is none — the
+default catalog below is the yardstick and structural findings are suggestions. Either
+way the review improves *this* document, in the author's own structure and voice
+(contract 4), even where they differ from what the template or the catalog would
+prescribe.
 
 ### 2. Assess it as a reviewer would
 
@@ -237,9 +228,9 @@ goes in only after — and only as — the user answers.
 
 ## The default section catalog
 
-When a template governs the document, it wins — this catalog is for documents without
-one. Draw from it freely (full guidance, good/bad examples, and the fallback question
-for each section live in `references/sections.md`):
+This catalog is for documents no template governs (contract 3). Draw from it freely —
+full guidance, good/bad examples, and the fallback question for each section live in
+`references/sections.md`:
 
 | Section | What it gives the reader | Worth having when |
 |---|---|---|
@@ -259,19 +250,18 @@ for each section live in `references/sections.md`):
 ## Diagrams
 
 Two diagram types earn their place in most design docs: a **C4 container diagram** for
-the architecture and **sequence diagrams** for flows with temporal order. The C4 diagram
-is authored as **Structurizr DSL** and embedded as a rendered image with the DSL folded
-beneath it; sequence diagrams are **Mermaid**, which renders natively in Markdown. Every
-diagram is followed by prose naming the components and explaining how they interact.
-Read `references/diagrams.md` before writing either one — it holds the embedding
-convention, the rendering fallbacks, and the delegation rules for the `structurizr` and
+the architecture, authored as **Structurizr DSL** and embedded as a rendered image with
+the DSL folded beneath it, and **sequence diagrams** for flows with temporal order,
+written as **Mermaid**, which renders natively in Markdown. Read
+`references/diagrams.md` before writing either one — it holds the embedding convention,
+the rendering fallbacks, and the delegation rules for the `structurizr` and
 `mermaid-sequence` skills.
 
 ## Reference files
 
 | File | Read it when |
 |---|---|
-| `references/sections.md` | Before writing your first design doc of the session, or when deciding whether a section earns its place — per-section guidance, pitfalls, examples, and the question to ask when the substance is missing. |
+| `references/sections.md` | Before writing your first design doc of the session, and before a review's structural pass — per-section guidance, pitfalls, examples, and the question to ask when the substance is missing. It carries the detail this file only points at: goals worth measuring, which API fragments to show, the glossary's two exclusions. |
 | `references/diagrams.md` | The document will carry a diagram — the C4 architecture view or a sequence flow: authoring the DSL, embedding image-plus-folded-source, and what to do when no renderer is available. |
 
 ## Attribution
