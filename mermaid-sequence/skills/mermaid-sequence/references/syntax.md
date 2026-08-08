@@ -4,6 +4,12 @@ Condensed from the official Mermaid documentation (mermaid.js.org/syntax/sequenc
 Version annotations mark features that older renderers (GitHub, GitLab, self-hosted
 wikis) may not support yet — see the portability table at the end.
 
+**Sections** — jump to what the diagram needs rather than reading straight through:
+
+Skeleton · Participants and actors · Messages · Activations · Notes · Blocks ·
+**Text escaping gotchas** · Numbering · Actor menus · **Portability** (which features
+older renderers reject)
+
 ## Skeleton
 
 ```
