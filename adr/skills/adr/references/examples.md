@@ -3,6 +3,12 @@
 All examples below are adr-tools-exact. Note the blank-line discipline: exactly one
 blank line between every element.
 
+**What's here** — read the parts your task needs, not all six: the **seed ADR** (only when
+initializing a fresh log), a **Portuguese-language ADR** (a log kept in another language),
+a **model well-written ADR** (the tone and length to aim for), a **complete supersede pair**
+and an **amend pair** (only when linking to an existing record), and **slug derivation
+examples**.
+
 The examples are in English; they exemplify *structure*. In a log kept in another
 language, only the prose is translated — the H1 title text and the section bodies. The
 `Date:` label, the four `##` headings, the status word, and the link verbs stay canonical
