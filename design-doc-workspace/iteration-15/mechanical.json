@@ -292,90 +292,60 @@
   {
     "eval": "eval-6-no-renderer-keeps-placeholder-no-disclaimer",
     "documents": [
-      "eval-6-no-renderer-keeps-placeholder-no-disclaimer/with_skill/outputs/docs/design/webhooks-de-saida.md"
+      "eval-6-no-renderer-keeps-placeholder-no-disclaimer/with_skill/outputs/docs/design/servico-de-webhooks-de-saida.md"
     ],
-    "reply_saved": false,
-    "doc_chars": 12804,
+    "reply_saved": true,
+    "doc_chars": 13092,
     "doc_is_portuguese": true,
-    "reply_is_portuguese": false,
+    "reply_is_portuguese": true,
     "exclusivity_hits": [
       {
         "where": "doc",
         "term": "único",
-        "context": "os entregar dentro da janela combinada. ## Visão geral Este documento propõe um serviço único responsável por entregar webhooks nos endpoints dos nossos clientes externos. Hoje esse t"
+        "context": "te documento propõe tirar a entrega das mãos de cada serviço e concentrá-la em um serviço único, que recebe os eventos de domínio, insiste na entrega quando o cliente está fora do ar e"
       },
       {
         "where": "doc",
         "term": "nenhum",
-        "context": "a do ar, a chamada falha e o evento se perde. Também não existe log central de entregas — nenhum lugar onde alguém consiga perguntar \"esse aviso chegou ao cliente?\" e obter resposta. A"
-      },
-      {
-        "where": "doc",
-        "term": "nenhum",
-        "context": "cliente reclama que não recebeu o aviso. Nesse ponto o evento já não existe mais em lugar nenhum e não há como reenviá-lo. Os eventos de domínio que interessam a esses clientes já trafe"
+        "context": "cliente está fora do ar e guarda o que aconteceu em cada tentativa. O que se busca é que nenhum evento se perca por indisponibilidade do cliente e que cada tentativa fique visível. O cu"
       },
       {
         "where": "doc",
         "term": "Nenhum",
-        "context": "ue interessam a esses clientes já trafegam no Kafka que mantemos hoje. ## Objetivos - **Nenhum evento perdido por indisponibilidade do cliente**, através do reenvio automático com back"
+        "context": "são publicados no Kafka que temos hoje. ## Objetivos e fora de escopo **Objetivos** - Nenhum evento perdido por indisponibilidade do cliente: o evento continua sendo reenviado com ba"
       },
       {
         "where": "doc",
         "term": "único",
-        "context": "e um chamado do suporte. ## O desenho ### Visão geral da solução Um serviço de entrega único consome os eventos de domínio do Kafka. Para cada evento ele registra a tentativa na base"
+        "context": "ara o time fechar antes da revisão. ## O desenho ### Visão geral da solução Um serviço único passa a ser o dono da entrega de webhooks. Ele consome os eventos de domínio do Kafka, pe"
       },
       {
         "where": "doc",
-        "term": "único",
-        "context": "Fonte do diagrama (Structurizr DSL)</summary> ``` workspace \"Webhooks de saída\" \"Serviço único de entrega de webhooks para endpoints de clientes externos.\" { !identifiers hierarch"
+        "term": "apenas",
+        "context": "a DLQ. A troca central é essa: os serviços de domínio deixam de fazer o POST e passam a apenas publicar o evento, e a responsabilidade pela entrega (reenvio, assinatura, registro) fica"
       },
       {
         "where": "doc",
-        "term": "único",
-        "context": "{ scope softwaresystem } } ``` </details> O **entregador de webhooks** é o único processo novo: ele consome os eventos de domínio do Kafka, decide o que entregar, assina,"
+        "term": "todas",
+        "context": "ente passa a depender da disponibilidade do serviço de entrega, que vira um ponto comum a todas as integrações. ## Alternativas consideradas **Não fazer nada.** Descartada. É o cenári"
       },
       {
         "where": "doc",
-        "term": "único",
-        "context": "ntos de domínio do Kafka, decide o que entregar, assina, envia e reagenda. Ele é também o único ponto do desenho que fala com o endpoint do cliente — os serviços de domínio deixam de fa"
+        "term": "Nenhum",
+        "context": "ando o evento, e a descoberta continua chegando pelo suporte, isto é, depois do prejuízo. Nenhum dos dois objetivos é atendido. **Usar um SaaS de webhooks.** Descartada. Resolveria o re"
       },
       {
         "where": "doc",
-        "term": "nenhuma",
-        "context": "como concluída else Cliente indisponível ou responde com erro C-->>E: Erro ou nenhuma resposta E->>DB: Registra a falha e agenda o reenvio loop Reenvio com bac"
+        "term": "Nenhum",
+        "context": "assina o documento como autor, e quais áreas e times revisam? - Os objetivos têm número? \"Nenhum evento perdido\" e \"visibilidade de cada tentativa\" ficam mais verificáveis com uma meta a"
       },
       {
-        "where": "doc",
-        "term": "nenhuma",
-        "context": "E->>C: POST do webhook assinado com HMAC C-->>E: Sucesso, erro ou nenhuma resposta E->>DB: Registra a tentativa e o resultado end opt J"
-      },
-      {
-        "where": "doc",
-        "term": "todos",
-        "context": "de tentativas e a DLQ. Alguém precisa acompanhá-las, e uma falha delas afeta a entrega de todos os clientes de uma vez, e não mais de um serviço só. ## Alternativas consideradas ### C"
-      },
-      {
-        "where": "doc",
-        "term": "nenhuma",
-        "context": "s abrir. ### Não fazer nada Manter cada serviço fazendo o POST na mão. - ✓ Custo zero, nenhuma peça nova para operar, nenhuma latência adicional. - ✗ É exatamente o que produz o proble"
-      },
-      {
-        "where": "doc",
-        "term": "nenhuma",
-        "context": "anter cada serviço fazendo o POST na mão. - ✓ Custo zero, nenhuma peça nova para operar, nenhuma latência adicional. - ✗ É exatamente o que produz o problema: sem reenvio, a queda do end"
-      },
-      {
-        "where": "doc",
-        "term": "toda",
-        "context": "r de chaves por cliente passa a ser um segredo que este serviço precisa guardar e usar em toda entrega — como essas chaves nascem, ficam guardadas e são rotacionadas está em aberto (ve"
-      },
-      {
-        "where": "doc",
-        "term": "nenhum",
-        "context": "a na base, painel, alerta — e o que verifica, antes e depois de subir, que o objetivo de \"nenhum evento perdido\" está sendo cumprido. - O que fica explicitamente fora de escopo desta ent"
+        "where": "reply",
+        "term": "Nenhum",
+        "context": "hoje entregam os webhooks — confirma ou troca. 2. Dá para colocar número nos objetivos? \"Nenhum evento perdido\" e \"visibilidade de cada tentativa\" ficam bem mais verificáveis com uma me"
       }
     ],
-    "exclusivity_count": 15,
+    "exclusivity_count": 9,
     "validation_disclaimer": [],
     "mermaid_blocks": 1,
     "details_blocks": 1,

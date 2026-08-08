@@ -1,5 +1,5 @@
 {
-  "total_tokens": null,
-  "duration_ms": null,
-  "note": "run aborted mid-task on an account spend limit; no usage reported"
+  "total_tokens": 72324,
+  "duration_ms": 278334,
+  "total_duration_seconds": 278.3
 }

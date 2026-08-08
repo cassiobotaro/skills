@@ -24,7 +24,7 @@ script owns the exclusivity sweep, the banned-disclaimer sweep, the diagram/orph
 the language markers; every exclusivity hit was then adjudicated by hand, since the term list
 catches restatements as readily as inferences.
 
-## Result — 39/39 on the five evals that completed; eval 6 aborted
+## Result — 46/46 (100%), no failures
 
 | Eval | Passed | Tokens |
 |---|---|---|
@@ -33,15 +33,18 @@ catches restatements as readily as inferences.
 | 3 review-flawed-doc | 11/11 | 59,597 |
 | 4 house-template-repo | 9/9 | 41,432 |
 | 5 template-gaps-asks-to-fill | 5/5 | 35,944 |
-| 6 no-renderer-keeps-placeholder | **not graded** | — |
+| 6 no-renderer-keeps-placeholder | 7/7 | 72,324 |
 
-Total 252,300 tokens over five runs, mean 50,460.
+Total 324,624 tokens over six runs, mean 54,104.
 
-**Eval 6 is not a failure — it is missing data.** The run was killed mid-task by an account
-spend limit, after it had written the design doc and while it was starting the sequence diagram.
-It produced no `response.md` and no Mermaid block, so four of its seven assertions have nothing
-to grade against. Its document is kept in the workspace for reference and must be re-run before
-1.3.4 can be called fully measured.
+Eval 6's first attempt was killed mid-task by an account spend limit, after writing the document
+and before the sequence diagram. It was re-seeded (the partial output deleted) and re-run from
+scratch; the numbers above are the complete run. Its seven assertions all hold: the C4
+architecture is Structurizr DSL folded in a `<details>` block under an image reference that stays
+a **placeholder** (no `diagrams/` file was generated and none was faked), the retry flow is a
+fenced ` ```mermaid ` sequence diagram, no validation disclaimer appears anywhere in the document,
+neither diagram is orphaned, and nothing was installed — the run honored the stated absence of
+Docker even though a `docker` binary sat on the PATH.
 
 ## The exclusivity sweep — what the generalization actually bought
 
@@ -54,7 +57,7 @@ Portuguese wording.
 | 3 review-flawed-doc | 0 | — |
 | **4 house-template-repo** | **0** | the decisive one (below) |
 | 1 rich-write-new-doc | 3 | all restatements |
-| 6 (incomplete) | 5 | all restatements |
+| 6 no-renderer-keeps-placeholder | 9 | all restatements |
 
 **Eval 4 is the one that matters.** It is where mode (b) failed at 1.3.1 (*"o Redis … é a única
 infraestrutura de contadores rápidos"*) and failed again, reworded, at 1.3.2 (*"o único freio
@@ -65,12 +68,15 @@ mentions of NAT or shared IP in the document) and reported having deleted a draf
 about "per token, not per IP" for re-smuggling the retracted false positive in as a selling
 point. The rule survived losing its examples.
 
-The remaining hits are the kind the rule is *not* aimed at: eval 1's *"um caminho único de
-exportação"* is the user's own words (*"pra ter um caminho só"*) describing the design's chosen
-property; eval 6's *"o único processo novo"* and *"o único ponto do desenho que fala com o
-endpoint do cliente"* are claims about the document's own diagram, verifiable from the diagram
-itself. None rules out an unmentioned alternative. That is exactly the distinction contract 2
-asks the model to make, and it is being made without a word list to lean on.
+The remaining hits are the kind the rule is *not* aimed at, and every one was adjudicated
+individually. Eval 1's *"um caminho único de exportação"* is the user's own words (*"pra ter um
+caminho só"*) describing the design's chosen property. Eval 6's nine break down the same way:
+*"um serviço único"* and *"nenhum evento perdido"* are quoted straight from the prompt,
+*"passam a apenas publicar o evento"* describes the proposed design's own behaviour, and
+*"Nenhum dos dois objetivos é atendido"* judges the "do nothing" alternative against the two
+goals the document itself states — verifiable from the page, not inferred about the world. None
+rules out an unmentioned alternative. That is exactly the distinction contract 2 asks the model
+to make, and it is being made without a word list to lean on.
 
 ## What the redundancy cut did and did not cost
 
@@ -96,9 +102,10 @@ The two properties most exposed by the cut both held:
 
 - **Never-invent inside the notation held everywhere.** Eval 1's DSL gives a technology only to
   `RabbitMQ` and `Amazon S3` — both named by the user — and leaves the API and worker containers'
-  technology slots empty, raising them as open questions. Eval 3, reviewing someone else's
+  technology slots empty, raising them as open questions. Eval 6's gives one only to
+  `PostgreSQL`, leaving the delivery service and the DLQ blank. Eval 3, reviewing someone else's
   document, wrote **every** container with an empty technology slot. No protocol appears on any
-  relationship label in either.
+  relationship label in any of the three.
 - **The template-governs contract held in both directions.** Eval 4 reproduced the house skeleton
   in order (Resumo → Contexto → Proposta/Compensações → Riscos → Plano de entrega), continued the
   ID sequence to `DD-2026-008`, and added `Objetivos` and `Alternativas consideradas` only for
@@ -111,8 +118,13 @@ The two properties most exposed by the cut both held:
   header date refreshed to the real `2026-08-07` and the vague "mais escalável / mais fácil de
   manter" justification removed.
 
-## Scope and what is still open
+## Scope
 
-Five evals, one run each — this is a regression gate, not a variance measurement. Eval 6 must be
-re-run to close the set. Wall clock is omitted: three runs executed concurrently with two
-`claude -p` trigger-eval sweeps, so it carries queueing delay. Tokens are the comparable figure.
+Six evals, one run each — this is a regression gate, not a variance measurement. Wall clock is
+omitted: five of the runs executed concurrently with two `claude -p` trigger-eval sweeps, so it
+carries queueing delay. Tokens are the comparable figure.
+
+Still unmeasured elsewhere in this sweep: the `structurizr` 1.2.1 and `adr` 1.2.3 reference-file
+indexes shipped without a regression run of their own (navigational changes, low risk but
+untested), and the `adr` description A/B — shipped text versus the recorded `best_description` on
+the same full trigger set — has not run. See the two `trigger-evals/README-current.md` files.
