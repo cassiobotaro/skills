@@ -12,6 +12,13 @@ buys the reader, how to write it well, and what to ask the user when its substan
 missing. Skip any section whose entry doesn't apply; a skipped section needs no
 apology and no placeholder.
 
+**Sections** — jump to the entry you need rather than reading straight through:
+
+Header · Glossary · Overview · Scope and context · Goals and out of scope ·
+The design (a series of sections) · Trade-offs of the chosen solution ·
+Alternatives considered · Cross-cutting concerns · Testability and observability ·
+Deployment plan · Open questions
+
 ## Header
 
 A small key–value table identifying the document and its lifecycle.
