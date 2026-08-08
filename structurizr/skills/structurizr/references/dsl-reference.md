@@ -6,6 +6,14 @@ generated DSL. Rare features (archetypes, workspace extension, scripts/plugins,
 filtered/custom/image views, perspectives) live in `dsl-advanced.md` — read that only
 when the task needs them.
 
+**Sections** — jump to what the task needs rather than reading straight through:
+
+1. File basics · 2. Elements · 3. Relationships · 4. Groups · 5. Identifiers ·
+6. Deployment · 7. Views · 8. Include/exclude expressions · 9. Styles · 10. Themes ·
+11. Documentation and ADRs · 12. Implied relationships, `!include` ·
+13. Workspace configuration · 14. Defaults and gotchas ·
+**15. House template for a new workspace** (copy this to start from scratch)
+
 ## 1. File basics
 
 - Structure: `workspace [name] [description] { model { … } views { … } }`.
