@@ -4,6 +4,13 @@ How to place every part of a user's architecture at the right C4 abstraction lev
 which questions to ask when you can't. Derived from c4model.com (Simon Brown, CC BY 4.0) —
 see NOTICE.md.
 
+**Sections** — jump to what the task needs rather than reading straight through:
+
+The hierarchy · Definitions and litmus tests (Person, Software System, Container,
+Component, Code element) · **Tricky cases** (including microservices — system or
+container?) · **The question bank** (what to ask when classification is ambiguous) ·
+FAQ essentials
+
 ## The hierarchy
 
 **Person → Software System → Container → Component → Code element.**

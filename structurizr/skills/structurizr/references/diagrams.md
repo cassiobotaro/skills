@@ -4,6 +4,13 @@ When each diagram type earns its place, how to make any diagram self-describing,
 full pre-delivery checklist. Derived from c4model.com (Simon Brown, CC BY 4.0) — see
 NOTICE.md.
 
+**Sections** — jump to what the task needs rather than reading straight through:
+
+Diagram types (System Context · Container · Component · Code · System Landscape ·
+Dynamic · Deployment, plus a **quick matrix**) · Notation rules, including lines as
+dependency vs data flow · **Review checklist** (run before delivering) ·
+Will diagrams rot?
+
 ## Diagram types
 
 ### System Context (level 1) — recommended for all teams
