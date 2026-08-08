@@ -8,7 +8,7 @@ description: >
   and adr-tools plus Structurizr's !adrs importer parse the exact English literals (Date:,
   ## Status / ## Context / ## Decision / ## Consequences, the status words) even when the prose
   is in another language. Michael Nygard format, file-compatible with Nat Pryce's adr-tools,
-  .adr-dir discovery included. Use this skill for any work on a decision log — including the
+  .adr-dir discovery. Use this skill for any work on a decision log — including the
   operations that look like a one-line edit: "write an ADR", "document this decision", "we
   decided to use X over Y", "ADR 7 is out of date, mark it superseded and write the
   replacement", "amend the existing record", "we changed our minds about Z", "start a decision
