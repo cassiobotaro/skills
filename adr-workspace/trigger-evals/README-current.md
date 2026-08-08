@@ -53,6 +53,37 @@ nothing" was also over-read: a tie in a noisy metric is not evidence of equivale
 **Score by pooled trigger rate over a group of queries, never by one sweep's headline.** 0/27
 versus 5/18 survives the noise; "19 beat 17" does not. This is now recorded in `CLAUDE.md`.
 
+## The 1.3.1 trim (2026-08-08)
+
+1.3.0's text was **1027 characters** — over the Agent Skills spec's 1024-char `description`
+limit. Claude Code never complained (it caps the listing at 1536 and truncates), but the spec
+path validates and fails hard, so claude.ai upload and `package_skill.py` would have rejected
+the skill. Shipping that text was not an option; the only question was which characters to cut.
+
+The cut: `.adr-dir discovery included.` → `.adr-dir discovery.` (1018, six to spare). A factual
+clause, not a trigger phrase — "included" appears in no query.
+
+Two fresh sweeps, pooled, against the two H1 sweeps above (`ab-trimmed-run1.json`, `run2`):
+
+| Arm | the 3 hard queries | all 10 should-trigger | all 10 should-NOT-trigger |
+|---|---|---|---|
+| 1.3.0, untrimmed (not shippable) | 5 / 18 (28%) | 39 / 60 (65%) | 0 / 60 |
+| **1.3.1, trimmed (shipped)** | 3 / 18 (17%) | **38 / 60 (63%)** | **0 / 60** |
+
+One sample apart on the positives. Per-query the movement runs both ways — `-1, 0, 0, -2, +1,
++2, +1, -2, 0, 0` — which is the same bidirectional swing this harness produces on *identical*
+text (see the wrong turn above).
+
+**What this establishes:** no large regression, and no new over-triggering — still 0 hits in 60
+negative samples. **What it does not establish:** equivalence. By the rule recorded above, a tie
+in a noisy metric is not evidence of equivalence, and at n=18 the hard-query 5→3 does not
+separate from noise either.
+
+Two per-query notes, neither actionable alone at this sample size: the Portuguese query
+("registra aí a decisão … OpenTelemetry") fell 5/6 → 3/6, the largest single drop; and "start a
+decision log for the platform-team repo" went 2/6 → 0/6, having already been below threshold.
+Both stay on the list of things to look at if the hard queries ever become the priority.
+
 ## Rerunning
 
 From the **repo root**, never from the skill-creator directory (the wrong cwd silently scores
