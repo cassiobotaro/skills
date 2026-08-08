@@ -1,16 +1,18 @@
 ---
 name: adr
 description: >
-  Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format,
-  file-compatible with Nat Pryce's adr-tools (sequential numbering, NNNN-slug.md filenames,
-  supersede/amend links in the Status section, .adr-dir discovery) and importable into
-  Structurizr's decision log — the parsed scaffolding (Date: label, ## headings, status words)
-  stays English even when the prose is in another language. Use this skill whenever
-  the user wants to record, document, revise, supersede, or amend an architecture or
-  technology decision — "write an ADR", "document this decision", "we decided to use X
-  over Y", "record why we chose Z", "replace or supersede ADR N", "ADR N is out of date,
-  mark it superseded and write the replacement", "start a decision log" — even if they
-  never say the acronym "ADR".
+  Write and maintain a project's Architecture Decision Record log — the files, not just the
+  prose. Every change to the log carries invariants a hand edit breaks silently: the next
+  number must be monotonic, the filename must be NNNN-slug.md derived from the title, a
+  supersede touches two files and rewrites the old one's Status section only (never its body),
+  and adr-tools plus Structurizr's !adrs importer parse the exact English literals (Date:,
+  ## Status / ## Context / ## Decision / ## Consequences, the status words) even when the prose
+  is in another language. Michael Nygard format, file-compatible with Nat Pryce's adr-tools,
+  .adr-dir discovery included. Use this skill for any work on a decision log — including the
+  operations that look like a one-line edit: "write an ADR", "document this decision", "we
+  decided to use X over Y", "ADR 7 is out of date, mark it superseded and write the
+  replacement", "amend the existing record", "we changed our minds about Z", "start a decision
+  log" — even if the user never says "ADR".
 ---
 
 # Architecture Decision Records (adr-tools compatible)
