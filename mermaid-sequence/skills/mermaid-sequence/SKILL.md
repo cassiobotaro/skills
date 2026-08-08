@@ -1,5 +1,6 @@
 ---
 name: mermaid-sequence
+license: MIT
 description: >
   Write and edit Mermaid sequence diagrams, delivered as fenced ```mermaid code blocks
   that render directly in Markdown (GitHub, GitLab, most wikis), validated and previewed

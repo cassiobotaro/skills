@@ -1,5 +1,6 @@
 ---
 name: design-doc
+license: MIT
 description: >
   Write and review software design documents through interactive discovery: ask the
   user targeted questions about the problem, the trade-offs, the alternatives, and the

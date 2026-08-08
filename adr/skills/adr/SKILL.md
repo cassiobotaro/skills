@@ -1,5 +1,6 @@
 ---
 name: adr
+license: MIT
 description: >
   Write and maintain a project's Architecture Decision Record log — the files, not just the
   prose. Every change to the log carries invariants a hand edit breaks silently: the next

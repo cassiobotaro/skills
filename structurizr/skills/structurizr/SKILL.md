@@ -1,5 +1,6 @@
 ---
 name: structurizr
+license: MIT
 description: >
   Author, evolve, and validate C4 model architecture documentation as Structurizr DSL
   (workspace.dsl). Use this skill whenever the user mentions Structurizr, C4, architecture
