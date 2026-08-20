@@ -9,15 +9,29 @@ description: >
   create or edit a .dsl workspace — even if they never say the word "Structurizr". Also use it
   when linking existing ADRs (architecture decision records, e.g. in doc/adr) into the
   architecture documentation or C4 views. Do NOT use it for cloud-infrastructure pictures
-  drawn from real vendor service icons (e.g. an AWS diagram with EC2/RDS/S3 boxes), for
-  sequence or behavior-over-time diagrams (that belongs to a Mermaid sequence diagram), or
-  for writing the ADR decision content itself.
+  drawn from real vendor service icons (e.g. an AWS diagram with EC2/RDS/S3 boxes), or for
+  sequence or behavior-over-time diagrams (that belongs to a Mermaid sequence diagram).
 ---
 
 # Structurizr / C4 architecture documentation
 
 This skill produces or edits a `workspace.dsl` file (Structurizr DSL, the C4 model) at the
 root of the user's repository, validates it, and links ADRs when the repository has them.
+
+## Check the scope first
+
+Three neighboring requests look like C4 work and are not. Check before modeling anything;
+if the request is one of these, say so in a sentence and hand it to the right place instead
+of opening a `workspace.dsl`.
+
+| The request | Why it isn't this skill | Where it goes |
+|---|---|---|
+| A cloud-infrastructure picture drawn from real vendor service icons (an AWS diagram with EC2/RDS/S3 boxes) | C4 models abstractions the team owns, not a vendor's service catalog rendered in its own iconography | A diagramming tool with the vendor icon set |
+| A sequence or behavior-over-time diagram ("what happens when a user checks out") | C4 views are static structure; ordered interaction is a different shape | The `mermaid-sequence` skill |
+| Writing the decision content of an ADR ("record why we chose Postgres") | This skill *links* an existing decision log into the views; it does not author the decision | The `adr` skill |
+
+Linking existing ADRs into the architecture documentation **is** this skill's work — only
+authoring the decision prose is not.
 
 ## The contract
 
