@@ -5,7 +5,9 @@
 > per-query claims this document makes. Re-measured at 10 runs per query, the two Haiku
 > queries called out below as 0/6 score 33% and 40%, `structurizr` on Haiku scores 60%
 > rather than 47-55%, and the `adr` control scores 81% rather than 93%. The
-> skill-level ordering survives; the per-query story in Part 1 does not.
+> skill-level ordering does **not** survive either — see `README-21pp-analysis.md`: at
+> `--num-workers 1`, `structurizr` measures 78% against `adr`'s 80%. The zero-false-fire
+> finding is the only thing in Part 1 that holds.
 
 Started as a Haiku-vs-Opus comparison of all four skills. Three of them were healthy on both
 models; `structurizr` was not, and that turned into a description change. Both halves are

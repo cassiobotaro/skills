@@ -1,5 +1,10 @@
 # Why structurizr looked broken on Haiku, and what was actually wrong (2026-08-20)
 
+> **Superseded in part by `README-21pp-analysis.md` (same day).** The sampling finding below
+> holds. The conclusion that a real 21pp deficit remained does not: that gap was concurrency.
+> At `--num-workers 1` the two skills measure 78% and 80%. Read the sections below on the
+> *sampling* artifact; ignore the closing verdict that `structurizr` is "genuinely weaker".
+
 The model A/B sweep reported `structurizr` at 47% on Haiku against 87-93% for the other three
 skills, failing hardest on the *most explicit* requests — `create a workspace.dsl` at 0/6 while
 the vaguer "document how our platform is structured using C4" fired 6/6. That paradox drove two
@@ -13,8 +18,8 @@ Two of them did, in the same set, and the pattern read as a signal.
 
 | Hypothesis | Test | Verdict |
 |---|---|---|
-| `run_eval.py` decides on the **first tool** — a session that explores the repo before invoking the skill scores as a non-trigger | Captured the full tool sequence instead of returning early, 3 runs on the 0/6 query | **Dead.** When Haiku triggers at all, `Skill` is the *first* tool. No exploration-then-skill pattern appeared. |
-| Concurrency confuses the model — `--num-workers 10` means ten identical candidate skills coexist in `.claude/commands/` | 4 queries × 3 runs at `--num-workers 1` vs `10` | **Dead.** 8/12 vs 9/12. |
+| `run_eval.py` decides on the **first tool** — a session that explores the repo before invoking the skill scores as a non-trigger | Captured the full tool sequence instead of returning early, 3 runs on the 0/6 query | ~~**Dead.**~~ **Wrong verdict — this is real.** It was tested on `create a workspace.dsl`, a query with nothing to look up, so no exploration happens and the effect cannot appear. On the query naming an *existing* `workspace.dsl` the pattern is plain: read the file, `find`, then invoke. 7/10 strict vs 9/10 counting the skill anywhere. The hypothesis is conditional on the query referencing repo state. |
+| Concurrency confuses the model — `--num-workers 10` means ten identical candidate skills coexist in `.claude/commands/` | 4 queries × 3 runs at `--num-workers 1` vs `10` | ~~**Dead.** 8/12 vs 9/12.~~ **Wrong verdict — this is the main cause.** 12 samples could not resolve it. At full set size: 60% at ten workers vs 78% serial. The mechanism is not identical candidates confusing the model; it is contention penalising sessions that touch the repo. See `README-21pp-analysis.md`. |
 | Haiku writes the DSL directly, or picks a sibling skill, instead of triggering | Same full-sequence capture | **Not observed.** No `Write` without a preceding `Skill`, no sibling skill chosen. |
 
 ## What it actually is: per-query probabilities that 3 runs cannot resolve
@@ -44,7 +49,10 @@ The full positive set at 10 runs per query, Haiku, against the shipped 1.3.0 des
 **No query sits at zero.** Six of the ten sit between 0.4 and 0.7, which is exactly where a
 3-run sample carries almost no information and the pass/fail threshold at 0.5 is a coin flip.
 
-## The gap is real, but a third the size
+## ~~The gap is real, but a third the size~~ — superseded, the gap is ~2pp
+
+**This section's conclusion is wrong; the numbers in it are correct but were all measured at
+ten workers.** Re-measured serially the two skills sit at 78% and 80%. Kept for the record.
 
 `adr` was the control — it scored 93% on Haiku in the same original sweep. Re-measured the same
 way:
@@ -55,7 +63,8 @@ way:
 | structurizr | 47-55% | **60%** |
 
 Both moved, in opposite directions, and the gap fell from 46pp to 21pp. So: `structurizr` **is**
-genuinely weaker on Haiku than `adr` — 21pp over 100 samples per skill is not noise — but it is
+genuinely weaker on Haiku than `adr` — 21pp over 100 samples per skill is not noise *(it is not
+noise, but it is bias: both arms ran at ten workers)* — but it is
 not the near-broken outlier the sweep portrayed, and there is no cliff on explicit
 `workspace.dsl` phrasing to go hunting for. The two description rewrites were chasing a shape in
 the noise.
@@ -75,9 +84,9 @@ the noise.
   heuristic needs to account for set size and run count, or be limited to the 3-run sweep shape
   it was written for.
 
-## What was not explained
+## What was not explained *(answered in `README-21pp-analysis.md`: it was concurrency)*
 
-Why `structurizr` is genuinely 21pp weaker than `adr` on Haiku. This investigation only
+~~Why `structurizr` is genuinely 21pp weaker than `adr` on Haiku.~~ This investigation only
 established that the deficit is smaller and smoother than reported, and that the explicit-phrasing
 paradox does not exist. The lowest query at n=10 (1/10, "add a component diagram … to our
 existing C4 model in workspace.dsl") is the one worth looking at next, and it is the only one
