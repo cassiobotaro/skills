@@ -1,5 +1,12 @@
 # structurizr trigger text across models, and what 1.3.0 changed (2026-08-19/20)
 
+> **Corrected 2026-08-20 — read `README-haiku-investigation.md` alongside this file.**
+> Every number below comes from 3 runs per query, and that is too few to support the
+> per-query claims this document makes. Re-measured at 10 runs per query, the two Haiku
+> queries called out below as 0/6 score 33% and 40%, `structurizr` on Haiku scores 60%
+> rather than 47-55%, and the `adr` control scores 81% rather than 93%. The
+> skill-level ordering survives; the per-query story in Part 1 does not.
+
 Started as a Haiku-vs-Opus comparison of all four skills. Three of them were healthy on both
 models; `structurizr` was not, and that turned into a description change. Both halves are
 recorded here because the harness lesson cost more than the result did.
@@ -16,11 +23,22 @@ Aggregate trigger rate, 20 queries per skill (10 positive / 10 negative), 3 runs
 | **structurizr** | **28/60 (47%)** | 24/30 (80%) | 0/60 |
 
 Zero false fires anywhere, both models — the descriptions do not leak into neighboring work.
-`adr` is *better* on Haiku than on Opus. Only `structurizr` fails, and it fails hardest on the
-most explicit requests: `create a workspace.dsl` 0/6 and `modela em Structurizr DSL` 0/6 on
-Haiku, while the vaguer "document how our platform is structured using C4" fires 6/6.
+That part holds up: it is the one claim here backed by enough samples (60 negatives per skill
+per model, none of which ever fired).
+
+~~Only `structurizr` fails, and it fails hardest on the most explicit requests:
+`create a workspace.dsl` 0/6 and `modela em Structurizr DSL` 0/6 on Haiku, while the vaguer
+"document how our platform is structured using C4" fires 6/6.~~ **Wrong — this paradox does not
+exist.** Those queries sit near a 0.35 trigger probability, where a 6-sample draw hits zero
+about 7% of the time; two of them did. At 30 runs each they score 33% and 40%. The apparent
+cliff on explicit phrasing was a shape in the noise, and it is what sent the two failed
+description rewrites in Part 2 chasing the wrong thing. `structurizr` is genuinely weaker on
+Haiku than `adr`, but by 21pp rather than 46pp.
 
 ## Part 2 — the arms, pooled over healthy sweeps
+
+These are 3-run sweeps too. Differences of roughly 10pp between arms are inside the sampling
+error, so read this table as "no arm clearly dominates" rather than as a ranking.
 
 | arm | Haiku | Opus | false fires (Opus) |
 |---|---|---|---|

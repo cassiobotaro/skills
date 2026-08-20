@@ -117,15 +117,23 @@ def summarize(result: dict) -> int:
     print(f"  false fires {false_fires}/{sum(r['runs'] for r in negatives)}")
     print(f"  per-query   {distribution}")
 
-    # A healthy sweep has queries the description fires on reliably. When the nested sessions
-    # stop firing — a usage limit, a failing CLI — every query collapses toward zero at once
-    # and no query reaches a full run. That is a broken sweep, not a description regression:
-    # it must never be pooled into a result.
-    if positives and max(distribution) < max(r["runs"] for r in positives):
+    # When the nested sessions stop firing — a usage limit, a failing CLI — every query
+    # collapses toward zero at once. That is a broken sweep, not a description regression, and
+    # must never be pooled into a result.
+    #
+    # The tell is the whole distribution sitting on the floor, not any single query missing a
+    # full run: at a per-query trigger probability near 0.4, no query reaching `runs_per_query`
+    # is the *expected* outcome on a short set, and an earlier version of this check cried wolf
+    # on healthy 30-run samples. Require both a very low aggregate and a ceiling barely off
+    # zero before calling a sweep broken.
+    runs_per_query = max(r["runs"] for r in positives) if positives else 0
+    floored = distribution and max(distribution) <= max(1, runs_per_query // 4)
+    if positives and hits / runs < 0.15 and floored:
         print(
-            "\n  WARNING: no positive query reached a full run. This is the degraded-sweep\n"
-            "  signature — discard this sweep instead of pooling it, and re-run. Canary:\n"
-            "  adr/opus on its own set has scored 14-20/30 across healthy sweeps.",
+            f"\n  WARNING: aggregate {hits}/{runs} with a per-query ceiling of "
+            f"{max(distribution)}/{runs_per_query}. This is the degraded-sweep signature —\n"
+            "  discard this sweep instead of pooling it, and re-run. Canary: adr/opus on its\n"
+            "  own set has scored 14-20/30 across healthy sweeps.",
             file=sys.stderr,
         )
         return 9
