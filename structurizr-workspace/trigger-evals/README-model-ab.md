@@ -1,5 +1,14 @@
 # structurizr trigger text across models, and what 1.3.0 changed (2026-08-19/20)
 
+> **Corrected twice on 2026-08-20 — read `README-serial-baseline.md` first, then
+> `README-haiku-investigation.md`.** The second correction is the bigger one: *every number in
+> this file was measured at `--num-workers 10`*, and the serial baseline moves the Opus column by
+> up to 31pp (`adr` 67% → 98%). The Part 1 ranking across skills, on both models, is an artifact
+> of contention: serially the four skills score 98/100/100/98 on Opus and 86/96/90/74 on Haiku.
+> The zero-false-fire claim also has one exception now — `design-doc`/Opus fires on "write a PRD
+> …" at 3/18. Treat the tables below as a record of what a ten-worker sweep reports, not as
+> measurements of these descriptions.
+>
 > **Corrected 2026-08-20 — read `README-haiku-investigation.md` alongside this file.**
 > Every number below comes from 3 runs per query, and that is too few to support the
 > per-query claims this document makes. Re-measured at 10 runs per query, the two Haiku
@@ -24,9 +33,13 @@ Aggregate trigger rate, 20 queries per skill (10 positive / 10 negative), 3 runs
 | mermaid-sequence | 26/30 (87%) | 30/30 (100%) | 0/60 |
 | **structurizr** | **28/60 (47%)** | 24/30 (80%) | 0/60 |
 
-Zero false fires anywhere, both models — the descriptions do not leak into neighboring work.
+~~Zero false fires anywhere, both models — the descriptions do not leak into neighboring work.
 That part holds up: it is the one claim here backed by enough samples (60 negatives per skill
-per model, none of which ever fired).
+per model, none of which ever fired).~~ **Nearly right, and now with a measured exception.** The
+serial baseline found 1 false fire in 240 negative samples: `design-doc` on Opus fires on "write
+a PRD for the new referral program", 1/3 there and 2/15 on a follow-up probe — **3/18 (17%)**
+pooled, CI [6, 39]. Still below the 0.5 threshold, so the query passes, but "never fires" is not
+the claim to make. Everything else stayed at zero.
 
 ~~Only `structurizr` fails, and it fails hardest on the most explicit requests:
 `create a workspace.dsl` 0/6 and `modela em Structurizr DSL` 0/6 on Haiku, while the vaguer

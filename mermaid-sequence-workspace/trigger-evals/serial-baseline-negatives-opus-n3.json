@@ -1,0 +1,99 @@
+{
+  "skill_name": "mermaid-sequence",
+  "description": "Write and edit Mermaid sequence diagrams, delivered as fenced ```mermaid code blocks that render directly in Markdown (GitHub, GitLab, most wikis), validated and previewed through a Mermaid MCP server when one is connected (mermaid-cli or mermaid.live otherwise). Use this skill whenever the user wants to show how parts of a system interact over time — \"sequence diagram\", \"draw the login flow\", \"diagram how the frontend talks to the API\", \"document this request/response chain\", \"show what happens when a user checks out\", \"diagram this webhook\" — even if they never say \"Mermaid\" or \"sequence diagram\".",
+  "results": [
+    {
+      "query": "diagram how the frontend talks to the API and the API talks to the cache and DB when a user loads their dashboard — show the order of calls",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create the C4 container diagram for our platform in workspace.dsl",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw an ER diagram of our orders database in mermaid — tables and relationships",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "make a flowchart in mermaid of our deployment decision logic (the if/else branches)",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create a gantt chart in mermaid for our Q3 roadmap",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write a design doc for the new event pipeline, with the flow of data between services",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document how our microservices are structured and connected at a high level using C4",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "record our decision to use Mermaid for all docs diagrams as an ADR",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "explain how the OAuth authorization code flow works",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw our team's org chart",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "set up mermaid-cli in our build so diagrams render in CI",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  }
+}

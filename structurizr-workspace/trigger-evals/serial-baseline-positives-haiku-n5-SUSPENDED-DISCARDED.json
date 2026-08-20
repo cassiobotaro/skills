@@ -1,0 +1,91 @@
+{
+  "skill_name": "structurizr",
+  "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL (workspace.dsl). Use this skill whenever the user mentions Structurizr, C4, architecture diagrams, system context / container / component diagrams, deployment or dynamic diagrams, system landscape, documenting how a system or its microservices are structured, or asks to create or edit a .dsl workspace — even if they never say the word \"Structurizr\". Also use it when linking existing ADRs (architecture decision records, e.g. in doc/adr) into the architecture documentation or C4 views. Do NOT use it for cloud-infrastructure pictures drawn from real vendor service icons (e.g. an AWS diagram with EC2/RDS/S3 boxes), or for sequence or behavior-over-time diagrams (that belongs to a Mermaid sequence diagram).",
+  "results": [
+    {
+      "query": "i want to document how our platform is structured using C4 — start with the system context and then the containers. we've got a React app, a Go API, Postgres, and we call Stripe and SendGrid",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "create a workspace.dsl for our order-management system — model the containers and their relationships",
+      "should_trigger": true,
+      "trigger_rate": 0.4,
+      "triggers": 2,
+      "runs": 5,
+      "pass": false
+    },
+    {
+      "query": "add a component diagram for the new payments service to our existing C4 model in workspace.dsl",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "we use Structurizr — model the deployment of our app across the staging and prod AWS environments",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "diagram the static architecture of our microservices: how the gateway, the user-service, the catalog-service and the order-service relate to each other and to the shared message bus",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "document our system landscape — we have like 8 internal systems and i want one view showing how they all connect at a high level",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "i have an architecture i want to capture as proper C4 with system context, containers, and a couple of dynamic views for the key flows",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "modela em Structurizr DSL a arquitetura do nosso sistema de cobrança, com containers e componentes",
+      "should_trigger": true,
+      "trigger_rate": 0.4,
+      "triggers": 2,
+      "runs": 5,
+      "pass": false
+    },
+    {
+      "query": "set up the C4 model for our new SaaS — i want it as DSL so we can render it in Structurizr and keep it in git",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "link our decision records from doc/adr into the architecture documentation so the C4 views show the related ADRs",
+      "should_trigger": true,
+      "trigger_rate": 0.8,
+      "triggers": 4,
+      "runs": 5,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 8,
+    "failed": 2
+  }
+}

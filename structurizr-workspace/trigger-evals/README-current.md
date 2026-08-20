@@ -29,6 +29,15 @@ Two should-trigger queries miss:
 | 0.00 | "add a component diagram for the new payments service to our existing C4 model in workspace.dsl" |
 | 0.00 | "link our decision records from doc/adr into the architecture documentation so the C4 views show the related ADRs" |
 
+> **Corrected 2026-08-20 — neither query is a zero.** These 0.00s come from 3 runs each at
+> `--num-workers 10`, the configuration `README-21pp-analysis.md` later showed punishes exactly
+> this kind of query (both name a file the session must find first). Measured serially
+> (`README-serial-baseline.md`): the component-diagram query scores 1/5 on Haiku and 5/5 on Opus,
+> the ADR-linking query 5/5 on Haiku and 4/5 on Opus. The paragraph below still reaches the right
+> conclusion — more synonyms are not the fix — but for the wrong reason: the boundary was not
+> being drawn conservatively, the harness was reporting a miss whenever the session opened the
+> named file before invoking the skill.
+
 Both are covered by the description's own text ("component diagrams", "create or edit a .dsl
 workspace"; "Also use it when linking existing ADRs … into the architecture documentation or C4
 views"), so more synonyms are unlikely to be the fix. The second is the more interesting one: the

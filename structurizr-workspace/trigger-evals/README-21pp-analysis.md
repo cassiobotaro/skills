@@ -77,15 +77,32 @@ that contradicted itself, which is an argument from logic, not from these rates.
   different worker counts are not comparable. Prefer `--num-workers 1` for any number that will
   be quoted; use concurrency only for a rough smoke test, and never mix the two in one table.
 - Every trigger number recorded in this repo before today was measured at ten workers, and the
-  ones from repo-touching query sets are depressed by an unknown amount. The `adr` numbers are
-  roughly safe; the `structurizr` ones are not.
+  ones from repo-touching query sets are depressed by an unknown amount. ~~The `adr` numbers are
+  roughly safe; the `structurizr` ones are not.~~ **Wrong — that generalisation came from Haiku
+  alone.** The full serial baseline (`README-serial-baseline.md`, same day) found the single
+  largest correction in the repo on `adr`/**Opus**: 67% → 98%, +31pp, bigger than `structurizr`'s
+  own Haiku correction. No ten-worker number here is safe, on any skill.
 - The "degraded sweep" phenomenon documented earlier — a sweep collapsing to near-zero with an
   empty stderr — is probably this same contention effect at its extreme, not only a usage limit.
 
-## Still open
+## Still open *(both items answered — see `README-serial-baseline.md`)*
 
 Whether `structurizr` and `adr` are genuinely equal on Haiku, or merely close. The serial
 comparison is 78% vs 80% at n=5 per query, which settles that there is no large gap but not
 that there is none. The one query that went the other way — `modela em Structurizr DSL …`,
 40% concurrent to 0/5 serial — is worth a larger sample before anyone reads a Portuguese-language
 weakness into it.
+
+**Answered 2026-08-20, same day.**
+
+- *Equal or merely close:* still not resolvable, and now with a measured reason. A second serial
+  sweep put `adr` at 86% and `structurizr` at 74%; pooling both sweeps gives 83/100 vs 76/100,
+  p = 0.29. Identical serial configurations move ±4-6pp between runs at n=50, so a 12pp gap sits
+  inside the noise band. `structurizr` is the weakest of the four on Haiku, by an amount this
+  harness cannot pin down without a much larger n.
+- *The Portuguese query:* it never went the other way. Its true rate is 10/35 (29%) — the same
+  number as the 40% measured concurrently, and the 0/5 was an ordinary draw. But a **literal
+  English translation of it scores 29/35 (83%)**, separating in each of two sweeps and in a
+  single sweep running both arms back to back (pooled p = 9e-6). This is not a general
+  Portuguese weakness — the PT positives in the other three sets score 5/5, 5/5 and 4/5 on
+  Haiku — it is this query against this description on this model.

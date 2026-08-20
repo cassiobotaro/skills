@@ -1,0 +1,91 @@
+{
+  "skill_name": "mermaid-sequence",
+  "description": "Write and edit Mermaid sequence diagrams, delivered as fenced ```mermaid code blocks that render directly in Markdown (GitHub, GitLab, most wikis), validated and previewed through a Mermaid MCP server when one is connected (mermaid-cli or mermaid.live otherwise). Use this skill whenever the user wants to show how parts of a system interact over time — \"sequence diagram\", \"draw the login flow\", \"diagram how the frontend talks to the API\", \"document this request/response chain\", \"show what happens when a user checks out\", \"diagram this webhook\" — even if they never say \"Mermaid\" or \"sequence diagram\".",
+  "results": [
+    {
+      "query": "draw a sequence diagram of our login flow: browser → BFF → Keycloak → BFF → browser, including the token exchange. put it in markdown for the wiki",
+      "should_trigger": true,
+      "trigger_rate": 0.8,
+      "triggers": 4,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "diagram how the frontend talks to the API and the API talks to the cache and DB when a user loads their dashboard — show the order of calls",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "show what happens step by step when a customer checks out: cart service, inventory check, payment, order creation, confirmation email",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "document this webhook flow as a diagram — Stripe sends us the event, we verify the signature, enqueue it, and ack. show the failure path too if the signature is bad",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "i need a sequence diagram for the password reset: user requests reset, we email a token, they submit new password, we validate and update",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "desenha um diagrama de sequência mostrando a comunicação entre o app mobile, o gateway e o serviço de notificações no envio de push",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "diagram the retry/backoff interaction between our worker and the third-party API when it returns 429s — as a mermaid block",
+      "should_trigger": true,
+      "trigger_rate": 0.2,
+      "triggers": 1,
+      "runs": 5,
+      "pass": false
+    },
+    {
+      "query": "show the message flow for our async order processing: producer publishes to Kafka, consumer picks it up, calls the fulfillment service, emits an event",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "i want to visualize the OAuth authorization code flow with PKCE as a sequence — client, auth server, resource server, all the round trips",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "create a diagram of the request/response chain when our API gateway authenticates a call, checks rate limits, then forwards to the upstream service",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 9,
+    "failed": 1
+  }
+}

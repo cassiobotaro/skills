@@ -1,0 +1,78 @@
+{
+  "skill": "structurizr",
+  "model": "haiku",
+  "query": "modela em Structurizr DSL a arquitetura do nosso sistema de cobrança, com containers e componentes",
+  "runs": [
+    {
+      "candidate": "structurizr-skill-ed6efef8",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-ed6efef8)"
+      ],
+      "first_text": "",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run00.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-590a14d9",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-590a14d9)"
+      ],
+      "first_text": "Vou criar um modelo Structurizr DSL de um sistema de cobrança com containers e componentes para você.",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run01.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-fc00a2e2",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-fc00a2e2)"
+      ],
+      "first_text": "Vou usar o skill Structurizr para modelar a arquitetura do seu sistema de cobrança. Deixe-me invocá-lo:",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run02.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-74cc3c30",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-74cc3c30)"
+      ],
+      "first_text": "Vou usar a skill de Structurizr para criar um modelo C4 do sistema de cobrança com containers e componentes.",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run03.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-60c1bfc9",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-60c1bfc9)"
+      ],
+      "first_text": "Vou usar a skill Structurizr para modelar a arquitetura do seu sistema de cobrança em DSL.",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run04.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-cadbcd51",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "Para modelar bem a arquitetura do sistema de cobrança em Structurizr, preciso de alguns detalhes sobre o sistema. Algumas perguntas:\n\n1. **Atores/Usuários**: Quem interage com o sistema? (clientes, administradores, sistemas externos?)\n\n2. **Containers principais**: Quais serviços/aplicações compõem o sistema? (API de cobrança, gateway de pagamento, banco de dados, fila de mensagens, serviços de no",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run05.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-bf2e2527",
+      "outcome": "late_trigger",
+      "tools": [
+        "Bash(find /home/cassiobotaro/Projetos/skills -type f \\( -name \"*.md\" -o -na)",
+        "Read(/home/cassiobotaro/Projetos/skills/structurizr-workspace/evals/files/l)",
+        "Read(/home/cassiobotaro/Projetos/skills/structurizr-workspace/evals/files/l)",
+        "Skill(structurizr-skill-bf2e2527)"
+      ],
+      "first_text": "Vou modelar a arquitetura de um sistema de cobrança em Structurizr DSL. Primeiro, deixe-me explorar o repositório para entender o contexto do seu sistema.",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run06.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-eddd95aa",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "Vou ajudar você a modelar a arquitetura do sistema de cobrança em Structurizr DSL. Mas antes, preciso entender melhor o sistema para documentá-lo com precisão (seguindo o princípio \"record, don't invent\").\n\nResponda algumas perguntas:\n\n1. **Containers principais** — o sistema é um monolito, microserviços, ou uma combinação? (ex: API REST, worker de processamento, sistema legado, etc.)\n\n2. **Fontes",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-pt/structurizr-run07.jsonl"
+    }
+  ]
+}

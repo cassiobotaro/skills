@@ -1,0 +1,27 @@
+{
+  "skill_name": "design-doc",
+  "description": "Write and review software design documents through interactive discovery: ask the user targeted questions about the problem, the trade-offs, the alternatives, and the impacted teams, then write (or improve) a clear, trade-off-focused Markdown design doc. Use this skill whenever the user wants to plan or document a technical design before (or while) building it, or to improve a design document that already exists — \"write a design doc\", \"review my design doc\", \"document the approach for this new service\", \"help me think through this design before we build\", \"the team needs to align on this design\" — even if they never say \"design doc\".",
+  "results": [
+    {
+      "query": "i'm about to build a real-time presence service (who's online) for our chat app. before i write code i want to think through the design — write a design doc with me, we can figure out the approach and trade-offs",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 15,
+      "runs": 15,
+      "pass": true
+    },
+    {
+      "query": "write a PRD for the new referral program — target users, success metrics, scope",
+      "should_trigger": false,
+      "trigger_rate": 0.13333333333333333,
+      "triggers": 2,
+      "runs": 15,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  }
+}

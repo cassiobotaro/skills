@@ -1,5 +1,11 @@
 # The adr trigger description: what was measured, and what it cost to learn (2026-08-07)
 
+> **Corrected 2026-08-20 — see `structurizr-workspace/trigger-evals/README-serial-baseline.md`.**
+> Every sweep in this file ran at `--num-workers 10`, which depresses the trigger rate for
+> queries that make the session look something up first. The "3 hard queries" below are exactly
+> that kind of query, and they are not hard: serially they score **26/30 (87%)**. The
+> methodology lessons in this file all hold; the rates do not.
+
 Four full sweeps of the same 20-query set, three descriptions. The headline: **the trigger text
 shipped in 1.3.0 was rewritten to reframe what the work *is*, and that — not adding synonyms —
 is what moved the needle.** Getting there took one wrong turn worth recording.
@@ -35,9 +41,26 @@ on nothing — zero hits across 60 negative samples, including the near-miss "li
 existing ADRs from doc/adr into the Structurizr architecture docs" that H1's own mention of the
 `!adrs` importer put at risk.
 
-**28% is an improvement, not a fix.** Those three queries still fall below the trigger threshold
+~~**28% is an improvement, not a fix.** Those three queries still fall below the trigger threshold
 more often than not. If they matter, the next lever is the same one that worked here — what the
-description says the work *is* — pushed further, not more phrasings.
+description says the work *is* — pushed further, not more phrasings.~~
+
+> **Corrected 2026-08-20 — there are no hard queries in this set.** Re-measured serially against
+> the shipped 1.3.2 text, the same three score **26/30 (87%)**, CI [70, 95] — 12/15 on Haiku,
+> 14/15 on Opus:
+>
+> | query | Haiku | Opus |
+> |---|---|---|
+> | ADR 0007 is out of date … mark it superseded | 3/5 | 4/5 |
+> | start a decision log for the platform-team repo | 4/5 | 5/5 |
+> | we changed our minds … amend the existing record | 5/5 | 5/5 |
+>
+> All three name an existing record the session tries to locate before acting, which is the query
+> shape ten-worker sweeps punish hardest and which `run_eval.py` scores as a miss whenever the
+> lookup comes first. The 0/27 → 5/18 comparison that chose the H1 wording still stands as an
+> A/B — both arms were measured the same wrong way — but the conclusion drawn from it here, that
+> the description needs pushing further on these queries, was aimed at contention. Do not spend a
+> rewrite on it.
 
 ## The wrong turn, and the methodology lesson
 
@@ -75,13 +98,17 @@ One sample apart on the positives. Per-query the movement runs both ways — `-1
 text (see the wrong turn above).
 
 **What this establishes:** no large regression, and no new over-triggering — still 0 hits in 60
-negative samples. **What it does not establish:** equivalence. By the rule recorded above, a tie
+negative samples. *(`adr` remains at zero in the serial baseline too: 0/30 negatives on each
+model. The one false fire found anywhere in 240 serial negative samples was `design-doc`/Opus on
+a PRD query.)* **What it does not establish:** equivalence. By the rule recorded above, a tie
 in a noisy metric is not evidence of equivalence, and at n=18 the hard-query 5→3 does not
 separate from noise either.
 
 Two per-query notes, neither actionable alone at this sample size: the Portuguese query
 ("registra aí a decisão … OpenTelemetry") fell 5/6 → 3/6, the largest single drop; and "start a
 decision log for the platform-team repo" went 2/6 → 0/6, having already been below threshold.
+*(Both look healthy serially: the Portuguese query scores 4/5 on Haiku and 14/20 on a 20-run
+probe, 5/5 on Opus; "start a decision log" 4/5 and 5/5. Neither was ever below threshold.)*
 Both stay on the list of things to look at if the hard queries ever become the priority.
 
 ## Rerunning

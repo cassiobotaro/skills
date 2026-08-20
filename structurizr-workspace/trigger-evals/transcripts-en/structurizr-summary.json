@@ -1,0 +1,39 @@
+{
+  "skill": "structurizr",
+  "model": "haiku",
+  "query": "model our billing system's architecture in Structurizr DSL, with containers and components",
+  "runs": [
+    {
+      "candidate": "structurizr-skill-269e3977",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "I'll help you model a billing system architecture in Structurizr DSL. Before I create the workspace, I need a few clarifications to make sure the model reflects your actual system:\n\n1. **System scope**: Is this an internal billing system, customer-facing SaaS platform, or a payment processor integration layer?\n\n2. **Key containers**: What are the main components you need to show? For example:\n   -",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-en/structurizr-run00.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-e0f15c2d",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-e0f15c2d)"
+      ],
+      "first_text": "I'll help you model a billing system's architecture in Structurizr DSL with containers and components.",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-en/structurizr-run01.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-c5773a2a",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "I'd be happy to help you model a billing system in Structurizr DSL! Before I create the architecture, I need to understand the scope better so I don't invent details. Can you answer a few quick questions:\n\n1. **System scope**: What are the core responsibilities? (e.g., payment processing, invoice generation, subscription management, usage tracking, reporting)\n\n2. **External integrations**: Does it",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-en/structurizr-run02.jsonl"
+    },
+    {
+      "candidate": "structurizr-skill-273115a1",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(structurizr-skill-273115a1)"
+      ],
+      "first_text": "I'll help you model a billing system architecture in Structurizr DSL. Let me invoke the structurizr skill to create this with proper C4 structure.",
+      "transcript": "structurizr-workspace/trigger-evals/transcripts-en/structurizr-run03.jsonl"
+    }
+  ]
+}

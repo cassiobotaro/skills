@@ -1,0 +1,19 @@
+{
+  "skill_name": "structurizr",
+  "description": "Author, evolve, and validate C4 model architecture documentation as Structurizr DSL (workspace.dsl). Use this skill whenever the user mentions Structurizr, C4, architecture diagrams, system context / container / component diagrams, deployment or dynamic diagrams, system landscape, documenting how a system or its microservices are structured, or asks to create or edit a .dsl workspace — even if they never say the word \"Structurizr\". Also use it when linking existing ADRs (architecture decision records, e.g. in doc/adr) into the architecture documentation or C4 views. Do NOT use it for cloud-infrastructure pictures drawn from real vendor service icons (e.g. an AWS diagram with EC2/RDS/S3 boxes), or for sequence or behavior-over-time diagrams (that belongs to a Mermaid sequence diagram).",
+  "results": [
+    {
+      "query": "model our billing system's architecture in Structurizr DSL, with containers and components",
+      "should_trigger": true,
+      "trigger_rate": 0.8,
+      "triggers": 16,
+      "runs": 20,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0
+  }
+}

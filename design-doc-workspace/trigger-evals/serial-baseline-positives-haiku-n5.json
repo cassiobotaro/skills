@@ -1,0 +1,91 @@
+{
+  "skill_name": "design-doc",
+  "description": "Write and review software design documents through interactive discovery: ask the user targeted questions about the problem, the trade-offs, the alternatives, and the impacted teams, then write (or improve) a clear, trade-off-focused Markdown design doc. Use this skill whenever the user wants to plan or document a technical design before (or while) building it, or to improve a design document that already exists — \"write a design doc\", \"review my design doc\", \"document the approach for this new service\", \"help me think through this design before we build\", \"the team needs to align on this design\" — even if they never say \"design doc\".",
+  "results": [
+    {
+      "query": "i'm about to build a real-time presence service (who's online) for our chat app. before i write code i want to think through the design — write a design doc with me, we can figure out the approach and trade-offs",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "review my design doc for the new rate-limiter, it's in docs/designs/rate-limiter.md — i think it's missing the failure modes and i'm not sure the alternatives section is honest",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "write an RFC for migrating our monolith's billing module into a separate service — cover the why, the cutover plan, and what could go wrong",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "the team needs to align on how we'll do multi-region failover for the API. help me draft a design we can circulate for feedback",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "document the approach for the new search feature — we're considering Elasticsearch vs Postgres full-text vs Algolia, and i want the trade-offs laid out for each",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "preciso escrever um documento de design pra nova pipeline de ingestão de eventos, com as alternativas que a gente considerou",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "help me think through the design of our webhook delivery system before we build it — retries, ordering, idempotency, the whole thing",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "we're redesigning auth to support SSO and SCIM. i need a technical design document the security team can review and sign off on",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "draft a design proposal for sharding our Postgres — i want it to honestly weigh the operational cost against the scaling benefit",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "my manager asked for a one-pager design before i start the caching layer work. can you help me write it so it covers the problem and the options?",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  }
+}

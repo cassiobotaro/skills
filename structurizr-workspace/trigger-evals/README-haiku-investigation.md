@@ -1,5 +1,13 @@
 # Why structurizr looked broken on Haiku, and what was actually wrong (2026-08-20)
 
+> **Superseded twice on the same day — also read `README-serial-baseline.md`.** Every rate in
+> this file, including the n=10 and n=30 "large-sample" ones, was measured at `--num-workers 10`.
+> Serially, the two queries this file resolves to 33% and 40% score 4/5 and 0/5, and the residual
+> "21pp deficit" it hands to `README-21pp-analysis.md` is down to ~12pp and not statistically
+> separable (p = 0.21 at n=50 per skill, p = 0.29 pooling two serial sweeps). The Portuguese
+> query it flags as worth a second look is now measured at 10/35 (29%) against 29/35 (83%) for a
+> literal English translation — see the serial baseline for what that does and does not mean.
+>
 > **Superseded in part by `README-21pp-analysis.md` (same day).** The sampling finding below
 > holds. The conclusion that a real 21pp deficit remained does not: that gap was concurrency.
 > At `--num-workers 1` the two skills measure 78% and 80%. Read the sections below on the
@@ -48,6 +56,12 @@ The full positive set at 10 runs per query, Haiku, against the shipped 1.3.0 des
 
 **No query sits at zero.** Six of the ten sit between 0.4 and 0.7, which is exactly where a
 3-run sample carries almost no information and the pass/fail threshold at 0.5 is a coin flip.
+
+*(All ten rates in this table are ten-worker rates. Serially the same set scores 74% overall,
+with the shape changed rather than shifted: the `component diagram … workspace.dsl` query stays
+low at 1/5, `create a workspace.dsl` rises to 4/5, and the Portuguese query drops to 0/5 — its
+true serial rate being 29% over 35 samples. The conclusion that no query is at zero holds; the
+per-query ordering here does not.)*
 
 ## ~~The gap is real, but a third the size~~ — superseded, the gap is ~2pp
 
