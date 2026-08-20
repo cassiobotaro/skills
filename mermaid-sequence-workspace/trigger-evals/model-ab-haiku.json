@@ -1,0 +1,171 @@
+{
+  "skill_name": "mermaid-sequence",
+  "description": "Write and edit Mermaid sequence diagrams, delivered as fenced ```mermaid code blocks that render directly in Markdown (GitHub, GitLab, most wikis), validated and previewed through a Mermaid MCP server when one is connected (mermaid-cli or mermaid.live otherwise). Use this skill whenever the user wants to show how parts of a system interact over time \u2014 \"sequence diagram\", \"draw the login flow\", \"diagram how the frontend talks to the API\", \"document this request/response chain\", \"show what happens when a user checks out\", \"diagram this webhook\" \u2014 even if they never say \"Mermaid\" or \"sequence diagram\".",
+  "results": [
+    {
+      "query": "diagram how the frontend talks to the API and the API talks to the cache and DB when a user loads their dashboard \u2014 show the order of calls",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "show what happens step by step when a customer checks out: cart service, inventory check, payment, order creation, confirmation email",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw a sequence diagram of our login flow: browser \u2192 BFF \u2192 Keycloak \u2192 BFF \u2192 browser, including the token exchange. put it in markdown for the wiki",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document this webhook flow as a diagram \u2014 Stripe sends us the event, we verify the signature, enqueue it, and ack. show the failure path too if the signature is bad",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "i need a sequence diagram for the password reset: user requests reset, we email a token, they submit new password, we validate and update",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "desenha um diagrama de sequ\u00eancia mostrando a comunica\u00e7\u00e3o entre o app mobile, o gateway e o servi\u00e7o de notifica\u00e7\u00f5es no envio de push",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "diagram the retry/backoff interaction between our worker and the third-party API when it returns 429s \u2014 as a mermaid block",
+      "should_trigger": true,
+      "trigger_rate": 0.3333333333333333,
+      "triggers": 1,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "show the message flow for our async order processing: producer publishes to Kafka, consumer picks it up, calls the fulfillment service, emits an event",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "i want to visualize the OAuth authorization code flow with PKCE as a sequence \u2014 client, auth server, resource server, all the round trips",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create a diagram of the request/response chain when our API gateway authenticates a call, checks rate limits, then forwards to the upstream service",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create the C4 container diagram for our platform in workspace.dsl",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw an ER diagram of our orders database in mermaid \u2014 tables and relationships",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "make a flowchart in mermaid of our deployment decision logic (the if/else branches)",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create a gantt chart in mermaid for our Q3 roadmap",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write a design doc for the new event pipeline, with the flow of data between services",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document how our microservices are structured and connected at a high level using C4",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "record our decision to use Mermaid for all docs diagrams as an ADR",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw our team's org chart",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "explain how the OAuth authorization code flow works",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "set up mermaid-cli in our build so diagrams render in CI",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "passed": 19,
+    "failed": 1
+  }
+}
