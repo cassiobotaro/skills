@@ -65,4 +65,4 @@ and produced two entirely discarded sweeps before they were found:
 **Sweeps degrade intermittently.** A baseline Opus sweep scored 22/30, and the very next sweep of
 the same text scored 2/30 with distribution `[0,0,0,0,0,0,0,0,1,1]` against the healthy
 `[0,0,2,2,3,3,3,3,3,3]`. Print the per-query distribution, discard any sweep whose positives never
-reach 3/3, and never pool a degraded sweep into a result. Canary: adr/opus scores ~18-22/30.
+reach 3/3, and never pool a degraded sweep into a result. Canary: adr/opus has scored 14-20/30 across healthy sweeps — a wide band, which is itself the point.
