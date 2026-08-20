@@ -26,6 +26,12 @@ Usage (from the repo root):
         --skill-path adr/skills/adr \
         --model haiku -o adr-workspace/trigger-evals/some-run.json
 
+It also defaults `--num-workers` to 1, against upstream's 10. Concurrency is an experimental
+variable here, not a speed knob: it depresses the trigger rate specifically for queries that
+make the session read the repository first, which manufactured a 21pp gap between two skills
+that vanished once both were re-measured serially. See
+`structurizr-workspace/trigger-evals/README-21pp-analysis.md`.
+
 Any other flags are passed straight through to run_eval.py.
 """
 
@@ -145,7 +151,26 @@ def main() -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("-o", "--output", help="Write the result JSON here as well as summarizing it")
+    parser.add_argument(
+        "--num-workers", type=int, default=1,
+        help="Concurrent sessions (default 1). An experimental variable, not a speed knob — "
+             "see the warning this prints above 1.",
+    )
     args, passthrough = parser.parse_known_args()
+
+    # Upstream defaults this to 10, which is why the wrapper owns the flag instead of passing
+    # it through: a rate measured at ten workers is not comparable with a serial one.
+    if args.num_workers > 1:
+        print(
+            f"\n  WARNING: --num-workers {args.num_workers}. Concurrency depresses the trigger\n"
+            "  rate, and not evenly — the penalty lands on queries that make the session read\n"
+            "  the repository before it can act. Measured on the structurizr set: 60% at ten\n"
+            "  workers against 78% serially, while adr barely moved, manufacturing a 21pp gap\n"
+            "  between the two skills that does not exist. Treat this run as a smoke test: do\n"
+            "  not quote it, and do not table it beside a serial number.\n",
+            file=sys.stderr,
+        )
+    passthrough = [*passthrough, "--num-workers", str(args.num_workers)]
 
     repo_root = Path(__file__).resolve().parent.parent
     if Path.cwd() != repo_root:
