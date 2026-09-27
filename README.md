@@ -10,14 +10,14 @@ Agent skills for software architecture documentation: design docs and diagrams. 
 
 ## Installation
 
-| Host | Install with | Register an MCP server with | Without Docker / an MCP server |
-|---|---|---|---|
-| Claude Code | `claude plugin install <skill>@cassiobotaro-skills`, or `/plugin` | `claude mcp add --scope user …` | DSL is authored but not validated; Mermaid ships without a rendered preview |
-| GitHub Copilot CLI | `gh skill install cassiobotaro/skills <skill>` | Copilot's own MCP configuration | same |
-| Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | the host's own MCP configuration | same |
-| Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | the host's own MCP configuration | same |
+| Host | Install with | Without Docker |
+|---|---|---|
+| Claude Code | `claude plugin install <skill>@cassiobotaro-skills`, or `/plugin` | DSL and Mermaid are authored but not validated; you get the command to run later |
+| GitHub Copilot CLI | `gh skill install cassiobotaro/skills <skill>` | same |
+| Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
+| Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | same |
 
-No skill *requires* an MCP server or Docker: `design-doc` uses neither, `structurizr` validates through Docker, `mermaid-sequence` previews through an MCP server, and both diagram skills degrade gracefully, as the last column says.
+No skill *requires* Docker, and none uses an MCP server: `design-doc` needs no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
 
 ### Claude Code
 
@@ -52,16 +52,10 @@ Any other Agent Skills host works too: copy a skill folder (e.g. `design-doc/ski
 
 ## External tooling
 
-The diagram skills validate and render through tooling you provide, and degrade gracefully when it is missing. Nothing is bundled — installing Docker or registering an MCP server is your opt-in.
+The diagram skills validate and render through tooling you provide, and degrade gracefully when it is missing. Nothing is bundled and no MCP server is involved — installing Docker is your opt-in, and nothing you diagram leaves your machine.
 
-- **mermaid-sequence** — renders natively on GitHub, GitLab, and most wikis. It will validate and preview through the public [Mermaid MCP server](https://mcp.mermaid.ai/mcp) *if you have one registered*, but the plugin does **not** bundle it: that server renders your diagrams remotely, so opting in is left to you (see below). Without it, the skill still produces ready-to-paste diagrams and falls back to mermaid-cli or mermaid.live to preview.
-- **structurizr** — validates, previews, and exports workspaces with the [`structurizr/structurizr`](https://hub.docker.com/r/structurizr/structurizr) Docker image (`structurizr/structurizr validate`, `local`, `export`), pulled on first use. No MCP server is involved. Without Docker, the skill still authors the DSL, tells you it was not validated, and gives you the `validate` command to run later.
-
-In Claude Code, register the Mermaid server at user scope; other hosts use their own MCP configuration, with the same URL:
-
-```bash
-claude mcp add --scope user --transport http mermaid https://mcp.mermaid.ai/mcp
-```
+- **mermaid-sequence** — renders natively on GitHub, GitLab, and most wikis. It validates diagrams with [mermaid-cli](https://github.com/mermaid-js/mermaid-cli): first through its Docker image ([`minlag/mermaid-cli`](https://hub.docker.com/r/minlag/mermaid-cli), pulled on first use), then through a local `mmdc` install if Docker is missing. Without either, the skill still produces ready-to-paste diagrams, tells you they were not validated, and gives you the Docker command to run later.
+- **structurizr** — validates, previews, and exports workspaces with the [`structurizr/structurizr`](https://hub.docker.com/r/structurizr/structurizr) Docker image (`structurizr/structurizr validate`, `local`, `export`), pulled on first use. Without Docker, the skill still authors the DSL, tells you it was not validated, and gives you the `validate` command to run later.
 
 ## Repository layout
 

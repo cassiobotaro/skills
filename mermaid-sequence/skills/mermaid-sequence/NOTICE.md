@@ -9,14 +9,13 @@ tooling:
   ([source repository](https://github.com/mermaid-js/mermaid)), distributed under the
   **MIT License**, Copyright (c) 2014-present Knut Sveidqvist and Mermaid
   contributors.
-- **mermaid-cli** (`mmdc`, used as a local validation fallback) —
+- **mermaid-cli** (`mmdc`, used for local validation — through its Docker image
+  `minlag/mermaid-cli` / `ghcr.io/mermaid-js/mermaid-cli/mermaid-cli` first, or a local
+  install as fallback) —
   [github.com/mermaid-js/mermaid-cli](https://github.com/mermaid-js/mermaid-cli),
-  **MIT License**.
-- **Mermaid MCP server** (`mcp.mermaid.ai`, used for validation and preview when
-  connected) — a hosted service operated by the Mermaid Chart team. Diagrams sent to
-  it are rendered remotely; this skill instructs against sending sensitive flows
-  there.
-- **mermaid.live** (suggested for manual preview/editing) — the Mermaid Live Editor,
+  **MIT License**. Neither route sends the diagram off the machine.
+- **mermaid.live** (suggested for manual preview/editing; renders remotely) — the
+  Mermaid Live Editor,
   [github.com/mermaid-js/mermaid-live-editor](https://github.com/mermaid-js/mermaid-live-editor),
   **MIT License**.
 

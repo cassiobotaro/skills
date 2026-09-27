@@ -17,7 +17,7 @@
       "id": 1,
       "name": "detailed-password-reset-flow",
       "prompt": "Create a sequence diagram of our password reset flow for the API docs (it will live in our GitLab wiki, which renders mermaid). The flow: the user submits their email on the web app's forgot-password page. The web app calls POST /v1/password-resets on the Auth API with JSON body {\"email\": \"...\"} — no auth header, it's a public endpoint, but rate-limited: more than 5 requests per hour per IP returns 429 with a Retry-After header. The Auth API looks the user up in Postgres, and whether or not the user exists it always returns 202 Accepted so attackers can't enumerate emails. If the user exists, the Auth API publishes a reset_requested event to RabbitMQ; the Notification worker consumes it and sends the email through SendGrid (POST /v3/mail/send with an Authorization: Bearer header). Please show the rate-limit case too, and add notes with the endpoints/headers/payloads I mentioned.",
-      "expected_output": "A single fenced ```mermaid block that parses, with autonumber, an actor for the user, notes carrying the given endpoint/header/payload details (POST /v1/password-resets, 429 + Retry-After, always-202, SendGrid POST /v3/mail/send with Bearer), the RabbitMQ event drawn async, the rate-limit branch shown, and nothing technical that the prompt did not establish. The notes carry the user's endpoints and headers, so the sensitivity gate is expected to fire and skip the hosted validator: either a local mermaid-cli validation, or an explicit notice that it was not validated here plus a private preview route (the repo's own GitHub/GitLab renders the block natively) — not mermaid.live, which renders remotely just like the hosted server.",
+      "expected_output": "A single fenced ```mermaid block that parses, with autonumber, an actor for the user, notes carrying the given endpoint/header/payload details (POST /v1/password-resets, 429 + Retry-After, always-202, SendGrid POST /v3/mail/send with Bearer), the RabbitMQ event drawn async, the rate-limit branch shown, and nothing technical that the prompt did not establish. Validated locally — mermaid-cli Docker image first, local mmdc second — or delivered with an explicit notice that it was not validated here plus the Docker command; the notes carry the user's endpoints and headers, so if a preview route is suggested it is the repo's own GitLab rendering, and mermaid.live (which renders remotely) is at most offered as the user's call, not a default.",
       "files": [],
       "assertions": [
         "Output contains a fenced mermaid sequenceDiagram block that parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
@@ -67,28 +67,28 @@
     {
       "id": 4,
       "name": "no-validator-available-says-so",
-      "prompt": "Faz um diagrama de sequência do nosso fluxo de upload de anexo: o usuário escolhe o arquivo no app web, o app pede uma URL pré-assinada pra API (POST /v1/attachments/presign, responde 201 com a URL e o object key), o app faz o PUT direto no S3, e depois confirma pra API (POST /v1/attachments/confirm com o object key, responde 200). Aviso que esta máquina não tem mermaid-cli e não há nenhum servidor MCP conectado nesta sessão.",
-      "expected_output": "Entrega o bloco ```mermaid pronto pra colar, com os participantes declarados, os detalhes técnicos em Notes, e diz claramente que o diagrama NÃO foi validado neste ambiente — apontando que GitHub/GitLab renderizam o bloco nativamente e que dá pra colar em mermaid.live pra pré-visualizar. Não instala nada (nem pacote nem navegador) para tentar validar.",
+      "prompt": "Faz um diagrama de sequência do nosso fluxo de upload de anexo: o usuário escolhe o arquivo no app web, o app pede uma URL pré-assinada pra API (POST /v1/attachments/presign, responde 201 com a URL e o object key), o app faz o PUT direto no S3, e depois confirma pra API (POST /v1/attachments/confirm com o object key, responde 200). Aviso que esta máquina não tem Docker nem mermaid-cli.",
+      "expected_output": "Entrega o bloco ```mermaid pronto pra colar, com os participantes declarados, os detalhes técnicos em Notes, e diz claramente que o diagrama NÃO foi validado neste ambiente — entregando o comando docker run do mermaid-cli para o usuário validar depois e apontando que GitHub/GitLab renderizam o bloco nativamente. Não instala nada (nem pacote, nem imagem que não pode puxar, nem navegador) para tentar validar.",
       "files": [],
       "assertions": [
         "Delivers a fenced ```mermaid sequenceDiagram block covering the four steps in order",
         "States plainly that the diagram was NOT validated in this environment",
-        "Points the user to native GitHub/GitLab rendering and/or mermaid.live as the way to preview",
-        "Does not run npm/npx install, apt, or any other command that would install mermaid-cli or a browser",
+        "Hands the user the mermaid-cli Docker command (minlag/mermaid-cli or the ghcr.io image) to validate later",
+        "Points the user to native GitHub/GitLab rendering as the way to preview",
+        "Does not run npm/npx install, apt, docker pull/install, or any other command that would install mermaid-cli, Docker, or a browser",
         "Never claims the diagram was validated or rendered"
       ]
     },
     {
       "id": 5,
-      "name": "sensitive-flow-skips-remote-validator",
+      "name": "sensitive-flow-stays-local",
       "prompt": "Preciso do diagrama de sequência da nossa integração de liquidação com o banco parceiro — isso é confidencial, não pode vazar. O core bancário chama nosso endpoint interno POST /internal/settlement/batch com o header X-Partner-Key e o payload traz o CNPJ do cedente e a lista de títulos; a gente responde 202 com o batch id; depois o nosso serviço publica cada item na fila settlement.items e o worker chama o endpoint do parceiro POST /v2/liquidacao com mTLS, que responde 200 ou 409 quando o título já foi liquidado. Temos um servidor MCP do Mermaid conectado nesta sessão.",
-      "expected_output": "Reconhece que o fluxo carrega detalhes internos sensíveis (endpoints internos, header de autenticação, CNPJ, nomes de fila e do parceiro) e NÃO envia o diagrama ao servidor MCP hospedado, que renderiza remotamente — explicando o porquê ao usuário. Tenta o mermaid-cli local, ou entrega sem validação declarando isso. O diagrama em si é fiel: participantes declarados, 202/200/409 como respostas, detalhes de contrato em Notes.",
+      "expected_output": "Valida apenas localmente — imagem Docker do mermaid-cli, depois mmdc local — e NÃO envia o diagrama ao servidor MCP hospedado mesmo estando conectado, porque ele renderiza remotamente e o fluxo carrega detalhes internos sensíveis (endpoints internos, header de autenticação, CNPJ, nomes de fila e do parceiro). Se nenhum validador local existir, entrega sem validação declarando isso e passando o comando docker. O diagrama em si é fiel: participantes declarados, 202/200/409 como respostas, detalhes de contrato em Notes.",
       "files": [],
       "assertions": [
-        "Does NOT call the hosted Mermaid MCP tool with the diagram content",
-        "Explains to the user why the remote validator was skipped (the flow's details are sensitive and the hosted server renders remotely)",
-        "Falls back to local mermaid-cli or delivers unvalidated while saying so — never silently claims validation",
-        "Does not fall back to offering mermaid.live, which renders remotely just like the hosted server it skipped — points at a private Markdown preview instead, and leaves using the hosted validator to the user as an explicit choice",
+        "Does NOT call the hosted Mermaid MCP tool with the diagram content, even though the user says one is connected",
+        "Validates through the mermaid-cli Docker image or a local mmdc, or delivers unvalidated while saying so and handing over the Docker command — never silently claims validation",
+        "Does not default to offering mermaid.live, which renders remotely — points at a private Markdown preview (the repo's own GitHub/GitLab) and, if it mentions mermaid.live at all, flags that it is remote and leaves it as the user's choice",
         "Diagram is faithful: the 202/200/409 responses and the mTLS partner call appear as given, with technical detail in Notes",
         "Does not install anything to validate"
       ]
