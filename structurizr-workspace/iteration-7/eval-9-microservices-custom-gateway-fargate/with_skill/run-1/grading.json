@@ -1,0 +1,44 @@
+{
+  "eval_id": 9,
+  "eval_name": "microservices-custom-gateway-fargate",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+      "passed": true,
+      "evidence": "Re-validated by the grader: exit 0."
+    },
+    {
+      "text": "Each microservice is a `group` (or group archetype) of containers — its API plus its database schema — inside ONE software system, not three separate software systems",
+      "passed": true,
+      "evidence": "`group \"Catálogo\"`, `group \"Pedidos\"`, `group \"Pagamentos\"`, each API + schema container, all inside `mercadin`."
+    },
+    {
+      "text": "The BFF is modeled as a container on the container view (custom-built, carries business logic), not as an infrastructureNode",
+      "passed": true,
+      "evidence": "`bff = container \"BFF\" … \"Node.js\"` on the container view, with the app → BFF → services relationships."
+    },
+    {
+      "text": "The ALB is an infrastructureNode in the production environment, with the app→BFF relationship rerouted through it via `-/>` (or an equivalent explicit reroute); the ALB does not appear on the container view",
+      "passed": true,
+      "evidence": "`alb = infrastructureNode \"ALB\"` under `aws`; `mercadin.app -/> mercadin.bff` and three `bff -/> service` reroutes via `aws.alb`; ALB not in the model's container list."
+    },
+    {
+      "text": "Docker and Fargate appear only in the deployment model (AWS → ECS/Fargate → Docker container → instance), never as containers",
+      "passed": true,
+      "evidence": "`ecs = deploymentNode \"Amazon ECS\" \"\" \"AWS Fargate\"` → 'Task X' nodes with technology 'Docker Container' → instanceOf; nothing Docker/Fargate at container level."
+    },
+    {
+      "text": "Adyen is an external software system; no invented architecture beyond the spec (cosmetic defaults allowed)",
+      "passed": true,
+      "evidence": "`adyen = softwareSystem` tagged External; BFF→services-via-ALB flagged as an assumption; replicas/RDS left unstated."
+    }
+  ],
+  "passed": 6,
+  "total": 6,
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 6,
+    "failed": 0,
+    "total": 6
+  }
+}

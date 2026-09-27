@@ -10,14 +10,14 @@ Agent skills for software architecture documentation: design docs and diagrams. 
 
 ## Installation
 
-| Host | Install with | Register an MCP server with | Without an MCP server |
+| Host | Install with | Register an MCP server with | Without Docker / an MCP server |
 |---|---|---|---|
 | Claude Code | `claude plugin install <skill>@cassiobotaro-skills`, or `/plugin` | `claude mcp add --scope user …` | DSL is authored but not validated; Mermaid ships without a rendered preview |
 | GitHub Copilot CLI | `gh skill install cassiobotaro/skills <skill>` | Copilot's own MCP configuration | same |
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | the host's own MCP configuration | same |
 | Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | the host's own MCP configuration | same |
 
-No skill *requires* an MCP server: `design-doc` never uses one, and the two diagram skills degrade gracefully, as the last column says.
+No skill *requires* an MCP server or Docker: `design-doc` uses neither, `structurizr` validates through Docker, `mermaid-sequence` previews through an MCP server, and both diagram skills degrade gracefully, as the last column says.
 
 ### Claude Code
 
@@ -50,17 +50,16 @@ gh skill install cassiobotaro/skills design-doc
 
 Any other Agent Skills host works too: copy a skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory.
 
-## MCP servers
+## External tooling
 
-The diagram skills can validate and render through an MCP server, and degrade gracefully when none is connected. Neither is bundled — registering one is your opt-in.
+The diagram skills validate and render through tooling you provide, and degrade gracefully when it is missing. Nothing is bundled — installing Docker or registering an MCP server is your opt-in.
 
 - **mermaid-sequence** — renders natively on GitHub, GitLab, and most wikis. It will validate and preview through the public [Mermaid MCP server](https://mcp.mermaid.ai/mcp) *if you have one registered*, but the plugin does **not** bundle it: that server renders your diagrams remotely, so opting in is left to you (see below). Without it, the skill still produces ready-to-paste diagrams and falls back to mermaid-cli or mermaid.live to preview.
-- **structurizr** — validates, parses, and exports workspaces through a Structurizr MCP server at `http://localhost:3000/mcp` *if you have one running and registered*. The plugin does **not** bundle it (a `localhost` config only does anything on a machine already running the server). You run the server locally (e.g. `docker run -p 3000:3000 structurizr/mcp`) and register it yourself (see below); without it, the skill still authors DSL but cannot validate it.
+- **structurizr** — validates, previews, and exports workspaces with the [`structurizr/structurizr`](https://hub.docker.com/r/structurizr/structurizr) Docker image (`structurizr/structurizr validate`, `local`, `export`), pulled on first use. No MCP server is involved. Without Docker, the skill still authors the DSL, tells you it was not validated, and gives you the `validate` command to run later.
 
-In Claude Code, register either one at user scope; other hosts use their own MCP configuration, with the same URLs:
+In Claude Code, register the Mermaid server at user scope; other hosts use their own MCP configuration, with the same URL:
 
 ```bash
-claude mcp add --scope user --transport http structurizr http://localhost:3000/mcp
 claude mcp add --scope user --transport http mermaid https://mcp.mermaid.ai/mcp
 ```
 

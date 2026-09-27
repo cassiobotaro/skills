@@ -1,0 +1,44 @@
+{
+  "eval_id": 7,
+  "eval_name": "aws-lambda-serverless-localstack",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+      "passed": true,
+      "evidence": "Re-validated by the grader: exit 0."
+    },
+    {
+      "text": "Each of the three Lambda functions is its own container (an archetype like `lambda = container` is fine); DynamoDB is a container tagged/styled as a data store; the Flutter app is a container; Stripe is an external software system",
+      "passed": false,
+      "evidence": "Three Lambda containers (technology 'AWS Lambda / Python'), `orders` DynamoDB container tagged Database, Stripe external — OK. But the Flutter app is modeled as an external `softwareSystem \"App Mobile\"`, not a container; the agent flagged this as an assumption and offered to move it. Ownership was ambiguous in the prompt; the skill's rule would be to ask, not pick."
+    },
+    {
+      "text": "Amazon API Gateway is NOT a container and is absent from the container view; it appears only as an infrastructureNode in the production deployment environment",
+      "passed": true,
+      "evidence": "API Gateway appears only as `infrastructureNode` (in `dev` under LocalStack and in `prod` under `aws.region`); no such container exists."
+    },
+    {
+      "text": "Production environment reroutes the app→Lambda relationships through the API Gateway infrastructureNode with `-/>` (or an equivalent explicit reroute)",
+      "passed": true,
+      "evidence": "`appMobile -/> orderflow.criarPedido { … aws.region.apigw … }`, second `-/>` reuses the hop, `stripe -/> orderflow.webhookPagamento` likewise."
+    },
+    {
+      "text": "Two deployment environments with one deployment view each: Development nests the laptop → LocalStack → Lambda service → function instances; Live nests AWS (→ region) → Lambda service → function instances, with DynamoDB under an AWS node",
+      "passed": true,
+      "evidence": "`dev`: Laptop → LocalStack → 'AWS Lambda (emulado)' → containerInstance ×3; `prod`: AWS → us-east-1 → 'AWS Lambda' → containerInstance ×3, DynamoDB under the region. Views Deployment-Dev and Deployment-Prod."
+    },
+    {
+      "text": "No invented architecture: no extra containers, systems, queues or relationships beyond the spec (cosmetic defaults allowed)",
+      "passed": true,
+      "evidence": "No extra containers/queues. The dev-env `apigw -> lambda` 'Invoca' relationships follow from the stated gateway; Stripe/smartphone deployment nodes are presentational."
+    }
+  ],
+  "passed": 5,
+  "total": 6,
+  "summary": {
+    "pass_rate": 0.8333333333333334,
+    "passed": 5,
+    "failed": 1,
+    "total": 6
+  }
+}

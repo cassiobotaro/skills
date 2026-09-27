@@ -1,0 +1,44 @@
+{
+  "eval_id": 8,
+  "eval_name": "hardware-system-iot-custom-element",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+      "passed": true,
+      "evidence": "Re-validated by the grader: exit 0."
+    },
+    {
+      "text": "Cameras and robots are modeled as custom hardware elements (an `element` archetype / custom element with hardware metadata or tag) — NOT as softwareSystem, container or person",
+      "passed": false,
+      "evidence": "`cameras = softwareSystem \"Câmeras Industriais\"` and `robos = softwareSystem \"Braços Robóticos\"` with tags External+Hardware. The official pattern models hardware as a custom `element` archetype (`hardwareSystem = element { metadata \"Hardware System\" }`). The agent named that alternative in its reply and still defaulted to softwareSystem — the skill gives it no rule."
+    },
+    {
+      "text": "Hardware elements are visually distinguished from software systems via a tag and a style entry",
+      "passed": true,
+      "evidence": "Tag `Hardware` + `element \"Hardware\" { shape hexagon }`."
+    },
+    {
+      "text": "Containers are exactly: Vue panel, Go ingestion service, Go command service, TimescaleDB — each with a technology; the operator is a person",
+      "passed": true,
+      "evidence": "painel (Vue), ingestao (Go), comandos (Go), telemetria (TimescaleDB, Database tag); `operador = person`."
+    },
+    {
+      "text": "Relationships carry the stated protocols: cameras → ingestion 'RTSP', command service → robots 'OPC UA'",
+      "passed": true,
+      "evidence": "`cameras -> fabricaviva.ingestao … \"RTSP\"`, `fabricaviva.comandos -> robos … \"OPC UA\"`."
+    },
+    {
+      "text": "No invented architecture: no extra elements or relationships beyond the spec (cosmetic defaults allowed)",
+      "passed": true,
+      "evidence": "Only stated relationships; telemetry DB and panel wiring left as explicit TODO/questions instead of invented."
+    }
+  ],
+  "passed": 5,
+  "total": 6,
+  "summary": {
+    "pass_rate": 0.8333333333333334,
+    "passed": 5,
+    "failed": 1,
+    "total": 6
+  }
+}

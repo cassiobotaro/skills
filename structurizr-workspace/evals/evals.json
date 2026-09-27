@@ -69,7 +69,7 @@
       "id": 5,
       "eval_name": "no-validator-available-says-so",
       "prompt": "Escreve o workspace.dsl pro nosso sistema de agendamento: um app mobile Flutter e um painel web em Vue conversam com uma API em Python (FastAPI); a API guarda os agendamentos num PostgreSQL 15 e dispara lembretes por SMS através da Twilio. Só o contexto e os containers. Esta máquina não tem Docker instalado e não há nenhum servidor MCP conectado nesta sessão.",
-      "expected_output": "Gera o workspace.dsl fiel ao spec e, por não ter validador algum disponível, declara explicitamente que o DSL NÃO foi validado neste ambiente, entregando o comando docker de validate para o usuário rodar depois (e, opcionalmente, o comando que sobe o servidor MCP). Nunca afirma nem insinua que o arquivo foi validado. Não tenta instalar Docker nem qualquer dependência.",
+      "expected_output": "Gera o workspace.dsl fiel ao spec e, por não ter validador algum disponível, declara explicitamente que o DSL NÃO foi validado neste ambiente, entregando o comando docker de validate para o usuário rodar depois. Nunca afirma nem insinua que o arquivo foi validado. Não tenta instalar Docker nem qualquer dependência.",
       "files": [],
       "assertions": [
         "Creates workspace.dsl faithful to the spec (Flutter app, Vue panel, FastAPI, PostgreSQL 15 as containers; Twilio as external system)",
@@ -77,6 +77,66 @@
         "Never claims or implies the file was validated, and reports no fabricated validation output",
         "Hands the user the Structurizr CLI/Docker validate command so they can validate later",
         "Does not attempt to install Docker, the Structurizr CLI, or any other dependency"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "kubernetes-eks-alb-firewall-deployment",
+      "prompt": "Preciso do workspace.dsl do nosso sistema de agendamento de consultas, o Agenda+. É um SPA em React, uma API em Kotlin (Spring Boot) e um PostgreSQL; pacientes usam o SPA. Em produção roda tudo na AWS: a API sobe no EKS, num cluster chamado 'plataforma', como pods com 3 réplicas; o Postgres é RDS. Na frente da API tem um Application Load Balancer, e na frente do ALB um AWS WAF fazendo firewall. Quero as views de contexto, de containers e a de deployment de produção.",
+      "expected_output": "workspace.dsl válido com contexto + containers (SPA, API, PostgreSQL) e um deploymentEnvironment de produção. EKS, cluster Kubernetes, pods, Docker e RDS aparecem SÓ no modelo de deployment, como deploymentNodes aninhados (AWS → EKS → cluster → pod com instances 3 → container → instanceOf/containerInstance da API); nunca como containers nem na view de containers. O ALB e o WAF são infrastructureNode dentro do ambiente de produção e o relacionamento SPA→API é re-roteado por eles com `-/>` (SPA → WAF → ALB → API). Nada inventado além do dito.",
+      "files": [],
+      "assertions": [
+        "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+        "Container view has exactly the SPA, the API and PostgreSQL — no Kubernetes, pod, Docker, EKS, ALB or WAF element on it",
+        "Production deployment nests AWS → EKS → Kubernetes cluster → pod (instances 3) → (Docker container) → API instance, and PostgreSQL is deployed under an RDS node",
+        "ALB and WAF are infrastructureNodes inside the production environment (not deploymentNodes, not containers)",
+        "The SPA→API relationship is rerouted through WAF and ALB in the deployment environment using `-/>` (or an equivalent explicit reroute), so the deployment view shows SPA → WAF → ALB → API",
+        "No invented architecture: no extra containers, systems or relationships beyond the spec (cosmetic defaults allowed)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "aws-lambda-serverless-localstack",
+      "prompt": "Escreve o workspace.dsl da nossa API serverless de pedidos, o OrderFlow. São três funções Lambda em Python: criar-pedido, listar-pedidos e webhook-pagamento; todas leem e escrevem numa tabela DynamoDB 'orders'. Na frente das lambdas fica o Amazon API Gateway (só roteamento e auth por API key, nada custom). O webhook é chamado pelo Stripe. O app mobile (Flutter) dos clientes chama a API. Em dev cada dev roda tudo no laptop com LocalStack; em produção é a AWS mesmo (us-east-1). Quero a view de containers e uma deployment view pra dev e outra pra produção.",
+      "expected_output": "Cada função Lambda é um container (opcionalmente via archetype `lambda = container`), DynamoDB é um container (data store), Stripe é sistema externo, o app Flutter é container. O Amazon API Gateway NÃO é container (é gerenciado e só roteia): aparece como infrastructureNode no ambiente de produção, com o relacionamento app→funções re-roteado por ele (`-/>`). Dois deploymentEnvironments: Development com Laptop → LocalStack → Lambda Service → instanceOf; Live com AWS → (us-east-1) → Lambda Service → instanceOf, e DynamoDB sob um nó AWS. Uma deployment view por ambiente.",
+      "files": [],
+      "assertions": [
+        "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+        "Each of the three Lambda functions is its own container (an archetype like `lambda = container` is fine); DynamoDB is a container tagged/styled as a data store; the Flutter app is a container; Stripe is an external software system",
+        "Amazon API Gateway is NOT a container and is absent from the container view; it appears only as an infrastructureNode in the production deployment environment",
+        "Production environment reroutes the app→Lambda relationships through the API Gateway infrastructureNode with `-/>` (or an equivalent explicit reroute)",
+        "Two deployment environments with one deployment view each: Development nests the laptop → LocalStack → Lambda service → function instances; Live nests AWS (→ region) → Lambda service → function instances, with DynamoDB under an AWS node",
+        "No invented architecture: no extra containers, systems, queues or relationships beyond the spec (cosmetic defaults allowed)"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "hardware-system-iot-custom-element",
+      "prompt": "Quero documentar em Structurizr a nossa plataforma de monitoramento de chão de fábrica, a FabricaViva. Tem câmeras industriais (hardware da Basler, firmware fechado) que mandam frames pra plataforma, e braços robóticos (KUKA) que recebem comandos dela. Operadores usam um painel web. Dentro da plataforma tem o painel (Vue), um serviço de ingestão em Go que recebe os frames via RTSP, um serviço de comandos em Go que fala OPC UA com os robôs, e um TimescaleDB pra telemetria. Só contexto e containers por enquanto.",
+      "expected_output": "Câmeras e robôs são hardware, não software: modelados como elemento customizado — um archetype `element { metadata \"Hardware System\" }` (ou `element` com tag equivalente), nunca como `softwareSystem` nem `person`, e com estilo próprio para distingui-los. Operador é person. Containers: painel Vue, ingestão Go, comandos Go, TimescaleDB, com tecnologias e protocolos (RTSP, OPC UA) nos relacionamentos. Nada inventado.",
+      "files": [],
+      "assertions": [
+        "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+        "Cameras and robots are modeled as custom hardware elements (an `element` archetype / custom element with hardware metadata or tag) — NOT as softwareSystem, container or person",
+        "Hardware elements are visually distinguished from software systems via a tag and a style entry",
+        "Containers are exactly: Vue panel, Go ingestion service, Go command service, TimescaleDB — each with a technology; the operator is a person",
+        "Relationships carry the stated protocols: cameras → ingestion 'RTSP', command service → robots 'OPC UA'",
+        "No invented architecture: no extra elements or relationships beyond the spec (cosmetic defaults allowed)"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "microservices-custom-gateway-fargate",
+      "prompt": "Faz o workspace.dsl da loja online 'Mercadin'. Nosso time (só a gente) mantém três microsserviços em Java/Spring Boot, cada um com seu schema no Postgres: catalogo, pedidos e pagamentos. Na frente deles tem um BFF em Node que a gente mesmo escreveu — ele agrega respostas dos três serviços, aplica regras de autorização por perfil de cliente e monta o payload pro app. O app mobile (React Native) dos clientes fala só com o BFF. Pagamentos chama a Adyen. Em produção cada serviço e o BFF rodam como container Docker no ECS Fargate, atrás de um ALB. Quero contexto, containers e deployment de produção.",
+      "expected_output": "Os três microsserviços são grupos de containers (API + schema) dentro de um único softwareSystem, porque um só time é dono. O BFF é um container (foi construído pelo time e tem lógica de negócio — a exceção da regra 'gateway é deployment'). O ALB é infrastructureNode no ambiente de produção com re-roteamento `-/>` do app→BFF. Docker e Fargate aparecem só no deployment (AWS → ECS/Fargate → Docker container → instanceOf). Adyen é sistema externo. Nada inventado.",
+      "files": [],
+      "assertions": [
+        "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+        "Each microservice is a `group` (or group archetype) of containers — its API plus its database schema — inside ONE software system, not three separate software systems",
+        "The BFF is modeled as a container on the container view (custom-built, carries business logic), not as an infrastructureNode",
+        "The ALB is an infrastructureNode in the production environment, with the app→BFF relationship rerouted through it via `-/>` (or an equivalent explicit reroute); the ALB does not appear on the container view",
+        "Docker and Fargate appear only in the deployment model (AWS → ECS/Fargate → Docker container → instance), never as containers",
+        "Adyen is an external software system; no invented architecture beyond the spec (cosmetic defaults allowed)"
       ]
     }
   ]

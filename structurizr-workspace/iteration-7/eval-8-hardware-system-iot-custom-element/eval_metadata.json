@@ -1,0 +1,13 @@
+{
+  "eval_id": 8,
+  "eval_name": "hardware-system-iot-custom-element",
+  "prompt": "Quero documentar em Structurizr a nossa plataforma de monitoramento de chão de fábrica, a FabricaViva. Tem câmeras industriais (hardware da Basler, firmware fechado) que mandam frames pra plataforma, e braços robóticos (KUKA) que recebem comandos dela. Operadores usam um painel web. Dentro da plataforma tem o painel (Vue), um serviço de ingestão em Go que recebe os frames via RTSP, um serviço de comandos em Go que fala OPC UA com os robôs, e um TimescaleDB pra telemetria. Só contexto e containers por enquanto.",
+  "assertions": [
+    "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+    "Cameras and robots are modeled as custom hardware elements (an `element` archetype / custom element with hardware metadata or tag) — NOT as softwareSystem, container or person",
+    "Hardware elements are visually distinguished from software systems via a tag and a style entry",
+    "Containers are exactly: Vue panel, Go ingestion service, Go command service, TimescaleDB — each with a technology; the operator is a person",
+    "Relationships carry the stated protocols: cameras → ingestion 'RTSP', command service → robots 'OPC UA'",
+    "No invented architecture: no extra elements or relationships beyond the spec (cosmetic defaults allowed)"
+  ]
+}

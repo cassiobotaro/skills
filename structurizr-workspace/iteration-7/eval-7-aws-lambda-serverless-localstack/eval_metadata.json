@@ -1,0 +1,13 @@
+{
+  "eval_id": 7,
+  "eval_name": "aws-lambda-serverless-localstack",
+  "prompt": "Escreve o workspace.dsl da nossa API serverless de pedidos, o OrderFlow. São três funções Lambda em Python: criar-pedido, listar-pedidos e webhook-pagamento; todas leem e escrevem numa tabela DynamoDB 'orders'. Na frente das lambdas fica o Amazon API Gateway (só roteamento e auth por API key, nada custom). O webhook é chamado pelo Stripe. O app mobile (Flutter) dos clientes chama a API. Em dev cada dev roda tudo no laptop com LocalStack; em produção é a AWS mesmo (us-east-1). Quero a view de containers e uma deployment view pra dev e outra pra produção.",
+  "assertions": [
+    "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+    "Each of the three Lambda functions is its own container (an archetype like `lambda = container` is fine); DynamoDB is a container tagged/styled as a data store; the Flutter app is a container; Stripe is an external software system",
+    "Amazon API Gateway is NOT a container and is absent from the container view; it appears only as an infrastructureNode in the production deployment environment",
+    "Production environment reroutes the app→Lambda relationships through the API Gateway infrastructureNode with `-/>` (or an equivalent explicit reroute)",
+    "Two deployment environments with one deployment view each: Development nests the laptop → LocalStack → Lambda service → function instances; Live nests AWS (→ region) → Lambda service → function instances, with DynamoDB under an AWS node",
+    "No invented architecture: no extra containers, systems, queues or relationships beyond the spec (cosmetic defaults allowed)"
+  ]
+}
