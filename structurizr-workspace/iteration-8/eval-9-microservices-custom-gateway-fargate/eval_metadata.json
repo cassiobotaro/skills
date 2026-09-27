@@ -1,0 +1,13 @@
+{
+  "eval_id": 9,
+  "eval_name": "microservices-custom-gateway-fargate",
+  "prompt": "Faz o workspace.dsl da loja online 'Mercadin'. Nosso time (só a gente) mantém três microsserviços em Java/Spring Boot, cada um com seu schema no Postgres: catalogo, pedidos e pagamentos. Na frente deles tem um BFF em Node que a gente mesmo escreveu — ele agrega respostas dos três serviços, aplica regras de autorização por perfil de cliente e monta o payload pro app. O app mobile (React Native) dos clientes fala só com o BFF. Pagamentos chama a Adyen. Em produção cada serviço e o BFF rodam como container Docker no ECS Fargate, atrás de um ALB. Quero contexto, containers e deployment de produção.",
+  "assertions": [
+    "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+    "Each microservice is a `group` (or group archetype) of containers — its API plus its database schema — inside ONE software system, not three separate software systems",
+    "The BFF is modeled as a container on the container view (custom-built, carries business logic), not as an infrastructureNode",
+    "The ALB is an infrastructureNode in the production environment, with the app→BFF relationship rerouted through it via `-/>` (or an equivalent explicit reroute); the ALB does not appear on the container view",
+    "Docker and Fargate appear only in the deployment model (AWS → ECS/Fargate → Docker container → instance), never as containers",
+    "Adyen is an external software system; no invented architecture beyond the spec (cosmetic defaults allowed)"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "eval_id": 6,
+  "eval_name": "kubernetes-eks-alb-firewall-deployment",
+  "prompt": "Preciso do workspace.dsl do nosso sistema de agendamento de consultas, o Agenda+. É um SPA em React, uma API em Kotlin (Spring Boot) e um PostgreSQL; pacientes usam o SPA. Em produção roda tudo na AWS: a API sobe no EKS, num cluster chamado 'plataforma', como pods com 3 réplicas; o Postgres é RDS. Na frente da API tem um Application Load Balancer, e na frente do ALB um AWS WAF fazendo firewall. Quero as views de contexto, de containers e a de deployment de produção.",
+  "assertions": [
+    "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+    "Container view has exactly the SPA, the API and PostgreSQL — no Kubernetes, pod, Docker, EKS, ALB or WAF element on it",
+    "Production deployment nests AWS → EKS → Kubernetes cluster → pod (instances 3) → (Docker container) → API instance, and PostgreSQL is deployed under an RDS node",
+    "ALB and WAF are infrastructureNodes inside the production environment (not deploymentNodes, not containers)",
+    "The SPA→API relationship is rerouted through WAF and ALB in the deployment environment using `-/>` (or an equivalent explicit reroute), so the deployment view shows SPA → WAF → ALB → API",
+    "No invented architecture: no extra containers, systems or relationships beyond the spec (cosmetic defaults allowed)"
+  ]
+}

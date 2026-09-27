@@ -96,12 +96,8 @@ model {
         }
     }
     platform = softwareSystem "Factory Monitoring" "Watches the floor, commands the arms."
-    camera = hardwareSystem "Industrial Camera" {
-        description "Basler camera with closed firmware."
-    }
-    arm = hardwareSystem "Robotic Arm" {
-        description "KUKA arm."
-    }
+    camera = hardwareSystem "Industrial Camera" "Basler camera with closed firmware."
+    arm = hardwareSystem "Robotic Arm" "KUKA arm."
 
     camera -> platform "Streams video frames to" "RTSP"
     platform -> arm "Sends control commands to" "OPC UA"
@@ -118,10 +114,7 @@ views {
 ```
 
 `metadata` is the type line rendered under the name (the slot "Software System" occupies
-for systems). Set the description in the block, not positionally: `element`'s argument
-order is `<name> [metadata] [description]`, so `hardwareSystem "Camera" "Basler…"` puts
-the text into the metadata slot and silently overwrites the archetype's label (verified
-via JSON export). Custom elements appear on system-context views through their relationships;
+for systems). Custom elements appear on system-context views through their relationships;
 inside a container view they show as external neighbours of the containers they talk to.
 Firmware you *do* write and deploy is different: that is a container (or system) of yours
 running on the device, and the device is then a `deploymentNode` in a deployment view.

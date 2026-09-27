@@ -1,0 +1,44 @@
+{
+  "eval_id": 6,
+  "eval_name": "kubernetes-eks-alb-firewall-deployment",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+      "passed": true,
+      "evidence": "Re-validated by the grader: `structurizr/structurizr validate` exit 0."
+    },
+    {
+      "text": "Container view has exactly the SPA, the API and PostgreSQL — no Kubernetes, pod, Docker, EKS, ALB or WAF element on it",
+      "passed": true,
+      "evidence": "Container view includes only spa, api, db (containers of `agenda`); WAF/ALB/EKS/pod live under `producao`."
+    },
+    {
+      "text": "Production deployment nests AWS → EKS → Kubernetes cluster → pod (instances 3) → (Docker container) → API instance, and PostgreSQL is deployed under an RDS node",
+      "passed": false,
+      "evidence": "Nesting is AWS → `plataforma` (technology 'Amazon EKS') → 'Pod da API' (instances 3) → instanceOf. The EKS service and the Kubernetes cluster are merged into one node and the Docker-container layer is skipped; the official EKS example nests AWS → EKS → cluster → pod → container. Acceptable simplification, but not the reference shape. PostgreSQL under `rds` OK."
+    },
+    {
+      "text": "ALB and WAF are infrastructureNodes inside the production environment (not deploymentNodes, not containers)",
+      "passed": true,
+      "evidence": "`waf = infrastructureNode \"AWS WAF\"` and `alb = infrastructureNode \"Application Load Balancer\"` inside `aws`."
+    },
+    {
+      "text": "The SPA→API relationship is rerouted through WAF and ALB in the deployment environment using `-/>` (or an equivalent explicit reroute), so the deployment view shows SPA → WAF → ALB → API",
+      "passed": true,
+      "evidence": "`agenda.spa -/> agenda.api { spa -> aws.waf; aws.waf -> aws.alb; aws.alb -> agenda.api }`."
+    },
+    {
+      "text": "No invented architecture: no extra containers, systems or relationships beyond the spec (cosmetic defaults allowed)",
+      "passed": true,
+      "evidence": "Only stated elements/relationships; `WebBrowser` tag and styles are cosmetic. Region and SPA hosting left as open questions."
+    }
+  ],
+  "passed": 5,
+  "total": 6,
+  "summary": {
+    "pass_rate": 0.8333333333333334,
+    "passed": 5,
+    "failed": 1,
+    "total": 6
+  }
+}

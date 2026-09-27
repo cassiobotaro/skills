@@ -1,0 +1,42 @@
+{
+  "eval_id": 6,
+  "eval_name": "kubernetes-eks-alb-firewall-deployment",
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI (Docker) — or, if Docker is unavailable, the response says plainly it was not validated",
+      "passed": true,
+      "evidence": "Re-validated by the grader: `structurizr/structurizr validate` exit 0."
+    },
+    {
+      "text": "Container view has exactly the SPA, the API and PostgreSQL — no Kubernetes, pod, Docker, EKS, ALB or WAF element on it",
+      "passed": true,
+      "evidence": "Container view: spa, api, db only; WAF/ALB/EKS live under `producao`."
+    },
+    {
+      "text": "Production deployment nests AWS → EKS → Kubernetes cluster → pod (instances 3) → (Docker container) → API instance, and PostgreSQL is deployed under an RDS node",
+      "passed": true,
+      "evidence": "`aws` → `eks` ('Elastic Kubernetes Service') → `cluster` 'plataforma' ('Kubernetes Cluster') → `pod` (instances 3) → 'Contêiner da API' ('Docker Container') → instanceOf; PostgreSQL under `rds`. Matches the official EKS shape — the layer 1.4.0 collapsed is back."
+    },
+    {
+      "text": "ALB and WAF are infrastructureNodes inside the production environment (not deploymentNodes, not containers)",
+      "passed": true,
+      "evidence": "`waf = infrastructureNode \"Firewall\"` and `alb = infrastructureNode \"Load Balancer\"` under `aws`, styled `element \"Infrastructure Node\" { shape ellipse }`."
+    },
+    {
+      "text": "The SPA→API relationship is rerouted through WAF and ALB in the deployment environment using `-/>` (or an equivalent explicit reroute), so the deployment view shows SPA → WAF → ALB → API",
+      "passed": true,
+      "evidence": "`agenda.spa -/> agenda.api { spa -> aws.waf; aws.waf -> aws.alb; aws.alb -> agenda.api }`."
+    },
+    {
+      "text": "No invented architecture: no extra containers, systems or relationships beyond the spec (cosmetic defaults allowed)",
+      "passed": true,
+      "evidence": "Only stated elements; region and SPA hosting left as questions."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 6,
+    "failed": 0,
+    "total": 6
+  }
+}
