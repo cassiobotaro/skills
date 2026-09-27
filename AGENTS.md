@@ -1,15 +1,17 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for any coding agent working in this repository. This is the single instructions file:
+there is no separate `CLAUDE.md`, and everything here applies to every host.
 
 ## What this repo is
 
 `cassiobotaro-skills` — architecture-documentation skills in the open **Agent Skills** standard
 (`SKILL.md`), installable in any compatible host (Claude Code, GitHub Copilot, Google Antigravity,
-OpenCode, … — via `npx skills add` or `gh skill install`). The repository is also a Claude Code
-**plugin marketplace** where each skill ships as an independently installable plugin. There is no
-application code: the "source" is the skills' Markdown instructions (`SKILL.md` + `references/`).
-The three plugins are `design-doc`, `structurizr`, and `mermaid-sequence`.
+OpenCode, … — via `npx skills add cassiobotaro/skills` or `gh skill install cassiobotaro/skills <skill>`).
+The repository is also a Claude Code **plugin marketplace** where each skill ships as an
+independently installable plugin. There is no application code: the "source" is the skills'
+Markdown instructions (`SKILL.md` + `references/`). The three plugins are `design-doc`,
+`structurizr`, and `mermaid-sequence`.
 
 ## Layout
 
@@ -17,36 +19,53 @@ The three plugins are `design-doc`, `structurizr`, and `mermaid-sequence`.
 - `<plugin>/.claude-plugin/plugin.json` — per-plugin manifest (name, version, description, license, keywords).
 - `<plugin>/skills/<name>/` — the actual skill: `SKILL.md` (frontmatter `name` + `description`, then the body), `NOTICE.md` (upstream attribution), and `references/*.md` (loaded on demand).
 - `<plugin>-workspace/` — eval/benchmark artifacts only. **Committed but not part of the installed plugin.** Never reference a workspace path from inside a `skills/` file.
-- `eval-tools/capture_trigger_transcripts.py` — keeps the full stream of the nested sessions and classifies each as `strict_trigger` / `late_trigger` / `other_tool` / `prose_only`. Use it when a query's miss rate matters, because `run_eval.py` collapses all four outcomes into "did not trigger".
-- `eval-tools/run_trigger_eval.py` — the only correct way to run a trigger eval here. It patches a throwaway copy of skill-creator's cached `run_eval.py` (which is wrong for this repo in two ways) and flags degraded sweeps. Use it instead of calling `run_eval.py` directly; see the gotchas below.
+- `eval-tools/` — Python helpers for trigger evals (`run_trigger_eval.py`, `capture_trigger_transcripts.py`). They drive the Claude Code CLI; see "Evals" below.
+- `README.md` — user-facing installation and tooling guide. Keep it in sync when a skill's external tooling or install path changes.
 
-A plugin's `description` lives in three places, and they serve **two different jobs** — do not blindly sync them. `marketplace.json` and `plugin.json` carry the short *showcase* text (what a human reads when browsing plugins); those two must match each other. The `SKILL.md` frontmatter carries the *trigger* text, which is what the model actually reads to decide whether to invoke the skill — it is longer, measured against a trigger eval set, and changes to it are a behavioral change deserving a version bump. Editing the trigger text does not oblige you to touch the showcase text.
+A plugin's `description` lives in three places, and they serve **two different jobs** — do not
+blindly sync them. `marketplace.json` and `plugin.json` carry the short *showcase* text (what a
+human reads when browsing plugins); those two must match each other. The `SKILL.md` frontmatter
+carries the *trigger* text, which is what the model reads to decide whether to invoke the skill —
+it is longer, measured against a trigger eval set, and changes to it are a behavioral change
+deserving a version bump. Editing the trigger text does not oblige you to touch the showcase text.
 
-## Conventions specific to this repo
+## Conventions
 
 - **Versioning**: the `version` field lives **only** in each `plugin.json`, never in `marketplace.json` entries. Setting both causes drift (plugin.json silently wins). Bump the plugin.json version on any shipped skill change and use it in the commit subject (e.g. `design-doc 1.2.0: …`).
-- **No bundled MCP servers**: plugins must not ship a `.mcp.json`. A skill may *use* an MCP when one is connected but must degrade gracefully without it; registering a server is the user's opt-in (`claude mcp add --scope user …`). This is why `structurizr` and `mermaid-sequence` dropped their bundles in 1.1.0. Today no skill uses an MCP at all: since 1.4.0 `structurizr` validates, previews, and exports through the `structurizr/structurizr` Docker image, and since 1.2.0 `mermaid-sequence` validates through the `minlag/mermaid-cli` Docker image with a local `mmdc` as fallback. Without Docker (or the CLI), both ship the artifact with an explicit "not validated" notice plus the command.
+- **Commit subjects** follow `<plugin> <version>: <what changed>` for skill changes; other changes use a plain imperative subject.
+- **No bundled MCP servers**: plugins must not ship a `.mcp.json`. A skill may *use* an MCP when one is connected but must degrade gracefully without it; registering a server is the user's opt-in. Today no skill uses an MCP at all: `structurizr` validates, previews, and exports through the `structurizr/structurizr` Docker image, and `mermaid-sequence` validates through the `minlag/mermaid-cli` Docker image with a local `mmdc` as fallback. Without Docker (or the CLI), both ship the artifact with an explicit "not validated" notice plus the command to run later — **never an install attempt, never a remote validator**.
 - **Language**: skill content (`SKILL.md`, `references/`) is written in **English**. Generated *artifacts* follow the conversation language.
 - **Record, don't invent** is the shared contract across every skill: document only what the user/repository established; when the request is too vague to fill the sections honestly, ask 2–4 targeted questions instead of fabricating. The questions are the deliverable on a vague ask.
 - **Attribution**: every skill credits its prior art in `NOTICE.md` and an Attribution footer in `SKILL.md`. Preserve these and the root `LICENSE` (MIT) when editing.
+- **Token economy**: keep `SKILL.md` bodies lean. Material that is only sometimes needed goes in `references/*.md` and is loaded on demand; the body says when to read each file.
+- **Host portability**: a skill must work in any Agent Skills host. Do not depend on Claude-Code-only features (slash commands, hooks, settings) inside `skills/` files.
 
-## Validating a plugin
+## Validating a change
+
+There is no build or unit-test step. Before committing a skill change:
 
 ```bash
 claude plugin validate <plugin-dir>     # e.g. claude plugin validate design-doc
 ```
 
-There is no build or unit-test step. Correctness is measured by **evals**, not asserts.
+Check by hand that:
 
-## Evals / benchmarks
+- `SKILL.md` frontmatter has `name` (matching the directory) and `description`.
+- `marketplace.json` and `plugin.json` descriptions still match each other.
+- `plugin.json` `version` was bumped if anything under `skills/` changed.
+- No `skills/` file references a `*-workspace/` path.
 
-Evals are authored and run through the **skill-creator** skill (`/skill-creator`), not by
-scripts in this repo. Each skill has:
+Correctness is measured by **evals**, not asserts.
 
-- `<plugin>-workspace/evals/evals.json` — the eval set (prompt, `expected_output`, optional `files/`, optional `assertions`). This is the spec for what the skill must do; read it before changing a skill's behavior.
-- `<plugin>-workspace/iteration-N/` — per-run outputs, `with_skill/` vs `without_skill/` configs, `grading.json`, `benchmark.md` (the A/B summary: pass-rate, time, tokens).
+## Evals
 
-Gotchas when running evals in this repo (learned the hard way):
+Evals are authored and run through the **skill-creator** skill, not by scripts in this repo. Each skill has:
+
+- `<plugin>-workspace/evals/evals.json` — the eval set (prompt, `expected_output`, optional `files/`, optional `assertions`). This is the spec for what the skill must do; **read it before changing a skill's behavior**.
+- `<plugin>-workspace/iteration-N/` — per-run outputs, `with_skill/` vs `without_skill/` configs, `grading.json`, `benchmark.md` (the A/B summary).
+- `<plugin>-workspace/trigger-evals/` — trigger-rate sweeps. The reference numbers are in `structurizr-workspace/trigger-evals/README-serial-baseline.md`; compare new numbers against those, never against an older figure.
+
+Gotchas when running evals in this repo (learned the hard way). They are written against the Claude Code CLI, which is what the eval tooling drives, but the statistical rules hold for any harness:
 
 - Spawn eval subagents in the **foreground** (parallel calls in one message). Background agents (`run_in_background: true`) are blocked from Write/Edit in the main checkout regardless of allowlist; if you must, salvage outputs from their final messages.
 - **Cap the fan-out at ~4-6 concurrent runs.** Launching a whole multi-skill eval sweep in one message (19 agents, iteration-6/12) had 8 of them killed by the stall watchdog with no progress for 600s, and the survivors reported wall-clock in the millions of ms — pure queueing. Batch the runs and re-seed any fixture directory before re-running a killed agent, since a partial run may have edited it. Wall clock from a contended sweep is not a comparable metric; tokens are.
@@ -66,6 +85,6 @@ Gotchas when running evals in this repo (learned the hard way):
 
 ## Per-skill notes
 
-- **design-doc** — writes *and* reviews design docs via interactive discovery; trade-offs are mandatory (zero-cons = red flag). A user-supplied or house template **governs** (its sections become required); only without a template are sections suggestions. A review (1.2.0) must *establish* the governing template before judging structure — always ask the author for a template reference (templates normally live outside the repo; what the repo shows is a hint, not the answer) — and until one is confirmed the default catalog is the yardstick (suggestions, not demands). Diagram convention (1.1.0): the C4 architecture is authored as **Structurizr DSL** (delegating to the `structurizr` skill when present for classification/validation/idiomatic DSL), embedded as a **PNG/SVG image reference with the DSL folded in a `<details>` block** — render to PNG/SVG via structurizr's export tooling when reachable, otherwise leave the image as a placeholder (a one-line "render in the manual pass" note is fine); sequence flows stay Mermaid (they render natively). No "not machine-validated / ilustração do texto" disclaimer — manual review is assumed; only a *validation* disclaimer is banned. Generated prose is plain active-voice and gets a spelling pass in self-review.
-- **structurizr** — authors/edits `workspace.dsl` (C4 model, Structurizr DSL v6+); validation is Docker-only (`structurizr/structurizr validate`, no MCP), and a missing Docker means "delivered, not validated, here is the command" — never an install attempt; references split into always-read core (`dsl-reference`) plus conditional pattern files for token economy.
-- **mermaid-sequence** — Mermaid sequence diagrams as fenced ` ```mermaid ` blocks; never invent the flow or failure paths; technical detail (endpoint/headers/payload/status) goes in Notes. Validation (1.2.0) is local-only and ordered: mermaid-cli Docker image → local `mmdc` → "delivered, not validated, here is the Docker command" — never an install attempt, never a remote validator; mermaid.live may be offered for preview but it renders remotely, so for diagrams carrying internal detail that is the user's call. `references/syntax.md` is always-read (version-portability + escaping gotchas).
+- **design-doc** — writes *and* reviews design docs via interactive discovery; trade-offs are mandatory (zero-cons = red flag). A user-supplied or house template **governs** (its sections become required); only without a template are sections suggestions. A review must *establish* the governing template before judging structure — always ask the author for a template reference — and until one is confirmed the default catalog is the yardstick (suggestions, not demands). Diagram convention: the C4 architecture is authored as **Structurizr DSL** (delegating to the `structurizr` skill when present), embedded as a **PNG/SVG image reference with the DSL folded in a `<details>` block** — render via structurizr's export tooling when reachable, otherwise leave a placeholder with a one-line "render in the manual pass" note; sequence flows stay Mermaid. No "not machine-validated" disclaimer — manual review is assumed; only a *validation* disclaimer is banned. Generated prose is plain active-voice and gets a spelling pass in self-review.
+- **structurizr** — authors/edits `workspace.dsl` (C4 model, Structurizr DSL v6+); validation is Docker-only (`structurizr/structurizr validate`), and a missing Docker means "delivered, not validated, here is the command" — never an install attempt. ADR authoring is routed to the team's decision log, not written by this skill. References split into always-read core (`dsl-reference`) plus conditional pattern files for token economy.
+- **mermaid-sequence** — Mermaid sequence diagrams as fenced ` ```mermaid ` blocks; never invent the flow or failure paths; technical detail (endpoint/headers/payload/status) goes in Notes. Validation is local-only and ordered: mermaid-cli Docker image → local `mmdc` → "delivered, not validated, here is the Docker command". mermaid.live may be offered for preview but it renders remotely, so for diagrams carrying internal detail that is the user's call. `references/syntax.md` is always-read (version-portability + escaping gotchas).
