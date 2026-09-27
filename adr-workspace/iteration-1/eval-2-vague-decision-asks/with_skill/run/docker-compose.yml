@@ -1,5 +1,0 @@
-services:
-  api:
-    build: .
-  redis:
-    image: redis:7

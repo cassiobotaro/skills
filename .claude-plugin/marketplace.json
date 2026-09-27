@@ -1,13 +1,8 @@
 {
   "name": "cassiobotaro-skills",
   "owner": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
-  "description": "Architecture documentation skills: design docs, ADRs, C4/Structurizr models, Mermaid sequence diagrams",
+  "description": "Architecture documentation skills: design docs, C4/Structurizr models, Mermaid sequence diagrams",
   "plugins": [
-    {
-      "name": "adr",
-      "source": "./adr",
-      "description": "Write and maintain Architecture Decision Records (ADRs) in the Michael Nygard format, file-compatible with Nat Pryce's adr-tools and importable into Structurizr's decision log even when written in another language"
-    },
     {
       "name": "design-doc",
       "source": "./design-doc",

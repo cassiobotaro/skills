@@ -28,7 +28,7 @@ of opening a `workspace.dsl`.
 |---|---|---|
 | A cloud-infrastructure picture drawn from real vendor service icons (an AWS diagram with EC2/RDS/S3 boxes) | C4 models abstractions the team owns, not a vendor's service catalog rendered in its own iconography | A diagramming tool with the vendor icon set |
 | A sequence or behavior-over-time diagram ("what happens when a user checks out") | C4 views are static structure; ordered interaction is a different shape | The `mermaid-sequence` skill |
-| Writing the decision content of an ADR ("record why we chose Postgres") | This skill *links* an existing decision log into the views; it does not author the decision | The `adr` skill |
+| Writing the decision content of an ADR ("record why we chose Postgres") | This skill *links* an existing decision log into the views; it does not author the decision | The team's decision log (e.g. adr-tools); once the ADR exists, link it here |
 
 Linking existing ADRs into the architecture documentation **is** this skill's work — only
 authoring the decision prose is not.

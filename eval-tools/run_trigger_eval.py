@@ -7,7 +7,7 @@ near-zero triggers, which reads as a description regression rather than a broken
 
 1. `--setting-sources project,local` is not passed to `claude -p`. The four skills in this
    repo are installed at *user* scope, so they mask the injected candidate command and every
-   positive scores 0. Measured: adr/opus 0/30.
+   positive scores 0. Measured: 0/30 on opus.
 2. A trigger is counted only when the session picks the *calling worker's own* candidate
    (`<skill>-skill-<uuid>`). Every worker writes its own copy into the same
    `.claude/commands/`, so with `--num-workers 10` the session sees ten identical candidates
@@ -22,9 +22,9 @@ and the corresponding patch should be dropped rather than forced.
 Usage (from the repo root):
 
     ./eval-tools/run_trigger_eval.py \
-        --eval-set adr-workspace/trigger-evals/trigger_eval.json \
-        --skill-path adr/skills/adr \
-        --model haiku -o adr-workspace/trigger-evals/some-run.json
+        --eval-set design-doc-workspace/trigger-evals/trigger_eval.json \
+        --skill-path design-doc/skills/design-doc \
+        --model haiku -o design-doc-workspace/trigger-evals/some-run.json
 
 It also defaults `--num-workers` to 1, against upstream's 10. Concurrency is an experimental
 variable here, not a speed knob: it depresses the trigger rate specifically for queries that
@@ -138,8 +138,8 @@ def summarize(result: dict) -> int:
         print(
             f"\n  WARNING: aggregate {hits}/{runs} with a per-query ceiling of "
             f"{max(distribution)}/{runs_per_query}. This is the degraded-sweep signature —\n"
-            "  discard this sweep instead of pooling it, and re-run. Canary: adr/opus on its\n"
-            "  own set has scored 14-20/30 across healthy sweeps.",
+            "  discard this sweep instead of pooling it, and re-run. Canary: on opus every skill\n"
+            "  scores 98-100% on its own positives in a healthy serial sweep.",
             file=sys.stderr,
         )
         return 9
@@ -165,8 +165,8 @@ def main() -> int:
             f"\n  WARNING: --num-workers {args.num_workers}. Concurrency depresses the trigger\n"
             "  rate, and not evenly — the penalty lands on queries that make the session read\n"
             "  the repository before it can act. Measured on the structurizr set: 60% at ten\n"
-            "  workers against 78% serially, while adr barely moved, manufacturing a 21pp gap\n"
-            "  between the two skills that does not exist. Treat this run as a smoke test: do\n"
+            "  workers against 78% serially, manufacturing a 21pp gap against another skill that\n"
+            "  does not exist. Treat this run as a smoke test: do\n"
             "  not quote it, and do not table it beside a serial number.\n",
             file=sys.stderr,
         )
