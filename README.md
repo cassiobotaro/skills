@@ -8,6 +8,8 @@ Agent skills for software architecture documentation: design docs and diagrams. 
 | `structurizr` | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl) (`workspace.dsl`): system context, container, component, deployment, and dynamic diagrams. |
 | `mermaid-sequence` | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced ```` ```mermaid ```` code blocks that render directly in Markdown (GitHub, GitLab, most wikis). |
 
+**Record, don't invent.** Every skill documents only what you or your repository established — no invented metrics, technologies, relationships, endpoints, or failure paths. When a request is too vague to fill honestly, the skill asks a few targeted questions (batched, in the conversation language) instead of guessing, and those questions are the deliverable: a gap gets asked about, a fabrication gets believed.
+
 ## Installation
 
 | Host | Install with | Without Docker |
