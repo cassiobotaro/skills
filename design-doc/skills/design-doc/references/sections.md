@@ -4,7 +4,9 @@ This catalog applies when no template governs the document. A user-supplied temp
 or the structure the repository's design docs already follow — takes precedence: its
 sections are required content, filled by asking the user for what's missing, never
 swapped for the catalog below. (The per-section questions here still help: reuse them
-for whichever template sections they match.)
+for whichever template sections they match.) In a review, neither the template nor this
+catalog is a checklist: read the sections the author wrote, and use an entry here only
+to phrase a suggestion the document's own content calls for.
 
 Within the catalog, the order below is a sensible default order for the document
 itself. None of these sections is mandatory — each entry explains what the section

@@ -70,7 +70,9 @@ the document under review.
    a ceiling: when the user gives you substance the template has nowhere to put — goals,
    alternatives they weighed — add the section rather than dropping what they said, but
    keep the house skeleton and its order intact and tell the user you stepped outside
-   the pattern, so the deviation is theirs to accept.
+   the pattern, so the deviation is theirs to accept. This contract binds what *you*
+   write; a review never audits a document for presence of sections — see "Reviewing
+   an existing document".
 
 4. **Follow the document's context.** When reviewing, keep the document's existing
    language, structure, and voice — improve the doc the author wrote, don't replace it
@@ -184,20 +186,28 @@ Before declaring done, check:
 ### 1. Read the whole document, then establish the governing template
 
 Identify its structure, language, intended audience, and current state before judging
-anything. Then settle which template the review measures against — the answer decides
-what counts as a gap versus a suggestion (contract 3). Unless the user already supplied
-a template, always ask them for a reference to one: templates normally live in wikis and
-shared drives, not in the repository, so what the repo shows (or doesn't) is a hint,
-never the answer. Put the question among the review's questions for the author; it costs
-one line, while measuring against the wrong yardstick costs the review. Other design docs
-in the repository can corroborate a house structure meanwhile, but the user's answer
-wins. Until a template is confirmed — or when the user confirms there is none — the
-default catalog below is the yardstick and structural findings are suggestions. Either
-way the review improves *this* document, in the author's own structure and voice
-(contract 4), even where they differ from what the template or the catalog would
-prescribe.
+anything. Then learn which template the house uses, so a suggestion can be phrased in
+its terms and the author knows where it would land. Unless the user already supplied a
+template, ask them for a reference to one: templates normally live in wikis and shared
+drives, not in the repository, so what the repo shows (or doesn't) is a hint, never the
+answer. Put the question among the review's questions for the author; it costs one
+line. Other design docs in the repository can corroborate a house structure meanwhile,
+but the user's answer wins. Until a template is confirmed — or when the user confirms
+there is none — the default catalog below supplies the vocabulary for suggestions. The
+template is context, never a checklist: with or without one, the review improves *this*
+document, in the author's own structure and voice (contract 4), even where they differ
+from what the template or the catalog would prescribe.
 
 ### 2. Assess it as a reviewer would
+
+Review what is on the page. Every finding comes from reading the sections the author
+wrote — never from comparing the document's headings against a template or the catalog
+and listing what is absent. A section that isn't there is not a finding; a section that
+is there and says something weak, unsupported, or one-sided is. When the content you
+read reveals that a section *would* help — the design touches three other teams and
+nothing gives them a place to review; a rollout is described in passing but never
+planned — suggest it, tied to that content, phrased as a suggestion and never as a
+missing requirement.
 
 Look for, roughly in order of importance:
 
@@ -215,13 +225,11 @@ Look for, roughly in order of importance:
   terms, the doc's own diagram tooling — flag them for removal), inlined detail that
   should be a link, a stale header state, passive or evasive prose that hides who
   does what, and spelling slips.
-- **Template gaps** — required sections the governing template demands but the
-  document lacks: substance gaps, asked of the author exactly like a missing
-  trade-off.
-- **Sections that would add clarity** — when no template governs, drawn from the
-  default catalog and framed as suggestions tied to this document's content ("the
+- **Sections that would add clarity** — only when the existing content calls for one,
+  named in the house template's terms when a template is known and the catalog's
+  otherwise, and always framed as a suggestion tied to this document's content ("the
   migration touches three other teams; a cross-cutting concerns section would give
-  them a place to review").
+  them a place to review"). Never a bare "the template requires X and it is missing".
 
 ### 3. Present findings, then apply
 
