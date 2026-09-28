@@ -117,8 +117,8 @@ Relationships
 
 Structurizr-specific additions
 - [ ] DSL validates cleanly (`structurizr/structurizr validate` via Docker)?
-- [ ] No legacy keywords (`enterprise`, `!extend`, `!ref`, `branding`, plural `themes`,
-      `dashed true`)?
+- [ ] No removed/deprecated keywords (`enterprise`, `!extend`, `!ref`, `branding`,
+      `location`, `dashed true`)?
 - [ ] View keys stable and descriptive?
 - [ ] `configuration { scope … }` matches the workspace type?
 - [ ] Dynamic-view steps all backed by model relationships?

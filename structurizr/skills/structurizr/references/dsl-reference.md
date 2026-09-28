@@ -20,7 +20,10 @@ when the task needs them.
 - Keywords case-insensitive; quotes required only for values with spaces.
 - **Opening `{` must end its statement's line; closing `}` sits alone on its line.**
 - Comments `//`, `#`, `/* … */`; line continuation with trailing `\`.
-- Constants: `!const NAME value`, referenced as `${NAME}`.
+- Skip an earlier optional argument with an empty string: `container "DB" "" "PostgreSQL"`.
+- Constants and variables: `!const NAME value` (immutable) / `!var NAME value`
+  (reassignable), names `a-zA-Z0-9-_.`, referenced as `${NAME}`. `${NAME}` also resolves
+  environment variables; an unknown name is left as-is, silently.
 - **No forward references** — define an element before naming it in a relationship.
   Workaround: inside the source element's block, `-> x "Uses"` (implicit `this`).
 
@@ -56,8 +59,8 @@ Nesting: persons/systems in `model`; containers in a softwareSystem; components 
 container. Default tags: `Element` plus `Person` / `Software System` / `Container` /
 `Component`.
 
-Inside any element body: `description "…"`, `technology "…"`, `tags "T1" "T2"`,
-`url https://…`, `properties { "name" "value" }`.
+Inside any element body: `description "…"`, `technology "…"`, `tags "T1" "T2"` (also
+`tags "T1,T2"` or singular `tag "T1"`), `url https://…`, `properties { "name" "value" }`.
 
 ## 3. Relationships
 
@@ -78,9 +81,12 @@ group "Team A" {
 }
 ```
 
-Valid at model level, inside systems, inside containers. Nested groups need
+Valid at model level, inside systems, inside containers, inside deployment nodes. A group
+only holds elements of one abstraction level. Nested groups need
 `properties { "structurizr.groupSeparator" "/" }` at the top of `model`. Style targets:
-`element "Group"`, `element "Group:Team A"`, `element "Group:Parent/Child"`.
+`element "Group"`, `element "Group:Team A"`, `element "Group:Parent/Child"`. A component
+can also name its group as a property: `component "X" { group "Name" }`. Groups carry no
+identifier and `!identifiers hierarchical` does not apply to them.
 
 **LEGACY:** `enterprise { }` and `location` were removed — use groups.
 
@@ -121,7 +127,7 @@ production = deploymentEnvironment "Production" {
 | infrastructureNode | `infrastructureNode <name> [description] [technology] [tags]` |
 | instanceOf | `instanceOf <identifier> [deploymentGroups] [tags]` — generic; the classic `containerInstance <id>` / `softwareSystemInstance <id>` forms are equally valid |
 | deploymentGroup | `<id> = deploymentGroup <name>` — isolates instance wiring per copy; assign per instance (`containerInstance api grp`) or once on a node (`deploymentGroup grp` inside the `deploymentNode` block, applying to everything beneath it) |
-| healthCheck | `healthCheck <name> <url> [interval] [timeout]` (in an instance block) |
+| healthCheck | `healthCheck <name> <url> [interval] [timeout]` (in an instance block; interval in seconds, default 60; timeout in ms, default 0) |
 
 `instances` takes a count (`instances 2`) or range (`"1..N"`). Relationships between
 instances are inherited from the model. An instance can carry an identifier
@@ -156,16 +162,27 @@ layout. (filtered/custom/image views: see `dsl-advanced.md`.)
 View body:
 
 ```
-include <*|id|expression> …
+include <*|*?|id|expression> …
 exclude <id|expression> …
 autoLayout [tb|bt|lr|rl] [rankSeparation] [nodeSeparation]   // defaults: tb 300 300
 title <text>
 description <text>
 default                       // marks the default view
+animation {                   // one line of identifiers per animation step
+    <id> [id…]
+    <id> [id…]
+}
+properties { "name" "value" }
 ```
 
+`*?` (reluctant wildcard; context/container/component views only) includes the same
+elements as `*` but only relationships to/from the elements in scope — handy when the
+outside systems talk to each other and clutter the view.
+
 **Dynamic views** — each line is an ordered step, and **must be backed by a model
-relationship** between the two elements (description may be overridden per step):
+relationship** between the two elements (description and technology may be overridden
+per step). A step can also name an identified relationship instead of a pair:
+`rel1 "Description"`.
 
 ```
 dynamic s "Feature" {
@@ -190,14 +207,21 @@ systems it depends on) — to show another system's containers, name them
 
 ```
 ->id   id->   ->id->                       // element + incoming/outgoing/both relationships
+element==->id   element==id->   element==->id->   // same, but id may also be a group
 element.type==<Person|SoftwareSystem|Container|Component|DeploymentNode|InfrastructureNode|ContainerInstance>
 element.parent==<id>      element.tag==<tag>[,tag]      element.tag!=<tag>
+element.technology==<t>   element.technology!=<t>
+element.group==<name>     element.properties[<name>]==<value>
 *->*   id->*   *->id                       // relationships
-relationship.tag==<tag>   relationship.source==<id>   relationship.destination==<id>
+relationship==id->id      relationship.tag==<tag>[,tag]   relationship.tag!=<tag>
+relationship.source==<id> relationship.destination==<id>
+relationship.properties[<name>]==<value>
 ```
 
-Combine with `&&`/`||`: `include "element.type==Container && element.parent==s"`.
-Exclude a relationship: `exclude "u -> s.api"`.
+Combine with `&&`/`||`: `include "element.type==Container && element.parent==s"`. Quote
+any expression containing whitespace. Relationship expressions only act on elements
+already in the view. Exclude a relationship: `exclude "u -> s.api"` (`*` allowed on
+either side).
 
 ## 9. Styles
 
@@ -211,25 +235,44 @@ styles {
         stroke <#rrggbb|name>   strokeWidth <1-10>
         fontSize <int>   border <solid|dashed|dotted>   opacity <0-100>
         metadata <true|false>   description <true|false>
+        properties { "name" "value" }
     }
     relationship "<tag>" {
         thickness <int>   color <#rrggbb|name>
-        style <solid|dashed|dotted>      // modern; LEGACY: dashed true|false
-        routing <Direct|Orthogonal|Curved>
+        style <solid|dashed|dotted>      // modern; REMOVED: dashed true|false
+        routing <Direct|Orthogonal|Curved>   jump <true|false>
         fontSize <int>   width <int>   position <0-100>   opacity <0-100>
+        properties { "name" "value" }
     }
+    light { element … relationship … }   // styles for light mode only
+    dark  { element … relationship … }   // styles for dark mode only
 }
 ```
 
-Styles match by tag — tag elements (`tags "Database"`) and style the tag. ADR status
-styling: `element "Decision:<Status>"` (literal status string, no fixed enum). Element
-styles render fully in Structurizr; PlantUML/Mermaid exports support a subset.
+Styles match by tag — tag elements (`tags "Database"`) and style the tag. `colour` is an
+alias of `color`. ADR status styling: `element "Decision:<Status>"` (literal status
+string, no fixed enum). Element styles render fully in Structurizr; PlantUML/Mermaid
+exports support a subset.
+
+**Terminology** (in `views`) renames the C4 vocabulary in rendered diagrams:
+
+```
+terminology {
+    person <term>   softwareSystem <term>   container <term>   component <term>
+    deploymentNode <term>   infrastructureNode <term>   relationship <term>
+    metadata <square|round|curly|angle|double-angle|none>
+}
+```
 
 ## 10. Themes
 
 ```
-theme <installed-name|url|file>     // repeatable, one per line
+theme <installed-name|url|file>     // repeatable, one per line (house style)
+themes <a> [b] …                    // also valid; leave it alone in existing files
 ```
+
+A name must be installed; a URL is loaded when rendering; a file is inlined into the
+workspace.
 
 **Prefer installed theme names** — the `structurizr/structurizr` image bundles them at
 `/usr/local/structurizr-themes` (verified): `amazon-web-services-2025.07`,
@@ -239,12 +282,12 @@ theme <installed-name|url|file>     // repeatable, one per line
 `-e STRUCTURIZR_THEMES=/usr/local/structurizr-themes` on `validate`/`export` runs.
 
 Avoid `https://static.structurizr.com/themes/...` URLs: the Structurizr cloud service
-reaches end-of-life on 2026-09-30 and they will stop resolving.
+is being retired (the docs list it under "End of life") and those URLs depend on it.
 
 Tag elements with the theme's tag names (e.g. `tags "Amazon Web Services - RDS"`) for
 icons. Local `styles` combine with themes.
 
-**LEGACY:** `themes a b c` (plural), `theme default`, and `branding { }` (removed in v6).
+**REMOVED:** `theme default` and `branding { }` (gone in v6).
 
 ## 11. Documentation and ADRs
 
@@ -259,12 +302,15 @@ Valid at workspace, softwareSystem, and container scope; path relative to the DS
 
 ## 12. Implied relationships, !include
 
-- `!impliedRelationships <true|false>` — default **true**: `user -> s.api` also implies
-  `user -> s`. Leave it on. **Only one implied relationship is created per element pair**
-  (the first defined): two `user -> s.api` lines with different labels give the context
-  view a single arrow with the first label. Prefer one relationship whose label
-  summarizes ("Browses and purchases using") and put the specifics in dynamic-view steps;
-  if both arrows must show, define the parent-level relationships explicitly too.
+- `!impliedRelationships <true|false|fqcn>` — default **true**: `user -> s.api` also
+  implies `user -> s`. Leave it on. With the default strategy **only one implied
+  relationship is created per element pair** (the first defined): two `user -> s.api`
+  lines with different labels give the context view a single arrow with the first label.
+  Prefer one relationship whose label summarizes ("Browses and purchases using") and put
+  the specifics in dynamic-view steps. If both arrows must show, switch strategy:
+  `!impliedRelationships com.structurizr.model.CreateImpliedRelationshipsUnlessSameRelationshipExistsStrategy`
+  (implies unless the *same* relationship exists), rather than duplicating parent-level
+  relationships by hand.
 - `!include <file|directory|url>` — textually inlines DSL fragments (monorepo pattern:
   see `modeling-patterns.md`).
 
@@ -273,11 +319,14 @@ Valid at workspace, softwareSystem, and container scope; path relative to the DS
 ```
 configuration {
     scope <softwaresystem|landscape|none>
+    visibility <private|public>         // server/cloud only
+    users { <username> <read|write> }   // server/cloud only
+    properties { "name" "value" }
 }
 ```
 
 `scope softwaresystem` for one-system workspaces; `scope landscape` for landscape
-workspaces (these must not define containers).
+workspaces (these must not define containers). Only `scope` matters for local use.
 
 ## 14. Defaults and gotchas
 

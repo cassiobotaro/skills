@@ -52,16 +52,19 @@ asked about, the fabrication gets believed.
    Ask the user the 2–4 questions that actually decide the case (ownership, deploy unit,
    runs-or-stores) instead of guessing. Don't ask what you can verify yourself in the repo.
 
-3. **Modern syntax only** (Structurizr DSL v6+). Never emit these legacy/removed keywords:
+3. **Modern syntax only** (Structurizr DSL v6+). Never emit these removed or deprecated
+   keywords:
 
    | Never write | Write instead |
    |---|---|
-   | `enterprise { }` | `group "Name" { }` |
-   | `!extend`, `!ref` | `!element` / `!relationship` (and `!elements` / `!relationships`) |
+   | `enterprise { }` (removed) | `group "Name" { }` |
+   | `!extend`, `!ref` (deprecated) | `!element` / `!relationship` (and `!elements` / `!relationships`) |
    | `branding { }` (removed in v6) | themes |
-   | `themes a b` (plural list) | one `theme <name-or-url>` line each |
-   | `dashed true` / `dashed false` in styles | `style solid`, `style dashed`, or `style dotted` |
-   | `location` on person/system | `group` + tags |
+   | `dashed true` / `dashed false` in styles (removed) | `style solid`, `style dashed`, or `style dotted` |
+   | `location` on person/system (removed) | `group` + tags |
+
+   House style, not a language rule: write one `theme <name-or-url>` line per theme. The
+   plural `themes a b` is still valid DSL — leave it alone when editing a file that uses it.
 
 4. **Minimal diffs when editing.** Preserve existing identifiers, naming style, ordering,
    styles, and view keys; add what was asked and nothing else. Renaming elements or view keys

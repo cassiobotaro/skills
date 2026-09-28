@@ -51,7 +51,7 @@ workspace extends <file|url> {
 - `!elements <expression> { … }` / `!relationships <expression> { … }` apply changes in
   bulk, with `this` bound to each match. Useful e.g. for
   `!elements "element.parent==a" { this -> logging "Sends logs to" }`.
-- **LEGACY:** `!extend` and `!ref` — superseded by `!element`/`!relationship`.
+- **DEPRECATED:** `!extend` and `!ref` — superseded by `!element`/`!relationship`.
 
 ## 3. Filtered, custom, and image views
 
@@ -59,7 +59,9 @@ workspace extends <file|url> {
 filtered <baseKey> <include|exclude> <tags> [key] [description]
 custom [key] [title] [description] { … }        // for custom `element` types only
 image <*|element-id> [key] {
-    <plantuml|mermaid|kroki <format>|image> <file|url>
+    <plantuml|mermaid> <file|url|viewKey>    // viewKey: render another view of this workspace
+    kroki <format> <file|url>
+    image <file|url>
     title <text>
 }
 ```
@@ -74,8 +76,10 @@ base view from the diagram list** (by design), so to keep the full picture avail
 
 Image views from a Mermaid/PlantUML source need a renderer configured in `views`:
 `properties { "mermaid.url" "https://mermaid.ink" "mermaid.format" "svg" }` (PlantUML:
-`"plantuml.url"` / `"plantuml.format"`) — otherwise the view is an empty box. A static
-PNG/SVG needs nothing.
+`"plantuml.url"` / `"plantuml.format"`; Kroki: `"kroki.url"` / `"kroki.format"`) —
+otherwise the view is an empty box. The public renderers send the diagram source to a
+third party and may lack the CORS headers image views need; prefer a local instance. A
+static PNG/SVG needs nothing.
 
 ## 4. Perspectives
 

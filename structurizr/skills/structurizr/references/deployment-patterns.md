@@ -106,8 +106,8 @@ views {
 }
 ```
 
-Use bundled theme names (dsl-reference §10) — `static.structurizr.com` URLs die with the
-cloud EOL on 2026-09-30.
+Use bundled theme names (dsl-reference §10) — the Structurizr cloud service is being
+retired, and `static.structurizr.com` theme URLs depend on it.
 
 ## 3. Serverless functions (AWS Lambda and kin)
 
