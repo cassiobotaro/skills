@@ -137,6 +137,14 @@ substance is missing.
   design doc exists to pin down. Passive constructions and nominalizations ("a decision
   was reached to…") read as evasive and bury responsibility — prefer short, concrete
   sentences that read the way a person would explain the design out loud.
+- **Keep the typography plain.** Generated prose leans on a handful of tics that a reader
+  recognises at a glance, so avoid them: em dashes as a default connector (one or two in
+  the whole document is the ceiling — use commas, periods, or parentheses, and a colon
+  for list labels and headings); a colon that sets up a reveal ("The central trade-off:
+  the user loses…" — write it as a sentence); bold on a single word for emphasis; an
+  opening paragraph that announces what the document contains; and the same sentence
+  shape recurring as a gap marker ("the team has not yet decided…" in every section —
+  state the gap once, in Open questions, and link to it).
 - The design is not one section but a **series** of sections — the solution overview
   first, then only the details that earn their place. `references/sections.md` holds the
   menu and the two tests (longevity, freedom) for whether a detail belongs in the
@@ -160,6 +168,9 @@ Before declaring done, check:
 - Every diagram is followed by explanatory text.
 - The prose reads in plain, active language — no sentence hides its actor behind the
   passive, no decision floats without an owner.
+- Typography sweep: count the em dashes (one or two at most), and look for colon
+  reveals, emphasis bold, a "this document covers…" paragraph, and a gap-marker
+  sentence repeated across sections.
 - Acronyms and domain terms are defined. If the doc carries a glossary, sweep the
   finished body for stray acronyms — the short ones hide in tables and alternative
   names — and apply the two exclusions from `references/sections.md` §Glossary: terms
