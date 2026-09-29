@@ -1,0 +1,126 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "outputs/docs/design/exportacao-de-relatorios-em-background.md exists (220 lines, full design doc with header table, glossary, overview, context, objectives, solution with architecture and flow, trade-offs, alternatives, cross-cutting concerns, testability, open questions). response.md line 1: 'Criei o design doc em `docs/design/exportacao-de-relatorios-em-background.md`'."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire document is in Portuguese: headings 'Glossário', 'Visão geral', 'Contexto', 'Objetivos', 'A solução', 'Arquitetura', 'Fluxo de uma exportação', 'Dados e sensibilidade', 'Trade-offs da solução escolhida', 'Alternativas consideradas', 'Preocupações transversais', 'Questões em aberto'; diagram labels and Mermaid messages in Portuguese."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Trade-offs section, line 177: '✗ O usuário perde o download imediato. Exportações pequenas, que hoje chegam na hora, passam a chegar por e-mail. O time aceitou esse custo em troca do caminho único.' Also line 25 (overview) and line 46 ('O usuário perde o download imediato que hoje tem nas exportações pequenas')."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "Section 'Alternativas consideradas' (lines 183-189): '**Não fazer nada.** ... Descartada.', '**Gerar síncrono com timeout maior.** ... apenas empurra o problema ... Descartada.', '**Usar uma ferramenta de BI externa.** Descartada por dois motivos: o custo da ferramenta e a exposição de dados de cliente a um terceiro.', and the chosen option '**Enfileirar um job e gerar em um worker separado (escolhida).**'."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "Section 'Preocupações transversais' with '### Plataforma (fila compartilhada)' (line 195: 'Os jobs de exportação entram no RabbitMQ que a infraestrutura já opera e que outros consumidores compartilham. O time de Plataforma precisa avaliar a carga...') and '### Segurança (link assinado com PII)' (line 199: 'Arquivos com PII passam a existir no S3 e a ser acessíveis por link assinado enviado por e-mail. O time de Segurança precisa revisar a validade do link, a retenção...'). Both teams listed as reviewers in the header (line 9)."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": true,
+      "evidence": "'## Glossário' is the first section after the header (line 14), with entries Gateway, Link assinado, PII, Streaming. No entries for API, HTTP, URL (URL appears only inside the definition text of 'Link assinado') and none for C4, DSL or Structurizr. Note: BI and S3, both used in the doc, have no entry; the assertion lists them only as examples ('e.g.'), so this is a weakness, not a failure."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "C4 image (line 50) + folded DSL (lines 52-125) is followed by 'O sistema de exportação tem quatro containers:' with a bullet per container (lines 127-132) and a paragraph explaining the generic e-mail system and the blank technology slots (line 134). Mermaid sequence (lines 138-161) is followed by a step-by-step walkthrough ('Nos passos 1 a 3 a API recebe o pedido...', line 163) and a happy-path caveat (line 165)."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Numeric grep over the doc finds only: '30 segundos' (lines 16, 23, 29, 173), '12%' (30, 183, 205), '50 mil' (30, 38, 183, 205), '100 mil' (38, 183, 206, 211), 'toda semana' (31) — all from the prompt — plus today's date 2026-09-28 in the header, hex colours in the DSL styles, and list/step numbers. Header Autores 'a preencher', reviewers 'nomes a confirmar'. Data source, technology, e-mail mechanism, API response, link validity, retention, failure handling, queue isolation, scope, rollout are all in 'Questões em aberto' (lines 210-219). One inferred detail is not a metric: the upload to S3 is described as 'também em streaming' (lines 44, 154, 163, 176), which the prompt states only for generation; it does not introduce a value."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'## Visão geral' has exactly two paragraphs (lines 23 and 25). Paragraph 1: 'Hoje a API gera os relatórios exportados dentro da própria request, e as exportações grandes estouram o timeout de 30 segundos do gateway. Este documento propõe tirar a geração do caminho da request: a API passa a enfileirar um job no RabbitMQ, um worker separado gera o CSV/XLSX em streaming e envia o arquivo para o S3, e o usuário recebe por e-mail um link assinado para baixar o arquivo quando a exportação termina.' Paragraph 2: 'Em troca, toda exportação passa a ser assíncrona, inclusive as pequenas que hoje funcionam na hora. O time aceitou esse custo para ter um único caminho de exportação.' Names RabbitMQ and S3 (allowed) with no schemas, payloads, endpoints, retry policies or config values."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": true,
+      "evidence": "Technologies named anywhere in the doc: RabbitMQ, S3/Amazon S3, CSV/XLSX, e-mail, link assinado, API, (API) gateway, worker, bucket — all in the prompt. DSL technology slots: 'RabbitMQ' (fila, line 65), 'Amazon S3' (bucket, line 69); API (line 64) and worker (line 68) have no technology slot, and line 134 plus open question 3 ('Qual é a tecnologia da API e do worker? O diagrama deixa esses campos vazios de propósito') raise it. Relationship labels (lines 78-84) and Mermaid messages carry no protocol (no HTTPS/AMQP/SMTP/REST). E-mail sender is a generic 'Serviço de e-mail' external system with open question 4 ('serviço que a plataforma já tem ou provedor externo?'). Grep for PostgreSQL/MySQL/Redis/HTTPS/AMQP/SES/SMTP/SendGrid/Kafka/SQS/REST/JSON/gRPC/JWT/TLS/OAuth returns no real matches (only substrings of Portuguese words)."
+    }
+  ],
+  "summary": {
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "note": "No metrics.json or transcript available; only outputs, response.md and timing.json were provided.",
+    "total_tokens": 111795,
+    "output_chars": 230084,
+    "output_files": [
+      "outputs/docs/design/exportacao-de-relatorios-em-background.md",
+      "outputs/docs/design/diagrams/arquitetura-containers.svg"
+    ]
+  },
+  "claims": [
+    {
+      "claim": "The DSL passed structurizr/structurizr validate and the SVG was generated from it by exporting to Mermaid and rendering with minlag/mermaid-cli",
+      "type": "process",
+      "verified": true,
+      "evidence": "The SVG at outputs/docs/design/diagrams/arquitetura-containers.svg (219 KB, embeds a base64 font) contains Mermaid generator markers (2 'mermaid' occurrences) and the title 'Container View: Exportação de relatórios'; the validate exit code cannot be verified without a transcript."
+    },
+    {
+      "claim": "The Mermaid sequence diagram also passed minlag/mermaid-cli; nothing left the machine",
+      "type": "process",
+      "verified": false,
+      "evidence": "No transcript available; the Mermaid block parses by inspection but the validator run and the locality claim cannot be confirmed."
+    },
+    {
+      "claim": "The rendered SVG matches the DSL folded in the document",
+      "type": "factual",
+      "verified": true,
+      "evidence": "SVG text nodes contain 'Fila de exportação' (singular), 'Serviço de e-mail', 'Bucket de exportações', '[Container: Amazon S3]', '[Container: RabbitMQ]', 'Envia o arquivo gerado, em streaming, para', 'Envia o e-mail com o link assinado por meio de', 'Solicita a exportação de um relatório em' — exactly this run's DSL — and none of the with_skill run's distinct phrases ('Fila de exportações', 'Envio de e-mail', 'Sobe o arquivo')."
+    },
+    {
+      "claim": "The worker uploads the file to S3 'também em streaming'",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The prompt says 'o worker gera o CSV/XLSX em streaming e sobe pro S3'; streaming is stated for generation, the streaming upload is an extrapolation (lines 44, 154, 163, 176, DSL relationship label line 81). Not a technology or metric, so it does not fail an assertion, but it is a design detail the user did not state."
+    },
+    {
+      "claim": "The repository had no design doc, so the default section catalog was used",
+      "type": "process",
+      "verified": true,
+      "evidence": "Eval setup states the repository was empty; consistent."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Data source for the worker, failure handling, link validity and retention, queue isolation, scope, authors/reviewers — listed in response.md as the gaps that most change the design"
+    ],
+    "needs_review": [
+      "Security: link validity and file retention; Platform: dedicated queue and isolation from other consumers"
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3)...",
+        "reason": "Both runs pass while omitting BI and S3, both of which the doc uses. If those are meant as required coverage rather than examples, the assertion should say so; as written it only discriminates on the negative constraints."
+      },
+      {
+        "reason": "No assertion checks that the C4 image referenced by the doc exists on disk and matches the folded DSL. This run rendered a correct SVG, but a run that wrote the image reference and DSL without rendering (or rendered a stale DSL) would score identically."
+      },
+      {
+        "reason": "The 'no invented facts' assertion is scoped to metrics, so an inferred design detail like 'upload também em streaming' (stated as fact in prose, the Mermaid flow and a DSL relationship label) is not caught. An assertion on unflagged design extrapolations would discriminate here."
+      }
+    ],
+    "overall": "Assertions are satisfied with genuine content. The glossary and diagram assertions could be tightened to check coverage and DSL-to-image consistency; the streaming-upload extrapolation is the one 'record, don't invent' slip no assertion covers."
+  },
+  "svg_note": "The old_skill SVG (mermaid-cli render, 219 KB) contains exactly this run's DSL element and relationship names: 'Fila de exportação' (singular), 'Serviço de e-mail', 'Bucket de exportações [Container: Amazon S3]', 'Envia o arquivo gerado, em streaming, para', 'Envia o e-mail com o link assinado por meio de', 'Solicita a exportação de um relatório em'. None of the with_skill run's distinct phrases appear. No cross-contamination from the shared scratch directory."
+}

@@ -74,11 +74,10 @@ the same view alongside it: that leaves two diagrams to keep in step, and they d
 
 The image in that slot is a real **PNG or SVG** rendered from the Structurizr DSL — not a
 Mermaid block. Turning a C4 model into an image is the `structurizr` skill's domain, so
-when that skill (or its tooling) is available, lean on it: the `structurizr/structurizr`
-Docker image's `export` produces PlantUML/DOT/Mermaid that a renderer turns into PNG/SVG,
-and its preview UI exports PNG/SVG directly — the `structurizr` skill's hand-off carries
-the commands. (Never `structurizr/lite`; it is deprecated.) Save the result under the
-doc's `diagrams/` folder so the image reference resolves to the file you generated.
+when that skill (or its tooling) is available, lean on it: the Structurizr CLI/Docker
+`export` produces the picture (a static PNG/SVG, or PlantUML/DOT that a PlantUML renderer
+turns into PNG/SVG), and the Structurizr Lite UI exports the same. Save the result under
+the doc's `diagrams/` folder so the image reference resolves to the file you generated.
 
 Rendering and validation are both best-effort. Validate the DSL when the tooling is there
 and fix what it reports; but when an exporter, renderer, or validator is missing or

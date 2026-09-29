@@ -1,0 +1,123 @@
+{
+  "expectations": [
+    {
+      "text": "The review asks the author for a template reference before judging structure — since the user supplied none and templates normally live outside the repository, the question always goes to the author instead of treating the repo's silence as the answer",
+      "passed": true,
+      "evidence": "response.md, question 1: 'Template da casa. O time segue algum modelo de design doc (wiki, drive)? Se sim, me passa a referência: as sugestões abaixo ficam mais úteis nos termos dele. Se não existe, tudo bem, sigo com o vocabulário padrão.' The section suggestions are explicitly deferred until this is answered ('Com as respostas dos itens 4, 5 e 8, cabem seções...')."
+    },
+    {
+      "text": "The review does not audit section presence: it never lists sections as findings merely because a template or the skill's catalog would have them; any section it proposes is tied to content already in the document and framed as a suggestion, not a requirement",
+      "passed": true,
+      "evidence": "No finding is of the form 'section X is missing'. The only proposed sections appear at the end of the questions block, each tied to a concrete gap already discussed ('Solução ... não apresenta nenhum ponto negativo', 'O documento vai do problema direto para a solução') and explicitly framed: 'Sugiro porque o conteúdo pede, não porque falta um título.' The two sections actually added to the doc (Glossário, Contexto) are a restructuring of text the author already wrote, not empty catalog sections."
+    },
+    {
+      "text": "The reply separates findings into questions for the author versus edits applied",
+      "passed": true,
+      "evidence": "response.md has two headed blocks: '## Perguntas para você' (items 1–8) and '## O que já apliquei' (glossary, overview/context split, diagram prose, date, diagram kept), closing with an explicit list of what was not touched ('Não mexi em Objetivos, Fora de escopo, na frase de abertura da Solução nem no Plano')."
+    },
+    {
+      "text": "Missing trade-offs and alternatives become questions to the author — the edited doc gains no fabricated cons, alternatives, or metrics",
+      "passed": true,
+      "evidence": "Questions 4 ('O que fica pior ou mais caro com o fanout... Há algum dado que sustente as afirmações') and 5 ('O que mais foi considerado ... e por que perdeu?') go to the author. Diff of outputs/docs/design/fanout-de-notificacoes.md against the original shows only: date change, Glossário, Visão geral/Contexto split, and a four-step description of the existing diagram. No trade-off, alternative, number, percentage or latency figure was added; grep for %, ms, segundos, benchmark returns nothing in the doc."
+    },
+    {
+      "text": "A glossary is added or suggested at the BEGINNING of the document covering DLQ, TPS, CDC and SLA",
+      "passed": true,
+      "evidence": "Edited doc lines 10–18: '## Glossário' immediately after the header table and before 'Visão geral', with entries for CDC, DLQ, Exchange, Fanout, Provider, SLA and TPS."
+    },
+    {
+      "text": "The architecture diagram — whichever notation it ends up in, since the skill's convention replaces a hand-drawn Mermaid architecture with Structurizr DSL — is followed by explanatory prose, and no diagram is left orphaned",
+      "passed": true,
+      "evidence": "The Mermaid flowchart is kept and immediately followed by 'O fluxo do diagrama tem quatro etapas:' with a numbered list (Ingestão, Roteamento, Entrega, Falhas). The reply explains why the Structurizr conversion was deferred: 'Sem saber as tecnologias, o diagrama teria caixas vazias e não ajudaria.'"
+    },
+    {
+      "text": "The out-of-scope items are no longer mere negations of goals: either rewritten honestly in the document, or explicitly raised to the author as a question in the reply",
+      "passed": true,
+      "evidence": "Doc section left untouched (reviewer states this explicitly), and question 3 raises it: 'Os dois itens só negam os objetivos (\"não deve ser lento\", \"não deve perder notificações\") e não excluem nada. O que alguém poderia esperar deste trabalho e vocês decidiram não fazer agora ...? E \"não perder notificações\" é na verdade um requisito? Se for, ele pertence aos Objetivos.'"
+    },
+    {
+      "text": "Vague goals ('melhorar a performance', 'garantir o SLA') are flagged as unmeasurable and the author is asked for numbers — no invented targets",
+      "passed": true,
+      "evidence": "Question 2: '\"Começou a apresentar lentidão\" e os três objetivos (performance, escalável, SLA) não têm como ser verificados. Qual é o volume e a latência hoje, e qual número define sucesso? E qual é o SLA de entrega ...'. The Objetivos section in the doc is byte-identical to the original; the glossary SLA entry deliberately carries no value ('A definição de SLA está genérica de propósito; o valor entra quando você responder o item 2')."
+    },
+    {
+      "text": "The edited document remains in Portuguese and preserves the author's structure and voice",
+      "passed": true,
+      "evidence": "Entire edited doc is Portuguese. Section order Visão geral → Objetivos → Fora de escopo → Solução → Plano is preserved with Glossário and Contexto inserted; Objetivos, Fora de escopo, the diagram, the Solução opening sentence and Plano are byte-identical to the original. The Contexto paragraph reuses the author's own wording ('lê a tabela `notifications` a cada minuto, monta o payload de cada canal ... chama os providers um a um')."
+    },
+    {
+      "text": "The header is honestly refreshed (Última atualização set to the real current date)",
+      "passed": true,
+      "evidence": "Diff: '-| **Última atualização** | 2026-02-10 |' → '+| **Última atualização** | 2026-09-28 |'; today's date is 2026-09-28. Other header fields (Estado, Autor, Criado em) untouched, and the reply asks whether 'Em revisão' is still accurate instead of changing it."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": true,
+      "evidence": "The edited doc names only terms present in the original (CDC, dispatcher, exchange, filas, workers, DLQ, providers, TPS, SLA, cron, tabela `notifications`, push/e-mail/in-app). grep for rabbit|kafka|debezium|sqs|sns|redis|postgres|amqp|http|grpc|broker returns nothing in the doc. The message broker and CDC tool are raised as questions (item 6: 'Qual tecnologia de mensageria? \"Exchange\" sugere uma, mas o documento não diz.' / 'CDC sobre qual fonte e com qual ferramenta?')."
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "note": "No metrics.json or transcript available for this run; only response.md and the edited doc.",
+    "output_chars": 2918,
+    "response_chars": 4815,
+    "total_tokens": 66443
+  },
+  "claims": [
+    {
+      "claim": "Nada foi inventado para preencher lacuna: onde faltava fato, ficou pergunta.",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Diff against the original shows only restructuring of existing text, a term glossary, a description of the existing diagram and the date change; every unknown (broker, CDC source/tool, TPS placement, retry policy, in-app DLQ, numbers) appears as a question in the reply."
+    },
+    {
+      "claim": "Os fatos sobre o sistema atual ... foram para uma seção nova, Contexto, sem alteração de conteúdo.",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Contexto paragraph carries the same facts as the original overview (cron a cada minuto, tabela `notifications`, payload por canal, providers um a um, lentidão com o crescimento da base). One nuance: the sentence 'Com o crescimento da base esse modelo começou a apresentar lentidão' now appears in both Visão geral and Contexto — duplicated, not lost."
+    },
+    {
+      "claim": "Texto explicativo após o diagrama ... descrevendo só o que o seu texto e o seu diagrama já diziam.",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Step 4 correctly says only push and e-mail workers route to a DLQ (matching the diagram, not the text's 'DLQ por canal'), and the discrepancy is raised as question 6. Step 1's 'no lugar da leitura da tabela `notifications` por cron' is an inference from the original's 'ingestão via CDC' plus Plano step 4 'Desligar o cron', not a new fact."
+    },
+    {
+      "claim": "O diagrama Mermaid foi mantido como está; validei que renderiza sem erro.",
+      "type": "process",
+      "verified": false,
+      "evidence": "The diagram is byte-identical to the original (verifiable). The validation claim cannot be verified: no transcript is available for this run, so there is no evidence of a mermaid-cli/Docker invocation."
+    },
+    {
+      "claim": "Última atualização ajustada para hoje (2026-09-28).",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Header row reads 2026-09-28."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The review does not audit section presence...",
+        "reason": "Both runs in this eval insert a new 'Contexto' section into the doc as an applied edit (moving existing overview text). The assertion only governs sections the review *proposes*; it is silent on sections the reviewer *adds unilaterally*. If the intended contract is 'restructuring is fine, adding catalog sections is not', the assertion should say so, otherwise a run that adds an empty 'Alternativas consideradas' heading could still argue it is an edit rather than a finding."
+      },
+      {
+        "reason": "The reply claims the Mermaid diagram was validated ('validei que renderiza sem erro'), but with no transcript captured there is no way to check whether validation actually ran or which tool was used. If validation ordering (Docker image → local mmdc → 'not validated' notice) matters for this eval, capture the transcript or add an assertion that the reply states which validator ran."
+      },
+      {
+        "reason": "No assertion checks that the reviewer respected the user's split ('aplicar direto as melhorias que não dependem de mim'). This run explicitly left the Solução opening claim untouched and turned it into a question; the sibling old_skill run deleted that sentence from the doc. Both pass every current assertion, so the eval cannot distinguish 'edit only what does not depend on the author' from 'edit whatever the reviewer judges weak'."
+      }
+    ],
+    "overall": "All 11 assertions pass on genuine evidence: the doc gains only a glossary, a restructured overview/context, diagram prose and the date, while every substantive gap is a question to the author. The assertions are discriminating on fabrication; the main blind spot is the boundary of what a reviewer may edit without the author."
+  }
+}
