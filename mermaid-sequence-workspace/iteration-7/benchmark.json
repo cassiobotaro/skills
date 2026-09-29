@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "skill_name": "mermaid-sequence",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-09-28T23:48:35Z",
+    "evals_run": [
+      1
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 93.0,
+        "tokens": 51743,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a fenced mermaid sequenceDiagram block that parses cleanly \u2014 verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+          "passed": true,
+          "evidence": "response.md lines 3-38 hold a single ```mermaid fence opening with `sequenceDiagram`. Check run: the mermaid-cli check. The block was extracted and rendered with the `minlag/mermaid-cli` Docker image, exit 0, output \"Generating single mermaid chart\". No syntax-review fallback was needed."
+        },
+        {
+          "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+          "passed": true,
+          "evidence": "All inside the mermaid block: `W->>+A: POST /v1/password-resets` (line 15); `A-->>W: 202 Accepted` (line 27); `A-->>W: 429 Too Many Requests` (line 19) followed by `Note over W,A: Retry-After: ...` (line 20); `A-)Q: publish reset_requested` / `Q-)N: reset_requested consumed` with Q declared as `participant Q as RabbitMQ` (lines 10, 25, 34); `N->>S: POST /v3/mail/send` with S declared as SendGrid and `Note over N,S: Authorization: Bearer ...` (lines 12, 35-36). The request body `{ \"email\": \"...\" }` and the 5/hour/IP limit are in the note on line 16."
+        },
+        {
+          "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+          "passed": true,
+          "evidence": "Line 18 `alt more than 5 requests/hour from this IP` contains the 429 reply and Retry-After note; line 21 `else within rate limit` contains the lookup/publish/202 path. Mutually exclusive branches of one alt."
+        },
+        {
+          "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+          "passed": true,
+          "evidence": "In the `else within rate limit` branch, after the lookup (`A->>+D: Look up user by email` / `D-->>-A: user row, or no row`) the only conditional is `opt user exists` around the publish (lines 24-26); `A-->>W: 202 Accepted` (line 27) sits outside that opt, so it happens for both lookup outcomes, and the note on line 28 reads `Always 202, whether or not the email exists,<br/>so attackers cannot enumerate emails`."
+        },
+        {
+          "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+          "passed": true,
+          "evidence": "Line 6 `actor U as User`. The two `-)` arrows are exactly the publish and consume legs: `A-)Q: publish reset_requested` (line 25) and `Q-)N: reset_requested consumed` (line 34). All HTTP calls and the DB lookup use sync `->>`."
+        },
+        {
+          "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+          "passed": true,
+          "evidence": "Every endpoint, header, status, payload field and event name in the block traces to the prompt; the unspecified Retry-After value is left as `...` (line 20); no token TTL, reset link, token field or SendGrid response code appears. `429 Too Many Requests` is the standard reason phrase for the status the prompt gave. The run explicitly declined to draw web-app replies to the user and the SendGrid response because the prompt did not give them (lines 44-47), and discloses the publish-before-202 ordering as its own choice (line 49). The only inaccuracy is a self-referential label, `opt user exists (asynchronous, after step 8)` on line 33, which should read step 7 (see claims); it is not an invented technical fact about the system."
+        }
+      ],
+      "notes": [
+        "Web app replies to the user after 429/202 unspecified; omitted (disclosed).",
+        "SendGrid response and failure handling unknown; omitted (disclosed).",
+        "Order of publish vs. 202 unknown; publish drawn first (disclosed).",
+        "Opt label on line 33 references 'step 8' but should reference step 7 under autonumber."
+      ]
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 90.6,
+        "tokens": 50333,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Output contains a fenced mermaid sequenceDiagram block that parses cleanly \u2014 verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+          "passed": true,
+          "evidence": "response.md lines 3-37 hold a single ```mermaid fence opening with `sequenceDiagram`. Check run: the mermaid-cli check. The block was extracted and rendered with the `minlag/mermaid-cli` Docker image, exit 0, output \"Generating single mermaid chart\". No syntax-review fallback was needed."
+        },
+        {
+          "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+          "passed": true,
+          "evidence": "All inside the mermaid block: `W->>+A: POST /v1/password-resets` (line 15); `A-->>W: 202 Accepted` (line 26); `A-->>W: 429 Too Many Requests` (line 19) followed by `Note over W,A: Retry-After: ...` (line 20); `A-)MQ: Publish reset_requested event` / `MQ-)N: Consume reset_requested event` with MQ declared as `participant MQ as RabbitMQ` (lines 10, 30-31); `N->>SG: POST /v3/mail/send` with SG declared as SendGrid and `Note over N,SG: Authorization: Bearer ...` (lines 12, 32-33). The request body `{ \"email\": \"...\" }` and the 5/hour/IP limit are also in the note on line 16."
+        },
+        {
+          "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+          "passed": true,
+          "evidence": "Line 18 `alt rate limit exceeded (more than 5 requests/hour from this IP)` contains the 429 reply and Retry-After note; line 22 `else within rate limit` contains the lookup/202 path. The two cases are mutually exclusive branches of one alt."
+        },
+        {
+          "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+          "passed": true,
+          "evidence": "In the `else within rate limit` branch the lookup (`A->>+DB: Look up user by email` / `DB-->>-A: user row, or no match`) is followed unconditionally by `A-->>W: 202 Accepted` (line 26) and `Note over W,A: Same response whether or not the email exists<br/>(prevents email enumeration)` (line 27); only afterwards does `opt user exists` (line 29) gate the publish. The 202 sits outside the opt, so it is returned for both outcomes of the lookup."
+        },
+        {
+          "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+          "passed": true,
+          "evidence": "Line 6 `actor U as User`. The two `-)` arrows are exactly the publish and consume legs: `A-)MQ: Publish reset_requested event` (line 30) and `MQ-)N: Consume reset_requested event` (line 31). All HTTP calls (web app -> Auth API, worker -> SendGrid) and the DB lookup use sync `->>`."
+        },
+        {
+          "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+          "passed": true,
+          "evidence": "Every endpoint, header, status, payload field and event name in the block traces to the prompt; the unspecified Retry-After value is left as `...` (line 20, and stated in prose line 49), no token TTL, no reset link, no token field, no SendGrid response code is drawn (prose line 46 explicitly says the SendGrid response was omitted because it was not given). `429 Too Many Requests` is the standard reason phrase for the status the prompt gave, not an added detail. Caveat: two web-app-to-user reply arrows (`W-->>U: Show rate-limit error` line 21, `W-->>U: Show confirmation` line 28) and the 202-before-publish ordering are not from the prompt; they are flow steps rather than technical details and the response discloses all three as its own choices (lines 43-47), so they are not presented as established facts."
+        }
+      ],
+      "notes": [
+        "Web app replies to the user after 429/202 were not specified; generic wording drawn (disclosed).",
+        "SendGrid response and failure handling unknown; omitted (disclosed).",
+        "Order of 202 vs. event publish unknown; 202 drawn first (disclosed)."
+      ]
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 93.0,
+        "stddev": 0.0,
+        "min": 93.0,
+        "max": 93.0
+      },
+      "tokens": {
+        "mean": 51743.0,
+        "stddev": 0.0,
+        "min": 51743,
+        "max": 51743
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 90.6,
+        "stddev": 0.0,
+        "min": 90.6,
+        "max": 90.6
+      },
+      "tokens": {
+        "mean": 50333.0,
+        "stddev": 0.0,
+        "min": 50333,
+        "max": 50333
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+2.4",
+      "tokens": "+1410"
+    }
+  },
+  "notes": []
+}

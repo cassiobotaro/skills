@@ -59,9 +59,10 @@ and the payload field in the note — an invented one sends them down the wrong 
    that actually wants `application/vnd.api+json` pays for the guess. If the user or
    the code didn't state the header, leave it out.
 
-5. **Validate before declaring done** (step 5), locally and in a fixed order; when no
-   validator is available, say so explicitly. Never imply a diagram was checked when it
-   wasn't.
+5. **Validate before declaring done** (step 5): mermaid-cli through its Docker image
+   first, a local mermaid-cli install second, and if neither is available say explicitly
+   that the code was not validated and hand over the command. Validation never leaves the
+   machine. Never imply a diagram was checked when it wasn't.
 
 6. **Prefer portable syntax.** GitHub and GitLab bundle their own Mermaid versions,
    which lag the latest release. Stick to the safe core by default; use version-gated
@@ -192,9 +193,9 @@ container mounts that directory), then:
 
    The container reads input from `/data`, so mount the directory that holds the `.mmd`
    and pass paths relative to it; `-u` keeps the output owned by the user instead of
-   root. With Podman:
-   `podman run --userns keep-id --user "$UID" --rm -v "$DIR":/data:z ghcr.io/mermaid-js/mermaid-cli/mermaid-cli -i d.mmd -o d.svg`
-   (the same image on GitHub's registry).
+   root. `ghcr.io/mermaid-js/mermaid-cli/mermaid-cli` is the same image on GitHub's
+   registry. With Podman instead:
+   `podman run --userns keep-id --user "$UID" --rm -v "$DIR":/data:z ghcr.io/mermaid-js/mermaid-cli/mermaid-cli -i d.mmd -o d.svg`.
    - On a parse error, fix the diagram and re-run until it exits clean.
    - When the failure is environmental — daemon down, image can't be pulled, permission
      denied on the socket — Docker is unavailable here: fall through to 2. Don't try to
@@ -215,13 +216,15 @@ container mounts that directory), then:
    internal, and when it does (endpoints, headers, field names, partner names) say so and
    leave that choice to the user — it is their content.
 
+Steps 1 and 2 produce no inline preview; say which validator ran ("validated with the
+mermaid-cli Docker image" / "validated with the local mermaid-cli") and don't report
+output you didn't get.
+
 ### 6. Hand off
 
 - The fenced code block(s) — or the path of the Markdown file you wrote.
-- The validation notice: which validator ran ("validated with the mermaid-cli Docker
-  image" / "validated with the local mermaid-cli"), or the "not validated here" notice
-  with the Docker command (step 5.3). Neither validator produces an inline preview, so
-  don't report output you didn't get.
+- The validation notice: which validator ran (step 5.1 or 5.2), or the "not validated
+  here" notice with the Docker command (step 5.3).
 - A sentence or two walking the reader through the flow by step number — not a
   paragraph per arrow.
 

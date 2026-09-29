@@ -104,18 +104,29 @@ message's technical contract (headers, payload shape, status semantics).
 
 ## Blocks
 
-Every block opens with a keyword plus a label, holds statements, and closes with `end`;
-blocks nest.
+```
+loop Every 30s                 alt 2xx                     opt token present
+    A->>B: poll                    B-->>A: body                A->>B: enrich
+end                            else 4xx/5xx               end
+                                   B-->>A: error
+                               end
 
-- `alt 2xx` … `else 4xx/5xx` … `end` — mutually exclusive outcomes; label each branch
-  with its condition.
-- `opt token present` … `end` — a single optional sequence (an `if` without `else`).
-- `loop Every 30s` … `end` — repetition; the label states the condition/interval.
-- `par Notify all` … `and` … `end` — concurrent actions.
-- `critical Connect to DB` … `option Timeout` … `end` — an action that must happen,
-  with conditional circumstances.
-- `break checkout fails` … `end` — abort the remaining flow (exceptions, early exits).
-- `rect rgb(r, g, b)` / `rect rgba(...)` … `end` — background highlight box.
+par Notify all                 critical Connect to DB      break checkout fails
+    A->>B: event               and...                          API-->>U: failure page
+and                                S-->>DB: connect        end
+    A->>C: event               option Timeout
+end                                S-->>S: log error
+                               end
+```
+
+- `alt`/`else` — mutually exclusive outcomes; label each branch with its condition.
+- `opt` — a single optional sequence (an `if` without `else`).
+- `loop` — repetition; the label states the loop condition/interval.
+- `par`/`and` — concurrent actions; nestable.
+- `critical`/`option` — an action that must happen, with conditional circumstances.
+- `break` — abort the remaining flow (exceptions, early exits).
+- `rect rgb(r, g, b)` / `rect rgba(...)` — background highlight box around statements.
+- All blocks close with `end` and can be nested.
 
 ## Text escaping gotchas
 

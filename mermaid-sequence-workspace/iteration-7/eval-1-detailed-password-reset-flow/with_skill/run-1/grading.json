@@ -1,0 +1,99 @@
+{
+  "expectations": [
+    {
+      "text": "Output contains a fenced mermaid sequenceDiagram block that parses cleanly — verified with mermaid-cli (exit 0) where the CLI is available, otherwise by syntax review against references/syntax.md, with the grader stating which of the two checks it actually ran",
+      "passed": true,
+      "evidence": "response.md lines 3-37 hold a single ```mermaid fence opening with `sequenceDiagram`. Check run: the mermaid-cli check. The block was extracted and rendered with the `minlag/mermaid-cli` Docker image, exit 0, output \"Generating single mermaid chart\". No syntax-review fallback was needed."
+    },
+    {
+      "text": "The given technical details appear in the diagram (messages or notes): POST /v1/password-resets, 202 Accepted, 429 with Retry-After, reset_requested event via RabbitMQ, SendGrid POST /v3/mail/send with Authorization: Bearer",
+      "passed": true,
+      "evidence": "All inside the mermaid block: `W->>+A: POST /v1/password-resets` (line 15); `A-->>W: 202 Accepted` (line 26); `A-->>W: 429 Too Many Requests` (line 19) followed by `Note over W,A: Retry-After: ...` (line 20); `A-)MQ: Publish reset_requested event` / `MQ-)N: Consume reset_requested event` with MQ declared as `participant MQ as RabbitMQ` (lines 10, 30-31); `N->>SG: POST /v3/mail/send` with SG declared as SendGrid and `Note over N,SG: Authorization: Bearer ...` (lines 12, 32-33). The request body `{ \"email\": \"...\" }` and the 5/hour/IP limit are also in the note on line 16."
+    },
+    {
+      "text": "The rate-limit case is shown as a distinct branch (alt/else, break, or opt)",
+      "passed": true,
+      "evidence": "Line 18 `alt rate limit exceeded (more than 5 requests/hour from this IP)` contains the 429 reply and Retry-After note; line 22 `else within rate limit` contains the lookup/202 path. The two cases are mutually exclusive branches of one alt."
+    },
+    {
+      "text": "The always-202 anti-enumeration behavior is represented (202 returned regardless of user existence)",
+      "passed": true,
+      "evidence": "In the `else within rate limit` branch the lookup (`A->>+DB: Look up user by email` / `DB-->>-A: user row, or no match`) is followed unconditionally by `A-->>W: 202 Accepted` (line 26) and `Note over W,A: Same response whether or not the email exists<br/>(prevents email enumeration)` (line 27); only afterwards does `opt user exists` (line 29) gate the publish. The 202 sits outside the opt, so it is returned for both outcomes of the lookup."
+    },
+    {
+      "text": "The human user is declared as an actor and the event publish/consume legs are drawn with async arrows (-)) rather than sync request arrows",
+      "passed": true,
+      "evidence": "Line 6 `actor U as User`. The two `-)` arrows are exactly the publish and consume legs: `A-)MQ: Publish reset_requested event` (line 30) and `MQ-)N: Consume reset_requested event` (line 31). All HTTP calls (web app -> Auth API, worker -> SendGrid) and the DB lookup use sync `->>`."
+    },
+    {
+      "text": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+      "passed": true,
+      "evidence": "Every endpoint, header, status, payload field and event name in the block traces to the prompt; the unspecified Retry-After value is left as `...` (line 20, and stated in prose line 49), no token TTL, no reset link, no token field, no SendGrid response code is drawn (prose line 46 explicitly says the SendGrid response was omitted because it was not given). `429 Too Many Requests` is the standard reason phrase for the status the prompt gave, not an added detail. Caveat: two web-app-to-user reply arrows (`W-->>U: Show rate-limit error` line 21, `W-->>U: Show confirmation` line 28) and the 202-before-publish ordering are not from the prompt; they are flow steps rather than technical details and the response discloses all three as its own choices (lines 43-47), so they are not presented as established facts."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "note": "No metrics.json or transcript was produced for this run; only response.md and timing.json are available.",
+    "output_chars": 0,
+    "response_chars": 2880,
+    "total_tokens": 50333
+  },
+  "claims": [
+    {
+      "claim": "Validated with the mermaid-cli Docker image (minlag/mermaid-cli): it parses and renders cleanly",
+      "type": "process",
+      "verified": true,
+      "evidence": "The executor's own run cannot be seen (no transcript), but the grader's independent render of the same block with minlag/mermaid-cli exited 0, so the claim about the block's validity holds."
+    },
+    {
+      "claim": "It uses only core Mermaid syntax, so GitLab's bundled renderer handles it",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Block uses sequenceDiagram, autonumber, actor/participant, ->>/-->>/-), +/- activation, alt/else/opt, Note over with <br/>, and %% comments. All are long-standing sequenceDiagram features; nothing version-gated (no createParticipant, no box, no critical/parallel in newer forms)."
+    },
+    {
+      "claim": "Walk-through step numbers (1-2 submission/POST, 3-4 rate-limit, 5-8 normal path, 9-11 user-exists tail; swap 7 and 9 to reorder)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "With autonumber the arrows number 1 U->>W, 2 W->>A, 3 429, 4 W-->>U error, 5 lookup, 6 DB reply, 7 202, 8 W-->>U confirmation, 9 A-)MQ, 10 MQ-)N, 11 N->>SG. The prose matches."
+    },
+    {
+      "claim": "Steps 4 and 8 (what the web app shows the user) were chosen by the assistant, not taken from the description",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The prompt never says what the web app shows after a 429 or 202. The response draws generic replies and labels them as its own choice (line 45). This is the one place the run goes beyond record-don't-invent, though it is disclosed."
+    },
+    {
+      "claim": "Retry-After value left as `...` because the computation was not specified",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Prompt only says a Retry-After header is returned; line 20 shows `Retry-After: ...`."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Web app replies to the user after 429/202 were not specified; generic wording drawn (disclosed).",
+      "SendGrid response and failure handling unknown; omitted (disclosed).",
+      "Order of 202 vs. event publish unknown; 202 drawn first (disclosed)."
+    ],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "No technical details beyond what the prompt established are presented as facts (no invented endpoints, headers, TTLs, or payload fields)",
+        "reason": "Its parenthetical scopes it to endpoints/headers/TTLs/payloads, so this run passes despite drawing two user-facing reply arrows (`Show rate-limit error`, `Show confirmation`) the prompt never described. The skill's own contract is 'never invent the flow'; the old_skill run left those arrows out. Consider a companion assertion: 'No flow steps beyond the prompt are drawn, or any added step is explicitly flagged as an assumption in the response' — that would discriminate between the two runs on this eval."
+      },
+      {
+        "reason": "No assertion checks that the response discloses what it left out or assumed (SendGrid response, 202-vs-publish ordering). Both runs did this well; an assertion would lock the behavior in."
+      }
+    ],
+    "overall": "Assertions are well matched to the prompt and were all genuinely earned here. The one soft spot is that assertion 6 tolerates invented flow steps as long as they are not endpoints/headers/payloads."
+  }
+}
