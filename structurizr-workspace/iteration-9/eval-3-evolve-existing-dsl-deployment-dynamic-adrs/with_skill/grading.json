@@ -1,0 +1,103 @@
+{
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md reports the same plus a broken-copy control returning exit 1."
+    },
+    {
+      "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+      "passed": true,
+      "evidence": "Verified deterministically by the caller: every non-blank line of the original DSL is still present and docs/adr is byte-identical. Manual diff against evals/files/legacy-billing/workspace.dsl: identifiers atendente/faturamento/portal/api/worker/fila/banco/erp unchanged; the seven original relationships unchanged in label and technology; `systemContext faturamento \"Contexto\"` and `container faturamento \"Containers\"` unchanged; the four original style rules unchanged. Only additions: `!adrs docs/adr`, the `producao` deploymentEnvironment, the `EmissaoDeFatura` dynamic view, the `Deployment-Producao` view, and `theme amazon-web-services-2025.07` appended after styles."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+      "passed": true,
+      "evidence": "`producao = deploymentEnvironment \"Produção\"` > `aws` deploymentNode > `ecs = deploymentNode \"Amazon ECS\" ... \"AWS Fargate\"` containing `Portal Task { instanceOf faturamento.portal }`, `API Task { instances 2  instanceOf faturamento.api }`, `Worker Task { instanceOf faturamento.worker }`; `rds = deploymentNode \"Amazon RDS\"` > `\"PostgreSQL\" { instanceOf faturamento.banco }`; `alb = infrastructureNode \"Application Load Balancer\"` at the AWS level with the Portal->API relationship rerouted through it via `faturamento.portal -/> faturamento.api { portal -> aws.alb; aws.alb -> api }`. View `deployment faturamento \"Produção\" \"Deployment-Producao\"` present. ALB is not a container."
+    },
+    {
+      "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+      "passed": true,
+      "evidence": "`dynamic faturamento \"EmissaoDeFatura\"` has six steps: atendente -> portal, portal -> api, api -> banco, api -> fila, worker -> fila, worker -> erp. Each pair (and direction) matches a relationship declared in the original model (lines 26-32), so the validator accepts them; the flow matches the prompt (atendente emite pelo portal, portal chama API, API grava no banco e publica na fila, worker consome e envia pro ERP)."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+      "passed": true,
+      "evidence": "Line 5: `!adrs docs/adr` at workspace scope with no importer argument, i.e. the default adr-tools importer. The three files in outputs/docs/adr are in adr-tools format and untouched. response.md reports the three decisions were visible in a JSON export."
+    },
+    {
+      "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+      "passed": true,
+      "evidence": "The deployment contains only what the prompt named: AWS account node, ECS/Fargate with the three tasks, RDS PostgreSQL, ALB in front of the API. RabbitMQ and the ERP were deliberately left out of the deployment and both are asked about in response.md (\"Onde roda o RabbitMQ em produção?\", \"O ERP deve aparecer no deployment?\"); the AWS region is also flagged as omitted. The added theme and AWS tags are cosmetic and explicitly explained (\"O tema só estiliza elementos com tag Amazon Web Services - …\"). The response also notes that the missing queue instance means API->Fila and Worker->Fila arrows will be absent from the deployment view rather than hiding that consequence."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "note": "No transcript or metrics.json available; only response.md, outputs/workspace.dsl and outputs/docs/adr were graded.",
+    "total_tokens": 72082,
+    "output_chars": 4700,
+    "response_chars": 5300
+  },
+  "timing": {
+    "executor_duration_seconds": 192.6,
+    "total_duration_seconds": 192.6
+  },
+  "claims": [
+    {
+      "claim": "No existing identifier, label, view or style was changed",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Caller's line-preservation check plus manual diff: all original lines intact, only additive blocks."
+    },
+    {
+      "claim": "Each dynamic step is backed by a relationship that already existed in the model",
+      "type": "factual",
+      "verified": true,
+      "evidence": "All six source->destination pairs exist among the original seven relationships; the validator (which rejects unsupported steps) passed."
+    },
+    {
+      "claim": "The three ADR files follow adr-tools format so no importer argument was needed",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Filenames 0001-…md, 0002-…md, 0003-…md in outputs/docs/adr (byte-identical to fixture per caller); `!adrs docs/adr` validated with exit 0, which would fail if the importer could not parse them."
+    },
+    {
+      "claim": "Theme amazon-web-services-2025.07 is bundled in the Docker image and does not change the look of existing diagrams",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Validation passed with the theme line present (theme resolution is part of validation with STRUCTURIZR_THEMES set); the AWS tags are only applied to the new deployment nodes, so existing views are unaffected."
+    },
+    {
+      "claim": "No workspace.json was generated inside the repository",
+      "type": "process",
+      "verified": true,
+      "evidence": "outputs/ contains only workspace.dsl and docs/."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Where RabbitMQ runs in production (omitted from deployment, asked)",
+      "Whether the external ERP should appear in the deployment view (omitted, asked)",
+      "AWS region not modelled (flagged)"
+    ],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+        "reason": "The assertion is satisfied by omitting RabbitMQ from the deployment, but that omission silently drops the API->Fila and Worker->Fila arrows from the deployment view. This run explains that consequence; a run that omits the queue without saying so would still pass. Consider asserting that the reply names the RabbitMQ placement gap explicitly, since it is the one obvious hole in the prompt."
+      },
+      {
+        "reason": "Both eval-3 runs added `theme amazon-web-services-2025.07` and AWS icon tags that the user did not ask for. It is cosmetic and explained, but the prompt says 'Não mude o que já existe além do necessário'. No assertion decides whether an unrequested theme counts as scope creep; the eval author should state a position so runs are graded consistently."
+      }
+    ],
+    "overall": "Assertions are substantive and this run passes all six on genuine content. The two edges worth a decision from the eval author are the unrequested AWS theme and whether the queue-placement gap must be surfaced in the reply."
+  }
+}

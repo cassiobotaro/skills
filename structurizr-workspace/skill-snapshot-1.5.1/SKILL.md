@@ -20,13 +20,18 @@ root of the user's repository, validates it, and links ADRs when the repository 
 
 ## Check the scope first
 
-Three neighboring requests look like C4 work and are not; say so in a sentence and hand
-them on instead of opening a `workspace.dsl`: a cloud-infrastructure picture drawn from
-vendor service icons (C4 models the abstractions the team owns, not a vendor catalog in
-its own iconography — that is a diagramming tool's job); a sequence or behavior-over-time
-diagram (C4 views are static structure; ordered interaction is the `mermaid-sequence`
-skill's shape); and writing the decision content of an ADR (the team's decision log, e.g.
-adr-tools, authors it — this skill only *links* the existing log into the views, step 5).
+Three neighboring requests look like C4 work and are not. Check before modeling anything;
+if the request is one of these, say so in a sentence and hand it to the right place instead
+of opening a `workspace.dsl`.
+
+| The request | Why it isn't this skill | Where it goes |
+|---|---|---|
+| A cloud-infrastructure picture drawn from real vendor service icons (an AWS diagram with EC2/RDS/S3 boxes) | C4 models abstractions the team owns, not a vendor's service catalog rendered in its own iconography | A diagramming tool with the vendor icon set |
+| A sequence or behavior-over-time diagram ("what happens when a user checks out") | C4 views are static structure; ordered interaction is a different shape | The `mermaid-sequence` skill |
+| Writing the decision content of an ADR ("record why we chose Postgres") | This skill *links* an existing decision log into the views; it does not author the decision | The team's decision log (e.g. adr-tools); once the ADR exists, link it here |
+
+Linking existing ADRs into the architecture documentation **is** this skill's work — only
+authoring the decision prose is not.
 
 ## The contract
 
@@ -149,7 +154,7 @@ single-system workspace, `scope landscape` for a landscape one. Element names an
 descriptions follow the language the user used; DSL keywords are always English.
 
 `references/dsl-reference.md` §15 carries the full skeleton to copy when you start a
-workspace from scratch.
+workspace from scratch, with the reasoning behind each convention.
 
 ### 5. Link ADRs
 
@@ -203,18 +208,8 @@ identifier to every ancestor `deploymentNode` and use the full dotted path
 
 ### 7. Self-review
 
-Check the DSL against this list and fix what fails — the diagrams must read for someone
-who wasn't in the room:
-
-- every element has a description; every container a technology;
-- every relationship label is specific and reads correctly along the arrow; inter-process
-  ones carry a protocol;
-- kinds are encoded with tags + `styles`, so the rendered legend covers them and no
-  meaning lives in color alone;
-- view keys are stable and descriptive; `configuration { scope … }` matches the workspace
-  type; every dynamic-view step is backed by a model relationship;
-- no removed or deprecated keyword (contract 3); `!adrs` present when the repo has ADRs;
-- acronyms in names and descriptions are ones the audience knows.
+Run through the C4 review checklist in `references/diagrams.md` (titles, types,
+descriptions, technologies, label direction/specificity, legend coverage). Fix what fails.
 
 ### 8. Hand off
 
@@ -260,7 +255,7 @@ Read only what the task needs — each file read is a per-invocation token cost.
 |---|---|
 | `references/dsl-reference.md` | Always, before writing any DSL — core signatures for elements, relationships, views, styles, deployment, `!adrs`, themes, configuration. |
 | `references/c4-classification.md` | Anything is ambiguous: system vs container, microservices ownership, queues, serverless, shared libs. Includes the clarifying-question bank. |
-| `references/diagrams.md` | Choosing which diagrams to create, when step 3 leaves doubt: the seven view types, when each earns its place, and C4's notation rules. |
+| `references/diagrams.md` | Choosing which diagrams to create + the pre-delivery review checklist. |
 | `references/deployment-patterns.md` | Deployment work: `-/>` rerouting, Docker/K8s/EKS/Fargate/App Runner nesting, serverless (Lambda + local emulator), multi-environment, deployment groups. |
 | `references/modeling-patterns.md` | Microservices, messaging, landscape/system catalog, hardware/devices as custom elements, monorepo composition. |
 | `references/dsl-advanced.md` | Rare: archetypes, workspace extension, filtered/custom/image views, perspectives, scripts/plugins. |

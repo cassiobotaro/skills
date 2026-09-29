@@ -3,9 +3,8 @@
 Condensed from [docs.structurizr.com/dsl](https://docs.structurizr.com/dsl) (MIT) — see
 NOTICE.md. Current as of DSL v6.2.x (2026). Anything marked **LEGACY** must not appear in
 generated DSL. Rare features (archetypes, workspace extension, scripts/plugins,
-filtered/custom/image views, perspectives, terminology, animations, health checks,
-server-only configuration) live in `dsl-advanced.md` — read that only when the task
-needs them.
+filtered/custom/image views, perspectives) live in `dsl-advanced.md` — read that only
+when the task needs them.
 
 **Sections** — jump to what the task needs rather than reading straight through:
 
@@ -128,6 +127,7 @@ production = deploymentEnvironment "Production" {
 | infrastructureNode | `infrastructureNode <name> [description] [technology] [tags]` |
 | instanceOf | `instanceOf <identifier> [deploymentGroups] [tags]` — generic; the classic `containerInstance <id>` / `softwareSystemInstance <id>` forms are equally valid |
 | deploymentGroup | `<id> = deploymentGroup <name>` — isolates instance wiring per copy; assign per instance (`containerInstance api grp`) or once on a node (`deploymentGroup grp` inside the `deploymentNode` block, applying to everything beneath it) |
+| healthCheck | `healthCheck <name> <url> [interval] [timeout]` (in an instance block; interval in seconds, default 60; timeout in ms, default 0) |
 
 `instances` takes a count (`instances 2`) or range (`"1..N"`). Relationships between
 instances are inherited from the model. An instance can carry an identifier
@@ -168,10 +168,12 @@ autoLayout [tb|bt|lr|rl] [rankSeparation] [nodeSeparation]   // defaults: tb 300
 title <text>
 description <text>
 default                       // marks the default view
+animation {                   // one line of identifiers per animation step
+    <id> [id…]
+    <id> [id…]
+}
 properties { "name" "value" }
 ```
-
-(`animation { … }` steps: `dsl-advanced.md` §6.)
 
 `*?` (reluctant wildcard; context/container/component views only) includes the same
 elements as `*` but only relationships to/from the elements in scope — handy when the
@@ -250,8 +252,17 @@ styles {
 Styles match by tag — tag elements (`tags "Database"`) and style the tag. `colour` is an
 alias of `color`. ADR status styling: `element "Decision:<Status>"` (literal status
 string, no fixed enum). Element styles render fully in Structurizr; PlantUML/Mermaid
-exports support a subset. Renaming the C4 vocabulary in rendered diagrams
-(`terminology { … }`): `dsl-advanced.md` §6.
+exports support a subset.
+
+**Terminology** (in `views`) renames the C4 vocabulary in rendered diagrams:
+
+```
+terminology {
+    person <term>   softwareSystem <term>   container <term>   component <term>
+    deploymentNode <term>   infrastructureNode <term>   relationship <term>
+    metadata <square|round|curly|angle|double-angle|none>
+}
+```
 
 ## 10. Themes
 
@@ -308,13 +319,14 @@ Valid at workspace, softwareSystem, and container scope; path relative to the DS
 ```
 configuration {
     scope <softwaresystem|landscape|none>
+    visibility <private|public>         // server/cloud only
+    users { <username> <read|write> }   // server/cloud only
     properties { "name" "value" }
 }
 ```
 
 `scope softwaresystem` for one-system workspaces; `scope landscape` for landscape
-workspaces (these must not define containers). Server-only settings (`visibility`,
-`users`): `dsl-advanced.md` §6.
+workspaces (these must not define containers). Only `scope` matters for local use.
 
 ## 14. Defaults and gotchas
 
@@ -391,11 +403,26 @@ workspace "Name" "One-line description." {
 }
 ```
 
-The conventions this template encodes (hierarchical identifiers, descriptions and
-technologies everywhere, specific directional labels, tags + styles, stable view keys,
-`autoLayout`, scope) are explained in SKILL.md step 4; `autoLayout` direction (`lr`/`tb`)
-follows the flow, and the user can still drag elements in the UI, which persists to
-`workspace.json`.
+Why these conventions:
+
+- `!identifiers hierarchical` — lets container names repeat across systems and keeps the
+  workspace extendable later.
+- **Every element gets a description; every container gets a technology.** The C4 review
+  checklist demands both; diagrams must be readable by someone who wasn't in the room.
+- **Relationship labels are specific and directional** — "Publishes click events to", not
+  "Uses". The label must read correctly along the arrow's direction. Inter-process
+  relationships also get a technology/protocol.
+- **Tags + styles, not ad-hoc colors**: `Database` → cylinder, `Queue` → pipe, `External` →
+  grey, person shape for people. Consistent encodings double as the diagram legend.
+- **Stable, descriptive view keys** (`"SystemContext"`, `"Containers"`,
+  `"Deployment-Live"`) — keys identify views across exports and layout sessions; changing
+  them later orphans saved layout.
+- `autoLayout` on every view (direction `lr`/`tb` as fits the flow) — the user can still
+  drag elements in the UI, which then persists to `workspace.json`.
+- `configuration { scope softwaresystem }` for one-system workspaces,
+  `scope landscape` for landscape workspaces (these must not define containers).
+- Write element names and descriptions in the language the user used to describe their
+  system; DSL keywords are always English.
 
 ---
 *Condensed from the Structurizr documentation

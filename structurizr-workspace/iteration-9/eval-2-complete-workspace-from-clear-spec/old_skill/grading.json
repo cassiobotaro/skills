@@ -1,0 +1,96 @@
+{
+  "expectations": [
+    {
+      "text": "DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md reports the same (exit 0, empty output, invalid-DSL control returned exit 1)."
+    },
+    {
+      "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurtaí; Google Workspace as external system; nothing invented",
+      "passed": true,
+      "evidence": "outputs/workspace.dsl: one person `usuario`; softwareSystem `encurtai` with six containers `spa` (React SPA servido por nginx), `api` (Go (Gin), REST), `db` (PostgreSQL 16), `cache` (Redis 7), `fila` (RabbitMQ), `worker` (Go); external `google` tagged External. Relationships all trace to the prompt (user->SPA, user->API for short links, SPA->API, API->Google SSO, API->db, API->cache, API->fila, fila->worker, worker->db). Protocol choices (HTTPS, JSON/HTTPS, SQL/TCP, RESP/TCP, AMQP) are tech-implied; the SSO protocol was deliberately left as plain HTTPS and flagged in response.md item 2. No extra elements."
+    },
+    {
+      "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss→Postgres, and click-event publish",
+      "passed": true,
+      "evidence": "views: `systemContext encurtai \"SystemContext\"`, `container encurtai \"Containers\"`, `dynamic encurtai \"RedirecionamentoLink\"` with steps usuario -> api \"Acessa o link curto\"; api -> cache \"Consulta o destino do link curto em\"; api -> db \"Em caso de cache miss, consulta o destino do link em\"; api -> fila \"Publica o evento de clique em\"; api -> usuario \"Redireciona para a URL de destino\"."
+    },
+    {
+      "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+      "passed": true,
+      "evidence": "styles: `element \"Database\" { shape cylinder }` (applied to both Postgres and Redis via the Database tag), `element \"Queue\" { shape pipe background #f5a623 color #000000 }`, `element \"External\" { background #999999 color #ffffff }` against default Element #1168bd / Container #438dd5."
+    },
+    {
+      "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+      "passed": true,
+      "evidence": "Verified deterministically by the caller: no removed/deprecated keywords found. Manual read confirms `!identifiers hierarchical`, `tags` inside element blocks, `autoLayout`, `configuration { scope softwaresystem }`; `shape webBrowser` is a valid current shape."
+    },
+    {
+      "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+      "passed": true,
+      "evidence": "All nine container-level relationships carry a technology (HTTPS x3, JSON/HTTPS, SQL/TCP x2, RESP/TCP, AMQP x2). Labels are specific and directional: \"Chama para criar e consultar links\", \"Autentica usuários via SSO em\", \"Grava e lê links em\", \"Consulta e armazena redirecionamentos em\", \"Publica eventos de clique em\", \"Entrega eventos de clique para\", \"Grava métricas agregadas em\". The person -> system summary relationship has no protocol, which is correct."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "note": "No transcript or metrics.json available; only response.md and outputs/workspace.dsl were graded.",
+    "total_tokens": 67934,
+    "output_chars": 4100,
+    "response_chars": 3500
+  },
+  "timing": {
+    "executor_duration_seconds": 161.4,
+    "total_duration_seconds": 161.4
+  },
+  "claims": [
+    {
+      "claim": "Validated with structurizr/structurizr Docker image and passed without errors",
+      "type": "process",
+      "verified": true,
+      "evidence": "Caller's independent Docker validation exited 0 with no output."
+    },
+    {
+      "claim": "Nothing was added beyond what is in the user's message",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Every element and relationship in the DSL traces to a sentence in the prompt; only protocol strings were chosen by the executor, and the one that is not tech-implied (SSO protocol) was left as HTTPS and flagged."
+    },
+    {
+      "claim": "Dynamic view has 5 steps, the last one a response rendered dashed",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Five steps present; the last is api -> usuario, the reverse of step 1, which Structurizr renders as a response."
+    },
+    {
+      "claim": "Database style applies a cylinder to both Postgres and Redis",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Both `db` and `cache` carry `tags \"Database\"`; the style sets shape cylinder. Note Redis is therefore not visually distinct from Postgres, which the prompt did not require."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Whether the API writes to Redis after a cache miss (step omitted, flagged)",
+      "SSO protocol with Google Workspace (OIDC/SAML) unknown; left as HTTPS"
+    ],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Relationship labels are specific and inter-process links carry technology/protocol",
+        "reason": "\"Specific\" is not operationalized. This run's labels are clearly specific, but the with_skill run's \"Chama\" also passed on the strength of the repo fixture using it. Naming the banned pattern (Uses/Calls/Chama/Usa without an object) would make grading consistent."
+      },
+      {
+        "reason": "No assertion covers whether the reply flags unconfirmed choices (protocols, cache-fill step). Both eval-2 runs did this; adding it would let the eval discriminate a run that silently guesses."
+      }
+    ],
+    "overall": "All six assertions are substantive and passed on genuine content. Output is essentially equivalent to the with_skill run; the two differ only in label wording and tag/colour choices for Redis."
+  }
+}

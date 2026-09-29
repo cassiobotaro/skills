@@ -1,0 +1,272 @@
+{
+  "metadata": {
+    "skill_name": "structurizr",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-09-28T23:48:35Z",
+    "evals_run": [
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 161.4,
+        "tokens": 67934,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md reports the same (exit 0, empty output, invalid-DSL control returned exit 1)."
+        },
+        {
+          "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurta\u00ed; Google Workspace as external system; nothing invented",
+          "passed": true,
+          "evidence": "outputs/workspace.dsl: one person `usuario`; softwareSystem `encurtai` with six containers `spa` (React SPA servido por nginx), `api` (Go (Gin), REST), `db` (PostgreSQL 16), `cache` (Redis 7), `fila` (RabbitMQ), `worker` (Go); external `google` tagged External. Relationships all trace to the prompt (user->SPA, user->API for short links, SPA->API, API->Google SSO, API->db, API->cache, API->fila, fila->worker, worker->db). Protocol choices (HTTPS, JSON/HTTPS, SQL/TCP, RESP/TCP, AMQP) are tech-implied; the SSO protocol was deliberately left as plain HTTPS and flagged in response.md item 2. No extra elements."
+        },
+        {
+          "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss\u2192Postgres, and click-event publish",
+          "passed": true,
+          "evidence": "views: `systemContext encurtai \"SystemContext\"`, `container encurtai \"Containers\"`, `dynamic encurtai \"RedirecionamentoLink\"` with steps usuario -> api \"Acessa o link curto\"; api -> cache \"Consulta o destino do link curto em\"; api -> db \"Em caso de cache miss, consulta o destino do link em\"; api -> fila \"Publica o evento de clique em\"; api -> usuario \"Redireciona para a URL de destino\"."
+        },
+        {
+          "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+          "passed": true,
+          "evidence": "styles: `element \"Database\" { shape cylinder }` (applied to both Postgres and Redis via the Database tag), `element \"Queue\" { shape pipe background #f5a623 color #000000 }`, `element \"External\" { background #999999 color #ffffff }` against default Element #1168bd / Container #438dd5."
+        },
+        {
+          "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: no removed/deprecated keywords found. Manual read confirms `!identifiers hierarchical`, `tags` inside element blocks, `autoLayout`, `configuration { scope softwaresystem }`; `shape webBrowser` is a valid current shape."
+        },
+        {
+          "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+          "passed": true,
+          "evidence": "All nine container-level relationships carry a technology (HTTPS x3, JSON/HTTPS, SQL/TCP x2, RESP/TCP, AMQP x2). Labels are specific and directional: \"Chama para criar e consultar links\", \"Autentica usu\u00e1rios via SSO em\", \"Grava e l\u00ea links em\", \"Consulta e armazena redirecionamentos em\", \"Publica eventos de clique em\", \"Entrega eventos de clique para\", \"Grava m\u00e9tricas agregadas em\". The person -> system summary relationship has no protocol, which is correct."
+        }
+      ],
+      "notes": [
+        "Whether the API writes to Redis after a cache miss (step omitted, flagged)",
+        "SSO protocol with Google Workspace (OIDC/SAML) unknown; left as HTTPS"
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 197.0,
+        "tokens": 77804,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Edited DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md reports the same plus a canary error returning exit 1."
+        },
+        {
+          "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: every non-blank line of the original DSL is still present and docs/adr is byte-identical. Manual diff against evals/files/legacy-billing/workspace.dsl: identifiers atendente/faturamento/portal/api/worker/fila/banco/erp unchanged; the seven original relationships unchanged; `systemContext faturamento \"Contexto\"` and `container faturamento \"Containers\"` unchanged; the four original style rules unchanged. Additions only: `!adrs docs/adr`, `producao` deploymentEnvironment, `EmissaoFatura` dynamic view, `Deployment-Producao` view, a new `element \"Infrastructure Node\" { shape ellipse }` style rule appended after the existing ones, and `theme amazon-web-services-2025.07`."
+        },
+        {
+          "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+          "passed": true,
+          "evidence": "`producao = deploymentEnvironment \"Produ\u00e7\u00e3o\"` > `aws` deploymentNode > `ecs = deploymentNode \"Amazon ECS\" ... \"AWS Fargate\"` containing `Task do Portal { instanceOf faturamento.portal }`, `Task da API { instances 2  instanceOf faturamento.api }`, `Task do Worker { instanceOf faturamento.worker }`; `rds = deploymentNode \"Amazon RDS\"` > `\"PostgreSQL\" { instanceOf faturamento.banco }`; `alb = infrastructureNode \"Application Load Balancer\"` with Portal->API rerouted via `faturamento.portal -/> faturamento.api { portal -> aws.alb; aws.alb -> api }`. View `deployment faturamento producao \"Deployment-Producao\"` present (environment referenced by identifier, which validated). ALB is not a container."
+        },
+        {
+          "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+          "passed": true,
+          "evidence": "`dynamic faturamento \"EmissaoFatura\"` has six steps: atendente -> portal, portal -> api, api -> banco, api -> fila, worker -> fila, worker -> erp. Each pair and direction matches one of the seven original relationships, so the validator accepts them; the flow matches the prompt's description."
+        },
+        {
+          "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+          "passed": true,
+          "evidence": "Line 5: `!adrs docs/adr` at workspace scope with no importer argument (default adr-tools importer). outputs/docs/adr holds the three adr-tools-format files untouched. response.md reports 3 decisions imported in a JSON export."
+        },
+        {
+          "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+          "passed": true,
+          "evidence": "Deployment contains only what the prompt named (AWS account, ECS/Fargate with three tasks, RDS PostgreSQL, ALB before the API). RabbitMQ was left out of the deployment and asked about (\"Onde o RabbitMQ roda em produ\u00e7\u00e3o?\"), with the consequence for the missing queue arrows stated; region, Portal/Worker instance counts, and whether the ALB also fronts the Portal are each flagged as open. The theme and the `Infrastructure Node` ellipse style are unrequested but explicitly labelled cosmetic in the reply, not presented as infrastructure."
+        }
+      ],
+      "notes": [
+        "Where RabbitMQ runs in production (omitted from deployment, asked)",
+        "AWS region not modelled",
+        "Portal and Worker instance counts left at default 1",
+        "Whether the ALB also fronts the Portal (modelled only in front of the API)"
+      ]
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 178.6,
+        "tokens": 66753,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md also reports exit 0 with an empty output and a deliberately broken control file returning exit 1."
+        },
+        {
+          "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurta\u00ed; Google Workspace as external system; nothing invented",
+          "passed": true,
+          "evidence": "outputs/workspace.dsl model block: one person `usuario`; softwareSystem `encurtai` with exactly six containers `spa` (React SPA servido por nginx), `api` (Go (Gin)), `db` (PostgreSQL 16), `cache` (Redis 7), `fila` (RabbitMQ), `worker` (Go); one external softwareSystem `google` tagged External. Every relationship maps to a sentence in the prompt (SPA->API, API->Postgres, API->Redis, API->RabbitMQ, RabbitMQ->worker, worker->Postgres, API->Google SSO, user->SPA, user->API for short-link access). Protocols (HTTPS, SQL/TCP, Redis/TCP, AMQP) are not in the prompt but are tech-implied and explicitly flagged in response.md item 1 as unconfirmed. nginx kept as technology text, not a separate container (flagged in item 4). No extra elements."
+        },
+        {
+          "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss\u2192Postgres, and click-event publish",
+          "passed": true,
+          "evidence": "views block has `systemContext encurtai \"SystemContext\"`, `container encurtai \"Containers\"`, and `dynamic encurtai \"Redirecionamento\"` with steps: usuario -> api \"Acessa o link curto\"; api -> cache \"Consulta o destino do link no cache\"; api -> db \"Em caso de cache miss, consulta o link em\"; api -> fila \"Publica o evento de clique em\"; api -> usuario response step. All three requested flow elements present and in the order described."
+        },
+        {
+          "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+          "passed": true,
+          "evidence": "styles: `element \"Database\" { shape cylinder background #438dd5 }`, `element \"Queue\" { shape pipe background #438dd5 }`, `element \"External\" { background #999999 color #ffffff }` versus the default Element background #1168bd. Redis gets a separate `Cache` tag with cylinder + lighter #85bbf0 so it is visually distinct from Postgres."
+        },
+        {
+          "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: no removed/deprecated keywords (enterprise, !extend, !ref, branding, theme default, dashed true/false, location) found. Manual read confirms hierarchical identifiers, `tags` inside element blocks, `autoLayout`, `configuration { scope softwaresystem }`."
+        },
+        {
+          "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+          "passed": true,
+          "evidence": "All nine container-level relationships carry a technology third argument (HTTPS, REST/JSON sobre HTTPS, SQL/TCP, Redis/TCP, AMQP x2). Labels are directional and read along the arrow: \"Grava e l\u00ea links em\", \"Consulta e armazena redirecionamentos em\", \"Publica eventos de clique em\", \"Entrega eventos de clique para\", \"Grava m\u00e9tricas agregadas em\", \"Autentica usu\u00e1rios via SSO usando\". The only terse label is spa -> api \"Chama\" (with tech REST/JSON sobre HTTPS), which matches the convention used in the repo's own fixtures; the person -> system label has no tech, which is correct (not inter-process)."
+        }
+      ],
+      "notes": [
+        "Protocols on relationships were chosen by the executor, not given by the user (flagged in response)",
+        "HTTP redirect status code (301/302) not given, left generic",
+        "Whether the API writes to Redis after a cache miss is unknown; step omitted"
+      ]
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 192.6,
+        "tokens": 72082,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Edited DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md reports the same plus a broken-copy control returning exit 1."
+        },
+        {
+          "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+          "passed": true,
+          "evidence": "Verified deterministically by the caller: every non-blank line of the original DSL is still present and docs/adr is byte-identical. Manual diff against evals/files/legacy-billing/workspace.dsl: identifiers atendente/faturamento/portal/api/worker/fila/banco/erp unchanged; the seven original relationships unchanged in label and technology; `systemContext faturamento \"Contexto\"` and `container faturamento \"Containers\"` unchanged; the four original style rules unchanged. Only additions: `!adrs docs/adr`, the `producao` deploymentEnvironment, the `EmissaoDeFatura` dynamic view, the `Deployment-Producao` view, and `theme amazon-web-services-2025.07` appended after styles."
+        },
+        {
+          "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+          "passed": true,
+          "evidence": "`producao = deploymentEnvironment \"Produ\u00e7\u00e3o\"` > `aws` deploymentNode > `ecs = deploymentNode \"Amazon ECS\" ... \"AWS Fargate\"` containing `Portal Task { instanceOf faturamento.portal }`, `API Task { instances 2  instanceOf faturamento.api }`, `Worker Task { instanceOf faturamento.worker }`; `rds = deploymentNode \"Amazon RDS\"` > `\"PostgreSQL\" { instanceOf faturamento.banco }`; `alb = infrastructureNode \"Application Load Balancer\"` at the AWS level with the Portal->API relationship rerouted through it via `faturamento.portal -/> faturamento.api { portal -> aws.alb; aws.alb -> api }`. View `deployment faturamento \"Produ\u00e7\u00e3o\" \"Deployment-Producao\"` present. ALB is not a container."
+        },
+        {
+          "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+          "passed": true,
+          "evidence": "`dynamic faturamento \"EmissaoDeFatura\"` has six steps: atendente -> portal, portal -> api, api -> banco, api -> fila, worker -> fila, worker -> erp. Each pair (and direction) matches a relationship declared in the original model (lines 26-32), so the validator accepts them; the flow matches the prompt (atendente emite pelo portal, portal chama API, API grava no banco e publica na fila, worker consome e envia pro ERP)."
+        },
+        {
+          "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+          "passed": true,
+          "evidence": "Line 5: `!adrs docs/adr` at workspace scope with no importer argument, i.e. the default adr-tools importer. The three files in outputs/docs/adr are in adr-tools format and untouched. response.md reports the three decisions were visible in a JSON export."
+        },
+        {
+          "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+          "passed": true,
+          "evidence": "The deployment contains only what the prompt named: AWS account node, ECS/Fargate with the three tasks, RDS PostgreSQL, ALB in front of the API. RabbitMQ and the ERP were deliberately left out of the deployment and both are asked about in response.md (\"Onde roda o RabbitMQ em produ\u00e7\u00e3o?\", \"O ERP deve aparecer no deployment?\"); the AWS region is also flagged as omitted. The added theme and AWS tags are cosmetic and explicitly explained (\"O tema s\u00f3 estiliza elementos com tag Amazon Web Services - \u2026\"). The response also notes that the missing queue instance means API->Fila and Worker->Fila arrows will be absent from the deployment view rather than hiding that consequence."
+        }
+      ],
+      "notes": [
+        "Where RabbitMQ runs in production (omitted from deployment, asked)",
+        "Whether the external ERP should appear in the deployment view (omitted, asked)",
+        "AWS region not modelled (flagged)"
+      ]
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 179.2,
+        "stddev": 25.173,
+        "min": 161.4,
+        "max": 197.0
+      },
+      "tokens": {
+        "mean": 72869.0,
+        "stddev": 6979.1439,
+        "min": 67934,
+        "max": 77804
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 185.6,
+        "stddev": 9.8995,
+        "min": 178.6,
+        "max": 192.6
+      },
+      "tokens": {
+        "mean": 69417.5,
+        "stddev": 3768.172,
+        "min": 66753,
+        "max": 72082
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-6.4",
+      "tokens": "+3452"
+    }
+  },
+  "notes": []
+}

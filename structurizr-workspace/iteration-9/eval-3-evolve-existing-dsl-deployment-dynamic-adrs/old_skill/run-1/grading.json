@@ -1,0 +1,94 @@
+{
+  "expectations": [
+    {
+      "text": "Edited DSL validates cleanly with the Structurizr CLI",
+      "passed": true,
+      "evidence": "Verified deterministically by the caller: `structurizr/structurizr validate` via Docker exited 0 with no output. response.md reports the same plus a canary error returning exit 1."
+    },
+    {
+      "text": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+      "passed": true,
+      "evidence": "Verified deterministically by the caller: every non-blank line of the original DSL is still present and docs/adr is byte-identical. Manual diff against evals/files/legacy-billing/workspace.dsl: identifiers atendente/faturamento/portal/api/worker/fila/banco/erp unchanged; the seven original relationships unchanged; `systemContext faturamento \"Contexto\"` and `container faturamento \"Containers\"` unchanged; the four original style rules unchanged. Additions only: `!adrs docs/adr`, `producao` deploymentEnvironment, `EmissaoFatura` dynamic view, `Deployment-Producao` view, a new `element \"Infrastructure Node\" { shape ellipse }` style rule appended after the existing ones, and `theme amazon-web-services-2025.07`."
+    },
+    {
+      "text": "Production AWS deployment modeled as requested: ECS Fargate for portal/api/worker, API with 2 instances, RDS PostgreSQL, ALB as infrastructureNode (not a container), plus a deployment view",
+      "passed": true,
+      "evidence": "`producao = deploymentEnvironment \"Produção\"` > `aws` deploymentNode > `ecs = deploymentNode \"Amazon ECS\" ... \"AWS Fargate\"` containing `Task do Portal { instanceOf faturamento.portal }`, `Task da API { instances 2  instanceOf faturamento.api }`, `Task do Worker { instanceOf faturamento.worker }`; `rds = deploymentNode \"Amazon RDS\"` > `\"PostgreSQL\" { instanceOf faturamento.banco }`; `alb = infrastructureNode \"Application Load Balancer\"` with Portal->API rerouted via `faturamento.portal -/> faturamento.api { portal -> aws.alb; aws.alb -> api }`. View `deployment faturamento producao \"Deployment-Producao\"` present (environment referenced by identifier, which validated). ALB is not a container."
+    },
+    {
+      "text": "Dynamic view of the invoice-emission flow with steps backed by existing model relationships",
+      "passed": true,
+      "evidence": "`dynamic faturamento \"EmissaoFatura\"` has six steps: atendente -> portal, portal -> api, api -> banco, api -> fila, worker -> fila, worker -> erp. Each pair and direction matches one of the seven original relationships, so the validator accepts them; the flow matches the prompt's description."
+    },
+    {
+      "text": "ADRs linked via !adrs docs/adr using the default adr-tools importer",
+      "passed": true,
+      "evidence": "Line 5: `!adrs docs/adr` at workspace scope with no importer argument (default adr-tools importer). outputs/docs/adr holds the three adr-tools-format files untouched. response.md reports 3 decisions imported in a JSON export."
+    },
+    {
+      "text": "No silently invented infrastructure (unstated details omitted, asked about, or explicitly flagged as assumptions)",
+      "passed": true,
+      "evidence": "Deployment contains only what the prompt named (AWS account, ECS/Fargate with three tasks, RDS PostgreSQL, ALB before the API). RabbitMQ was left out of the deployment and asked about (\"Onde o RabbitMQ roda em produção?\"), with the consequence for the missing queue arrows stated; region, Portal/Worker instance counts, and whether the ALB also fronts the Portal are each flagged as open. The theme and the `Infrastructure Node` ellipse style are unrequested but explicitly labelled cosmetic in the reply, not presented as infrastructure."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "execution_metrics": {
+    "note": "No transcript or metrics.json available; only response.md, outputs/workspace.dsl and outputs/docs/adr were graded.",
+    "total_tokens": 77804,
+    "output_chars": 4700,
+    "response_chars": 4700
+  },
+  "claims": [
+    {
+      "claim": "Identifiers, names, relationships, views Contexto/Containers and styles were preserved",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Caller's line-preservation check plus manual diff confirm all original lines intact; one new style rule was appended, existing ones untouched."
+    },
+    {
+      "claim": "All six dynamic steps are backed by pre-existing relationships",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Each source->destination pair exists among the original seven relationships and the validator passed."
+    },
+    {
+      "claim": "Deployment view has 12 elements per JSON export",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Cannot verify without the export output. Counting by hand: aws node, alb, ecs node, 3 task nodes, 3 container instances (API instance with instances 2 counts as one element), rds node, PostgreSQL node, banco instance = 12 if the API instance counts once, so the figure is plausible but unverified."
+    },
+    {
+      "claim": "Theme amazon-web-services-2025.07 is bundled in the image and resolves offline",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Validation passed with STRUCTURIZR_THEMES pointing at the bundled themes directory; the theme line would fail validation if unresolved."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Where RabbitMQ runs in production (omitted from deployment, asked)",
+      "AWS region not modelled",
+      "Portal and Worker instance counts left at default 1",
+      "Whether the ALB also fronts the Portal (modelled only in front of the API)"
+    ],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Existing content preserved: original identifiers, view keys (Contexto, Containers), styles and relationships unchanged",
+        "reason": "This run appended a new `Infrastructure Node` style rule inside the existing styles block. The original rules are unchanged so it passes, but the prompt's 'Não mude o que já existe além do necessário' could be read as forbidding unrequested additions to the styles block. The assertion should state whether additive edits to existing blocks are allowed."
+      },
+      {
+        "reason": "Both eval-3 runs added `theme amazon-web-services-2025.07` and AWS icon tags unprompted. No assertion decides whether an unrequested theme is acceptable scope; the eval author should take a position so runs are graded consistently."
+      }
+    ],
+    "overall": "All six assertions pass on genuine content. This run flags more open points than the with_skill run (Portal/Worker instance counts, ALB-in-front-of-Portal) but does not ask about the ERP's placement; both are within the assertion's tolerance."
+  }
+}

@@ -1,10 +1,8 @@
 # Structurizr DSL — advanced features
 
 Read this only when the task explicitly needs one of these: archetypes, workspace
-extension, filtered/custom/image views, perspectives, scripts/plugins, or the rarely-used
-options in §6 (terminology, animations, health checks, server-only configuration).
-Derived from [docs.structurizr.com/dsl](https://docs.structurizr.com/dsl) (MIT) — see
-NOTICE.md.
+extension, filtered/custom/image views, perspectives, scripts/plugins. Derived from
+[docs.structurizr.com/dsl](https://docs.structurizr.com/dsl) (MIT) — see NOTICE.md.
 
 ## 1. Archetypes
 
@@ -119,33 +117,6 @@ DSL and append to it from a program: parse `workspace.dsl` with the Java `struct
 library (`com.structurizr:structurizr-dsl`), or `structurizr export -format json` and load
 the JSON with any language port. The libraries are append-only — nothing already in the
 DSL can be removed or edited from code.
-
-## 6. Rarely-used options
-
-- **Terminology** (in `views`) renames the C4 vocabulary in rendered diagrams:
-
-  ```
-  terminology {
-      person <term>   softwareSystem <term>   container <term>   component <term>
-      deploymentNode <term>   infrastructureNode <term>   relationship <term>
-      metadata <square|round|curly|angle|double-angle|none>
-  }
-  ```
-
-- **Animation** (in a view body) — one line of identifiers per step:
-
-  ```
-  animation {
-      <id> [id…]
-      <id> [id…]
-  }
-  ```
-
-- **Health checks** (in a container/system instance block):
-  `healthCheck <name> <url> [interval] [timeout]` — interval in seconds (default 60),
-  timeout in ms (default 0).
-- **Server-only configuration** (ignored locally): `visibility <private|public>` and
-  `users { <username> <read|write> }` inside `configuration { … }`.
 
 ---
 *Condensed from the Structurizr documentation

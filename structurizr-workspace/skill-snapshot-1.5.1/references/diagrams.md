@@ -1,14 +1,15 @@
-# C4 diagrams — which to create, notation rules
+# C4 diagrams — which to create, notation rules, review checklist
 
-When each diagram type earns its place and how to make any diagram self-describing.
-Derived from c4model.com (Simon Brown, CC BY 4.0) — see NOTICE.md. The pre-delivery
-checklist lives in SKILL.md step 7.
+When each diagram type earns its place, how to make any diagram self-describing, and the
+full pre-delivery checklist. Derived from c4model.com (Simon Brown, CC BY 4.0) — see
+NOTICE.md.
 
 **Sections** — jump to what the task needs rather than reading straight through:
 
 Diagram types (System Context · Container · Component · Code · System Landscape ·
 Dynamic · Deployment, plus a **quick matrix**) · Notation rules, including lines as
-dependency vs data flow · Will diagrams rot?
+dependency vs data flow · **Review checklist** (run before delivering) ·
+Will diagrams rot?
 
 ## Diagram types
 
@@ -91,6 +92,37 @@ consistent tag-based styles.
 ### Lines: dependency or data flow?
 Your choice per diagram — "A uses B" or "A sends X to B" — but the label must match the
 arrow head, and stay consistent within a diagram.
+
+## Review checklist (run before delivering)
+
+General
+- [ ] Does the diagram have a title (auto-generated or explicit)?
+- [ ] Is the diagram type and scope obvious?
+- [ ] Is there a key/legend covering the notation (styles → legend)?
+
+Elements
+- [ ] Every element has a name?
+- [ ] The abstraction level of every element is clear (person/system/container/…)?
+- [ ] Every element has a description saying what it does?
+- [ ] Technology stated wherever applicable (containers, components)?
+- [ ] All acronyms/abbreviations understandable?
+- [ ] Meaning of every color, shape, icon, border style, and size is clear (and used
+      consistently)?
+
+Relationships
+- [ ] Every arrow has a label describing intent?
+- [ ] Every label reads correctly in the arrow's direction?
+- [ ] Technology/protocol on inter-process relationships?
+- [ ] Meaning of every line style/arrowhead/color is clear?
+
+Structurizr-specific additions
+- [ ] DSL validates cleanly (`structurizr/structurizr validate` via Docker)?
+- [ ] No removed/deprecated keywords (`enterprise`, `!extend`, `!ref`, `branding`,
+      `location`, `dashed true`)?
+- [ ] View keys stable and descriptive?
+- [ ] `configuration { scope … }` matches the workspace type?
+- [ ] Dynamic-view steps all backed by model relationships?
+- [ ] ADRs linked via `!adrs` when the repo has them?
 
 ## Will diagrams rot?
 Context diagrams change slowly; container diagrams relatively slowly (faster with heavy
