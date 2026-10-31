@@ -4,7 +4,8 @@ Condensed from [docs.structurizr.com/dsl](https://docs.structurizr.com/dsl) (MIT
 NOTICE.md. Current as of DSL v6.2.x (2026). Anything marked **LEGACY** must not appear in
 generated DSL. Rare features (archetypes, workspace extension, scripts/plugins,
 filtered/custom/image views, perspectives, terminology, animations, health checks,
-server-only configuration) live in `dsl-advanced.md` — read that only when the task
+server-only configuration) and the exhaustive tables (include/exclude expression
+grammar, style properties) live in `dsl-advanced.md` — read that only when the task
 needs them.
 
 **Sections** — jump to what the task needs rather than reading straight through:
@@ -203,23 +204,21 @@ systems it depends on) — to show another system's containers, name them
 
 ## 8. Include/exclude expressions
 
+`include *` plus identifiers covers most views. When it doesn't, the expressions that
+come up in practice:
+
 ```
-->id   id->   ->id->                       // element + incoming/outgoing/both relationships
-element==->id   element==id->   element==->id->   // same, but id may also be a group
-element.type==<Person|SoftwareSystem|Container|Component|DeploymentNode|InfrastructureNode|ContainerInstance>
-element.parent==<id>      element.tag==<tag>[,tag]      element.tag!=<tag>
-element.technology==<t>   element.technology!=<t>
-element.group==<name>     element.properties[<name>]==<value>
-*->*   id->*   *->id                       // relationships
-relationship==id->id      relationship.tag==<tag>[,tag]   relationship.tag!=<tag>
-relationship.source==<id> relationship.destination==<id>
-relationship.properties[<name>]==<value>
+->id->                                     // element + its relationships (->id / id-> for one direction)
+element.type==Container                    // Person|SoftwareSystem|Container|Component|DeploymentNode|…
+element.parent==<id>      element.tag==<tag>
+exclude "u -> s.api"                       // drop one relationship; * allowed on either side
 ```
 
-Combine with `&&`/`||`: `include "element.type==Container && element.parent==s"`. Quote
-any expression containing whitespace. Relationship expressions only act on elements
-already in the view. Exclude a relationship: `exclude "u -> s.api"` (`*` allowed on
-either side).
+Combine with `&&`/`||` and quote any expression containing whitespace:
+`include "element.type==Container && element.parent==s"`. Relationship expressions only
+act on elements already in the view. The full grammar (technology, group, and property
+filters; `relationship.source`/`destination`; group-aware `element==->id`) is in
+`dsl-advanced.md` §7.
 
 ## 9. Styles
 
@@ -227,31 +226,19 @@ either side).
 styles {
     element "<tag>" {
         shape <Box|RoundedBox|Circle|Ellipse|Hexagon|Diamond|Cylinder|Bucket|Pipe|Person|Robot|Folder|WebBrowser|Window|Terminal|Shell|MobileDevicePortrait|MobileDeviceLandscape|Component>
-        icon <file|url>
-        width <int>   height <int>
-        background <#rrggbb|name>   color <#rrggbb|name>
-        stroke <#rrggbb|name>   strokeWidth <1-10>
-        fontSize <int>   border <solid|dashed|dotted>   opacity <0-100>
-        metadata <true|false>   description <true|false>
-        properties { "name" "value" }
+        background <#rrggbb|name>   color <#rrggbb|name>   icon <file|url>
     }
     relationship "<tag>" {
-        thickness <int>   color <#rrggbb|name>
-        style <solid|dashed|dotted>      // modern; REMOVED: dashed true|false
-        routing <Direct|Orthogonal|Curved>   jump <true|false>
-        fontSize <int>   width <int>   position <0-100>   opacity <0-100>
-        properties { "name" "value" }
+        style <solid|dashed|dotted>      // REMOVED: dashed true|false
+        color <#rrggbb|name>   routing <Direct|Orthogonal|Curved>
     }
-    light { element … relationship … }   // styles for light mode only
-    dark  { element … relationship … }   // styles for dark mode only
 }
 ```
 
-Styles match by tag — tag elements (`tags "Database"`) and style the tag. `colour` is an
-alias of `color`. ADR status styling: `element "Decision:<Status>"` (literal status
-string, no fixed enum). Element styles render fully in Structurizr; PlantUML/Mermaid
-exports support a subset. Renaming the C4 vocabulary in rendered diagrams
-(`terminology { … }`): `dsl-advanced.md` §6.
+Styles match by tag — tag elements (`tags "Database"`) and style the tag; `colour` is an
+alias of `color`. The house template in §15 carries the usual set. The remaining
+properties (size, stroke, border, opacity, font, metadata/description toggles, `light`/`dark`
+blocks), ADR status styling, and export caveats are in `dsl-advanced.md` §8.
 
 ## 10. Themes
 

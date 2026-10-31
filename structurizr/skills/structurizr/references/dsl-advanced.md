@@ -1,8 +1,10 @@
 # Structurizr DSL — advanced features
 
 Read this only when the task explicitly needs one of these: archetypes, workspace
-extension, filtered/custom/image views, perspectives, scripts/plugins, or the rarely-used
-options in §6 (terminology, animations, health checks, server-only configuration).
+extension, filtered/custom/image views, perspectives, scripts/plugins, the rarely-used
+options in §6 (terminology, animations, health checks, server-only configuration), or
+the exhaustive tables in §7 (include/exclude expression grammar) and §8 (style
+properties) when the condensed forms in `dsl-reference.md` don't cover the case.
 Derived from [docs.structurizr.com/dsl](https://docs.structurizr.com/dsl) (MIT) — see
 NOTICE.md.
 
@@ -148,6 +150,60 @@ DSL can be removed or edited from code.
   the replacement.
 - **Server-only configuration** (ignored locally): `visibility <private|public>` and
   `users { <username> <read|write> }` inside `configuration { … }`.
+
+## 7. Include/exclude expression grammar
+
+The condensed set in `dsl-reference.md` §8 covers most views; this is the full grammar.
+
+```
+->id   id->   ->id->                       // element + incoming/outgoing/both relationships
+element==->id   element==id->   element==->id->   // same, but id may also be a group
+element.type==<Person|SoftwareSystem|Container|Component|DeploymentNode|InfrastructureNode|ContainerInstance>
+element.parent==<id>      element.tag==<tag>[,tag]      element.tag!=<tag>
+element.technology==<t>   element.technology!=<t>
+element.group==<name>     element.properties[<name>]==<value>
+*->*   id->*   *->id                       // relationships
+relationship==id->id      relationship.tag==<tag>[,tag]   relationship.tag!=<tag>
+relationship.source==<id> relationship.destination==<id>
+relationship.properties[<name>]==<value>
+```
+
+Combine with `&&`/`||`: `include "element.type==Container && element.parent==s"`. Quote
+any expression containing whitespace. Relationship expressions only act on elements
+already in the view. Exclude a relationship: `exclude "u -> s.api"` (`*` allowed on
+either side).
+
+## 8. Style properties
+
+The common subset is in `dsl-reference.md` §9; this is every property the parser accepts.
+
+```
+styles {
+    element "<tag>" {
+        shape <Box|RoundedBox|Circle|Ellipse|Hexagon|Diamond|Cylinder|Bucket|Pipe|Person|Robot|Folder|WebBrowser|Window|Terminal|Shell|MobileDevicePortrait|MobileDeviceLandscape|Component>
+        icon <file|url>
+        width <int>   height <int>
+        background <#rrggbb|name>   color <#rrggbb|name>
+        stroke <#rrggbb|name>   strokeWidth <1-10>
+        fontSize <int>   border <solid|dashed|dotted>   opacity <0-100>
+        metadata <true|false>   description <true|false>
+        properties { "name" "value" }
+    }
+    relationship "<tag>" {
+        thickness <int>   color <#rrggbb|name>
+        style <solid|dashed|dotted>      // modern; REMOVED: dashed true|false
+        routing <Direct|Orthogonal|Curved>   jump <true|false>
+        fontSize <int>   width <int>   position <0-100>   opacity <0-100>
+        properties { "name" "value" }
+    }
+    light { element … relationship … }   // styles for light mode only
+    dark  { element … relationship … }   // styles for dark mode only
+}
+```
+
+ADR status styling: `element "Decision:<Status>"` (literal status string, no fixed
+enum). Element styles render fully in Structurizr; PlantUML/Mermaid exports support a
+subset. Renaming the C4 vocabulary in rendered diagrams (`terminology { … }`): §6.
 
 ---
 *Condensed from the Structurizr documentation

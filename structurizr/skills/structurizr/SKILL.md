@@ -136,7 +136,8 @@ invocation, and most tasks need none of them:
 - Microservices, queues/topics, landscape/multiple systems, hardware/devices, splitting
   the model across files → `references/modeling-patterns.md`
 - Archetypes, workspace extension (`!element`), filtered/custom/image views,
-  perspectives, scripts/plugins → `references/dsl-advanced.md`
+  perspectives, scripts/plugins, or an include/exclude expression or style property
+  beyond the condensed set in `dsl-reference.md` → `references/dsl-advanced.md`
 
 House conventions, in one breath: `!identifiers hierarchical`; every element gets a
 description and every container a technology; relationship labels are specific and
@@ -291,7 +292,7 @@ Read only what the task needs — each file read is a per-invocation token cost.
 | `references/diagrams.md` | Choosing which diagrams to create, when step 3 leaves doubt: the seven view types, when each earns its place, and C4's notation rules. |
 | `references/deployment-patterns.md` | Deployment work: `-/>` rerouting, Docker/K8s/EKS/Fargate/App Runner nesting, serverless (Lambda + local emulator), multi-environment, deployment groups. |
 | `references/modeling-patterns.md` | Microservices, messaging, landscape/system catalog, hardware/devices as custom elements, monorepo composition. |
-| `references/dsl-advanced.md` | Rare: archetypes, workspace extension, filtered/custom/image views, perspectives, scripts/plugins. |
+| `references/dsl-advanced.md` | Rare: archetypes, workspace extension, filtered/custom/image views, perspectives, scripts/plugins; plus the full include/exclude expression grammar and style property list. |
 
 ## Attribution
 
