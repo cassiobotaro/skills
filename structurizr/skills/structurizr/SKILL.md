@@ -237,8 +237,8 @@ it is deprecated.
   (the two interval variables make the UI pick up DSL edits every 2 s and persist manual
   layout every 5 s, so the user doesn't lose an arrangement between edits)
 
-- **Export** to `diagrams/` in another format (`plantuml`, `mermaid`, `json`, `dot`,
-  `ilograph`, `d2`, `static`):
+- **Export** to `diagrams/` in a text format (`plantuml`, `plantuml/c4plantuml`,
+  `mermaid`, `websequencediagrams`, `json`, `theme`, `static`) with the regular image:
 
   ```
   docker run --rm -u $(id -u):$(id -g) \
@@ -248,7 +248,27 @@ it is deprecated.
   ```
 
   This reads `workspace.json` (where saved layout lives), so preview with the UI at
-  least once first — or export straight from the DSL with `-workspace workspace.dsl`.
+  least once first — or export straight from the DSL with `-workspace workspace.dsl`
+  (autolayout only). `dot`, `d2`, and `ilograph` are not formats this CLI knows.
+
+- **Export PNG/SVG** — only the `-playwright` variant of the image can render them; the
+  regular one answers `Exporting to PNG/SVG is not supported in this build`. The variant
+  is published per version (`structurizr/structurizr:<version>-playwright`, no floating
+  tag), bundles the same themes, and is a far larger pull (~2 GB). Match the version of
+  the regular image already in use (`docker run --rm structurizr/structurizr version`):
+
+  ```
+  docker run --rm -u $(id -u):$(id -g) \
+      -v "$PWD":/usr/local/structurizr \
+      -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
+      structurizr/structurizr:<version>-playwright export \
+      -workspace workspace.json -format svg -output diagrams
+  ```
+
+  Writes one `<view key>.svg` (or `.png`) plus a `<view key>-key.svg` legend per view;
+  `-mode dark` renders the dark theme. The same `-workspace workspace.dsl` note applies.
+  When the variant isn't pulled and can't be, don't pull it on the user's behalf unless
+  asked — hand over this command instead, as with validation.
 
 If the user has their own wrappers/aliases around these images, respect those instead.
 

@@ -57,7 +57,7 @@ Any other Agent Skills host works too: copy a skill folder (e.g. `design-doc/ski
 The diagram skills validate and render through tooling you provide, and degrade gracefully when it is missing. Nothing is bundled and no MCP server is involved — installing Docker is your opt-in, and nothing you diagram leaves your machine.
 
 - **mermaid-sequence** — renders natively on GitHub, GitLab, and most wikis. It validates diagrams with [mermaid-cli](https://github.com/mermaid-js/mermaid-cli): first through its Docker image ([`minlag/mermaid-cli`](https://hub.docker.com/r/minlag/mermaid-cli), pulled on first use), then through a local `mmdc` install if Docker is missing. Without either, the skill still produces ready-to-paste diagrams, tells you they were not validated, and gives you the Docker command to run later.
-- **structurizr** — validates, previews, and exports workspaces with the [`structurizr/structurizr`](https://hub.docker.com/r/structurizr/structurizr) Docker image (`structurizr/structurizr validate`, `local`, `export`), pulled on first use. Without Docker, the skill still authors the DSL, tells you it was not validated, and gives you the `validate` command to run later.
+- **structurizr** — validates, previews, and exports workspaces with the [`structurizr/structurizr`](https://hub.docker.com/r/structurizr/structurizr) Docker image (`structurizr/structurizr validate`, `local`, `export`), pulled on first use; PNG/SVG export needs the image's `<version>-playwright` variant, which the skill names when it hands over the command. Without Docker, the skill still authors the DSL, tells you it was not validated, and gives you the `validate` command to run later.
 
 ## Repository layout
 
