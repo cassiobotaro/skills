@@ -5,7 +5,7 @@
       "id": 1,
       "eval_name": "rich-write-new-doc",
       "prompt": "Preciso escrever um design doc pro projeto que a gente vai tirar do papel: um serviço de exportação de relatórios em background. Hoje os relatórios grandes são gerados na própria request da API e estouram o timeout de 30s no gateway — uns 12% das exportações acima de 50 mil linhas falham, e o suporte abre ticket disso toda semana. A ideia é: a API passa a enfileirar um job num worker separado (a gente já tem RabbitMQ na infra), o worker gera o CSV/XLSX em streaming e sobe pro S3, e o usuário recebe um link assinado por e-mail quando termina. Alternativas que discutimos: gerar síncrono com timeout maior (descartado, só empurra o problema) e usar uma ferramenta de BI externa (descartado por custo e por expor dado de cliente). Trade-off que aceitamos: o usuário perde o download imediato — exportação pequena que hoje funciona na hora vai virar assíncrona também, pra ter um caminho só. Isso impacta o time de plataforma (fila compartilhada) e o de segurança (link assinado com PII). Objetivo: zerar os timeouts de exportação e aguentar 100 mil linhas. Cria o doc em docs/design/ por favor.",
-      "expected_output": "Cria docs/design/<slug>.md em português com: cabeçalho (estado rascunho, data real), visão geral de 1–2 parágrafos sem detalhes, contexto/problema com os números dados (timeout 30s, 12% acima de 50 mil linhas), objetivo mensurável (zerar timeouts, 100 mil linhas), design como série de seções (solução, arquitetura/fluxos com diagrama mermaid seguido de texto explicativo), compensações com contras explícitos (perda do download imediato), alternativas incluindo as citadas e 'não fazer nada', preocupações transversais (plataforma/fila compartilhada, segurança/PII) e glossário sugerido no início com os termos em que um revisor tropeçaria (PII, BI, S3 — sem entradas triviais como API/HTTP nem termos do ferramental do próprio doc como C4/DSL). Nada inventado além do que o usuário disse.",
+      "expected_output": "Cria docs/design/<slug>.md em português com: cabeçalho (estado rascunho, data real), visão geral de 1–2 parágrafos sem detalhes, contexto/problema com os números dados (timeout 30s, 12% acima de 50 mil linhas), objetivo mensurável (zerar timeouts, 100 mil linhas), design como série de seções (solução; arquitetura como diagrama C4 autorado em Structurizr DSL, embutido como referência de imagem Markdown — renderizada quando o ferramental do structurizr estiver acessível, placeholder caso contrário — com o DSL dobrado num bloco <details>; fluxos como blocos ```mermaid; todo diagrama seguido de texto explicativo), compensações com contras explícitos (perda do download imediato), alternativas incluindo as citadas e 'não fazer nada', preocupações transversais (plataforma/fila compartilhada, segurança/PII) e glossário sugerido no início com os termos em que um revisor tropeçaria (PII, BI, S3 — sem entradas triviais como API/HTTP nem termos do ferramental do próprio doc como C4/DSL). Nada inventado além do que o usuário disse.",
       "files": [],
       "assertions": [
         "Creates a Markdown design doc under docs/design/ in the project",
@@ -14,6 +14,7 @@
         "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
         "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
         "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+        "The architecture diagram is authored as Structurizr DSL and embedded as a Markdown image reference with the DSL folded inside a <details> block (rendered image when the structurizr tooling is reachable, placeholder otherwise); any flow diagram is a fenced ```mermaid sequence diagram; the architecture is never redrawn by hand in Mermaid",
         "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
         "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
         "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
@@ -105,6 +106,38 @@
         "The document contains NO validation disclaimer (no 'não validado', 'not machine-validated', 'ilustração do texto' or equivalent)",
         "Every diagram is followed by explanatory prose",
         "Does not attempt to install Docker, the Structurizr CLI, or any other dependency"
+      ]
+    },
+    {
+      "id": 7,
+      "eval_name": "user-template-governs",
+      "prompt": "Nosso template de design doc tá em docs/design/TEMPLATE.md — segue ele à risca, o time de arquitetura só aceita doc nesse formato. Preciso do doc do nosso novo serviço de deduplicação de eventos. Hoje o pipeline de ingestão recebe eventos duplicados dos produtores (reenvio em retry): medimos 4% de duplicatas no mês passado, e isso infla os relatórios de faturamento, o financeiro já reclamou duas vezes. A proposta é um serviço que fica entre o ingestor e o Kafka, guarda a chave idempotente de cada evento no Redis por 24h e descarta repetidos. Alternativas que discutimos: deduplicar no consumidor (cada consumidor teria que reimplementar, descartado) e usar a idempotência nativa do produtor Kafka (não cobre reenvio entre reinícios do produtor, descartado). Trade-off aceito: mais um salto no caminho crítico da ingestão, estimamos +5ms de latência. Meta: duplicatas abaixo de 0,1%. Autor sou eu, Rafael Nunes. Salva em docs/design/.",
+      "expected_output": "Cria docs/design/<slug>.md em português cobrindo TODAS as seções do template, na ordem do template (Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso, Perguntas abertas), com o cabeçalho do template preenchido com o que foi dado (autor Rafael Nunes, estado rascunho, data real) e os campos não informados (revisores) perguntados, não inventados. Motivação com os números dados (4% de duplicatas, reclamações do financeiro); Proposta com o serviço entre ingestor e Kafka, Redis com chave idempotente por 24h, e o trade-off dos +5ms; Métricas de sucesso com a meta de 0,1%. As alternativas discutidas (deduplicar no consumidor, idempotência do produtor Kafka) e o trade-off aceito não têm lugar no template: entram numa seção própria (ex.: 'Alternativas consideradas'), mantendo o esqueleto e a ordem da casa, e o desvio é nomeado ao usuário para ele aceitar. Riscos e Plano de rollout não foram dados: viram perguntas ao usuário (uma por seção), nunca boilerplate nem seção omitida. Não substitui o template pelo catálogo padrão da skill (nada de 'Visão geral', 'Escopo e contexto', 'Objetivos e fora de escopo' no lugar das seções da casa).",
+      "files": [
+        "files/template/docs/design/TEMPLATE.md"
+      ],
+      "assertions": [
+        "Creates a Markdown design doc under docs/design/, in Portuguese",
+        "The document contains every section of docs/design/TEMPLATE.md, in the template's order (Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso, Perguntas abertas), with the template's header table",
+        "The template's sections are not replaced or renamed into the skill's default catalog (no 'Visão geral', 'Escopo e contexto', 'Objetivos e fora de escopo' standing in for the house sections)",
+        "Riscos and Plano de rollout, whose substance the prompt does not give, are asked of the user — one targeted question each — and are not filled with boilerplate, invented risks, or invented rollout phases",
+        "The alternatives the user discussed (consumer-side dedup, Kafka producer idempotence) and the accepted +5ms latency cost are recorded under a dedicated heading of their own — at any level (a new section, or a subsection of a template section), as long as the template's top-level skeleton and order stay intact — and the reply names this deviation from the template so the user can accept it. A 'do nothing' baseline alongside them is the skill's contract, not an invention",
+        "The header carries the author Rafael Nunes, a draft state and a real date; reviewers are asked for, not invented",
+        "No invented facts: every metric (4% duplicates, 24h key retention, +5ms, 0.1% target) traces to the prompt; no invented technology, team, or stakeholder",
+        "Diagrams carry only established facts: the Structurizr DSL validates, its technology slots are filled only for technologies the prompt names (Redis, Kafka), relationships carry no invented protocol, and the Mermaid flow has no invented endpoints, headers, status codes, or failure branches"
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "single-decision-not-a-design",
+      "prompt": "Write a design doc recording our decision to use Terraform instead of Pulumi for our infrastructure as code. We picked Terraform because the team already knows HCL and the provider/module ecosystem is bigger. Put it in docs/design/.",
+      "expected_output": "Recognizes that this is a single, already-made decision with no design left to discover, and says so in a sentence instead of manufacturing a design doc around it. Suggests the right home for it — an architecture decision record / the team's decision log — and offers to help there if wanted. Does not create a design doc file in docs/design/ (or anywhere), does not invent a problem statement, goals, architecture, risks, or alternatives beyond the two the user named. Replies in English.",
+      "files": [],
+      "assertions": [
+        "States, in English, that a single already-made decision is not a design to document and that this skill writes design docs, not decision records",
+        "Does not create a design doc file under docs/design/ or anywhere else",
+        "Points the user to an ADR / decision log as the appropriate artifact (naming the format or offering to help is fine; writing the ADR itself is not required)",
+        "Does not assert as the team's reasoning anything the user did not state (no invented problem statement, goals, metrics, risks, or consequences); asking whether other options such as OpenTofu were considered is a question, not a fabrication"
       ]
     }
   ]

@@ -138,6 +138,57 @@
         "Docker and Fargate appear only in the deployment model (AWS → ECS/Fargate → Docker container → instance), never as containers",
         "Adyen is an external software system; no invented architecture beyond the spec (cosmetic defaults allowed)"
       ]
+    },
+    {
+      "id": 10,
+      "name": "scope-vendor-icon-diagram",
+      "eval_name": "scope-vendor-icon-diagram",
+      "prompt": "Generate an AWS architecture diagram for our platform using the real AWS service icons: EC2 boxes for the two app servers, an RDS box for the Postgres database, an S3 bucket for uploads and CloudFront in front of everything. I want the kind of picture you see in AWS reference architectures.",
+      "expected_output": "Says in a sentence that a vendor-icon infrastructure picture is not what this skill produces (C4 models the abstractions the team owns, not a cloud catalog in its own iconography) and hands the request on to a diagramming tool, without creating a workspace.dsl. It may offer, as an alternative the user can accept or decline, a C4 deployment view of what the team itself runs on that infrastructure — but does not build it unasked. Nothing about the platform is invented. Replies in English.",
+      "files": [],
+      "assertions": [
+        "Does not create or edit a workspace.dsl (or any .dsl file) in response to this request",
+        "States, in one or two sentences, that a vendor-service-icon infrastructure picture is outside this skill's scope and names what kind of tool does that job",
+        "If it offers a C4 deployment view as an alternative, it is offered as a choice for the user and not built unasked",
+        "Does not invent containers, relationships, or technologies for the platform beyond what the prompt names (EC2 app servers, RDS Postgres, S3 uploads, CloudFront)"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "adr-authoring-routed-linking-kept",
+      "eval_name": "adr-authoring-routed-linking-kept",
+      "prompt": "Decidimos trocar o RabbitMQ por Kafka na fila de faturas. Escreve o ADR 0004 dessa decisão em docs/adr/ e deixa o workspace.dsl apontando pros nossos ADRs, que hoje ele não aponta.",
+      "expected_output": "Separa os dois pedidos. (1) Não escreve o conteúdo do ADR 0004: diz em uma frase que a autoria da decisão cabe ao decision log do time (ex.: adr-tools, `adr new`), e no máximo aponta como criar o arquivo no formato que docs/adr já usa. (2) Faz o link: adiciona `!adrs docs/adr` ao workspace.dsl no escopo do workspace (os três ADRs existentes seguem o formato adr-tools), com diff mínimo — identificadores, nomes, chaves de view e estilos existentes preservados. Não altera o modelo para Kafka por conta própria: a troca é uma decisão anunciada, não uma mudança que o usuário pediu para refletir no modelo; pergunta se o workspace deve passar a mostrar Kafka agora ou só quando a migração acontecer. Valida com a imagem Docker structurizr/structurizr quando disponível; sem Docker, entrega e diz explicitamente que não validou, com o comando para rodar.",
+      "files": [
+        "files/legacy-billing/workspace.dsl",
+        "files/legacy-billing/docs/adr/0001-registrar-decisoes-de-arquitetura.md",
+        "files/legacy-billing/docs/adr/0002-usar-postgresql-como-banco-de-dados.md",
+        "files/legacy-billing/docs/adr/0003-processamento-assincrono-com-rabbitmq.md"
+      ],
+      "assertions": [
+        "Does not write the decision content of ADR 0004: no new file under docs/adr/ carrying Status/Context/Decision/Consequences text (the fixture ADRs use adr-tools' English headings) for the Kafka decision; the reply routes authoring to the team's decision log (e.g. adr-tools) in a sentence",
+        "Adds `!adrs docs/adr` (adr-tools format, the default) to workspace.dsl at workspace scope",
+        "Minimal diff: every existing identifier, element name, relationship, view key and style in workspace.dsl is preserved",
+        "Does not change the Fila de Faturas container's technology from RabbitMQ to Kafka (nor add Kafka elements) without asking; the reply asks whether the model should reflect the swap now or after the migration",
+        "Validates with the structurizr/structurizr Docker image and reports the result — or, if Docker is unavailable, says explicitly that the DSL was not validated and gives the validate command; never claims a validation that did not run. The grader re-runs `validate` from outputs/ to confirm the claim rather than trusting the reply",
+        "Replies in Portuguese"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "scope-sequence-request",
+      "eval_name": "scope-sequence-request",
+      "prompt": "Usa o Structurizr pra desenhar o passo a passo do checkout: o app chama a API de pedidos, a API reserva o estoque no serviço de inventário, cobra no gateway de pagamento e, se aprovado, publica o evento de pedido confirmado na fila. Quero ver a ordem das chamadas e o que acontece quando o pagamento é recusado.",
+      "expected_output": "Reconhece em uma frase que um fluxo ordenado no tempo, com caminho de falha (pagamento recusado), é um diagrama de sequência — forma do mermaid-sequence — e não uma view C4, e encaminha para lá sem abrir um workspace.dsl. Pode mencionar que uma dynamic view do Structurizr existe para cenários, mas só sobre um modelo que já exista e sem ramos de falha; não cria o modelo por conta própria para isso. Nada é inventado sobre o sistema. Responde em português.",
+      "files": [],
+      "assertions": [
+        "Does not create or edit a workspace.dsl (or any .dsl file) in response to this request",
+        "States in one or two sentences that an ordered interaction with a failure branch is a sequence diagram's shape (the mermaid-sequence skill), not a C4 view",
+        "If it mentions Structurizr dynamic views, it does not build a model unasked to host one and does not claim a dynamic view can express the declined-payment branch",
+        "Does not invent elements, technologies or relationships beyond what the prompt names (app, orders API, inventory service, payment gateway, queue). If it delivers the sequence diagram itself, reply arrows on the interactions the user named are fine; endpoints, headers, status codes, and what happens after the declined payment are not stated by the user and must stay out or become questions",
+        "Replies in Portuguese",
+        "If it claims the diagram was validated, the claim is true (the grader re-renders the block with mermaid-cli); a validation that did not run is never claimed"
+      ]
     }
   ]
 }

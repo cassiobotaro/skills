@@ -31,7 +31,7 @@
     {
       "id": 2,
       "name": "order-api-from-code",
-      "prompt": "Dá uma olhada no código da nossa API de pedidos em /home/cassiobotaro/Projetos/skills/mermaid-sequence-workspace/evals/files/order-api e gera um diagrama de sequência do que acontece quando chega um POST /orders, pra eu colocar no README do serviço. Usa os detalhes reais do código.",
+      "prompt": "Dá uma olhada no código da nossa API de pedidos neste repositório (main.py, payments.py, db.py, events.py) e gera um diagrama de sequência do que acontece quando chega um POST /orders, pra eu colocar no README do serviço. Usa os detalhes reais do código.",
       "expected_output": "Reads the code and produces a fenced ```mermaid block with the real flow: client -> Order API (POST /orders, 201), Order API -> PayGate (POST /v2/charges with Authorization: Bearer and Idempotency-Key, approved/declined), declined -> 402 branch, Postgres INSERT, RabbitMQ order.created published fire-and-forget. Notes carry details actually present in the code; no invented headers/fields; no unnecessary questions back to the user.",
       "files": [
         "files/order-api/main.py",
@@ -91,6 +91,21 @@
         "Does not default to offering mermaid.live, which renders remotely — points at a private Markdown preview (the repo's own GitHub/GitLab) and, if it mentions mermaid.live at all, flags that it is remote and leaves it as the user's choice",
         "Diagram is faithful: the 202/200/409 responses and the mTLS partner call appear as given, with technical detail in Notes",
         "Does not install anything to validate"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "scope-flowchart-request",
+      "prompt": "Faz um flowchart em mermaid da lógica de decisão do nosso deploy: se os testes passam, vai pra staging; se o smoke test em staging passa, sobe canary com 5% do tráfego; se a taxa de erro fica abaixo de 1% por 10 minutos, promove pra 100%; senão, rollback.",
+      "expected_output": "Reconhece que lógica de decisão (ramos condicionais sem participantes trocando mensagens) não é um diagrama de sequência e não força o fluxo na sintaxe sequenceDiagram. Diz em uma frase que esta skill cobre diagramas de sequência Mermaid. O que entregar — um bloco ```mermaid flowchart feito fora das convenções da skill, ou uma pergunta — contém exatamente os quatro passos e condições que o usuário deu (testes → staging; smoke → canary 5%; erro < 1% por 10 min → 100%; senão rollback), sem etapas, aprovações ou ferramentas inventadas. Não instala nada. Responde em português.",
+      "files": [],
+      "assertions": [
+        "Does not render the decision logic as a `sequenceDiagram`: no participants/actors exchanging messages are invented to fit the deploy gates into sequence notation",
+        "States in a sentence that this skill covers Mermaid sequence diagrams, so the flowchart is outside its scope",
+        "Whatever is delivered (a flowchart block or a question) contains exactly the user's gates — tests → staging; smoke test → 5% canary; error rate < 1% for 10 min → 100%; otherwise rollback — with no invented steps, approvals, tools, or timings. A terminal node for the failing-tests / failing-smoke branches the prompt leaves undefined is acceptable only when flagged to the user as the author's choice; routing those branches to rollback unflagged is an invention",
+        "The reply states how the block was validated (mermaid-cli Docker image, local mmdc, or an explicit 'not validated here' notice with the Docker command); it never claims a validation that did not run",
+        "Replies in Portuguese",
+        "The delivered Mermaid block renders with mermaid-cli without error (the grader re-renders it)"
       ]
     }
   ]
