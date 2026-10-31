@@ -1,0 +1,125 @@
+{
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/, in Portuguese",
+      "passed": true,
+      "evidence": "outputs/docs/design/deduplicacao-de-eventos.md exists (plus diagrams/deduplicacao-de-eventos-containers.svg). Title 'Serviço de deduplicação de eventos · DD-2026-(a definir)'; all prose is Portuguese ('O pipeline de ingestão recebe eventos duplicados dos produtores...'). Reply: 'Doc salvo em `docs/design/deduplicacao-de-eventos.md`'."
+    },
+    {
+      "text": "The document contains every section of docs/design/TEMPLATE.md, in the template's order (Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso, Perguntas abertas), with the template's header table",
+      "passed": true,
+      "evidence": "H2 headings in order: Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso, Perguntas abertas, identical to TEMPLATE.md. Header is the template's key-value table with Documento, Estado, Autores, Revisores, Criado em, Última atualização, and the title keeps the '<Título> · DD-<ano>-<seq>' pattern."
+    },
+    {
+      "text": "The template's sections are not replaced or renamed into the skill's default catalog (no 'Visão geral', 'Escopo e contexto', 'Objetivos e fora de escopo' standing in for the house sections)",
+      "passed": true,
+      "evidence": "grep for 'Visão geral|Escopo e contexto|Objetivos e fora de escopo' over the doc returns nothing. The only non-template headings are four H3s nested under Proposta (Arquitetura, Fluxo de um evento, Trade-offs da solução, Alternativas consideradas); no H2 was added, removed, or renamed."
+    },
+    {
+      "text": "Riscos and Plano de rollout, whose substance the prompt does not give, are asked of the user — one targeted question each — and are not filled with boilerplate, invented risks, or invented rollout phases",
+      "passed": true,
+      "evidence": "Riscos body: 'Seção pendente: o autor ainda não listou os riscos desta proposta e suas mitigações. As perguntas ... estão em Perguntas abertas (itens 1 e 2).' Plano de rollout body: 'Seção pendente: o autor ainda não definiu as fases ... A pergunta correspondente está em Perguntas abertas (item 3).' No risk list, no phases. Reply asks one targeted question per section: Q1 'Riscos: o que o serviço faz quando o Redis não responde? ...' and Q3 'Plano de rollout: entra em fases (por produtor, por tipo de evento, modo de observação sem descartar)? Qual o critério de avanço e qual o rollback?'. The rollout question lists candidate phasing axes as options inside the question, not as content in the doc."
+    },
+    {
+      "text": "The alternatives the user discussed (consumer-side dedup, Kafka producer idempotence) and the accepted +5ms latency cost are recorded — in a section of their own since the template has no slot for them — and the reply names this deviation from the template so the user can accept it",
+      "passed": true,
+      "evidence": "Recorded under two dedicated headings, '### Trade-offs da solução' (bullet '✗ Mais um salto no caminho crítico da ingestão: estimamos +5 ms de latência por evento.') and '### Alternativas consideradas' (table rows 'Deduplicar no consumidor | Cada consumidor teria que reimplementar a mesma lógica.' and 'Usar a idempotência nativa do produtor Kafka | Não cobre o reenvio entre reinícios do produtor.'). These are H3 subsections of Proposta rather than a new H2. Judged as satisfying 'a section of their own': the content sits under its own headings, is not blended into template prose or dropped, and the skill contract's other two conditions are met more strictly than a new H2 would (house skeleton and order kept intact at the top level). The reply names the deviation explicitly and hands the decision to the user: 'Um desvio para você decidir: o template não tem lugar para alternativas nem para trade-offs ... Coloquei os dois como subseções da Proposta ... Se o time de arquitetura preferir, movo para uma seção própria ou tiro.' If the eval author intends 'section of their own' to mean a top-level H2 specifically, this run would fail on that literal reading; see eval_feedback."
+    },
+    {
+      "text": "The header carries the author Rafael Nunes, a draft state and a real date; reviewers are asked for, not invented",
+      "passed": true,
+      "evidence": "Header rows: '**Autores** | Rafael Nunes', '**Estado** | Rascunho', '**Criado em** | 2026-10-31' (today's actual date), '**Revisores** | (a definir)'. Reply Q5: 'qual é o próximo número da sequência DD-2026-<seq>, e quem revisa?' The reviewer suggestion in Q5 (teams operating the ingestor/Kafka/Redis, someone from finance) is phrased as a question in the reply and in Perguntas abertas item 5, not written into the header."
+    },
+    {
+      "text": "No invented facts: every metric (4% duplicates, 24h key retention, +5ms, 0.1% target) traces to the prompt; no invented technology, team, or stakeholder",
+      "passed": true,
+      "evidence": "Every number in the doc, DSL, Mermaid and SVG labels is one of: 4%, 24 horas, +5 ms, 0,1%, 'duas vezes' (finance complaints), all from the prompt. Technologies named: only Redis and Kafka ('Apache Kafka' as the technology slot of the Kafka container); the Ingestor and the dedup container have no technology slot and relationships carry no protocol; the doc says so ('O diagrama não indica a tecnologia do ingestor nem do serviço de deduplicação, nem o protocolo de cada integração'). Mermaid block has no endpoints, headers, payloads or status codes; its alt/else branches are the dedup rule the prompt gives (new key -> publish, seen key -> discard), and the Redis-down path is deliberately left to Perguntas abertas item 1 rather than drawn. Stakeholders: only 'o financeiro' and 'relatórios de faturamento' (prompt). Inferences present and flagged: producers/consumers modelled as external software systems, with the reply saying 'Desenhei produtores e consumidores como sistemas externos ao pipeline; se algum deles é do seu time, me avisa que ajusto.' One unflagged addition: a 'Não fazer nada' baseline row in the alternatives table, whose rejection text uses only prompt facts (4%, inflated billing reports, two complaints); it is a baseline, not a fabricated fact about the user's discussion. DSL validated with structurizr/structurizr validate (exit 0); Mermaid rendered with minlag/mermaid-cli."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": 89128,
+    "duration_ms": 278225,
+    "total_duration_seconds": 278.2
+  },
+  "claims": [
+    {
+      "claim": "Segui o TEMPLATE.md à risca: cabeçalho com os mesmos campos e as seis seções na mesma ordem",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Six H2s match the template verbatim and in order; header table has the same six fields."
+    },
+    {
+      "claim": "O diagrama C4 (Structurizr DSL, validado e exportado com a imagem structurizr/structurizr:playwright)",
+      "type": "process",
+      "verified": true,
+      "evidence": "Re-validated the folded DSL with structurizr/structurizr validate: exit 0, no errors (a deliberately broken copy produced an ERROR line, so the silent pass is genuine). The SVG is a real Structurizr export (JointJS markup, 'Container View: Pipeline de ingestão', 3320x1500), not a placeholder. The exact image tag used cannot be confirmed from the final reply alone."
+    },
+    {
+      "claim": "o diagrama de sequência (Mermaid, validado com a imagem minlag/mermaid-cli)",
+      "type": "process",
+      "verified": true,
+      "evidence": "Extracted the mermaid block and rendered it with minlag/mermaid-cli: 'Generating single mermaid chart', 199 KB SVG produced."
+    },
+    {
+      "claim": "não coloquei tecnologia no ingestor nem no serviço novo, nem protocolo nas setas",
+      "type": "quality",
+      "verified": true,
+      "evidence": "DSL: container 'Ingestor' and 'Serviço de deduplicação' have name + description only; 'Redis' and 'Kafka' carry technology 'Redis' / 'Apache Kafka'; all five relationships have a description and no technology argument. SVG labels show '[Container]' for Ingestor/dedup and '[Container: Redis]' / '[Container: Apache Kafka]'."
+    },
+    {
+      "claim": "as três alternativas (não fazer nada, deduplicar no consumidor, idempotência nativa do produtor Kafka)",
+      "type": "factual",
+      "verified": false,
+      "evidence": "The user discussed two alternatives. 'Não fazer nada' was added by the executor as a baseline row; its content uses only prompt facts, but the reply presents it alongside the user's two as if all three were given, without flagging the addition."
+    },
+    {
+      "claim": "Duas seções do template ficaram marcadas como pendentes ... Riscos e Plano de rollout",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Both sections contain only a 'Seção pendente' marker pointing at Perguntas abertas items."
+    },
+    {
+      "claim": "Trade-off bullets '✗ O caminho de ingestão passa a depender do Redis' and '✗ A janela é de 24 horas: um reenvio que chegue mais de 24 horas depois ... não é reconhecido'",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Not in the prompt, but direct logical consequences of the described design (Redis on the critical path; 24h TTL). Both are tied to open questions (items 1 and 2) rather than asserted as decided facts."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Producers and consumers drawn as external software systems; executor asks the user to confirm ownership",
+      "Identity of the idempotent key and whether retries can arrive more than 24h after the original (Perguntas abertas item 2)"
+    ],
+    "needs_review": [
+      "Riscos and Plano de rollout left as pending markers awaiting answers to Q1 and Q3",
+      "Document number (DD-2026-<seq>) and reviewers left as '(a definir)' awaiting Q5",
+      "Trade-offs and alternatives placed as H3 subsections of Proposta; user asked to accept, move to its own section, or drop"
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "The alternatives the user discussed ... are recorded — in a section of their own since the template has no slot for them — and the reply names this deviation",
+        "reason": "'A section of their own' is ambiguous between a new top-level H2 and a dedicated subsection. This run used H3s under Proposta and named the deviation; I passed it, but a stricter grader could fail the identical output. Reword to state the intended bar, e.g. 'under a dedicated heading (own section or subsection), not blended into a template section's prose' or 'as a new top-level section' if that is what is wanted."
+      },
+      {
+        "reason": "No assertion covers the diagrams at all, although the skill contract puts the C4 image plus folded DSL and the Mermaid flow in the doc. I had to verify by hand that the DSL validates, the SVG is a real render rather than a placeholder, technology slots are filled only for Redis and Kafka, and the Mermaid block has no invented endpoints, headers or failure branches. A wrong or hallucinated diagram would pass every current assertion."
+      },
+      {
+        "reason": "The executor added a 'Não fazer nada' baseline row to the alternatives table and counted it as one of 'as três alternativas' in the reply. The no-invented-facts assertion does not say whether a do-nothing baseline counts as invention; decide and encode it so this stops being a grader judgment call."
+      },
+      {
+        "assertion": "Riscos and Plano de rollout ... are asked of the user — one targeted question each",
+        "reason": "Passes with one question per section, but the reply asks five questions in total. If the eval also wants to bound the total question count (the repo's shared contract says 2-4 on a vague ask), say so explicitly; otherwise the assertion cannot catch a reply that buries the two targeted questions in a long list."
+      }
+    ],
+    "overall": "Assertions discriminate well on template governance and on recording versus inventing, which is the point of this eval. The gaps are the diagrams (entirely unchecked) and the ambiguity of 'section of their own'."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "eval_id": 7,
+  "eval_name": "eval-7-user-template-governs",
+  "prompt": "Nosso template de design doc tá em docs/design/TEMPLATE.md — segue ele à risca, o time de arquitetura só aceita doc nesse formato. Preciso do doc do nosso novo serviço de deduplicação de eventos. Hoje o pipeline de ingestão recebe eventos duplicados dos produtores (reenvio em retry): medimos 4% de duplicatas no mês passado, e isso infla os relatórios de faturamento, o financeiro já reclamou duas vezes. A proposta é um serviço que fica entre o ingestor e o Kafka, guarda a chave idempotente de cada evento no Redis por 24h e descarta repetidos. Alternativas que discutimos: deduplicar no consumidor (cada consumidor teria que reimplementar, descartado) e usar a idempotência nativa do produtor Kafka (não cobre reenvio entre reinícios do produtor, descartado). Trade-off aceito: mais um salto no caminho crítico da ingestão, estimamos +5ms de latência. Meta: duplicatas abaixo de 0,1%. Autor sou eu, Rafael Nunes. Salva em docs/design/.",
+  "assertions": [
+    "Creates a Markdown design doc under docs/design/, in Portuguese",
+    "The document contains every section of docs/design/TEMPLATE.md, in the template's order (Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso, Perguntas abertas), with the template's header table",
+    "The template's sections are not replaced or renamed into the skill's default catalog (no 'Visão geral', 'Escopo e contexto', 'Objetivos e fora de escopo' standing in for the house sections)",
+    "Riscos and Plano de rollout, whose substance the prompt does not give, are asked of the user — one targeted question each — and are not filled with boilerplate, invented risks, or invented rollout phases",
+    "The alternatives the user discussed (consumer-side dedup, Kafka producer idempotence) and the accepted +5ms latency cost are recorded — in a section of their own since the template has no slot for them — and the reply names this deviation from the template so the user can accept it",
+    "The header carries the author Rafael Nunes, a draft state and a real date; reviewers are asked for, not invented",
+    "No invented facts: every metric (4% duplicates, 24h key retention, +5ms, 0.1% target) traces to the prompt; no invented technology, team, or stakeholder"
+  ]
+}

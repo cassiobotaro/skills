@@ -1,0 +1,68 @@
+{
+  "expectations": [
+    {
+      "text": "Does not create or edit a workspace.dsl (or any .dsl file) in response to this request",
+      "passed": true,
+      "evidence": "with_skill/outputs/ is empty (no files created). Reply opens: \"This isn't a job for the Structurizr / C4 skill, so I haven't started a `workspace.dsl`.\""
+    },
+    {
+      "text": "States, in one or two sentences, that a vendor-service-icon infrastructure picture is outside this skill's scope and names what kind of tool does that job",
+      "passed": true,
+      "evidence": "Second paragraph (two sentences): \"What you're describing — EC2, RDS, S3 and CloudFront boxes drawn with the official AWS icons ... is a cloud-infrastructure picture in the vendor's own iconography. C4 models the software abstractions your team owns ... not a vendor service catalog, so forcing it into a C4 workspace would give you a worse picture than a diagramming tool will.\" Then names concrete tools: diagrams.net/draw.io (AWS shape library), the Python `diagrams` package, and the official AWS Architecture Icons pack."
+    },
+    {
+      "text": "If it offers a C4 deployment view as an alternative, it is offered as a choice for the user and not built unasked",
+      "passed": true,
+      "evidence": "Last paragraph: \"Where this skill *would* fit: if, beyond the picture, you also want the platform documented as a C4 model ... I can produce a `workspace.dsl` with a system context view, a container view and an AWS deployment view ... For that I'd need three things: (1) ... (2) ... (3) ... Answer those and I'll start.\" Conditional offer gated on the user's answers; outputs/ is empty, so nothing was built."
+    },
+    {
+      "text": "Does not invent containers, relationships, or technologies for the platform beyond what the prompt names (EC2 app servers, RDS Postgres, S3 uploads, CloudFront)",
+      "passed": true,
+      "evidence": "The only platform elements mentioned are the prompt's own: \"CloudFront in front, two EC2 app servers, the RDS Postgres instance and the S3 uploads bucket\". The reply explicitly asks rather than assumes what runs on EC2, who the users are, and which external systems exist. The remark that \"Structurizr's AWS theme puts the service icons on the deployment nodes\" is a statement about the tool, not about the platform."
+    },
+    {
+      "text": "Replies in English, matching the conversation language",
+      "passed": true,
+      "evidence": "Entire reply is in English."
+    }
+  ],
+  "summary": { "passed": 5, "failed": 0, "total": 5, "pass_rate": 1.0 },
+  "timing": { "total_tokens": 48274, "duration_ms": 49483, "total_duration_seconds": 49.5 },
+  "claims": [
+    {
+      "claim": "No workspace.dsl was started",
+      "type": "process",
+      "verified": true,
+      "evidence": "outputs/ directory is empty."
+    },
+    {
+      "claim": "diagrams.net ships the official AWS architecture shape library; the Python `diagrams` package has an AWS icon set; AWS publishes an official Architecture Icons pack",
+      "type": "factual",
+      "verified": true,
+      "evidence": "All three are real, well-known tools that do exactly this job (draw.io AWS shape libraries, mingrammer/diagrams `diagrams.aws.*` nodes, aws.amazon.com/architecture/icons)."
+    },
+    {
+      "claim": "Structurizr's AWS theme puts service icons on deployment nodes",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Structurizr publishes an Amazon Web Services theme that attaches icons to elements by tag; it is normally applied to deployment-view nodes."
+    }
+  ],
+  "user_notes_summary": { "uncertainties": [], "needs_review": [], "workarounds": [] },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Replies in English, matching the conversation language",
+        "reason": "Non-discriminating: essentially any reply to an English prompt passes. It inflates the pass rate without testing the skill."
+      },
+      {
+        "reason": "The reply also offered to write the out-of-scope artifact itself (a Python `diagrams` script for the five AWS nodes). No assertion says whether the expected behaviour on a scope-refusal is 'point to the right tool' only or 'point and offer to do it'. If the author cares, add an assertion either way; today both behaviours pass."
+      },
+      {
+        "assertion": "If it offers a C4 deployment view as an alternative, it is offered as a choice for the user and not built unasked",
+        "reason": "Conditional assertions pass vacuously when the alternative is not mentioned. Fine as a guard, but it cannot distinguish a run that gives a useful alternative from one that simply refuses; consider a separate assertion that the reply names what this skill *would* do for this platform."
+      }
+    ],
+    "overall": "Scope-refusal behaviour is exactly as specified and the assertions on .dsl absence and non-invention are deterministic and meaningful. The language assertion is filler, and the eval does not pin down whether offering to produce the vendor-icon picture through another tool is desired."
+  }
+}

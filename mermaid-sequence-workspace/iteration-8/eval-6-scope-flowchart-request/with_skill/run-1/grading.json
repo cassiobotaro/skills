@@ -1,0 +1,98 @@
+{
+  "eval_name": "eval-6-scope-flowchart-request",
+  "skill": "mermaid-sequence",
+  "expectations": [
+    {
+      "text": "Does not render the decision logic as a `sequenceDiagram`: no participants/actors exchanging messages are invented to fit the deploy gates into sequence notation",
+      "passed": true,
+      "evidence": "Both the reply and outputs/deploy-flowchart.md contain a single `flowchart TD` block; no `sequenceDiagram`, `participant`, `actor` or message arrows (`->>`) appear anywhere. The reply explicitly defers a sequence diagram to a hypothetical future ask: \"Se em algum momento quiser mostrar quem fala com quem nesse pipeline (CI, orquestrador de deploy, ...) ... aí sim um diagrama de sequência é o formato certo\"."
+    },
+    {
+      "text": "States in a sentence that this skill covers Mermaid sequence diagrams, so the flowchart is outside its scope",
+      "passed": true,
+      "evidence": "Opening sentence of the reply: \"Um aviso antes do diagrama: a skill que você acionou é a de **diagramas de sequência** (interações entre componentes ao longo do tempo). O que você descreveu é uma lógica de decisão, e para isso o tipo certo é mesmo o `flowchart` — então fiz o flowchart, aplicando as mesmas regras da skill que fazem sentido aqui\". It names the skill's scope (sequence diagrams), says the request is a different kind of diagram, and says it is applying only 'the skill's rules that make sense here' - i.e. the flowchart sits outside the skill's remit. The literal words 'fora do escopo' are not used, but the one-sentence scope statement the assertion asks for is present and unambiguous."
+    },
+    {
+      "text": "Whatever is delivered (a flowchart block or a question) contains exactly the user's gates — tests → staging; smoke test → 5% canary; error rate < 1% for 10 min → 100%; otherwise rollback — with no invented steps, approvals, tools, or timings",
+      "passed": true,
+      "evidence": "All three gates are present with the user's exact thresholds and outcomes: `Testes passam?` -Sim-> `Deploy em staging`; `Smoke test passa?` -Sim-> `Sobe canary com 5% do tráfego`; `Taxa de erro abaixo de 1% por 10 minutos?` -Sim-> `Promove para 100% do tráfego`, -Não-> `Rollback`. No approvals, tools (no CI/CD product, no monitoring tool) or extra timings were added. The one addition is the terminal node `Deploy interrompido` on the Não branches of the test and smoke gates, which the prompt leaves undefined (its 'senão, rollback' attaches grammatically to the canary gate). Judgment: this is not an invented step. (a) It is a terminal state, not an action - it performs nothing (no notification, no retry, no revert); it is the minimal rendering of 'the gate failed and the pipeline does not continue', which is what a gate means. A flowchart with decision nodes cannot leave a Não edge dangling, so some terminal was unavoidable; the alternatives were to silently route those branches to Rollback (a stronger invention - nothing is in production yet) or omit the branches (an incomplete decision chart). (b) It is not presented as the user's logic: the reply labels it \"Uma escolha minha para você confirmar\" and explains the reasoning; the file carries a blockquote \"levam a Deploy interrompido por interpretação: a descrição original só define o rollback para a etapa do canary. Confirmar se uma falha no smoke test também exige rollback do staging.\" This is the repo-wide 'record, don't invent; flag the gap and ask' contract applied correctly. The assertion lists invented steps/approvals/tools/timings as the failure modes; a flagged, no-op terminal for an undefined branch matches none of them. Flagged in eval_feedback so the author can state explicitly how undefined branches should be handled."
+    },
+    {
+      "text": "Does not install any package or browser",
+      "passed": true,
+      "evidence": "The reply reports validation via the Docker image only: \"Validado com a imagem Docker do mermaid-cli (`minlag/mermaid-cli`)\". No mention of npm/npx install, puppeteer, Chromium or any package manager. The outputs directory contains only deploy-flowchart.md (no node_modules, lockfiles or puppeteer config). Caveat: only the final reply was captured, so the absence of an install is inferred from the reply and the output tree, not from a tool-call log."
+    },
+    {
+      "text": "Replies in Portuguese",
+      "passed": true,
+      "evidence": "Entire reply is Portuguese (\"Um aviso antes do diagrama ...\", \"Validado com a imagem Docker ...\", \"Uma escolha minha para você confirmar\"); node labels and the file's heading/notes (\"Lógica de decisão do deploy\") are Portuguese as well. Only Mermaid keywords are in English, as required by the syntax."
+    }
+  ],
+  "claims": [
+    {
+      "claim": "The block was validated with the minlag/mermaid-cli Docker image and rendered without errors",
+      "type": "process",
+      "verified": true,
+      "evidence": "Re-run by the grader: extracted the block from outputs/deploy-flowchart.md to d.mmd and ran `docker run --rm -u $(id -u):$(id -g) -v $DIR:/data minlag/mermaid-cli -i d.mmd -o d.svg` -> 'Generating single mermaid chart', exit 0, 381 KB SVG containing all seven node labels. The rendering outcome is confirmed; whether the executor itself ran Docker cannot be seen from the final reply alone, but the claim's substance holds."
+    },
+    {
+      "claim": "Saved to deploy-flowchart.md at the repository root",
+      "type": "factual",
+      "verified": true,
+      "evidence": "with_skill/outputs/deploy-flowchart.md exists and its mermaid block is byte-identical to the one in the reply."
+    },
+    {
+      "claim": "Uses only basic flowchart syntax, so it renders directly on GitHub/GitLab",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Plain `flowchart TD`, quoted labels, `{}`/`[]`/`([])` shapes, `|label|` edges and a `<br/>` line break - all standard Mermaid flowchart features supported by GitHub's and GitLab's renderers. Not executed against GitHub itself."
+    },
+    {
+      "claim": "The description only defines rollback for the canary stage",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Prompt: \"se a taxa de erro fica abaixo de 1% por 10 minutos, promove pra 100%; senão, rollback.\" - the 'senão' is the else of the last condition; the earlier gates have no stated else."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Whether a failed smoke test should also roll back staging (executor drew 'Deploy interrompido' and asked)"
+    ],
+    "needs_review": [
+      "Confirm the Não branches of the test and smoke gates ('Deploy interrompido' vs 'Rollback')"
+    ],
+    "workarounds": [
+      "Skill scope is sequence diagrams; executor produced a flowchart anyway, applying the skill's record-don't-invent and local-validation rules to it"
+    ]
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Whatever is delivered (a flowchart block or a question) contains exactly the user's gates ... with no invented steps, approvals, tools, or timings",
+        "reason": "The prompt deliberately leaves the Não branches of the first two gates undefined, and the assertion does not say how a correct run should handle them. A flowchart cannot leave a decision edge dangling, so every run must either omit those branches, route them to Rollback, or add a terminal and flag it. I passed the flagged 'Deploy interrompido' terminal as a non-step; a stricter reading fails it. State the intended behaviour, e.g. 'branches the prompt leaves undefined are either omitted or drawn with a visible note that they are an assumption to confirm; routing them silently to Rollback or adding any action node counts as invention.'"
+      },
+      {
+        "assertion": "Does not install any package or browser",
+        "reason": "Not verifiable from a final-reply-only transcript: a run that ran `npm i -g @mermaid-js/mermaid-cli` and then said nothing about it would pass. Either capture tool calls for this eval, or pair it with an assertion on what the reply must say about validation (Docker image used / local mmdc used / explicit 'not validated, run this command' notice), which is observable and is the skill's actual contract."
+      },
+      {
+        "reason": "No assertion checks that the delivered Mermaid block actually parses. The skill's core promise is 'validated locally when possible', and the executor claimed it; I had to confirm it myself with mermaid-cli. Add 'the delivered block renders with mermaid-cli (Docker image) without error' - it is cheap, deterministic, and discriminating (an unescaped label or a stray keyword fails it)."
+      },
+      {
+        "reason": "Uncovered outcome, positive: the executor kept the flagged assumption inside the artifact (blockquote under the diagram), not only in the chat reply, so a reader of deploy-flowchart.md sees the open question. If that is desired behaviour for scope-stretch cases, an assertion could check that any assumption is recorded next to the diagram, not just in the reply."
+      }
+    ],
+    "overall": "5/5, and the rendered output is genuinely correct (confirmed by re-running mermaid-cli). The scope-statement and language assertions are fine. The 'no invented steps' assertion is under-specified for the undefined branches the prompt itself creates, the 'no install' assertion cannot be checked from the captured transcript, and nothing checks the block renders."
+  },
+  "execution_metrics": {
+    "metrics_json": "not present; tool-call counts unavailable (only the final reply was captured)",
+    "output_chars": 1012,
+    "transcript_chars": 2045
+  },
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  }
+}

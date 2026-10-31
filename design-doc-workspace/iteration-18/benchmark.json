@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "skill_name": "design-doc",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-10-31T20:23:32Z",
+    "evals_run": [
+      7,
+      8
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 278.2,
+        "tokens": 89128,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Creates a Markdown design doc under docs/design/, in Portuguese",
+          "passed": true,
+          "evidence": "outputs/docs/design/deduplicacao-de-eventos.md exists (plus diagrams/deduplicacao-de-eventos-containers.svg). Title 'Servi\u00e7o de deduplica\u00e7\u00e3o de eventos \u00b7 DD-2026-(a definir)'; all prose is Portuguese ('O pipeline de ingest\u00e3o recebe eventos duplicados dos produtores...'). Reply: 'Doc salvo em `docs/design/deduplicacao-de-eventos.md`'."
+        },
+        {
+          "text": "The document contains every section of docs/design/TEMPLATE.md, in the template's order (Motiva\u00e7\u00e3o, Proposta, Riscos, Plano de rollout, M\u00e9tricas de sucesso, Perguntas abertas), with the template's header table",
+          "passed": true,
+          "evidence": "H2 headings in order: Motiva\u00e7\u00e3o, Proposta, Riscos, Plano de rollout, M\u00e9tricas de sucesso, Perguntas abertas, identical to TEMPLATE.md. Header is the template's key-value table with Documento, Estado, Autores, Revisores, Criado em, \u00daltima atualiza\u00e7\u00e3o, and the title keeps the '<T\u00edtulo> \u00b7 DD-<ano>-<seq>' pattern."
+        },
+        {
+          "text": "The template's sections are not replaced or renamed into the skill's default catalog (no 'Vis\u00e3o geral', 'Escopo e contexto', 'Objetivos e fora de escopo' standing in for the house sections)",
+          "passed": true,
+          "evidence": "grep for 'Vis\u00e3o geral|Escopo e contexto|Objetivos e fora de escopo' over the doc returns nothing. The only non-template headings are four H3s nested under Proposta (Arquitetura, Fluxo de um evento, Trade-offs da solu\u00e7\u00e3o, Alternativas consideradas); no H2 was added, removed, or renamed."
+        },
+        {
+          "text": "Riscos and Plano de rollout, whose substance the prompt does not give, are asked of the user \u2014 one targeted question each \u2014 and are not filled with boilerplate, invented risks, or invented rollout phases",
+          "passed": true,
+          "evidence": "Riscos body: 'Se\u00e7\u00e3o pendente: o autor ainda n\u00e3o listou os riscos desta proposta e suas mitiga\u00e7\u00f5es. As perguntas ... est\u00e3o em Perguntas abertas (itens 1 e 2).' Plano de rollout body: 'Se\u00e7\u00e3o pendente: o autor ainda n\u00e3o definiu as fases ... A pergunta correspondente est\u00e1 em Perguntas abertas (item 3).' No risk list, no phases. Reply asks one targeted question per section: Q1 'Riscos: o que o servi\u00e7o faz quando o Redis n\u00e3o responde? ...' and Q3 'Plano de rollout: entra em fases (por produtor, por tipo de evento, modo de observa\u00e7\u00e3o sem descartar)? Qual o crit\u00e9rio de avan\u00e7o e qual o rollback?'. The rollout question lists candidate phasing axes as options inside the question, not as content in the doc."
+        },
+        {
+          "text": "The alternatives the user discussed (consumer-side dedup, Kafka producer idempotence) and the accepted +5ms latency cost are recorded \u2014 in a section of their own since the template has no slot for them \u2014 and the reply names this deviation from the template so the user can accept it",
+          "passed": true,
+          "evidence": "Recorded under two dedicated headings, '### Trade-offs da solu\u00e7\u00e3o' (bullet '\u2717 Mais um salto no caminho cr\u00edtico da ingest\u00e3o: estimamos +5 ms de lat\u00eancia por evento.') and '### Alternativas consideradas' (table rows 'Deduplicar no consumidor | Cada consumidor teria que reimplementar a mesma l\u00f3gica.' and 'Usar a idempot\u00eancia nativa do produtor Kafka | N\u00e3o cobre o reenvio entre rein\u00edcios do produtor.'). These are H3 subsections of Proposta rather than a new H2. Judged as satisfying 'a section of their own': the content sits under its own headings, is not blended into template prose or dropped, and the skill contract's other two conditions are met more strictly than a new H2 would (house skeleton and order kept intact at the top level). The reply names the deviation explicitly and hands the decision to the user: 'Um desvio para voc\u00ea decidir: o template n\u00e3o tem lugar para alternativas nem para trade-offs ... Coloquei os dois como subse\u00e7\u00f5es da Proposta ... Se o time de arquitetura preferir, movo para uma se\u00e7\u00e3o pr\u00f3pria ou tiro.' If the eval author intends 'section of their own' to mean a top-level H2 specifically, this run would fail on that literal reading; see eval_feedback."
+        },
+        {
+          "text": "The header carries the author Rafael Nunes, a draft state and a real date; reviewers are asked for, not invented",
+          "passed": true,
+          "evidence": "Header rows: '**Autores** | Rafael Nunes', '**Estado** | Rascunho', '**Criado em** | 2026-10-31' (today's actual date), '**Revisores** | (a definir)'. Reply Q5: 'qual \u00e9 o pr\u00f3ximo n\u00famero da sequ\u00eancia DD-2026-<seq>, e quem revisa?' The reviewer suggestion in Q5 (teams operating the ingestor/Kafka/Redis, someone from finance) is phrased as a question in the reply and in Perguntas abertas item 5, not written into the header."
+        },
+        {
+          "text": "No invented facts: every metric (4% duplicates, 24h key retention, +5ms, 0.1% target) traces to the prompt; no invented technology, team, or stakeholder",
+          "passed": true,
+          "evidence": "Every number in the doc, DSL, Mermaid and SVG labels is one of: 4%, 24 horas, +5 ms, 0,1%, 'duas vezes' (finance complaints), all from the prompt. Technologies named: only Redis and Kafka ('Apache Kafka' as the technology slot of the Kafka container); the Ingestor and the dedup container have no technology slot and relationships carry no protocol; the doc says so ('O diagrama n\u00e3o indica a tecnologia do ingestor nem do servi\u00e7o de deduplica\u00e7\u00e3o, nem o protocolo de cada integra\u00e7\u00e3o'). Mermaid block has no endpoints, headers, payloads or status codes; its alt/else branches are the dedup rule the prompt gives (new key -> publish, seen key -> discard), and the Redis-down path is deliberately left to Perguntas abertas item 1 rather than drawn. Stakeholders: only 'o financeiro' and 'relat\u00f3rios de faturamento' (prompt). Inferences present and flagged: producers/consumers modelled as external software systems, with the reply saying 'Desenhei produtores e consumidores como sistemas externos ao pipeline; se algum deles \u00e9 do seu time, me avisa que ajusto.' One unflagged addition: a 'N\u00e3o fazer nada' baseline row in the alternatives table, whose rejection text uses only prompt facts (4%, inflated billing reports, two complaints); it is a baseline, not a fabricated fact about the user's discussion. DSL validated with structurizr/structurizr validate (exit 0); Mermaid rendered with minlag/mermaid-cli."
+        }
+      ],
+      "notes": [
+        "Producers and consumers drawn as external software systems; executor asks the user to confirm ownership",
+        "Identity of the idempotent key and whether retries can arrive more than 24h after the original (Perguntas abertas item 2)",
+        "Riscos and Plano de rollout left as pending markers awaiting answers to Q1 and Q3",
+        "Document number (DD-2026-<seq>) and reviewers left as '(a definir)' awaiting Q5",
+        "Trade-offs and alternatives placed as H3 subsections of Proposta; user asked to accept, move to its own section, or drop"
+      ]
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 60.3,
+        "tokens": 49319,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States, in English, that a single already-made decision is not a design to document and that this skill writes design docs, not decision records",
+          "passed": true,
+          "evidence": "Reply is in English. Para 2: \"What you described is a decision, not a design. 'We use Terraform instead of Pulumi, because ...' is one choice, already made, with its reasons attached. A design doc exists to work through an implementation strategy while it is still open ... Wrapping those sections around a settled tool choice would produce a document that is mostly padding\". Para 3 names the other artifact: \"The right record for this is an architecture decision record (ADR)\". The design-doc-vs-decision-record distinction is stated directly; the reply does not use the literal phrase \"this skill\", but opens with \"I have not written the document\" and frames the whole refusal as 'a design doc is the wrong artifact for a settled decision', which is the assertion's substance."
+        },
+        {
+          "text": "Does not create a design doc file under docs/design/ or anywhere else",
+          "passed": true,
+          "evidence": "Deterministic: with_skill/outputs/ contains no files (verified by the caller and by `find` over the eval dir, which lists only eval_metadata.json, response.md and the two timing.json). Reply line 1: \"I have not written the document\"."
+        },
+        {
+          "text": "Points the user to an ADR / decision log as the appropriate artifact (naming the format or offering to help is fine; writing the ADR itself is not required)",
+          "passed": true,
+          "evidence": "Para 3: \"The right record for this is an architecture decision record (ADR): a one-page note with the context, the decision, the alternatives you weighed ... and the consequences you accept ... teams usually keep these in `docs/decisions/` or `docs/adr/`.\" Closing: \"the ADR for the tool choice (answer 1 to 3 and I will write it)\". Format named, location suggested, help offered; ADR not written."
+        },
+        {
+          "text": "Does not fabricate content: no invented problem statement, goals, metrics, risks, or alternatives beyond Terraform and Pulumi",
+          "passed": true,
+          "evidence": "No artifact was written, so nothing was recorded as the team's content. The reply contains no problem statement, goals or metrics. The borderline material is in question 1 and 2: it names HCL expressiveness, Pulumi's testing story, the 2023 BUSL licence change and OpenTofu. Judgment: this is discovery, not fabrication. (a) Each item is posed as something the user must confirm, with an explicit disclaimer in the same sentence: \"I do not know which of these, if any, you discussed, so I will not list them as your consequences unless you confirm them\" and \"Was OpenTofu (or anything other than Pulumi) considered, or was the choice strictly Terraform versus Pulumi?\". (b) The items are accurate general facts about the two tools (BUSL relicensing of Terraform in Aug 2023 and the OpenTofu fork are real), not invented attributes of this team's decision. (c) The repo's shared contract for every skill is 'record, don't invent; on a vague ask, 2-4 targeted questions are the deliverable' - the reply does exactly that (4 numbered questions). Fabrication under grader.md means presenting invented content as established; nothing here is presented as established. Question 4's examples (repo layout, state locking, CI plans/applies) are likewise offered as candidate topics for a possible open design, prefixed by \"Is there a genuinely open design next to this decision? For example\", not asserted as the user's design. Literal reading caveat: the assertion says 'no alternatives beyond Terraform and Pulumi' and OpenTofu is mentioned; I read the list as examples of fabrication, not a ban on asking whether other options were weighed - flagged in eval_feedback so the author can tighten the wording if the stricter reading was intended."
+        }
+      ],
+      "notes": [
+        "Executor did not know which consequences, if any, the team discussed and declined to list any without confirmation",
+        "Executor did not know whether OpenTofu or anything other than Pulumi was considered",
+        "User must choose between an ADR for the tool choice, a design doc for an adjacent open design (repo layout / state / CI), or both"
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 169.25,
+        "stddev": 154.0786,
+        "min": 60.3,
+        "max": 278.2
+      },
+      "tokens": {
+        "mean": 69223.5,
+        "stddev": 28149.2139,
+        "min": 49319,
+        "max": 89128
+      }
+    },
+    "delta": {
+      "pass_rate": "+1.00",
+      "time_seconds": "+169.2",
+      "tokens": "+69224"
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,12 @@
+{
+  "eval_id": 10,
+  "eval_name": "eval-10-scope-vendor-icon-diagram",
+  "prompt": "Generate an AWS architecture diagram for our platform using the real AWS service icons: EC2 boxes for the two app servers, an RDS box for the Postgres database, an S3 bucket for uploads and CloudFront in front of everything. I want the kind of picture you see in AWS reference architectures.",
+  "assertions": [
+    "Does not create or edit a workspace.dsl (or any .dsl file) in response to this request",
+    "States, in one or two sentences, that a vendor-service-icon infrastructure picture is outside this skill's scope and names what kind of tool does that job",
+    "If it offers a C4 deployment view as an alternative, it is offered as a choice for the user and not built unasked",
+    "Does not invent containers, relationships, or technologies for the platform beyond what the prompt names (EC2 app servers, RDS Postgres, S3 uploads, CloudFront)",
+    "Replies in English, matching the conversation language"
+  ]
+}

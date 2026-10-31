@@ -1,0 +1,12 @@
+{
+  "eval_id": 12,
+  "eval_name": "eval-12-scope-sequence-request",
+  "prompt": "Usa o Structurizr pra desenhar o passo a passo do checkout: o app chama a API de pedidos, a API reserva o estoque no serviço de inventário, cobra no gateway de pagamento e, se aprovado, publica o evento de pedido confirmado na fila. Quero ver a ordem das chamadas e o que acontece quando o pagamento é recusado.",
+  "assertions": [
+    "Does not create or edit a workspace.dsl (or any .dsl file) in response to this request",
+    "States in one or two sentences that an ordered interaction with a failure branch is a sequence diagram's shape (the mermaid-sequence skill), not a C4 view",
+    "If it mentions Structurizr dynamic views, it does not build a model unasked to host one and does not claim a dynamic view can express the declined-payment branch",
+    "Does not invent elements, technologies or relationships beyond what the prompt names (app, orders API, inventory service, payment gateway, queue)",
+    "Replies in Portuguese"
+  ]
+}

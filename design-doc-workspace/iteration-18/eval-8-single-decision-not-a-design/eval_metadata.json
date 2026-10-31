@@ -1,0 +1,11 @@
+{
+  "eval_id": 8,
+  "eval_name": "eval-8-single-decision-not-a-design",
+  "prompt": "Write a design doc recording our decision to use Terraform instead of Pulumi for our infrastructure as code. We picked Terraform because the team already knows HCL and the provider/module ecosystem is bigger. Put it in docs/design/.",
+  "assertions": [
+    "States, in English, that a single already-made decision is not a design to document and that this skill writes design docs, not decision records",
+    "Does not create a design doc file under docs/design/ or anywhere else",
+    "Points the user to an ADR / decision log as the appropriate artifact (naming the format or offering to help is fine; writing the ADR itself is not required)",
+    "Does not fabricate content: no invented problem statement, goals, metrics, risks, or alternatives beyond Terraform and Pulumi"
+  ]
+}

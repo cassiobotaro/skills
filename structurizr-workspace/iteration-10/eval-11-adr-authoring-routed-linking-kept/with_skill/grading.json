@@ -1,0 +1,89 @@
+{
+  "expectations": [
+    {
+      "text": "Does not write the decision content of ADR 0004: no new file under docs/adr/ carrying Status/Contexto/Decisão/Consequências text for the Kafka decision; the reply routes authoring to the team's decision log (e.g. adr-tools) in a sentence",
+      "passed": true,
+      "evidence": "`diff -r` of outputs/docs/adr/ against the fixture reports identical: only 0001-0003 exist, no 0004 file. Reply section 1 is titled \"ADR 0004 — fica com o decision log, não comigo\" and states: \"Escrever o conteúdo de uma decisão de arquitetura é trabalho do registro de decisões do time (adr-tools, no formato que vocês já usam em `docs/adr`), não desta skill, que só *liga* os ADRs existentes ao workspace.\" It gives the `adr new -s 3 \"Processamento assíncrono com Kafka\"` command and leaves Context/Decision/Consequences for the team to fill (it names what each section should cover in one clause each, but writes no decision text)."
+    },
+    {
+      "text": "Adds `!adrs docs/adr` (adr-tools format, the default) to workspace.dsl at workspace scope",
+      "passed": true,
+      "evidence": "outputs/workspace.dsl lines 5-6, directly inside the `workspace` block after `!identifiers hierarchical` and before `model {`: \"// Decisões de arquitetura (formato adr-tools) em docs/adr\" / \"!adrs docs/adr\". No format argument, i.e. adr-tools default."
+    },
+    {
+      "text": "Minimal diff: every existing identifier, element name, relationship, view key and style in workspace.dsl is preserved",
+      "passed": true,
+      "evidence": "`diff` against the fixture original shows exactly three added lines (4a5,7: the comment, `!adrs docs/adr`, a blank line) and no deletions or modifications. All identifiers (atendente, faturamento, portal, api, worker, fila, banco, erp), relationships, view keys (Contexto, Containers) and styles are byte-identical."
+    },
+    {
+      "text": "Does not change the Fila de Faturas container's technology from RabbitMQ to Kafka (nor add Kafka elements) without asking; the reply asks whether the model should reflect the swap now or after the migration",
+      "passed": true,
+      "evidence": "workspace.dsl still has `fila = container \"Fila de Faturas\" \"Buffer de faturas a processar.\" \"RabbitMQ\"`; no Kafka element added. Reply section 3: \"O container `Fila de Faturas` continua com tecnologia `RabbitMQ` no DSL. Não troquei para Kafka porque ... não sei se o workspace documenta o estado atual ou o alvo: 1. A troca já está em produção (ou vai entrar junto com o ADR)? Se sim, atualizo `\"RabbitMQ\"` → `\"Kafka\"` ...\""
+    },
+    {
+      "text": "Validates with the structurizr/structurizr Docker image and reports the result — or, if Docker is unavailable, says explicitly that the DSL was not validated and gives the validate command; never claims a validation that did not run",
+      "passed": true,
+      "evidence": "Reply: \"Validado com `structurizr/structurizr validate` via Docker: parse limpo, os três ADRs importados.\" Grader re-ran `docker run ... structurizr/structurizr validate -workspace workspace.dsl` from outputs/: exit 0, no errors. Grader also ran `inspect`: it emits exactly the findings the reply lists (workspace.scope missing; relationship.technology missing on Atendente->Portal Web, API->Fila, Worker->Fila; model.softwaresystem.decisions wanting decisions inside the software system). The specificity of the reported inspector findings is strong evidence the validation actually ran."
+    },
+    {
+      "text": "Replies in Portuguese",
+      "passed": true,
+      "evidence": "Entire reply is in Portuguese (\"Fiz a parte do `workspace.dsl`; o ADR 0004 em si eu não escrevi\")."
+    }
+  ],
+  "summary": { "passed": 6, "failed": 0, "total": 6, "pass_rate": 1.0 },
+  "timing": { "total_tokens": 60836, "duration_ms": 115054, "total_duration_seconds": 115.1 },
+  "claims": [
+    {
+      "claim": "Validation with structurizr/structurizr via Docker passed cleanly",
+      "type": "process",
+      "verified": true,
+      "evidence": "Reproduced by the grader: validate exits 0 with no diagnostics on outputs/workspace.dsl."
+    },
+    {
+      "claim": "The three ADRs were imported",
+      "type": "factual",
+      "verified": true,
+      "evidence": "docs/adr/ holds exactly three adr-tools-format files and validate parses the !adrs directive without error; validate prints no count, so the number is inferred from the directory, not from tool output."
+    },
+    {
+      "claim": "inspect flagged: missing workspace scope, missing technology on API->Fila, Worker->Fila and Atendente->Portal Web, and prefers decisions inside the softwareSystem block",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Grader's inspect run emits workspace.scope, three model.relationship.technology errors for those exact relationships (plus the implied Atendente->Faturamento one), model.softwaresystem.decisions and model.softwaresystem.documentation. The reply omitted the documentation finding, which is harmless."
+    },
+    {
+      "claim": "The ADR folder is adr-tools format (`# N. Título`, `Date:`, `## Status/Context/Decision/Consequences`) with no README or template to exclude",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Fixture 0001 header: \"# 1. Registrar decisões de arquitetura / Date: 2025-11-10 / ## Status / ## Context / ## Decision / ## Consequences\"; the directory holds only 0001-0003."
+    },
+    {
+      "claim": "`adr new -s 3 \"...\"` creates 0004 and marks 0003 as Superseded by 0004",
+      "type": "factual",
+      "verified": true,
+      "evidence": "That is the documented behaviour of adr-tools' `-s` flag; consistent with ADR 0001's own rule that superseded decisions be marked with a link."
+    }
+  ],
+  "user_notes_summary": { "uncertainties": [], "needs_review": [], "workarounds": [] },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Does not write the decision content of ADR 0004: no new file under docs/adr/ carrying Status/Contexto/Decisão/Consequências text ...",
+        "reason": "The fixture ADRs use English section headings (## Status / Context / Decision / Consequences), not the Portuguese ones the assertion names. A grader looking for 'Contexto'/'Decisão' literally could miss a violating file; name the fixture's actual headings. Also, 'in a sentence' is stricter than what a good reply does — this run routes in a paragraph with the adr-tools command, which is better, not worse."
+      },
+      {
+        "assertion": "Validates with the structurizr/structurizr Docker image and reports the result ...",
+        "reason": "The transcript is the final reply only, so the process claim cannot be verified from it; the grader has to reproduce the validation. That is fine, but the assertion should say so (\"grader re-runs validate from outputs/\"), otherwise a confident false claim of validation would pass on wording alone."
+      },
+      {
+        "assertion": "Replies in Portuguese",
+        "reason": "Non-discriminating; passes for any Portuguese reply regardless of quality."
+      },
+      {
+        "reason": "No assertion covers the inspect recommendations the reply surfaced (scope, missing protocols) and correctly left unapplied. That restraint is the right behaviour under 'minimal diff' and is implicitly rewarded by assertion 3, but a run that silently applied `configuration { scope softwaresystem }` would fail assertion 3 for the wrong-looking reason. Consider an explicit assertion: inspector findings are reported, not applied."
+      }
+    ],
+    "overall": "Strong eval: assertions 2-4 are deterministic (file diff) and assertion 1 is directly checkable on the filesystem. The Docker-validation assertion needs the grader to reproduce the run; the heading names in assertion 1 should match the fixture."
+  }
+}

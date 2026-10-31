@@ -1,0 +1,85 @@
+{
+  "expectations": [
+    {
+      "text": "Does not create or edit a workspace.dsl (or any .dsl file) in response to this request",
+      "passed": true,
+      "evidence": "The only file under outputs/ is docs/checkout-sequencia.md; no .dsl file exists. Reply: \"Por isso não abri um `workspace.dsl`\"."
+    },
+    {
+      "text": "States in one or two sentences that an ordered interaction with a failure branch is a sequence diagram's shape (the mermaid-sequence skill), not a C4 view",
+      "passed": true,
+      "evidence": "First sentence of the reply: \"Esse pedido é um diagrama de sequência, não um diagrama C4: você quer a **ordem das chamadas** e o **desvio quando o pagamento é recusado**, e as views do Structurizr mostram estrutura estática ...\" followed by \"desenhei o fluxo como diagrama de sequência Mermaid\". It names the Mermaid sequence diagram rather than the skill by name, which is the intended artifact."
+    },
+    {
+      "text": "If it mentions Structurizr dynamic views, it does not build a model unasked to host one and does not claim a dynamic view can express the declined-payment branch",
+      "passed": true,
+      "evidence": "Dynamic views are mentioned once, in the negative: \"(a *dynamic view* até enumera passos, mas não tem condicional — não há como expressar \\\"se aprovado / se recusado\\\")\". That is the opposite of claiming it can express the branch. No model or .dsl was created. The closing offer of a structural workspace.dsl (\"contexto + containers\") is a choice (\"posso montar em seguida\"), not built, and is not a dynamic view."
+    },
+    {
+      "text": "Does not invent elements, technologies or relationships beyond what the prompt names (app, orders API, inventory service, payment gateway, queue)",
+      "passed": true,
+      "evidence": "Participants are exactly the five named: App, API de Pedidos, Serviço de Inventário, Gateway de Pagamento, Fila. No technologies (no HTTP, Kafka, etc.) appear; the reply asks for them instead (question 4). The declined branch carries only \"Recusado\" plus a note that stock-release and the app's response are undefined, with four targeted questions. The only inferred content is two reply arrows on prompt-named calls (\"Reserva confirmada\", \"Pedido confirmado\" to the app) — replies on existing interactions, not new elements, technologies or relationships."
+    },
+    {
+      "text": "Replies in Portuguese",
+      "passed": true,
+      "evidence": "Entire reply and the saved Markdown are in Portuguese."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "claims": [
+    {
+      "claim": "The diagram was validated with the mermaid-cli Docker image (parse OK)",
+      "type": "process",
+      "verified": true,
+      "evidence": "Grader extracted the fenced block from outputs/docs/checkout-sequencia.md and ran `minlag/mermaid-cli -i d.mmd -o d.svg`: succeeded, produced a 200 KB SVG."
+    },
+    {
+      "claim": "Structurizr dynamic views have no conditional construct and cannot express approved/declined branches",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Dynamic views enumerate ordered (optionally parallel) steps; the DSL has no alt/else equivalent."
+    },
+    {
+      "claim": "The failure path was not invented: nothing beyond 'Recusado' is drawn in the declined branch",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Declined branch contains one reply arrow and a Note stating stock-reservation handling and the app's response are undefined; the reply poses four questions to fill it."
+    },
+    {
+      "claim": "The app receives 'Pedido confirmado' in the approved branch",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Not stated in the prompt; a plausible inference about the synchronous call's reply. Minor, and inconsistent with the declined branch where the app's response is correctly marked undefined."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [],
+    "needs_review": [],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Does not invent elements, technologies or relationships beyond what the prompt names ...",
+        "reason": "The assertion does not say whether implied reply messages count as invention. This run added 'Reserva confirmada' and 'Pedido confirmado' return arrows the prompt never states, which a strict reading could fail. Decide and spell it out (e.g. 'return messages on named calls are allowed; new messages in the declined branch are not')."
+      },
+      {
+        "reason": "No assertion covers what the run should do after the scope statement. This run went on to author the Mermaid diagram (the mermaid-sequence skill's job) and saved a new file docs/checkout-sequencia.md unasked. Whether a structurizr-skill eval wants hand-off only, inline delivery, or a file on disk is a meaningful behavioural choice that currently passes in every form."
+      },
+      {
+        "reason": "The mermaid validation claim is an important observed outcome with no assertion; it was true here (grader reproduced it) but a false claim would go unpunished. If the diagram is in scope for this eval, add the same 'never claims a validation that did not run' assertion used in eval-11."
+      },
+      {
+        "assertion": "Replies in Portuguese",
+        "reason": "Non-discriminating."
+      }
+    ],
+    "overall": "Scope redirection is clean and the dynamic-view statement is phrased exactly as the assertion requires (it denies, rather than claims, branch expressiveness). The assertion set stops at the redirection, leaving the delivered sequence diagram, the unasked file write and the validation claim unchecked."
+  }
+}

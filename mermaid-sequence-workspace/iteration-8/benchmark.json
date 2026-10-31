@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "skill_name": "mermaid-sequence",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-10-31T20:23:33Z",
+    "evals_run": [
+      6
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 84.7,
+        "tokens": 50813,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Does not render the decision logic as a `sequenceDiagram`: no participants/actors exchanging messages are invented to fit the deploy gates into sequence notation",
+          "passed": true,
+          "evidence": "Both the reply and outputs/deploy-flowchart.md contain a single `flowchart TD` block; no `sequenceDiagram`, `participant`, `actor` or message arrows (`->>`) appear anywhere. The reply explicitly defers a sequence diagram to a hypothetical future ask: \"Se em algum momento quiser mostrar quem fala com quem nesse pipeline (CI, orquestrador de deploy, ...) ... a\u00ed sim um diagrama de sequ\u00eancia \u00e9 o formato certo\"."
+        },
+        {
+          "text": "States in a sentence that this skill covers Mermaid sequence diagrams, so the flowchart is outside its scope",
+          "passed": true,
+          "evidence": "Opening sentence of the reply: \"Um aviso antes do diagrama: a skill que voc\u00ea acionou \u00e9 a de **diagramas de sequ\u00eancia** (intera\u00e7\u00f5es entre componentes ao longo do tempo). O que voc\u00ea descreveu \u00e9 uma l\u00f3gica de decis\u00e3o, e para isso o tipo certo \u00e9 mesmo o `flowchart` \u2014 ent\u00e3o fiz o flowchart, aplicando as mesmas regras da skill que fazem sentido aqui\". It names the skill's scope (sequence diagrams), says the request is a different kind of diagram, and says it is applying only 'the skill's rules that make sense here' - i.e. the flowchart sits outside the skill's remit. The literal words 'fora do escopo' are not used, but the one-sentence scope statement the assertion asks for is present and unambiguous."
+        },
+        {
+          "text": "Whatever is delivered (a flowchart block or a question) contains exactly the user's gates \u2014 tests \u2192 staging; smoke test \u2192 5% canary; error rate < 1% for 10 min \u2192 100%; otherwise rollback \u2014 with no invented steps, approvals, tools, or timings",
+          "passed": true,
+          "evidence": "All three gates are present with the user's exact thresholds and outcomes: `Testes passam?` -Sim-> `Deploy em staging`; `Smoke test passa?` -Sim-> `Sobe canary com 5% do tr\u00e1fego`; `Taxa de erro abaixo de 1% por 10 minutos?` -Sim-> `Promove para 100% do tr\u00e1fego`, -N\u00e3o-> `Rollback`. No approvals, tools (no CI/CD product, no monitoring tool) or extra timings were added. The one addition is the terminal node `Deploy interrompido` on the N\u00e3o branches of the test and smoke gates, which the prompt leaves undefined (its 'sen\u00e3o, rollback' attaches grammatically to the canary gate). Judgment: this is not an invented step. (a) It is a terminal state, not an action - it performs nothing (no notification, no retry, no revert); it is the minimal rendering of 'the gate failed and the pipeline does not continue', which is what a gate means. A flowchart with decision nodes cannot leave a N\u00e3o edge dangling, so some terminal was unavoidable; the alternatives were to silently route those branches to Rollback (a stronger invention - nothing is in production yet) or omit the branches (an incomplete decision chart). (b) It is not presented as the user's logic: the reply labels it \"Uma escolha minha para voc\u00ea confirmar\" and explains the reasoning; the file carries a blockquote \"levam a Deploy interrompido por interpreta\u00e7\u00e3o: a descri\u00e7\u00e3o original s\u00f3 define o rollback para a etapa do canary. Confirmar se uma falha no smoke test tamb\u00e9m exige rollback do staging.\" This is the repo-wide 'record, don't invent; flag the gap and ask' contract applied correctly. The assertion lists invented steps/approvals/tools/timings as the failure modes; a flagged, no-op terminal for an undefined branch matches none of them. Flagged in eval_feedback so the author can state explicitly how undefined branches should be handled."
+        },
+        {
+          "text": "Does not install any package or browser",
+          "passed": true,
+          "evidence": "The reply reports validation via the Docker image only: \"Validado com a imagem Docker do mermaid-cli (`minlag/mermaid-cli`)\". No mention of npm/npx install, puppeteer, Chromium or any package manager. The outputs directory contains only deploy-flowchart.md (no node_modules, lockfiles or puppeteer config). Caveat: only the final reply was captured, so the absence of an install is inferred from the reply and the output tree, not from a tool-call log."
+        },
+        {
+          "text": "Replies in Portuguese",
+          "passed": true,
+          "evidence": "Entire reply is Portuguese (\"Um aviso antes do diagrama ...\", \"Validado com a imagem Docker ...\", \"Uma escolha minha para voc\u00ea confirmar\"); node labels and the file's heading/notes (\"L\u00f3gica de decis\u00e3o do deploy\") are Portuguese as well. Only Mermaid keywords are in English, as required by the syntax."
+        }
+      ],
+      "notes": [
+        "Whether a failed smoke test should also roll back staging (executor drew 'Deploy interrompido' and asked)",
+        "Confirm the N\u00e3o branches of the test and smoke gates ('Deploy interrompido' vs 'Rollback')",
+        "Skill scope is sequence diagrams; executor produced a flowchart anyway, applying the skill's record-don't-invent and local-validation rules to it"
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 84.7,
+        "stddev": 0.0,
+        "min": 84.7,
+        "max": 84.7
+      },
+      "tokens": {
+        "mean": 50813.0,
+        "stddev": 0.0,
+        "min": 50813,
+        "max": 50813
+      }
+    },
+    "delta": {
+      "pass_rate": "+1.00",
+      "time_seconds": "+84.7",
+      "tokens": "+50813"
+    }
+  },
+  "notes": []
+}

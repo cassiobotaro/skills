@@ -1,0 +1,13 @@
+{
+  "eval_id": 11,
+  "eval_name": "eval-11-adr-authoring-routed-linking-kept",
+  "prompt": "Decidimos trocar o RabbitMQ por Kafka na fila de faturas. Escreve o ADR 0004 dessa decisão em docs/adr/ e deixa o workspace.dsl apontando pros nossos ADRs, que hoje ele não aponta.",
+  "assertions": [
+    "Does not write the decision content of ADR 0004: no new file under docs/adr/ carrying Status/Contexto/Decisão/Consequências text for the Kafka decision; the reply routes authoring to the team's decision log (e.g. adr-tools) in a sentence",
+    "Adds `!adrs docs/adr` (adr-tools format, the default) to workspace.dsl at workspace scope",
+    "Minimal diff: every existing identifier, element name, relationship, view key and style in workspace.dsl is preserved",
+    "Does not change the Fila de Faturas container's technology from RabbitMQ to Kafka (nor add Kafka elements) without asking; the reply asks whether the model should reflect the swap now or after the migration",
+    "Validates with the structurizr/structurizr Docker image and reports the result — or, if Docker is unavailable, says explicitly that the DSL was not validated and gives the validate command; never claims a validation that did not run",
+    "Replies in Portuguese"
+  ]
+}

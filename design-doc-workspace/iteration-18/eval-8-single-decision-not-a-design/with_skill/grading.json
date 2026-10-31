@@ -1,0 +1,94 @@
+{
+  "eval_name": "eval-8-single-decision-not-a-design",
+  "skill": "design-doc",
+  "expectations": [
+    {
+      "text": "States, in English, that a single already-made decision is not a design to document and that this skill writes design docs, not decision records",
+      "passed": true,
+      "evidence": "Reply is in English. Para 2: \"What you described is a decision, not a design. 'We use Terraform instead of Pulumi, because ...' is one choice, already made, with its reasons attached. A design doc exists to work through an implementation strategy while it is still open ... Wrapping those sections around a settled tool choice would produce a document that is mostly padding\". Para 3 names the other artifact: \"The right record for this is an architecture decision record (ADR)\". The design-doc-vs-decision-record distinction is stated directly; the reply does not use the literal phrase \"this skill\", but opens with \"I have not written the document\" and frames the whole refusal as 'a design doc is the wrong artifact for a settled decision', which is the assertion's substance."
+    },
+    {
+      "text": "Does not create a design doc file under docs/design/ or anywhere else",
+      "passed": true,
+      "evidence": "Deterministic: with_skill/outputs/ contains no files (verified by the caller and by `find` over the eval dir, which lists only eval_metadata.json, response.md and the two timing.json). Reply line 1: \"I have not written the document\"."
+    },
+    {
+      "text": "Points the user to an ADR / decision log as the appropriate artifact (naming the format or offering to help is fine; writing the ADR itself is not required)",
+      "passed": true,
+      "evidence": "Para 3: \"The right record for this is an architecture decision record (ADR): a one-page note with the context, the decision, the alternatives you weighed ... and the consequences you accept ... teams usually keep these in `docs/decisions/` or `docs/adr/`.\" Closing: \"the ADR for the tool choice (answer 1 to 3 and I will write it)\". Format named, location suggested, help offered; ADR not written."
+    },
+    {
+      "text": "Does not fabricate content: no invented problem statement, goals, metrics, risks, or alternatives beyond Terraform and Pulumi",
+      "passed": true,
+      "evidence": "No artifact was written, so nothing was recorded as the team's content. The reply contains no problem statement, goals or metrics. The borderline material is in question 1 and 2: it names HCL expressiveness, Pulumi's testing story, the 2023 BUSL licence change and OpenTofu. Judgment: this is discovery, not fabrication. (a) Each item is posed as something the user must confirm, with an explicit disclaimer in the same sentence: \"I do not know which of these, if any, you discussed, so I will not list them as your consequences unless you confirm them\" and \"Was OpenTofu (or anything other than Pulumi) considered, or was the choice strictly Terraform versus Pulumi?\". (b) The items are accurate general facts about the two tools (BUSL relicensing of Terraform in Aug 2023 and the OpenTofu fork are real), not invented attributes of this team's decision. (c) The repo's shared contract for every skill is 'record, don't invent; on a vague ask, 2-4 targeted questions are the deliverable' - the reply does exactly that (4 numbered questions). Fabrication under grader.md means presenting invented content as established; nothing here is presented as established. Question 4's examples (repo layout, state locking, CI plans/applies) are likewise offered as candidate topics for a possible open design, prefixed by \"Is there a genuinely open design next to this decision? For example\", not asserted as the user's design. Literal reading caveat: the assertion says 'no alternatives beyond Terraform and Pulumi' and OpenTofu is mentioned; I read the list as examples of fabrication, not a ban on asking whether other options were weighed - flagged in eval_feedback so the author can tighten the wording if the stricter reading was intended."
+    }
+  ],
+  "claims": [
+    {
+      "claim": "No design doc was written",
+      "type": "process",
+      "verified": true,
+      "evidence": "outputs/ is empty."
+    },
+    {
+      "claim": "\"Your repository has no `docs/` yet, so there is no house convention to follow\"",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Consistent with the eval: no files/ fixture and an empty outputs/ working directory; no docs/ (or any) directory existed for the executor to inspect. Cannot confirm the executor actually listed the directory since only the final reply was captured."
+    },
+    {
+      "claim": "Terraform moved to BUSL in 2023 and this pushed some teams toward OpenTofu",
+      "type": "factual",
+      "verified": true,
+      "evidence": "HashiCorp relicensed Terraform under BUSL 1.1 in August 2023; OpenTofu is the Linux Foundation fork created in response. Stated as general context and explicitly not attributed to the user's team."
+    },
+    {
+      "claim": "A design doc wrapped around a settled tool choice would be mostly padding",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Reasoned in the reply (context, trade-offs and alternatives sections would all restate the same two sentences); consistent with the skill's own contract that trade-offs are mandatory and must be real."
+    }
+  ],
+  "user_notes_summary": {
+    "uncertainties": [
+      "Executor did not know which consequences, if any, the team discussed and declined to list any without confirmation",
+      "Executor did not know whether OpenTofu or anything other than Pulumi was considered"
+    ],
+    "needs_review": [
+      "User must choose between an ADR for the tool choice, a design doc for an adjacent open design (repo layout / state / CI), or both"
+    ],
+    "workarounds": []
+  },
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Does not fabricate content: no invented problem statement, goals, metrics, risks, or alternatives beyond Terraform and Pulumi",
+        "reason": "The clause 'no alternatives beyond Terraform and Pulumi' collides with the skill's own discovery contract: a correct run that asks 'was OpenTofu also considered?' names a third alternative without fabricating anything. I passed it on the fabrication reading, but a stricter grader could fail the same transcript. Reword to separate the two, e.g. 'Does not assert, as the team's context or reasoning, any problem statement, goals, metrics, risks, consequences or alternatives the user did not state; asking whether other options were weighed is fine.'"
+      },
+      {
+        "assertion": "States, in English, that a single already-made decision is not a design to document and that this skill writes design docs, not decision records",
+        "reason": "Two clauses in one assertion. The first was met verbatim; the second ('this skill writes design docs, not decision records') was met only by implication (the reply never says 'this skill'). Either split it, or soften the second clause to 'and that a design doc is the wrong artifact for it', which is what a good reply actually says."
+      },
+      {
+        "reason": "No assertion covers the most useful thing the reply did: it offered the user a path to a real design doc (the open design next to the decision - module layout, state locking, CI apply flow) with the Terraform choice recorded as a constraint. A bare refusal plus 'write an ADR' would score 4/4 here just as well. Consider an assertion that rewards redirecting toward the genuinely open design, or at least asking 2-4 targeted questions (the repo-wide contract) rather than stopping at the refusal."
+      }
+    ],
+    "overall": "The run is a clean pass and the deterministic assertions (no file, ADR named) are solid. The fabrication assertion needs rewording so that discovery questions about unstated alternatives are unambiguously allowed, and the set does not distinguish a good redirect from a bare refusal."
+  },
+  "timing": {
+    "total_tokens": 49319,
+    "duration_ms": 60319,
+    "total_duration_seconds": 60.3
+  },
+  "execution_metrics": {
+    "metrics_json": "not present; tool-call counts unavailable (only the final reply was captured)",
+    "output_chars": 0,
+    "transcript_chars": 2648
+  },
+  "summary": {
+    "passed": 4,
+    "failed": 0,
+    "total": 4,
+    "pass_rate": 1.0
+  }
+}
