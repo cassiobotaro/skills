@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "skill_name": "structurizr",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-10-31T21:57:56Z",
+    "evals_run": [
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 124.3,
+        "tokens": 60302,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "DSL validates cleanly with the Structurizr CLI",
+          "passed": true,
+          "evidence": "Grader re-ran `structurizr/structurizr validate -workspace workspace.dsl` from outputs/: exit 0, no error lines. Agent also reported validate + inspect (inspect: only missing !docs/!adrs, reported to user, not fabricated)."
+        },
+        {
+          "text": "Model matches the spec exactly: 1 person; SPA, API, worker, PostgreSQL, Redis, RabbitMQ as containers of Encurta\u00ed; Google Workspace as external system; nothing invented",
+          "passed": true,
+          "evidence": "One person 'Usu\u00e1rio interno'; encurtai has exactly spa (React/nginx), api (Go Gin), worker (Go), db (PostgreSQL 16), cache (Redis 7), fila (RabbitMQ); googleWorkspace external. No extra elements; SSO protocol left as plain HTTPS and raised as a question."
+        },
+        {
+          "text": "Requested views present: systemContext, container, and a dynamic redirect flow including cache lookup, miss\u2192Postgres, and click-event publish",
+          "passed": true,
+          "evidence": "systemContext 'SystemContext', container 'Containers', dynamic 'Redirecionamento' with 4 steps: usuario->api, api->cache, api->db 'Em caso de cache miss', api->fila 'Publica o evento de clique'."
+        },
+        {
+          "text": "Styles differentiate database (cylinder), queue (pipe), and external system (distinct color)",
+          "passed": true,
+          "evidence": "element \"Database\" { shape cylinder }, element \"Queue\" { shape pipe }, element \"External\" { background #999999 } vs default #1168bd."
+        },
+        {
+          "text": "Modern syntax only (no enterprise/!extend/!ref/branding/theme default/dashed booleans)",
+          "passed": true,
+          "evidence": "grep for enterprise|!extend|!ref|branding|theme default|dashed true/false: no matches. Uses !identifiers hierarchical, instance-free model, configuration scope."
+        },
+        {
+          "text": "Relationship labels are specific and inter-process links carry technology/protocol",
+          "passed": true,
+          "evidence": "All 9 relationships have directional verbs ('Publica eventos de clique em', 'Grava m\u00e9tricas agregadas em') and a technology (HTTPS, JSON/HTTPS, SQL/TCP, Redis/TCP, AMQP)."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 124.3,
+        "stddev": 0.0,
+        "min": 124.3,
+        "max": 124.3
+      },
+      "tokens": {
+        "mean": 60302.0,
+        "stddev": 0.0,
+        "min": 60302,
+        "max": 60302
+      }
+    },
+    "delta": {
+      "pass_rate": "+1.00",
+      "time_seconds": "+124.3",
+      "tokens": "+60302"
+    }
+  },
+  "notes": []
+}

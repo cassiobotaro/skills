@@ -1,0 +1,68 @@
+{
+  "eval_id": 1,
+  "eval_name": "eval-1-rich-write-new-doc",
+  "expectations": [
+    {
+      "text": "Creates a Markdown design doc under docs/design/ in the project",
+      "passed": true,
+      "evidence": "outputs/docs/design/exportacao-de-relatorios-em-background.md plus rendered SVGs in docs/design/diagrams/."
+    },
+    {
+      "text": "The document is written in Portuguese, matching the conversation language",
+      "passed": true,
+      "evidence": "Whole document in Portuguese: 'Visão geral', 'Escopo e contexto', 'Trade-offs da solução escolhida', 'Questões em aberto'."
+    },
+    {
+      "text": "The accepted trade-off — loss of immediate download for small exports — appears explicitly as a cost of the chosen solution",
+      "passed": true,
+      "evidence": "Trade-offs section: '✗ O usuário perde o download imediato. Exportações pequenas, que hoje funcionam na hora, passam a chegar por e-mail. O time aceitou esse custo em troca do caminho único.' Also stated in the solution overview."
+    },
+    {
+      "text": "Alternatives include the two discussed (longer synchronous timeout, external BI tool) and also 'do nothing'",
+      "passed": true,
+      "evidence": "Alternatives table rows: 'Não fazer nada', 'Gerar síncrono com timeout maior', 'Ferramenta de BI externa', and the chosen worker/fila/S3 path, each with cost and decision."
+    },
+    {
+      "text": "Cross-cutting concerns cover the platform team (shared queue) and the security team (signed links with PII)",
+      "passed": true,
+      "evidence": "'Preocupações transversais' has subsections 'Plataforma (fila compartilhada)' and 'Segurança (link assinado com PII)'; both teams also listed as reviewers in the header."
+    },
+    {
+      "text": "A glossary is included or suggested at the beginning of the document covering terms a reviewer could stumble on (e.g. PII, BI, S3); it does NOT carry entries for universally known terms (API, HTTP, URL) nor for the document's own authoring tooling (C4, DSL, Structurizr)",
+      "passed": true,
+      "evidence": "Glossário right after the header: BI, Gateway, Job de exportação, Link assinado, PII, Streaming, Worker. No API/HTTP/URL, no C4/DSL/Structurizr/Mermaid entries. S3 is not glossed, but the assertion lists it as an example, not a requirement."
+    },
+    {
+      "text": "The architecture diagram is authored as Structurizr DSL and embedded as a Markdown image reference with the DSL folded inside a <details> block (rendered image when the structurizr tooling is reachable, placeholder otherwise); any flow diagram is a fenced ```mermaid sequence diagram; the architecture is never redrawn by hand in Mermaid",
+      "passed": true,
+      "evidence": "'![Diagrama de contêineres…](diagrams/Containers.svg)' followed by <details><summary>Fonte do diagrama (Structurizr DSL)</summary> with the workspace; Containers.svg exists (rendered via the -playwright image). Flow is a ```mermaid sequenceDiagram. Grader re-validated: structurizr validate exit 0, mermaid-cli exit 0."
+    },
+    {
+      "text": "Every diagram in the doc is followed by explanatory prose (no orphan diagrams)",
+      "passed": true,
+      "evidence": "C4 image followed by a bullet per container plus a paragraph on the gateway and the empty slots; sequence diagram followed by a step-by-step walkthrough (passos 1–3, 4–6, 7–9) and a happy-path-only note."
+    },
+    {
+      "text": "No invented facts: every metric in the doc traces to the prompt (30s timeout, 12% failures, 50k/100k rows); unknowns appear as open questions or explicit blanks, never fabricated values",
+      "passed": true,
+      "evidence": "Only 30 s, 12%, 50 mil and 100 mil appear. Link validity, retention, job payload, failure handling, volume are explicit open questions (10 listed); authors left as '(a preencher)'."
+    },
+    {
+      "text": "The overview section is at most two paragraphs and stays at solution-shape altitude: naming the core mechanism/technology is fine, but no schemas, payloads, endpoints, retry policies, or config values",
+      "passed": true,
+      "evidence": "'Visão geral' is exactly two paragraphs naming RabbitMQ, worker, S3 and the e-mail link; no payloads, endpoints, retries or config."
+    },
+    {
+      "text": "No invented technology: every technology, protocol, datastore and product named in the document — including inside a diagram's DSL technology slots and relationship labels — traces to the prompt or to the repository; unstated ones are left blank and raised as questions",
+      "passed": true,
+      "evidence": "DSL technology slots: RabbitMQ and Amazon S3 only; API and worker have no technology; no relationship carries a protocol. 'Serviço de e-mail' draws the stated e-mail delivery with the sender left as open question 5. The doc says so explicitly under the diagram. Grader note: the DSL wires the worker as the e-mail trigger, a reasonable reading of 'quando termina' rather than an invented product."
+    }
+  ],
+  "skill": "design-doc",
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "pass_rate": 1.0
+  }
+}
