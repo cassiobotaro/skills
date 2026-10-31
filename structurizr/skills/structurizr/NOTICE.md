@@ -15,10 +15,12 @@ The c4model.com website and example diagrams are licensed under the
 
 ## Structurizr documentation — docs.structurizr.com
 
-The DSL syntax reference (`references/dsl-reference.md`) and cookbook
-(`references/cookbook.md`) are derived from the **Structurizr documentation**
-(© Simon Brown), published from the `structurizr/structurizr.github.io` repository under
-the **MIT License**: <https://docs.structurizr.com>
+The DSL syntax reference (`references/dsl-reference.md`), the advanced-features
+reference (`references/dsl-advanced.md`), and the pattern files
+(`references/deployment-patterns.md`, `references/modeling-patterns.md`) are derived
+from the **Structurizr documentation** (© Simon Brown), published from the
+`structurizr/structurizr.github.io` repository under the **MIT License**:
+<https://docs.structurizr.com>
 
 ## Structurizr tooling
 
