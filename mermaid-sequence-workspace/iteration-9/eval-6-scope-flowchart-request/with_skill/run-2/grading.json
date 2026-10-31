@@ -1,0 +1,44 @@
+{
+  "eval_name": "eval-6-scope-flowchart-request",
+  "skill": "mermaid-sequence",
+  "config": "with_skill",
+  "run": "run-2",
+  "expectations": [
+    {
+      "text": "Does not render the decision logic as a `sequenceDiagram`: no participants/actors exchanging messages are invented to fit the deploy gates into sequence notation",
+      "passed": true,
+      "evidence": "Single `flowchart TD` block; no sequence notation."
+    },
+    {
+      "text": "States in a sentence that this skill covers Mermaid sequence diagrams, so the flowchart is outside its scope",
+      "passed": true,
+      "evidence": "Opens with: 'esta skill cobre diagramas de sequência Mermaid, e o que você descreveu é uma lógica de decisão com ramificações — isso é um `flowchart`'."
+    },
+    {
+      "text": "Whatever is delivered (a flowchart block or a question) contains exactly the user's gates — tests → staging; smoke test → 5% canary; error rate < 1% for 10 min → 100%; otherwise rollback — with no invented steps, approvals, tools, or timings. A terminal node for the failing-tests / failing-smoke branches the prompt leaves undefined is acceptable only when flagged to the user as the author's choice; routing those branches to rollback unflagged is an invention",
+      "passed": true,
+      "evidence": "Exactly the four gates; failing tests/smoke end in '/A definir: resultado não especificado/' nodes, flagged and asked about. Nothing invented."
+    },
+    {
+      "text": "The reply states how the block was validated (mermaid-cli Docker image, local mmdc, or an explicit 'not validated here' notice with the Docker command); it never claims a validation that did not run",
+      "passed": true,
+      "evidence": "'Validado com a imagem Docker do mermaid-cli (`minlag/mermaid-cli`), que renderizou sem erros de parse.' Grader re-rendered: exit 0."
+    },
+    {
+      "text": "Replies in Portuguese",
+      "passed": true,
+      "evidence": "Portuguese throughout."
+    },
+    {
+      "text": "The delivered Mermaid block renders with mermaid-cli without error (the grader re-renders it)",
+      "passed": true,
+      "evidence": "Grader re-rendered: exit 0."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "eval_id": 6,
+  "eval_name": "eval-6-scope-flowchart-request",
+  "prompt": "Faz um flowchart em mermaid da lógica de decisão do nosso deploy: se os testes passam, vai pra staging; se o smoke test em staging passa, sobe canary com 5% do tráfego; se a taxa de erro fica abaixo de 1% por 10 minutos, promove pra 100%; senão, rollback.",
+  "assertions": [
+    "Does not render the decision logic as a `sequenceDiagram`: no participants/actors exchanging messages are invented to fit the deploy gates into sequence notation",
+    "States in a sentence that this skill covers Mermaid sequence diagrams, so the flowchart is outside its scope",
+    "Whatever is delivered (a flowchart block or a question) contains exactly the user's gates — tests → staging; smoke test → 5% canary; error rate < 1% for 10 min → 100%; otherwise rollback — with no invented steps, approvals, tools, or timings. A terminal node for the failing-tests / failing-smoke branches the prompt leaves undefined is acceptable only when flagged to the user as the author's choice; routing those branches to rollback unflagged is an invention",
+    "The reply states how the block was validated (mermaid-cli Docker image, local mmdc, or an explicit 'not validated here' notice with the Docker command); it never claims a validation that did not run",
+    "Replies in Portuguese",
+    "The delivered Mermaid block renders with mermaid-cli without error (the grader re-renders it)"
+  ]
+}
