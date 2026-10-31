@@ -20,6 +20,26 @@ Markdown file that GitHub, GitLab, and most wikis render natively — validated 
 delivery and annotated with the technical details (endpoints, headers, payloads, status
 codes) that make a diagram useful as documentation rather than decoration.
 
+## Check the scope first
+
+A sequence diagram has participants exchanging messages in time order. Three neighboring
+requests arrive in the same words ("diagram this", "draw the flow") and lack that shape;
+forcing them into `sequenceDiagram` makes the notation demand what the user never gave —
+participants, messages, replies — and rule 1 below is broken by the syntax itself. Say in
+a sentence that this skill covers Mermaid sequence diagrams, then:
+
+- **Decision logic or a branching process** ("if the tests pass, go to staging; if the
+  error rate stays under 1%, promote") is a `flowchart`. Deliver it as a plain Mermaid
+  flowchart: rules 1, 2 and 5 still hold (only the user's steps and conditions; a branch
+  the user left undefined ends in a flagged terminal node, never in an invented outcome;
+  validated the same way, since mermaid-cli renders every diagram type), while the house
+  conventions in step 3 are sequence-specific and do not apply.
+- **A lifecycle of states** ("an order goes from pending to paid to shipped") is a
+  `stateDiagram-v2`, handled the same way.
+- **Static structure** — which systems and containers exist and how they depend on each
+  other — is a C4 view, not a Mermaid diagram of any kind: hand it to the `structurizr`
+  skill when it is installed, and say so when it is not.
+
 ## The contract
 
 These rules exist because a sequence diagram is documentation other people will trust.
