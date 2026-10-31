@@ -164,8 +164,10 @@ belong to that one element. Detect the format:
   Statement") → `!adrs docs/decisions madr`
 - log4brains → `!adrs <path> log4brains`
 
-The path is relative to the DSL file. Don't create ADRs the user didn't ask for; if there
-are none, simply don't emit `!adrs`.
+The path is relative to the DSL file. Every Markdown file in it is imported, so when the
+folder also holds a `README.md`, an index, or a template (`nnnn-template.md`, `0000-*`),
+use the block form and exclude them: `!adrs docs/adr { exclude "README.md" "nnnn-.*" }`.
+Don't create ADRs the user didn't ask for; if there are none, simply don't emit `!adrs`.
 
 ### 6. Validate — always, before declaring done
 
@@ -184,6 +186,12 @@ docker run --rm -u $(id -u):$(id -g) \
 `STRUCTURIZR_THEMES` variable lets bundled theme names like `amazon-web-services-2025.07`
 resolve offline.) Fix every reported error and re-run until it exits clean. If the DSL
 lives somewhere other than the repo root, mount that directory instead.
+
+Once it parses, run the same command with `inspect` in place of `validate`: it applies
+the built-in model rules (missing descriptions, elements on no view, disconnected
+elements, no workspace scope) and prints one line per finding. Treat those findings as
+input to the self-review below — fix what the user's material supports, and report the
+rest rather than inventing descriptions to silence them.
 
 If Docker is not available in this session (the binary is missing, the daemon isn't
 running, or the image can't be pulled), don't try to install it or find another route.

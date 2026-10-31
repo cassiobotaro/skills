@@ -282,12 +282,18 @@ icons. Local `styles` combine with themes.
 
 ```
 !docs <path> [fqcn]
-!adrs <path> [adrtools|madr|log4brains|fqcn]
+!adrs <path> [adrtools|madr|log4brains|fqcn]        // !decisions is the same keyword
+!adrs <path> [type] {
+    exclude <filename|regex> [filename|regex]       // skip README.md, nnnn-template.md …
+}
 ```
 
 Valid at workspace, softwareSystem, and container scope; path relative to the DSL file
 (same dir or subdir). `!adrs` default importer is **adrtools** (Nygard format: `# N. Title`,
 `Date:`, `## Status`); files import alphabetically, so `NNNN-title.md` ordering holds.
+Every Markdown/AsciiDoc file in the directory is imported, so a `README.md` or an ADR
+template in the folder breaks the parse — exclude it with the block form (same for
+`!docs`). `!decisions` is the parser's primary name for `!adrs` since v6.2; both work.
 
 ## 12. Implied relationships, !include
 

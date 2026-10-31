@@ -141,9 +141,11 @@ DSL can be removed or edited from code.
   }
   ```
 
-- **Health checks** (in a container/system instance block):
-  `healthCheck <name> <url> [interval] [timeout]` — interval in seconds (default 60),
-  timeout in ms (default 0).
+- **Health checks** — **DEPRECATED** since v6.1 (the CLI warns: "Health checks are
+  deprecated - please use dynamic perspectives instead"). Leave existing
+  `healthCheck <name> <url> [interval] [timeout]` lines alone in files you edit, but
+  don't write new ones: a `perspective "Health" { url … }` block (§4) on the element is
+  the replacement.
 - **Server-only configuration** (ignored locally): `visibility <private|public>` and
   `users { <username> <read|write> }` inside `configuration { … }`.
 
