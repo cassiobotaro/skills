@@ -238,24 +238,17 @@ goes in only after — and only as — the user answers.
 
 ## The default section catalog
 
-This catalog is for documents no template governs (contract 3). Draw from it freely —
-full guidance, good/bad examples, and the fallback question for each section live in
-`references/sections.md`:
+This catalog is for documents no template governs (contract 3), in its default order:
+Header · Glossary · Overview · Scope and context · Goals and out of scope · The design (a
+series of sections) · Trade-offs of the chosen solution · Alternatives considered ·
+Cross-cutting concerns · Testability and observability · Deployment plan · Open questions.
 
-| Section | What it gives the reader | Worth having when |
-|---|---|---|
-| Header | Authors, reviewers (with their areas), state, dates, tags | Recommended minimum |
-| Glossary | Acronyms and domain terms, defined before first use | The doc leans on acronyms or domain vocabulary |
-| Overview | One–two paragraphs: what this doc is about, no details | Recommended minimum |
-| Scope and context | Background facts that situate the reader — no goals, no solutions | The reader needs situating (current tech, debt, motivators) |
-| Goals and out of scope | Measurable goals; explicit exclusions | The boundaries aren't obvious |
-| The design (a series of sections) | Solution overview → details: architecture (C4 container), flows (sequence), APIs/payloads, data sensitivity, pseudocode (rarely) | Recommended minimum — the core |
-| Trade-offs of the chosen solution | The pros *and* the cons, explicitly | Whenever there was a real decision — the doc's long-term value |
-| Alternatives considered | Each alternative's trade-offs, including "do nothing", and why the winner won | Real alternatives existed (they almost always did) |
-| Cross-cutting concerns | Security, infrastructure, compatibility, load imposed on other teams | Anyone outside the team is impacted |
-| Testability and observability | How success will be verified and observed in production | Closing section, when relevant |
-| Deployment plan | Incremental, safe delivery steps | Closing section, when relevant |
-| Open questions | What is still unknown — honesty that invites collaboration | Closing section, when anything is unresolved |
+The recommended minimum is the header, the overview, and the design written around its
+trade-offs; alternatives earn their place whenever there was a real decision, which is
+almost always; cross-cutting concerns whenever anyone outside the team is impacted; the
+closing sections when there is something to say. `references/sections.md` carries, for
+each section, what it gives the reader, when it is worth having, how to write it well,
+and the question to ask when its substance is missing.
 
 ## Diagrams
 
