@@ -8,7 +8,6 @@
   { "query": "i have an architecture i want to capture as proper C4 with system context, containers, and a couple of dynamic views for the key flows", "should_trigger": true, "note": "dynamic VIEW inside C4 (not a mermaid sequence)" },
   { "query": "modela em Structurizr DSL a arquitetura do nosso sistema de cobrança, com containers e componentes", "should_trigger": true, "note": "PT, Structurizr DSL" },
   { "query": "set up the C4 model for our new SaaS — i want it as DSL so we can render it in Structurizr and keep it in git", "should_trigger": true, "note": "C4 as DSL" },
-  { "query": "link our decision records from doc/adr into the architecture documentation so the C4 views show the related ADRs", "should_trigger": true, "note": "ADR linking is a structurizr feature — must beat adr" },
 
   { "query": "draw a sequence diagram showing how the checkout request flows through the gateway, order service and payment service over time — as a mermaid block for the README", "should_trigger": false, "note": "belongs to mermaid-sequence (over-time + mermaid format) — THE key boundary" },
   { "query": "we decided to adopt the C4 model as our documentation standard — record that decision", "should_trigger": false, "note": "mentions C4 but task is recording a decision (adr)" },
