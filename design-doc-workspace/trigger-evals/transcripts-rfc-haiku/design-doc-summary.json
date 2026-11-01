@@ -1,0 +1,51 @@
+{
+  "skill": "design-doc",
+  "model": "haiku",
+  "query": "write an RFC for migrating our monolith's billing module into a separate service — cover the why, the cutover plan, and what could go wrong",
+  "runs": [
+    {
+      "candidate": "design-doc-skill-d97d84f0",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "# RFC: Extract the billing module from the monolith into a separate service\n\n**Status:** Draft\n**Author:** [name]\n**Reviewers:** [teams]\n**Decision needed by:** [date]\n\n> Bracketed items are facts I don't have about your system. Fill them in or answer the questions at the end before this goes to review.\n\n## 1. Summary\n\nMove billing logic (invoices, subscriptions, proration, tax, payment-provider i",
+      "transcript": "design-doc-workspace/trigger-evals/transcripts-rfc-haiku/design-doc-run00.jsonl"
+    },
+    {
+      "candidate": "design-doc-skill-0ea48f58",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "# RFC: Extract the billing module from the monolith into a standalone billing service\n\n| Field | Value |\n|---|---|\n| Status | Draft |\n| Author | [name] |\n| Date | 2026-10-31 |\n| Reviewers | [finance eng lead], [payments owner], [SRE], [monolith owner] |\n| Decision needed by | [date] |\n\n> Placeholders in `[brackets]` are facts I don't have yet. See *Open questions* at the end.\n\n## 1. Summary\n\nWe pr",
+      "transcript": "design-doc-workspace/trigger-evals/transcripts-rfc-haiku/design-doc-run01.jsonl"
+    },
+    {
+      "candidate": "design-doc-skill-cb6a5b41",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(design-doc-skill-cb6a5b41)"
+      ],
+      "first_text": "I'll use the design-doc skill for this. It writes RFCs from what you tell it about the system, so it won't invent details about your monolith.",
+      "transcript": "design-doc-workspace/trigger-evals/transcripts-rfc-haiku/design-doc-run02.jsonl"
+    },
+    {
+      "candidate": "design-doc-skill-be68b399",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "I can write this RFC, but I'd be guessing at the facts that drive it. The why, the cutover order, and the failure modes depend on what billing does in your monolith and how tangled it is with the rest of the system. Without that, any section I wrote would be generic filler. Could you answer these?\n\n1. **What does the billing module do today?** For example: subscriptions, invoicing, proration, tax,",
+      "transcript": "design-doc-workspace/trigger-evals/transcripts-rfc-haiku/design-doc-run03.jsonl"
+    },
+    {
+      "candidate": "design-doc-skill-56b47d8d",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "# RFC: Extract the billing module from the monolith into a separate service\n\n**Status:** Draft\n**Author:** [name]\n**Date:** 2026-10-31\n**Reviewers:** [billing owner], [platform/SRE], [finance/accounting], [frontend owner]\n\n> Items in `[brackets]` are facts I don't have about your system. Section 8 lists the questions that would change the plan most.\n\n## 1. Summary\n\nWe propose moving the billing mo",
+      "transcript": "design-doc-workspace/trigger-evals/transcripts-rfc-haiku/design-doc-run04.jsonl"
+    },
+    {
+      "candidate": "design-doc-skill-aa4cacef",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "# RFC: Extract the billing module from the monolith into a standalone service\n\n**Status:** Draft\n**Author:** [name]\n**Reviewers:** [teams]\n**Date:** 2026-10-31\n\n> This draft fills what can be inferred from the request. Items in `[brackets]` are facts I don't have. The questions at the end decide several sections.\n\n## 1. Summary\n\nMove billing (invoicing, subscriptions, charges, refunds, and the led",
+      "transcript": "design-doc-workspace/trigger-evals/transcripts-rfc-haiku/design-doc-run05.jsonl"
+    }
+  ]
+}

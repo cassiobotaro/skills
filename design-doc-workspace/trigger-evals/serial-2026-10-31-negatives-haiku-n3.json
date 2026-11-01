@@ -1,0 +1,99 @@
+{
+  "skill_name": "design-doc",
+  "description": "Write and review software design documents through interactive discovery: ask the user targeted questions about the problem, the trade-offs, the alternatives, and the impacted teams, then write (or improve) a clear, trade-off-focused Markdown design doc. Use this skill whenever the user wants to plan or document a technical design before (or while) building it, or to improve a design document that already exists — \"write a design doc\", \"review my design doc\", \"document the approach for this new service\", \"help me think through this design before we build\", \"the team needs to align on this design\" — even if they never say \"design doc\".",
+  "results": [
+    {
+      "query": "i'm about to build a real-time presence service (who's online) for our chat app. before i write code i want to think through the design — write a design doc with me, we can figure out the approach and trade-offs",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we decided to go with Terraform over Pulumi for IaC — record that decision with the rationale",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create the C4 component diagram for the billing service in our workspace.dsl",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw the sequence diagram for the OAuth login flow as a mermaid block for the wiki",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write the API reference docs for our public REST endpoints, with example requests and responses",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write a PRD for the new referral program — target users, success metrics, scope",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "implement the rate limiter we designed last week — here's the doc, just write the code",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "review this pull request for the payments refactor and leave comments",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "summarize this 40-page design doc into a few bullet points for the exec update",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create a project plan with milestones and timelines for the Q3 platform work",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "what makes a good design doc? give me some tips",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  }
+}
