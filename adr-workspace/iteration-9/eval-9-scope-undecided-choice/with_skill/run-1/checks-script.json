@@ -1,0 +1,13 @@
+{
+  "decided_by": "script",
+  "files": [],
+  "checks": [
+    {
+      "id": "9.3",
+      "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)",
+      "passed": true,
+      "ref": "outputs/ (empty)",
+      "evidence": "project root holds no file after the run"
+    }
+  ]
+}

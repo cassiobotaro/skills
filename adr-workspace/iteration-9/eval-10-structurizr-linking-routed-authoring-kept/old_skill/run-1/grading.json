@@ -1,0 +1,211 @@
+{
+  "eval_name": "eval-10-structurizr-linking-routed-authoring-kept",
+  "skill": "adr",
+  "config": "old_skill",
+  "run": "run-1",
+  "baseline": "evals/checks-baseline.json",
+  "summary": {
+    "passed": 12,
+    "failed": 0,
+    "total": 12,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "id": "10.1",
+      "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+    },
+    {
+      "id": "10.2",
+      "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+    },
+    {
+      "id": "10.3",
+      "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "'Date: 2026-11-15' equals the file's write date",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+    },
+    {
+      "id": "10.4",
+      "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "four headings in order, none extra",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+    },
+    {
+      "id": "10.5",
+      "text": "The Status section's status word is 'Accepted'",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "first non-blank line of Status is 'Accepted'",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+    },
+    {
+      "id": "10.6",
+      "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "no double blank; blank line around H1, Date and every heading",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+    },
+    {
+      "id": "10.7",
+      "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+      "kind": "reply",
+      "assertion": 2,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "10.8",
+      "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+      "kind": "reply",
+      "assertion": 2,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "10.9",
+      "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+      "kind": "invention",
+      "assertion": 2,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit can be applied per account, which the gateway cannot do.\"; :21 \"which adds more state and more load to the Redis instance it already depends on\" (Redis dependency established in 0002:23)",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit can be applied per account, which the gateway cannot do.\"; :21 \"which adds more state and more load to the Redis instance it already depends on\" (Redis dependency established in 0002:23)",
+          "search": "Every sentence of 0004 checked against the user's message and ADRs 0001-0003 for invented metrics, incidents, alternatives, technologies or consequences; 'more state and more load' is a direct restatement of storing counters in Redis, and 'already depends on' comes from ADR 0002; no other additions found"
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11-21 contain only the per-account limit, 5 per 15 minutes, gateway cannot see account ids, counters in Redis; \"the Redis instance it already depends on\" is grounded in 0002 \"Redis becomes a hard runtime dependency of the login path\"",
+          "search": "invented metrics, incidents, alternatives, technologies or consequences across lines 1-21 of the new ADR; \"more state and more load\" is a direct logical restatement of keeping counters in Redis, not a new fact"
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11-21 contains only: per-account limiting need, gateway cannot see account ids, 5 attempts per 15 minutes in the session service instead of the gateway, limit applied per account, counters in Redis adding state and load to \"the Redis instance it already depends on\" (dependency established in 0002:23).",
+          "search": "Looked across the whole new ADR for metrics, incidents, alternatives, technologies or consequences not in the user's message or ADRs 0001-0003; \"more state and more load\" is a direct restatement of keeping counters in Redis, and the existing Redis dependency comes from ADR 0002. None found."
+        }
+      ]
+    },
+    {
+      "id": "10.10",
+      "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+      "kind": "file",
+      "assertion": 3,
+      "passed": true,
+      "evidence": "sha256 equal to the fixture for all three",
+      "decided_by": "script",
+      "ref": "doc/adr/0001..0003"
+    },
+    {
+      "id": "10.11",
+      "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+      "kind": "absence",
+      "assertion": 4,
+      "passed": true,
+      "evidence": "the only new path is the ADR; no .dsl file anywhere",
+      "decided_by": "script",
+      "ref": "outputs/"
+    },
+    {
+      "id": "10.12",
+      "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+      "kind": "reply",
+      "assertion": 4,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\" ... \"The `!adrs` line itself has to go in your workspace DSL. The Structurizr tooling is the right place to add it.\"",
+          "search": ""
+        }
+      ]
+    }
+  ]
+}

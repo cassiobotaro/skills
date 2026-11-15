@@ -1,0 +1,211 @@
+{
+  "eval_name": "eval-10-structurizr-linking-routed-authoring-kept",
+  "skill": "adr",
+  "config": "old_skill",
+  "run": "run-2",
+  "baseline": "evals/checks-baseline.json",
+  "summary": {
+    "passed": 11,
+    "failed": 1,
+    "total": 12,
+    "pass_rate": 0.9167
+  },
+  "expectations": [
+    {
+      "id": "10.1",
+      "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+    },
+    {
+      "id": "10.2",
+      "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+    },
+    {
+      "id": "10.3",
+      "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "'Date: 2026-11-15' equals the file's write date",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+    },
+    {
+      "id": "10.4",
+      "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "four headings in order, none extra",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+    },
+    {
+      "id": "10.5",
+      "text": "The Status section's status word is 'Accepted'",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "first non-blank line of Status is 'Accepted'",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+    },
+    {
+      "id": "10.6",
+      "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+      "kind": "file",
+      "assertion": 1,
+      "passed": true,
+      "evidence": "no double blank; blank line around H1, Date and every heading",
+      "decided_by": "script",
+      "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+    },
+    {
+      "id": "10.7",
+      "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+      "kind": "reply",
+      "assertion": 2,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "10.8",
+      "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+      "kind": "reply",
+      "assertion": 2,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "10.9",
+      "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+      "kind": "invention",
+      "assertion": 2,
+      "passed": false,
+      "decided_by": "judge",
+      "votes": "2/3",
+      "borderline": true,
+      "not_scored": false,
+      "evidence": "doc/adr/0004:19 \"The limit can be applied per account, which the gateway could not do.\"; :21 \"keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2)\"; :23 \"it is applied only after a request has reached the service.\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "doc/adr/0004:19 \"The limit can be applied per account, which the gateway could not do.\"; :21 \"keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2)\"; :23 \"it is applied only after a request has reached the service.\"",
+          "search": "Looked through all of ADR 0004 for any metric, incident, alternative, technology or consequence not in the user's message or ADRs 1-3. Found none: 5 per 15 minutes, the gateway, account ids and Redis counters come from the user, Redis-for-sessions comes from ADR 2, and the write load and after-arrival points follow directly from the decision. \"The obvious place\" (line 11) is framing for the gateway alternative the user named, not a new fact."
+        },
+        {
+          "passed": true,
+          "evidence": "0004:19 \"The limit can be applied per account, which the gateway could not do.\"; 0004:21 \"adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2)\"; 0004:23 \"it is applied only after a request has reached the service.\"",
+          "search": "Searched the whole new ADR for invented metrics, incidents, alternatives, technologies or consequences. The only figures (5 per 15 minutes) come from the user; the gateway as the alternative comes from the user; Redis comes from the user and ADR 2. Write load/more state follows directly from keeping counters in Redis, and enforcement after the request reaches the service follows directly from not enforcing at the gateway. Line 11's \"obvious place\" is mild framing, not an invented fact."
+        },
+        {
+          "passed": false,
+          "evidence": "",
+          "search": "Every factual assertion in the new ADR (lines 11-23) compared against the user's message and ADRs 1-3. Borderline: line 11 says \"The API gateway is the obvious place for rate limiting\", which is a judgment the user never made. The user only said the limit goes in the service \"instead of at the API gateway\". Line 21's \"adds write load\" and line 23's \"applied only after a request has reached the service\" can be read as logical restatements, but the 'obvious place' claim goes beyond the stated material."
+        }
+      ]
+    },
+    {
+      "id": "10.10",
+      "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+      "kind": "file",
+      "assertion": 3,
+      "passed": true,
+      "evidence": "sha256 equal to the fixture for all three",
+      "decided_by": "script",
+      "ref": "doc/adr/0001..0003"
+    },
+    {
+      "id": "10.11",
+      "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+      "kind": "absence",
+      "assertion": 4,
+      "passed": true,
+      "evidence": "the only new path is the ADR; no .dsl file anywhere",
+      "decided_by": "script",
+      "ref": "outputs/"
+    },
+    {
+      "id": "10.12",
+      "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+      "kind": "reply",
+      "assertion": 4,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" ... \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" ... \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" ... \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" and \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+          "search": ""
+        }
+      ]
+    }
+  ]
+}

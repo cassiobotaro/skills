@@ -1,0 +1,170 @@
+{
+  "eval_name": "eval-9-scope-undecided-choice",
+  "skill": "adr",
+  "config": "with_skill",
+  "run": "run-2",
+  "baseline": "evals/checks-baseline.json",
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "id": "9.1",
+      "text": "The reply says there is no decision to record yet",
+      "kind": "reply",
+      "assertion": 1,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Se eu escrevesse agora \"Kafka ou RabbitMQ\", teria que inventar a decisão e os motivos ... Como a escolha ainda está aberta, vejo dois caminhos",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "Se eu escrevesse agora \"Kafka ou RabbitMQ\", teria que inventar a decisão e os motivos ... Como a escolha ainda está aberta, vejo dois caminhos",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Como a escolha ainda está aberta, vejo dois caminhos",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Como a escolha ainda está aberta, vejo dois caminhos",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "9.2",
+      "text": "The reply is written in Portuguese",
+      "kind": "reply",
+      "assertion": 1,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Ainda não vou criar o ADR. Um ADR registra uma decisão que o time já tomou, com as razões reais dela.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "Ainda não vou criar o ADR. Um ADR registra uma decisão que o time já tomou, com as razões reais dela.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Ainda não vou criar o ADR. Um ADR registra uma decisão que o time já tomou, com as razões reais dela.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Ainda não vou criar o ADR. Um ADR registra uma decisão que o time já tomou, com as razões reais dela.",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "9.3",
+      "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)",
+      "kind": "absence",
+      "assertion": 2,
+      "passed": true,
+      "evidence": "project root holds no file after the run",
+      "decided_by": "script",
+      "ref": "outputs/ (empty)"
+    },
+    {
+      "id": "9.4",
+      "text": "The reply offers to write the ADR once the choice is made, or offers a Proposed ADR for a concrete proposal awaiting agreement (either offer is enough)",
+      "kind": "reply",
+      "assertion": 3,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Quando vocês decidirem, me diga qual escolheram e por quê. ... Aí eu escrevo o ADR como `Accepted`.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "Quando vocês decidirem, me diga qual escolheram e por quê. ... Aí eu escrevo o ADR como `Accepted`.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Quando vocês decidirem, me diga qual escolheram e por quê. [...] Aí eu escrevo o ADR como `Accepted`.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Quando vocês decidirem, me diga qual escolheram e por quê. [...] Aí eu escrevo o ADR como `Accepted`.",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "9.5",
+      "text": "Neither the reply nor any file picks Kafka or RabbitMQ as the team's decision",
+      "kind": "invention",
+      "assertion": 4,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Any sentence stating Kafka or RabbitMQ was chosen, whole reply; no files exist. Kafka/RabbitMQ appear only in the question and as hypothetical proposal examples (\"por exemplo \\\"propomos Kafka\\\" ou \\\"propomos RabbitMQ\\\"\"), not as a decision.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any sentence stating Kafka or RabbitMQ was chosen, whole reply; no files exist. Kafka/RabbitMQ appear only in the question and as hypothetical proposal examples (\"por exemplo \\\"propomos Kafka\\\" ou \\\"propomos RabbitMQ\\\"\"), not as a decision."
+        },
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any sentence stating Kafka or RabbitMQ as the chosen option, whole reply; no files exist. Only mentions are the user's question and hypothetical examples ('por exemplo \"propomos Kafka\" ou \"propomos RabbitMQ\"'), not a pick."
+        },
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any sentence stating the team chose Kafka or RabbitMQ, whole reply; no files exist. Only hypothetical examples found: 'por exemplo \"propomos Kafka\" ou \"propomos RabbitMQ\"', framed as examples, not a pick."
+        }
+      ]
+    },
+    {
+      "id": "9.6",
+      "text": "Neither the reply nor any file presents a reason, force or consequence as the team's own. General trade-off discussion clearly framed as input to the choice is not such a presentation",
+      "kind": "invention",
+      "assertion": 4,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The only forces listed (\"volume e padrão de eventos, requisitos de ordenação e retenção, experiência do time, custo operacional\") are framed as information the reply asks the user to provide, not as the team's own.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The only forces listed (\"volume e padrão de eventos, requisitos de ordenação e retenção, experiência do time, custo operacional\") are framed as information the reply asks the user to provide, not as the team's own."
+        },
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. Forces listed ('volume e padrão de eventos, requisitos de ordenação e retenção, experiência do time, custo operacional') are framed as information to be supplied by the user, not as the team's own."
+        },
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The only forces listed ('volume e padrão de eventos, requisitos de ordenação e retenção, experiência do time, custo operacional') are framed as information the user must supply, not as the team's own."
+        }
+      ]
+    }
+  ]
+}

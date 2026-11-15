@@ -1,0 +1,6 @@
+{"packet": "pab84dcd4", "checks": [
+{"id": "10.7", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot count attempts per account.\"", "search": ""},
+{"id": "10.8", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis.\"", "search": ""},
+{"id": "10.9", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"We will rate-limit login attempts per account inside the session service, at 5 attempts per 15 minutes, instead of at the API gateway.\"; :19 \"The limit is enforced per account, which the gateway could not do.\"", "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; every sentence rewords the user's message, line 19 restates the Context reason; none found"},
+{"id": "10.12", "passed": true, "evidence": "\"That is the structurizr skill's job, not this skill's, and there is no `workspace.dsl` in this repository yet.\"", "search": ""}
+]}

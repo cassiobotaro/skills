@@ -1,0 +1,19 @@
+{
+  "split_checks": [
+    [
+      "eval-10-structurizr-linking-routed-authoring-kept/old_skill/run-1",
+      "10.9",
+      "2/3"
+    ],
+    [
+      "eval-10-structurizr-linking-routed-authoring-kept/old_skill/run-2",
+      "10.9",
+      "2/3"
+    ],
+    [
+      "eval-10-structurizr-linking-routed-authoring-kept/with_skill/run-1",
+      "10.9",
+      "2/3"
+    ]
+  ]
+}

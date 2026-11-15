@@ -1,0 +1,1776 @@
+{
+  "metadata": {
+    "skill_name": "adr",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-15T22:12:13Z",
+    "evals_run": [
+      10,
+      11
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 10,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 16.5,
+        "tokens": 48447,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"but the gateway cannot see account ids, so it cannot count attempts per account.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"but the gateway cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"but the gateway cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"but the gateway cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "2/3",
+          "borderline": true,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The limit is 5 attempts per 15 minutes.\"; :15 \"The session service will keep the rate-limit counters in Redis.\"; :21 \"Redis carries more load and more responsibility on the login path.\"",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Any consequence not in the user's message or ADRs 0001-0003, whole new ADR. Borderline: line 21 \"Redis carries more load and more responsibility on the login path.\" asserts a consequence (added load/responsibility) the user did not state; it is an inference rather than a direct restatement of the decision or the stated trade-off"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The limit is 5 attempts per 15 minutes.\"; :15 \"The session service will keep the rate-limit counters in Redis.\"; :21 \"Redis carries more load and more responsibility on the login path.\"",
+              "search": "Invented metric, incident, alternative, technology or consequence in the whole ADR 0004; the only addition is line 21 'Redis carries more load and more responsibility on the login path', which follows directly from storing the new counters in Redis, already on the login path per 0002:23; no other addition found"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions. Redis carries more load and more responsibility on the login path.\"",
+              "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; the gateway alternative and 5/15 limit are from the user, 'sessions' and 'login path' from 0002-store-sessions-in-redis.md:15,23, 'more load' follows directly from adding counters; no invented fact found"
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"Wiring `!adrs` into a `workspace.dsl` is the `structurizr` skill's job, not this skill's.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"Wiring `!adrs` into a `workspace.dsl` is the `structurizr` skill's job, not this skill's.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"Wiring `!adrs` into a `workspace.dsl` is the `structurizr` skill's job, not this skill's.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"Wiring `!adrs` into a `workspace.dsl` is the `structurizr` skill's job, not this skill's.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "old_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 14.5,
+        "tokens": 47529,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "2/3",
+          "borderline": true,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"allowing 5 attempts per 15 minutes. We will not enforce this limit at the API gateway.\"; :21 \"which adds load and state to a dependency that already holds sessions.\"",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Any consequence not in the user's message or ADRs 0001-0003, whole new ADR. Borderline: line 21 \"which adds load and state to a dependency that already holds sessions\" asserts added load on Redis, a consequence the user did not state; 'already holds sessions' comes from ADR 0002, but the load claim is an inference, not a direct restatement"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"allowing 5 attempts per 15 minutes. We will not enforce this limit at the API gateway.\"; :21 \"which adds load and state to a dependency that already holds sessions.\"",
+              "search": "Invented metric, incident, alternative, technology or consequence across ADR 0004; line 21's 'adds load and state to a dependency that already holds sessions' restates the counters decision plus ADR 0002 (sessions in Redis); nothing else added"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit is applied per account, which the gateway could not do.\"; :21 \"which adds load and state to a dependency that already holds sessions.\"",
+              "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; 'already holds sessions' comes from 0002-store-sessions-in-redis.md:15, 'adds load and state' follows directly from keeping counters in Redis, line 19 restates the Context reason; no invented fact found"
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"That belongs to the `structurizr` skill, not the ADR skill, so I did not write it here.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"That belongs to the `structurizr` skill, not the ADR skill, so I did not write it here.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"That belongs to the `structurizr` skill, not the ADR skill, so I did not write it here.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"That belongs to the `structurizr` skill, not the ADR skill, so I did not write it here.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 20.9,
+        "tokens": 49835,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "11.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0003-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.2",
+          "text": "The new file's first line is '# 3. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 3. Store user-uploaded files in S3' -> slug 'store-user-uploaded-files-in-s3'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:1"
+        },
+        {
+          "id": "11.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:3"
+        },
+        {
+          "id": "11.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:5,9,13,17"
+        },
+        {
+          "id": "11.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:7"
+        },
+        {
+          "id": "11.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.7",
+          "text": "The new ADR's Context section states the user's force: the app servers move to an autoscaling group next quarter, where replaced instances do not keep their disks",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: every file read becomes a network call",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call, which is slower than reading from local disk. We accepted this trade-off.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call, which is slower than reading from local disk. We accepted this trade-off.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.9",
+          "text": "The new ADR's Context section asserts nothing beyond the user's message and the two existing ADRs: no motive the user did not give, no general claim about S3, object storage, durability or common practice, no invented incident, number or alternative. Rewording the user's own statements is not an invention",
+          "kind": "invention",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks, so files kept on local disk would be lost whenever an instance is replaced.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks, so files kept on local disk would be lost whenever an instance is replaced.\"",
+              "search": "Any motive, S3/durability claim, number, incident or alternative beyond the user's message, Context line 11; the final clause rewords the user's 'replaced without keeping their disks'"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks, so files kept on local disk would be lost whenever an instance is replaced.\"",
+              "search": "Any motive, S3/durability claim, number, incident or alternative not in the user's message, Context section lines 9-11; only rewording and a direct consequence of the user's statements found"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks, so files kept on local disk would be lost whenever an instance is replaced.\"",
+              "search": "Any motive, S3/durability claim, incident, number or alternative in Context (line 11); the closing clause is a direct rewording of 'replaced without keeping their disks', nothing else added"
+            }
+          ]
+        },
+        {
+          "id": "11.10",
+          "text": "The new ADR's Decision and Consequences sections assert nothing beyond the user's message and the two existing ADRs. A consequence that is a direct logical restatement of the stated decision or trade-off is not an invention",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "0/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Any claim beyond the user's message in Decision and Consequences, lines 13-21. Borderline: line 21 \"which is slower than reading from local disk\" adds a general performance claim the user did not state (the user said only that every read becomes a network call and called it a downside)",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Any claim beyond the user's message in Decision and Consequences, lines 13-21. Borderline: line 21 \"which is slower than reading from local disk\" adds a general performance claim the user did not state (the user said only that every read becomes a network call and called it a downside)"
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Claims beyond the user's message in Decision/Consequences, lines 13-21. Borderline: line 21 adds \"which is slower than reading from local disk\", a general performance claim the user did not state (the user only said every read becomes a network call and called it a downside); not a pure restatement"
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Any claim in Decision/Consequences (lines 13-21) beyond the user's message. Borderline: line 21 adds \"which is slower than reading from local disk\", a general performance claim the user did not make (they said only that every read becomes a network call); it is not a strict logical restatement of the stated trade-off"
+            }
+          ]
+        },
+        {
+          "id": "11.11",
+          "text": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "11.12",
+          "text": "No file other than the one new ADR was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "configuration": "old_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 14.8,
+        "tokens": 47114,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "11.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0003-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.2",
+          "text": "The new file's first line is '# 3. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 3. Store user-uploaded files in S3' -> slug 'store-user-uploaded-files-in-s3'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:1"
+        },
+        {
+          "id": "11.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:3"
+        },
+        {
+          "id": "11.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:5,9,13,17"
+        },
+        {
+          "id": "11.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:7"
+        },
+        {
+          "id": "11.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.7",
+          "text": "The new ADR's Context section states the user's force: the app servers move to an autoscaling group next quarter, where replaced instances do not keep their disks",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: every file read becomes a network call",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call to S3 instead of a local disk read. We accepted this downside.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call to S3 instead of a local disk read. We accepted this downside.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call to S3 instead of a local disk read. We accepted this downside.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call to S3 instead of a local disk read.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.9",
+          "text": "The new ADR's Context section asserts nothing beyond the user's message and the two existing ADRs: no motive the user did not give, no general claim about S3, object storage, durability or common practice, no invented incident, number or alternative. Rewording the user's own statements is not an invention",
+          "kind": "invention",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks. Files kept on local disk would be lost whenever an instance is replaced.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks. Files kept on local disk would be lost whenever an instance is replaced.\"",
+              "search": "Any motive, S3/durability claim, number, incident or alternative beyond the user's message, Context line 11; the last sentence rewords the user's 'replaced without keeping their disks'"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks. Files kept on local disk would be lost whenever an instance is replaced.\"",
+              "search": "Any motive, S3/durability/common-practice claim, number, incident or alternative not given by the user, Context lines 9-11; last sentence is a direct restatement of the user's 'replaced without keeping their disks', nothing else added"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are currently stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks. Files kept on local disk would be lost whenever an instance is replaced.\"",
+              "search": "Any motive, S3/durability claim, incident, number or alternative in Context (line 11); the last sentence directly rewords 'replaced without keeping their disks', nothing else added"
+            }
+          ]
+        },
+        {
+          "id": "11.10",
+          "text": "The new ADR's Decision and Consequences sections assert nothing beyond the user's message and the two existing ADRs. A consequence that is a direct logical restatement of the stated decision or trade-off is not an invention",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the lifetime of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call to S3 instead of a local disk read.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the lifetime of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call to S3 instead of a local disk read.\"",
+              "search": "Any claim beyond the user's message in Decision and Consequences, lines 13-21; all statements restate the decision or the stated trade-off"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the lifetime of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call to S3 instead of a local disk read. We accepted this downside.\"",
+              "search": "Claims beyond the user's message in Decision/Consequences lines 13-21; all are restatements of the decision, force and trade-off"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the lifetime of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"We accepted this downside.\"",
+              "search": "Any claim in Decision/Consequences (lines 13-21) not derivable from the user's message; line 19 restates the stated motive, line 21 restates the accepted downside without performance claims; none found"
+            }
+          ]
+        },
+        {
+          "id": "11.11",
+          "text": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "11.12",
+          "text": "No file other than the one new ADR was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 13.1,
+        "tokens": 48783,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot apply a per-account limit.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot apply a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot apply a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot apply a per-account limit.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "2/3",
+          "borderline": true,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"allowing 5 attempts per 15 minutes, instead of at the API gateway\"; :21 \"which adds write load and more state to the service's Redis usage.\"",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Any consequence not in the user's message or ADRs 0001-0003, whole new ADR. Borderline: line 21 \"which adds write load and more state to the service's Redis usage\" asserts added write load, a consequence the user did not state; 'more state' restates the counters, but the write-load claim is an inference, not a direct restatement"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"allowing 5 attempts per 15 minutes, instead of at the API gateway\"; :21 \"which adds write load and more state to the service's Redis usage.\"",
+              "search": "Invented metric, incident, alternative, technology or consequence across ADR 0004; the only addition is 'adds write load and more state', a direct logical restatement of keeping new counters in Redis; nothing else beyond the user's message"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit can be applied per account, which the gateway could not do.\"; :21 \"which adds write load and more state to the service's Redis usage.\"",
+              "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; 'write load and more state' follows directly from keeping counters in Redis, line 19 restates the Context reason; no invented fact found"
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"It means adding `!adrs doc/adr` to a `workspace.dsl`, which belongs to the `structurizr` skill.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"It means adding `!adrs doc/adr` to a `workspace.dsl`, which belongs to the `structurizr` skill.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"It means adding `!adrs doc/adr` to a `workspace.dsl`, which belongs to the `structurizr` skill.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"It means adding `!adrs doc/adr` to a `workspace.dsl`, which belongs to the `structurizr` skill.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 14.9,
+        "tokens": 48704,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot count attempts per account.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"Login attempts need to be limited per account. The API gateway cannot see account ids, so it cannot count attempts per account.\"; :15 \"at 5 attempts per 15 minutes, instead of at the API gateway\"; :19 \"The limit is enforced per account, which the gateway could not do.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"Login attempts need to be limited per account. The API gateway cannot see account ids, so it cannot count attempts per account.\"; :15 \"at 5 attempts per 15 minutes, instead of at the API gateway\"; :19 \"The limit is enforced per account, which the gateway could not do.\"",
+              "search": "Any metric, incident, alternative, technology or consequence not in the user's message or ADRs 0001-0003, whole new ADR lines 1-21; line 19 restates the decision and stated reason"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"We will rate-limit login attempts per account inside the session service, at 5 attempts per 15 minutes, instead of at the API gateway.\"; :19 \"The limit is enforced per account, which the gateway could not do.\"",
+              "search": "Invented metric, incident, alternative, technology or consequence across ADR 0004 lines 1-21; every statement restates the user's message"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:15 \"We will rate-limit login attempts per account inside the session service, at 5 attempts per 15 minutes, instead of at the API gateway.\"; :19 \"The limit is enforced per account, which the gateway could not do.\"",
+              "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; every sentence rewords the user's message, line 19 restates the Context reason; none found"
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"That is the structurizr skill's job, not this skill's, and there is no `workspace.dsl` in this repository yet.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"That is the structurizr skill's job, not this skill's, and there is no `workspace.dsl` in this repository yet.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"That is the structurizr skill's job, not this skill's, and there is no `workspace.dsl` in this repository yet.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"That is the structurizr skill's job, not this skill's, and there is no `workspace.dsl` in this repository yet.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 17.0,
+        "tokens": 48021,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "11.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0003-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.2",
+          "text": "The new file's first line is '# 3. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 3. Store user-uploaded files in S3' -> slug 'store-user-uploaded-files-in-s3'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:1"
+        },
+        {
+          "id": "11.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:3"
+        },
+        {
+          "id": "11.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:5,9,13,17"
+        },
+        {
+          "id": "11.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:7"
+        },
+        {
+          "id": "11.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.7",
+          "text": "The new ADR's Context section states the user's force: the app servers move to an autoscaling group next quarter, where replaced instances do not keep their disks",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: every file read becomes a network call",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call instead of a local disk read. The team accepted this cost.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call instead of a local disk read. The team accepted this cost.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call instead of a local disk read. The team accepted this cost.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call instead of a local disk read.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.9",
+          "text": "The new ADR's Context section asserts nothing beyond the user's message and the two existing ADRs: no motive the user did not give, no general claim about S3, object storage, durability or common practice, no invented incident, number or alternative. Rewording the user's own statements is not an invention",
+          "kind": "invention",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": "Any motive, S3/durability claim, number, incident or alternative beyond the user's message, Context line 11; both sentences reword the user's statements"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": "Any motive, S3/durability/common-practice claim, number, incident or alternative not given by the user, Context lines 9-11; none found, only rewording"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": "Any motive, S3/durability claim, incident, number or alternative in Context (lines 9-11); none found, both sentences reword the user's message"
+            }
+          ]
+        },
+        {
+          "id": "11.10",
+          "text": "The new ADR's Decision and Consequences sections assert nothing beyond the user's message and the two existing ADRs. A consequence that is a direct logical restatement of the stated decision or trade-off is not an invention",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call instead of a local disk read.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call instead of a local disk read.\"",
+              "search": "Any claim beyond the user's message in Decision and Consequences, lines 13-21; 'instead of a local disk read' and line 19 restate the decision (moving off local disk)"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call instead of a local disk read. The team accepted this cost.\"",
+              "search": "Claims beyond the user's message in Decision/Consequences lines 13-21; all restate the decision, force and trade-off"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"The team accepted this cost.\"",
+              "search": "Any claim in Decision/Consequences (lines 13-21) not derivable from the user's message; line 19 is a direct restatement of the stated motive, line 21 of the accepted downside"
+            }
+          ]
+        },
+        {
+          "id": "11.11",
+          "text": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "11.12",
+          "text": "No file other than the one new ADR was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 15.7,
+        "tokens": 48321,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "11.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0003-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.2",
+          "text": "The new file's first line is '# 3. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 3. Store user-uploaded files in S3' -> slug 'store-user-uploaded-files-in-s3'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:1"
+        },
+        {
+          "id": "11.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:3"
+        },
+        {
+          "id": "11.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:5,9,13,17"
+        },
+        {
+          "id": "11.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:7"
+        },
+        {
+          "id": "11.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+        },
+        {
+          "id": "11.7",
+          "text": "The new ADR's Context section states the user's force: the app servers move to an autoscaling group next quarter, where replaced instances do not keep their disks",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: every file read becomes a network call",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call. The team accepted this downside.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call. The team accepted this downside.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call. The team accepted this downside.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "11.9",
+          "text": "The new ADR's Context section asserts nothing beyond the user's message and the two existing ADRs: no motive the user did not give, no general claim about S3, object storage, durability or common practice, no invented incident, number or alternative. Rewording the user's own statements is not an invention",
+          "kind": "invention",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": "Any motive, S3/durability claim, number, incident or alternative not in the user's message, Context section lines 9-11; both sentences reword the user's statements"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": "Any motive, S3/durability/common-practice claim, number, incident or alternative not given by the user, Context section lines 9-11; none found, only rewording"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"User-uploaded files are stored on the local disk of the app servers. Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\"",
+              "search": "Any motive, S3/durability claim, incident, number or alternative in Context (line 11); both sentences reword the user's message, none found"
+            }
+          ]
+        },
+        {
+          "id": "11.10",
+          "text": "The new ADR's Decision and Consequences sections assert nothing beyond the user's message and the two existing ADRs. A consequence that is a direct logical restatement of the stated decision or trade-off is not an invention",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call. The team accepted this downside.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call. The team accepted this downside.\"",
+              "search": "Any claim beyond the user's message in Decision and Consequences, lines 13-21; line 19 is a direct restatement of the decision's purpose"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"Every file read becomes a network call. The team accepted this downside.\"",
+              "search": "Claims beyond the user's message in Decision/Consequences lines 13-21; line 19 is a direct logical restatement of the decision and stated force, nothing else added"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:15 \"We will store user-uploaded files in S3 instead of on the app servers' local disk.\"; :19 \"Uploaded files no longer depend on the life of any single app server, so instances in the autoscaling group can be replaced freely.\"; :21 \"The team accepted this downside.\"",
+              "search": "Any claim in Decision/Consequences (lines 13-21) not derivable from the user's message; line 19 restates the stated motive, line 21 the accepted downside; none found"
+            }
+          ]
+        },
+        {
+          "id": "11.11",
+          "text": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for every pre-existing ADR",
+          "decided_by": "script",
+          "ref": "doc/adr/ fixture files"
+        },
+        {
+          "id": "11.12",
+          "text": "No file other than the one new ADR was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 5,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.9375,
+        "stddev": 0.0417,
+        "min": 0.9167,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 16.675,
+        "stddev": 2.9511,
+        "min": 14.5,
+        "max": 20.9
+      },
+      "tokens": {
+        "mean": 48231.25,
+        "stddev": 1205.5379,
+        "min": 47114,
+        "max": 49835
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9792,
+        "stddev": 0.0417,
+        "min": 0.9167,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 15.175,
+        "stddev": 1.6317,
+        "min": 13.1,
+        "max": 17.0
+      },
+      "tokens": {
+        "mean": 48457.25,
+        "stddev": 353.9665,
+        "min": 48021,
+        "max": 48783
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.04",
+      "time_seconds": "+1.5",
+      "tokens": "-226"
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,2421 @@
+{
+  "metadata": {
+    "skill_name": "adr",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-15T21:58:10Z",
+    "evals_run": [
+      8,
+      9,
+      10
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 10,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 12,
+        "failed": 0,
+        "total": 12,
+        "time_seconds": 17.5,
+        "tokens": 48020,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds more state and more load to the Redis instance it already depends on.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit can be applied per account, which the gateway cannot do.\"; :21 \"which adds more state and more load to the Redis instance it already depends on\" (Redis dependency established in 0002:23)",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit can be applied per account, which the gateway cannot do.\"; :21 \"which adds more state and more load to the Redis instance it already depends on\" (Redis dependency established in 0002:23)",
+              "search": "Every sentence of 0004 checked against the user's message and ADRs 0001-0003 for invented metrics, incidents, alternatives, technologies or consequences; 'more state and more load' is a direct restatement of storing counters in Redis, and 'already depends on' comes from ADR 0002; no other additions found"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11-21 contain only the per-account limit, 5 per 15 minutes, gateway cannot see account ids, counters in Redis; \"the Redis instance it already depends on\" is grounded in 0002 \"Redis becomes a hard runtime dependency of the login path\"",
+              "search": "invented metrics, incidents, alternatives, technologies or consequences across lines 1-21 of the new ADR; \"more state and more load\" is a direct logical restatement of keeping counters in Redis, not a new fact"
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11-21 contains only: per-account limiting need, gateway cannot see account ids, 5 attempts per 15 minutes in the session service instead of the gateway, limit applied per account, counters in Redis adding state and load to \"the Redis instance it already depends on\" (dependency established in 0002:23).",
+              "search": "Looked across the whole new ADR for metrics, incidents, alternatives, technologies or consequences not in the user's message or ADRs 0001-0003; \"more state and more load\" is a direct restatement of keeping counters in Redis, and the existing Redis dependency comes from ADR 0002. None found."
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for all three",
+          "decided_by": "script",
+          "ref": "doc/adr/0001..0003"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"Authoring or editing your Structurizr workspace is outside what I do here, and there is no `workspace.dsl` in this repository for me to edit.\" ... \"The `!adrs` line itself has to go in your workspace DSL. The Structurizr tooling is the right place to add it.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "old_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 18.2,
+        "tokens": 48582,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place for rate limiting, but it cannot see account ids, so it cannot enforce a per-account limit.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2).\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "2/3",
+          "borderline": true,
+          "not_scored": false,
+          "evidence": "doc/adr/0004:19 \"The limit can be applied per account, which the gateway could not do.\"; :21 \"keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2)\"; :23 \"it is applied only after a request has reached the service.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004:19 \"The limit can be applied per account, which the gateway could not do.\"; :21 \"keeps rate-limit counters in Redis, which adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2)\"; :23 \"it is applied only after a request has reached the service.\"",
+              "search": "Looked through all of ADR 0004 for any metric, incident, alternative, technology or consequence not in the user's message or ADRs 1-3. Found none: 5 per 15 minutes, the gateway, account ids and Redis counters come from the user, Redis-for-sessions comes from ADR 2, and the write load and after-arrival points follow directly from the decision. \"The obvious place\" (line 11) is framing for the gateway alternative the user named, not a new fact."
+            },
+            {
+              "passed": true,
+              "evidence": "0004:19 \"The limit can be applied per account, which the gateway could not do.\"; 0004:21 \"adds write load and more state to the Redis instance it already depends on for sessions (see ADR 2)\"; 0004:23 \"it is applied only after a request has reached the service.\"",
+              "search": "Searched the whole new ADR for invented metrics, incidents, alternatives, technologies or consequences. The only figures (5 per 15 minutes) come from the user; the gateway as the alternative comes from the user; Redis comes from the user and ADR 2. Write load/more state follows directly from keeping counters in Redis, and enforcement after the request reaches the service follows directly from not enforcing at the gateway. Line 11's \"obvious place\" is mild framing, not an invented fact."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Every factual assertion in the new ADR (lines 11-23) compared against the user's message and ADRs 1-3. Borderline: line 11 says \"The API gateway is the obvious place for rate limiting\", which is a judgment the user never made. The user only said the limit goes in the service \"instead of at the API gateway\". Line 21's \"adds write load\" and line 23's \"applied only after a request has reached the service\" can be read as logical restatements, but the 'obvious place' claim goes beyond the stated material."
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for all three",
+          "decided_by": "script",
+          "ref": "doc/adr/0001..0003"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" ... \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" ... \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" ... \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"This skill only writes and maintains the ADR files. It does not edit `workspace.dsl`, so I made no workspace changes.\" and \"Authoring or editing the workspace is a separate task for the Structurizr tooling.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 13.6,
+        "tokens": 46750,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "8.1",
+          "text": "The reply says that nothing has been decided yet / the design is still open, i.e. that there is no made decision here to record",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "What you described is a list of open questions, not a decision",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "What you described is a list of open questions, not a decision",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "What you described is a list of open questions, not a decision",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "What you described is a list of open questions, not a decision",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.2",
+          "text": "The reply says that an ADR (or this skill) records decisions already made, as the reason it is not writing one now",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "I haven't written the ADR yet. What you described is a list of open questions, not a decision, and an ADR records a decision the team has already made and why.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "I haven't written the ADR yet. What you described is a list of open questions, not a decision, and an ADR records a decision the team has already made and why.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written the ADR yet. What you described is a list of open questions, not a decision, and an ADR records a decision the team has already made and why.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written the ADR yet. What you described is a list of open questions, not a decision, and an ADR records a decision the team has already made and why.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.3",
+          "text": "The reply is written in English",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "I haven't written the ADR yet.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "I haven't written the ADR yet.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written the ADR yet. What you described is a list of open questions, not a decision",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Could you answer these so I can write the first record?",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.4",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR, no design doc)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "8.5",
+          "text": "The reply names a design doc as the appropriate artifact for this request (naming the design-doc skill or offering to help with it counts)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "A design doc may also be a better place to explore the open options before any ADR exists.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "A design doc may also be a better place to explore the open options before any ADR exists.",
+              "search": "any sentence naming a design doc, whole reply; the mention is hedged ('may also be') alongside an offer to write a Proposed ADR, but it explicitly names a design doc as the better place for the open options"
+            },
+            {
+              "passed": true,
+              "evidence": "A design doc may also be a better place to explore the open options before any ADR exists.",
+              "search": "any sentence naming a design doc, whole reply; the wording is hedged ('may also be a better place') but it names the design doc as the better artifact for exploring the open options"
+            },
+            {
+              "passed": true,
+              "evidence": "A design doc may also be a better place to explore the open options before any ADR exists.",
+              "search": "any sentence naming a design doc, whole reply; hedged with 'may' but explicitly names it as the better place for the open options"
+            }
+          ]
+        },
+        {
+          "id": "8.6",
+          "text": "The reply says that the decisions the design settles can be recorded as ADRs afterwards",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "The log keeps one decision per ADR, so each one will get its own record once it is settled.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "The log keeps one decision per ADR, so each one will get its own record once it is settled.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "so each one will get its own record once it is settled. ... I can record the first decision that settles as `Proposed` and add the others as you decide them.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "These are also four separate decisions (channels, queue, retries, ownership). The log keeps one decision per ADR, so each one will get its own record once it is settled.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.7",
+          "text": "Neither the reply nor any file asserts, as the team's position, a decision, rationale, alternative or consequence that the user's message did not state. Questions and clearly-labelled options are not assertions",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "any stated channel, queue, retry policy, owner, rationale, alternative or consequence presented as the team's position, whole reply; files: none exist. Only questions and a labelled example ('for example, \"we will put a queue in front of the senders, using X\"') appear",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "any stated channel, queue, retry policy, owner, rationale, alternative or consequence presented as the team's position, whole reply; files: none exist. Only questions and a labelled example ('for example, \"we will put a queue in front of the senders, using X\"') appear"
+            },
+            {
+              "passed": true,
+              "evidence": "Which of the four has the team actually decided? For that one, what did you choose (for example, \"we will put a queue in front of the senders, using X\")?",
+              "search": "any asserted channel, queue, retry, ownership decision, rationale, alternative or consequence in the reply; none found, the only concrete option is a labelled example inside a question; no files exist"
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "any stated channel, queue, retry policy, owner, rationale, alternative or consequence presented as the team's position, whole reply; files: none exist. Only questions and an illustrative example in quotes ('for example, \"we will put a queue in front of the senders, using X\"') appear"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "old_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 16.7,
+        "tokens": 46999,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "8.1",
+          "text": "The reply says that nothing has been decided yet / the design is still open, i.e. that there is no made decision here to record",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "the four things you listed (channels, a queue, retries, ownership) are still open. If I wrote one now, I would be inventing the decision and the reasons for it.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "the four things you listed (channels, a queue, retries, ownership) are still open. If I wrote one now, I would be inventing the decision and the reasons for it.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "the four things you listed (channels, a queue, retries, ownership) are still open. If I wrote one now, I would be inventing the decision and the reasons for it.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "the four things you listed (channels, a queue, retries, ownership) are still open. If I wrote one now, I would be inventing the decision and the reasons for it.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.2",
+          "text": "The reply says that an ADR (or this skill) records decisions already made, as the reason it is not writing one now",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "An ADR records a decision that has already been made, and the four things you listed (channels, a queue, retries, ownership) are still open.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision that has already been made, and the four things you listed (channels, a queue, retries, ownership) are still open.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet ... An ADR records a decision that has already been made, and the four things you listed (channels, a queue, retries, ownership) are still open.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision that has already been made, and the four things you listed (channels, a queue, retries, ownership) are still open.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.3",
+          "text": "The reply is written in English",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "I haven't written an ADR yet, and I haven't created or changed anything in `doc/adr`.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet, and I haven't created or changed anything in `doc/adr`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet, and I haven't created or changed anything in `doc/adr`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet, and I haven't created or changed anything in `doc/adr`.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.4",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR, no design doc)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "8.5",
+          "text": "The reply names a design doc as the appropriate artifact for this request (naming the design-doc skill or offering to help with it counts)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "0/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "any mention of a design doc, the design-doc skill, or an offer to help write one, whole reply; none found. The only alternative offered is a Proposed ADR listing open questions.",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "any mention of a design doc, the design-doc skill, or an offer to help write one, whole reply; none found. The only alternative offered is a Proposed ADR listing open questions."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "any mention of a design doc, design document, the design-doc skill, or an offer to help write a design, whole reply; none found (only ADRs, including a Proposed ADR, are offered)"
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Any mention of 'design doc', 'design document', the design-doc skill, or an offer to help design the architecture, whole reply. None found; the only alternative offered is a Proposed ADR naming the open questions."
+            }
+          ]
+        },
+        {
+          "id": "8.6",
+          "text": "The reply says that the decisions the design settles can be recorded as ADRs afterwards",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "0/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "borderline: the reply says 'Once you answer, I'll write the ADRs in `doc/adr`' and 'Tell me which of them you have settled, and I'll write those', but never ties ADRs to decisions settled by a design (no design or design doc is mentioned), so the proposition that the design's decisions can be recorded as ADRs afterwards is not stated.",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "borderline: the reply says 'Once you answer, I'll write the ADRs in `doc/adr`' and 'Tell me which of them you have settled, and I'll write those', but never ties ADRs to decisions settled by a design (no design or design doc is mentioned), so the proposition that the design's decisions can be recorded as ADRs afterwards is not stated."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "a sentence saying decisions settled by a design (doc) can be recorded as ADRs afterwards, whole reply. Borderline: the reply says 'Tell me which of them you have settled, and I'll write those' and 'Once you answer, I'll write the ADRs', but never ties this to a design that settles the decisions; it asks the user to supply decisions directly"
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "A sentence saying decisions settled by a design (process) can be recorded as ADRs afterwards, whole reply. Borderline: 'Tell me which of them you have settled, and I'll write those' and 'Once you answer, I'll write the ADRs in doc/adr' offer ADRs for decisions the user already settled, but never tie them to a design that settles them later."
+            }
+          ]
+        },
+        {
+          "id": "8.7",
+          "text": "Neither the reply nor any file asserts, as the team's position, a decision, rationale, alternative or consequence that the user's message did not state. Questions and clearly-labelled options are not assertions",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "For example: which channels (email, SMS, push, ...), whether a queue sits in front of the senders and which technology",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "For example: which channels (email, SMS, push, ...), whether a queue sits in front of the senders and which technology",
+              "search": "any statement presenting a channel choice, queue, retry policy, owner, rationale or consequence as the team's position, whole reply and files (none exist); examples are labelled 'For example' / 'such as' and posed as questions; the plan to add 0001 'Record architecture decisions' is the assistant's proposed action, not an asserted team decision."
+            },
+            {
+              "passed": true,
+              "evidence": "Tell me which of them you have settled, and I'll write those. / For example: which channels (email, SMS, push, ...) / If you want to record that the architecture is still open, I can write a single ADR with status Proposed",
+              "search": "any statement asserting a chosen channel, queue, retry policy, owner, rationale, alternative or consequence as the team's position, whole reply and files (no files exist); all such content is framed as questions, examples or offers"
+            },
+            {
+              "passed": true,
+              "evidence": "Reply: 'I wouldn't pick answers for you'; decision content appears only as questions/examples ('For example: which channels (email, SMS, push, ...)'). Files: 'None. The project directory is empty.'",
+              "search": "Any sentence asserting a chosen channel, queue, retry policy, owner, rationale or consequence as the team's position, whole reply and files; none found (cost examples are framed as 'such as' inside a question)."
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 16.9,
+        "tokens": 50110,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "9.1",
+          "text": "The reply says there is no decision to record yet",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje eu n\u00e3o tenho nenhuma das duas coisas. N\u00e3o existe escolha entre Kafka e RabbitMQ",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje eu n\u00e3o tenho nenhuma das duas coisas. N\u00e3o existe escolha entre Kafka e RabbitMQ",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje eu n\u00e3o tenho nenhuma das duas coisas. N\u00e3o existe escolha entre Kafka e RabbitMQ",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "N\u00e3o existe escolha entre Kafka e RabbitMQ, e eu n\u00e3o conhe\u00e7o as for\u00e7as do seu contexto.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.2",
+          "text": "The reply is written in Portuguese",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje eu n\u00e3o tenho nenhuma das duas coisas.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.3",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "9.4",
+          "text": "The reply offers to write the ADR once the choice is made, or offers a Proposed ADR for a concrete proposal awaiting agreement (either offer is enough)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Com essas respostas eu escrevo o ADR em portugu\u00eas, com o status `Proposed` ou `Accepted` conforme o caso.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Com essas respostas eu escrevo o ADR em portugu\u00eas, com o status `Proposed` ou `Accepted` conforme o caso.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Com essas respostas eu escrevo o ADR em portugu\u00eas, com o status `Proposed` ou `Accepted` conforme o caso.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Com essas respostas eu escrevo o ADR em portugu\u00eas, com o status `Proposed` ou `Accepted` conforme o caso.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.5",
+          "text": "Neither the reply nor any file picks Kafka or RabbitMQ as the team's decision",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "N\u00e3o existe escolha entre Kafka e RabbitMQ; Se for isso, eu documento as op\u00e7\u00f5es e o que est\u00e1 em jogo, sem declarar um vencedor.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "N\u00e3o existe escolha entre Kafka e RabbitMQ; Se for isso, eu documento as op\u00e7\u00f5es e o que est\u00e1 em jogo, sem declarar um vencedor.",
+              "search": "any sentence choosing Kafka or RabbitMQ as the team's decision, whole reply; no files exist"
+            },
+            {
+              "passed": true,
+              "evidence": "N\u00e3o existe escolha entre Kafka e RabbitMQ",
+              "search": "any sentence declaring Kafka or RabbitMQ as chosen, whole reply; no files exist in the project"
+            },
+            {
+              "passed": true,
+              "evidence": "N\u00e3o existe escolha entre Kafka e RabbitMQ; \"Se for isso, eu documento as op\u00e7\u00f5es e o que est\u00e1 em jogo, sem declarar um vencedor.\"",
+              "search": "any sentence stating the team chose Kafka or RabbitMQ, whole reply; files: none exist"
+            }
+          ]
+        },
+        {
+          "id": "9.6",
+          "text": "Neither the reply nor any file presents a reason, force or consequence as the team's own. General trade-off discussion clearly framed as input to the choice is not such a presentation",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Qual custo o time aceita pagar em cada caminho? Por exemplo, a complexidade operacional do Kafka ou abrir m\u00e3o do replay no RabbitMQ.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Qual custo o time aceita pagar em cada caminho? Por exemplo, a complexidade operacional do Kafka ou abrir m\u00e3o do replay no RabbitMQ.",
+              "search": "any reason, force or consequence stated as the team's own, whole reply; trade-offs appear only inside questions as input to the choice; no files exist"
+            },
+            {
+              "passed": true,
+              "evidence": "Qual custo o time aceita pagar em cada caminho? Por exemplo, a complexidade operacional do Kafka ou abrir m\u00e3o do replay no RabbitMQ.",
+              "search": "any reason/force/consequence stated as the team's own, whole reply; the only trade-offs appear as examples inside questions, framed as input; no files exist"
+            },
+            {
+              "passed": true,
+              "evidence": "Qual custo o time aceita pagar em cada caminho? Por exemplo, a complexidade operacional do Kafka ou abrir m\u00e3o do replay no RabbitMQ.",
+              "search": "any reason, force or consequence asserted as the team's own, whole reply; the only trade-offs (volume, replay, ordering, latency, Kafka ops complexity, RabbitMQ replay) appear inside questions as examples, i.e. framed as input; files: none exist"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "configuration": "old_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 19.5,
+        "tokens": 47522,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "9.1",
+          "text": "The reply says there is no decision to record yet",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje n\u00e3o tenho nenhuma das duas coisas.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje n\u00e3o tenho nenhuma das duas coisas.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje n\u00e3o tenho nenhuma das duas coisas.",
+              "search": "statement that no decision exists yet, whole reply"
+            },
+            {
+              "passed": true,
+              "evidence": "Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time, e hoje n\u00e3o tenho nenhuma das duas coisas.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.2",
+          "text": "The reply is written in Portuguese",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+              "search": "language of the whole reply"
+            },
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o escrevi o ADR. Um ADR registra uma decis\u00e3o e as raz\u00f5es reais do time",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.3",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "9.4",
+          "text": "The reply offers to write the ADR once the choice is made, or offers a Proposed ADR for a concrete proposal awaiting agreement (either offer is enough)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Se voc\u00eas j\u00e1 bateram o martelo, me diga qual foi a escolha e por qu\u00ea, e eu escrevo como `Accepted`.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Se voc\u00eas j\u00e1 bateram o martelo, me diga qual foi a escolha e por qu\u00ea, e eu escrevo como `Accepted`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Se voc\u00eas j\u00e1 bateram o martelo, me diga qual foi a escolha e por qu\u00ea, e eu escrevo como `Accepted`.",
+              "search": "offer to write ADR after choice or Proposed ADR, whole reply"
+            },
+            {
+              "passed": true,
+              "evidence": "Se voc\u00eas j\u00e1 bateram o martelo, me diga qual foi a escolha e por qu\u00ea, e eu escrevo como `Accepted`.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.5",
+          "text": "Neither the reply nor any file picks Kafka or RabbitMQ as the team's decision",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Se eu escolhesse Kafka ou RabbitMQ por conta pr\u00f3pria, teria que inventar o contexto e os trade-offs.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Se eu escolhesse Kafka ou RabbitMQ por conta pr\u00f3pria, teria que inventar o contexto e os trade-offs.",
+              "search": "any sentence choosing Kafka or RabbitMQ as the decision, whole reply; no files exist"
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "any sentence choosing Kafka or RabbitMQ as the decision, whole reply; no files exist. None found; reply says 'Se eu escolhesse Kafka ou RabbitMQ por conta pr\u00f3pria, teria que inventar'"
+            },
+            {
+              "passed": true,
+              "evidence": "Se eu escolhesse Kafka ou RabbitMQ por conta pr\u00f3pria, teria que inventar o contexto e os trade-offs.",
+              "search": "any sentence choosing Kafka or RabbitMQ as the decision, whole reply; no files exist"
+            }
+          ]
+        },
+        {
+          "id": "9.6",
+          "text": "Neither the reply nor any file presents a reason, force or consequence as the team's own. General trade-off discussion clearly framed as input to the choice is not such a presentation",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Quais restri\u00e7\u00f5es pesam na escolha? Por exemplo, a experi\u00eancia do time com cada ferramenta, o custo de operar a infraestrutura",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Quais restri\u00e7\u00f5es pesam na escolha? Por exemplo, a experi\u00eancia do time com cada ferramenta, o custo de operar a infraestrutura",
+              "search": "any reason, force or consequence stated as the team's own, whole reply; all factors appear only as questions or examples to ask about; no files exist"
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "any reason, force or consequence presented as the team's own, whole reply; no files exist. Only questions asking the team for context, constraints and trade-offs; none asserted"
+            },
+            {
+              "passed": true,
+              "evidence": "**Quais restri\u00e7\u00f5es pesam na escolha?** Por exemplo, a experi\u00eancia do time com cada ferramenta, o custo de operar a infraestrutura",
+              "search": "any reason, force or consequence asserted as the team's own, whole reply; all factors appear only as questions to the user; no files exist"
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 17.6,
+        "tokens": 49092,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place to apply a rate limit, but it cannot see account ids, so it cannot count attempts per account.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place to apply a rate limit, but it cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place to apply a rate limit, but it cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the obvious place to apply a rate limit, but it cannot see account ids, so it cannot count attempts per account.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, in addition to the sessions it already stores there\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, in addition to the sessions it already stores there\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, in addition to the sessions it already stores there\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, in addition to the sessions it already stores there\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "0/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Checked every sentence of ADR 0004 against the user's message and ADRs 1-3. Borderline: line 11 asserts a purpose the user never stated, \"Login attempts need to be limited per account to slow down repeated guessing.\" It is a plausible inference, but it is not in the source material. Line 21 \"This adds state to maintain and more data in Redis\" and line 19 are restatements of the decision. Because the motive was inferred and presented as fact, this is borderline, so UNMET.",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Checked every sentence of ADR 0004 against the user's message and ADRs 1-3. Borderline: line 11 asserts a purpose the user never stated, \"Login attempts need to be limited per account to slow down repeated guessing.\" It is a plausible inference, but it is not in the source material. Line 21 \"This adds state to maintain and more data in Redis\" and line 19 are restatements of the decision. Because the motive was inferred and presented as fact, this is borderline, so UNMET."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Checked every sentence of the new ADR (lines 1-21) against the user's message and ADRs 1-3. Borderline: line 11 says \"Login attempts need to be limited per account to slow down repeated guessing.\" The purpose \"to slow down repeated guessing\" appears nowhere in the user's message or the existing ADRs, so it is an inferred motivation stated as fact. Line 11's \"The API gateway is the obvious place to apply a rate limit\" is also framing the user did not give. Line 21's \"This adds state to maintain and more data in Redis\" reads as a restatement of the trade-off. Because the motivation is stated as fact without a source, this is at best borderline, so UNMET."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Borderline. Compared every assertion in the new ADR against the user's message and ADRs 1-3. 0004:11 asserts a purpose, \"Login attempts need to be limited per account to slow down repeated guessing\", which the user never stated (they gave only the limit, the placement and the gateway reason); 0004:11 also asserts \"The API gateway is the obvious place to apply a rate limit\". These are plausible inferences, not direct restatements of the decision, so the check is treated as unmet. Remaining consequences (0004:19, 0004:21 \"adds state to maintain and more data in Redis\") read as restatements."
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for all three",
+          "decided_by": "script",
+          "ref": "doc/adr/0001..0003"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"Showing the ADRs in your Structurizr workspace means adding an `!adrs` directive to `workspace.dsl`. That is the `structurizr` skill's job, not this one's, and I didn't write or edit a workspace file.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"Showing the ADRs in your Structurizr workspace means adding an `!adrs` directive to `workspace.dsl`. That is the `structurizr` skill's job, not this one's, and I didn't write or edit a workspace file.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"Showing the ADRs in your Structurizr workspace means adding an `!adrs` directive to `workspace.dsl`. That is the `structurizr` skill's job, not this one's, and I didn't write or edit a workspace file.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"Showing the ADRs in your Structurizr workspace means adding an `!adrs` directive to `workspace.dsl`. That is the `structurizr` skill's job, not this one's\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 0.9167,
+        "passed": 11,
+        "failed": 1,
+        "total": 12,
+        "time_seconds": 16.5,
+        "tokens": 47980,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "10.1",
+          "text": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.2",
+          "text": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "H1 '# 4. Rate-limit login attempts in the session service' -> slug 'rate-limit-login-attempts-in-the-session-service'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:1"
+        },
+        {
+          "id": "10.3",
+          "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "'Date: 2026-11-15' equals the file's write date",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:3"
+        },
+        {
+          "id": "10.4",
+          "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "four headings in order, none extra",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:5,9,13,17"
+        },
+        {
+          "id": "10.5",
+          "text": "The Status section's status word is 'Accepted'",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "first non-blank line of Status is 'Accepted'",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:7"
+        },
+        {
+          "id": "10.6",
+          "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+          "kind": "file",
+          "assertion": 1,
+          "passed": true,
+          "evidence": "no double blank; blank line around H1, Date and every heading",
+          "decided_by": "script",
+          "ref": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md"
+        },
+        {
+          "id": "10.7",
+          "text": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the usual place for rate limiting, but it cannot see account ids, so it cannot enforce a limit per account.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the usual place for rate limiting, but it cannot see account ids, so it cannot enforce a limit per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway is the usual place for rate limiting, but it cannot see account ids, so it cannot enforce a limit per account.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"but it cannot see account ids, so it cannot enforce a limit per account.\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.8",
+          "text": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis",
+          "kind": "reply",
+          "assertion": 2,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, adding write load and more state to a store that is already a hard runtime dependency of the login path.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, adding write load and more state to a store that is already a hard runtime dependency of the login path.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis, adding write load and more state to a store that is already a hard runtime dependency of the login path.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "10.9",
+          "text": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention",
+          "kind": "invention",
+          "assertion": 2,
+          "passed": false,
+          "decided_by": "judge",
+          "votes": "0/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Every factual assertion in 0004 compared against the user's message and ADRs 0001-0003. Borderline: line 11 asserts a purpose the user never gave (\"to slow down repeated guessing\") and a claim not in the message or ADRs (\"The API gateway is the usual place for rate limiting\"). Line 21 adds \"write load\", which is an inference, not a restatement. The \"hard runtime dependency\" part does trace to 0002:23. Because the rationale and the 'usual place' claim go beyond the source material, the check is unmet.",
+          "passes": [
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Every factual assertion in 0004 compared against the user's message and ADRs 0001-0003. Borderline: line 11 asserts a purpose the user never gave (\"to slow down repeated guessing\") and a claim not in the message or ADRs (\"The API gateway is the usual place for rate limiting\"). Line 21 adds \"write load\", which is an inference, not a restatement. The \"hard runtime dependency\" part does trace to 0002:23. Because the rationale and the 'usual place' claim go beyond the source material, the check is unmet."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Checked every sentence of the new ADR against the user's message and ADRs 1-3. Borderline/unsupported: line 11 \"to slow down repeated guessing\" asserts a security motivation the user never stated, and \"The API gateway is the usual place for rate limiting\" is an unstated claim; line 21 \"adding write load\" is an inferred consequence not given by the user. The 'hard runtime dependency' clause is supported by ADR 0002:23. Because the invented motivation is at best borderline, the check is UNMET."
+            },
+            {
+              "passed": false,
+              "evidence": "",
+              "search": "Compared every sentence of ADR 0004 against the user's message and ADRs 0001-0003. Line 11 asserts a purpose the user never gave (\"to slow down repeated guessing\") and a general claim not in the material (\"The API gateway is the usual place for rate limiting\"). Line 21 adds \"write load\", which is a plausible inference rather than a restatement of the decision. The hard-dependency claim does come from ADR 0002:23. Borderline at best because of the invented motivation and the 'usual place' claim, so UNMET."
+            }
+          ]
+        },
+        {
+          "id": "10.10",
+          "text": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture",
+          "kind": "file",
+          "assertion": 3,
+          "passed": true,
+          "evidence": "sha256 equal to the fixture for all three",
+          "decided_by": "script",
+          "ref": "doc/adr/0001..0003"
+        },
+        {
+          "id": "10.11",
+          "text": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root",
+          "kind": "absence",
+          "assertion": 4,
+          "passed": true,
+          "evidence": "the only new path is the ADR; no .dsl file anywhere",
+          "decided_by": "script",
+          "ref": "outputs/"
+        },
+        {
+          "id": "10.12",
+          "text": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)",
+          "kind": "reply",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"I did not edit a `workspace.dsl`, because adding `!adrs` to a workspace is the `structurizr` skill's job.\"",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"I did not edit a `workspace.dsl`, because adding `!adrs` to a workspace is the `structurizr` skill's job.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"I did not edit a `workspace.dsl`, because adding `!adrs` to a workspace is the `structurizr` skill's job.\"",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "\"I did not edit a `workspace.dsl`, because adding `!adrs` to a workspace is the `structurizr` skill's job.\"",
+              "search": ""
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 12.9,
+        "tokens": 46823,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "8.1",
+          "text": "The reply says that nothing has been decided yet / the design is still open, i.e. that there is no made decision here to record",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Your message lists four open questions ... What you have is a design that is still being worked out",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Your message lists four open questions ... What you have is a design that is still being worked out",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "What you have is a design that is still being worked out, and that fits a design doc.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "What you have is a design that is still being worked out, and that fits a design doc.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.2",
+          "text": "The reply says that an ADR (or this skill) records decisions already made, as the reason it is not writing one now",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.3",
+          "text": "The reply is written in English",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.4",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR, no design doc)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "8.5",
+          "text": "The reply names a design doc as the appropriate artifact for this request (naming the design-doc skill or offering to help with it counts)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "What you have is a design that is still being worked out, and that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "What you have is a design that is still being worked out, and that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs for the notification service.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs for the notification service.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.6",
+          "text": "The reply says that the decisions the design settles can be recorded as ADRs afterwards",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Each question can become its own ADR once the team settles it.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Each question can become its own ADR once the team settles it.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Each question can become its own ADR once the team settles it.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Each question can become its own ADR once the team settles it.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.7",
+          "text": "Neither the reply nor any file asserts, as the team's position, a decision, rationale, alternative or consequence that the user's message did not state. Questions and clearly-labelled options are not assertions",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Any statement presenting a channel, queue, retry, ownership choice, rationale or consequence as the team's position, whole reply; files: none exist. Only found clearly-labelled examples (\"for example \\\"we will put a queue in front of the senders, because ...\\\"\") and questions, which are not assertions.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any statement presenting a channel, queue, retry, ownership choice, rationale or consequence as the team's position, whole reply; files: none exist. Only found clearly-labelled examples (\"for example \\\"we will put a queue in front of the senders, because ...\\\"\") and questions, which are not assertions."
+            },
+            {
+              "passed": true,
+              "evidence": "1. What exactly was decided, or is being proposed (for example, queue technology, retry policy)?",
+              "search": "Looked through the whole reply for any statement presenting a channel choice, queue decision, retry policy, owning team, rationale, alternative or consequence as the team's position; only questions and a clearly-labelled example (\"for example, 'we will put a queue in front of the senders, because ...'\") appear. No files exist in the project."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Looked through the whole reply for any statement presenting a decision, rationale, alternative or consequence as the team's position; the only concrete example (\"we will put a queue in front of the senders, because ...\") is explicitly labelled \"for example\", the rest are questions. No files exist."
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 12.2,
+        "tokens": 46823,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "8.1",
+          "text": "The reply says that nothing has been decided yet / the design is still open, i.e. that there is no made decision here to record",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "What you describe is a design that is still open. The channels, the queue in front of the senders, the retry behavior and the owning team are all undecided.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "What you describe is a design that is still open. The channels, the queue in front of the senders, the retry behavior and the owning team are all undecided.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "What you describe is a design that is still open. The channels, the queue in front of the senders, the retry behavior and the owning team are all undecided.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "What you describe is a design that is still open. The channels, the queue in front of the senders, the retry behavior and the owning team are all undecided.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.2",
+          "text": "The reply says that an ADR (or this skill) records decisions already made, as the reason it is not writing one now",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "An ADR records a decision the team has already made, along with its real reasons. What you describe is a design that is still open.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision the team has already made, along with its real reasons. What you describe is a design that is still open.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "An ADR records a decision the team has already made, along with its real reasons. What you describe is a design that is still open.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I didn't write an ADR, and I didn't change anything in `doc/adr`. An ADR records a decision the team has already made, along with its real reasons.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.3",
+          "text": "The reply is written in English",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "I didn't write an ADR, and I didn't change anything in `doc/adr`.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "I didn't write an ADR, and I didn't change anything in `doc/adr`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I didn't write an ADR, and I didn't change anything in `doc/adr`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "I didn't write an ADR, and I didn't change anything in `doc/adr`.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.4",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR, no design doc)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "8.5",
+          "text": "The reply names a design doc as the appropriate artifact for this request (naming the design-doc skill or offering to help with it counts)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "This is work for a design doc, where you compare the options and settle the open questions. The `design-doc` skill can help, if it is installed.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "This is work for a design doc, where you compare the options and settle the open questions. The `design-doc` skill can help, if it is installed.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "This is work for a design doc, where you compare the options and settle the open questions. The `design-doc` skill can help, if it is installed.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "This is work for a design doc, where you compare the options and settle the open questions. The `design-doc` skill can help, if it is installed.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.6",
+          "text": "The reply says that the decisions the design settles can be recorded as ADRs afterwards",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Once a question is settled, each answer can become its own ADR.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Once a question is settled, each answer can become its own ADR.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Once a question is settled, each answer can become its own ADR.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Once a question is settled, each answer can become its own ADR.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "8.7",
+          "text": "Neither the reply nor any file asserts, as the team's position, a decision, rationale, alternative or consequence that the user's message did not state. Questions and clearly-labelled options are not assertions",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "\"We will support email and push first\" would be one ADR.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "\"We will support email and push first\" would be one ADR.",
+              "search": "Any decision, rationale, alternative or consequence stated as the team's position, whole reply; no files exist. The channel/queue lines are framed as hypothetical examples ('would be one ADR'), and the ownership line is a general remark, not a team position; the rest are questions."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Looked for any statement presented as the team's decision, rationale, alternative or consequence, whole reply and files (none exist). The channel/queue examples are framed hypothetically (\"would be one ADR\", \"would be another\"), the ownership line is general guidance (\"usually a note in the design doc\"), and the rest are questions; no assertion of the team's position found."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Looked through the whole reply for any decision, rationale, alternative or consequence stated as the team's position. The channel and queue examples are hypotheticals (\"would be one ADR\"). The ownership line is general advice. The rest are questions. The project has no files."
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 15.3,
+        "tokens": 47228,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "9.1",
+          "text": "The reply says there is no decision to record yet",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Se voc\u00eas ainda n\u00e3o bateram o martelo entre Kafka e RabbitMQ, n\u00e3o h\u00e1 decis\u00e3o para registrar.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Se voc\u00eas ainda n\u00e3o bateram o martelo entre Kafka e RabbitMQ, n\u00e3o h\u00e1 decis\u00e3o para registrar.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Se voc\u00eas ainda n\u00e3o bateram o martelo entre Kafka e RabbitMQ, n\u00e3o h\u00e1 decis\u00e3o para registrar.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Se voc\u00eas ainda n\u00e3o bateram o martelo entre Kafka e RabbitMQ, n\u00e3o h\u00e1 decis\u00e3o para registrar.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.2",
+          "text": "The reply is written in Portuguese",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "N\u00e3o escrevi o ADR ainda, e n\u00e3o criei nenhum arquivo. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com os motivos reais.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "N\u00e3o escrevi o ADR ainda, e n\u00e3o criei nenhum arquivo. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com os motivos reais.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "N\u00e3o escrevi o ADR ainda, e n\u00e3o criei nenhum arquivo. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com os motivos reais.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "N\u00e3o escrevi o ADR ainda, e n\u00e3o criei nenhum arquivo. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com os motivos reais.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.3",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "9.4",
+          "text": "The reply offers to write the ADR once the choice is made, or offers a Proposed ADR for a concrete proposal awaiting agreement (either offer is enough)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "A\u00ed posso escrever um ADR com status `Proposed`. ... Quando voc\u00eas decidirem, \u00e9 s\u00f3 me dizer a escolha e os motivos. A\u00ed o ADR sai como `Accepted`, no log do projeto.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "A\u00ed posso escrever um ADR com status `Proposed`. ... Quando voc\u00eas decidirem, \u00e9 s\u00f3 me dizer a escolha e os motivos. A\u00ed o ADR sai como `Accepted`, no log do projeto.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "A\u00ed posso escrever um ADR com status `Proposed`. ... Quando voc\u00eas decidirem, \u00e9 s\u00f3 me dizer a escolha e os motivos. A\u00ed o ADR sai como `Accepted`, no log do projeto.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Quando voc\u00eas decidirem, \u00e9 s\u00f3 me dizer a escolha e os motivos. A\u00ed o ADR sai como `Accepted`, no log do projeto.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.5",
+          "text": "Neither the reply nor any file picks Kafka or RabbitMQ as the team's decision",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Qualquer texto que eu escrevesse agora teria que inventar o vencedor e as raz\u00f5es dele",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Qualquer texto que eu escrevesse agora teria que inventar o vencedor e as raz\u00f5es dele",
+              "search": "Any sentence stating Kafka or RabbitMQ as chosen, whole reply; no files exist. The only mention of a choice is the hypothetical example (por exemplo, \"queremos Kafka\") framing option 2, not a decision."
+            },
+            {
+              "passed": true,
+              "evidence": "Qualquer texto que eu escrevesse agora teria que inventar o vencedor e as raz\u00f5es dele",
+              "search": "any sentence naming Kafka or RabbitMQ as chosen, whole reply; files: none exist. The only pick-like text is the hypothetical example (por exemplo, \"queremos Kafka\"), framed as a scenario, not the team's decision."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any sentence stating Kafka or RabbitMQ as the chosen option, whole reply; files: none (project empty). The only mention of one option alone is the hypothetical example 'por exemplo, \"queremos Kafka\"', framed as an illustration, not a decision."
+            }
+          ]
+        },
+        {
+          "id": "9.6",
+          "text": "Neither the reply nor any file presents a reason, force or consequence as the team's own. General trade-off discussion clearly framed as input to the choice is not such a presentation",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Ele cobre requisitos (volume, ordena\u00e7\u00e3o, reten\u00e7\u00e3o/replay, lat\u00eancia, opera\u00e7\u00e3o), as alternativas e os trade-offs de cada uma.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Ele cobre requisitos (volume, ordena\u00e7\u00e3o, reten\u00e7\u00e3o/replay, lat\u00eancia, opera\u00e7\u00e3o), as alternativas e os trade-offs de cada uma.",
+              "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The requirement list is framed as what a design doc would cover (input to the choice), and the rest are questions to the user, not asserted team reasons."
+            },
+            {
+              "passed": true,
+              "evidence": "Isso \u00e9 design doc, n\u00e3o ADR. Ele cobre requisitos (volume, ordena\u00e7\u00e3o, reten\u00e7\u00e3o/replay, lat\u00eancia, opera\u00e7\u00e3o), as alternativas e os trade-offs de cada uma.",
+              "search": "any reason, force or consequence attributed to the team, whole reply; files: none exist. The requirements list is framed as topics a future design doc would cover, and the rest are questions to the user."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any reason, force or consequence attributed to the team, whole reply; files: none. Only 'requisitos (volume, ordena\u00e7\u00e3o, reten\u00e7\u00e3o/replay, lat\u00eancia, opera\u00e7\u00e3o)' appear, framed as inputs a future design doc would cover, plus open questions to the team."
+            }
+          ]
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "configuration": "with_skill",
+      "run_number": 2,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 14.9,
+        "tokens": 47360,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "id": "9.1",
+          "text": "The reply says there is no decision to record yet",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Se eu escrevesse agora \"Kafka ou RabbitMQ\", teria que inventar a decis\u00e3o e os motivos ... Como a escolha ainda est\u00e1 aberta, vejo dois caminhos",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Se eu escrevesse agora \"Kafka ou RabbitMQ\", teria que inventar a decis\u00e3o e os motivos ... Como a escolha ainda est\u00e1 aberta, vejo dois caminhos",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Como a escolha ainda est\u00e1 aberta, vejo dois caminhos",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Como a escolha ainda est\u00e1 aberta, vejo dois caminhos",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.2",
+          "text": "The reply is written in Portuguese",
+          "kind": "reply",
+          "assertion": 1,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Ainda n\u00e3o vou criar o ADR. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com as raz\u00f5es reais dela.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o vou criar o ADR. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com as raz\u00f5es reais dela.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o vou criar o ADR. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com as raz\u00f5es reais dela.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Ainda n\u00e3o vou criar o ADR. Um ADR registra uma decis\u00e3o que o time j\u00e1 tomou, com as raz\u00f5es reais dela.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.3",
+          "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)",
+          "kind": "absence",
+          "assertion": 2,
+          "passed": true,
+          "evidence": "project root holds no file after the run",
+          "decided_by": "script",
+          "ref": "outputs/ (empty)"
+        },
+        {
+          "id": "9.4",
+          "text": "The reply offers to write the ADR once the choice is made, or offers a Proposed ADR for a concrete proposal awaiting agreement (either offer is enough)",
+          "kind": "reply",
+          "assertion": 3,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Quando voc\u00eas decidirem, me diga qual escolheram e por qu\u00ea. ... A\u00ed eu escrevo o ADR como `Accepted`.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "Quando voc\u00eas decidirem, me diga qual escolheram e por qu\u00ea. ... A\u00ed eu escrevo o ADR como `Accepted`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Quando voc\u00eas decidirem, me diga qual escolheram e por qu\u00ea. [...] A\u00ed eu escrevo o ADR como `Accepted`.",
+              "search": ""
+            },
+            {
+              "passed": true,
+              "evidence": "Quando voc\u00eas decidirem, me diga qual escolheram e por qu\u00ea. [...] A\u00ed eu escrevo o ADR como `Accepted`.",
+              "search": ""
+            }
+          ]
+        },
+        {
+          "id": "9.5",
+          "text": "Neither the reply nor any file picks Kafka or RabbitMQ as the team's decision",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Any sentence stating Kafka or RabbitMQ was chosen, whole reply; no files exist. Kafka/RabbitMQ appear only in the question and as hypothetical proposal examples (\"por exemplo \\\"propomos Kafka\\\" ou \\\"propomos RabbitMQ\\\"\"), not as a decision.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any sentence stating Kafka or RabbitMQ was chosen, whole reply; no files exist. Kafka/RabbitMQ appear only in the question and as hypothetical proposal examples (\"por exemplo \\\"propomos Kafka\\\" ou \\\"propomos RabbitMQ\\\"\"), not as a decision."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any sentence stating Kafka or RabbitMQ as the chosen option, whole reply; no files exist. Only mentions are the user's question and hypothetical examples ('por exemplo \"propomos Kafka\" ou \"propomos RabbitMQ\"'), not a pick."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any sentence stating the team chose Kafka or RabbitMQ, whole reply; no files exist. Only hypothetical examples found: 'por exemplo \"propomos Kafka\" ou \"propomos RabbitMQ\"', framed as examples, not a pick."
+            }
+          ]
+        },
+        {
+          "id": "9.6",
+          "text": "Neither the reply nor any file presents a reason, force or consequence as the team's own. General trade-off discussion clearly framed as input to the choice is not such a presentation",
+          "kind": "invention",
+          "assertion": 4,
+          "passed": true,
+          "decided_by": "judge",
+          "votes": "3/3",
+          "borderline": false,
+          "not_scored": false,
+          "evidence": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The only forces listed (\"volume e padr\u00e3o de eventos, requisitos de ordena\u00e7\u00e3o e reten\u00e7\u00e3o, experi\u00eancia do time, custo operacional\") are framed as information the reply asks the user to provide, not as the team's own.",
+          "passes": [
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The only forces listed (\"volume e padr\u00e3o de eventos, requisitos de ordena\u00e7\u00e3o e reten\u00e7\u00e3o, experi\u00eancia do time, custo operacional\") are framed as information the reply asks the user to provide, not as the team's own."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. Forces listed ('volume e padr\u00e3o de eventos, requisitos de ordena\u00e7\u00e3o e reten\u00e7\u00e3o, experi\u00eancia do time, custo operacional') are framed as information to be supplied by the user, not as the team's own."
+            },
+            {
+              "passed": true,
+              "evidence": "",
+              "search": "Any reason, force or consequence attributed to the team, whole reply; no files exist. The only forces listed ('volume e padr\u00e3o de eventos, requisitos de ordena\u00e7\u00e3o e reten\u00e7\u00e3o, experi\u00eancia do time, custo operacional') are framed as information the user must supply, not as the team's own."
+            }
+          ]
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.9385,
+        "stddev": 0.1148,
+        "min": 0.7143,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 17.0667,
+        "stddev": 1.9786,
+        "min": 13.6,
+        "max": 19.5
+      },
+      "tokens": {
+        "mean": 47997.1667,
+        "stddev": 1231.5974,
+        "min": 46750,
+        "max": 50110
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.9722,
+        "stddev": 0.043,
+        "min": 0.9167,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 14.9,
+        "stddev": 2.064,
+        "min": 12.2,
+        "max": 17.6
+      },
+      "tokens": {
+        "mean": 47551.0,
+        "stddev": 867.1217,
+        "min": 46823,
+        "max": 49092
+      }
+    },
+    "delta": {
+      "pass_rate": "-0.03",
+      "time_seconds": "+2.2",
+      "tokens": "+446"
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,8 @@
+{"packet": "pc100f3e0", "checks": [
+{"id": "8.1", "passed": true, "evidence": "the four things you listed (channels, a queue, retries, ownership) are still open. If I wrote one now, I would be inventing the decision and the reasons for it.", "search": ""},
+{"id": "8.2", "passed": true, "evidence": "An ADR records a decision that has already been made, and the four things you listed (channels, a queue, retries, ownership) are still open.", "search": ""},
+{"id": "8.3", "passed": true, "evidence": "I haven't written an ADR yet, and I haven't created or changed anything in `doc/adr`.", "search": ""},
+{"id": "8.5", "passed": false, "evidence": "", "search": "Any mention of 'design doc', 'design document', the design-doc skill, or an offer to help design the architecture, whole reply. None found; the only alternative offered is a Proposed ADR naming the open questions."},
+{"id": "8.6", "passed": false, "evidence": "", "search": "A sentence saying decisions settled by a design (process) can be recorded as ADRs afterwards, whole reply. Borderline: 'Tell me which of them you have settled, and I'll write those' and 'Once you answer, I'll write the ADRs in doc/adr' offer ADRs for decisions the user already settled, but never tie them to a design that settles them later."},
+{"id": "8.7", "passed": true, "evidence": "Reply: 'I wouldn't pick answers for you'; decision content appears only as questions/examples ('For example: which channels (email, SMS, push, ...)'). Files: 'None. The project directory is empty.'", "search": "Any sentence asserting a chosen channel, queue, retry policy, owner, rationale or consequence as the team's position, whole reply and files; none found (cost examples are framed as 'such as' inside a question)."}
+]}

@@ -1,0 +1,11 @@
+{
+  "eval_id": 9,
+  "eval_name": "eval-9-scope-undecided-choice",
+  "prompt": "Escreve um ADR: Kafka ou RabbitMQ pro nosso barramento de eventos? A gente ainda não bateu o martelo.",
+  "assertions": [
+    "States, in Portuguese, that there is no decision to record yet",
+    "Creates no file under doc/adr/ or anywhere else (no seed ADR, no ADR picking Kafka or RabbitMQ)",
+    "Offers to write the ADR once the choice is made, or a `Proposed` ADR if the user has a concrete proposal awaiting agreement",
+    "Does not pick Kafka or RabbitMQ on the team's behalf and does not present any rationale as the team's own; general trade-off discussion clearly framed as input to the choice is fine"
+  ]
+}

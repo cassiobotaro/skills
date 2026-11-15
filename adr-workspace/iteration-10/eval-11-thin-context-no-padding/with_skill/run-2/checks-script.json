@@ -1,0 +1,66 @@
+{
+  "decided_by": "script",
+  "files": [
+    "doc/adr/0001-record-architecture-decisions.md",
+    "doc/adr/0002-use-postgresql-for-persistence.md",
+    "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+  ],
+  "checks": [
+    {
+      "id": "11.1",
+      "text": "Exactly one new file exists under doc/adr/, and its name matches 0003-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug",
+      "passed": true,
+      "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md",
+      "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md"
+    },
+    {
+      "id": "11.2",
+      "text": "The new file's first line is '# 3. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped",
+      "passed": true,
+      "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:1",
+      "evidence": "H1 '# 3. Store user-uploaded files in S3' -> slug 'store-user-uploaded-files-in-s3'"
+    },
+    {
+      "id": "11.3",
+      "text": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file",
+      "passed": true,
+      "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:3",
+      "evidence": "'Date: 2026-11-15' equals the file's write date"
+    },
+    {
+      "id": "11.4",
+      "text": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1",
+      "passed": true,
+      "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:5,9,13,17",
+      "evidence": "four headings in order, none extra"
+    },
+    {
+      "id": "11.5",
+      "text": "The Status section's status word is 'Accepted'",
+      "passed": true,
+      "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md:7",
+      "evidence": "first non-blank line of Status is 'Accepted'"
+    },
+    {
+      "id": "11.6",
+      "text": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading",
+      "passed": true,
+      "ref": "doc/adr/0003-store-user-uploaded-files-in-s3.md",
+      "evidence": "no double blank; blank line around H1, Date and every heading"
+    },
+    {
+      "id": "11.11",
+      "text": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture",
+      "passed": true,
+      "ref": "doc/adr/ fixture files",
+      "evidence": "sha256 equal to the fixture for every pre-existing ADR"
+    },
+    {
+      "id": "11.12",
+      "text": "No file other than the one new ADR was created or edited under the project root",
+      "passed": true,
+      "ref": "outputs/",
+      "evidence": "the only new path is the ADR; no .dsl file anywhere"
+    }
+  ]
+}

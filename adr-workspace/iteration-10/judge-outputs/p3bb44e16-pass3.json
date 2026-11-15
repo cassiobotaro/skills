@@ -1,0 +1,6 @@
+{"packet": "p3bb44e16", "checks": [
+{"id": "10.7", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot apply a per-account limit.\"", "search": ""},
+{"id": "10.8", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"", "search": ""},
+{"id": "10.9", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit can be applied per account, which the gateway could not do.\"; :21 \"which adds write load and more state to the service's Redis usage.\"", "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; 'write load and more state' follows directly from keeping counters in Redis, line 19 restates the Context reason; no invented fact found"},
+{"id": "10.12", "passed": true, "evidence": "\"It means adding `!adrs doc/adr` to a `workspace.dsl`, which belongs to the `structurizr` skill.\"", "search": ""}
+]}

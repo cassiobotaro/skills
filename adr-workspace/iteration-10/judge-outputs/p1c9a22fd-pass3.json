@@ -1,0 +1,6 @@
+{"packet": "p1c9a22fd", "checks": [
+{"id": "10.7", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"but the gateway cannot see account ids, so it cannot count attempts per account.\"", "search": ""},
+{"id": "10.8", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions.\"", "search": ""},
+{"id": "10.9", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now stores rate-limit counters in Redis, in addition to sessions. Redis carries more load and more responsibility on the login path.\"", "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; the gateway alternative and 5/15 limit are from the user, 'sessions' and 'login path' from 0002-store-sessions-in-redis.md:15,23, 'more load' follows directly from adding counters; no invented fact found"},
+{"id": "10.12", "passed": true, "evidence": "\"Wiring `!adrs` into a `workspace.dsl` is the `structurizr` skill's job, not this skill's.\"", "search": ""}
+]}

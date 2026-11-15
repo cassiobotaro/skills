@@ -1,0 +1,12 @@
+{
+  "eval_id": 11,
+  "eval_name": "eval-11-thin-context-no-padding",
+  "prompt": "ADR please: we're moving user-uploaded files from the app servers' local disk to S3, because the app servers are going into an autoscaling group next quarter and instances there get replaced without keeping their disks. Downside we accepted: every file read becomes a network call.",
+  "assertions": [
+    "A new doc/adr/0003-<slug>.md is created: H1 '# 3. <title>', ISO 8601 date with today's real date, the four sections in order, Accepted status, one-blank-line discipline",
+    "Context states the user's force (app servers move to an autoscaling group next quarter; replaced instances do not keep their disks) and Consequences states the accepted trade-off (every file read becomes a network call)",
+    "Context asserts nothing the user's message or the existing ADRs did not establish: no supplied motive, no general claim about S3 / object storage / durability / industry practice, no invented incident, number or alternative",
+    "Decision and Consequences assert nothing beyond the user's message and the existing ADRs, apart from direct logical restatements of the decision",
+    "The two existing ADR files (0001, 0002) are byte-for-byte untouched and no other file is created"
+  ]
+}

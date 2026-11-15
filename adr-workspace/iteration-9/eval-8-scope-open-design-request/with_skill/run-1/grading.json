@@ -1,0 +1,199 @@
+{
+  "eval_name": "eval-8-scope-open-design-request",
+  "skill": "adr",
+  "config": "with_skill",
+  "run": "run-1",
+  "baseline": "evals/checks-baseline.json",
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "id": "8.1",
+      "text": "The reply says that nothing has been decided yet / the design is still open, i.e. that there is no made decision here to record",
+      "kind": "reply",
+      "assertion": 1,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Your message lists four open questions ... What you have is a design that is still being worked out",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "Your message lists four open questions ... What you have is a design that is still being worked out",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "What you have is a design that is still being worked out, and that fits a design doc.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "What you have is a design that is still being worked out, and that fits a design doc.",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "8.2",
+      "text": "The reply says that an ADR (or this skill) records decisions already made, as the reason it is not writing one now",
+      "kind": "reply",
+      "assertion": 1,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "An ADR records a decision the team has already made, along with its real reasons. ... If I wrote an ADR now, I would be inventing the decisions and the rationale behind them",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "8.3",
+      "text": "The reply is written in English",
+      "kind": "reply",
+      "assertion": 1,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "I haven't written an ADR yet, and I haven't touched `doc/adr`.",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "8.4",
+      "text": "No file exists anywhere under the project root after the run (no seed ADR, no ADR, no design doc)",
+      "kind": "absence",
+      "assertion": 2,
+      "passed": true,
+      "evidence": "project root holds no file after the run",
+      "decided_by": "script",
+      "ref": "outputs/ (empty)"
+    },
+    {
+      "id": "8.5",
+      "text": "The reply names a design doc as the appropriate artifact for this request (naming the design-doc skill or offering to help with it counts)",
+      "kind": "reply",
+      "assertion": 3,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "What you have is a design that is still being worked out, and that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "What you have is a design that is still being worked out, and that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs for the notification service.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "that fits a design doc. If the `design-doc` skill is installed, it can walk you through the problem, the alternatives and the trade-offs for the notification service.",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "8.6",
+      "text": "The reply says that the decisions the design settles can be recorded as ADRs afterwards",
+      "kind": "reply",
+      "assertion": 3,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Each question can become its own ADR once the team settles it.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "Each question can become its own ADR once the team settles it.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Each question can become its own ADR once the team settles it.",
+          "search": ""
+        },
+        {
+          "passed": true,
+          "evidence": "Each question can become its own ADR once the team settles it.",
+          "search": ""
+        }
+      ]
+    },
+    {
+      "id": "8.7",
+      "text": "Neither the reply nor any file asserts, as the team's position, a decision, rationale, alternative or consequence that the user's message did not state. Questions and clearly-labelled options are not assertions",
+      "kind": "invention",
+      "assertion": 4,
+      "passed": true,
+      "decided_by": "judge",
+      "votes": "3/3",
+      "borderline": false,
+      "not_scored": false,
+      "evidence": "Any statement presenting a channel, queue, retry, ownership choice, rationale or consequence as the team's position, whole reply; files: none exist. Only found clearly-labelled examples (\"for example \\\"we will put a queue in front of the senders, because ...\\\"\") and questions, which are not assertions.",
+      "passes": [
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Any statement presenting a channel, queue, retry, ownership choice, rationale or consequence as the team's position, whole reply; files: none exist. Only found clearly-labelled examples (\"for example \\\"we will put a queue in front of the senders, because ...\\\"\") and questions, which are not assertions."
+        },
+        {
+          "passed": true,
+          "evidence": "1. What exactly was decided, or is being proposed (for example, queue technology, retry policy)?",
+          "search": "Looked through the whole reply for any statement presenting a channel choice, queue decision, retry policy, owning team, rationale, alternative or consequence as the team's position; only questions and a clearly-labelled example (\"for example, 'we will put a queue in front of the senders, because ...'\") appear. No files exist in the project."
+        },
+        {
+          "passed": true,
+          "evidence": "",
+          "search": "Looked through the whole reply for any statement presenting a decision, rationale, alternative or consequence as the team's position; the only concrete example (\"we will put a queue in front of the senders, because ...\") is explicitly labelled \"for example\", the rest are questions. No files exist."
+        }
+      ]
+    }
+  ]
+}
