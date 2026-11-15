@@ -1,0 +1,171 @@
+{
+  "skill_name": "adr",
+  "description": "Write and maintain a project's Architecture Decision Record log \u2014 the files, not just the prose. Every change to the log carries invariants a hand edit breaks silently: the next number must be monotonic, the filename must be NNNN-slug.md derived from the title, a supersede touches two files and rewrites the old one's Status section only (never its body), and adr-tools plus Structurizr's !adrs importer parse the exact English literals (Date:, ## Status / ## Context / ## Decision / ## Consequences, the status words) even when the prose is in another language. Michael Nygard format, file-compatible with Nat Pryce's adr-tools, .adr-dir discovery. Use this skill for any work on a decision log \u2014 including the operations that look like a one-line edit: \"write an ADR\", \"document this decision\", \"we decided to use X over Y\", \"ADR 7 is out of date, mark it superseded and write the replacement\", \"amend the existing record\", \"we changed our minds about Z\", \"start a decision log\" \u2014 even if the user never says \"ADR\".",
+  "results": [
+    {
+      "query": "start a decision log for the platform-team repo, we don't have one yet and i want to start tracking our architecture calls properly",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "ADR 0007 is out of date \u2014 we moved off Redis for sessions and now use the JWT approach. mark it superseded and write the new one",
+      "should_trigger": true,
+      "trigger_rate": 0.3333333333333333,
+      "triggers": 1,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "write an ADR documenting our move from REST to gRPC for internal service-to-service comms",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we finally settled the debate \u2014 we're going with Postgres instead of DynamoDB for the orders service because of the relational reporting needs. can you capture this so the team has a record of why?",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document the decision to adopt feature flags via LaunchDarkly, including the alternatives we looked at (Unleash, homegrown) and why we passed on them",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we changed our minds about the message broker. amend the existing record to note we're now sticking with SQS instead of switching to Kafka",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "triggers": 2,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "registra a\u00ed a decis\u00e3o de a gente padronizar em OpenTelemetry pra tracing",
+      "should_trigger": true,
+      "trigger_rate": 0.3333333333333333,
+      "triggers": 1,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "i need to write up why we chose to deprecate the v1 API and force migration to v2, in the nygard format if possible",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "the tech lead wants every significant tech choice written up in doc/adr from now on. let's record the first one: choosing pnpm over npm for the monorepo",
+      "should_trigger": true,
+      "trigger_rate": 0.3333333333333333,
+      "triggers": 1,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "create a record explaining our choice of hexagonal architecture for the new billing module so future devs understand the rationale",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "create the C4 container diagram for our payments platform in a workspace.dsl",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write a full design doc for the new notification service \u2014 problem statement, the approaches we considered, trade-offs, rollout plan",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "link all our existing ADRs from doc/adr into the Structurizr architecture docs so they show up in the decision log view",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw a sequence diagram of how the auth handshake works between the SPA, the BFF and Keycloak",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write up the postmortem for yesterday's outage, including timeline and action items",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document our REST API endpoints so the frontend team knows the request/response shapes",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "summarize the key decisions we made in last week's architecture review meeting into meeting notes",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we need a PRD for the new self-serve onboarding flow \u2014 goals, user stories, success metrics",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "what's the difference between an ADR and an RFC? when should i use each?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "help me decide whether to use Kafka or RabbitMQ for our event bus \u2014 walk me through the trade-offs",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "passed": 16,
+    "failed": 4
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "eval_id": 7,
+  "eval_name": "english-regression",
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with the canonical English seed 0001-record-architecture-decisions.md verbatim (only the date substituted) and the decision as 0002",
+      "passed": true,
+      "evidence": "doc/adr/0001-record-architecture-decisions.md diffed against the canonical seed (evals/files/english-log/0001) with the Date line normalized: identical (SEED_VERBATIM_OK). Only the date differs — 'Date: 2026-07-21'. The decision is 0002-use-iso-8601-utc-strings-for-timestamps-in-the-public-api.md."
+    },
+    {
+      "text": "ADR 0002 is entirely in English with the four canonical section headings (Status, Context, Decision, Consequences) in order",
+      "passed": true,
+      "evidence": "0002 is English throughout; grep shows '## Status | ## Context | ## Decision | ## Consequences' at lines 5/9/18/23 in canonical order."
+    },
+    {
+      "text": "ADR 0002 has Accepted status, ISO 8601 date with today's real date, H1 '# 2. <title>', and one-blank-line discipline",
+      "passed": true,
+      "evidence": "Line 7 'Accepted'; line 3 'Date: 2026-07-21' (today, ISO 8601); line 1 '# 2. Use ISO 8601 UTC strings for timestamps in the public API'; awk blank-line scan 'ok', single trailing newline."
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs (string parsing for clients, larger payloads), not just benefits",
+      "passed": true,
+      "evidence": "Consequences: 'Clients now have to parse strings rather than read an integer directly.' and 'Payloads get slightly bigger, since a timestamp string is longer than the integer it replaces.' alongside the two benefits."
+    }
+  ]
+}

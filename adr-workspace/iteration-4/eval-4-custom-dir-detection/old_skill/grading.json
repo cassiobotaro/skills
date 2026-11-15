@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "New ADR in docs/architecture/decisions/ (from .adr-dir), not doc/adr",
+      "passed": true,
+      "evidence": "created under custom dir"
+    },
+    {
+      "text": "Numbered 0003, kebab slug, H1 '# 3.'",
+      "passed": true,
+      "evidence": "H1 '# 3.'"
+    },
+    {
+      "text": "English, four sections in order, ISO Date, Accepted",
+      "passed": true,
+      "evidence": "structure ok"
+    },
+    {
+      "text": "Context/Decision capture URL-path versioning + motives (SDK, gateway, logs/curl)",
+      "passed": true,
+      "evidence": "url versioning + motives"
+    },
+    {
+      "text": "Consequences include URL proliferation + cap of two active versions",
+      "passed": true,
+      "evidence": "proliferation+two versions"
+    },
+    {
+      "text": "Existing 0001, 0002, .adr-dir unmodified",
+      "passed": true,
+      "evidence": "verified untouched (shell)"
+    }
+  ]
+}

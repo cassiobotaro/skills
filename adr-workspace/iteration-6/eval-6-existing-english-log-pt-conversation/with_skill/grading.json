@@ -1,0 +1,31 @@
+{
+  "eval_id": 6,
+  "eval_name": "existing-english-log-pt-conversation",
+  "expectations": [
+    {
+      "text": "A new ADR 0003 is created with its prose in ENGLISH even though the conversation is in Portuguese, because the existing log is in English — consistency outranks conversation language",
+      "passed": true,
+      "evidence": "doc/adr/0003-use-redis-for-user-session-storage.md is entirely in English ('We will store user sessions in Redis instead of PostgreSQL ...') although the prompt was Portuguese; existing 0001/0002 are English."
+    },
+    {
+      "text": "The agent tells the user (in Portuguese) that it matched the existing log's language",
+      "passed": true,
+      "evidence": "_user_facing_response.md: '**Escrevi o ADR em inglês**, mesmo com a nossa conversa em português, porque o log existente ... está todo em inglês' — stated in Portuguese."
+    },
+    {
+      "text": "The two existing ADR files (0001, 0002) are byte-for-byte untouched",
+      "passed": true,
+      "evidence": "diff -r evals/files/english-log vs the outputs dir reports only the added 0003 file and _user_facing_response.md; 0001 and 0002 are byte-identical to the fixtures."
+    },
+    {
+      "text": "ADR 0003 follows exact format: # 3. <title> H1, ISO 8601 date, four sections in order, Accepted status, blank-line discipline",
+      "passed": true,
+      "evidence": "Line 1 '# 3. Use Redis for user session storage'; line 3 'Date: 2026-07-21'; headings at lines 5/9/17/22 in order Status/Context/Decision/Consequences; Status body 'Accepted'; awk blank-line scan reports 'ok' (no consecutive blanks), file ends in one newline."
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs (extra infrastructure component, session loss on Redis restart)",
+      "passed": true,
+      "evidence": "Consequences: 'We take on one more piece of infrastructure to operate, monitor, and keep available.' and 'Sessions are lost if Redis restarts without persistence, which means users are logged out.'"
+    }
+  ]
+}

@@ -1,0 +1,701 @@
+{
+  "metadata": {
+    "skill_name": "adr",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-07T19:44:17Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 68.5,
+        "tokens": 22219,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Fresh log seeded like adr init (0001 with Nygard link + adr-tools mention)",
+          "passed": true,
+          "evidence": "0001 present, Nygard+adr-tools links"
+        },
+        {
+          "text": "Decision ADR as 0002-<kebab>.md, 4-digit padded filename, slug from title",
+          "passed": true,
+          "evidence": "0002 filename present"
+        },
+        {
+          "text": "Four sections in order, un-padded H1, Date line today",
+          "passed": true,
+          "evidence": "H1 '# 2.', 4 sections, date 2026-06-07"
+        },
+        {
+          "text": "Status 'Accepted' (or PT 'Aceito')",
+          "passed": true,
+          "evidence": "status word present"
+        },
+        {
+          "text": "Decision active voice naming PostgreSQL; Context covers ACID/team/RDS forces",
+          "passed": true,
+          "evidence": "PostgreSQL+ACID+RDS in body"
+        },
+        {
+          "text": "Consequences include downsides (rigid schema, migrations as deploy step)",
+          "passed": true,
+          "evidence": "migration+schema downside present"
+        },
+        {
+          "text": "No invented facts (no fabricated metrics/benchmarks/alternatives)",
+          "passed": true,
+          "evidence": "no stray metrics/benchmarks"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 51.6,
+        "tokens": 19787,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Does NOT deliver a finished ADR padded with invented content",
+          "passed": true,
+          "evidence": "no ADR file created"
+        },
+        {
+          "text": "Asks targeted clarifying questions (>=2 of: replacement, forces, role, trade-offs)",
+          "passed": true,
+          "evidence": "8 questions, 5 topic hits"
+        },
+        {
+          "text": "If any ADR file created it's explicit draft/skeleton (n/a \u2014 none created)",
+          "passed": true,
+          "evidence": "no file created \u2192 vacuously satisfied"
+        },
+        {
+          "text": "Final response in Portuguese",
+          "passed": true,
+          "evidence": "PT markers present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 66.3,
+        "tokens": 23314,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR 0004 (numbering continues from 0003)",
+          "passed": true,
+          "evidence": "0004 present"
+        },
+        {
+          "text": "0004 Status: Accepted + Supersedes [2. Store sessions in Redis](0002-...)",
+          "passed": true,
+          "evidence": "exact Supersedes line present"
+        },
+        {
+          "text": "0002 Status reduced to 'Superseded by [4. ...](0004-...)' (Accepted removed); body untouched",
+          "passed": true,
+          "evidence": "Status replaced, no standalone Accepted"
+        },
+        {
+          "text": "Modern spelling 'Superseded/Supersedes' not legacy 'Superceded'",
+          "passed": true,
+          "evidence": "no legacy spelling"
+        },
+        {
+          "text": "0004 English, four sections, ISO date, stated facts (SPOF, replication cost, 15-min JWT)",
+          "passed": true,
+          "evidence": "facts present"
+        },
+        {
+          "text": "0001 and 0003 untouched",
+          "passed": true,
+          "evidence": "verified byte-identical via diff (shell)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 49.4,
+        "tokens": 20981,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR in docs/architecture/decisions/ (from .adr-dir), not doc/adr",
+          "passed": true,
+          "evidence": "created under custom dir"
+        },
+        {
+          "text": "Numbered 0003, kebab slug, H1 '# 3.'",
+          "passed": true,
+          "evidence": "H1 '# 3.'"
+        },
+        {
+          "text": "English, four sections in order, ISO Date, Accepted",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "Context/Decision capture URL-path versioning + motives (SDK, gateway, logs/curl)",
+          "passed": true,
+          "evidence": "url versioning + motives"
+        },
+        {
+          "text": "Consequences include URL proliferation + cap of two active versions",
+          "passed": true,
+          "evidence": "proliferation+two versions"
+        },
+        {
+          "text": "Existing 0001, 0002, .adr-dir unmodified",
+          "passed": true,
+          "evidence": "verified untouched (shell)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 69.7,
+        "tokens": 22957,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "doc/adr with exactly two files (0001 seed + 0002 decision)",
+          "passed": true,
+          "evidence": "2 files"
+        },
+        {
+          "text": "0001 seed translated to PT (headings/status/body), slug from translated title",
+          "passed": true,
+          "evidence": "PT seed headings + slug 'registrar-decisoes'"
+        },
+        {
+          "text": "0002 H1/headings/status/body in PT",
+          "passed": true,
+          "evidence": "PT headings in 0002"
+        },
+        {
+          "text": "0002 exact structure: un-padded H1, Date ISO today, four sections, blank-line discipline",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "0002 filename NNNN-slug.md from PT title",
+          "passed": true,
+          "evidence": "kebab slug ok"
+        },
+        {
+          "text": "Consequences record accepted trade-off (loss of event replay), no invented facts",
+          "passed": true,
+          "evidence": "event replay trade-off present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 50.1,
+        "tokens": 21025,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR 0003 in ENGLISH despite PT conversation (consistency wins)",
+          "passed": true,
+          "evidence": "English headings"
+        },
+        {
+          "text": "Agent tells user (in PT) it matched the existing log's language",
+          "passed": true,
+          "evidence": "PT note about English/consistency"
+        },
+        {
+          "text": "Existing 0001, 0002 byte-for-byte untouched",
+          "passed": true,
+          "evidence": "verified identical via diff (shell)"
+        },
+        {
+          "text": "0003 exact format: '# 3.' H1, ISO date, four sections, Accepted, blank-line",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "Consequences include trade-offs (extra infra component, session loss on restart)",
+          "passed": true,
+          "evidence": "trade-offs present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 61.5,
+        "tokens": 21795,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "0001 canonical English seed verbatim (only date changed)",
+          "passed": true,
+          "evidence": "verbatim seed"
+        },
+        {
+          "text": "0002 entirely English, four canonical headings in order",
+          "passed": true,
+          "evidence": "English headings"
+        },
+        {
+          "text": "0002 Accepted, ISO date today, '# 2.' H1, blank-line discipline",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "Consequences include accepted trade-offs (string parsing, larger payloads)",
+          "passed": true,
+          "evidence": "trade-offs present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 85.9,
+        "tokens": 22907,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Fresh log seeded like adr init (0001 with Nygard link + adr-tools mention)",
+          "passed": true,
+          "evidence": "0001 present, Nygard+adr-tools links"
+        },
+        {
+          "text": "Decision ADR as 0002-<kebab>.md, 4-digit padded filename, slug from title",
+          "passed": true,
+          "evidence": "0002 filename present"
+        },
+        {
+          "text": "Four sections in order, un-padded H1, Date line today",
+          "passed": true,
+          "evidence": "H1 '# 2.', 4 sections, date 2026-06-07"
+        },
+        {
+          "text": "Status 'Accepted' (or PT 'Aceito')",
+          "passed": true,
+          "evidence": "status word present"
+        },
+        {
+          "text": "Decision active voice naming PostgreSQL; Context covers ACID/team/RDS forces",
+          "passed": true,
+          "evidence": "PostgreSQL+ACID+RDS in body"
+        },
+        {
+          "text": "Consequences include downsides (rigid schema, migrations as deploy step)",
+          "passed": true,
+          "evidence": "migration+schema downside present"
+        },
+        {
+          "text": "No invented facts (no fabricated metrics/benchmarks/alternatives)",
+          "passed": true,
+          "evidence": "no stray metrics/benchmarks"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 39.2,
+        "tokens": 18771,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Does NOT deliver a finished ADR padded with invented content",
+          "passed": true,
+          "evidence": "no ADR file created"
+        },
+        {
+          "text": "Asks targeted clarifying questions (>=2 of: replacement, forces, role, trade-offs)",
+          "passed": true,
+          "evidence": "8 questions, 4 topic hits"
+        },
+        {
+          "text": "If any ADR file created it's explicit draft/skeleton (n/a \u2014 none created)",
+          "passed": true,
+          "evidence": "no file created \u2192 vacuously satisfied"
+        },
+        {
+          "text": "Final response in Portuguese",
+          "passed": true,
+          "evidence": "PT markers present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 61.1,
+        "tokens": 22527,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR 0004 (numbering continues from 0003)",
+          "passed": true,
+          "evidence": "0004 present"
+        },
+        {
+          "text": "0004 Status: Accepted + Supersedes [2. Store sessions in Redis](0002-...)",
+          "passed": true,
+          "evidence": "exact Supersedes line present"
+        },
+        {
+          "text": "0002 Status reduced to 'Superseded by [4. ...](0004-...)' (Accepted removed); body untouched",
+          "passed": true,
+          "evidence": "Status replaced, no standalone Accepted"
+        },
+        {
+          "text": "Modern spelling 'Superseded/Supersedes' not legacy 'Superceded'",
+          "passed": true,
+          "evidence": "no legacy spelling"
+        },
+        {
+          "text": "0004 English, four sections, ISO date, stated facts (SPOF, replication cost, 15-min JWT)",
+          "passed": true,
+          "evidence": "facts present"
+        },
+        {
+          "text": "0001 and 0003 untouched",
+          "passed": true,
+          "evidence": "verified byte-identical via diff (shell)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 56.8,
+        "tokens": 21318,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR in docs/architecture/decisions/ (from .adr-dir), not doc/adr",
+          "passed": true,
+          "evidence": "created under custom dir"
+        },
+        {
+          "text": "Numbered 0003, kebab slug, H1 '# 3.'",
+          "passed": true,
+          "evidence": "H1 '# 3.'"
+        },
+        {
+          "text": "English, four sections in order, ISO Date, Accepted",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "Context/Decision capture URL-path versioning + motives (SDK, gateway, logs/curl)",
+          "passed": true,
+          "evidence": "url versioning + motives"
+        },
+        {
+          "text": "Consequences include URL proliferation + cap of two active versions",
+          "passed": true,
+          "evidence": "proliferation+two versions"
+        },
+        {
+          "text": "Existing 0001, 0002, .adr-dir unmodified",
+          "passed": true,
+          "evidence": "verified untouched (shell)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 61.5,
+        "tokens": 22447,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "doc/adr with exactly two files (0001 seed + 0002 decision)",
+          "passed": true,
+          "evidence": "2 files"
+        },
+        {
+          "text": "0001 seed translated to PT (headings/status/body), slug from translated title",
+          "passed": true,
+          "evidence": "PT seed headings + slug 'registrar-decisoes'"
+        },
+        {
+          "text": "0002 H1/headings/status/body in PT",
+          "passed": true,
+          "evidence": "PT headings in 0002"
+        },
+        {
+          "text": "0002 exact structure: un-padded H1, Date ISO today, four sections, blank-line discipline",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "0002 filename NNNN-slug.md from PT title",
+          "passed": true,
+          "evidence": "kebab slug ok"
+        },
+        {
+          "text": "Consequences record accepted trade-off (loss of event replay), no invented facts",
+          "passed": true,
+          "evidence": "event replay trade-off present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 51.1,
+        "tokens": 20567,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "New ADR 0003 in ENGLISH despite PT conversation (consistency wins)",
+          "passed": true,
+          "evidence": "English headings"
+        },
+        {
+          "text": "Agent tells user (in PT) it matched the existing log's language",
+          "passed": true,
+          "evidence": "PT note about English/consistency"
+        },
+        {
+          "text": "Existing 0001, 0002 byte-for-byte untouched",
+          "passed": true,
+          "evidence": "verified identical via diff (shell)"
+        },
+        {
+          "text": "0003 exact format: '# 3.' H1, ISO date, four sections, Accepted, blank-line",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "Consequences include trade-offs (extra infra component, session loss on restart)",
+          "passed": true,
+          "evidence": "trade-offs present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 60.9,
+        "tokens": 21449,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "0001 canonical English seed verbatim (only date changed)",
+          "passed": true,
+          "evidence": "verbatim seed"
+        },
+        {
+          "text": "0002 entirely English, four canonical headings in order",
+          "passed": true,
+          "evidence": "English headings"
+        },
+        {
+          "text": "0002 Accepted, ISO date today, '# 2.' H1, blank-line discipline",
+          "passed": true,
+          "evidence": "structure ok"
+        },
+        {
+          "text": "Consequences include accepted trade-offs (string parsing, larger payloads)",
+          "passed": true,
+          "evidence": "trade-offs present"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "old_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 59.5857,
+        "stddev": 9.0186,
+        "min": 49.4,
+        "max": 69.7
+      },
+      "tokens": {
+        "mean": 21725.4286,
+        "stddev": 1230.9251,
+        "min": 19787,
+        "max": 23314
+      }
+    },
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 59.5,
+        "stddev": 14.1151,
+        "min": 39.2,
+        "max": 85.9
+      },
+      "tokens": {
+        "mean": 21426.5714,
+        "stddev": 1428.6999,
+        "min": 18771,
+        "max": 22907
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+0.1",
+      "tokens": "+299"
+    }
+  },
+  "notes": []
+}

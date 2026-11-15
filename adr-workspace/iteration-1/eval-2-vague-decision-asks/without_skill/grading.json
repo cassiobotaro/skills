@@ -1,0 +1,31 @@
+{
+  "run_id": "eval-2-without_skill",
+  "expectations": [
+    {
+      "text": "Does NOT deliver a finished ADR padded with invented context, replacement technology, or consequences",
+      "passed": false,
+      "evidence": "Created and numbered docs/adr/0001-replace-redis.md in the decision log. Although marked Proposed with TODOs, it occupies number 0001 with a non-decision ('We will replace Redis' with undefined target) and asserts 'Redis most likely holds session data' as context. A log entry was delivered where questions were the right deliverable."
+    },
+    {
+      "text": "Final response asks targeted clarifying questions covering at least two of: what replaces Redis, why the change (forces), Redis's current role (cache/session/queue), accepted trade-offs",
+      "passed": true,
+      "evidence": "Final response asks 4 questions: why, replacement, current data/requirements, migration plan."
+    },
+    {
+      "text": "If any ADR file is created at all, it is explicitly a draft/skeleton with pending markers — not fabricated content presented as fact",
+      "passed": true,
+      "evidence": "The created ADR is status Proposed with explicit TODO markers and an 'Open questions' section; assumptions are hedged ('most likely')."
+    },
+    {
+      "text": "Final response is in Portuguese, matching the user's conversation language",
+      "passed": true,
+      "evidence": "final_response.md is in Portuguese."
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 1,
+    "total": 4,
+    "pass_rate": 0.75
+  }
+}

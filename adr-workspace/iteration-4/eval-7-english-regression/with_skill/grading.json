@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "0001 canonical English seed verbatim (only date changed)",
+      "passed": true,
+      "evidence": "verbatim seed"
+    },
+    {
+      "text": "0002 entirely English, four canonical headings in order",
+      "passed": true,
+      "evidence": "English headings"
+    },
+    {
+      "text": "0002 Accepted, ISO date today, '# 2.' H1, blank-line discipline",
+      "passed": true,
+      "evidence": "structure ok"
+    },
+    {
+      "text": "Consequences include accepted trade-offs (string parsing, larger payloads)",
+      "passed": true,
+      "evidence": "trade-offs present"
+    }
+  ]
+}

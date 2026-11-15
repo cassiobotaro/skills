@@ -1,0 +1,46 @@
+{
+  "run_id": "eval-1-with_skill",
+  "expectations": [
+    {
+      "text": "Fresh log seeded like adr init: doc/adr/0001-record-architecture-decisions.md created with the canonical adr-tools init content (Nygard link, adr-tools mention)",
+      "passed": true,
+      "evidence": "doc/adr/0001-record-architecture-decisions.md created; diff against canonical content (ignoring date) is empty — verbatim match."
+    },
+    {
+      "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
+      "passed": true,
+      "evidence": "doc/adr/0002-use-postgresql-for-the-orders-service.md; slug correctly derived from 'Use PostgreSQL for the orders service'."
+    },
+    {
+      "text": "ADR is in English with exactly the four sections in order (Status, Context, Decision, Consequences), H1 uses the un-padded number ('# 2. ...'), and a 'Date: YYYY-MM-DD' line with today's date",
+      "passed": true,
+      "evidence": "H1 '# 2. Use PostgreSQL for the orders service'; Date: 2026-06-04; exactly ## Status/## Context/## Decision/## Consequences in order; single-blank-line discipline verified (no double blanks)."
+    },
+    {
+      "text": "Status section is 'Accepted'",
+      "passed": true,
+      "evidence": "Status section contains exactly 'Accepted'."
+    },
+    {
+      "text": "Decision section is active voice ('We will ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS",
+      "passed": true,
+      "evidence": "Decision: 'We will use PostgreSQL as the datastore for the orders service, running on the existing Amazon RDS instance, rather than MongoDB.' Context covers all three forces."
+    },
+    {
+      "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives",
+      "passed": true,
+      "evidence": "Both negatives present as standalone paragraphs: 'The schema becomes more rigid...' and 'Schema changes turn into migrations that must run as a step of the deploy...'."
+    },
+    {
+      "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated",
+      "passed": true,
+      "evidence": "Every claim in Context/Consequences maps to the prompt (ACID flow, team experience, RDS paid, rigid schema, deploy migrations). MongoDB mentioned only as the stated alternative."
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

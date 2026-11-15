@@ -1,0 +1,91 @@
+{
+  "skill_name": "adr",
+  "description": "Use this skill for ANY request that involves architecture decision records, decision logs, or documenting a technical decision — writing one, amending one, superseding one, or starting a log. Always use this skill for such requests, without exception.",
+  "results": [
+    {
+      "query": "we finally settled the debate — we're going with Postgres instead of DynamoDB for the orders service because of the relational reporting needs. can you capture this so the team has a record of why?",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "start a decision log for the platform-team repo, we don't have one yet and i want to start tracking our architecture calls properly",
+      "should_trigger": true,
+      "trigger_rate": 0.8,
+      "triggers": 8,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "write an ADR documenting our move from REST to gRPC for internal service-to-service comms",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "ADR 0007 is out of date — we moved off Redis for sessions and now use the JWT approach. mark it superseded and write the new one",
+      "should_trigger": true,
+      "trigger_rate": 0.9,
+      "triggers": 9,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "document the decision to adopt feature flags via LaunchDarkly, including the alternatives we looked at (Unleash, homegrown) and why we passed on them",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "the tech lead wants every significant tech choice written up in doc/adr from now on. let's record the first one: choosing pnpm over npm for the monorepo",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "we changed our minds about the message broker. amend the existing record to note we're now sticking with SQS instead of switching to Kafka",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "registra aí a decisão de a gente padronizar em OpenTelemetry pra tracing",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "i need to write up why we chose to deprecate the v1 API and force migration to v2, in the nygard format if possible",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "create a record explaining our choice of hexagonal architecture for the new billing module so future devs understand the rationale",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  }
+}

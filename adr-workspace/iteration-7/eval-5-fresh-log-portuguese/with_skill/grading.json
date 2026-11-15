@@ -1,0 +1,49 @@
+{
+  "eval_id": 5,
+  "eval_name": "fresh-log-portuguese",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with exactly two files: a 0001 seed ADR and a 0002 decision ADR",
+      "passed": true,
+      "evidence": "doc/adr/ contains exactly two files: 0001 seed + 0002 decision (script: 2 new ADRs, 0 pre-existing)"
+    },
+    {
+      "text": "The 0001 seed ADR has its title and body translated into Portuguese and its filename slug derives from the translated title",
+      "passed": true,
+      "evidence": "Seed title/body translated to Portuguese; filename slug derives from the translated title (script: slug matches strict derivation)"
+    },
+    {
+      "text": "The seed ADR keeps the adr-tools scaffolding in canonical English: the `Date:` label, the four `##` headings, and the status word are NOT translated",
+      "passed": true,
+      "evidence": "Seed keeps Date:, the four ## headings and 'Accepted' in English (script: headings exactly canonical)"
+    },
+    {
+      "text": "ADR 0002 has its H1 title text and the four section bodies in Portuguese",
+      "passed": true,
+      "evidence": "ADR 0002 H1 text and all four section bodies in Portuguese"
+    },
+    {
+      "text": "ADR 0002 keeps the scaffolding canonical: the `Date:` label, the four `## Status/Context/Decision/Consequences` headings in order, and the status word all in English",
+      "passed": true,
+      "evidence": "ADR 0002 scaffolding canonical English — Date: label, four headings in order, status word (script: ok)"
+    },
+    {
+      "text": "ADR 0002 keeps the exact structure: H1 with un-padded number, Date: line in ISO 8601 with today's real date, one blank line between every element",
+      "passed": true,
+      "evidence": "H1 un-padded, Date: ISO 8601 = today, one blank line between every element (script: blank-line discipline clean)"
+    },
+    {
+      "text": "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title (lowercased, non-alphanumeric runs collapsed to single hyphens)",
+      "passed": true,
+      "evidence": "Filename 0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md — NNNN-slug.md, non-alnum runs collapsed (script: ok)"
+    },
+    {
+      "text": "The Consequences section records the accepted trade-off (loss of event replay) and contains no invented facts beyond what the prompt established",
+      "passed": true,
+      "evidence": "Consequences record the accepted loss of event replay; no invented throughput, cost or migration claims"
+    }
+  ],
+  "passed": 8,
+  "total": 8
+}

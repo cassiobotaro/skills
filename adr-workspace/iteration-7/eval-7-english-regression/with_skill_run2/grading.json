@@ -1,0 +1,29 @@
+{
+  "eval_id": 7,
+  "eval_name": "english-regression",
+  "configuration": "with_skill_run2",
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with the canonical English seed 0001-record-architecture-decisions.md verbatim (only the date substituted) and the decision as 0002",
+      "passed": true,
+      "evidence": "0001 is the canonical English seed VERBATIM — date-normalized diff vs reference is empty; decision is 0002"
+    },
+    {
+      "text": "ADR 0002 is entirely in English with the four canonical section headings (Status, Context, Decision, Consequences) in order",
+      "passed": true,
+      "evidence": "0002 entirely English, four canonical headings in order (script: ok)"
+    },
+    {
+      "text": "ADR 0002 has Accepted status, ISO 8601 date with today's real date, H1 '# 2. <title>', and one-blank-line discipline",
+      "passed": true,
+      "evidence": "Accepted, Date: 2026-07-21, H1 '# 2.' un-padded, blank-line discipline (script: ok)"
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs (string parsing for clients, larger payloads), not just benefits",
+      "passed": true,
+      "evidence": "Consequences carry both accepted trade-offs (string parsing, larger payloads)"
+    }
+  ],
+  "passed": 4,
+  "total": 4
+}

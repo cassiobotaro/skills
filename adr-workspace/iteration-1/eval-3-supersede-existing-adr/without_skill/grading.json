@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-3-without_skill",
+  "expectations": [
+    {
+      "text": "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+      "passed": true,
+      "evidence": "doc/adr/0004-use-stateless-jwt-tokens-for-sessions.md created."
+    },
+    {
+      "text": "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+      "passed": true,
+      "evidence": "Status section matches the expected exact format."
+    },
+    {
+      "text": "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+      "passed": true,
+      "evidence": "diff vs fixture shows exactly one changed line: 'Accepted' → 'Superseded by [4. Use stateless JWT tokens for sessions](0004-use-stateless-jwt-tokens-for-sessions.md)'."
+    },
+    {
+      "text": "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+      "passed": true,
+      "evidence": "Both link lines use the modern spelling."
+    },
+    {
+      "text": "New ADR is in English, four sections in order, ISO date, and reflects only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+      "passed": true,
+      "evidence": "Format correct; content grounded in prompt + fixture ADR 2 (e.g. 'no longer a single DELETE operation' derives from ADR 2's consequences). Adds an inline '[ADR 2](...)' link in Context — grounded, though not part of the canonical link scheme."
+    },
+    {
+      "text": "ADRs 0001 and 0003 are untouched",
+      "passed": true,
+      "evidence": "diff -q against fixtures: identical."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

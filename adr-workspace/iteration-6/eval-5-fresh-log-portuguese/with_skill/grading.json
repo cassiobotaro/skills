@@ -1,0 +1,46 @@
+{
+  "eval_id": 5,
+  "eval_name": "fresh-log-portuguese",
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with exactly two files: a 0001 seed ADR and a 0002 decision ADR",
+      "passed": true,
+      "evidence": "ls doc/adr shows exactly two files: 0001-registrar-decisoes-de-arquitetura.md and 0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md."
+    },
+    {
+      "text": "The 0001 seed ADR has its title and body translated into Portuguese and its filename slug derives from the translated title",
+      "passed": true,
+      "evidence": "Seed H1 '# 1. Registrar decisões de arquitetura'; body translated ('Precisamos registrar as decisões de arquitetura tomadas neste projeto.', 'Vamos usar Architecture Decision Records, como [descrito por Michael Nygard](...)'); filename slug 'registrar-decisoes-de-arquitetura' derives from that translated title."
+    },
+    {
+      "text": "The seed ADR keeps the adr-tools scaffolding in canonical English: the `Date:` label, the four `##` headings, and the status word are NOT translated",
+      "passed": true,
+      "evidence": "Seed keeps 'Date: 2026-07-21', '## Status', '## Context', '## Decision', '## Consequences' and the status word 'Accepted' in English — grep of the file shows no translated heading."
+    },
+    {
+      "text": "ADR 0002 has its H1 title text and the four section bodies in Portuguese",
+      "passed": true,
+      "evidence": "0002 H1 '# 2. Adotar RabbitMQ em vez de Kafka para a fila de mensagens'; all four bodies Portuguese ('Os serviços precisam trocar mensagens entre si por meio de uma fila.', 'Vamos adotar o RabbitMQ ...', 'Abrimos mão do replay de eventos ...')."
+    },
+    {
+      "text": "ADR 0002 keeps the scaffolding canonical: the `Date:` label, the four `## Status/Context/Decision/Consequences` headings in order, and the status word all in English",
+      "passed": true,
+      "evidence": "grep '^#|^Date:' on 0002: '# 2. ... | Date: 2026-07-21 | ## Status | ## Context | ## Decision | ## Consequences'; line 7 is 'Accepted' — label, headings (in order) and status word all canonical English."
+    },
+    {
+      "text": "ADR 0002 keeps the exact structure: H1 with un-padded number, Date: line in ISO 8601 with today's real date, one blank line between every element",
+      "passed": true,
+      "evidence": "Line 1 un-padded '# 2.'; line 3 'Date: 2026-07-21' (today, ISO 8601); awk scan for consecutive blank lines reports 'ok' (no double blanks) and the file ends with a single newline."
+    },
+    {
+      "text": "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title (lowercased, non-alphanumeric runs collapsed to single hyphens)",
+      "passed": true,
+      "evidence": "Filename '0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md' == NNNN + the Portuguese title lowercased with non-alphanumeric runs collapsed to single hyphens."
+    },
+    {
+      "text": "The Consequences section records the accepted trade-off (loss of event replay) and contains no invented facts beyond what the prompt established",
+      "passed": true,
+      "evidence": "Consequences: 'Abrimos mão do replay de eventos, que o Kafka ofereceria pela retenção do log. Se um dia precisarmos dessa capacidade, ela será objeto de uma nova decisão.' Context repeats only prompt facts (<100 msg/s, no retention need, team experience). Nothing else added."
+    }
+  ]
+}

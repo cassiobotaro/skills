@@ -1,0 +1,13 @@
+{
+  "eval_id": 3,
+  "eval_name": "supersede-existing-adr",
+  "prompt": "Esse repositório já tem ADRs em doc/adr. A gente decidiu abandonar a decisão do ADR 2 (sessões no Redis): vamos passar a usar tokens JWT stateless, porque o cluster Redis virou ponto único de falha nos deploys multi-região e o custo de manter ele replicado não compensa; com JWT a gente aceita o trade-off de não conseguir revogar sessão imediatamente (vamos usar expiração curta de 15 minutos). Escreve o novo ADR substituindo o antigo.",
+  "assertions": [
+    "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+    "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+    "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+    "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+    "New ADR is in English, four sections in order, ISO date, and reflects only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+    "ADRs 0001 and 0003 are untouched"
+  ]
+}

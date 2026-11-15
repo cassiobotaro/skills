@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-3-with_skill",
+  "expectations": [
+    {
+      "text": "New ADR created as doc/adr/0004-<slug>.md — numbering continues from the highest existing (0003)",
+      "passed": true,
+      "evidence": "doc/adr/0004-use-stateless-jwt-sessions.md created."
+    },
+    {
+      "text": "New ADR Status section reads exactly: 'Accepted', blank line, 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)' — bracket text equals the target H1 minus '# ', href is the bare basename",
+      "passed": true,
+      "evidence": "Status section: 'Accepted' + blank line + 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)'. Bracket text matches target H1 exactly; bare basename href."
+    },
+    {
+      "text": "Old 0002-store-sessions-in-redis.md edited so its Status section contains only 'Superseded by [4. <New title>](0004-<slug>.md)' (the 'Accepted' word removed); everything outside the Status section is byte-identical to the original",
+      "passed": true,
+      "evidence": "diff vs fixture shows exactly one changed line (line 7): 'Accepted' → 'Superseded by [4. Use stateless JWT sessions](0004-use-stateless-jwt-sessions.md)'. Rest byte-identical."
+    },
+    {
+      "text": "Modern spelling 'Superseded by'/'Supersedes' used, not the legacy 'Superceded'/'Supercedes'",
+      "passed": true,
+      "evidence": "Both link lines use the modern spelling."
+    },
+    {
+      "text": "New ADR is in English, four sections in order, ISO date, and reflects only stated facts: Redis as multi-region SPOF, replication cost, JWT with 15-minute expiry and no immediate revocation",
+      "passed": true,
+      "evidence": "All format checks pass; Date: 2026-06-04. Content limited to stated facts plus repo-grounded detail ('read on every authenticated request' comes from fixture ADR 2)."
+    },
+    {
+      "text": "ADRs 0001 and 0003 are untouched",
+      "passed": true,
+      "evidence": "diff -q against fixtures: identical."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

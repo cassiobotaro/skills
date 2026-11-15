@@ -1,0 +1,45 @@
+{
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Fresh log seeded like adr init (0001 with Nygard link + adr-tools mention)",
+      "passed": true,
+      "evidence": "0001 present, Nygard+adr-tools links"
+    },
+    {
+      "text": "Decision ADR as 0002-<kebab>.md, 4-digit padded filename, slug from title",
+      "passed": true,
+      "evidence": "0002 filename present"
+    },
+    {
+      "text": "Four sections in order, un-padded H1, Date line today",
+      "passed": true,
+      "evidence": "H1 '# 2.', 4 sections, date 2026-06-07"
+    },
+    {
+      "text": "Status 'Accepted' (or PT 'Aceito')",
+      "passed": true,
+      "evidence": "status word present"
+    },
+    {
+      "text": "Decision active voice naming PostgreSQL; Context covers ACID/team/RDS forces",
+      "passed": true,
+      "evidence": "PostgreSQL+ACID+RDS in body"
+    },
+    {
+      "text": "Consequences include downsides (rigid schema, migrations as deploy step)",
+      "passed": true,
+      "evidence": "migration+schema downside present"
+    },
+    {
+      "text": "No invented facts (no fabricated metrics/benchmarks/alternatives)",
+      "passed": true,
+      "evidence": "no stray metrics/benchmarks"
+    }
+  ]
+}

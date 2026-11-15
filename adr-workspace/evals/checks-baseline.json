@@ -1,0 +1,240 @@
+{
+  "note": "Frozen check list for adr evals 8-10. Written once, before any run of iteration-9, and not edited to fit an output. Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file and kind=absence are decided by a script from the bytes on disk; kind=reply and kind=invention are decided by an LLM judge (three independent passes, majority verdict, disagreement = borderline and counted as not met). A met check cites file:line or a literal quote; an unmet check records what was searched and where; a check with neither is 'not scored'. A borderline case resolves to not met. More text or more files never raise a verdict.",
+  "frozen_on": "2026-11-15",
+  "evals": {
+    "8": [
+      {
+        "id": "8.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply says that nothing has been decided yet / the design is still open, i.e. that there is no made decision here to record"
+      },
+      {
+        "id": "8.2",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply says that an ADR (or this skill) records decisions already made, as the reason it is not writing one now"
+      },
+      {
+        "id": "8.3",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply is written in English"
+      },
+      {
+        "id": "8.4",
+        "assertion": 2,
+        "kind": "absence",
+        "check": "No file exists anywhere under the project root after the run (no seed ADR, no ADR, no design doc)"
+      },
+      {
+        "id": "8.5",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply names a design doc as the appropriate artifact for this request (naming the design-doc skill or offering to help with it counts)"
+      },
+      {
+        "id": "8.6",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply says that the decisions the design settles can be recorded as ADRs afterwards"
+      },
+      {
+        "id": "8.7",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "Neither the reply nor any file asserts, as the team's position, a decision, rationale, alternative or consequence that the user's message did not state. Questions and clearly-labelled options are not assertions"
+      }
+    ],
+    "9": [
+      {
+        "id": "9.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply says there is no decision to record yet"
+      },
+      {
+        "id": "9.2",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply is written in Portuguese"
+      },
+      {
+        "id": "9.3",
+        "assertion": 2,
+        "kind": "absence",
+        "check": "No file exists anywhere under the project root after the run (no seed ADR, no ADR choosing a broker)"
+      },
+      {
+        "id": "9.4",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply offers to write the ADR once the choice is made, or offers a Proposed ADR for a concrete proposal awaiting agreement (either offer is enough)"
+      },
+      {
+        "id": "9.5",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "Neither the reply nor any file picks Kafka or RabbitMQ as the team's decision"
+      },
+      {
+        "id": "9.6",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "Neither the reply nor any file presents a reason, force or consequence as the team's own. General trade-off discussion clearly framed as input to the choice is not such a presentation"
+      }
+    ],
+    "10": [
+      {
+        "id": "10.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "Exactly one new file exists under doc/adr/, and its name matches 0004-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug"
+      },
+      {
+        "id": "10.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The new file's first line is '# 4. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped"
+      },
+      {
+        "id": "10.3",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file"
+      },
+      {
+        "id": "10.4",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1"
+      },
+      {
+        "id": "10.5",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The Status section's status word is 'Accepted'"
+      },
+      {
+        "id": "10.6",
+        "assertion": 1,
+        "kind": "file",
+        "check": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading"
+      },
+      {
+        "id": "10.7",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The new ADR's Context section states the user's reason: the API gateway cannot see account ids"
+      },
+      {
+        "id": "10.8",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The new ADR's Consequences section states the accepted trade-off: the session service now keeps rate-limit counters in Redis"
+      },
+      {
+        "id": "10.9",
+        "assertion": 2,
+        "kind": "invention",
+        "check": "The new ADR asserts as fact nothing beyond the user's message and the three existing ADRs: no invented metric, incident, alternative, technology or consequence. A consequence that is a direct logical restatement of the stated decision is not an invention"
+      },
+      {
+        "id": "10.10",
+        "assertion": 3,
+        "kind": "file",
+        "check": "doc/adr/0001-*.md, 0002-*.md and 0003-*.md are byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "10.11",
+        "assertion": 4,
+        "kind": "absence",
+        "check": "No workspace.dsl (nor any other file outside the one new ADR) was created or edited under the project root"
+      },
+      {
+        "id": "10.12",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The reply says, in a sentence, that linking the ADRs into the Structurizr workspace is the structurizr skill's work or otherwise outside this skill's scope (naming the '!adrs doc/adr' directive is fine)"
+      }
+    ],
+    "11": [
+      {
+        "id": "11.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "Exactly one new file exists under doc/adr/, and its name matches 0003-<slug>.md with a lowercase alphanumeric-and-single-hyphen slug"
+      },
+      {
+        "id": "11.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The new file's first line is '# 3. <title>', and the filename slug equals the title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped"
+      },
+      {
+        "id": "11.3",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The new file has a 'Date: YYYY-MM-DD' line whose value is the calendar date on which the run wrote the file"
+      },
+      {
+        "id": "11.4",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The new file has exactly the four '## ' headings Status, Context, Decision, Consequences, in that order, and no other heading besides the H1"
+      },
+      {
+        "id": "11.5",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The Status section's status word is 'Accepted'"
+      },
+      {
+        "id": "11.6",
+        "assertion": 1,
+        "kind": "file",
+        "check": "One-blank-line discipline: no two consecutive blank lines, and a blank line before and after the H1, the Date line and every heading"
+      },
+      {
+        "id": "11.7",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The new ADR's Context section states the user's force: the app servers move to an autoscaling group next quarter, where replaced instances do not keep their disks"
+      },
+      {
+        "id": "11.8",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The new ADR's Consequences section states the accepted trade-off: every file read becomes a network call"
+      },
+      {
+        "id": "11.9",
+        "assertion": 3,
+        "kind": "invention",
+        "check": "The new ADR's Context section asserts nothing beyond the user's message and the two existing ADRs: no motive the user did not give, no general claim about S3, object storage, durability or common practice, no invented incident, number or alternative. Rewording the user's own statements is not an invention"
+      },
+      {
+        "id": "11.10",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "The new ADR's Decision and Consequences sections assert nothing beyond the user's message and the two existing ADRs. A consequence that is a direct logical restatement of the stated decision or trade-off is not an invention"
+      },
+      {
+        "id": "11.11",
+        "assertion": 5,
+        "kind": "file",
+        "check": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "11.12",
+        "assertion": 5,
+        "kind": "absence",
+        "check": "No file other than the one new ADR was created or edited under the project root"
+      }
+    ]
+  },
+  "amendments": [
+    "2026-11-15, after iteration-9: a met kind=invention check is a negative (\"nothing invented\") and has no sentence to quote; its evidence is the recorded search. No check of evals 8-10 was changed.",
+    "2026-11-15, before iteration-10: checks for eval 11 added, before any run of it. Judge passes: three for kind=invention, where iteration-9 saw its only split; one is enough for kind=reply (59/60 unanimous)."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "eval_id": 1,
+  "eval_name": "clear-decision-fresh-repo",
+  "prompt": "No nosso serviço de pedidos a gente decidiu usar PostgreSQL em vez de MongoDB. O motivo principal é que o fluxo de criação de pedido atualiza estoque, pagamento e pedido juntos e precisa de transação ACID; além disso o time já tem experiência com Postgres e a empresa já paga RDS. A desvantagem que discutimos é que o schema fica mais rígido e migrações viram um passo de deploy. Escreve um ADR documentando essa decisão. O repositório ainda não tem nenhum ADR.",
+  "assertions": [
+    {
+      "text": "Fresh log seeded like adr init: doc/adr/0001-record-architecture-decisions.md created with the canonical adr-tools init content (Nygard link, adr-tools mention)"
+    },
+    {
+      "text": "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)"
+    },
+    {
+      "text": "ADR is in English with exactly the four sections in order (Status, Context, Decision, Consequences), H1 uses the un-padded number ('# 2. ...'), and a 'Date: YYYY-MM-DD' line with today's date"
+    },
+    {
+      "text": "Status section is 'Accepted'"
+    },
+    {
+      "text": "Decision section is active voice ('We will ...') naming PostgreSQL; Context covers the stated forces: ACID transaction across order/stock/payment, team experience with Postgres, company already pays for RDS"
+    },
+    {
+      "text": "Consequences include the stated downsides (more rigid schema, migrations become a deploy step), not only positives"
+    },
+    {
+      "text": "No invented facts: no fabricated metrics, benchmarks, alternatives, or constraints beyond what the user stated"
+    }
+  ]
+}

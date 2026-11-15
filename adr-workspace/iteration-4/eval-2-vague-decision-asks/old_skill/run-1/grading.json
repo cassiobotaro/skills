@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Does NOT deliver a finished ADR padded with invented content",
+      "passed": true,
+      "evidence": "no ADR file created"
+    },
+    {
+      "text": "Asks targeted clarifying questions (>=2 of: replacement, forces, role, trade-offs)",
+      "passed": true,
+      "evidence": "8 questions, 5 topic hits"
+    },
+    {
+      "text": "If any ADR file created it's explicit draft/skeleton (n/a — none created)",
+      "passed": true,
+      "evidence": "no file created → vacuously satisfied"
+    },
+    {
+      "text": "Final response in Portuguese",
+      "passed": true,
+      "evidence": "PT markers present"
+    }
+  ]
+}

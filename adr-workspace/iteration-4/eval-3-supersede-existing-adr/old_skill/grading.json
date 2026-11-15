@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "New ADR 0004 (numbering continues from 0003)",
+      "passed": true,
+      "evidence": "0004 present"
+    },
+    {
+      "text": "0004 Status: Accepted + Supersedes [2. Store sessions in Redis](0002-...)",
+      "passed": true,
+      "evidence": "exact Supersedes line present"
+    },
+    {
+      "text": "0002 Status reduced to 'Superseded by [4. ...](0004-...)' (Accepted removed); body untouched",
+      "passed": true,
+      "evidence": "Status replaced, no standalone Accepted"
+    },
+    {
+      "text": "Modern spelling 'Superseded/Supersedes' not legacy 'Superceded'",
+      "passed": true,
+      "evidence": "no legacy spelling"
+    },
+    {
+      "text": "0004 English, four sections, ISO date, stated facts (SPOF, replication cost, 15-min JWT)",
+      "passed": true,
+      "evidence": "facts present"
+    },
+    {
+      "text": "0001 and 0003 untouched",
+      "passed": true,
+      "evidence": "verified byte-identical via diff (shell)"
+    }
+  ]
+}

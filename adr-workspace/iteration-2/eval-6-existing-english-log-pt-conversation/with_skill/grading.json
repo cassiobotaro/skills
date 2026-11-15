@@ -1,0 +1,29 @@
+{
+  "expectations": [
+    {
+      "text": "A new ADR 0003 is created in ENGLISH even though the conversation is in Portuguese, because the existing log is in English",
+      "passed": true,
+      "evidence": "0003-use-redis-for-session-storage.md is fully English: 'Accepted', Status/Context/Decision/Consequences, 'We will use Redis…'"
+    },
+    {
+      "text": "The agent tells the user (in Portuguese) that it matched the existing log's language",
+      "passed": true,
+      "evidence": "Final message: 'o log de decisões existente… está escrito em inglês. Para que o log fique consistente de ponta a ponta, escrevi este ADR também em inglês… um log em dois idiomas é pior do que um log inteiro em um só', plus an offer to migrate if the user prefers Portuguese"
+    },
+    {
+      "text": "The two existing ADR files (0001, 0002) are byte-for-byte untouched",
+      "passed": true,
+      "evidence": "diff of 0001 against canonical shows only the original fixture date (2026-05-10); 0002 has its original 23 lines and no supersede edits"
+    },
+    {
+      "text": "ADR 0003 follows exact format",
+      "passed": true,
+      "evidence": "'# 3. Use Redis for session storage', 'Date: 2026-06-07', four sections in order, 'Accepted', one-blank-line discipline"
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs",
+      "passed": true,
+      "evidence": "'Redis becomes an additional infrastructure component…' and 'If Redis restarts without persistence configured, the sessions it holds are lost'"
+    }
+  ]
+}

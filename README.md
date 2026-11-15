@@ -1,9 +1,10 @@
 # cassiobotaro-skills
 
-Agent skills for software architecture documentation: design docs and diagrams. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
+Agent skills for software architecture documentation: decision records, design docs, and diagrams. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
 
 | Skill | What it does |
 |---|---|
+| `adr` | Write and maintain Architecture Decision Records in the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), file-compatible with [adr-tools](https://github.com/npryce/adr-tools) (sequential numbering, `NNNN-slug.md` filenames, supersede/amend links, `.adr-dir` discovery). |
 | `design-doc` | Write and review software design documents through interactive discovery — targeted questions about the problem, trade-offs, alternatives, and impacted teams — producing trade-off-focused Markdown, condensing the [Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/) and industry practice (Google, Pragmatic Engineer). |
 | `structurizr` | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl) (`workspace.dsl`): system context, container, component, deployment, and dynamic diagrams. |
 | `mermaid-sequence` | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced ```` ```mermaid ```` code blocks that render directly in Markdown (GitHub, GitLab, most wikis). |
@@ -19,7 +20,7 @@ Agent skills for software architecture documentation: design docs and diagrams. 
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
 | Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | same |
 
-No skill *requires* Docker, and none uses an MCP server: `design-doc` needs no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
+No skill *requires* Docker, and none uses an MCP server: `adr` and `design-doc` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
 
 ### Claude Code
 
@@ -28,6 +29,7 @@ Add the marketplace, then install the skills you want:
 ```bash
 claude plugin marketplace add cassiobotaro/skills
 
+claude plugin install adr@cassiobotaro-skills
 claude plugin install design-doc@cassiobotaro-skills
 claude plugin install structurizr@cassiobotaro-skills
 claude plugin install mermaid-sequence@cassiobotaro-skills
@@ -61,12 +63,13 @@ The diagram skills validate and render through tooling you provide, and degrade 
 
 ## Repository layout
 
-Each skill ships as a plugin in its own directory (`design-doc/`, `structurizr/`, `mermaid-sequence/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
+Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
 
 ## License and attribution
 
 [MIT](LICENSE). Each skill builds on prior art credited in its `NOTICE.md`:
 
+- [adr](adr/skills/adr/NOTICE.md) — Michael Nygard (ADR format), Nat Pryce (adr-tools)
 - [design-doc](design-doc/skills/design-doc/NOTICE.md) — Cássio Botaro (Design Docs series), Malte Ubl, Rina Artstain, Gergely Orosz, Tech Leads Club
 - [structurizr](structurizr/skills/structurizr/NOTICE.md) — Simon Brown (C4 model, Structurizr)
 - [mermaid-sequence](mermaid-sequence/skills/mermaid-sequence/NOTICE.md) — the Mermaid project

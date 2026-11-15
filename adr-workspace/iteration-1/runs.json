@@ -1,0 +1,14 @@
+{
+  "iteration": 1,
+  "note": "First launch attempt failed (subagent writes denied before allowlist); these are the re-run agents.",
+  "agents": {
+    "a1d8297cc4389d42e": "eval-1-clear-decision-fresh-repo/with_skill",
+    "a2d2da2eed17c8b22": "eval-1-clear-decision-fresh-repo/without_skill",
+    "a353d519aedcdb32d": "eval-2-vague-decision-asks/with_skill",
+    "ad1f810c2b7c11630": "eval-2-vague-decision-asks/without_skill",
+    "affb562aaff1f2567": "eval-3-supersede-existing-adr/with_skill",
+    "a46521df833d81b8f": "eval-3-supersede-existing-adr/without_skill",
+    "aa31f2e6e9dc6a58d": "eval-4-custom-dir-detection/with_skill",
+    "af35552c18d69fd62": "eval-4-custom-dir-detection/without_skill"
+  }
+}

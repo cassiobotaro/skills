@@ -1,0 +1,19 @@
+{
+  "eval_id": 2,
+  "eval_name": "vague-decision-asks",
+  "prompt": "escreve um adr ai dizendo que vamos trocar o redis",
+  "assertions": [
+    {
+      "text": "Does NOT deliver a finished ADR padded with invented context, replacement technology, or consequences"
+    },
+    {
+      "text": "Final response asks targeted clarifying questions covering at least two of: what replaces Redis, why the change (forces), Redis's current role (cache/session/queue), accepted trade-offs"
+    },
+    {
+      "text": "If any ADR file is created at all, it is explicitly a draft/skeleton with pending markers — not fabricated content presented as fact"
+    },
+    {
+      "text": "Final response is in Portuguese, matching the user's conversation language"
+    }
+  ]
+}

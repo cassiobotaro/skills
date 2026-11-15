@@ -1,0 +1,49 @@
+{
+  "eval_id": 5,
+  "eval_name": "fresh-log-portuguese",
+  "configuration": "with_skill_run2",
+  "expectations": [
+    {
+      "text": "doc/adr/ is created with exactly two files: a 0001 seed ADR and a 0002 decision ADR",
+      "passed": true,
+      "evidence": "doc/adr/ has exactly the 0001 seed + 0002 decision (script: 2 new, 0 pre-existing)"
+    },
+    {
+      "text": "The 0001 seed ADR has its title and body translated into Portuguese and its filename slug derives from the translated title",
+      "passed": true,
+      "evidence": "Seed title/body in Portuguese; slug from the translated title (script: matches strict derivation)"
+    },
+    {
+      "text": "The seed ADR keeps the adr-tools scaffolding in canonical English: the `Date:` label, the four `##` headings, and the status word are NOT translated",
+      "passed": true,
+      "evidence": "Seed keeps Date:, four headings, status word in English (script: canonical)"
+    },
+    {
+      "text": "ADR 0002 has its H1 title text and the four section bodies in Portuguese",
+      "passed": true,
+      "evidence": "0002 H1 and all four bodies in Portuguese"
+    },
+    {
+      "text": "ADR 0002 keeps the scaffolding canonical: the `Date:` label, the four `## Status/Context/Decision/Consequences` headings in order, and the status word all in English",
+      "passed": true,
+      "evidence": "0002 scaffolding canonical English (script: ok)"
+    },
+    {
+      "text": "ADR 0002 keeps the exact structure: H1 with un-padded number, Date: line in ISO 8601 with today's real date, one blank line between every element",
+      "passed": true,
+      "evidence": "H1 un-padded, ISO date = today, one blank line between elements (script: ok)"
+    },
+    {
+      "text": "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title (lowercased, non-alphanumeric runs collapsed to single hyphens)",
+      "passed": true,
+      "evidence": "0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md (script: ok)"
+    },
+    {
+      "text": "The Consequences section records the accepted trade-off (loss of event replay) and contains no invented facts beyond what the prompt established",
+      "passed": true,
+      "evidence": "Consequences record the accepted loss of replay; Kafka recorded only as the named alternative, no invented comparison"
+    }
+  ],
+  "passed": 8,
+  "total": 8
+}

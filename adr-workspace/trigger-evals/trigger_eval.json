@@ -1,0 +1,23 @@
+[
+  { "query": "we finally settled the debate — we're going with Postgres instead of DynamoDB for the orders service because of the relational reporting needs. can you capture this so the team has a record of why?", "should_trigger": true, "note": "decision to record, never says ADR" },
+  { "query": "start a decision log for the platform-team repo, we don't have one yet and i want to start tracking our architecture calls properly", "should_trigger": true, "note": "adr init / start a decision log" },
+  { "query": "write an ADR documenting our move from REST to gRPC for internal service-to-service comms", "should_trigger": true, "note": "explicit ADR" },
+  { "query": "ADR 0007 is out of date — we moved off Redis for sessions and now use the JWT approach. mark it superseded and write the new one", "should_trigger": true, "note": "supersede" },
+  { "query": "document the decision to adopt feature flags via LaunchDarkly, including the alternatives we looked at (Unleash, homegrown) and why we passed on them", "should_trigger": true, "note": "single recorded decision w/ considered alternatives — must beat design-doc" },
+  { "query": "the tech lead wants every significant tech choice written up in doc/adr from now on. let's record the first one: choosing pnpm over npm for the monorepo", "should_trigger": true, "note": "doc/adr path + record a choice" },
+  { "query": "we changed our minds about the message broker. amend the existing record to note we're now sticking with SQS instead of switching to Kafka", "should_trigger": true, "note": "amend existing record" },
+  { "query": "registra aí a decisão de a gente padronizar em OpenTelemetry pra tracing", "should_trigger": true, "note": "PT, casual, record the decision" },
+  { "query": "i need to write up why we chose to deprecate the v1 API and force migration to v2, in the nygard format if possible", "should_trigger": true, "note": "mentions Nygard format" },
+  { "query": "create a record explaining our choice of hexagonal architecture for the new billing module so future devs understand the rationale", "should_trigger": true, "note": "record rationale of a choice" },
+
+  { "query": "write a full design doc for the new notification service — problem statement, the approaches we considered, trade-offs, rollout plan", "should_trigger": false, "note": "belongs to design-doc" },
+  { "query": "draw a sequence diagram of how the auth handshake works between the SPA, the BFF and Keycloak", "should_trigger": false, "note": "belongs to mermaid-sequence" },
+  { "query": "create the C4 container diagram for our payments platform in a workspace.dsl", "should_trigger": false, "note": "belongs to structurizr" },
+  { "query": "link all our existing ADRs from doc/adr into the Structurizr architecture docs so they show up in the decision log view", "should_trigger": false, "note": "mentions ADRs but task is the structurizr !adrs import" },
+  { "query": "write up the postmortem for yesterday's outage, including timeline and action items", "should_trigger": false, "note": "near-miss: doc, not a decision record" },
+  { "query": "document our REST API endpoints so the frontend team knows the request/response shapes", "should_trigger": false, "note": "near-miss: API reference docs" },
+  { "query": "we need a PRD for the new self-serve onboarding flow — goals, user stories, success metrics", "should_trigger": false, "note": "near-miss: product doc" },
+  { "query": "what's the difference between an ADR and an RFC? when should i use each?", "should_trigger": false, "note": "conceptual Q&A; mentions ADR but Claude answers directly" },
+  { "query": "summarize the key decisions we made in last week's architecture review meeting into meeting notes", "should_trigger": false, "note": "near-miss: 'decisions' keyword but wants meeting notes" },
+  { "query": "help me decide whether to use Kafka or RabbitMQ for our event bus — walk me through the trade-offs", "should_trigger": false, "note": "DEBATABLE: asks to make a decision, not record one. Flag for review." }
+]

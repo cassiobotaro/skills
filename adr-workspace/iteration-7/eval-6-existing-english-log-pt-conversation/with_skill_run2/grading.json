@@ -1,0 +1,34 @@
+{
+  "eval_id": 6,
+  "eval_name": "existing-english-log-pt-conversation",
+  "configuration": "with_skill_run2",
+  "expectations": [
+    {
+      "text": "A new ADR 0003 is created with its prose in ENGLISH even though the conversation is in Portuguese, because the existing log is in English — consistency outranks conversation language",
+      "passed": true,
+      "evidence": "0003-use-redis-for-user-session-storage.md in ENGLISH despite the Portuguese conversation"
+    },
+    {
+      "text": "The agent tells the user (in Portuguese) that it matched the existing log's language",
+      "passed": true,
+      "evidence": "Told the user in Portuguese it matched the log's language, and offered the whole-log migration separately"
+    },
+    {
+      "text": "The two existing ADR files (0001, 0002) are byte-for-byte untouched",
+      "passed": true,
+      "evidence": "diff -r: 0001 and 0002 pristine"
+    },
+    {
+      "text": "ADR 0003 follows exact format: # 3. <title> H1, ISO 8601 date, four sections in order, Accepted status, blank-line discipline",
+      "passed": true,
+      "evidence": "'# 3. Use Redis for user session storage', ISO date, four sections, Accepted, blank-line discipline (script: ok)"
+    },
+    {
+      "text": "The Consequences section includes the accepted trade-offs (extra infrastructure component, session loss on Redis restart)",
+      "passed": true,
+      "evidence": "Consequences carry both trade-offs (extra infra component, session loss on restart without persistence)"
+    }
+  ],
+  "passed": 5,
+  "total": 5
+}

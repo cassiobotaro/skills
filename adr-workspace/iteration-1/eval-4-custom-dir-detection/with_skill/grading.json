@@ -1,0 +1,41 @@
+{
+  "run_id": "eval-4-with_skill",
+  "expectations": [
+    {
+      "text": "New ADR created inside docs/architecture/decisions/ (the directory named by .adr-dir) — NOT in doc/adr/ or docs/adr/",
+      "passed": true,
+      "evidence": "docs/architecture/decisions/0003-version-the-public-api-by-url-path.md; agent explicitly honored .adr-dir."
+    },
+    {
+      "text": "Numbered 0003 with a kebab-case slug; H1 reads '# 3. <Title>' (un-padded)",
+      "passed": true,
+      "evidence": "H1 '# 3. Version the public API by URL path' matches filename 0003-version-the-public-api-by-url-path.md."
+    },
+    {
+      "text": "English, four sections in order (Status, Context, Decision, Consequences), 'Date:' in ISO 8601, Status 'Accepted'",
+      "passed": true,
+      "evidence": "All present; Date: 2026-06-04; no double blank lines."
+    },
+    {
+      "text": "Context/Decision capture URL-path versioning over header versioning with the stated motives (SDK client expectations, gateway routing, visibility in logs/curl)",
+      "passed": true,
+      "evidence": "Context lists the two options and all three forces; Decision: 'We will version the public API by URL path...'."
+    },
+    {
+      "text": "Consequences include URL proliferation and the cap of at most two active versions",
+      "passed": true,
+      "evidence": "'URLs proliferate as versions accumulate. ... we will maintain at most two active versions at any one time.'"
+    },
+    {
+      "text": "Existing 0001, 0002 and the .adr-dir file are unmodified",
+      "passed": true,
+      "evidence": "diff -q against fixtures: identical."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  }
+}

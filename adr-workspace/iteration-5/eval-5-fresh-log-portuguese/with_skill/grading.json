@@ -1,0 +1,61 @@
+{
+  "run_id": "eval-5-with_skill",
+  "eval_name": "fresh-log-portuguese",
+  "summary": {
+    "passed": 10,
+    "total": 10,
+    "pass_rate": 1.0
+  },
+  "expectations": [
+    {
+      "text": "Fresh log initialized: doc/adr/ has a 0001 seed ADR and the decision as 0002",
+      "passed": true,
+      "evidence": "files = ['0001-registrar-decisoes-de-arquitetura.md', '0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md']"
+    },
+    {
+      "text": "0002 filename NNNN-slug.md, slug derived from the Portuguese title (accents transliterated)",
+      "passed": true,
+      "evidence": "filename = 0002-adotar-rabbitmq-em-vez-de-kafka-para-a-fila-de-mensagens.md"
+    },
+    {
+      "text": "0002 H1 '# 2. <Portuguese title>'; un-padded H1 number matches padded filename number",
+      "passed": true,
+      "evidence": "H1 = '# 2. Adotar RabbitMQ em vez de Kafka para a fila de mensagens'"
+    },
+    {
+      "text": "Date: label canonical English with ISO date (today); NOT translated to 'Data:'",
+      "passed": true,
+      "evidence": "date line -> Date: 2026-06-07; today=2026-06-07; 'Data:' label? False"
+    },
+    {
+      "text": "Status heading English '## Status' + status word 'Accepted' (NOT '## Estado'/'Aceito')",
+      "passed": true,
+      "evidence": "status line = 'Accepted'"
+    },
+    {
+      "text": "Other headings English '## Context'/'## Decision'/'## Consequences' (not translated)",
+      "passed": true,
+      "evidence": "4 English headings=True; any PT heading=False"
+    },
+    {
+      "text": "Section bodies (Context/Decision/Consequences) written in Portuguese",
+      "passed": true,
+      "evidence": "PT markers in 0002 body >=2: True"
+    },
+    {
+      "text": "Consequences records the accepted trade-off (giving up event replay/retention)",
+      "passed": true,
+      "evidence": "Consequences mentions replay/retention"
+    },
+    {
+      "text": "Seed 0001 keeps English scaffolding (Date:/##/Accepted) with Portuguese title+body",
+      "passed": true,
+      "evidence": "seed status='Accepted'; 4 EN headings=True; PT headings=False; 'Data:' label=False; PT body=True"
+    },
+    {
+      "text": "Structurizr adr-tools importer compat: 'Date: ', '## Status', '## Context' literals present so date & status parse (not silently defaulted)",
+      "passed": true,
+      "evidence": "DATE_PREFIX/STATUS_HEADING/CONTEXT_HEADING all matched -> importer reads date=2026-06-07, status=Accepted"
+    }
+  ]
+}
