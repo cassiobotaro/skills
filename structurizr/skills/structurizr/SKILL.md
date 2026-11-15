@@ -25,8 +25,9 @@ them on instead of opening a `workspace.dsl`: a cloud-infrastructure picture dra
 vendor service icons (C4 models the abstractions the team owns, not a vendor catalog in
 its own iconography — that is a diagramming tool's job); a sequence or behavior-over-time
 diagram (C4 views are static structure; ordered interaction is the `mermaid-sequence`
-skill's shape); and writing the decision content of an ADR (the team's decision log, e.g.
-adr-tools, authors it — this skill only *links* the existing log into the views, step 5).
+skill's shape); and writing the decision content of an ADR (the `adr` skill when it is installed, the team's
+decision log tooling such as adr-tools otherwise — this skill only *links* the existing
+log into the views, step 5).
 
 ## The contract
 
