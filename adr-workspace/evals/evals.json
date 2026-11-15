@@ -141,7 +141,8 @@
         "Creates no file under doc/adr/ or anywhere else (no seed ADR, no ADR picking Kafka or RabbitMQ)",
         "Offers to write the ADR once the choice is made, or a `Proposed` ADR if the user has a concrete proposal awaiting agreement",
         "Does not pick Kafka or RabbitMQ on the team's behalf and does not present any rationale as the team's own; general trade-off discussion clearly framed as input to the choice is fine"
-      ]
+      ],
+      "note": "Regression guard only. In iteration-9 it did not separate 1.4.0 from 1.3.2 (12/12 in both arms): rule 1 already refuses to record a choice not made. Leave it out of A/Bs of the scope section."
     },
     {
       "id": 10,

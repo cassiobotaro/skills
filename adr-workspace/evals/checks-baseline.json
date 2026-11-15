@@ -235,6 +235,36 @@
   },
   "amendments": [
     "2026-11-15, after iteration-9: a met kind=invention check is a negative (\"nothing invented\") and has no sentence to quote; its evidence is the recorded search. No check of evals 8-10 was changed.",
-    "2026-11-15, before iteration-10: checks for eval 11 added, before any run of it. Judge passes: three for kind=invention, where iteration-9 saw its only split; one is enough for kind=reply (59/60 unanimous)."
-  ]
+    "2026-11-15, before iteration-10: checks for eval 11 added, before any run of it. Judge passes: three for kind=invention, where iteration-9 saw its only split; one is enough for kind=reply (59/60 unanimous).",
+    "2026-11-15, after iteration-10: anchor cases for kind=invention, because 'direct logical restatement' split the judges 2/3 on 'adds load'. A restatement says the same fact in other words or points at what a file already records; anything that adds a property the user did not state is an inference and makes the check UNMET. Applies from iteration-11 on; earlier gradings are not revised."
+  ],
+  "anchors": {
+    "invention": [
+      {
+        "verdict": "MET",
+        "case": "User: 'the service now keeps rate-limit counters in Redis'. ADR: 'The session service now holds rate-limit counters in Redis, alongside the sessions it already stores there (see ADR 2).'",
+        "why": "Same fact reworded, plus a pointer to what an existing ADR records."
+      },
+      {
+        "verdict": "MET",
+        "case": "User: 'instances there get replaced without keeping their disks'. ADR: 'Files kept on local disk would be lost whenever an instance is replaced.'",
+        "why": "The user's own statement applied to the user's own subject; nothing new is asserted."
+      },
+      {
+        "verdict": "UNMET",
+        "case": "ADR: 'which adds write load to Redis' / 'Redis carries more load and more responsibility on the login path'.",
+        "why": "Load is a property the user did not state. Plausible, and still the model's inference."
+      },
+      {
+        "verdict": "UNMET",
+        "case": "User: 'every file read becomes a network call'. ADR: 'which is slower than reading from local disk'.",
+        "why": "A performance claim the user did not make."
+      },
+      {
+        "verdict": "UNMET",
+        "case": "ADR Context: 'Login attempts need to be limited per account to slow down repeated guessing.' / 'The API gateway is the usual place for rate limiting.'",
+        "why": "A supplied motive and a general truth; neither is in the user's message or the repository."
+      }
+    ]
+  }
 }
