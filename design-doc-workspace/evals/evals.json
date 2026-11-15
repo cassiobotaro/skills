@@ -136,7 +136,7 @@
       "assertions": [
         "States, in English, that a single already-made decision is not a design to document and that this skill writes design docs, not decision records",
         "Does not create a design doc file under docs/design/ or anywhere else",
-        "Points the user to an ADR / decision log as the appropriate artifact (naming the format or offering to help is fine; writing the ADR itself is not required)",
+        "Points the user to an ADR / decision log as the appropriate artifact (naming the `adr` skill, the format, or offering to help is fine; writing the ADR itself is not required)",
         "Does not assert as the team's reasoning anything the user did not state (no invented problem statement, goals, metrics, risks, or consequences); asking whether other options such as OpenTofu were considered is a question, not a fabrication"
       ]
     }

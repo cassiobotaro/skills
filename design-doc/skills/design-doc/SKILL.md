@@ -77,7 +77,8 @@ the document under review.
    growing past 10–20 pages is a signal the problem should be split. This skill writes
    design docs, nothing else: if what the user actually has is a single already-made
    decision with no design to discover, say so instead of manufacturing a design doc
-   around it.
+   around it — that is an ADR (the `adr` skill when it is installed, the team's decision
+   log otherwise).
 
 ## Writing a new document
 
