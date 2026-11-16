@@ -31,8 +31,8 @@ system ships, then amend in a linked document) are condensed from **Malte Ubl**'
 
 ## How to write an effective design document — Rina Artstain
 
-The intro written for a distracted reader, the glossary for domain terms, limiting
-feedback requests to key decisions, accessible comparison tables (markers, not color
+The intro written for a distracted reader, the glossary for domain terms,
+accessible comparison tables (markers, not color
 alone), and the reviewer logistics (named approvers with their areas, status
 tracking) are condensed from **Rina Artstain**'s *How to write an effective design
 document*: <https://rinaarts.com/how-to-write-an-effective-design-document/>
