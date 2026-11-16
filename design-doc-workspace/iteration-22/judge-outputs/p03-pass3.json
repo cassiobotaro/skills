@@ -1,0 +1,7 @@
+[
+  {
+    "id": "9.10",
+    "verdict": "met",
+    "evidence": "Searched the reply (lines 1-14), the new mini-doc exportacao-de-relatorios-armazenamento-s3.md (lines 1-44) and the edited original (header lines 9-10) for asserted costs, retention, credentials/access, download mechanism or URL scheme, metrics, change date, outcomes and alternatives not given by the user or the original. Found none asserted as fact: the S3 move, the second worker, the 404 and 'em produção desde março' come from the user; '/var/exports/<job_id>.csv', 'GET /exports/<job_id>/download', the single-worker assumption, the 7-day loss and the bucket's rejected credentials/retention cost are restated and attributed to the original ('O design original ... gravava', 'Foi a alternativa que o design original descartou'). Change date, current download mechanism, bucket retention, accepted costs, other alternatives (routing, shared disk), migration of old files and authors all appear only as open questions or explicitly unconfirmed ('Os custos desta mudança ainda não foram informados', 'Falta confirmar a retenção', 'A confirmar'). The 2026-11-16 dates are the doc's creation/amendment date, not a claimed change date. Closest candidate, trade-off line 24 'o que elimina o 404 no download com mais de um worker', follows directly from the user's stated cause of the 404 (file only on the worker that generated it), so it is not an invented outcome."
+  }
+]

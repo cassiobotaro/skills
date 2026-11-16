@@ -1,0 +1,7 @@
+[
+  {
+    "id": "9.10",
+    "verdict": "unmet",
+    "evidence": "Searched the reply and both files for asserted costs, retention, credentials/access, download mechanism/URL scheme, metrics, dates, outcomes, and alternatives. Dates, cost, retention, credentials and other alternatives are left as open questions, and the credentials/retention trade-off is attributed to the original doc. One download-mechanism assertion remains, and neither the user nor the original doc established it: mini-doc line 29, \"Como o arquivo não depende mais do disco de um worker específico, qualquer worker pode atender o download.\" This states that workers still serve the download. Open question 2 (line 47) treats exactly that as unknown (\"a API ou o worker lê do bucket e devolve o arquivo, ou o usuário recebe um link direto para o bucket?\"). Line 35 also asserts an outcome (\"o que elimina o 404 que motivou a mudança\"), which is only implied by the user's past tense \"caía\". The line-29 assertion is at least borderline, and the rules say borderline is unmet."
+  }
+]
