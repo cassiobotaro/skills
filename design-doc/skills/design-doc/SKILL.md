@@ -23,8 +23,8 @@ author's reasoning, so the heart of the work is drawing that reasoning out of th
 with the right questions and writing it down clearly. The document is theirs; the
 questions are yours.
 
-The deliverable of every invocation is Markdown on disk: a new design doc, or edits to
-the document under review.
+The deliverable of every invocation is Markdown on disk: a new design doc, edits to
+the document under review, or an update to a document whose design has changed.
 
 ## The contract
 
@@ -78,7 +78,11 @@ the document under review.
    design docs, nothing else: if what the user actually has is a single already-made
    decision with no design to discover, say so instead of manufacturing a design doc
    around it — that is an ADR (the `adr` skill when it is installed, the team's decision
-   log otherwise).
+   log otherwise). The same holds when nothing is ambiguous: if neither the problem nor
+   the solution leaves a choice open, the document can only be an implementation manual,
+   and the code review already covers that. Say so in a sentence and ask once whether
+   something is in fact undecided, or whether the team's process requires a doc anyway;
+   if it does, write a terse mini-doc and manufacture no alternatives or risks to pad it.
 
 ## Writing a new document
 
@@ -99,7 +103,9 @@ from the title as a short slug; if the existing collection uses IDs (e.g.
 
 An honest design doc needs: **the problem** (what hurts today, why solving it matters
 now), **the boundaries** (what the work will achieve — ideally measurable — and what
-is deliberately out of scope), **the solution** (concrete enough to evaluate), **the
+is deliberately out of scope), **the constraints** (what cannot change: a legacy
+system, a host platform, a contract with another team — in a heavily constrained design
+they explain why every option is imperfect), **the solution** (concrete enough to evaluate), **the
 accepted costs** (what got worse in exchange for what got better), **the alternatives**
 (what else was considered, including "do nothing", and why the chosen path won), and
 **the blast radius** (who outside the team is impacted — security, infrastructure,
@@ -203,7 +209,10 @@ missing requirement.
 Look for, roughly in order of importance:
 
 - **Missing trade-offs** — decisions presented with no cost, no alternatives, or a
-  jump from problem straight to solution. The highest-value review finding.
+  jump from problem straight to solution. The highest-value review finding. When the
+  whole document reads as an implementation manual, ask first whether there was a
+  choice to make at all: "none, the path was obvious" is an honest answer, and it means
+  the document may not be needed (contract 5), not that it needs invented alternatives.
 - **Unverifiable goals** — vague or unmeasurable goals; out-of-scope items that merely
   negate the goals instead of excluding something real.
 - **Substance gaps** — claims without supporting facts, missing "do nothing"
@@ -236,6 +245,26 @@ Report findings in two groups before touching the file:
 Let the user choose what to apply and answer what they want to answer; then edit the
 file. Edits preserve the author's voice and language. Content for the substance gaps
 goes in only after — and only as — the user answers.
+
+## Updating a document whose design changed
+
+When implementation or review proves part of the design wrong, where the change lands
+depends on whether the system has shipped. The header's state is the first evidence; if
+it does not settle the matter, ask, since "in production" is the user's fact to give.
+
+- **Not shipped yet**: update the document itself. Replace the affected sections, and
+  when the abandoned approach was a real decision, keep it as an entry in Alternatives
+  considered with the reason it lost, so the reasoning is not erased. Refresh the
+  header's state and *Last updated*.
+- **Shipped**: the document is now the record of why the system was built that way, so
+  leave its body alone. Write the change as a new, right-sized document (usually a
+  mini-doc) that names the original, states what changed and why, and carries its own
+  trade-offs. Link the two both ways: the only edit to the original is a line in its
+  header (`Amended by`) and its *Last updated*. An unlinked amendment leaves the next
+  reader with a design doc that silently contradicts the system.
+
+Either way the reason for the change comes from the user. A change with no stated
+reason is a question, not a paragraph to compose.
 
 ## The default section catalog
 

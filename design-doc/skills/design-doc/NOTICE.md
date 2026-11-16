@@ -22,8 +22,11 @@ closing trio of testability/observability, deployment plan, and open questions),
 The trade-off-first framing, the warning against jumping from problem to solution,
 non-goals as deliberately rejected goals, "overview then details", showing only
 relevant API/schema fragments, pseudocode only for novel algorithms, the length
-guidance (1–3 page mini-docs; split past 10–20 pages), and the "when (not) to write
-one" ambiguity test are condensed from **Malte Ubl**'s *Design Docs at Google*:
+guidance (1–3 page mini-docs; split past 10–20 pages), the "when (not) to write
+one" ambiguity test, the degree-of-constraint distinction (greenfield versus heavily
+constrained designs), privacy among the cross-cutting concerns, the system-context
+diagram, linking to prototypes, and the lifecycle rule (update the document until the
+system ships, then amend in a linked document) are condensed from **Malte Ubl**'s *Design Docs at Google*:
 <https://www.industrialempathy.com/posts/design-docs-at-google/>
 
 ## How to write an effective design document — Rina Artstain

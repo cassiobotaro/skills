@@ -3,7 +3,9 @@
 Two diagram types earn their place in most design docs: a **C4 container diagram** for
 the architecture — the executable processes, the data stores, and how they communicate —
 and **sequence diagrams** for flows with temporal order (API call chains, pipelines,
-batch processes). A diagram never stands on its own: follow each one with prose that
+batch processes). When the point of the design is where the system sits among others
+(who calls it, what it depends on, which teams it touches), a C4 **system context**
+diagram serves better than, or ahead of, the container view. A diagram never stands on its own: follow each one with prose that
 names the components and explains how they interact, since the reader needs to know what
 the boxes mean, not merely that they exist.
 

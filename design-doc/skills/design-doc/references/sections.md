@@ -45,6 +45,9 @@ A small key–value table identifying the document and its lifecycle.
 - The document ID is optional; if the collection uses one (`DD-<year>-<seq>`),
   continue the sequence.
 - Tags pay off later, when someone searches for "how did we decide X".
+- Once the system has shipped, later changes live in amendment documents. Add an
+  **Amended by** row linking each one, so the original still leads the reader to the
+  current design.
 - Dates are real dates (`date +%Y-%m-%d`), never guessed.
 
 **If missing, ask:** who are the authors, and which areas or teams should review this?
@@ -109,8 +112,13 @@ bring the reader up to speed.
   Background written to foreshadow the answer reads as advocacy, and reviewers notice.
 - Assume some prior knowledge, and link to detailed information rather than copying
   it in.
+- State the constraints the design must live with (a legacy system, a host platform,
+  another team's contract). A greenfield design has to justify how it narrowed a wide
+  field; a heavily constrained one has to show which imperfect option it picked and
+  why, and the reader cannot judge that without knowing what was fixed.
 
-**If missing, ask:** what exists today, and what is motivating this work now?
+**If missing, ask:** what exists today, what is motivating this work now, and what
+are you not allowed to change?
 
 ## Goals and out of scope
 
@@ -125,6 +133,8 @@ Two lists: what the work will achieve, and what it deliberately will not.
   explicitly excluded — "real-time recommendations are out; the pipeline runs daily".
   Merely negating the goals ("the system shouldn't be slow") excludes nothing and
   helps no one.
+- Out of scope means "not allowed to cost the goals anything", not "forbidden". A
+  design that happens to deliver an excluded item for free is fine.
 
 **If missing, ask:** how will you know this worked — is there a number? And what
 related problem are you explicitly *not* solving this time?
@@ -147,7 +157,9 @@ first statement of the key trade-off. Then go into details, choosing among:
   of truth and show the two fields the design actually hinges on.
 - **Data and its sensitivity** — what is stored, in what rough form, and whether any
   of it is sensitive (PII, financial), since that constrains the design.
-- **Pseudocode** — rarely. Only when a novel algorithm is itself the design.
+- **Pseudocode** — rarely. Only when a novel algorithm is itself the design. When a
+  prototype exists, link to it instead of pasting its code: it shows the design can
+  be built.
 
 Two tests for whether a detail belongs:
 
@@ -197,17 +209,21 @@ acceptable?
 
 ## Cross-cutting concerns
 
-What this design touches *beyond the authoring team*: security, infrastructure,
-compatibility with existing APIs, load imposed on other teams' systems.
+What this design touches *beyond the authoring team*: security, privacy,
+infrastructure, compatibility with existing APIs, load imposed on other teams' systems.
 
-- One short subsection per concern that actually applies (Security, Infrastructure,
-  Compatibility…) — a paragraph each is usually enough.
+- One short subsection per concern that actually applies (Security, Privacy,
+  Infrastructure, Compatibility…) — a paragraph each is usually enough. Personal data
+  noted under the design's data section is the cue for a Privacy subsection here.
+- When the organization keeps a separate document or review for a concern (a privacy
+  or security review), link to it rather than restating it.
 - This section exists for collaboration: it tells impacted teams what to look at.
   Involve them as early as possible — late surprises cause rework — and suggest them
   as reviewers in the header.
 
 **If missing, ask:** who outside your team is impacted — does this add load to a
-shared system, expose a new surface, or change an API someone depends on?
+shared system, expose a new surface, handle personal data, or change an API someone
+depends on?
 
 ## Testability and observability
 
