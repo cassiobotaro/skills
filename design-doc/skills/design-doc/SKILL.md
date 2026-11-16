@@ -52,6 +52,14 @@ the document under review, or an update to a document whose design has changed.
    Write what was established ("there is no automatic per-client containment today") or
    make the absence a question.
 
+   Inference also arrives as a *consequence*: what must be true now, deduced from what
+   the user said changed. Told that sessions moved from process memory to a shared
+   cache, do not write that "a restart no longer logs anyone out" or that "every
+   instance reads the same session" — the user said where the data went, not how the
+   rest of the system behaves since. The day you write is likewise not the day the
+   change happened. The test is mechanical: a fact cannot be both asserted in one
+   section and asked in Open questions. If you are asking it, delete the assertion.
+
 3. **The template governs; without one, sections are suggestions.** When the user
    supplies a template — or the repository's design docs already follow one — its
    sections are the document's contract: cover every one, in the template's order, and
@@ -161,7 +169,8 @@ substance is missing.
 
 Before declaring done, check:
 
-- Nothing in the document that the user or the repository didn't establish.
+- Nothing in the document that the user or the repository didn't establish. Read each
+  open question against the body: no section may state as fact what the question asks.
 - The header's state reflects reality, and dates are real (`date +%Y-%m-%d`).
 - The overview is one–two paragraphs with no details; the context section contains
   background only — no goals, no solutions.
@@ -264,7 +273,8 @@ it does not settle the matter, ask, since "in production" is the user's fact to 
   reader with a design doc that silently contradicts the system.
 
 Either way the reason for the change comes from the user. A change with no stated
-reason is a question, not a paragraph to compose.
+reason is a question, not a paragraph to compose. So is everything the change left
+unsaid: when it happened, and how the parts that depended on the old design work now.
 
 ## The default section catalog
 
