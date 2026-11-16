@@ -1,0 +1,9 @@
+[
+  {"id": "10.2", "verdict": "unmet", "evidence": "Searched reply lines 1-9 for a statement that no design choice is open. Line 1 says only that the solution can be written ('A solução que você descreveu já dá para escrever'); line 6 treats format/validation as possibly open and line 9 names 'o formato do telefone' as an open question. No claim that nothing is left to decide."},
+  {"id": "10.3", "verdict": "unmet", "evidence": "Searched reply for a statement that a doc is unnecessary or would only restate the implementation. Line 1 says the opposite: 'Faltam as partes que dão valor a um design doc' and commits to writing a mini-doc."},
+  {"id": "10.4", "verdict": "met", "evidence": "Line 1: 'Ainda não criei o arquivo em `docs/design/`. A solução que você descreveu já dá para escrever'"},
+  {"id": "10.5", "verdict": "met", "evidence": "Line 6: 'o telefone tem formato definido (E.164, só dígitos, máscara brasileira) e validação no servidor? ... Ou isso fica como questão em aberto no doc?'"},
+  {"id": "10.6", "verdict": "met", "evidence": "Line 1: 'Isto é uma mudança pequena, então o doc será um mini-doc de 1 a 2 páginas. Respondendo as perguntas abaixo, eu escrevo e salvo em `docs/design/`.'"},
+  {"id": "10.7", "verdict": "unmet", "evidence": "The reply runs a discovery interview gating the document: line 1 'Respondendo as perguntas abaixo, eu escrevo', then line 3 '**Problema:** o que dói hoje sem o telefone, e por que resolver agora?', line 5 '**Alternativas:** o que mais o time considerou', line 7 '**Impacto fora do time:** quem consome `PUT /clientes/{id}`'."},
+  {"id": "10.8", "verdict": "met", "evidence": "Searched reply lines 1-9 and files (none) for asserted problem, goal, metric, alternative, risk, validation rule or impacted team. All such content appears as questions or 'Por exemplo'/'Exemplo' illustrations (lines 3-7); format is only flagged as a possible open question (line 9). No files written."}
+]

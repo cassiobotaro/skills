@@ -1,0 +1,28 @@
+{
+ "note": "Frozen check list for design-doc evals 9-10. Written before any run of iteration-21 and not edited to fit an output. Caveat: its author had already read one with-skill run of each eval (iteration-20) when writing it. Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file and kind=absence are decided by a script from the bytes on disk; kind=reply and kind=invention are decided by an LLM judge in a packet that does not name the arm (one pass for reply, three independent passes for invention, met only when unanimous, a split is borderline and counted as not met). A met reply check quotes the words that satisfy it; an unmet check records what was searched; for a met invention check the recorded search is the evidence. A borderline case resolves to not met. More text or more files never raise a verdict.",
+ "frozen_on": "2026-11-16",
+ "evals": {
+  "9": [
+   {"id": "9.1", "assertion": 1, "kind": "file", "check": "Exactly one new .md file exists under docs/design/ besides exportacao-de-relatorios.md"},
+   {"id": "9.2", "assertion": 2, "kind": "file", "check": "In docs/design/exportacao-de-relatorios.md, everything from the line '## Visão geral' to the end of the file is byte-identical to the fixture"},
+   {"id": "9.3", "assertion": 3, "kind": "file", "check": "The part of the original document above '## Visão geral' contains a Markdown link whose target resolves to the new file"},
+   {"id": "9.4", "assertion": 3, "kind": "file", "check": "The new file contains a Markdown link whose target resolves to exportacao-de-relatorios.md"},
+   {"id": "9.5", "assertion": 6, "kind": "file", "check": "Every ISO date (YYYY-MM-DD) in any created or modified file under docs/ is either the run date or a date already present in the fixture, and the run date appears at least once"},
+   {"id": "9.6", "assertion": 4, "kind": "reply", "check": "The documentation written in this run (the new document, or the edits to the original when there is no new document) states that the generated files moved from the worker's local disk to an S3 bucket"},
+   {"id": "9.7", "assertion": 4, "kind": "reply", "check": "The documentation written in this run gives the user's reason: a second worker was added and the download reached the worker that did not have the file, returning 404"},
+   {"id": "9.8", "assertion": 5, "kind": "reply", "check": "At least one of these gaps is asked of the user or recorded as an open question, in the reply or in the documentation: what got worse with S3, what happens to the 7-day retention or its cleanup cron, who or what serves the download now"},
+   {"id": "9.9", "assertion": 6, "kind": "reply", "check": "The reply and the text written in this run are in Portuguese"},
+   {"id": "9.10", "assertion": 5, "kind": "invention", "check": "Neither the reply nor any text written in this run asserts, as a fact about the team or the system, a cost, retention policy, credential or access setup, download mechanism or URL scheme, metric, date of the change, outcome, or alternative that neither the user's message nor the original document established. Restating what the original document says, attributed to it, is not an invention; questions and entries listed as open questions are not assertions"}
+  ],
+  "10": [
+   {"id": "10.1", "assertion": 2, "kind": "absence", "check": "No file exists under the project root after the run other than reply.md"},
+   {"id": "10.2", "assertion": 1, "kind": "reply", "check": "The reply says the change leaves no design choice open (nothing ambiguous, nothing left to decide)"},
+   {"id": "10.3", "assertion": 1, "kind": "reply", "check": "The reply says a design doc for this change is not needed or would only restate the implementation"},
+   {"id": "10.4", "assertion": 1, "kind": "reply", "check": "The reply is written in Portuguese"},
+   {"id": "10.5", "assertion": 3, "kind": "reply", "check": "The reply asks whether something is in fact undecided, or whether the team's process requires a doc anyway (either is enough)"},
+   {"id": "10.6", "assertion": 3, "kind": "reply", "check": "The reply offers to write a short (terse, mini) doc if the user still wants one"},
+   {"id": "10.7", "assertion": 3, "kind": "reply", "check": "The reply does not run a discovery interview: it does not ask the user to supply the problem, goals, metrics, alternatives or impacted teams as things to answer before a document can be written. Topics offered as examples of what might still be undecided are not an interview"},
+   {"id": "10.8", "assertion": 4, "kind": "invention", "check": "Neither the reply nor any file asserts, as a fact about the team or the system, a problem statement, goal, metric, alternative, risk, validation rule or impacted team that the user's message did not state. Possibilities raised as questions or as examples of what might be undecided are not assertions"}
+  ]
+ }
+}

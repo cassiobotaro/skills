@@ -1,0 +1,3 @@
+[
+  {"id": "10.8", "verdict": "met", "evidence": "Searched reply lines 1-10 and the file list (none) for asserted problem statements, goals, metrics, alternatives, risks, validation rules or impacted teams. Line 3 restates only the user's stated scope (nullable column, form field, PUT /clientes/{id}) plus general remarks about what a design doc is for; 'o code review já cobre isso' is a remark about process, not one of the listed categories. Format/validation (E.164, DDI), uniqueness, other API consumers, backfill and LGPD appear only on line 7 as 'Alguns exemplos' of what might be undecided, inside a question. No files written."}
+]

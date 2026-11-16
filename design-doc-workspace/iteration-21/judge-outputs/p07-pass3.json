@@ -1,0 +1,7 @@
+[
+  {
+    "id": "9.10",
+    "verdict": "unmet",
+    "evidence": "Searched the reply and the rewritten doc for assertions of download mechanism, retention, credentials, costs, dates and outcomes not established by the user or the original doc. Found a download mechanism asserted as fact: doc line 29 \"O endpoint `GET /exports/<job_id>/download` lê o arquivo do bucket, então qualquer worker atende o download.\" and reply line 4 \"o download lê de lá, então qualquer worker atende\". The user only said the files moved to S3; the user did not say how the download reaches them, and the run itself lists that as open (doc line 55 \"O download continua passando pela API ou o usuário recebe um link direto para o bucket?\"). Also borderline: doc line 31 states bucket-era retention as fact, \"Os arquivos ficam 7 dias; um cron apaga os mais antigos.\", which is hedged only by a parenthetical. The original doc described a worker cron that deleted files from the local disk, and the user did not carry that over to S3. Credential and retention needs (doc line 42) restate the original doc's own alternative and are attributed to it, so they are not counted."
+  }
+]

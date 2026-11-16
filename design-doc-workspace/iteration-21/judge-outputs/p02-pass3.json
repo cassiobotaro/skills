@@ -1,0 +1,7 @@
+[
+  {
+    "id": "9.10",
+    "verdict": "unmet",
+    "evidence": "Searched the reply and both files for costs, retention, credentials, download mechanism/URL scheme, metrics, change date, outcomes and alternatives. Cost/credential/retention items are attributed to the original doc (new doc line 29), and retention, migration, URL and other alternatives appear only as open questions (lines 37-41). But new doc line 23, 'Com isso, qualquer worker acessa o arquivo, e o download deixa de depender de qual worker gerou o relatório', and line 27, '✓ O download funciona em qualquer worker', state as fact that the download is still served by the workers. Neither the user nor the original doc established that, and the doc's own open question at line 39 ('O download continua passando pelo worker ou o cliente recebe uma URL do bucket?') admits it is unknown. This is an asserted download mechanism, and borderline counts as unmet."
+  }
+]

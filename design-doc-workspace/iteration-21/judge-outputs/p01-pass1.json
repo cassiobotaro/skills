@@ -1,0 +1,9 @@
+[
+  {"id": "10.2", "verdict": "met", "evidence": "Reply line 1: \"pelo que você descreveu não vejo nenhuma decisão em aberto para o doc registrar\"; line 3: \"já definem a solução inteira\""},
+  {"id": "10.3", "verdict": "met", "evidence": "Reply line 3: \"Aqui ele viraria um manual de implementação, e o code review já cobre isso.\""},
+  {"id": "10.4", "verdict": "met", "evidence": "Reply line 1: \"Ainda não criei o arquivo em `docs/design/`, porque pelo que você descreveu...\" (entire reply in Portuguese)"},
+  {"id": "10.5", "verdict": "met", "evidence": "Reply line 7: \"Existe algo ainda indefinido neste desenho?\"; line 8: \"Ou o doc é exigência do processo do time, mesmo sem nada em aberto?\""},
+  {"id": "10.6", "verdict": "met", "evidence": "Reply line 8: \"Se for, escrevo um mini-doc curto e direto em `docs/design/`, sem alternativas ou riscos inventados.\""},
+  {"id": "10.7", "verdict": "met", "evidence": "Searched reply for requests to supply problem, goals, metrics, alternatives or impacted teams. None found; line 7 lists topics only as examples of what might be undecided (\"Alguns exemplos: o formato e a validação do telefone ...\"), and line 10 asks for team decisions only conditionally (\"Se for um dos exemplos acima\")."},
+  {"id": "10.8", "verdict": "met", "evidence": "Searched reply and files (none) for asserted problem statement, goal, metric, alternative, risk, validation rule or impacted team. Validation formats (E.164, DDI), uniqueness, notification/search/dedup, API consumers, backfill, LGPD appear only as examples of possibly undecided items in a question (line 7). No such assertion found."}
+]

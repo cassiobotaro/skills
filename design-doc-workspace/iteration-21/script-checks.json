@@ -1,0 +1,88 @@
+{
+ "9/with_skill/run-1": {
+  "checks": {
+   "9.1": true,
+   "9.2": true,
+   "9.3": true,
+   "9.4": true,
+   "9.5": true
+  },
+  "tree": [
+   "docs/design/exportacao-de-relatorios-armazenamento-s3.md",
+   "docs/design/exportacao-de-relatorios.md",
+   "reply.md"
+  ]
+ },
+ "9/with_skill/run-2": {
+  "checks": {
+   "9.1": true,
+   "9.2": true,
+   "9.3": true,
+   "9.4": true,
+   "9.5": true
+  },
+  "tree": [
+   "docs/design/armazenamento-de-exportacoes-em-s3.md",
+   "docs/design/exportacao-de-relatorios.md",
+   "reply.md"
+  ]
+ },
+ "9/old_skill/run-1": {
+  "checks": {
+   "9.1": false,
+   "9.2": false,
+   "9.3": false,
+   "9.4": false,
+   "9.5": true
+  },
+  "tree": [
+   "docs/design/exportacao-de-relatorios.md",
+   "reply.md"
+  ]
+ },
+ "9/old_skill/run-2": {
+  "checks": {
+   "9.1": false,
+   "9.2": false,
+   "9.3": false,
+   "9.4": false,
+   "9.5": true
+  },
+  "tree": [
+   "docs/design/exportacao-de-relatorios.md",
+   "reply.md"
+  ]
+ },
+ "10/with_skill/run-1": {
+  "checks": {
+   "10.1": true
+  },
+  "tree": [
+   "reply.md"
+  ]
+ },
+ "10/with_skill/run-2": {
+  "checks": {
+   "10.1": true
+  },
+  "tree": [
+   "reply.md"
+  ]
+ },
+ "10/old_skill/run-1": {
+  "checks": {
+   "10.1": true
+  },
+  "tree": [
+   "reply.md"
+  ]
+ },
+ "10/old_skill/run-2": {
+  "checks": {
+   "10.1": true
+  },
+  "tree": [
+   "reply.md"
+  ]
+ }
+}

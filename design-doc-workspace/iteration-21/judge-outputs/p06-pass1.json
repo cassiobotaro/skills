@@ -1,0 +1,9 @@
+[
+  {"id": "10.2", "verdict": "met", "evidence": "Reply line 1: \"Do jeito que você descreveu, não vejo nada em aberto\" and \"Sem escolha a fazer\""},
+  {"id": "10.3", "verdict": "met", "evidence": "Reply line 1: \"Sem escolha a fazer, o documento viraria um manual de implementação, e o code review já cobre isso.\""},
+  {"id": "10.4", "verdict": "met", "evidence": "Reply line 1: \"Ainda não criei o arquivo em `docs/design/`.\" (entire reply in Portuguese)"},
+  {"id": "10.5", "verdict": "met", "evidence": "Reply line 5: \"Existe alguma decisão realmente em aberto nessa mudança?\"; line 6: \"Ou o processo do seu time exige um design doc mesmo para uma mudança assim?\""},
+  {"id": "10.6", "verdict": "met", "evidence": "Reply line 6: \"Nesse caso eu escrevo um mini-doc enxuto em `docs/design/`, só com o que você me confirmar.\""},
+  {"id": "10.7", "verdict": "unmet", "evidence": "Reply line 8: \"Se for o primeiro caso, me conte a decisão e as opções que vocês pesaram, e eu escrevo o documento em torno delas.\" It asks the user to supply the alternatives (\"as opções que vocês pesaram\") before the document is written. That request is conditional and short, and line 5's topics are only examples, so the case is borderline. Borderline is unmet."},
+  {"id": "10.8", "verdict": "met", "evidence": "Searched the reply for stated problems, goals, metrics, alternatives, risks, validation rules or impacted teams. Validation formats (E.164, só dígitos, texto livre), LGPD masking, the production migration and API clients of the PUT appear only as examples inside a question (line 5: \"Alguns exemplos: ...\"). No other such assertion was found. No files were written (\"(none)\")."}
+]
