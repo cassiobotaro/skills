@@ -139,6 +139,36 @@
         "Points the user to an ADR / decision log as the appropriate artifact (naming the `adr` skill, the format, or offering to help is fine; writing the ADR itself is not required)",
         "Does not assert as the team's reasoning anything the user did not state (no invented problem statement, goals, metrics, risks, or consequences); asking whether other options such as OpenTofu were considered is a question, not a fabrication"
       ]
+    },
+    {
+      "id": 9,
+      "eval_name": "amend-shipped-doc",
+      "prompt": "O design doc docs/design/exportacao-de-relatorios.md foi aprovado e o serviço tá em produção desde março. A gente mudou onde os arquivos gerados ficam: saíram do disco local do worker e foram pra um bucket S3, porque subimos um segundo worker e o download caía no worker que não tinha o arquivo e devolvia 404. Atualiza a documentação.",
+      "expected_output": "Reconhece que o sistema já está em produção (o usuário disse, e o cabeçalho diz Implementado) e por isso não reescreve o corpo do doc original: ele é o registro do raciocínio da época. Escreve a mudança como um documento novo e curto em docs/design/, que nomeia o original, diz o que mudou (disco local do worker -> bucket S3) e por quê (segundo worker, download caindo no worker sem o arquivo, 404). Liga os dois nos dois sentidos: o original ganha só uma linha no cabeçalho apontando para a emenda e a data de última atualização. Não inventa custos, retenção, credenciais, números nem alternativas: o que falta (o que piorou com o S3, o que acontece com a retenção de 7 dias e o cron, quem serve o download agora) vira pergunta. Responde em português.",
+      "files": [
+        "files/shipped/docs/design/exportacao-de-relatorios.md"
+      ],
+      "assertions": [
+        "A new Markdown document is created under docs/design/ describing the storage change; the change is not written into the original document's body",
+        "The original document's sections below the header (Visão geral, Objetivos, Solução, Trade-offs, Alternativas, Questões em aberto) are byte-for-byte unchanged",
+        "The original's header gains a link to the new document, and the new document links back to the original",
+        "The new document states what changed (worker local disk to an S3 bucket) and the reason the user gave (second worker, download hitting the worker without the file, 404)",
+        "Nothing invented: no accepted cost, retention policy, credential setup, URL scheme, metric or extra alternative that the user or the original document did not establish; missing substance (what got worse, what happens to the 7-day retention and the cleanup cron, who serves the download now) is asked as questions or recorded as open questions",
+        "Dates written are the real current date, and the reply and the new document are in Portuguese"
+      ]
+    },
+    {
+      "id": 10,
+      "eval_name": "unambiguous-change-no-doc",
+      "prompt": "Escreve um design doc pra adicionar o campo telefone (opcional) no cadastro de cliente: coluna nova nullable na tabela clientes, campo no formulário de cadastro e no PUT /clientes/{id}. Salva em docs/design/.",
+      "expected_output": "Reconhece que o pedido não deixa nenhuma escolha em aberto: o problema e a solução já estão dados, e o documento só poderia ser um manual de implementação. Diz isso em uma ou duas frases e pergunta uma vez se existe algo de fato indefinido (ou se o processo do time exige o doc mesmo assim), oferecendo um mini-doc enxuto nesse caso. Não cria arquivo em docs/design/ nesse turno, não inventa problema, objetivos mensuráveis, alternativas, riscos, validação de formato nem times impactados. Responde em português.",
+      "files": [],
+      "assertions": [
+        "States, in Portuguese, that the change leaves no design choice open and that a design doc for it would only restate the implementation",
+        "Does not create a design doc file under docs/design/ or anywhere else in this turn",
+        "Asks at most one short round of questions: whether something is actually undecided, or whether the team's process requires a doc anyway (offering a terse mini-doc in that case)",
+        "Does not assert anything the user did not state: no invented problem statement, goals, metrics, alternatives, risks, validation rules or impacted teams (raising one as a question is not a fabrication)"
+      ]
     }
   ]
 }
