@@ -1,0 +1,20 @@
+{
+ "note": "Pilot, one arm only: design-doc 1.5.3 as shipped, no skill change. Question: what does the skill do today with template sections the template itself marks as dispensable? Check list frozen before any run and not edited to fit an output. Not added to evals.json or checks-baseline.json: this is an observation that decides whether a change is worth making, not yet a spec. kind=file is decided by a script; kind=reading is decided by one reader (the session that ran the pilot, not blind: there is a single arm) and must quote the words, or record the search when the answer is no. Checks O.* are observations, not pass/fail: 'expected_under_proposal' says what the proposed rule would produce.",
+ "frozen_on": "2026-11-16",
+ "sections": {
+  "required": ["Motivação", "Proposta", "Riscos", "Perguntas abertas"],
+  "optional_with_substance": ["Métricas de sucesso"],
+  "optional_without_substance": ["Histórias de usuário", "Plano de rollout"],
+  "conditional_condition_not_established": ["Critérios de aceite", "Estratégia de migração"]
+ },
+ "checks": [
+  {"id": "11.1", "kind": "file", "text": "Exactly one new .md under docs/design/ besides TEMPLATE.md, and TEMPLATE.md is byte-identical to the fixture"},
+  {"id": "11.2", "kind": "file", "text": "The four required headings are present, in the template's order"},
+  {"id": "11.3", "kind": "file", "text": "The heading 'Métricas de sucesso' is present and its body carries the 0,1% target"},
+  {"id": "O.1", "kind": "file", "text": "For each of the four dispensable sections without substance: is its heading in the document?", "expected_under_proposal": "absent, all four"},
+  {"id": "11.4", "kind": "reading", "text": "The user is asked for the content of Riscos (required, not given), in the reply or in the document"},
+  {"id": "O.2", "kind": "reading", "text": "For each of the four dispensable sections without substance: is the user asked to supply its content or to say whether it applies (reply or document)?", "expected_under_proposal": "no question, all four"},
+  {"id": "O.3", "kind": "reading", "text": "For each of the four that is present in the document: what is in its body — (a) content traceable to the prompt, (b) content not in the prompt, (c) a placeholder or pending marker, (d) a question", "expected_under_proposal": "not applicable (absent)"},
+  {"id": "O.4", "kind": "reading", "text": "The reply names the dispensable sections it left out", "expected_under_proposal": "yes, whenever one was left out"}
+ ]
+}

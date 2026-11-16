@@ -1,0 +1,144 @@
+{
+ "run-1": {
+  "O.0": true,
+  "new_docs": [
+   "deduplicacao-de-eventos.md"
+  ],
+  "12.1": true,
+  "reply_question_marks": 12,
+  "12.2": {
+   "present": 18,
+   "of": 18,
+   "in_order": true,
+   "missing": []
+  },
+  "extra_headings": [
+   "### 5.6 Alternativas consideradas\n"
+  ],
+  "O.1": {
+   "API e protótipos": "Sem informação sobre a interface do serviço (P5). Nenhum protótipo existe até aqui.",
+   "Mudanças nos clientes": "Sem informação sobre mudanças no código dos produtores e do ingestor (P4, P5). Os consumidores do Kafka não mudam: a motivação de deduplicar fora deles é justamente evitar que cada um reimplemente a lógica.",
+   "Compatibilidade e atualização": "Sem informação sobre convivência de versões durante o deploy, nem sobre a migração do fluxo atual (P8).",
+   "Segurança": "Sem informação sobre superfície nova, permissões ou dados sensíveis. Os eventos alimentam relatórios de faturamento, e o time ainda não disse se a chave idempotente ou o evento contém dados sensíveis (P9 abaixo).\n\n- **P9.** Há dado sensível ou financeiro nos eventos, e o Redis passa a guardá-lo?",
+   "Observabilidade": "Sem informação sobre métricas, logs e alertas. A meta de duplicatas abaixo de 0,1% só é verificável com uma métrica de duplicatas descartadas e de duplicatas que chegam ao Kafka (P6).",
+   "Critérios de teste": "Critério de aceite derivado da meta: duplicatas abaixo de 0,1%, contra 4% medidos no mês passado. Sem informação sobre testes funcionais, negativos, de carga e de longa duração (P2, P3, P6).",
+   "Outros artefatos": "Nenhum artefato relacionado foi informado até aqui."
+  },
+  "header_rows": {
+   "Jira relacionado": "| **Jira relacionado** | |",
+   "Issues relacionadas": "| **Issues relacionadas** | |",
+   "Dono do requisito": "| **Dono do requisito** | |",
+   "Engenheiro de qualidade": "| **Engenheiro de qualidade** | |",
+   "Engenheiro de suporte": "| **Engenheiro de suporte** | |",
+   "Revisores técnicos": "| **Revisores técnicos** | |"
+  },
+  "O.6": [],
+  "doc_question_marks": 9
+ },
+ "run-2": {
+  "O.0": true,
+  "new_docs": [
+   "deduplicacao-de-eventos.md"
+  ],
+  "12.1": true,
+  "reply_question_marks": 0,
+  "12.2": {
+   "present": 18,
+   "of": 18,
+   "in_order": true,
+   "missing": []
+  },
+  "extra_headings": [],
+  "O.1": {
+   "API e protótipos": "A preencher (pergunta 4 em 2.2).",
+   "Mudanças nos clientes": "A preencher (pergunta 5 em 2.2).",
+   "Compatibilidade e atualização": "A preencher (pergunta 7 em 2.2).",
+   "Segurança": "A preencher (pergunta 9 em 2.2).",
+   "Observabilidade": "A preencher (pergunta 10 em 2.2). A meta de duplicatas abaixo de 0,1% indica pelo menos uma métrica a acompanhar: a taxa de duplicatas que chega ao Kafka.",
+   "Critérios de teste": "A preencher (pergunta 11 em 2.2).",
+   "Outros artefatos": "A preencher (pergunta 12 em 2.2)."
+  },
+  "header_rows": {
+   "Jira relacionado": "| **Jira relacionado** | A preencher (ver 2.2) |",
+   "Issues relacionadas": "| **Issues relacionadas** | A preencher (ver 2.2) |",
+   "Dono do requisito": "| **Dono do requisito** | A preencher (ver 2.2) |",
+   "Engenheiro de qualidade": "| **Engenheiro de qualidade** | A preencher (ver 2.2) |",
+   "Engenheiro de suporte": "| **Engenheiro de suporte** | A preencher (ver 2.2) |",
+   "Revisores técnicos": "| **Revisores técnicos** | A preencher (ver 2.2) |"
+  },
+  "O.6": [],
+  "doc_question_marks": 20
+ },
+ "run-3": {
+  "O.0": true,
+  "new_docs": [
+   "deduplicacao-de-eventos.md"
+  ],
+  "12.1": true,
+  "reply_question_marks": 2,
+  "12.2": {
+   "present": 18,
+   "of": 18,
+   "in_order": true,
+   "missing": []
+  },
+  "extra_headings": [
+   "### 5.6 Alternativas consideradas e trade-offs\n"
+  ],
+  "O.1": {
+   "API e protótipos": "Pendente. Perguntas: o serviço expõe uma API nova ou fica transparente entre o ingestor e o Kafka? Ele devolve algum erro ou resposta nova ao produtor quando descarta uma duplicata? Há aviso de depreciação?",
+   "Mudanças nos clientes": "Pendente. Perguntas: os produtores, o ingestor ou os consumidores precisam mudar algo (por exemplo, enviar a chave idempotente)? O time de APIs foi avisado?",
+   "Compatibilidade e atualização": "Pendente. Perguntas: como o ingestor e o serviço convivem durante o deploy? Como migrar o que existe, e como voltar ao fluxo atual (ingestor direto ao Kafka) se algo falhar?",
+   "Segurança": "Pendente. Perguntas: o serviço traz superfície nova ou permissões novas? A chave idempotente ou o evento carregam dados sensíveis que o Redis passaria a guardar? Há eventos de auditoria?",
+   "Observabilidade": "Pendente. Perguntas: quais métricas, logs e alertas mostram que o serviço funciona (por exemplo, a taxa de duplicatas descartadas, a taxa que chega ao Kafka e a latência adicionada)?",
+   "Critérios de teste": "Pendente. Perguntas: quais testes funcionais, negativos, de carga e de longa duração o time exige antes do lançamento? Como o time vai verificar a meta de menos de 0,1% de duplicatas?",
+   "Outros artefatos": "Pendente. Não há links, protótipos ou documentos relacionados até aqui."
+  },
+  "header_rows": {
+   "Jira relacionado": "| **Jira relacionado** | |",
+   "Issues relacionadas": "| **Issues relacionadas** | |",
+   "Dono do requisito": "| **Dono do requisito** | |",
+   "Engenheiro de qualidade": "| **Engenheiro de qualidade** | |",
+   "Engenheiro de suporte": "| **Engenheiro de suporte** | |",
+   "Revisores técnicos": "| **Revisores técnicos** | |"
+  },
+  "O.6": [],
+  "doc_question_marks": 24
+ },
+ "run-4": {
+  "O.0": true,
+  "new_docs": [
+   "servico-deduplicacao-eventos.md"
+  ],
+  "12.1": true,
+  "reply_question_marks": 12,
+  "12.2": {
+   "present": 18,
+   "of": 18,
+   "in_order": true,
+   "missing": []
+  },
+  "extra_headings": [
+   "### 2.3 Alternativas consideradas e trade-offs\n"
+  ],
+  "O.1": {
+   "API e protótipos": "Pendente: a interface do serviço (como o ingestor o chama, qual campo carrega a chave idempotente, o que o serviço devolve quando descarta um evento) não foi descrita. Ver 2.2, perguntas 2 e 5.",
+   "Mudanças nos clientes": "Pendente: não foi estabelecido se produtores, ingestor ou consumidores precisam mudar. Ver 2.2, pergunta 5. Se houver mudança em quem chama o sistema, avisar o time de APIs.",
+   "Compatibilidade e atualização": "Pendente: convivência de versões durante o deploy e migração do que já existe não foram descritas. Ver 2.2, perguntas 5 e 6.",
+   "Segurança": "Pendente: superfície nova, permissões e dados sensíveis nos eventos e no Redis não foram descritos. Ver 2.2, pergunta 8.",
+   "Observabilidade": "Pendente: métricas, logs, traces e alertas não foram definidos. A meta de 0,1% de duplicatas implica ao menos uma métrica da taxa de duplicatas que chegam ao Kafka, mas a forma de medi-la cabe ao autor. Ver 2.2, pergunta 9.",
+   "Critérios de teste": "Pendente: os testes exigidos antes do lançamento não foram definidos. O único critério estabelecido é a meta de duplicatas abaixo de 0,1%, medida contra a linha de base de 4%. Ver 2.2, pergunta 10.",
+   "Outros artefatos": "Nenhum link informado até agora."
+  },
+  "header_rows": {
+   "Jira relacionado": "| **Jira relacionado** | |",
+   "Issues relacionadas": "| **Issues relacionadas** | |",
+   "Dono do requisito": "| **Dono do requisito** | |",
+   "Engenheiro de qualidade": "| **Engenheiro de qualidade** | |",
+   "Engenheiro de suporte": "| **Engenheiro de suporte** | |",
+   "Revisores técnicos": "| **Revisores técnicos** | |"
+  },
+  "O.6": [],
+  "doc_question_marks": 14
+ }
+}

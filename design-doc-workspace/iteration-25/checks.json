@@ -1,0 +1,19 @@
+{
+ "note": "Pilot, one arm only: design-doc 1.5.3 as shipped, no skill change. Question: with a governing template of many required sections (Hazelcast-shaped: 11 header rows, 15 headings, none marked optional), most of them unfilled by the prompt, what does the skill do? SKILL.md asks for 'one question per template section the conversation hasn't filled' and also for '2-5 targeted questions'; read literally the two collide. Hypothesis under test: the reply becomes a flat interrogation (one undifferentiated question per empty section), or the empty sections get boilerplate. Check list frozen before any run and not edited to fit an output. Not added to evals.json or checks-baseline.json. kind=file by script; kind=reading by one reader (the session running the pilot, not blind: single arm), quoting the words or recording the search. O.* are observations, not pass/fail. The prompt is eval 7's, word for word.",
+ "frozen_on": "2026-11-16",
+ "template_headings": ["Contexto", "Descrição", "Terminologia", "Atores e cenários", "Desenho funcional", "Resumo da funcionalidade", "Notas, dúvidas e pendências", "Interação com o usuário", "API e protótipos", "Mudanças nos clientes", "Desenho técnico", "Componentes", "Compatibilidade e atualização", "Desempenho e escala", "Segurança", "Observabilidade", "Critérios de teste", "Outros artefatos"],
+ "sections_with_no_substance_in_prompt": ["API e protótipos", "Mudanças nos clientes", "Compatibilidade e atualização", "Segurança", "Observabilidade", "Critérios de teste", "Outros artefatos"],
+ "header_rows_with_no_substance_in_prompt": ["Jira relacionado", "Issues relacionadas", "Dono do requisito", "Engenheiro de qualidade", "Engenheiro de suporte", "Revisores técnicos"],
+ "not_scored": "Atores e cenários, Notas/dúvidas/pendências, Desempenho e escala and Terminologia are partly derivable from the prompt and are not scored.",
+ "checks": [
+  {"id": "O.0", "kind": "file", "text": "Was a document written at all, or did the run answer with questions only?"},
+  {"id": "12.1", "kind": "file", "text": "TEMPLATE.md is byte-identical to the fixture; at most one new .md under docs/design/"},
+  {"id": "12.2", "kind": "file", "text": "How many of the 18 template headings are in the document, and are the ones present in the template's order?"},
+  {"id": "O.1", "kind": "file", "text": "For each of the 7 sections with no substance: heading present or absent; body extracted"},
+  {"id": "O.2", "kind": "reading", "text": "For each of those 7 that is present, its body is: (a) a pointer or question to the user, (b) content not traceable to the prompt, (c) empty, (d) an assertion that it does not apply"},
+  {"id": "O.3", "kind": "reading", "text": "Number of distinct questions put to the user in the reply; number of entries in the document's open-questions list (wherever the template puts it)"},
+  {"id": "O.4", "kind": "reading", "text": "Of the 7 sections and the 6 header rows with no substance, how many is the user asked about (reply or document)?"},
+  {"id": "O.5", "kind": "reading", "text": "Are the questions prioritised or grouped (substance questions set apart from fill-in-the-template ones), or one flat list?"},
+  {"id": "O.6", "kind": "file", "text": "A template row or heading with no substance silently dropped: absent from the document and not mentioned in the reply"}
+ ]
+}
