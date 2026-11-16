@@ -195,7 +195,11 @@ its trade-offs and the reason it lost.
 
 - Focus on the **trade-offs of each option and how they led to the final choice** —
   that's what makes the decision auditable later.
-- Always include **"do nothing"** as an alternative and say why it was discarded. If
+- Always include **"do nothing"** as an alternative and say why it was discarded. It
+  is the problem seen as an option, so its reason is the pain the user described and
+  nothing more: no added consequences, no account of a discussion nobody reported.
+  When the user described no pain, there is nothing to write it from; ask the question
+  below instead. If
   doing nothing isn't even worth refuting, the problem statement is probably too
   weak.
 - Be succinct: a focused paragraph or two per alternative. A comparison table works
