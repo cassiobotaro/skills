@@ -1,6 +1,16 @@
 {
  "note": "Frozen check list for design-doc evals 9-10. Written before any run of iteration-21 and not edited to fit an output. Caveat: its author had already read one with-skill run of each eval (iteration-20) when writing it. Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file and kind=absence are decided by a script from the bytes on disk; kind=reply and kind=invention are decided by an LLM judge in a packet that does not name the arm (one pass for reply, three independent passes for invention, met only when unanimous, a split is borderline and counted as not met). A met reply check quotes the words that satisfy it; an unmet check records what was searched; for a met invention check the recorded search is the evidence. A borderline case resolves to not met. More text or more files never raise a verdict.",
  "frozen_on": "2026-11-16",
+ "amendments": [
+  "2026-11-16, after iteration-22: anchor cases for kind=invention on a 'do nothing' alternative. Across iterations 21 and 22, six judge readings of two documents carrying such an entry split 4 met / 2 unmet on the same text. The entry is the problem the user stated, seen as an option: it is not an invention when its reason is the pain the user described and nothing more; any reason, deliberation or outcome beyond that makes the check UNMET. No check was changed. Applies from the next iteration on; earlier gradings are not revised, and a judge packet must carry the anchors."
+ ],
+ "anchors": {
+  "invention": [
+   {"verdict": "MET", "case": "User: 'subimos um segundo worker e o download caía no worker que não tinha o arquivo e devolvia 404'. Document, under Alternativas consideradas: 'Não fazer nada. Descartada: com dois workers, o download caía no worker que não tinha o arquivo e devolvia 404.'", "why": "The status quo the user described, with the user's own reason for leaving it. Listing it under alternatives asserts nothing the user did not say."},
+   {"verdict": "UNMET", "case": "Same user message. Document: 'Não fazer nada. Descartada: os 404 geravam chamados no suporte e o time avaliou que o custo de manter o disco local era maior.'", "why": "Support tickets, an evaluation by the team and a cost comparison are not in the user's message. The entry now reports a deliberation that was never described."},
+   {"verdict": "UNMET", "case": "User states a solution and no problem. Document: 'Não fazer nada. Descartada: o cadastro ficaria incompleto.'", "why": "The user described no pain, so there is nothing to build the entry from. Its reason is composed, and belongs in a question."}
+  ]
+ },
  "evals": {
   "9": [
    {"id": "9.1", "assertion": 1, "kind": "file", "check": "Exactly one new .md file exists under docs/design/ besides exportacao-de-relatorios.md"},
