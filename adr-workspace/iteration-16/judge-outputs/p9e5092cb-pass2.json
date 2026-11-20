@@ -1,0 +1,41 @@
+{
+ "packet": "p9e5092cb",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "You've listed four open questions: which channels to support, whether to put a queue in front of the senders, how retries should work, and which team owns it. Right now there is nothing to record",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision that has already been made, along with the reasons for it. ... Right now there is nothing to record, and writing the ADR would mean inventing the choices and the rationale.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR yet, and I haven't created or changed any files.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "**While the architecture is open**, a design doc is the better tool. ... I can help draft one if you want.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "**Once a question is settled**, each one becomes its own ADR in `doc/adr` (one ADR per decision).",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "For example: \"Put a queue in front of the notification senders\", \"Retry failed deliveries with exponential backoff\", \"Support email and push as the initial channels\". ... I'll write them up faithfully and won't add anything you didn't say.",
+   "search": "Looked in the whole reply for any decision, rationale, alternative or consequence stated as the team's position. Found only example ADR titles explicitly introduced with \"For example\", questions to the user, and a general remark that ownership is usually organizational, which does not state the team's position. No files exist in the project."
+  }
+ ]
+}

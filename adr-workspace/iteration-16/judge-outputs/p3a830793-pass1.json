@@ -1,0 +1,41 @@
+{
+ "packet": "p3a830793",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "You listed four things that are still open: which channels to support, whether to put a queue in front of the senders, how retries should work, and which team owns the service. If I wrote the record now, I would be inventing the decision and its rationale.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision that has already been made, along with the reasons for it. ... If I wrote the record now, I would be inventing the decision and its rationale.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR yet, and I haven't created any files in `doc/adr`.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "The questions you list are the contents of a design doc, where alternatives and trade-offs are weighed before anything is chosen.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once the team settles a question, each answer becomes its own ADR.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "For example: \"We will put a queue between the API and the channel senders, using X.\"",
+   "search": "Searched the whole reply for any decision, rationale, alternative or consequence stated as the team's position. The only concrete-sounding decision is explicitly labelled as an example of the format. No files exist."
+  }
+ ]
+}

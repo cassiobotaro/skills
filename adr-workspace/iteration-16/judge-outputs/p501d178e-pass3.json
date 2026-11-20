@@ -1,0 +1,41 @@
+{
+ "packet": "p501d178e",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "I haven't written the ADR yet, because nothing has been decided.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision and the real reasons behind it. What you described is four open questions",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written the ADR yet, because nothing has been decided.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "A design doc is the better place to explore options",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "the ADRs can come out of it once choices are made.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "If I filled in answers, I'd be inventing the rationale ... For example, a queue adds operational cost but gives you buffering and retry isolation. I need your actual trade-offs, not generic ones.",
+   "search": "Looked through the whole reply for any decision, rationale, alternative or consequence stated as the team's position. The project has no files to check. The only trade-off claim (queue cost/buffering) is labelled 'For example' and followed by a request for the team's real trade-offs. The broker names (Kafka/SQS/RabbitMQ) and the channels (email, SMS, push) appear only inside example answers to a question. The remark that ownership 'may not need an ADR' is advice about process, not a team decision."
+  }
+ ]
+}

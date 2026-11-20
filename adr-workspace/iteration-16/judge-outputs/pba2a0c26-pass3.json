@@ -1,0 +1,41 @@
+{
+ "packet": "pba2a0c26",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "I haven't written an ADR yet, because you haven't made the decision.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a choice that has already been made and the reasons for it.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR yet, because you haven't made the decision.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "Then this is a design discussion, and a design doc is the better tool for it.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once the team has agreed on the architecture, each decision can be recorded here as its own ADR.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "I created no files in `doc/adr`.",
+   "search": "Searched the whole reply for any decision, rationale, alternative or consequence stated as the team's position; found only questions and labelled options (e.g. 'for example, \"we will put a queue in front of the senders because X\"' is a placeholder template). The project directory is empty, so no file asserts anything."
+  }
+ ]
+}

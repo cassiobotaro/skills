@@ -1,0 +1,41 @@
+{
+ "packet": "pf576570c",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "the four things you listed (channels, a queue, retries, ownership) are still open. If I wrote one now, I would be inventing the decision and the reasons for it.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision that has already been made, and the four things you listed (channels, a queue, retries, ownership) are still open.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR yet, and I haven't created or changed anything in `doc/adr`.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": false,
+   "evidence": "",
+   "search": "Searched the whole reply for 'design doc', a design-doc skill, or an offer to help write a design document. None found. The only alternative offered is 'a single ADR with status Proposed that names the open questions', which is not a design doc."
+  },
+  {
+   "id": "8.6",
+   "passed": false,
+   "evidence": "",
+   "search": "Searched the whole reply for a statement that decisions settled by a design (doc) can be recorded as ADRs afterwards. Borderline: the reply says 'Tell me which of them you have settled, and I'll write those' and 'Once you answer, I'll write the ADRs'. Neither line ties the ADRs to decisions settled by a design process or design doc, so the check is unmet."
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "Tell me which of them you have settled, and I'll write those. ... I wouldn't pick answers for you.",
+   "search": "Searched the reply and the files for decisions, rationale, alternatives or consequences asserted as the team's position. The project is empty, so there are no files. In the reply, 'operational complexity from a queue or delayed delivery from retries' appears only as an example inside a question about trade-offs, not as the team's position. No other assertions were found."
+  }
+ ]
+}

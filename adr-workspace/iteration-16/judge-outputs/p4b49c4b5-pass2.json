@@ -1,0 +1,41 @@
+{
+ "packet": "p4b49c4b5",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "What you described is a list of open questions, not a decision",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "I haven't written the ADR yet. What you described is a list of open questions, not a decision, and an ADR records a decision the team has already made and why.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "Could you answer these so I can write the first record?",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "A design doc may also be a better place to explore the open options before any ADR exists.",
+   "search": "Any sentence naming a design doc, whole reply. The 'may' hedges the wording, but the reply still names a design doc as the better place for this request."
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "These are also four separate decisions (channels, queue, retries, ownership). The log keeps one decision per ADR, so each one will get its own record once it is settled.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "",
+   "search": "Looked for any assertion of a team decision, rationale, alternative or consequence the user did not state, across the whole reply; no files exist. The only concrete specifics ('we will put a queue in front of the senders, using X'; 'volume, reliability incidents, a new product requirement') are labelled examples inside questions. The one-decision-per-ADR remark is a stated ADR convention, not a team position."
+  }
+ ]
+}

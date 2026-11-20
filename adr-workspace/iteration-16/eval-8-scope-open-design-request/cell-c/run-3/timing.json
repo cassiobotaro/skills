@@ -1,0 +1,21 @@
+{
+  "total_tokens": 92117,
+  "duration_ms": 8170,
+  "total_duration_seconds": 9.5,
+  "cost_usd": 0.064763,
+  "num_turns": 3,
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "permission_denials": [],
+  "tool_calls": [
+    {
+      "tool": "Read",
+      "target": "/home/cassiobotaro/Projetos/skills/adr-workspace/skill-snapshot-1.4.0/SKILL.md"
+    },
+    {
+      "tool": "Write",
+      "target": "/home/cassiobotaro/Projetos/skills/adr-workspace/iteration-16/eval-8-scope-open-design-request/cell-c/run-3/response.md"
+    }
+  ]
+}

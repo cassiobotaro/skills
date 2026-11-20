@@ -1,0 +1,41 @@
+{
+ "packet": "pfdbd3977",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "You said the architecture is still open: channels, queue, retries and ownership.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision that has been made and the real reasons for it. If I filled those four points in myself, the log would carry invented rationale",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written the ADR yet, and I haven't created any files.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "If nothing is decided yet, the better next step is a design doc that explores these options.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "I can then turn each choice into an ADR once the team settles it.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "Project directory is empty. The only alternatives in the reply are offered inside questions as labelled examples: \"For the queue, that could be a broker versus direct calls from the senders.\"",
+   "search": "Searched the whole reply for any decision, rationale, alternative or consequence stated as the team's position. The only general claim is \"Ownership is usually not an ADR at all\", which is advice about ADR practice and not a team decision. No files exist."
+  }
+ ]
+}

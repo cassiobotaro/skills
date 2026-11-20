@@ -1,0 +1,41 @@
+{
+ "packet": "p20165d29",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "The notification service is still in the design phase",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "The notification service is still in the design phase, and an ADR records a decision the team has already made.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR, and I haven't created anything in `doc/adr`.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "A design doc fits this stage better.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once the team settles a question, each answer can become its own ADR.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "tell me the choice and the reasons, for example \"we will put a queue in front of the senders because…\"",
+   "search": "Looked through the whole reply for any decision, rationale, alternative or consequence stated as the team's position; also checked the files, and the project directory is empty. The only concrete choice is the queue sentence, which is a labelled example of input the user could give, not an assertion."
+  }
+ ]
+}

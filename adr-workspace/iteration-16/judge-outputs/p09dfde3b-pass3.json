@@ -1,0 +1,41 @@
+{
+ "packet": "p09dfde3b",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "What you describe is a design that is still open. The channels, the queue in front of the senders, the retry behavior and the owning team are all undecided.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision the team has already made, along with its real reasons.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I didn't write an ADR, and I didn't change anything in `doc/adr`.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "This is work for a design doc, where you compare the options and settle the open questions. The `design-doc` skill can help, if it is installed.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once a question is settled, each answer can become its own ADR.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "**Channels:** \"We will support email and push first\" would be one ADR.",
+   "search": "Looked through the whole reply for any decision, rationale, alternative or consequence stated as the team's position. Found none. The project has no files. The email/push and message-queue lines are conditional examples of what an ADR \"would be\", not claims about what the team decided. The rest of the reply is questions or general remarks about ADRs and design docs."
+  }
+ ]
+}

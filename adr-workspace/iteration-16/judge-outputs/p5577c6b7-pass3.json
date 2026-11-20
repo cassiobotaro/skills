@@ -1,0 +1,41 @@
+{
+ "packet": "p5577c6b7",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "I haven't written the ADR yet, because there is no decision to record. You listed four open questions (channels, a queue in front of the senders, retry behavior, ownership)",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "an ADR documents a decision the team has actually made and the reasons behind it. If I wrote one now I would have to invent the choices, the forces and the trade-offs.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written the ADR yet, because there is no decision to record.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": false,
+   "evidence": "",
+   "search": "Looked through the whole reply for any mention of a design doc, a design-doc skill, or an offer to help write a design document. None found. The only alternative offered is a 'Proposed' ADR."
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "An ADR holds one decision, so these four questions will probably become separate records as they get settled.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "Pick one that has been settled, or one that is close. For example: \"we will put a message queue (which one?) between the API and the channel senders\".",
+   "search": "Searched the whole reply for statements presented as the team's decision, rationale, alternative or consequence. The queue, channel and retry items appear only as labelled examples inside questions. 'Ownership is organizational rather than architectural' is a general framing, not a team position. No files exist."
+  }
+ ]
+}

@@ -1,0 +1,41 @@
+{
+ "packet": "p8ecb89e2",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "Nothing is decided yet, so there is nothing to record.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records one decision the team has already made, along with its real reasons. If I wrote one now, I would be inventing the decision and its rationale.",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR, and I haven't touched `doc/adr`.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "The `design-doc` skill fits that: it walks through the problem, the trade-offs and the alternatives with you, and ends in a written design document. I can start that now if you like.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once you settle each question, each one becomes its own ADR (one decision per record).",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "Nothing is decided yet, so there is nothing to record.",
+   "search": "Looked through the whole reply for any channel, queue, retry or ownership choice, rationale, alternative or consequence stated as the team's position. Found only restatements of the user's four open questions, examples of future ADR topics, and a conditional offer. The project directory is empty, so no file asserts anything."
+  }
+ ]
+}

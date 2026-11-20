@@ -1,0 +1,41 @@
+{
+ "packet": "p20165d29",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "The notification service is still in the design phase",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "an ADR records a decision the team has already made",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR, and I haven't created anything in `doc/adr`.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "A design doc fits this stage better.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once the team settles a question, each answer can become its own ADR.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "",
+   "search": "Looked through the whole reply for any decision, rationale, alternative or consequence stated as the team's position. Found none. The only concrete choice is 'for example \"we will put a queue in front of the senders because…\"', which is labelled as an example. The project directory is empty, so no file asserts anything."
+  }
+ ]
+}

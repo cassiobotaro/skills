@@ -1,0 +1,41 @@
+{
+ "packet": "p27acb353",
+ "checks": [
+  {
+   "id": "8.1",
+   "passed": true,
+   "evidence": "Every point you listed is still open: channels, queue or no queue, retry behavior and ownership.",
+   "search": ""
+  },
+  {
+   "id": "8.2",
+   "passed": true,
+   "evidence": "An ADR records a decision that has already been made, along with the reasons for it. ... If I wrote the record now I would have to invent the decision and its rationale",
+   "search": ""
+  },
+  {
+   "id": "8.3",
+   "passed": true,
+   "evidence": "I haven't written an ADR yet, and `doc/adr` has no files from me.",
+   "search": ""
+  },
+  {
+   "id": "8.5",
+   "passed": true,
+   "evidence": "If nothing is decided yet, a design doc is the better tool for exploring channels, queueing, retries and ownership.",
+   "search": ""
+  },
+  {
+   "id": "8.6",
+   "passed": true,
+   "evidence": "Once the team settles on each point, I'll write one ADR per decision.",
+   "search": ""
+  },
+  {
+   "id": "8.7",
+   "passed": true,
+   "evidence": "3. **What alternatives did you weigh, and what downside are you accepting?** For example, a queue adds operational overhead and makes delivery eventually consistent.",
+   "search": "Looked through the whole reply for any decision, rationale, alternative or consequence stated as the team's position; no files exist. The only consequence-like statement is a labelled example inside a question, so it is not an assertion. 'Ownership is usually an organizational agreement' is a general remark, not a claim about the team's position."
+  }
+ ]
+}
