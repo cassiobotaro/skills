@@ -1,0 +1,44 @@
+{
+ "frozen_on": "2026-11-20",
+ "note": "Written before the first session of this A/B and not edited to fit a result.",
+ "question": "Does the AGENTS.md text removed on 2026-11-20 (per-skill notes, eval rules) raise the trigger rate of the queries that do not name the artifact?",
+ "arms": {
+  "a": "session started in a directory holding AGENTS.md as committed at 2bc0e04 (old)",
+  "b": "same, holding the trimmed AGENTS.md"
+ },
+ "arms_note": "Both directories sit below the repository root, whose trimmed AGENTS.md loads too, so the arms differ by the removed text only. Numbers from a nested start directory are comparable between arms, not with a sweep started at the root.",
+ "sets": {
+  "adr": {
+   "queries": [
+    "start a decision log for the platform-team repo, we don't have one yet and i want to start tracking our architecture calls properly",
+    "document the decision to adopt feature flags via LaunchDarkly, including the alternatives we looked at (Unleash, homegrown) and why we passed on them",
+    "the tech lead wants every significant tech choice written up in doc/adr from now on. let's record the first one: choosing pnpm over npm for the monorepo",
+    "registra aí a decisão de a gente padronizar em OpenTelemetry pra tracing",
+    "i need to write up why we chose to deprecate the v1 API and force migration to v2, in the nygard format if possible",
+    "create a record explaining our choice of hexagonal architecture for the new billing module so future devs understand the rationale"
+   ],
+   "canary": "write an ADR documenting our move from REST to gRPC for internal service-to-service comms"
+  },
+  "mermaid-sequence": {
+   "queries": [
+    "diagram the retry/backoff interaction between our worker and the third-party API when it returns 429s — as a mermaid block",
+    "show the message flow for our async order processing: producer publishes to Kafka, consumer picks it up, calls the fulfillment service, emits an event"
+   ],
+   "canary": "diagram how the frontend talks to the API and the API talks to the cache and DB when a user loads their dashboard — show the order of calls"
+  }
+ },
+ "selection_note": "The adr six are the positives at 0-3 of 5 on 2026-11-15. The two mermaid-sequence queries were picked because they fell from 4/5 to 0/5; that selection biases neither arm, since both arms are new samples.",
+ "protocol": {
+  "model": "claude-haiku-5-5",
+  "runs_per_query_per_arm": 10,
+  "blocks": "two blocks of 5 per skill and arm, order a b b a across the day: adr-a, adr-b, mermaid-a, mermaid-b, mermaid-b, mermaid-a, adr-b, adr-a",
+  "num_workers": 1,
+  "timeout": 120,
+  "canary": "one 5/5 positive per skill in every block, 5 runs"
+ },
+ "prediction": {
+  "if_the_removed_text_helped": "arm a clearly above arm b on the eight queries pooled (earlier sweeps: 16/40 with the old file, 2/40 with the trimmed one).",
+  "if_not": "the arms look alike."
+ },
+ "reading_rule": "A finding needs all three: pooled difference of 15 points or more over the eight queries (80 runs per arm), Fisher p < 0.05, and at least six of the eight queries moving the same way. Anything less is reported as not shown. Runs of one query are not independent, so the pooled p is optimistic."
+}

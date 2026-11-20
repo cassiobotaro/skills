@@ -1,0 +1,38 @@
+{
+  "skill_name": "mermaid-sequence",
+  "description": "Write and edit Mermaid sequence diagrams, delivered as fenced ```mermaid code blocks that render directly in Markdown (GitHub, GitLab, most wikis), validated locally with mermaid-cli (its Docker image, or a local install) when available and delivered with an explicit notice otherwise. Use this skill whenever the user wants to show how parts of a system interact over time — \"sequence diagram\", \"draw the login flow\", \"diagram how the frontend talks to the API\", \"document this request/response chain\", \"show what happens when a user checks out\", \"diagram this webhook\" — even if they never say \"Mermaid\" or \"sequence diagram\".",
+  "results": [
+    {
+      "query": "diagram the retry/backoff interaction between our worker and the third-party API when it returns 429s — as a mermaid block",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 5,
+      "pass": false
+    },
+    {
+      "query": "show the message flow for our async order processing: producer publishes to Kafka, consumer picks it up, calls the fulfillment service, emits an event",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 5,
+      "pass": false
+    },
+    {
+      "query": "diagram how the frontend talks to the API and the API talks to the cache and DB when a user loads their dashboard — show the order of calls",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 1,
+    "failed": 2
+  },
+  "arm": "b",
+  "block": 1,
+  "canary_query": "diagram how the frontend talks to the API and the API talks to the cache and DB when a user loads their dashboard — show the order of calls"
+}
