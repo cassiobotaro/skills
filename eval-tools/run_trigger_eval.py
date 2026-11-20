@@ -24,7 +24,7 @@ Usage (from the repo root):
     ./eval-tools/run_trigger_eval.py \
         --eval-set design-doc-workspace/trigger-evals/trigger_eval.json \
         --skill-path design-doc/skills/design-doc \
-        --model haiku -o design-doc-workspace/trigger-evals/some-run.json
+        --model claude-sonnet-5-5 -o design-doc-workspace/trigger-evals/some-run.json
 
 It also defaults `--num-workers` to 1, against upstream's 10. Concurrency is an experimental
 variable here, not a speed knob: it depresses the trigger rate specifically for queries that
@@ -36,19 +36,22 @@ Any other flags are passed straight through to run_eval.py.
 
 Routine check (the default thing to run after a description change):
 
-    ./eval-tools/run_trigger_eval.py --routine \
-        --eval-set adr-workspace/trigger-evals/trigger_eval.json \
+    ./eval-tools/run_trigger_eval.py --routine \\
+        --eval-set adr-workspace/trigger-evals/trigger_eval.json \\
         --skill-path adr/skills/adr -o adr-workspace/trigger-evals/some-run.json
 
-`--routine` is the whole protocol in one command, on one model: the positives at 5 runs per
-query, then the negatives at 1 run per query with the best-scoring positive spliced in three
-times as a canary, serially, with a 120 s timeout, under `systemd-inhibit` when it exists. It
-defaults to claude-haiku-5-5 because that is the only model on which the descriptions
-separate: sonnet, fable and opus sit at 98-100% (model sweep of 2026-10-31), so a sweep there
-buys a ceiling. About 63 sessions per skill, against 332 for the four-model sweep at 5 and 3
-runs. Run a ceiling model as well (`--model claude-opus-5-5`) only when the description text
-changed. The negatives at one run are a smoke test for a description that started firing
-broadly, not a rate: one false fire in 240 samples is not measurable at any size used here.
+`--routine` is the whole protocol in one command, on one model: the positives at 3 runs per
+query, then the negatives at 3 runs per query with the best-scoring positive as a canary,
+serially, with a 120 s timeout, under `systemd-inhibit` when it exists. About 63 sessions
+per skill.
+
+It defaults to the target model, claude-sonnet-5-5: the model that reads the user's request
+is the one that decides to invoke a skill, and for this repository's skills that is a large
+model. There the positives sit at 98-100%, so they are a regression guard (a warning prints
+under 90%), and the runs go to the negatives, where the only trigger defect ever found on a
+large model was (a false fire at ~17%). Haiku is opt-in (`--model claude-haiku-5-5
+--runs-per-query 5`): take one number per release as an early warning, and do not tune a
+description to it.
 """
 
 import argparse
@@ -64,8 +67,10 @@ SKILL_CREATOR_CANDIDATES = [
     Path.home() / ".claude/plugins/cache/claude-plugins-official/skill-creator/unknown/skills/skill-creator",
 ]
 
-ROUTINE_MODEL = "claude-haiku-5-5"
-ROUTINE_POSITIVE_RUNS = 5
+ROUTINE_MODEL = "claude-sonnet-5-5"  # the target model; see eval-tools/README.md
+ROUTINE_POSITIVE_RUNS = 3
+ROUTINE_NEGATIVE_RUNS = 3
+ROUTINE_CEILING = 0.90  # the target model has held 98-100% on every skill's positives
 ROUTINE_TIMEOUT = 120
 INHIBIT = ["systemd-inhibit", "--what=idle:sleep", "--mode=block", "--why=trigger eval sweep"]
 
@@ -236,6 +241,16 @@ def routine(args, passthrough: list[str], script: Path, workdir: Path, repo_root
         print("  Negatives not run: the positives look degraded.", file=sys.stderr)
         return code
 
+    hits = sum(r["triggers"] for r in pos["results"])
+    runs = sum(r["runs"] for r in pos["results"])
+    if model == ROUTINE_MODEL and hits / runs < ROUTINE_CEILING:
+        print(
+            f"\n  WARNING: {hits}/{runs} on {model}, which has held 98-100% on every skill's\n"
+            "  positives. A regression candidate, not yet a regression: two identical sweeps\n"
+            "  move 4-6 points at n=50, more at this size. Re-run before reading it.\n",
+            file=sys.stderr,
+        )
+
     best = max(pos["results"], key=lambda r: r["triggers"])
     if best["triggers"] < best["runs"]:
         print(f"  note: no positive reached a full run; the canary is the best one, at {best['triggers']}/{best['runs']}.")
@@ -285,7 +300,8 @@ def main() -> int:
     parser.add_argument("--model", help=f"Model id (passed to run_eval.py; --routine defaults to {ROUTINE_MODEL})")
     parser.add_argument("--runs-per-query", type=int, help=f"Runs per query (--routine: positives, default {ROUTINE_POSITIVE_RUNS})")
     parser.add_argument("--timeout", type=int, help=f"Seconds per session (--routine defaults to {ROUTINE_TIMEOUT})")
-    parser.add_argument("--negative-runs", type=int, default=1, help="--routine: runs per negative query (default 1)")
+    parser.add_argument("--negative-runs", type=int, default=ROUTINE_NEGATIVE_RUNS,
+                        help=f"--routine: runs per negative query (default {ROUTINE_NEGATIVE_RUNS})")
     parser.add_argument("--canary-runs", type=int, default=3, help="--routine: canary runs in the negatives pass (default 3)")
     parser.add_argument("--no-inhibit", action="store_true", help="--routine: do not wrap the sweeps in systemd-inhibit")
     args, passthrough = parser.parse_known_args()

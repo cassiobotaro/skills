@@ -4,6 +4,17 @@ Read this before running an eval or quoting a number from one. It is not loaded 
 `AGENTS.md` points here. The helpers in this directory are `run_trigger_eval.py` and
 `capture_trigger_transcripts.py` for trigger evals, and `judge.py` for grading (last two sections).
 
+## Which model
+
+The target model is **claude-sonnet-5-5**. The model that reads the user's request is the one that decides to invoke a skill and the one that follows it, and for architecture documentation that is a large model; haiku mostly runs delegated execution steps. So:
+
+- **Quote numbers on the target model**, by id. `--routine` defaults to it; run the executors of a behavioral eval on it.
+- **Trigger positives there are a regression guard**, not a measurement: sonnet, fable and opus sit at 98-100% on every skill. What is left to measure on a large model is the negatives, where the one trigger defect found so far was (`design-doc` on "write a PRD for the new referral program", ~17% on opus).
+- **No haiku arm in a behavioral A/B.** It doubled the cost of the ablations (`adr` iterations 12-15, `design-doc` iteration-26), and the one effect that mattered showed more clearly on sonnet.
+- **One haiku trigger number per release**, as an early warning and a stand-in for hosts that run smaller models. It is not a target: do not lengthen or sharpen a description to move it. A haiku rate also moves with what the repository's own `AGENTS.md` says about the skills (`structurizr-workspace/trigger-evals/agentsmd-ab-2026-11-20/README.md`).
+
+Most of what follows was learned on haiku, because it is the only model on which the numbers move. Read it as how to measure, not as what to optimize.
+
 Evals are authored and run through the **skill-creator** skill, not by scripts in this repo. Each skill has:
 
 - `<plugin>-workspace/evals/evals.json` — the eval set (prompt, `expected_output`, optional `files/`, optional `assertions`). This is the spec for what the skill must do; **read it before changing a skill's behavior**.
@@ -50,9 +61,11 @@ Gotchas when running evals in this repo (learned the hard way). They are written
 
 `--routine` runs the serial protocol of the baselines in one command and on one model, where it used to be two hand-split eval sets, a hand-spliced canary and a `systemd-inhibit` wrapper per model:
 
-- **One model, `claude-haiku-5-5` by default.** It is the only one on which the descriptions separate; sonnet, fable and opus sit at 98-100%, so a sweep there buys a ceiling. Add one ceiling run (`--model claude-opus-5-5`) only when the description text changed. Pass an id, not an alias; the id is written into the result.
-- **Positives at 5 runs per query** (`--runs-per-query`), then **negatives at 1** (`--negative-runs`) with the best-scoring positive of the first pass spliced in three times as the canary (`--canary-runs`). About 63 sessions per skill, against 83 per model and 332 for four models at 5 and 3 runs.
-- **The negatives are a smoke test, not a rate.** They catch a description that started firing broadly. One false fire in 240 samples is not measurable at one run or at three; probe a suspect query on its own at ten runs or more.
+- **One model, the target (`claude-sonnet-5-5`) by default.** Pass an id, not an alias; the id is written into the result. For the per-release haiku number: `--model claude-haiku-5-5 --runs-per-query 5`.
+- **Positives at 3 runs per query** (`--runs-per-query`): a regression guard. Under 90% on the target model it prints a warning; re-run before reading that as a regression.
+- **Negatives at 3 runs per query** (`--negative-runs`), with the best-scoring positive of the first pass as the canary (`--canary-runs`, 3). This is where the runs are worth paying for on a large model. A false fire is listed by query; probe that query on its own at ten runs or more before calling it a rate.
+- **About 63 sessions per skill**, against 332 for four models at 5 and 3 runs. A sweep session on sonnet cost US$ 0.03 to 0.04 when it ran to completion (three sessions measured, 2026-11-20), so a routine check is about US$ 2 per skill at most; `run_eval.py` does not report cost.
+- **Take the reference when you need it.** No routine sweep has been run on sonnet since the `AGENTS.md` split. Before changing a description, run `--routine` on the current text, then on the candidate, the same day: that pair is the comparison, and it is better than a stored baseline taken weeks and CLI versions earlier.
 - **It stops early and says why.** Positives with the degraded-sweep signature end the run before the negatives are paid for; a canary that never fires exits non-zero, because the zeros then mean nothing.
 - Serial only (`--num-workers` is refused), 120 s timeout, under `systemd-inhibit` when it works on the machine (`--no-inhibit` to skip).
 - The result keeps the old shape (`results` with `triggers` and `runs` per query) and adds `protocol` and `canary`, so pooling scripts read it unchanged.
@@ -61,7 +74,7 @@ Without `--routine` the wrapper runs a single sweep exactly as before.
 
 Two things to keep in mind when reading a routine number:
 
-- **Every trigger number recorded before 2026-11-20 was measured with the old `AGENTS.md` in each session's context**, which named the four skills and described what each one does. The reference on the trimmed file is `structurizr-workspace/trigger-evals/README-routine-2026-11-20.md` (claude-haiku-5-5: adr 42%, design-doc 62%, structurizr 72%, mermaid-sequence 76%; one routine sweep each). None of the four separates from its earlier number, so that sweep does not show the split changed the rate; compare a description change against these, not against the older figures. An A/B of the two files on eight indirect queries (`structurizr-workspace/trigger-evals/agentsmd-ab-2026-11-20/README.md`) found no general effect by its frozen rule (27/80 against 14/80, but only four of eight queries moving the same way) and one query that depends on the old text (8/10 against 0/10).
+- **Every trigger number recorded before 2026-11-20 was measured with the old `AGENTS.md` in each session's context**, which named the four skills and described what each one does. The haiku reference on the trimmed file is `structurizr-workspace/trigger-evals/README-routine-2026-11-20.md` (claude-haiku-5-5: adr 42%, design-doc 62%, structurizr 72%, mermaid-sequence 76%; one sweep each, positives at 5 and negatives at 1, the routine's defaults that day). None of the four separates from its earlier number, so that sweep does not show the split changed the rate; compare a description change against these, not against the older figures. An A/B of the two files on eight indirect queries (`structurizr-workspace/trigger-evals/agentsmd-ab-2026-11-20/README.md`) found no general effect by its frozen rule (27/80 against 14/80, but only four of eight queries moving the same way) and one query that depends on the old text (8/10 against 0/10).
 - **A sweep is visible to other sessions in the checkout.** The candidate command it injects under `.claude/commands/` showed up in the skill list of an interactive session open in the repository while the sweep ran. Do not run executors or a second sweep there at the same time.
 
 ## Grading with `judge.py`
