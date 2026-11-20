@@ -1,0 +1,813 @@
+{
+ "a-sonnet/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 0,
+   "per_1000_words": 0.0,
+   "evidence": []
+  },
+  "O.3": {
+   "count": 872
+  }
+ },
+ "a-sonnet/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-de-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 1,
+   "per_1000_words": 1.1,
+   "evidence": [
+    "é impactado"
+   ]
+  },
+  "O.3": {
+   "count": 931
+  }
+ },
+ "a-sonnet/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-de-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 1,
+   "per_1000_words": 1.2,
+   "evidence": [
+    "é feito"
+   ]
+  },
+  "O.3": {
+   "count": 827
+  }
+ },
+ "a-sonnet/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/servico-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 1,
+   "per_1000_words": 1.2,
+   "evidence": [
+    "é gravado"
+   ]
+  },
+  "O.3": {
+   "count": 805
+  }
+ },
+ "b-sonnet/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-de-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 1
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 6,
+   "per_1000_words": 7.8,
+   "evidence": [
+    "é enviado",
+    "é assinada",
+    "é agendado",
+    "são rotacionados",
+    "será consumida",
+    "será medido"
+   ]
+  },
+  "O.3": {
+   "count": 769
+  }
+ },
+ "b-sonnet/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-de-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 1
+  },
+  "T.2": {
+   "passed": false,
+   "count": 1,
+   "evidence": [
+    "**DLQ**"
+   ]
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 10,
+   "per_1000_words": 10.3,
+   "evidence": [
+    "é acionado",
+    "é persistida",
+    "foi definido",
+    "foram definidos",
+    "é registrado",
+    "é guardado",
+    "é rotacionado",
+    "serão consultadas"
+   ]
+  },
+  "O.3": {
+   "count": 973
+  }
+ },
+ "b-sonnet/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/servico-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 5,
+   "per_1000_words": 6.2,
+   "evidence": [
+    "foram definidas",
+    "é registrado",
+    "será implementado",
+    "é gerenciado",
+    "será consumida"
+   ]
+  },
+  "O.3": {
+   "count": 807
+  }
+ },
+ "b-sonnet/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-de-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 4,
+   "per_1000_words": 5.2,
+   "evidence": [
+    "é enviado",
+    "é agendado",
+    "foi atingido",
+    "são impactadas"
+   ]
+  },
+  "O.3": {
+   "count": 771
+  }
+ },
+ "a-haiku/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/servico-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 8,
+   "per_1000_words": 6.9,
+   "evidence": [
+    "são publicados",
+    "é assinado",
+    "é rotacionada",
+    "foi definido",
+    "foram definidos",
+    "será testado",
+    "é gravado",
+    "são mantidas"
+   ]
+  },
+  "O.3": {
+   "count": 1163
+  }
+ },
+ "a-haiku/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 15,
+   "per_1000_words": 11.5,
+   "evidence": [
+    "foi enviado",
+    "foram atingidos",
+    "foi definida",
+    "é entregue",
+    "é marcada",
+    "é reenviado",
+    "foi descartada",
+    "foram registrados"
+   ]
+  },
+  "O.3": {
+   "count": 1303
+  }
+ },
+ "a-haiku/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/servico-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 9,
+   "per_1000_words": 8.8,
+   "evidence": [
+    "foi definido",
+    "foram definidos",
+    "foi dimensionado",
+    "foi definida",
+    "foram definidos",
+    "é criado",
+    "é contado",
+    "é preservada"
+   ]
+  },
+  "O.3": {
+   "count": 1023
+  }
+ },
+ "a-haiku/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 10,
+   "per_1000_words": 7.1,
+   "evidence": [
+    "foram informadas",
+    "foram informadas",
+    "foi definido",
+    "foram informadas",
+    "são assinados",
+    "foram informados",
+    "foi dimensionada",
+    "foi definida"
+   ]
+  },
+  "O.3": {
+   "count": 1416
+  }
+ },
+ "b-haiku/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 1
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 14,
+   "per_1000_words": 11.2,
+   "evidence": [
+    "é marcada",
+    "é marcada",
+    "foram definidas",
+    "foi aceito",
+    "foram levantados",
+    "é assinado",
+    "são guardadas",
+    "são provisionadas"
+   ]
+  },
+  "O.3": {
+   "count": 1247
+  }
+ },
+ "b-haiku/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/entrega-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 16,
+   "per_1000_words": 14.5,
+   "evidence": [
+    "foi alterado",
+    "foi definido",
+    "são publicados",
+    "foi gerada",
+    "é aplicada",
+    "é registrada",
+    "é assinado",
+    "é marcada"
+   ]
+  },
+  "O.3": {
+   "count": 1106
+  }
+ },
+ "b-haiku/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/servico-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 0
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 18,
+   "per_1000_words": 13.3,
+   "evidence": [
+    "foi pago",
+    "foi alterada",
+    "é acionado",
+    "foi levantada",
+    "foi entregue",
+    "foram definidos",
+    "é gravada",
+    "é aceita"
+   ]
+  },
+  "O.3": {
+   "count": 1355
+  }
+ },
+ "b-haiku/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": [
+    "outputs/docs/design/servico-webhooks-saida.md"
+   ]
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "mermaid": true,
+    "image": true,
+    "details_with_dsl": true
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": "regex DISCLAIMER over the prose: no hit"
+  },
+  "T.1": {
+   "passed": true,
+   "count": 1
+  },
+  "T.2": {
+   "passed": true,
+   "count": 0,
+   "evidence": []
+  },
+  "T.3": {
+   "passed": true,
+   "evidence": "regex ANNOUNCE before the second '## ': no hit"
+  },
+  "O.1": {
+   "count": 0
+  },
+  "O.2": {
+   "count": 16,
+   "per_1000_words": 13.2,
+   "evidence": [
+    "é reenviado",
+    "são publicados",
+    "era implementado",
+    "foi renderizado",
+    "é marcada",
+    "é feito",
+    "foi definido",
+    "é assinado"
+   ]
+  },
+  "O.3": {
+   "count": 1214
+  }
+ }
+}

@@ -1,0 +1,1069 @@
+{
+ "a-sonnet/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-a-background-job.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in a background job",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-a-background-job",
+    "from_title": "generate-invoice-pdfs-in-a-background-job"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in a background job",
+   "words": 7,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 27
+  },
+  "O.1": {
+   "count": 248,
+   "context": 117,
+   "decision": 46,
+   "consequences": 68
+  },
+  "O.2": {
+   "count": 0,
+   "evidence": []
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-sonnet/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 27
+  },
+  "O.1": {
+   "count": 238,
+   "context": 111,
+   "decision": 46,
+   "consequences": 65
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-sonnet/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 31
+  },
+  "O.1": {
+   "count": 283,
+   "context": 121,
+   "decision": 61,
+   "consequences": 85
+  },
+  "O.2": {
+   "count": 0,
+   "evidence": []
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-sonnet/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 27
+  },
+  "O.1": {
+   "count": 263,
+   "context": 108,
+   "decision": 70,
+   "consequences": 69
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-sonnet/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 31
+  },
+  "O.1": {
+   "count": 264,
+   "context": 116,
+   "decision": 55,
+   "consequences": 77
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-sonnet/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 29
+  },
+  "O.1": {
+   "count": 272,
+   "context": 121,
+   "decision": 63,
+   "consequences": 72
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-sonnet/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 31
+  },
+  "O.1": {
+   "count": 278,
+   "context": 126,
+   "decision": 63,
+   "consequences": 73
+  },
+  "O.2": {
+   "count": 0,
+   "evidence": []
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-sonnet/run-4": {
+  "F.1": {
+   "passed": false,
+   "evidence": {
+    "new": [
+     "doc/adr/0002-generate-invoice-pdfs-in-background-jobs.md"
+    ],
+    "fixture_untouched": false
+   }
+  },
+  "F.2": {
+   "passed": false,
+   "evidence": {
+    "h1": "# 2. Generate invoice PDFs in background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-background-jobs",
+    "from_title": "generate-invoice-pdfs-in-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in background jobs",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 29
+  },
+  "O.1": {
+   "count": 272,
+   "context": 118,
+   "decision": 65,
+   "consequences": 73
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-haiku/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-a-background-job.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in a background job",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-a-background-job",
+    "from_title": "generate-invoice-pdfs-in-a-background-job"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in a background job",
+   "words": 7,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 25
+  },
+  "O.1": {
+   "count": 272,
+   "context": 107,
+   "decision": 67,
+   "consequences": 81
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "is stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-haiku/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-a-background-job.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in a background job",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-a-background-job",
+    "from_title": "generate-invoice-pdfs-in-a-background-job"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in a background job",
+   "words": 7,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 29
+  },
+  "O.1": {
+   "count": 298,
+   "context": 124,
+   "decision": 58,
+   "consequences": 99
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "is stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-haiku/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-a-background-job.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in a background job",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-a-background-job",
+    "from_title": "generate-invoice-pdfs-in-a-background-job"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in a background job",
+   "words": 7,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 27
+  },
+  "O.1": {
+   "count": 304,
+   "context": 109,
+   "decision": 68,
+   "consequences": 110
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "a-haiku/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-a-background-job.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in a background job",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-a-background-job",
+    "from_title": "generate-invoice-pdfs-in-a-background-job"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in a background job",
+   "words": 7,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 27
+  },
+  "O.1": {
+   "count": 302,
+   "context": 104,
+   "decision": 70,
+   "consequences": 111
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-haiku/run-1": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-the-background.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in the background",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-the-background",
+    "from_title": "generate-invoice-pdfs-in-the-background"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in the background",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 31
+  },
+  "O.1": {
+   "count": 328,
+   "context": 113,
+   "decision": 72,
+   "consequences": 127
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "be stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-haiku/run-2": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-move-invoice-pdf-generation-to-a-background-job.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Move invoice PDF generation to a background job",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "move-invoice-pdf-generation-to-a-background-job",
+    "from_title": "move-invoice-pdf-generation-to-a-background-job"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Move invoice PDF generation to a background job",
+   "words": 8,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 28
+  },
+  "O.1": {
+   "count": 299,
+   "context": 118,
+   "decision": 67,
+   "consequences": 96
+  },
+  "O.2": {
+   "count": 2,
+   "evidence": [
+    "is stored",
+    "is removed"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-haiku/run-3": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-move-invoice-pdf-generation-to-background-jobs.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Move invoice PDF generation to background jobs",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "move-invoice-pdf-generation-to-background-jobs",
+    "from_title": "move-invoice-pdf-generation-to-background-jobs"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Move invoice PDF generation to background jobs",
+   "words": 7,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 27
+  },
+  "O.1": {
+   "count": 284,
+   "context": 121,
+   "decision": 41,
+   "consequences": 105
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "is stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ },
+ "b-haiku/run-4": {
+  "F.1": {
+   "passed": true,
+   "evidence": {
+    "new": [
+     "doc/adr/0003-generate-invoice-pdfs-in-the-background.md"
+    ],
+    "fixture_untouched": true
+   }
+  },
+  "F.2": {
+   "passed": true,
+   "evidence": {
+    "h1": "# 3. Generate invoice PDFs in the background",
+    "date": "2026-11-20",
+    "h2": [
+     "## Status",
+     "## Context",
+     "## Decision",
+     "## Consequences"
+    ],
+    "status": "Accepted"
+   }
+  },
+  "F.3": {
+   "passed": true,
+   "evidence": {
+    "file": "generate-invoice-pdfs-in-the-background",
+    "from_title": "generate-invoice-pdfs-in-the-background"
+   }
+  },
+  "T.1": {
+   "passed": true,
+   "title": "Generate invoice PDFs in the background",
+   "words": 6,
+   "sentence_tokens": []
+  },
+  "T.2": {
+   "passed": true,
+   "evidence": {
+    "we_will": true,
+    "names_sidekiq": true
+   }
+  },
+  "T.3": {
+   "passed": true,
+   "count": 31
+  },
+  "O.1": {
+   "count": 302,
+   "context": 126,
+   "decision": 66,
+   "consequences": 94
+  },
+  "O.2": {
+   "count": 1,
+   "evidence": [
+    "is stored"
+   ]
+  },
+  "O.3": {
+   "count": 0
+  },
+  "O.4": {
+   "count": 0
+  }
+ }
+}

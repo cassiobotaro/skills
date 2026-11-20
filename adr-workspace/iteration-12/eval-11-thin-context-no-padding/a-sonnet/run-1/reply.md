@@ -1,0 +1,5 @@
+I recorded the decision as ADR 3 in your existing log: `doc/adr/0003-store-user-uploaded-files-in-s3.md`, status Accepted, dated 2026-11-20. Your log already had 0001 and 0002, so this is the next number. I did not touch any existing ADR.
+
+The ADR uses only what you told me. The context is that uploads sit on local disk and the app servers move into an autoscaling group next quarter, where instances are replaced without keeping their disks. The decision is to store the files in S3. The consequences are that uploads no longer depend on a single instance, and that every file read becomes a network call, which the team accepted.
+
+Your message was enough to write from, so I did not ask questions. If you want any of the following in the record, tell me and I will add it before the ADR is shared: alternatives you considered (for example a shared network filesystem), how existing files on local disk will migrate, or any mitigation for the read latency (a CDN or cache). I left these out because you did not state them.

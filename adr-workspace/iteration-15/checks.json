@@ -1,0 +1,21 @@
+{
+ "note": "One arm: adr 1.4.2 as edited in the working tree (skill-a is a copy of it). 1.4.2 does two things: it removes the Title, Decision and Length bullets of step 4, which iterations 12 to 14 found without effect in 48 runs, and it adds to the Filename rule that 'alphanumeric' means ASCII letters and digits, as adr-tools' own pipeline yields on Linux (tr -Ccs [:alnum:] -, checked under GNU, BusyBox and uutils tr): an accented letter becomes a hyphen, never transliterated, never kept. The second change goes against what the unchanged skill did: in iteration-14, 15 of 16 runs folded the seed's 'decisões' to 'decisoes' and one kept the accent, so S.1 as defined here was met by 0 of 16. Same prompt, empty repository and executor brief as iteration-14 (the prompt is in ../iteration-14/checks.json). Check list frozen before any run and not edited to fit an output. Every check is decided by grade.py from the bytes on disk. O.* are observations. Invention is not judged. Not added to checks-baseline.json; evals.json assertions for evals 1 and 5 were reworded to state the accent rule when the skill was edited.",
+ "frozen_on": "2026-11-20",
+ "prediction": "If the new sentence and its example are enough, S.1 is met in every run: the seed is 0001-registrar-decis-es-de-arquitetura.md (or the same derivation of whatever title the run gives the seed) and its H1 keeps the accent. If runs go on folding to 'decisoes', the text is not enough against the model's default and the fix belongs in a script. T.1 to T.3 are the regression guard for the cut: they should stay at the ceiling as in arm b of iterations 12 to 14.",
+ "cells": ["a-sonnet", "a-haiku"],
+ "runs_per_cell": 4,
+ "checks": [
+  {"id": "F.1", "kind": "file", "text": "Exactly two files under doc/adr/, one numbered 0001 and one numbered 0002"},
+  {"id": "F.2", "kind": "file", "text": "In 0002: H1 is '# 2. <title>'; the label 'Date:' is in English and carries the run's date in ISO 8601; the four headings Status, Context, Decision, Consequences are present in English, in order, with no other level-2 heading; the status word is Accepted"},
+  {"id": "F.4", "kind": "file", "text": "The prose of 0002 is in Portuguese: its Context contains at least three of the words que, não, de, em, uma, para"},
+  {"id": "S.1", "kind": "slug", "text": "The seed's filename slug equals its own H1 title lowercased with every run of anything but ASCII letters and digits collapsed to one hyphen and edge hyphens stripped. Recorded: the title, the slug, and whether the title has a non-ASCII letter (the rule is exercised only then)"},
+  {"id": "S.2", "kind": "slug", "text": "The same for 0002"},
+  {"id": "S.3", "kind": "slug", "text": "Every filename under doc/adr/ is NNNN-<lowercase ASCII letters, digits and single hyphens>.md"},
+  {"id": "T.1", "kind": "style", "text": "Title of 0002 is a short phrase and not a sentence: 10 words or fewer, no terminal punctuation, none of the tokens decidimos, vamos, iremos, será, serão, foi, foram, é, são, deve, devemos, ficou"},
+  {"id": "T.2", "kind": "style", "text": "The Decision section states the decision in the first person plural (vamos, iremos, or a verb ending in -aremos, -eremos, -iremos) and names Sidekiq"},
+  {"id": "T.3", "kind": "style", "text": "The 0002 record is 40 lines or fewer"},
+  {"id": "O.1", "kind": "observation", "text": "Words in 0002; words in Context, Decision and Consequences"},
+  {"id": "O.2", "kind": "observation", "text": "Passive constructions in the Decision section by regex; whether 'ficou decidido' survives"},
+  {"id": "O.5", "kind": "observation", "text": "Files written outside doc/adr/ (the harness's reply.md misplaced inside outputs/, as five sonnet runs did in iteration-14)"}
+ ]
+}
