@@ -2,7 +2,7 @@
 
 Read this before running an eval or quoting a number from one. It is not loaded automatically:
 `AGENTS.md` points here. The helpers in this directory are `run_trigger_eval.py` and
-`capture_trigger_transcripts.py`.
+`capture_trigger_transcripts.py` for trigger evals, and `judge.py` for grading (last section).
 
 Evals are authored and run through the **skill-creator** skill, not by scripts in this repo. Each skill has:
 
@@ -37,4 +37,22 @@ Gotchas when running evals in this repo (learned the hard way). They are written
 - **`AGENTS.md` is in the context of every run, so skill behavior and eval lore stay out of it.** A host loads it into each executor subagent and each `claude -p` trigger session started in the repository, in every arm: a `without_skill` or `old_skill` executor reads whatever it says the skills do. Until 2026-11-20 it carried the per-skill notes and the content of this file; a zero-tool probe quoted the `adr` note back from a subagent and from a headless session. Measured on claude-haiku-5-5 with `--setting-sources project,local`: 26,125 context tokens per session at the repo root before the split, 20,575 after, 18,169 in an empty directory. Two things that were in both arms: the scope-check note during `adr` iteration-9, and "Generated prose is plain active-voice" during `design-doc` iteration-26. Re-run on `adr` eval 8 with the old and the trimmed file (`adr-workspace/iteration-16/README.md`): the frozen checks did not separate (28/28 against 27/28), so the leak did not make that result; it did change the route, since 1.3.2 inspected the repository in 4/4 runs without the old file and in 0/4 with it. Iteration-26 was not re-run. `AGENTS.md` still names the four skills and the repository's purpose; a run that must see none of that has to start outside the repository.
 - **A session keeps the `AGENTS.md` it started with, and so do its subagents.** After the file was trimmed on 2026-11-20, a subagent spawned by the session that trimmed it still quoted the old headings, while a new headless session read the new file. After editing `AGENTS.md`, run executors from a new session or as headless sessions, and probe one before paying for the rest.
 - **A copy of the repository under a temp directory loads no `AGENTS.md`.** Two copies that differed only in that file gave the same context size (22,487 and 22,486 tokens) and a probe that saw no instructions file in either. The likely cause is that the directory was never trusted in the CLI; that was not verified. To control which text a headless run sees, start it in a directory below the repository root that holds its own `AGENTS.md`: the root file and the nested one both load (probed, iteration-16). Delete that file afterwards.
-- **A judge does not need a subagent.** `claude -p` with `--tools ""`, its own `--system-prompt`, `--setting-sources project,local` and `--disable-slash-commands`, started in an empty directory, used about 2.8 k tokens per call against the ~43 k of a subagent judge, and gave the four re-judged iteration-9 outputs the verdicts their subagent judges had given. One session per call keeps the "one judge per packet" rule. See `adr-workspace/iteration-16/grade.py`.
+- **A judge does not need a subagent.** `claude -p` with `--tools ""`, its own `--system-prompt`, `--setting-sources project,local` and `--disable-slash-commands`, started in an empty directory, used about 2.8 k tokens per call against the ~43 k of a subagent judge, and gave the four re-judged iteration-9 outputs the verdicts their subagent judges had given. One session per call keeps the "one judge per packet" rule. `judge.py` in this directory is that judge.
+
+## Grading with `judge.py`
+
+`judge.py` holds the part of grading that each iteration used to rewrite in its own `grade.py`: blind packets, the judge calls, and the count. What only the iteration knows stays with it: which runs exist, and the checks decided from bytes.
+
+```bash
+./eval-tools/judge.py manifest adr-workspace/iteration-N   # discover the runs -> runs.json
+./eval-tools/judge.py packets  adr-workspace/iteration-N   # -> judge-inputs/pNN.md, judge-map.json
+./eval-tools/judge.py judge    adr-workspace/iteration-N   # -> judge-outputs/pNN-passK.json, judge-cost.json
+./eval-tools/judge.py table    adr-workspace/iteration-N   # -> results.json and a table per eval
+```
+
+- **`runs.json` is the only input to edit.** `manifest` finds `eval-<id>-*/<cell>/run-*/` with the reply at `response.md` or `outputs/reply.md`. Each run takes a `fixture` (the project as it was before the run), so the packet shows the files before, and tags each file after as unchanged, changed or new. Add a run of an older iteration to the list to re-judge it in the same batch, which a changed packet requires.
+- **Checks come from the frozen `checks-baseline.json`** of the workspace. Kinds `file` and `absence` are not judged: the iteration's script writes `script-checks.json` (`{"<run key>": {"<check id>": true}}`, or the same under a `checks` key) and `table` merges it. A script check with no verdict is reported as not scored and counted unmet. Every other kind goes to the judge, with the anchor cases when the eval has a check of kind `invention`.
+- **Three passes on every check by default**, met only when all agree; a split is listed, never averaged. The rule of one pass outside invention was a cost rule for subagent judges, and at ~2.8 k tokens a call it no longer pays to build two packet variants. `--passes 1` restores it for a whole batch.
+- **`judge` resumes.** A call whose output exists is skipped, a failed one is reported and the command exits non-zero, and running it again retries only what is missing. `--only 2` is the smoke test before a full batch. `packets` refuses to renumber packets once verdicts exist.
+- **Name the judge by id** (`--model`, default `claude-opus-5-5`); `judge-cost.json` records the id the session reported, the calls, tokens and cost. Calls go through `claude -p`, so they are billed like the trigger evals.
+- Checked on the iteration-16 data: fed the 48 verdicts of that iteration, `table` gives the table in its README. The packet text differs from iteration-16's (it follows `design-doc` iteration-23's, with a JSON answer), and only two calls were run on the new text, so a full batch on it has not been compared with the old judges.
