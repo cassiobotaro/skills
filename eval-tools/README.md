@@ -2,7 +2,7 @@
 
 Read this before running an eval or quoting a number from one. It is not loaded automatically:
 `AGENTS.md` points here. The helpers in this directory are `run_trigger_eval.py` and
-`capture_trigger_transcripts.py` for trigger evals, and `judge.py` for grading (last section).
+`capture_trigger_transcripts.py` for trigger evals, and `judge.py` for grading (last two sections).
 
 Evals are authored and run through the **skill-creator** skill, not by scripts in this repo. Each skill has:
 
@@ -38,6 +38,31 @@ Gotchas when running evals in this repo (learned the hard way). They are written
 - **A session keeps the `AGENTS.md` it started with, and so do its subagents.** After the file was trimmed on 2026-11-20, a subagent spawned by the session that trimmed it still quoted the old headings, while a new headless session read the new file. After editing `AGENTS.md`, run executors from a new session or as headless sessions, and probe one before paying for the rest.
 - **A copy of the repository under a temp directory loads no `AGENTS.md`.** Two copies that differed only in that file gave the same context size (22,487 and 22,486 tokens) and a probe that saw no instructions file in either. The likely cause is that the directory was never trusted in the CLI; that was not verified. To control which text a headless run sees, start it in a directory below the repository root that holds its own `AGENTS.md`: the root file and the nested one both load (probed, iteration-16). Delete that file afterwards.
 - **A judge does not need a subagent.** `claude -p` with `--tools ""`, its own `--system-prompt`, `--setting-sources project,local` and `--disable-slash-commands`, started in an empty directory, used about 2.8 k tokens per call against the ~43 k of a subagent judge, and gave the four re-judged iteration-9 outputs the verdicts their subagent judges had given. One session per call keeps the "one judge per packet" rule. `judge.py` in this directory is that judge.
+
+## The routine trigger check
+
+```bash
+./eval-tools/run_trigger_eval.py --routine \
+    --eval-set adr-workspace/trigger-evals/trigger_eval.json \
+    --skill-path adr/skills/adr \
+    -o adr-workspace/trigger-evals/serial-<date>-routine-haiku.json
+```
+
+`--routine` runs the serial protocol of the baselines in one command and on one model, where it used to be two hand-split eval sets, a hand-spliced canary and a `systemd-inhibit` wrapper per model:
+
+- **One model, `claude-haiku-5-5` by default.** It is the only one on which the descriptions separate; sonnet, fable and opus sit at 98-100%, so a sweep there buys a ceiling. Add one ceiling run (`--model claude-opus-5-5`) only when the description text changed. Pass an id, not an alias; the id is written into the result.
+- **Positives at 5 runs per query** (`--runs-per-query`), then **negatives at 1** (`--negative-runs`) with the best-scoring positive of the first pass spliced in three times as the canary (`--canary-runs`). About 63 sessions per skill, against 83 per model and 332 for four models at 5 and 3 runs.
+- **The negatives are a smoke test, not a rate.** They catch a description that started firing broadly. One false fire in 240 samples is not measurable at one run or at three; probe a suspect query on its own at ten runs or more.
+- **It stops early and says why.** Positives with the degraded-sweep signature end the run before the negatives are paid for; a canary that never fires exits non-zero, because the zeros then mean nothing.
+- Serial only (`--num-workers` is refused), 120 s timeout, under `systemd-inhibit` when it works on the machine (`--no-inhibit` to skip).
+- The result keeps the old shape (`results` with `triggers` and `runs` per query) and adds `protocol` and `canary`, so pooling scripts read it unchanged.
+
+Without `--routine` the wrapper runs a single sweep exactly as before.
+
+Two things to keep in mind when reading a routine number:
+
+- **Every trigger number recorded before 2026-11-20 was measured with the old `AGENTS.md` in each session's context**, which named the four skills and described what each one does. No sweep has been run since on the trimmed file, so the direction and size of the change are unknown. Take a new haiku number for a skill before comparing a description change against its baseline.
+- **A sweep is visible to other sessions in the checkout.** The candidate command it injects under `.claude/commands/` showed up in the skill list of an interactive session open in the repository while the sweep ran. Do not run executors or a second sweep there at the same time.
 
 ## Grading with `judge.py`
 
