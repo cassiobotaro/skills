@@ -209,7 +209,12 @@ Amends [5. Help comments](0005-help-comments.md)
 | Something About Node.JS | `0001-something-about-node-js.md` |
 | Slash/Slash/Slash/ | `0002-slash-slash-slash.md` |
 | -Bar- | `0003-bar.md` |
+| Registrar decisões de arquitetura | `0001-registrar-decis-es-de-arquitetura.md` |
+| Adotar a geração assíncrona | `0004-adotar-a-gera-o-ass-ncrona.md` |
 
 Rule: lowercase the title, collapse every run of non-alphanumeric characters into a
-single hyphen, strip leading and trailing hyphens. The H1 keeps the title exactly as
-given (with its original capitalization) — only the filename is slugged.
+single hyphen, strip leading and trailing hyphens. Alphanumeric is ASCII only, which is
+what adr-tools' own pipeline yields (`tr -Ccs [:alnum:] -`): an accented letter becomes a
+hyphen, and two in a row (`çã`) become one. Do not transliterate it (`decisoes`) and do
+not keep it (`decisões`). The H1 keeps the title exactly as given (with its original
+capitalization and accents) — only the filename is slugged.

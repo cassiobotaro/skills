@@ -113,7 +113,11 @@ will need to be mitigated. All of them, not just the positive ones.
   un-padded number (`# 4. …`); the filename uses 4-digit zero padding.
 - **Filename**: `NNNN-slug.md`. Slug = the title, lowercased, with every run of
   non-alphanumeric characters collapsed to a single hyphen and leading/trailing hyphens
-  stripped: "Something About Node.JS" → `0001-something-about-node-js.md`.
+  stripped: "Something About Node.JS" → `0001-something-about-node-js.md`. Alphanumeric
+  means the ASCII letters and digits, as adr-tools computes the slug: an accented letter
+  is a separator like any other, never transliterated and never kept — "Registrar
+  decisões de arquitetura" → `0001-registrar-decis-es-de-arquitetura.md`, not `decisoes`
+  and not `decisões`. Only the filename loses the accent; the H1 keeps it.
 - **Date**: ISO 8601. Run `date +%Y-%m-%d` — don't guess the current date.
 - **Status word**: `Accepted` by default; `Proposed` when the user indicates the
   decision still awaits agreement; `Deprecated` when a decision is retired without a
@@ -192,7 +196,6 @@ positive ones.
 Write as if in conversation with a future developer — full sentences organized into
 paragraphs, good prose. Beyond what the template already embeds:
 
-- **Title**: a short noun phrase ("Use ISO 8601 format for dates"), not a sentence.
 - **Context**: only the forces the user or the repository gave — don't advocate or
   foreshadow the answer; posing the motivating question is fine ("How can a user find out
   about available commands?"). Invention slips in here more easily than anywhere else: a
@@ -202,13 +205,9 @@ paragraphs, good prose. Beyond what the template already embeds:
   transactional data"). The future reader cannot tell the team's reasons from yours, so
   leave both out: two sentences of real context are a complete Context. Ask when the gap
   matters.
-- **Decision**: active voice, concrete and specific — name the technology, format, or
-  mechanism.
 - **Consequences**: every one — positive, negative, neutral — as a short standalone
   paragraph or sentence; bullets are visual style for full sentences, never an excuse
   for fragments.
-- **Length**: the canonical ADRs run 15–40 lines; one or two pages is the absolute
-  ceiling. Shorter records get read and kept up to date.
 
 ### 5. Initialize a fresh log
 

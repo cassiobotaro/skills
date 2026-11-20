@@ -9,7 +9,7 @@
       "expected_output": "Seeds doc/adr/ like `adr init` and writes the decision as 0002. Prose in Portuguese (the conversation language), scaffolding in canonical English. Context carries the stated forces, Consequences carries the stated downsides. Nothing invented.",
       "files": [],
       "assertions": [
-        "Fresh log seeded like adr init: a 0001 seed ADR is created in doc/adr/ carrying the canonical adr-tools init content (the Nygard link and the adr-tools mention); its filename slug derives from its own title, which is translated when the log's prose language is not English",
+        "Fresh log seeded like adr init: a 0001 seed ADR is created in doc/adr/ carrying the canonical adr-tools init content (the Nygard link and the adr-tools mention); its filename slug derives from its own title, which is translated when the log's prose language is not English (ASCII letters and digits only, as adr-tools computes it: an accented letter becomes a hyphen, e.g. registrar-decis-es-de-arquitetura)",
         "Decision ADR created as doc/adr/0002-<kebab-slug>.md (4-digit zero-padded filename, slug lowercased/hyphenated from the title)",
         "Prose (H1 title text and the section bodies) is in Portuguese, matching the conversation, while the adr-tools scaffolding stays canonical English: the `Date:` label, the four `## Status` / `## Context` / `## Decision` / `## Consequences` headings in order, and the status word",
         "H1 uses the un-padded number ('# 2. ...') and a 'Date: YYYY-MM-DD' line carries today's real date",
@@ -78,12 +78,12 @@
       "files": [],
       "assertions": [
         "doc/adr/ is created with exactly two files: a 0001 seed ADR and a 0002 decision ADR",
-        "The 0001 seed ADR has its title and body translated into Portuguese and its filename slug derives from the translated title",
+        "The 0001 seed ADR has its title and body translated into Portuguese and its filename slug derives from the translated title, with an accented letter turned into a hyphen as adr-tools does (registrar-decis-es-de-arquitetura, neither decisoes nor decisões)",
         "The seed ADR keeps the adr-tools scaffolding in canonical English: the `Date:` label, the four `##` headings, and the status word are NOT translated",
         "ADR 0002 has its H1 title text and the four section bodies in Portuguese",
         "ADR 0002 keeps the scaffolding canonical: the `Date:` label, the four `## Status/Context/Decision/Consequences` headings in order, and the status word all in English",
         "ADR 0002 keeps the exact structure: H1 with un-padded number, Date: line in ISO 8601 with today's real date, one blank line between every element",
-        "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title (lowercased, non-alphanumeric runs collapsed to single hyphens)",
+        "ADR 0002 filename follows NNNN-slug.md with the slug derived from the Portuguese title (lowercased, runs of anything but ASCII letters and digits collapsed to single hyphens, so an accented letter becomes a hyphen)",
         "The Consequences section records the accepted trade-off (loss of event replay) and contains no invented facts beyond what the prompt established"
       ]
     },
