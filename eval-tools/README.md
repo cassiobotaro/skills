@@ -61,7 +61,7 @@ Without `--routine` the wrapper runs a single sweep exactly as before.
 
 Two things to keep in mind when reading a routine number:
 
-- **Every trigger number recorded before 2026-11-20 was measured with the old `AGENTS.md` in each session's context**, which named the four skills and described what each one does. No sweep has been run since on the trimmed file, so the direction and size of the change are unknown. Take a new haiku number for a skill before comparing a description change against its baseline.
+- **Every trigger number recorded before 2026-11-20 was measured with the old `AGENTS.md` in each session's context**, which named the four skills and described what each one does. The reference on the trimmed file is `structurizr-workspace/trigger-evals/README-routine-2026-11-20.md` (claude-haiku-5-5: adr 42%, design-doc 62%, structurizr 72%, mermaid-sequence 76%; one routine sweep each). None of the four separates from its earlier number, so that sweep does not show the split changed the rate; compare a description change against these, not against the older figures.
 - **A sweep is visible to other sessions in the checkout.** The candidate command it injects under `.claude/commands/` showed up in the skill list of an interactive session open in the repository while the sweep ran. Do not run executors or a second sweep there at the same time.
 
 ## Grading with `judge.py`
