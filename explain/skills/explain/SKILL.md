@@ -282,7 +282,8 @@ For an explanation:
 4. If there is an analogy: are the correspondences and the breaking point written?
 5. Which sentences could go with no loss to this reader? Remove them.
 
-For a text: step 8 of section 5, then the gaps of rule 2.
+For a text: step 8 of section 5, then the gaps of rule 2. For a revision of the user's
+draft, count the lines that say what changed: three at most.
 
 ## Attribution
 
