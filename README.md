@@ -1,6 +1,6 @@
 # cassiobotaro-skills
 
-Agent skills for software architecture documentation: decision records, design docs, and diagrams. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
+Agent skills for software architecture documentation: decision records, design docs, and diagrams, plus a prose editor the other skills can call. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
 
 | Skill | What it does |
 |---|---|
@@ -8,6 +8,7 @@ Agent skills for software architecture documentation: decision records, design d
 | `design-doc` | Write and review software design documents through interactive discovery — targeted questions about the problem, trade-offs, alternatives, and impacted teams — producing trade-off-focused Markdown, condensing the [Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/) and industry practice (Google, Pragmatic Engineer). |
 | `structurizr` | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl) (`workspace.dsl`): system context, container, component, deployment, and dynamic diagrams. |
 | `mermaid-sequence` | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced ```` ```mermaid ```` code blocks that render directly in Markdown (GitHub, GitLab, most wikis). |
+| `unslop` | Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese, without changing its meaning or adding a fact. It runs only when you ask for it by name ("unslop this"), or when another skill calls it. |
 
 **Record, don't invent.** Every skill documents only what you or your repository established — no invented metrics, technologies, relationships, endpoints, or failure paths. When a request is too vague to fill honestly, the skill asks a few targeted questions (batched, in the conversation language) instead of guessing, and those questions are the deliverable: a gap gets asked about, a fabrication gets believed.
 
@@ -20,7 +21,7 @@ Agent skills for software architecture documentation: decision records, design d
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
 | Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | same |
 
-No skill *requires* Docker, and none uses an MCP server: `adr` and `design-doc` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
+No skill *requires* Docker, and none uses an MCP server: `adr`, `design-doc`, and `unslop` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
 
 ### Claude Code
 
@@ -33,6 +34,7 @@ claude plugin install adr@cassiobotaro-skills
 claude plugin install design-doc@cassiobotaro-skills
 claude plugin install structurizr@cassiobotaro-skills
 claude plugin install mermaid-sequence@cassiobotaro-skills
+claude plugin install unslop@cassiobotaro-skills
 ```
 
 Or interactively from inside Claude Code with `/plugin`.
@@ -63,7 +65,7 @@ The diagram skills validate and render through tooling you provide, and degrade 
 
 ## Repository layout
 
-Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
+Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`, `unslop/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
 
 ## License and attribution
 
@@ -73,3 +75,4 @@ Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `struc
 - [design-doc](design-doc/skills/design-doc/NOTICE.md) — Cássio Botaro (Design Docs series), Malte Ubl, Rina Artstain, Gergely Orosz, Tech Leads Club
 - [structurizr](structurizr/skills/structurizr/NOTICE.md) — Simon Brown (C4 model, Structurizr)
 - [mermaid-sequence](mermaid-sequence/skills/mermaid-sequence/NOTICE.md) — the Mermaid project
+- [unslop](unslop/skills/unslop/NOTICE.md) — Lauren Tan (pstack)

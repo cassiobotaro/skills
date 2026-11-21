@@ -22,6 +22,11 @@
       "name": "mermaid-sequence",
       "source": "./mermaid-sequence",
       "description": "Write and edit Mermaid sequence diagrams as fenced code blocks that render directly in Markdown (GitHub, GitLab, most wikis)"
+    },
+    {
+      "name": "unslop",
+      "source": "./unslop",
+      "description": "Remove machine-writing patterns from prose in English or Brazilian Portuguese without changing its meaning or adding facts; runs only when you ask for it by name or another skill calls it"
     }
   ]
 }

@@ -209,6 +209,12 @@ paragraphs, good prose. Beyond what the template already embeds:
   paragraph or sentence; bullets are visual style for full sentences, never an excuse
   for fragments.
 
+When the `unslop` skill is installed, invoke it on the record once the file is written and
+before the self-review: on the H1 title text and the three section bodies. The scaffolding of rule 2 is
+not prose and stays exact. The seed of step 5 stays as `references/examples.md` gives it,
+and no existing record is in its reach (step 6). A fact it finds missing is a question for
+the user (rule 1).
+
 ### 5. Initialize a fresh log
 
 When no ADR log exists anywhere, mirror `adr init`: create `doc/adr/`, seed it with the
@@ -240,6 +246,8 @@ For Amends/Clarifies, do step 1–2 with the right verb pair (`Amends` / `Amende
 
 Before declaring done, check the new file and every edited file:
 
+- The `unslop` skill, when it is installed, was invoked on the new record's prose (step 4).
+  If it was not run, run it now.
 - Four sections in order, one-blank-line discipline; the title text and section bodies in the
   log's language, and every piece of scaffolding in canonical English — the `Date:` label, the
   four headings, the status word, the link verbs (rule 2).

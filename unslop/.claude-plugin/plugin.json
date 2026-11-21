@@ -1,0 +1,9 @@
+{
+  "name": "unslop",
+  "description": "Remove machine-writing patterns from prose in English or Brazilian Portuguese without changing its meaning or adding facts; runs only when you ask for it by name or another skill calls it",
+  "version": "1.0.0",
+  "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
+  "repository": "https://github.com/cassiobotaro/skills",
+  "license": "MIT",
+  "keywords": ["unslop", "writing", "prose", "editing", "documentation"]
+}
