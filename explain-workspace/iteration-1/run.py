@@ -16,6 +16,11 @@ Sessions run with `--setting-sources project,local`, so no user-scope plugin or 
 loaded in either cell. The repository's own AGENTS.md loads in both, since the project
 root sits below it.
 
+Changed on 2026-11-21, after the runs of this iteration were made: the fixture copies are
+built before the workers start, because building them on first use let one run copy a
+fixture that another was still creating (explain-workspace/iteration-2/README.md). The
+runs recorded here did not have this change.
+
 Usage: run.py <eval>:<cell>:<run> [...] [--workers N]
        run.py all [--runs N] [--workers N]
 """
@@ -140,6 +145,11 @@ def main():
         jobs = [(ev, cell, n) for ev in EVALS for cell in CELLS for n in range(1, a.n + 1)]
     else:
         jobs = [(r.split(":")[0], r.split(":")[1], int(r.split(":")[2])) for r in a.runs]
+    # Build every fixture copy before the workers start. fixture() is not safe to call for
+    # the first time from two threads: one creates the directory, the other sees it exist
+    # and copies it before the files are in, and its run starts in an empty project.
+    for ev in sorted({j[0] for j in jobs}):
+        fixture(ev)
     with cf.ThreadPoolExecutor(a.workers) as ex:
         for res in ex.map(lambda j: run(*j), jobs):
             print(json.dumps(res), flush=True)
