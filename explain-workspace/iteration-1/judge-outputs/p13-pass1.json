@@ -1,0 +1,62 @@
+[
+ {
+  "id": "9.1",
+  "verdict": "met",
+  "evidence": "\"A correção entra em produção na **quinta-feira, 26/11**.\" (reply line 7)"
+ },
+ {
+  "id": "9.2",
+  "verdict": "met",
+  "evidence": "\"Sobre o desconto na mensalidade, a decisão é do nosso financeiro.\" (reply line 9)"
+ },
+ {
+  "id": "9.3",
+  "verdict": "met",
+  "evidence": "Searched the revised reply (lines 3-11) for a promise or a refusal of a discount. Line 9 only says the decision belongs to finance and that the request was passed on. Nothing grants or denies a discount."
+ },
+ {
+  "id": "9.4",
+  "verdict": "met",
+  "evidence": "First (line 7): \"A correção entra em produção na **quinta-feira, 26/11**.\" Then (line 9): \"Sobre o desconto na mensalidade, a decisão é do nosso financeiro.\""
+ },
+ {
+  "id": "9.5",
+  "verdict": "unmet",
+  "evidence": "The first two sentences after the greeting are \"A exportação de notas para o ERP está falhando desde segunda-feira (16/11).\" and \"O problema veio do conector, que foi atualizado na última versão da plataforma.\" Neither gives the fix date. The date first appears in the fourth sentence (line 7)."
+ },
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "Searched the revised reply (lines 3-11) for 'Que bom que só percebemos'. It is absent; it appears only in the change notes (line 14) as a quote of what was removed."
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "Searched the revised reply (lines 3-11) for ironic or sarcastic phrasing. Found none; the tone is plain and apologetic."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Searched the revised reply for 'Espero que sim', 'agradecemos imensamente' and similar openers. Found none; the opener is \"Olá, Paulo, bom dia.\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "unmet",
+  "evidence": "Borderline: \"Qualquer dúvida estamos à disposição\" is absent, but the closer \"Se precisar de algo até quinta, é só me chamar.\" is a stock offer-of-help closer of the same kind. It is only lightly specific because of 'até quinta'."
+ },
+ {
+  "id": "9.10",
+  "verdict": "unmet",
+  "evidence": "Facts not in the thread or the prompt, and not bracketed: \"desde segunda-feira (16/11)\" (the date is inferred) and \"Já levei o seu pedido para eles\" (an action the user never said happened)."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "\"O que mudei:\" followed by \"- **Frase sarcástica removida.** ...\" (reply lines 13-14)"
+ },
+ {
+  "id": "9.12",
+  "verdict": "unmet",
+  "evidence": "The change remarks run from line 13 to line 18: a header plus five bullets, several of them long. That is more than three lines."
+ }
+]

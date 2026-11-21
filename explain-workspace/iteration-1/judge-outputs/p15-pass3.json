@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Counted the sentences in reply line 1. There is only one: \"A porta padrão do PostgreSQL é a **5432** (TCP).\""
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "Searched the whole reply (line 1) for comparisons or analogy wording such as 'como', 'tipo', 'parecido'. None found. The reply only states the port number."
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Checked how the reply ends. It ends with \"(TCP).\", which is a statement. There is no question mark and no offer of more help."
+ }
+]

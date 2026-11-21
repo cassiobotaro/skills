@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Searched the reply for sentence count. Reply line 1 is a single sentence: \"A porta padrão do PostgreSQL é a **5432** (TCP).\" That is one sentence, which is two or fewer."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "Searched the whole reply (line 1) for an analogy, comparison or metaphor ('como', 'tipo', 'parecido', 'igual a'). None found. The reply only states the port number and protocol."
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Checked how the reply ends. Line 1 ends with \"(TCP).\" There is no question mark and no offer of more help ('se precisar', 'posso ajudar', etc.) anywhere in the reply."
+ }
+]

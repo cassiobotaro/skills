@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"concurrency is about *juggling* several tasks so they overlap in time. Parallelism is about *actually running* several at the same instant on different CPU cores.\""
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 7: \"**Case A: the slow part is waiting.** Each file comes from a web API, and each download takes 2 seconds of mostly idle time.\" Line 8: \"**Case B: the slow part is computing.** The files are already on disk, and each one takes 2 seconds of real CPU work\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"Parallelism is about *actually running* several at the same instant on different CPU cores.\" Line 7: \"Only one thing runs at any instant, but the waits overlap ... That's **concurrency without parallelism**.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 5: \"Say you have 100 files to clean.\" Line 16: \"you have a script that reads 50 local CSVs and runs a slow pandas transformation on each.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "Borderline. GIL is defined where it first appears (line 12). But `asyncio` first appears on line 3 (\"you haven't used `threading`, `asyncio` or `multiprocessing` much\") with no definition. Line 7 then recommends it as a tool for Case A (\"In Python you'd use `threading`, `ThreadPoolExecutor` or `asyncio`\") and still never defines it. Whether the reply 'relies on' it is debatable, so this is borderline."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening of line 1 for praise of the question. It opens with \"**Short answer:** concurrency is about...\", which has no praise."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. Line 1 goes straight to the answer and does not restate the question."
+ }
+]

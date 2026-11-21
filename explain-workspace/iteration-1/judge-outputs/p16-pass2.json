@@ -1,0 +1,47 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "line 5: \"O que importa na prática é a redução *absoluta*, que depende do risco que sua mãe tem hoje.\" and line 1: \"“50%” sozinho não diz se é muito ou pouco. Falta saber **50% de quê**.\""
+ },
+ {
+  "id": "5.2",
+  "verdict": "met",
+  "evidence": "line 9: \"Se, em 10 anos, 2 em cada 100 pessoas parecidas com ela têm infarto, o remédio reduziria isso para 1 em 100.\"; line 10: \"Se 20 em cada 100 têm infarto, o remédio reduziria para 10 em 100.\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "line 7: \"Dois exemplos:\"; line 9: \"Se, em 10 anos, 2 em cada 100...\"; line 10: \"Se 20 em cada 100 têm infarto\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "Searched the reply for real-world figures about the drug or the mother's risk. The only figure is the user's own 50%. Everything else is conditional examples (lines 9-10). Line 32 says: \"Não sei qual é o remédio nem o quadro clínico dela\"."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Searched all 32 lines for drug names (brand or generic). None found; the reply says only \"o remédio\" / \"remédio novo\"."
+ },
+ {
+  "id": "5.6",
+  "verdict": "met",
+  "evidence": "Searched for named trials, authors, journals or years. None found. Line 20 mentions \"O estudo\" only as a generic question to ask, not as a citation."
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "line 24: \"Esses 50% são em relação a quê? Qual é o risco da minha mãe hoje e qual seria com o remédio?\""
+ },
+ {
+  "id": "5.8",
+  "verdict": "met",
+  "evidence": "Searched for any verdict on whether the drug is worth taking. None found. Line 32: \"então não consigo dizer se vale a pena\"; it defers to the doctor: \"não pare nem comece nada sem combinar com o médico\"."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "line 1: \"“50%” sozinho não diz se é muito ou pouco.\""
+ }
+]

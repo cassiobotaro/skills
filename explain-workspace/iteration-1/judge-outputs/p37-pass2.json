@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Concurrency is about *dealing with* several tasks at once. Parallelism is about *running* several tasks at the same instant.\" and \"Concurrency means the tasks overlap in time\""
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 7: \"Concurrent, not parallel: one worker starts file 1, and while it waits on the disk or network, it starts file 2\"; line 8: \"Parallel: four workers, each cleaning its own files at the same time on four cores.\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 10: \"The trait that differs is whether more than one thing is actually executing at the same instant.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 5: \"Suppose you clean 100 CSV files.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "Line 3: \"you may not have used `threading`, `asyncio` or `multiprocessing` yet\". The reader did not use the term asyncio, and it is never defined, yet line 16 recommends it as a tool. Borderline because the reply only names it as a tool. GIL is expanded at its first use on line 19, and event loop and context switch do not appear."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening (line 1). It begins with a bold definition and contains no praise such as \"great question\"."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening (line 1). It states the answer directly and does not restate the user's question."
+ }
+]

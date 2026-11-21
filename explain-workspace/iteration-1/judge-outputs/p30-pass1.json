@@ -1,0 +1,42 @@
+[
+ {
+  "id": "10.1",
+  "verdict": "met",
+  "evidence": "First sentence (line 3): \"Vamos em passos curtos.\""
+ },
+ {
+  "id": "10.2",
+  "verdict": "unmet",
+  "evidence": "Borderline: the closing line is a single task, \"Manda suas respostas do Teste 1 quando puder.\" (line 51), but that task bundles three separate questions a), b) and c) (lines 35-39). So the reply does not end with exactly one question or task."
+ },
+ {
+  "id": "10.3",
+  "verdict": "unmet",
+  "evidence": "Before the final task the reply asks three questions that each need an answer: \"**a)** O que `contagem_regressiva(2)` imprime?\" (line 35), \"**b)** O que acontece se eu apagar o `if n == 0`...\" (line 37), \"**c)** Com suas palavras, qual é o caso base e qual é o passo recursivo...\" (line 39)."
+ },
+ {
+  "id": "10.4",
+  "verdict": "unmet",
+  "evidence": "More than two new ideas: smaller version of the same problem (line 7), \"**Caso base**\" (line 13), \"**Passo recursivo**\" (line 14), \"O Python interrompe com `RecursionError`.\" (line 16), and \"Repare que `n - 1` aproxima a chamada do caso base.\" (line 31)."
+ },
+ {
+  "id": "10.5",
+  "verdict": "unmet",
+  "evidence": "Borderline: the call stack is only previewed, not explained: \"**Passo 4**: rastrear a pilha de chamadas à mão\" (line 48). Depth limits are also mentioned (line 49). It is still a mention of the call stack, so unmet."
+ },
+ {
+  "id": "10.6",
+  "verdict": "met",
+  "evidence": "\"`contagem_regressiva(3)` imprime `3`, `2`, `1`, `Fim!`.\" (line 29)"
+ },
+ {
+  "id": "10.7",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for any explanation of what a function, a variable or a loop is. None found; the reply assumes these concepts throughout."
+ },
+ {
+  "id": "10.8",
+  "verdict": "met",
+  "evidence": "Searched for generic praise such as 'Ótima', 'Excelente' or 'boa pergunta'. None found; line 41 is encouragement to answer, not praise."
+ }
+]

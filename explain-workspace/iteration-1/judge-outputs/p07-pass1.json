@@ -1,0 +1,42 @@
+[
+ {
+  "id": "10.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Como você já tem Python há alguns meses, vou supor que sabe escrever funções, usar listas e fatiar com `lista[1:]`.\""
+ },
+ {
+  "id": "10.2",
+  "verdict": "met",
+  "evidence": "Line 33 is the reply's one task: \"Rastreie `soma([4])`. Quais chamadas acontecem, em que ordem, e qual valor cada uma devolve?\" The sub-questions are parts of that one trace task. Line 35 comes after it but only describes the next step and asks nothing."
+ },
+ {
+  "id": "10.3",
+  "verdict": "met",
+  "evidence": "Searched lines 1-31 for questions. The only candidate is line 1, \"Se algum desses ainda está instável, me avise e eu volto um passo\", which is a conditional offer and needs no answer. The hint on line 33 is part of the task."
+ },
+ {
+  "id": "10.4",
+  "verdict": "met",
+  "evidence": "Searched the reply for new concepts. It introduces two: a function that calls itself on a smaller problem (line 5) and the base case (line 5). Lines 25 and 28, on answers returning and on shrinking input, elaborate those two ideas. The `sum()` note is a side remark."
+ },
+ {
+  "id": "10.5",
+  "verdict": "met",
+  "evidence": "Searched for pilha/stack, memoização/memoization, cauda/tail: none found. Line 16, \"Cada chamada fica esperando a seguinte terminar\", describes the trace without introducing the call stack as a concept."
+ },
+ {
+  "id": "10.6",
+  "verdict": "met",
+  "evidence": "Lines 19-22: \"soma([2, 5, 1]) = 2 + soma([5, 1]) ... soma([]) = 0   ← caso base\" and line 25: \"`1 + 0 = 1`, depois `5 + 1 = 6`, depois `2 + 6 = 8`\""
+ },
+ {
+  "id": "10.7",
+  "verdict": "met",
+  "evidence": "Searched for explanations of função/variável/loop. Line 1 assumes this knowledge (\"vou supor que sabe escrever funções\") and explains none of them."
+ },
+ {
+  "id": "10.8",
+  "verdict": "met",
+  "evidence": "Searched for praise such as 'Ótima', 'Excelente', 'boa pergunta', 'parabéns': none found."
+ }
+]

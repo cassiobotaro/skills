@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: 'There's no comment or doc in the repo that records the author's reasoning.' / 'What follows is what the code shows plus the usual trade-offs.' / '**What `allow()` does:** it refills lazily.' None of them contrasts elapsed-time refill with a periodic timer. The contrast first appears at line 5 ('**Why that beats a timer here:**') and in the bullets after it."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"On each call it works out `elapsed * rate`, adds that to the bucket, caps it at `capacity`\" and \"`api.py` creates a bucket the first time it sees a key and keeps it in the module-level `buckets` dict\" and \"It uses `time.monotonic()`.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for motive claims such as 'the author chose', 'was done to', 'because the author', 'designed to'. None found. Line 1 disclaims it: 'There's no comment or doc in the repo that records the author's reasoning.' The rest describes what the design gives."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or token buckets and for any bucket analogy. None found. The reply starts straight from what allow() does."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for project-specific measurements, incidents, traffic figures or requirements. The only numbers are rate 5 (RATE_PER_SECOND = 5 in api.py:3) and an illustrative 0.2s calculation derived from it. The NTP/DST and threading remarks are general statements, not project facts. The reply says it did not check git history."
+ }
+]

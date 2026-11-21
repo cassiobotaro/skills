@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"There's no comment or doc in the repo that records the author's reasoning.\" / \"What follows is what the code shows plus the usual trade-offs.\" / \"**What `allow()` does:** it refills lazily.\" None of them says what elapsed-time refill gives that a timer does not. The contrast first appears at line 7 (\"A timer design needs a timer, thread or task for each bucket...\") and in later bullets."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"On each call it works out `elapsed * rate`, adds that to the bucket, caps it at `capacity`\"; also \"`api.py` creates a bucket the first time it sees a key and keeps it in the module-level `buckets` dict\" and \"It uses `time.monotonic()`.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for motive phrasing such as 'the author chose', 'this was done to' or 'was designed to'. None found. The reply disclaims motive instead: \"There's no comment or doc in the repo that records the author's reasoning\" and \"If you want the actual history behind the choice, `git log` or `git blame`... I haven't checked either.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or token buckets, or a bucket analogy. None found. The reply goes straight to how `allow()` refills and the design trade-offs."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements. The numbers used (rate 5, lumps of 5, 0.2s gives 1 token) follow from RATE_PER_SECOND = 5 in api.py:3. The threading and asyncio remarks are conditional ('if you call `allow()` from threads', 'if you run single-threaded'). No invented project facts found."
+ }
+]

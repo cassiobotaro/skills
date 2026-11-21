@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: 'The code doesn't record why it was written this way, so I'm inferring the reasoning from what's in `limiter.py` and `api.py`.' / 'There are no comments, docs or commit history for this.' / 'This is the standard lazy-refill pattern, and the design supports these reasons:'. None says what elapsed-time refill gives that a timer does not. The contrast first appears in point 1 (line 4), after the third sentence."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` keeps a `buckets` dict and creates a `TokenBucket` the first time a key shows up.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the reply for motive-as-fact phrasing ('the author chose', 'was done to', 'because the author'). None found. The motive is marked as inference ('I'm inferring the reasoning', 'the design supports these reasons'), and line 23 says 'If the original author left a rationale somewhere ... I haven't seen one.'"
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched the reply for a definition of rate limiting or an introductory bucket analogy. None found. The reply goes straight to design reasons and caveats."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements not in the files. None found. The claims describe the code's behavior (buckets dict, monotonic time, no lock, in-memory state). The Redis/Lua mention is a hypothetical suggestion, not a claim about the project."
+ }
+]

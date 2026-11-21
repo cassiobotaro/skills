@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Counted the sentences in reply line 1. There are two: 'A porta padrão do PostgreSQL é a **5432** (TCP.' and 'Dá para mudar no `postgresql.conf`, pelo parâmetro `port`.' That is not more than two."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "Searched reply line 1 for comparison or analogy wording ('como', 'parecido', 'tipo', 'imagine'). None found; the reply gives only factual statements."
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Checked the end of reply line 1. It ends with the statement 'pelo parâmetro `port`.' There is no question mark and no offer of more help."
+ }
+]

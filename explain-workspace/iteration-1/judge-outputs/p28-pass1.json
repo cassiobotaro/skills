@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"There's no comment or doc in the repo that records the author's reasoning.\" / \"What follows is what the code shows plus the usual trade-offs.\" / \"**What `allow()` does:** it refills lazily.\" None of them says what elapsed-time refill gives that a periodic timer does not. The contrast with a timer first appears in the bullets under \"Why that beats a timer here\" (line 7 onward), past the first three sentences."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` creates a bucket the first time it sees a key and keeps it in the module-level `buckets` dict.\" Also: \"On each call it works out `elapsed * rate`, adds that to the bucket, caps it at `capacity`\" and \"It uses `time.monotonic()`.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for motive claims such as 'the author chose', 'was done to', 'designed to' and 'intended'. None found. The reply states \"There's no comment or doc in the repo that records the author's reasoning\" and points to git log/blame without having checked them. It describes only what the design gives."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or token buckets and for any introductory analogy (water, bucket filling, and similar). None found. The reply opens directly with the mechanics of `allow()` and the trade-offs."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures and requirements. The only numbers are \"rate 5\" and \"lumps of 5\", which match RATE_PER_SECOND = 5 at api.py:3, and an illustrative 0.2s that follows from that rate. The thread-safety and unbounded `buckets` remarks follow from limiter.py:11-19 and api.py:6-12. No invented project facts found."
+ }
+]

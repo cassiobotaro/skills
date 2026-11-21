@@ -1,0 +1,42 @@
+[
+ {
+  "id": "10.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Como você já tem Python há alguns meses, vou supor que sabe escrever funções, usar listas e fatiar com `lista[1:]`.\""
+ },
+ {
+  "id": "10.2",
+  "verdict": "met",
+  "evidence": "Line 33: \"Rastreie `soma([4])`. Quais chamadas acontecem, em que ordem, e qual valor cada uma devolve?\" This is one tracing task. Its sub-questions are parts of that trace. Line 35 is only a closing remark about the next step and asks nothing."
+ },
+ {
+  "id": "10.3",
+  "verdict": "met",
+  "evidence": "Searched every line before line 33 for questions or requests. The only one is line 1: \"Se algum desses ainda está instável, me avise\". It is conditional and optional, so it needs no answer. No other questions were found."
+ },
+ {
+  "id": "10.4",
+  "verdict": "met",
+  "evidence": "Searched for new concepts. Found two: a function calling itself on a smaller problem (line 5, \"uma função que se chama com um problema menor\") and the base case (line 5, \"caso base\"). Line 28 (\"lista menor\") develops the first idea rather than adding a new one."
+ },
+ {
+  "id": "10.5",
+  "verdict": "met",
+  "evidence": "Searched for 'pilha', 'stack', 'memoização', 'memoization', 'cauda', 'tail': none found. Lines 16 and 25 describe calls waiting and results returning, but only as part of the trace. The call stack is never named or taught as a topic."
+ },
+ {
+  "id": "10.6",
+  "verdict": "met",
+  "evidence": "Lines 19-22: \"soma([2, 5, 1]) = 2 + soma([5, 1])\" through \"soma([]) = 0   ← caso base\". Line 25: \"`1 + 0 = 1`, depois `5 + 1 = 6`, depois `2 + 6 = 8`\"."
+ },
+ {
+  "id": "10.7",
+  "verdict": "met",
+  "evidence": "Searched for explanations of function, variable or loop. Line 1 assumes this knowledge (\"vou supor que sabe escrever funções\") and explains none of them."
+ },
+ {
+  "id": "10.8",
+  "verdict": "met",
+  "evidence": "Searched for 'Ótima', 'Excelente', 'Boa pergunta' and similar praise. None found."
+ }
+]

@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Concurrency is about *dealing with* several tasks at once. Parallelism is about *running* several tasks at the same instant.\" Line 1 also says \"Concurrency means the tasks overlap in time\""
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 7: \"**Concurrent, not parallel:** one worker starts file 1, and while it waits on the disk or network, it starts file 2\". Line 8: \"**Parallel:** four workers, each cleaning its own files at the same time on four cores.\" Also lines 16-17, waiting vs computing: \"waits (downloads, reads from a database or API, many small files) | concurrency\" and \"computes (heavy regex, big transformations in pure Python) | parallelism\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 10: \"The trait that differs is whether more than one thing is actually executing at the same instant.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 5: \"Suppose you clean 100 CSV files.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "GIL is defined where it first appears at line 19: \"because of the GIL (global interpreter lock)\". Event loop and context switch do not appear. But asyncio first appears at line 3 without a definition: \"you may not have used `threading`, `asyncio` or `multiprocessing` yet\". The reply relies on it as a recommended tool at line 16 and never defines it. Borderline at most, because it is offered as a tool name."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening, line 1. It begins with the definition \"**Concurrency is about *dealing with* several tasks at once.\" There is no praise of the question."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening, line 1. It starts directly with the answer. It does not restate the user's question."
+ }
+]

@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"concurrency is about *juggling* several tasks so they overlap in time. Parallelism is about *actually running* several at the same instant on different CPU cores.\""
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 7: \"**Case A: the slow part is waiting.** Each file comes from a web API, and each download takes 2 seconds of mostly idle time.\" Line 8: \"**Case B: the slow part is computing.** The files are already on disk, and each one takes 2 seconds of real CPU work\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"Parallelism is about *actually running* several at the same instant on different CPU cores.\" Line 7: \"Only one thing runs at any instant, but the waits overlap\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 5: \"Say you have 100 files to clean.\" Line 7: \"Each file comes from a web API, and each download takes 2 seconds\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "Borderline. GIL is defined where it first appears (line 12: \"the Global Interpreter Lock (GIL) lets only one thread run Python code at a time\"). But asyncio first appears in line 3 (\"you haven't used `threading`, `asyncio` or `multiprocessing` much\") with no definition, and line 7 recommends it as a tool (\"In Python you'd use `threading`, `ThreadPoolExecutor` or `asyncio`\"). It is never defined anywhere in the reply. It is only named as a library, not needed to follow the explanation, which makes the case borderline."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise (e.g. 'great question'). The reply opens with \"**Short answer:** concurrency is about...\" and has no praise."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. Line 1 starts directly with the answer (\"**Short answer:** concurrency is about...\"), not a restatement."
+ }
+]

@@ -1,0 +1,47 @@
+[
+ {
+  "id": "7.1",
+  "verdict": "met",
+  "evidence": "First sentence of the text: \"Pesquisadores acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, durante 8 anos.\" (estudo/resumo-simples.md:1)"
+ },
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "The reply opens with a remark (\"Fiz uma versão simples do resumo e salvei em `estudo/resumo-simples.md`. O texto é este:\"). The text to send then follows as a separate blockquote (lines 3-9). The remarks to the user come after it, outside the blockquote (lines 11-13). The text is set apart."
+ },
+ {
+  "id": "7.3",
+  "verdict": "met",
+  "evidence": "\"Quem caminhava pelo menos 30 minutos por dia teve menos demência: 4,1% foram diagnosticados\" (estudo/resumo-simples.md:3)"
+ },
+ {
+  "id": "7.4",
+  "verdict": "met",
+  "evidence": "\"contra 6,3% entre os que caminhavam menos\" (estudo/resumo-simples.md:3)"
+ },
+ {
+  "id": "7.5",
+  "verdict": "met",
+  "evidence": "\"o estudo só observou as pessoas, então não prova que caminhar evita demência\" (estudo/resumo-simples.md:5)"
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline: \"Ou seja: caminhar faz bem e está associado a menos demência\" (estudo/resumo-simples.md:7). 'caminhar faz bem' is stated as a fact and is a causal claim of benefit, placed right beside the dementia association, so a reader may take it as causal. Otherwise the text only uses association language."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Searched estudo/resumo-simples.md for coorte, razão de risco, IC 95%, intervalo de confiança and causalidade reversa. None appear. They were replaced with plain wording (\"só observou as pessoas\", \"risco ficou cerca de 30% menor\", \"Pode ser o contrário\")."
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "\"caminhar faz bem\" (estudo/resumo-simples.md:7). This is a general health claim that does not appear in estudo/resumo.md."
+ },
+ {
+  "id": "7.9",
+  "verdict": "unmet",
+  "evidence": "Word count of estudo/resumo-simples.md: line 1 = 16, line 3 = 36, line 5 = 47, so 99 words before line 7 is counted. This already exceeds the original's 87 words."
+ }
+]

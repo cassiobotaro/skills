@@ -1,0 +1,42 @@
+[
+ {
+  "id": "10.1",
+  "verdict": "met",
+  "evidence": "First sentence (line 1): \"Vou ir em passos curtos.\""
+ },
+ {
+  "id": "10.2",
+  "verdict": "met",
+  "evidence": "Line 32: \"Se eu apagasse as duas linhas do caso base (`if not nums:` e `return 0`) e chamasse `soma([5])`, o que você acha que aconteceria? Responda com o que você prevê e por quê, mesmo que não tenha certeza.\" This is the only question or task. Line 34 is a statement of the plan, not a second task."
+ },
+ {
+  "id": "10.3",
+  "verdict": "met",
+  "evidence": "Searched lines 1-31 for other questions or requests to the user. There are no question marks and no imperative tasks before line 32. Line 28 (\"não tente seguir... Suponha que...\") is advice for writing code, not something the user must answer."
+ },
+ {
+  "id": "10.4",
+  "verdict": "unmet",
+  "evidence": "Borderline. Lines 7-8 introduce two ideas: \"**Caso base:**\" and \"**Passo recursivo:**\". Line 28 adds a third distinct idea, trusting the recursive call: \"Suponha que `soma(nums[1:])` já devolve a resposta certa para a lista menor.\" Line 26 also touches on unwinding: \"as respostas voltam na ordem inversa\"."
+ },
+ {
+  "id": "10.5",
+  "verdict": "met",
+  "evidence": "Searched for pilha/call stack, memoização/memoization/cache, cauda/tail recursion. None appear. Line 26 describes answers returning in reverse order but does not name or explain the call stack."
+ },
+ {
+  "id": "10.6",
+  "verdict": "met",
+  "evidence": "Lines 21-26: \"`soma([3, 1, 2])` precisa de `3 + soma([1, 2])`\" ... \"`soma([])` cai no caso base e devolve `0`\" ... \"`2 + 0 = 2`, depois `1 + 2 = 3`, depois `3 + 3 = 6`.\""
+ },
+ {
+  "id": "10.7",
+  "verdict": "met",
+  "evidence": "Searched for explanations of função/variável/loop. Line 1 explicitly skips them: \"já conhece funções, listas e `if`. Parto disso e não explico mais nada dessas coisas.\" No definitions of these appear."
+ },
+ {
+  "id": "10.8",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for praise such as 'ótima', 'excelente' or 'boa pergunta'. None found. The reply opens directly with \"Vou ir em passos curtos.\""
+ }
+]

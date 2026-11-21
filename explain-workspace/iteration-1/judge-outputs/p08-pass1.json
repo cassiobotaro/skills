@@ -1,0 +1,42 @@
+[
+ {
+  "id": "2.1",
+  "verdict": "met",
+  "evidence": "\"Python não executa o arquivo linha por linha.\" (reply line 1)"
+ },
+ {
+  "id": "2.2",
+  "verdict": "met",
+  "evidence": "It is the first sentence: \"Python não executa o arquivo linha por linha.\" (reply line 1)"
+ },
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "Searched for any text before the first sentence on line 1. The correction is the very first sentence, so nothing precedes it."
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "\"Antes de rodar qualquer coisa, ele lê o arquivo inteiro e o compila para bytecode. Só depois executa esse bytecode.\" (reply line 1)"
+ },
+ {
+  "id": "2.5",
+  "verdict": "met",
+  "evidence": "\"O `SyntaxError` aparece na compilação, e nessa hora o `print` da linha 1 ainda não rodou. Como a compilação falhou, a execução nem começa.\" (reply line 1)"
+ },
+ {
+  "id": "2.6",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for claims that Python is compiled like C or is not interpreted. None found. Line 8 keeps the interpreted framing: \"a máquina virtual executa o bytecode, instrução por instrução. É por isso que o Python costuma ser chamado de \\\"interpretado\\\".\""
+ },
+ {
+  "id": "2.7",
+  "verdict": "met",
+  "evidence": "\"Python não executa o arquivo linha por linha.\" (reply line 1)"
+ },
+ {
+  "id": "2.8",
+  "verdict": "met",
+  "evidence": "Searched the opening of line 1 for praise such as \"ótima pergunta\". The reply opens directly with the correction \"Python não executa o arquivo linha por linha.\""
+ }
+]

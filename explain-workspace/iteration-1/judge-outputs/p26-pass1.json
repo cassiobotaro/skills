@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "Borderline. The first three sentences describe only the mechanism: \"Lazy refill is the standard way to do this. The bucket stores the time of its last update. On each `allow()` call it works out how many tokens a timer would have added since then, clamps the total to `capacity`, and spends from that.\" The first statement of what this gives over a timer comes in the fifth sentence: \"The result is the same as a timer, but without a timer.\" That is outside the first three."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"You can see it in `limiter.py:12-15`.\"; \"**`time.monotonic()` makes the arithmetic safe.**\"; \"In `api.py`, `buckets` grows with every distinct key.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched for any motive stated as fact ('the author chose', 'was done to'). None found. The reply says the opposite: \"Whether the original author chose this for these reasons, I can't tell from the code.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or a token bucket, and for any introductory analogy. None found. The reply opens directly with the lazy-refill mechanism."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements not in the files. None found. The figures used (5/s, BURST 20, 0.2 s yielding 1 token) follow from api.py:3-4 and limiter.py:14. Thread-safety is marked as an inference: \"This is my reading of the code, since I haven't seen the callers.\""
+ }
+]

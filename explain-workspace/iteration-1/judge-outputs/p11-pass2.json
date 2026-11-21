@@ -1,0 +1,47 @@
+[
+ {
+  "id": "8.1",
+  "verdict": "met",
+  "evidence": "Line 5, the first sentence after the greeting 'Oi, Marina,': \"Preciso da sua aprovação para o aditivo do contrato com a Translog.\""
+ },
+ {
+  "id": "8.2",
+  "verdict": "met",
+  "evidence": "Searched the email body (lines 1-14) for dates or deadlines. The deadline is a bracketed gap, line 11: \"até **[data limite]**\". The only other dates are 'maio' and 'julho', which the user gave. No invented date found."
+ },
+ {
+  "id": "8.3",
+  "verdict": "met",
+  "evidence": "Line 18: \"Deixei um campo em aberto: a **data limite** para a aprovação. Você não informou esse prazo ... então vale preencher.\""
+ },
+ {
+  "id": "8.4",
+  "verdict": "met",
+  "evidence": "Line 7: \"Sem o aditivo, passamos a pagar 12% a mais a partir de julho.\""
+ },
+ {
+  "id": "8.5",
+  "verdict": "met",
+  "evidence": "Searched lines 1-14 for a contract value, amounts in R$, meetings, names of people in legal, and claims about what Translog said. None found. 'R$ X' appears only in the note after the email (line 22). Line 11 \"posso te passar o aditivo e a comparação de preços\" is an offer, not a stated fact."
+ },
+ {
+  "id": "8.6",
+  "verdict": "met",
+  "evidence": "Searched lines 3-5 for 'Espero que esteja bem' or a similar template opener. None found; the email goes straight from the greeting to the request."
+ },
+ {
+  "id": "8.7",
+  "verdict": "met",
+  "evidence": "Searched lines 11-14 for 'Fico à disposição' or a similar template closer. None found; the email closes with \"Obrigado,\" and \"[Seu nome]\"."
+ },
+ {
+  "id": "8.8",
+  "verdict": "met",
+  "evidence": "Line 5, first sentence: \"Preciso da sua aprovação para o aditivo do contrato com a Translog.\""
+ },
+ {
+  "id": "8.9",
+  "verdict": "met",
+  "evidence": "Searched lines 1-14 for remarks addressed to the user. None found. The notes to the user start after the '---' separator (line 16). Inside the email, '[data limite]' and '[Seu nome]' are only bracketed gaps."
+ }
+]

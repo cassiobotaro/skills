@@ -1,0 +1,62 @@
+[
+ {
+  "id": "9.1",
+  "verdict": "met",
+  "evidence": "suporte/resposta-revisada.md:3 \"A correção entra em produção na quinta-feira, 26/11.\""
+ },
+ {
+  "id": "9.2",
+  "verdict": "met",
+  "evidence": "suporte/resposta-revisada.md:5 \"Sobre o desconto pelos dias parados: quem decide isso é o nosso financeiro.\""
+ },
+ {
+  "id": "9.3",
+  "verdict": "met",
+  "evidence": "Searched resposta-revisada.md for any promise or refusal of a discount. Line 5 only says finance decides and \"te retorno assim que tiver uma posição\". It neither grants nor denies."
+ },
+ {
+  "id": "9.4",
+  "verdict": "met",
+  "evidence": "First, line 3: \"A correção entra em produção na quinta-feira, 26/11.\" Then line 5: \"Sobre o desconto pelos dias parados: quem decide isso é o nosso financeiro.\""
+ },
+ {
+  "id": "9.5",
+  "verdict": "met",
+  "evidence": "After the greeting at line 1, line 3 reads: \"Sobre a exportação de notas para o ERP: a falha começou com a atualização do conector na última versão. A correção entra em produção na quinta-feira, 26/11.\" The date is in the second sentence."
+ },
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "Searched resposta-revisada.md for \"Que bom que só percebemos\". It is not present."
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "Read all of resposta-revisada.md lines 1-12 looking for ironic or sarcastic phrasing. Found none."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Searched resposta-revisada.md for \"Espero que sim\", \"agradecemos imensamente\" and similar stock openers. None found. The opener is \"Olá, Paulo, bom dia!\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 9 reads \"Qualquer dúvida, é só falar.\" This is a reworded version of the stock closer \"Qualquer dúvida estamos à disposição\"."
+ },
+ {
+  "id": "9.10",
+  "verdict": "unmet",
+  "evidence": "Line 5 states a fact found in neither the thread nor the prompt: \"Já repassei o seu pedido\". The user only said finance decides, not that the request was forwarded. The reply itself admits this is unverified."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Reply line 18: \"O que mudei:\", followed by bullets such as \"**Ironia:** tirei o \\\"Que bom que só percebemos depois de três dias, né\\\".\""
+ },
+ {
+  "id": "9.12",
+  "verdict": "unmet",
+  "evidence": "The change notes run from reply line 18 to line 23: a heading plus five bullets, which is more than three lines."
+ }
+]

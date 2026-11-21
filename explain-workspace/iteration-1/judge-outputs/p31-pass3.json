@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Counted the sentences in reply line 1. There are two: 'A porta padrão do PostgreSQL é a **5432** (TCP).' and 'Ela pode ser mudada pela opção `port` no `postgresql.conf`.' No third sentence."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "Searched reply line 1 for analogy markers ('como', 'tipo', 'parecido', comparisons). None found. The reply only states facts."
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Checked the ending of reply line 1. It ends with 'no `postgresql.conf`.', which is a statement. It is not a question and not an offer of more help."
+ }
+]

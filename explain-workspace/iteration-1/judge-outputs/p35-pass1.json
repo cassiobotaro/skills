@@ -1,0 +1,47 @@
+[
+ {
+  "id": "7.1",
+  "verdict": "met",
+  "evidence": "First sentence of the text to send: \"Pesquisadores acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, durante 8 anos.\""
+ },
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "The reply opens with a remark to the user (\"Deixei o resumo mais simples, pronto para colar no grupo...\"). The text to send sits between '---' separators on lines 3 and 15. The closing remark (line 17) is outside them."
+ },
+ {
+  "id": "7.3",
+  "verdict": "met",
+  "evidence": "\"Entre quem caminhava pelo menos 30 minutos por dia, 4 em cada 100 (4,1%) desenvolveram demência.\""
+ },
+ {
+  "id": "7.4",
+  "verdict": "met",
+  "evidence": "\"Entre quem caminhava menos, foram 6 em cada 100 (6,3%).\""
+ },
+ {
+  "id": "7.5",
+  "verdict": "met",
+  "evidence": "\"não dá para afirmar que caminhar *evita* a demência\" and \"o estudo não prova que uma coisa causa a outra.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Searched the text to send (reply lines 5-13, resumo-simples.md) for previne/reduz/protege stated as fact. Found only association phrasing: \"quem caminhava tinha cerca de 32% menos risco\" and \"caminhar anda junto com menor risco\". The text explicitly denies causation."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Searched the text to send for coorte, razão de risco, IC 95%, intervalo de confiança and causalidade reversa: none appear. 'Causalidade reversa' is replaced by \"a causa pode ser o contrário\". The listed terms appear only in the closing remark to the user (line 17), which is not part of the text to send."
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the text to send for other studies, mechanisms, health-body recommendations and walking advice: none found. The '32% menos risco' figure is derived from the original's razão de risco of 0,68."
+ },
+ {
+  "id": "7.9",
+  "verdict": "unmet",
+  "evidence": "Word count of the text to send: the first paragraph has 16 words, the second 44, the 'Mas atenção...' paragraph about 20, the two bullets about 30, and the closing sentence about 18. That is roughly 128 words, more than the original's 87."
+ }
+]

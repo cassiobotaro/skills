@@ -1,0 +1,47 @@
+[
+ {
+  "id": "7.1",
+  "verdict": "met",
+  "evidence": "\"Uma pesquisa acompanhou 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, durante 8 anos.\""
+ },
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "The reply opens with the remark \"Aqui vai o texto, pronto pra colar:\", but a '---' line follows it and another '---' closes the text, so the text to send is set apart from the remarks to the user."
+ },
+ {
+  "id": "7.3",
+  "verdict": "met",
+  "evidence": "\"Entre as que caminhavam pelo menos 30 minutos por dia, cerca de 4 em cada 100 tiveram demência.\""
+ },
+ {
+  "id": "7.4",
+  "verdict": "met",
+  "evidence": "\"Entre as que caminhavam menos, foram cerca de 6 em cada 100.\""
+ },
+ {
+  "id": "7.5",
+  "verdict": "met",
+  "evidence": "\"Isso não prova que caminhar protege o cérebro.\" and \"só com esse estudo não dá pra dizer que é a caminhada que causa a diferença.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Searched the text between the '---' lines for 'previne', 'reduz', 'protege' and 'causa' stated as fact. 'protege' appears only in the negated \"Isso não prova que caminhar protege o cérebro\". 'risco cerca de 30% menor' is stated as an observation about the group (\"quem caminhava mais teve\"), not as an effect of walking."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Searched the text between the '---' lines for coorte, razão de risco, IC 95%, intervalo de confiança and causalidade reversa. None appears: the CI is rendered as \"entre 11% e 48% menor\" and reverse causation as \"a causa pode ser a inversa\". 'coorte' and 'razão de risco 0,68' appear only in the remarks to the user (line 15), outside the text to send."
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the text for other studies, mechanisms, health-body recommendations and advice to walk a set amount. None found. Every figure maps to estudo/resumo.md: 11%–48% is 1−0.89 to 1−0.52, and 30% is about 1−0.68. Calling the CI \"número exato\" is a mislabel of a source fact, not an added fact."
+ },
+ {
+  "id": "7.9",
+  "verdict": "unmet",
+  "evidence": "Word count of the text to send (lines 4–10): line 4 has 17 words and line 6 has 57, for 74. Line 8 then adds \"Isso não prova que caminhar protege o cérebro.\" (8 words, total 82) and \"Quem já está começando a ter demência pode caminhar menos, então a causa pode ser a inversa.\" (17 words, total 99). The count passes 87 before the end of line 8, and lines 8–10 hold more words still."
+ }
+]

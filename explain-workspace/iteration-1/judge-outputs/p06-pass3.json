@@ -1,0 +1,47 @@
+[
+ {
+  "id": "8.1",
+  "verdict": "met",
+  "evidence": "First sentence of the body, after the greeting 'Oi, Marina,': \"Preciso da sua aprovação para o aditivo do contrato com a Translog, até [data limite].\""
+ },
+ {
+  "id": "8.2",
+  "verdict": "met",
+  "evidence": "Searched the subject and body for a concrete approval date. The only deadlines are bracketed gaps: subject \"até [data]\" and body \"até [data limite]\". 'maio' and 'julho' come from the user."
+ },
+ {
+  "id": "8.3",
+  "verdict": "met",
+  "evidence": "\"**[data limite]:** você não informou até quando a Marina precisa aprovar. Não inventei uma data, porque o pedido depende dela.\""
+ },
+ {
+  "id": "8.4",
+  "verdict": "met",
+  "evidence": "\"Sem o aditivo, passamos a pagar 12% a mais a partir de julho.\""
+ },
+ {
+  "id": "8.5",
+  "verdict": "met",
+  "evidence": "Searched the email for a contract value, an amount in reais, a meeting, a name of someone in legal, or a statement of what Translog said. None found. The reais impact is a bracketed placeholder: \"[Impacto em reais dos 12% a mais, por mês ou por ano.]\". Every stated fact (price change in May, 12% from July, 12-month lock, legal review) comes from the user."
+ },
+ {
+  "id": "8.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for 'Espero que esteja bem' or a similar template opener. The email goes from 'Oi, Marina,' straight to the request."
+ },
+ {
+  "id": "8.7",
+  "verdict": "met",
+  "evidence": "Searched the closing for 'Fico à disposição para quaisquer esclarecimentos' or a similar template closer. The email closes with \"Se tiver dúvida, me chama.\" The formal phrase appears only in the note to the user after the email, as an alternative."
+ },
+ {
+  "id": "8.8",
+  "verdict": "met",
+  "evidence": "\"Preciso da sua aprovação para o aditivo do contrato com a Translog, até [data limite].\""
+ },
+ {
+  "id": "8.9",
+  "verdict": "met",
+  "evidence": "Searched lines 1-15 (the email) for remarks addressed to the user. Lines 9 and 11 are bracketed gaps (\"[Impacto em reais...]\", \"[Como aprovar: ...]\"), which the check excludes. All notes to the user come after the '---' separator."
+ }
+]

@@ -1,0 +1,47 @@
+[
+ {
+  "id": "8.1",
+  "verdict": "met",
+  "evidence": "Line 5, the first sentence after the greeting: \"Preciso da sua aprovação para o aditivo do contrato com a Translog até [data limite].\""
+ },
+ {
+  "id": "8.2",
+  "verdict": "met",
+  "evidence": "Searched the email body (lines 1-14) for any deadline or date. The approval deadline appears only as the bracketed gap \"[data limite]\" (line 5). The only other dates are \"em maio\" and \"a partir de julho\", which the user gave."
+ },
+ {
+  "id": "8.3",
+  "verdict": "met",
+  "evidence": "Line 19: \"**Data limite** da aprovação. Ela é o que faz a Marina agir, então não deixe sem data.\""
+ },
+ {
+  "id": "8.4",
+  "verdict": "met",
+  "evidence": "Line 7: \"Sem o aditivo, passamos a pagar 12% a mais a partir de julho\""
+ },
+ {
+  "id": "8.5",
+  "verdict": "met",
+  "evidence": "Searched the email body for a contract value, an amount in reais, a meeting, a name in legal, or a statement of what Translog said. The amounts appear only as the placeholders \"[equivale a R$ X por mês / R$ Y por ano]\". Legal is referred to only as \"O jurídico\". There is no meeting and no quoted statement from Translog."
+ },
+ {
+  "id": "8.6",
+  "verdict": "met",
+  "evidence": "Searched lines 3-5 and the rest of the email for 'Espero que esteja bem' or a similar template opener. The email goes straight from \"Oi Marina,\" to the request."
+ },
+ {
+  "id": "8.7",
+  "verdict": "met",
+  "evidence": "Searched the closing lines 11-14 for 'Fico à disposição' or a similar template closer. The email closes with \"Se tiver alguma dúvida, me avisa.\" and then \"Obrigado,\", which are not that template."
+ },
+ {
+  "id": "8.8",
+  "verdict": "met",
+  "evidence": "The email is in Portuguese. Its first sentence (line 5) is \"Preciso da sua aprovação para o aditivo do contrato com a Translog até [data limite].\""
+ },
+ {
+  "id": "8.9",
+  "verdict": "met",
+  "evidence": "Searched email lines 1-14 for remarks addressed to the user. The only user-directed text is inside brackets, for example \"[Se houver prazo da Translog para assinatura, informar aqui.]\" and \"[encaminho para assinatura / próximo passo]\". These are bracketed gaps, which the check excludes. All notes for the user come after the \"---\" separator on line 16."
+ }
+]

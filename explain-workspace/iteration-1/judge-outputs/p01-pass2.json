@@ -1,0 +1,47 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"\\\"50%\\\" sozinho não diz se é muito ou pouco. Falta saber **50% de quê**.\" and line 15: \"**Quanto vale depende do risco da sua mãe**\""
+ },
+ {
+  "id": "5.2",
+  "verdict": "met",
+  "evidence": "Line 10: \"Se, sem o remédio, 10 em cada 100 pessoas têm infarto em 5 anos, com ele seriam 5 em 100.\" Line 11: \"Se, sem o remédio, 2 em cada 1.000 têm infarto, com ele seria 1 em 1.000.\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "Line 8: \"Dois exemplos com os mesmos \\\"50%\\\":\" and the conditional \"Se, sem o remédio, ...\" on lines 10 and 11"
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for figures presented as real data about the drug or the mother's risk. The only numbers are the user's own \"50%\" and the illustrative examples on lines 10-11. The mother's risk is given only as an open question (line 28)."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for any drug name, brand or class. None found. It says only \"o remédio\" and asks for the \"nome do remédio\" (line 36)."
+ },
+ {
+  "id": "5.6",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for study names, trials, authors or journals. None found. It refers only generically to \"Qualidade do estudo\" (line 24) and asks for the \"nome ... do estudo\" (line 36)."
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "Line 28: \"Qual é o risco de infarto da minha mãe nos próximos 5 ou 10 anos, sem o remédio e com ele?\""
+ },
+ {
+  "id": "5.8",
+  "verdict": "met",
+  "evidence": "Searched for a verdict on whether the drug is worth taking. Found only conditional statements: \"tende a ser um ganho concreto\" for high-risk people (line 17) and \"os 50% podem ser um ótimo resultado\" (line 34). It leaves the decision to the family and the doctor: \"ajudam vocês a decidir com clareza\" (line 34)."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "First sentence (line 1): \"\\\"50%\\\" sozinho não diz se é muito ou pouco.\""
+ }
+]

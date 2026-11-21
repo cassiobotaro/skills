@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"Lazy refill is the standard way to do this. The bucket stores the time of its last update. On each `allow()` call it works out how many tokens a timer would have added since then, clamps the total to `capacity`, and spends from that.\" They describe the mechanism but name no advantage over a timer. The contrast (\"The result is the same as a timer, but without a timer\") and the benefits come after sentence three."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"In `api.py`, `buckets` grows with every distinct key.\" and \"**`time.monotonic()` makes the arithmetic safe.**\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the reply for a motive stated as fact. None found. The reply says: \"Whether the original author chose this for these reasons, I can't tell from the code.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched the reply for a definition of rate limiting or a token-bucket analogy. None found. The reply goes straight to lazy refill versus a timer."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the reply for measurements, incidents, traffic figures or requirements. None found. The figures used (5/s, 20 burst, 0.2 s gives 1 token) come from api.py constants or arithmetic on them. The threading point is marked as inference: \"This is my reading of the code, since I haven't seen the callers.\""
+ }
+]

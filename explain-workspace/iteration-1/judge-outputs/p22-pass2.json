@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"The code doesn't record why it was written this way, so I'm inferring the reasoning from what's in `limiter.py` and `api.py`.\" / \"There are no comments, docs or commit history for this.\" / \"This is the standard lazy-refill pattern, and the design supports these reasons:\". None of them says what elapsed-time refill gives that a timer does not. The contrast first appears in the numbered points that follow."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` keeps a `buckets` dict and creates a `TokenBucket` the first time a key shows up.\" Also: \"Tokens are `min(capacity, tokens + elapsed * rate)`\" and \"`time.monotonic()` is also immune to wall-clock changes\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched for motive phrasing such as 'the author chose', 'was done to' and 'because'. The reply frames its reasoning as inference: \"I'm inferring the reasoning\", \"the design supports these reasons\", and \"If the original author left a rationale somewhere ... that would be the authoritative answer\". The one 'because' (\"because the bucket's state only matters when someone asks\") explains how the design behaves, not why the author chose it. \"The `tokens` field is a float for that reason\" sits under the inference framing."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for a definition of rate limiting or a token bucket, and for any introductory analogy. None found. The reply assumes the reader already knows these concepts and goes straight to lazy refill versus a timer."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements not in the files. None found. The reply stays with the file contents (the buckets dict, min/elapsed*rate, time.monotonic, no lock). It presents multiple workers and Redis as conditionals (\"If you need a global limit\"), not as project facts."
+ }
+]

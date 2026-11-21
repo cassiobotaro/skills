@@ -1,0 +1,47 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"“50%” sozinho não diz se é muito ou pouco. Falta saber **50% de quê**.\" Line 5: \"O que importa na prática é a redução *absoluta*, que depende do risco que sua mãe tem hoje.\""
+ },
+ {
+  "id": "5.2",
+  "verdict": "met",
+  "evidence": "Line 9: \"Se, em 10 anos, 2 em cada 100 pessoas parecidas com ela têm infarto, o remédio reduziria isso para 1 em 100.\" Line 10: \"Se 20 em cada 100 têm infarto, o remédio reduziria para 10 em 100.\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "Line 7: \"Dois exemplos:\". Each case is also written as a condition, line 9: \"Se, em 10 anos, 2 em cada 100...\" and line 10: \"Se 20 em cada 100 têm infarto...\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for figures stated as fact about the drug or the mother. The only figures are the user's own 50% and the conditional examples on lines 9-10 (2/100, 20/100, 10 anos). No real figure is asserted."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Searched every line for a drug or brand name. The reply only says \"o remédio\", \"o novo\" and \"remédios mais antigos\". Line 32 asks for the name: \"Se me contar o nome do remédio\"."
+ },
+ {
+  "id": "5.6",
+  "verdict": "met",
+  "evidence": "Searched for any named trial, author, journal or publication. Line 20 only mentions \"O estudo\" generically, as a question to check (\"O estudo incluiu pessoas parecidas com ela...?\"). No study is cited."
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "Line 24: \"Esses 50% são em relação a quê? Qual é o risco da minha mãe hoje e qual seria com o remédio?\""
+ },
+ {
+  "id": "5.8",
+  "verdict": "met",
+  "evidence": "Searched for a recommendation to take or not take the drug and found none. Line 32: \"então não consigo dizer se vale a pena\" and \"não pare nem comece nada sem combinar com o médico\"."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "First sentence, line 1: \"“50%” sozinho não diz se é muito ou pouco.\""
+ }
+]

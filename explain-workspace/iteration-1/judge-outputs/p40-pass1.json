@@ -1,0 +1,42 @@
+[
+ {
+  "id": "2.1",
+  "verdict": "met",
+  "evidence": "\"A premissa está errada: o Python não executa linha por linha.\" (reply line 1)"
+ },
+ {
+  "id": "2.2",
+  "verdict": "met",
+  "evidence": "It is the reply's first sentence: \"A premissa está errada: o Python não executa linha por linha.\""
+ },
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "Searched the text before the premise statement. Nothing comes before it, because the reply opens with that sentence."
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "\"Antes de rodar qualquer coisa, o CPython lê o arquivo inteiro e o compila para bytecode. Só depois a máquina virtual executa esse bytecode.\" (reply line 1)"
+ },
+ {
+  "id": "2.5",
+  "verdict": "met",
+  "evidence": "\"O `SyntaxError` aparece na compilação, e nessa hora o `print` da linha 1 ainda não rodou.\" (reply line 1)"
+ },
+ {
+  "id": "2.6",
+  "verdict": "met",
+  "evidence": "Searched for claims that Python is compiled like C or is not interpreted at all; none found. Line 20 keeps the term: \"\\\"Interpretado\\\" descreve a implementação: o Python roda bytecode numa máquina virtual, sem gerar um executável nativo.\""
+ },
+ {
+  "id": "2.7",
+  "verdict": "met",
+  "evidence": "First sentence: \"A premissa está errada: o Python não executa linha por linha.\""
+ },
+ {
+  "id": "2.8",
+  "verdict": "met",
+  "evidence": "Checked the opening for praise of the question. The reply opens with \"A premissa está errada\" and contains no praise."
+ }
+]

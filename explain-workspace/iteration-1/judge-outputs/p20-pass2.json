@@ -1,0 +1,47 @@
+[
+ {
+  "id": "8.1",
+  "verdict": "met",
+  "evidence": "First sentence of the body, after the greeting: \"Preciso da sua aprovação para o aditivo do contrato com a Translog.\" (line 5)"
+ },
+ {
+  "id": "8.2",
+  "verdict": "met",
+  "evidence": "Searched the email (lines 1-14) for any approval deadline or date. The only one is the bracketed gap \"Se você puder aprovar até **[data]**\" (line 9). The other date references are 'maio' and 'julho', which the user gave, and \"antes de o novo preço começar a valer\", which is not a date."
+ },
+ {
+  "id": "8.3",
+  "verdict": "met",
+  "evidence": "\"Deixei um campo em aberto: **o prazo para a aprovação**, que é o `[data]` do segundo parágrafo. ... então preencha antes de enviar.\" (line 18)"
+ },
+ {
+  "id": "8.4",
+  "verdict": "met",
+  "evidence": "\"Sem o aditivo, passamos a pagar 12% a mais a partir de julho.\" (line 7)"
+ },
+ {
+  "id": "8.5",
+  "verdict": "met",
+  "evidence": "Searched lines 1-14 for a contract value, an amount in reais, a stated meeting, a name of someone in legal, and any claim about what Translog said. None found. \"conversar rapidinho\" (line 11) is an offer, not a stated meeting. \"o parecer do jurídico\" (line 11) is a mild inference from the user's statement that legal already reviewed it, not a new fact."
+ },
+ {
+  "id": "8.6",
+  "verdict": "met",
+  "evidence": "Searched lines 3-5 for 'Espero que esteja bem' or a similar template opener. None found: the greeting \"Oi, Marina,\" goes straight to the request."
+ },
+ {
+  "id": "8.7",
+  "verdict": "met",
+  "evidence": "Searched lines 11-14 for 'Fico à disposição' or a similar template closer. None found: the email closes with a specific offer and \"Obrigado,\"."
+ },
+ {
+  "id": "8.8",
+  "verdict": "met",
+  "evidence": "\"Preciso da sua aprovação para o aditivo do contrato com a Translog.\" (line 5)"
+ },
+ {
+  "id": "8.9",
+  "verdict": "met",
+  "evidence": "Searched lines 1-14 for remarks addressed to the user. None found: only the bracketed gaps [data] and [seu nome]. The notes to the user come after the '---' separator (lines 18-20)."
+ }
+]

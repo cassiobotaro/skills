@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: 'The code doesn't record why it was written this way, so I'm inferring the reasoning from what's in `limiter.py` and `api.py`.' / 'There are no comments, docs or commit history for this.' / 'This is the standard lazy-refill pattern, and the design supports these reasons:'. None of them says what elapsed-time refill gives over a periodic timer. The contrast first appears in point 1 ('With lazy refill, an idle bucket costs only memory and no CPU'), which comes after the first three sentences."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "'`api.py` keeps a `buckets` dict and creates a `TokenBucket` the first time a key shows up.' Also: 'Tokens are `min(capacity, tokens + elapsed * rate)`.'"
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the reply for motive stated as fact ('the author chose', 'was done to', 'because the author'). None found. The reasoning is marked as inference: 'so I'm inferring the reasoning' and 'If the original author left a rationale somewhere ... that would be the authoritative answer, and I haven't seen one.'"
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched the reply for a definition of rate limiting or token bucket and for any introductory bucket analogy. None found. The reply starts directly with 'This is the standard lazy-refill pattern'."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the reply for measurements, incidents, traffic figures or requirements not present in api.py or limiter.py. None found. The multi-worker, high-cardinality and multi-thread scenarios are stated conditionally ('If `check()` is called from multiple threads', 'If key cardinality is high', 'If you need a global limit'), not as facts about the project."
+ }
+]

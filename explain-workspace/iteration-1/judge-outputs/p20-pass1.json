@@ -1,0 +1,47 @@
+[
+ {
+  "id": "8.1",
+  "verdict": "met",
+  "evidence": "First sentence of the body (line 5): \"Preciso da sua aprovação para o aditivo do contrato com a Translog.\""
+ },
+ {
+  "id": "8.2",
+  "verdict": "met",
+  "evidence": "Searched email lines 1-14 for deadlines or dates. The only approval deadline is the bracketed gap \"até **[data]**\" (line 9). The other date references are 'maio' and 'a partir de julho', both given by the user. 'antes de o novo preço começar a valer' names no new date."
+ },
+ {
+  "id": "8.3",
+  "verdict": "met",
+  "evidence": "Line 18: \"Deixei um campo em aberto: **o prazo para a aprovação**, que é o `[data]` do segundo parágrafo. ... então preencha antes de enviar.\""
+ },
+ {
+  "id": "8.4",
+  "verdict": "met",
+  "evidence": "Line 7: \"Sem o aditivo, passamos a pagar 12% a mais a partir de julho.\""
+ },
+ {
+  "id": "8.5",
+  "verdict": "met",
+  "evidence": "Searched email lines 1-14 for a contract value, an amount in reais, a scheduled meeting, a legal staff name, and claims about what Translog said. None found. 'parecer do jurídico' and 'conversar rapidinho' are an offer and an inference from the user's statement that legal reviewed, not new facts. The impact in reais appears only in the advice after the email (line 20)."
+ },
+ {
+  "id": "8.6",
+  "verdict": "met",
+  "evidence": "Searched lines 3-5 for template openers such as 'Espero que esteja bem'. The email goes straight from 'Oi, Marina,' to the request."
+ },
+ {
+  "id": "8.7",
+  "verdict": "met",
+  "evidence": "Searched lines 11-14 for template closers such as 'Fico à disposição para quaisquer esclarecimentos'. The email closes with 'Obrigado, [seu nome]'. Line 11 is a specific offer, not the template phrase."
+ },
+ {
+  "id": "8.8",
+  "verdict": "met",
+  "evidence": "First sentence: \"Preciso da sua aprovação para o aditivo do contrato com a Translog.\""
+ },
+ {
+  "id": "8.9",
+  "verdict": "met",
+  "evidence": "Searched email lines 1-14 for remarks addressed to the user. Found none. The only non-email items are the bracketed gaps [data] and [seu nome]. The notes to the user start after the '---' separator (line 16)."
+ }
+]

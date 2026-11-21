@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 2: \"**Concurrency** means juggling several tasks so they overlap in time. They take turns, and only one may be running at any instant.\" Line 3: \"**Parallelism** means actually running several tasks at the same moment, on different CPU cores.\" These are the reply's first three sentences, after the heading \"**Short version:**\"."
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "One core versus several, line 5: \"One cook is making soup and bread... That's concurrency: one cook, two tasks in progress\" versus \"Two cooks, one on soup and one on bread, working at the same time is parallelism.\" Waiting versus computing, line 15: \"waits on files, network, APIs, or a database | I/O-bound\" versus line 16: \"crunches numbers, parses, or transforms lots of data | CPU-bound\"."
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 2: \"only one may be running at any instant\"; line 3: \"actually running several tasks at the same moment\"."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 34: \"CPU-bound, such as cleaning 50 big CSV files. Processes use all cores\"; line 50: \"If you're cleaning many independent files, `ProcessPoolExecutor` is usually the easiest win.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "Borderline. GIL is defined where it first appears (line 18: \"Python's GIL (Global Interpreter Lock) lets only one thread run Python code at a time\"). But `asyncio` first appears in line 15, \"concurrency: `threading`, `asyncio`, or `concurrent.futures.ThreadPoolExecutor`\", with no definition anywhere in the reply. It is listed as a recommended tool, so it is unclear whether the reply relies on it. Searched for: GIL, event loop, asyncio, context switch."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening of the reply for praise (e.g. \"great question\"). Line 1 is \"**Short version:**\" and line 2 starts the definition directly. No praise found."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening of the reply for a restatement of the question. Line 1 is \"**Short version:**\", followed directly by the definitions. No restatement found."
+ }
+]

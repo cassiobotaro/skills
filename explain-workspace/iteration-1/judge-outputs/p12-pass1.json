@@ -1,0 +1,47 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "\"Falta saber 50% **de quê**: quanto é o risco de infarto da sua mãe hoje, sem o remédio novo.\" (line 1)"
+ },
+ {
+  "id": "5.2",
+  "verdict": "met",
+  "evidence": "Line 5: \"Se, entre pessoas como sua mãe, 2 em cada 100 teriam infarto nos próximos anos, o remédio levaria isso a 1 em 100.\" Line 6: \"Se 20 em cada 100 teriam infarto, o remédio levaria isso a 10 em 100.\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "\"Os números abaixo são hipotéticos, só para ilustrar\" (line 3)"
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "Searched all 21 lines for real figures about the drug or the mother's risk. The only numbers are the illustrative 2/100, 20/100 and NNT 100, all marked hypothetical. Line 10 is conditional and gives no figure. Line 19 says: \"Não tenho como verificar o remédio nem o estudo\"."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Searched the reply for any drug or brand name. None found. It refers only to \"o remédio novo\", and line 19 says: \"não sei qual é o medicamento\"."
+ },
+ {
+  "id": "5.6",
+  "verdict": "met",
+  "evidence": "Searched for study names, authors, trials or journals. None found. \"estudo\" appears only generically (\"pela bula do estudo\", \"verificar o remédio nem o estudo\")."
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "\"**Qual é o risco dela hoje, e qual seria com o remédio?** Peça em números do tipo \"x em 100, em tantos anos\"\" (line 14)"
+ },
+ {
+  "id": "5.8",
+  "verdict": "met",
+  "evidence": "Searched for any verdict on whether to take the drug. Line 10 is conditional only (\"Se a mãe já teve infarto ou tem risco alto, 50% costuma ser muito. Se o risco dela é baixo...\") and adds \"Não dá para saber qual é o caso com o que você me contou.\" The decision is left to the user and the cardiologist."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "\"\"50%\" não diz, sozinho, se é muito.\" (line 1)"
+ }
+]

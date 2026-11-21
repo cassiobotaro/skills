@@ -1,0 +1,47 @@
+[
+ {
+  "id": "7.1",
+  "verdict": "met",
+  "evidence": "First sentence of the text to send (reply line 4): \"Saiu um estudo sobre caminhada e demência.\""
+ },
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "Searched before and inside the text to send. The only line before it is the remark \"Aqui vai a versão para colar no grupo:\" (line 1). The text is set off by \"---\" on lines 3 and 11. The remarks to the user come after the closing separator (lines 13-17)."
+ },
+ {
+  "id": "7.3",
+  "verdict": "met",
+  "evidence": "\"Entre quem caminhava pelo menos 30 minutos por dia, cerca de 4 em cada 100 tiveram demência.\" (line 6)"
+ },
+ {
+  "id": "7.4",
+  "verdict": "met",
+  "evidence": "\"Entre quem caminhava menos, foram cerca de 6 em cada 100.\" (line 6)"
+ },
+ {
+  "id": "7.5",
+  "verdict": "met",
+  "evidence": "\"Ou seja, caminhar está associado a menos demência, mas o estudo não mostra que seja a causa.\" (line 10)"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Searched lines 4-10 for causal claims. The only use of \"protege\" is negated: \"Isso não prova que caminhar protege o cérebro.\" The phrase \"quem caminhava mais tinha um risco um terço menor\" describes an association, not a cause. No 'previne' or 'reduz o risco' stated as fact."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Searched lines 4-10 for coorte, razão de risco, IC 95%, intervalo de confiança and causalidade reversa. None of these appears. They are named only in the remarks to the user (line 13), which is outside the text to send."
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched lines 4-10 for added facts: other studies, mechanisms, health-body recommendations, walking advice. None found. \"não mandou ninguém caminhar\" paraphrases \"observacional\". \"um terço menor\" restates 0,68. \"pode ser um pouco maior ou menor\" restates the confidence interval."
+ },
+ {
+  "id": "7.9",
+  "verdict": "unmet",
+  "evidence": "Counted the words of the text to send (lines 4-10). By the end of line 6 the count is already about 84 words. Lines 8 and 10 add roughly 70 more, for a total of about 150 words, which is longer than the 87-word original."
+ }
+]

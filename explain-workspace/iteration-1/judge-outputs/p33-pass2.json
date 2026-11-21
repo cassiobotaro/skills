@@ -1,0 +1,47 @@
+[
+ {
+  "id": "7.1",
+  "verdict": "met",
+  "evidence": "First sentence of the text: \"Pesquisadores acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, durante 8 anos.\" (estudo/resumo-simples.md:1)"
+ },
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "The reply opens with a remark to the user (\"Fiz uma versão simples do resumo e salvei em `estudo/resumo-simples.md`. O texto é este:\"). The text to send is then set apart as a blockquote (reply lines 3-9). The remarks that follow (lines 11-13) are outside the quote. Nothing stray sits inside the quoted text."
+ },
+ {
+  "id": "7.3",
+  "verdict": "met",
+  "evidence": "\"Quem caminhava pelo menos 30 minutos por dia teve menos demência: 4,1% foram diagnosticados\" (estudo/resumo-simples.md:3)"
+ },
+ {
+  "id": "7.4",
+  "verdict": "met",
+  "evidence": "\"contra 6,3% entre os que caminhavam menos\" (estudo/resumo-simples.md:3)"
+ },
+ {
+  "id": "7.5",
+  "verdict": "met",
+  "evidence": "\"o estudo só observou as pessoas, então não prova que caminhar evita demência\" (estudo/resumo-simples.md:5)"
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. \"Ou seja: caminhar faz bem e está associado a menos demência\" (estudo/resumo-simples.md:7). \"caminhar faz bem\" states a causal benefit of walking as fact. It does not name dementia, but borderline counts as unmet."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Searched estudo/resumo-simples.md for coorte, razão de risco, IC 95%, intervalo de confiança and causalidade reversa. None appears. They are replaced by \"só observou as pessoas\", \"o risco ficou cerca de 30% menor\" and \"Pode ser o contrário: quem já está começando a ter demência talvez caminhe menos\"."
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "\"caminhar faz bem\" (estudo/resumo-simples.md:7). This general health claim does not appear in estudo/resumo.md."
+ },
+ {
+  "id": "7.9",
+  "verdict": "unmet",
+  "evidence": "Word count of estudo/resumo-simples.md: paragraph 1 has 16 words, paragraph 2 has 36 and paragraph 3 has 47. That is already 99 words before paragraph 4, which exceeds the original's 87."
+ }
+]

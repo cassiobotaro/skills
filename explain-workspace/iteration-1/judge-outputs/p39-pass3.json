@@ -1,0 +1,62 @@
+[
+ {
+  "id": "9.1",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"A exportação de notas para o ERP volta a funcionar na quinta-feira, 26/11, quando a correção entra em produção.\""
+ },
+ {
+  "id": "9.2",
+  "verdict": "met",
+  "evidence": "Reply line 7: \"Sobre o desconto na mensalidade, a decisão é do financeiro. Ainda não tenho a resposta.\""
+ },
+ {
+  "id": "9.3",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-7 for any promise or refusal of the discount. Line 7 only says the finance team decides and the answer will come by [data]. No promise and no refusal found."
+ },
+ {
+  "id": "9.4",
+  "verdict": "met",
+  "evidence": "First, line 3: \"A exportação de notas para o ERP volta a funcionar na quinta-feira, 26/11\". Then, line 7: \"Sobre o desconto na mensalidade, a decisão é do financeiro.\""
+ },
+ {
+  "id": "9.5",
+  "verdict": "met",
+  "evidence": "First sentence after the greeting \"Olá, Paulo, bom dia.\": \"A exportação de notas para o ERP volta a funcionar na quinta-feira, 26/11, quando a correção entra em produção.\""
+ },
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "Searched the revised client text (reply lines 1-7) for \"Que bom que só percebemos depois de três dias, né\". Not present. It appears only quoted in the change notes (line 14), not in the text for the client."
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-7 for sarcasm or irony. The removed line is replaced by a direct apology: \"Pedimos desculpas pelos dias parados e por termos demorado a perceber o problema.\" No sarcasm found."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-7 for \"Espero que sim!\", \"agradecemos imensamente\" and similar template openers. None found. The opening is only \"Olá, Paulo, bom dia.\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-7 for \"Qualquer dúvida estamos à disposição\" and similar template closers. None found. The text ends with \"Retorno até [data] com o que ficar definido.\""
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-7 for facts absent from the thread and prompt. The cause given is only the connector update (thread lines 11-13). The late detection is from thread line 13. No compensation is offered. The finance deadline is a bracketed gap \"[data]\". The date 16/11 appears only in the notes to the user (line 18), not in the client text."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Reply line 12: \"**O que mudei**\", followed by bullets, e.g. line 13: \"Coloquei a resposta sobre a data no começo, com o dia escrito por extenso.\""
+ },
+ {
+  "id": "9.12",
+  "verdict": "unmet",
+  "evidence": "The 'O que mudei' section runs from reply line 12 to line 16: a header plus four bullets, one of them a long multi-sentence bullet (line 14). The assumptions paragraph (line 18) adds more. This is well over three lines."
+ }
+]
