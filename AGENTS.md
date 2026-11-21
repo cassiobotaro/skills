@@ -6,7 +6,7 @@ host. Two more files are read on demand; see "Read on demand" at the end.
 
 ## What this repo is
 
-`cassiobotaro-skills` — architecture-documentation skills, one code-comments skill, and one prose-editing skill, in the open **Agent Skills** standard
+`cassiobotaro-skills` — software engineering skills (decision records, design docs, diagrams, code comments, prose editing), in the open **Agent Skills** standard
 (`SKILL.md`), installable in any compatible host (Claude Code, GitHub Copilot, Google Antigravity,
 OpenCode, … — via `npx skills add cassiobotaro/skills` or `gh skill install cassiobotaro/skills <skill>`).
 The repository is also a Claude Code **plugin marketplace** where each skill ships as an
