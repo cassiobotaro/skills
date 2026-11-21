@@ -36,3 +36,29 @@ Nothing was invented in the two runs that used the skill. The unaided rewrite of
 case moved "reduz custos" from the experts to the service, which the original did not say.
 
 Cost: US$ 0.27 for the six sessions, as reported by the CLI.
+
+## Delegation from `adr` and `design-doc`
+
+Six more sessions, same model and flags plus the file tools, each in a scratch project
+holding the calling skill and `unslop`. The prompts are eval 5 of `adr` (fresh log, in
+Portuguese) and eval 1 of `design-doc` (new document, in Portuguese), word for word.
+Nothing was graded against the checks of either eval.
+
+| Wording in the calling skill | `adr` | `design-doc` |
+|---|---|---|
+| First draft: one sentence in the write step, "when the `unslop` skill is installed, apply it" | 0 of 1 runs invoked `unslop` | 0 of 1. The run read `unslop/SKILL.md` with `cat` and its reply said "Não rodei o `unslop`". |
+| As shipped (`adr` 1.5.0, `design-doc` 1.6.0): "invoke it once the file is written", plus a first line in the self-review that checks it ran | 2 of 2 | 2 of 2 |
+
+In the four runs of the shipped wording:
+
+- `adr`: both logs keep `Date:` and the four English headings in both records, and the
+  slugs are the ASCII ones (`0001-registrar-decis-es-de-arquitetura.md`). One reply said
+  that `unslop` found nothing to cut.
+- `design-doc`: each run made five to seven edits to the document after invoking `unslop`.
+  Both documents end with no em dash and keep the `<details>` block. The documents were
+  not saved before those edits, so what `unslop` changed was not diffed.
+
+The first draft failed once per skill and the shipped wording worked twice per skill. That
+separates the two wordings on these two prompts and measures no rate.
+
+Cost: US$ 1.24 for the six sessions, as reported by the CLI.
