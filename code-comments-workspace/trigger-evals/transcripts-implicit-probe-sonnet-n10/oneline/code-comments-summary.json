@@ -1,0 +1,77 @@
+{
+  "skill": "code-comments",
+  "model": "claude-sonnet-5-5",
+  "query": "muda o intervalo desse poller de 10 pra 45 segundos:\n\nPOLL_INTERVAL = 10  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)",
+  "runs": [
+    {
+      "candidate": "code-comments-skill-57c620f8",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor de `POLL_INTERVAL` mudou, de 10 para 45. O comentário continua correto, então ficou como estava.\n\nEsse trecho não está no repositório `skills`, então não editei nenhum arquivo. Se ele estiver em outro projeto, me diga o caminho e eu aplico a mudança lá.",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run00.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-5030f8ac",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor da constante mudou, de `10` para `45`. O comentário continua correto, então o deixei como estava.",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run01.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-871364a1",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor de `POLL_INTERVAL` mudou, de 10 para 45. O comentário continua correto, porque a unidade ainda é segundos.\n\nVocê colou o trecho em vez de apontar um arquivo, então não editei nada no repositório. Se esse código estiver em algum arquivo daqui, me diga qu",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run02.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-1672cdac",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor de `POLL_INTERVAL` mudou, de 10 para 45. O comentário continua correto, então o deixei como estava.\n\nEsse trecho não está em nenhum arquivo deste repositório, então não editei nada aqui. Se ele estiver em outro projeto, me diga o caminho do arquivo e eu",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run03.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-d84c914a",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor mudou, de `10` para `45`. O comentário \"seconds between polls\" continua correto, então o mantive.\n\nEsse código não está no repositório, então não editei nenhum arquivo. Se ele estiver em algum arquivo, me diga qual e eu faço a alteração lá.",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run04.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-1a4f735d",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor de `POLL_INTERVAL` mudou, de 10 para 45. O comentário continua correto, então o deixei como estava.\n\nEsse snippet não está no repositório, então não editei nenhum arquivo. Se ele estiver em algum arquivo, me diga qual e eu faço a alteração lá.",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run05.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-2f09586e",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor da constante mudou. O comentário continua correto, e `run()` usa `POLL_INTERVAL`, então não precisa de outro ajuste.",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run06.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-ef023b84",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor da constante mudou. O comentário continua correto, e `run()` não precisa de alteração porque já usa `POLL_INTERVAL`.\n\nSe esse código estiver em um arquivo do repositório, me diga qual, que eu faço a edição lá.",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run07.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-f9922391",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor mudou, de `10` para `45`. O comentário \"seconds between polls\" continua correto, então ficou como estava.\n\nVocê colou o trecho em vez de apontar um arquivo, então não editei nada no repositório. Se ele estiver em algum arquivo, me diga qual e eu faço a ",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run08.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-bc8eff81",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "```python\nPOLL_INTERVAL = 45  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)\n```\n\nSó o valor de `POLL_INTERVAL` mudou, de 10 para 45. O comentário continua correto, e `run()` não precisa de alteração porque já lê a constante.\n\nIsso era um trecho colado, não um arquivo do repositório, então não editei nada. Se o poller estiver em um arquivo, me ",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-implicit-probe-sonnet-n10/oneline/code-comments-run09.jsonl"
+    }
+  ]
+}
