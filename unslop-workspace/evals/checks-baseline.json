@@ -1,0 +1,349 @@
+{
+  "note": "Frozen check list for unslop evals 1-6. Written before any run of these evals and not to be edited to fit an output. Its author had read no output of the skill: the smoke test notes (unslop-workspace/smoke-2026-11-21/README.md) were opened only as far as their method, and the trigger transcripts of 2026-11-21 hold no edited text. Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file and kind=absence are decided by a script from the bytes on disk after the run; in an eval with no fixture the only file is the reply, and check 1.2 and check 2.14 are decided on it. kind=reply, kind=invention and kind=negative are decided by an LLM judge. A met kind=reply check quotes the words or the file:line that satisfy it. kind=invention and kind=negative are negatives: when met there is nothing to quote and the evidence is the search; when unmet the offending words are quoted. In evals 1, 4, 5 and 6 the text is pasted and the edited version comes back inside the reply, next to the reply's own notes, where a removed phrase is often quoted: a script cannot tell the two apart, so the checks on the edited text there are judged and say so. In evals 2 and 3 the edited text is a file and the same kind of check is a script check. A fact the text must keep is one check per fact. A borderline case resolves to not met. More text never raises a verdict.",
+  "frozen_on": "2026-11-21",
+  "evals": {
+    "1": [
+      {
+        "id": "1.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply contains an edited version of the user's text, written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "1.2",
+        "assertion": 2,
+        "kind": "file",
+        "check": "The reply contains the inline code `cache.flush_all()`, backticks included, byte for byte"
+      },
+      {
+        "id": "1.3",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text has no em dash (—) used to join or set off clauses (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "1.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text has no 'não é apenas … mas também' construction (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "1.5",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text does not contain 'Vale ressaltar que' (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "1.6",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text does not contain 'No mundo atual' (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "1.7",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text does not end with a summary sentence opened by 'Em resumo' (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "1.8",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The edited text still says that the platform team built the cache service"
+      },
+      {
+        "id": "1.9",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The edited text still says that the service was designed to be faster than the previous one"
+      },
+      {
+        "id": "1.10",
+        "assertion": 5,
+        "kind": "invention",
+        "check": "No source is named for the claim that experts say caches reduce costs: no study, company, person or publication, in the edited text or in the reply"
+      },
+      {
+        "id": "1.11",
+        "assertion": 5,
+        "kind": "invention",
+        "check": "The edited text adds no number, benchmark or reason that the original text did not contain"
+      },
+      {
+        "id": "1.12",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The claim 'Especialistas afirmam que caches reduzem custos' is not left standing unflagged: it is gone from the edited text, or the reply asks the user about it"
+      },
+      {
+        "id": "1.13",
+        "assertion": 6,
+        "kind": "reply",
+        "check": "The reply tells the user what it did with that claim: that it deleted it, or that it is asking about it"
+      }
+    ],
+    "2": [
+      {
+        "id": "2.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "README.md differs from the fixture"
+      },
+      {
+        "id": "2.2",
+        "assertion": 1,
+        "kind": "absence",
+        "check": "No file other than README.md exists under the project root after the run"
+      },
+      {
+        "id": "2.3",
+        "assertion": 2,
+        "kind": "file",
+        "check": "The four lines of the fenced bash block, from ```bash to the closing ```, comment line included, appear in README.md as one contiguous block, byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "2.4",
+        "assertion": 3,
+        "kind": "file",
+        "check": "README.md contains, byte for byte and quotation marks included, the quoted sentence \"the sync is a crucial, robust safety net — not just a script\""
+      },
+      {
+        "id": "2.5",
+        "assertion": 4,
+        "kind": "file",
+        "check": "The first line of README.md is '# Ledger sync'"
+      },
+      {
+        "id": "2.6",
+        "assertion": 4,
+        "kind": "file",
+        "check": "README.md contains `ledger_snapshots`, backticks included"
+      },
+      {
+        "id": "2.7",
+        "assertion": 5,
+        "kind": "file",
+        "check": "Outside the fenced code block and outside double-quoted text, README.md does not contain 'In today's fast-paced world' (case-insensitive)"
+      },
+      {
+        "id": "2.8",
+        "assertion": 5,
+        "kind": "file",
+        "check": "Outside the fenced code block and outside double-quoted text, README.md does not contain 'serves as' (case-insensitive)"
+      },
+      {
+        "id": "2.9",
+        "assertion": 5,
+        "kind": "file",
+        "check": "Outside the fenced code block and outside double-quoted text, README.md does not contain 'not just' (case-insensitive)"
+      },
+      {
+        "id": "2.10",
+        "assertion": 5,
+        "kind": "file",
+        "check": "Outside the fenced code block and outside double-quoted text, README.md does not contain 'In conclusion' (case-insensitive)"
+      },
+      {
+        "id": "2.11",
+        "assertion": 5,
+        "kind": "file",
+        "check": "Outside the fenced code block and outside double-quoted text, README.md does not contain 'Let me know if' (case-insensitive)"
+      },
+      {
+        "id": "2.12",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "No study, source or author is cited, in README.md or in the reply, for the claim that reconciliation reduces incidents"
+      },
+      {
+        "id": "2.13",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md gains no speedup figure and no claim that the original did not contain"
+      },
+      {
+        "id": "2.14",
+        "assertion": 7,
+        "kind": "file",
+        "check": "The reply contains 'README.md'"
+      },
+      {
+        "id": "2.15",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "The reply lists the claims it deleted or is asking about, naming at least one of: the 'studies show' claim, the 'significantly faster' claim"
+      }
+    ],
+    "3": [
+      {
+        "id": "3.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "doc/adr/0002-use-redis-for-sessions.md is byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "3.2",
+        "assertion": 2,
+        "kind": "file",
+        "check": "notes.md does not contain 'In order to' (case-insensitive)"
+      },
+      {
+        "id": "3.3",
+        "assertion": 2,
+        "kind": "file",
+        "check": "notes.md does not contain 'it is worth noting that' (case-insensitive)"
+      },
+      {
+        "id": "3.4",
+        "assertion": 2,
+        "kind": "file",
+        "check": "notes.md does not contain 'serves as' (case-insensitive)"
+      },
+      {
+        "id": "3.5",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "notes.md still says that Redis is the session store (quote notes.md:line)"
+      },
+      {
+        "id": "3.6",
+        "assertion": 2,
+        "kind": "file",
+        "check": "notes.md contains the path doc/adr/0002-use-redis-for-sessions.md"
+      },
+      {
+        "id": "3.7",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply says that the accepted decision record (doc/adr/0002-use-redis-for-sessions.md) was left unchanged"
+      },
+      {
+        "id": "3.8",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply gives a reason for leaving it unchanged that rests on what the file is: an accepted decision record, a piece of history"
+      }
+    ],
+    "4": [
+      {
+        "id": "4.1",
+        "assertion": 1,
+        "kind": "negative",
+        "check": "The reply does not rewrite the text: the text it returns differs from the original by at most one small wording change. Returning it unchanged passes"
+      },
+      {
+        "id": "4.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text the reply returns still says that the worker pulls export jobs from RabbitMQ (quote the returned text)"
+      },
+      {
+        "id": "4.3",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text the reply returns still says that the worker writes each file to S3 (quote the returned text)"
+      },
+      {
+        "id": "4.4",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text the reply returns still says that the threshold is a job failing three times (quote the returned text)"
+      },
+      {
+        "id": "4.5",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text the reply returns still says that such a job goes to the dead-letter queue (quote the returned text)"
+      },
+      {
+        "id": "4.6",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text the reply returns still says that the on-call engineer gets a page (quote the returned text)"
+      },
+      {
+        "id": "4.7",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text the reply returns still says that exports above 100,000 rows are not supported yet (quote the returned text)"
+      },
+      {
+        "id": "4.8",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The text the reply returns has no sentence that the original did not have"
+      }
+    ],
+    "5": [
+      {
+        "id": "5.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply contains an edited version of the user's text, written in Spanish (quote its first sentence)"
+      },
+      {
+        "id": "5.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The reply tells the user that there is no vocabulary list for Spanish"
+      },
+      {
+        "id": "5.3",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text has no em dash (—) used to join or set off clauses (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "5.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The edited text has no 'no es solo … sino' construction (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "5.5",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The edited text still says that the panel shows the p99 latency of each service"
+      },
+      {
+        "id": "5.6",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "The edited text adds no fact, number or claim that the original did not contain"
+      }
+    ],
+    "6": [
+      {
+        "id": "6.1",
+        "assertion": 1,
+        "kind": "negative",
+        "check": "The edited text does not contain 'It is important to note that' (the edited text only, not the reply's notes about what it changed)"
+      },
+      {
+        "id": "6.2",
+        "assertion": 2,
+        "kind": "invention",
+        "check": "The edited text names no team, person, service or tool as the one that rotates the certificates, sends the alerts, or generated the keys. Keeping the passive voice passes; so does asking the user who does it"
+      },
+      {
+        "id": "6.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The edited text still says that the certificates are rotated every 90 days"
+      },
+      {
+        "id": "6.4",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The edited text still says that alerts are sent when rotation fails"
+      },
+      {
+        "id": "6.5",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The edited text still says that the keys were generated in the HSM"
+      }
+    ]
+  },
+  "amendments": []
+}
