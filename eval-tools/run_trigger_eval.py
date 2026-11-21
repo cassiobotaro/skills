@@ -5,7 +5,7 @@ The cached skill-creator `run_eval.py` needs two patches to produce a valid numb
 Both were found the expensive way — each one silently reports a healthy-looking sweep of
 near-zero triggers, which reads as a description regression rather than a broken harness:
 
-1. `--setting-sources project,local` is not passed to `claude -p`. The four skills in this
+1. `--setting-sources project,local` is not passed to `claude -p`. The skills in this
    repo are installed at *user* scope, so they mask the injected candidate command and every
    positive scores 0. Measured: 0/30 on opus.
 2. A trigger is counted only when the session picks the *calling worker's own* candidate
