@@ -1,0 +1,277 @@
+{
+  "note": "Frozen check list for code-comments evals 1-6. Written before any run of these evals and not to be edited to fit an output. Caveat: its author had read replies of trigger-probe sessions to shortened, pasted-code versions of the scenarios of evals 1, 2 and 4 (code-comments-workspace/trigger-evals/, 2026-11-21); those were not runs of these evals and were not graded. Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file is decided by a script from the files on disk after the run, which includes importing a Python file and calling a function in it. sync/client.ts cannot be executed with the tooling on the machine (no TypeScript compiler; node refuses its constructor parameter property), so eval 3 has no kind=file check and its behavior is judged with a quoted file:line. kind=reply, kind=invention and kind=negative are decided by an LLM judge. A met kind=reply check quotes the words or the file:line that satisfy it. kind=invention and kind=negative are negatives: when met there is nothing to quote and the evidence is the search; when unmet the offending words are quoted. kind=negative is new to this file: it holds the negatives about comments that are not inventions (a comment that restates a statement, narrates the edit, repeats a signature, or is in the wrong language). judge.py names only reply and invention in its rules, so its rule for invention has to cover negative before a batch of these checks is judged. A borderline case resolves to not met. More text or more comments never raise a verdict.",
+  "frozen_on": "2026-11-21",
+  "evals": {
+    "1": [
+      {
+        "id": "1.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "slugs/slugify.py can be imported and defines unique_slug; unique_slug('Olá, Mundo!', set()) returns 'ola-mundo', the value of slugify(title) when it is not in `existing`"
+      },
+      {
+        "id": "1.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "unique_slug('Olá, Mundo!', {'ola-mundo'}) returns 'ola-mundo-2', and unique_slug('Olá, Mundo!', {'ola-mundo', 'ola-mundo-2'}) returns 'ola-mundo-3'"
+      },
+      {
+        "id": "1.3",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "No comment in the added code restates what the statement next to it does (e.g. '# loop until the slug is free' over the loop, '# return the slug' over the return). Added code with no comment passes"
+      },
+      {
+        "id": "1.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "No comment or docstring in slugs/slugify.py narrates the edit or the conversation ('added', 'new function', 'as requested' or similar)"
+      },
+      {
+        "id": "1.5",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "unique_slug has no docstring or header comment that only repeats the signature (the function name or the parameter names put in prose). One that states the suffix scheme, what happens on a collision, or an input/output example passes; so does none at all"
+      },
+      {
+        "id": "1.6",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No comment or docstring added to slugs/slugify.py is written in a language other than English"
+      },
+      {
+        "id": "1.7",
+        "assertion": 6,
+        "kind": "file",
+        "check": "Every line of the fixture, from `import re` to the `return` line of slugify, appears in slugs/slugify.py as one contiguous block, byte-for-byte identical"
+      }
+    ],
+    "2": [
+      {
+        "id": "2.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "billing/invoice.py can be imported; due_date(date(2026, 1, 1), 30) returns date(2026, 2, 2), since 2026-01-31 is a Saturday, and due_date(date(2026, 1, 2), 30) returns date(2026, 2, 2), since 2026-02-01 is a Sunday"
+      },
+      {
+        "id": "2.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "due_date(date(2026, 1, 5), 30) returns date(2026, 2, 4), a Wednesday: a date that falls on a weekday is unchanged"
+      },
+      {
+        "id": "2.3",
+        "assertion": 2,
+        "kind": "file",
+        "check": "The text 'Due terms_days calendar days after issue, weekends included.' is not in billing/invoice.py"
+      },
+      {
+        "id": "2.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "No comment in billing/invoice.py narrates the edit: no 'fixed', 'corrigido', 'now', 'agora', 'changed' or 'bug' describing the change itself. A comment that says what the code does, in the present tense, is not narration"
+      },
+      {
+        "id": "2.5",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "No comment in billing/invoice.py is written in a language other than English"
+      },
+      {
+        "id": "2.6",
+        "assertion": 5,
+        "kind": "invention",
+        "check": "No comment gives a reason other than the user's (the bank only settles boletos on business days): no other motive, incident or rule is supplied. A comment with no reason passes"
+      },
+      {
+        "id": "2.7",
+        "assertion": 5,
+        "kind": "invention",
+        "check": "Neither a comment nor the reply claims that holidays are handled. Saying that holidays are not handled is not such a claim"
+      },
+      {
+        "id": "2.8",
+        "assertion": 6,
+        "kind": "file",
+        "check": "The lines of late_fee, from its `def` line to its last `return`, its comment included, appear in billing/invoice.py as one contiguous block, byte-for-byte identical to the fixture"
+      }
+    ],
+    "3": [
+      {
+        "id": "3.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "push sends the records in successive requests of at most 500 records each (quote the lines of sync/client.ts that split the records and send each part)"
+      },
+      {
+        "id": "3.2",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "push still throws when a response is not ok (quote the lines)"
+      },
+      {
+        "id": "3.3",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The limit of 500 is a named constant declared outside the loop, not a bare literal inside it (quote the declaration)"
+      },
+      {
+        "id": "3.4",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "A comment next to that constant says that the API rejects request bodies over 1 MB"
+      },
+      {
+        "id": "3.5",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "A comment next to that constant says that the largest records are about 2 KB"
+      },
+      {
+        "id": "3.6",
+        "assertion": 3,
+        "kind": "invention",
+        "check": "No comment in sync/client.ts states a fact about the API, the records or performance that the user did not give: no rate limit, timeout, measured size or throughput claim. Arithmetic on the user's own numbers (500 records of about 2 KB are about 1 MB) is not an invention"
+      },
+      {
+        "id": "3.7",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "No comment in sync/client.ts narrates the edit ('added batching', 'now sends in batches', 'as requested')"
+      },
+      {
+        "id": "3.8",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No comment restates a statement of the batching loop (e.g. '// send the batch' over the request, '// loop over the records' over the loop)"
+      }
+    ],
+    "4": [
+      {
+        "id": "4.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "worker/poller.py can be imported and POLL_INTERVAL_S equals 45"
+      },
+      {
+        "id": "4.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The lines of run, from `def run(fetch_jobs, handle):` to `time.sleep(POLL_INTERVAL_S)`, appear in worker/poller.py as one contiguous block, byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "4.3",
+        "assertion": 2,
+        "kind": "invention",
+        "check": "No comment in worker/poller.py gives a reason for the value 45 ('to reduce load', 'to avoid rate limiting', 'balances …' or any other motive). A unit or a plain description of what the constant is does not count as a reason; no comment at all passes"
+      },
+      {
+        "id": "4.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "No comment in worker/poller.py narrates the edit ('changed from 10', 'increased', 'was 10')"
+      },
+      {
+        "id": "4.5",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "The reply does not present a reason for the value 45 as a fact. Saying that no reason was given, or asking for one, passes"
+      }
+    ],
+    "5": [
+      {
+        "id": "5.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "reports/usage.py can be imported; summarize([{'account': 'a', 'bytes': 10}, {'account': 'a', 'bytes': -4}, {'account': 'b', 'bytes': 7}, {'account': 'b', 'bytes': 5}, {'account': 'a', 'bytes': 1}]) returns {'a': 11, 'b': 12}"
+      },
+      {
+        "id": "5.2",
+        "assertion": 2,
+        "kind": "file",
+        "check": "In reports/usage.py, the body of summarize still assigns to a variable named `d`"
+      },
+      {
+        "id": "5.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply suggests giving `d` a descriptive name"
+      },
+      {
+        "id": "5.4",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply presents that rename as a suggestion the user may decline, separate from the change that was made, and not as something done"
+      },
+      {
+        "id": "5.5",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "No comment on the new condition only restates it ('skip negative bytes', 'ignore negatives'). A comment that gives the user's reason (negative rows are corrections written by billing) passes; so does no comment on the condition"
+      },
+      {
+        "id": "5.6",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No comment in reports/usage.py narrates the edit"
+      },
+      {
+        "id": "5.7",
+        "assertion": 5,
+        "kind": "file",
+        "check": "The lines of top_accounts, from its `def` line to its `return`, appear in reports/usage.py as one contiguous block, byte-for-byte identical to the fixture"
+      }
+    ],
+    "6": [
+      {
+        "id": "6.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "With comments and docstrings removed, cache/ttl.py parses to the same syntax tree as the fixture: no statement added, removed, reordered or renamed"
+      },
+      {
+        "id": "6.2",
+        "assertion": 2,
+        "kind": "file",
+        "check": "cache/ttl.py contains at least one comment or docstring"
+      },
+      {
+        "id": "6.3",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "No comment or docstring in cache/ttl.py is written in a language other than Portuguese. Names taken from the code (TTLCache, MAX_ENTRIES, get, put, None) inside a Portuguese sentence do not count"
+      },
+      {
+        "id": "6.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "No comment restates a single statement (e.g. 'retorna o valor' over `return value`, 'inicializa o dicionário' over `self._entries = {}`)"
+      },
+      {
+        "id": "6.5",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "A comment or docstring at the class or the file level says what TTLCache is for"
+      },
+      {
+        "id": "6.6",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "The comments state at least two of these five behaviors (quote one passage for each of two): an expired entry is removed only when get reads it; expired entries still count toward MAX_ENTRIES; put evicts the entry stored longest ago, not the least recently read; the eviction scans every entry; a stored None cannot be told from a miss when default is None"
+      },
+      {
+        "id": "6.7",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "No comment or docstring states a behavior that the code in cache/ttl.py does not have"
+      },
+      {
+        "id": "6.8",
+        "assertion": 7,
+        "kind": "invention",
+        "check": "No comment gives a reason for MAX_ENTRIES being 1024 or for any other design choice: the file and the user establish none. Saying that the reason is unknown passes"
+      }
+    ]
+  },
+  "amendments": []
+}
