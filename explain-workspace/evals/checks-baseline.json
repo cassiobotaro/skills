@@ -1,0 +1,561 @@
+{
+  "note": "Frozen check list for explain evals 1-10. Written before any run of these evals and not to be edited to fit an output. Its author had read no output of the skill: the trigger transcripts of 2026-11-21 hold no explanation, and of SKILL.md only the description had been read, in the trigger results. Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file and kind=absence are decided by a script from the bytes on disk after the run; where the eval has no fixture the only file is the reply, and the checks on emoji, on '5432', on headings and on list items are decided on it. kind=reply, kind=invention and kind=negative are decided by an LLM judge. A met kind=reply check quotes the words that satisfy it. kind=invention and kind=negative are negatives: when met there is nothing to quote and the evidence is the search; when unmet the offending words are quoted. In evals 7, 8 and 9 the reply holds a text meant for someone else next to the reply's own remarks to the user; a check that says 'the text', 'the email' or 'the revised reply' is about that text only. Counts (sentences, lines, words) are judged, not scripted, because a script cannot tell that text from the remarks; a judge counts badly near a limit, so a borderline count resolves to not met like any other borderline case. More text never raises a verdict. No anchor cases: the two earlier lists got theirs by dated amendment after judges split.",
+  "frozen_on": "2026-11-21",
+  "evals": {
+    "1": [
+      {
+        "id": "1.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply is written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "1.2",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "The reply asks the user no question before the explanation starts"
+      },
+      {
+        "id": "1.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "Within its first two sentences the reply states what a mutex is: something that lets only one goroutine or thread at a time run a piece of code or touch a value (quote the sentence)"
+      },
+      {
+        "id": "1.4",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The reply contains a concrete case with specific values or a specific sequence of events (for example two goroutines incrementing the same counter and one update being lost), not only a general statement (quote it)"
+      },
+      {
+        "id": "1.5",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The reply does not open by praising the question ('Ótima pergunta', 'Claro!')"
+      },
+      {
+        "id": "1.6",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The reply does not open by restating the question ('Você quer saber o que é um mutex')"
+      },
+      {
+        "id": "1.7",
+        "assertion": 6,
+        "kind": "file",
+        "check": "The reply contains no emoji"
+      },
+      {
+        "id": "1.8",
+        "assertion": 7,
+        "kind": "negative",
+        "check": "The reply does not explain what a variable or a function is"
+      },
+      {
+        "id": "1.9",
+        "assertion": 7,
+        "kind": "negative",
+        "check": "No concurrency term the user did not use (race condition or condição de corrida, critical section or seção crítica, goroutine scheduling) appears without being defined or replaced where it first appears. A reply that uses none of them passes"
+      },
+      {
+        "id": "1.10",
+        "assertion": 8,
+        "kind": "negative",
+        "check": "No analogy in the reply is left without saying what corresponds to what. A reply with no analogy passes"
+      },
+      {
+        "id": "1.11",
+        "assertion": 8,
+        "kind": "negative",
+        "check": "No analogy in the reply is left without saying where it stops working. A reply with no analogy passes"
+      },
+      {
+        "id": "1.12",
+        "assertion": 9,
+        "kind": "negative",
+        "check": "The reply does not end with a generic offer of more help ('Se tiver mais dúvidas, é só perguntar', 'Quer que eu explique mais?'). A question that checks the reader's understanding, or an offer of one specific thing, is not a generic offer"
+      }
+    ],
+    "2": [
+      {
+        "id": "2.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply says explicitly that the premise is wrong: Python does not execute a file by reading and running one line at a time (quote)"
+      },
+      {
+        "id": "2.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "That statement is within the first three sentences of the reply (quote the sentences up to it)"
+      },
+      {
+        "id": "2.3",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "Nothing before that statement explains the behavior as if Python did run the file line by line"
+      },
+      {
+        "id": "2.4",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply gives the replacing model: the whole file is parsed or compiled (to bytecode) before any of it is executed (quote)"
+      },
+      {
+        "id": "2.5",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The reply answers the question asked: the syntax error is found in that first step, so line 1 never ran (quote)"
+      },
+      {
+        "id": "2.6",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The reply does not overcorrect into a false claim: it does not say that Python is a compiled language like C, nor that it is not interpreted at all"
+      },
+      {
+        "id": "2.7",
+        "assertion": 6,
+        "kind": "reply",
+        "check": "The reply is written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "2.8",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The reply does not open by praising the question"
+      }
+    ],
+    "3": [
+      {
+        "id": "3.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "Within its first three sentences the reply answers the contrast: what computing the refill from elapsed time inside allow() gives that a periodic timer does not (quote)"
+      },
+      {
+        "id": "3.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The reply refers to something specific in the files: the elapsed-time computation in allow(), time.monotonic(), or the per-API-key dictionary of buckets in api.py (quote)"
+      },
+      {
+        "id": "3.3",
+        "assertion": 3,
+        "kind": "invention",
+        "check": "The reply does not state the author's motive as a fact ('the author chose this because', 'this was done to'). Describing what the design gives, or marking a motive as an inference, passes"
+      },
+      {
+        "id": "3.4",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "The reply does not walk a beginner through what a rate limiter or a token bucket is: no definition of rate limiting, no analogy introducing the bucket"
+      },
+      {
+        "id": "3.5",
+        "assertion": 5,
+        "kind": "invention",
+        "check": "The reply invents no fact about the project: no measurement, incident, traffic figure or requirement that is not in the two files"
+      },
+      {
+        "id": "3.6",
+        "assertion": 6,
+        "kind": "file",
+        "check": "ratelimit/limiter.py and ratelimit/api.py are byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "3.7",
+        "assertion": 6,
+        "kind": "absence",
+        "check": "No file other than those two exists under the project root after the run"
+      }
+    ],
+    "4": [
+      {
+        "id": "4.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "Within its first three sentences the reply states the difference: concurrency is dealing with several tasks in overlapping periods, parallelism is executing several at the same instant (quote)"
+      },
+      {
+        "id": "4.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The reply contains at least one pair of cases that differ in the deciding trait: the same tasks on one core versus on several, or waiting versus computing (quote both cases)"
+      },
+      {
+        "id": "4.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply names the trait that separates the two concepts: whether tasks actually run at the same instant (quote)"
+      },
+      {
+        "id": "4.4",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "At least one case is about what this reader does: a Python script, files, downloads or rows of data (quote)"
+      },
+      {
+        "id": "4.5",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No term the reader did not use and the reply relies on (GIL, event loop, asyncio, context switch) appears without being defined where it first appears. A reply that uses none of them passes"
+      },
+      {
+        "id": "4.6",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The reply does not open by praising the question"
+      },
+      {
+        "id": "4.7",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The reply does not open by restating the question"
+      }
+    ],
+    "5": [
+      {
+        "id": "5.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply says that a 50% reduction cannot be judged without knowing the risk before the drug, the baseline (quote)"
+      },
+      {
+        "id": "5.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The reply shows the point with absolute numbers out of a group (N in 100, N in 1,000) for at least two different baselines (quote both)"
+      },
+      {
+        "id": "5.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The numbers of that illustration are marked as hypothetical (quote the marker: 'suponha', 'por exemplo', 'se o risco fosse' or the like)"
+      },
+      {
+        "id": "5.4",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "The reply states no real-world figure about the drug or about the mother's risk"
+      },
+      {
+        "id": "5.5",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "The reply names no drug"
+      },
+      {
+        "id": "5.6",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "The reply cites no study"
+      },
+      {
+        "id": "5.7",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "The reply names at least one question to take to the cardiologist: her risk without the drug, or the period over which the figure was measured (quote)"
+      },
+      {
+        "id": "5.8",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The reply does not decide for the user whether the drug is worth taking"
+      },
+      {
+        "id": "5.9",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "The reply is written in Portuguese (quote its first sentence)"
+      }
+    ],
+    "6": [
+      {
+        "id": "6.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "The reply contains '5432'"
+      },
+      {
+        "id": "6.2",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "The reply has no more than two sentences"
+      },
+      {
+        "id": "6.3",
+        "assertion": 3,
+        "kind": "file",
+        "check": "The reply has no Markdown heading: no line starts with '#'"
+      },
+      {
+        "id": "6.4",
+        "assertion": 3,
+        "kind": "file",
+        "check": "The reply has no list item: no line starts with '-', '*', '+' or a number followed by '.' or ')'"
+      },
+      {
+        "id": "6.5",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The reply contains no analogy"
+      },
+      {
+        "id": "6.6",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The reply does not end with a question or with an offer of more help"
+      }
+    ],
+    "7": [
+      {
+        "id": "7.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The text to send to the family group is written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "7.2",
+        "assertion": 1,
+        "kind": "negative",
+        "check": "Nothing that would be pasted by mistake stands inside or in front of the text to send: the reply starts with it, or sets it apart from its own remarks to the user"
+      },
+      {
+        "id": "7.3",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text gives the figure for those who walked at least 30 minutes a day: 4,1%, or about 4 in 100 (quote)"
+      },
+      {
+        "id": "7.4",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The text gives the figure for those who walked less: 6,3%, or about 6 in 100 (quote)"
+      },
+      {
+        "id": "7.5",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The text says that the study does not show that walking is the cause of the difference (quote)"
+      },
+      {
+        "id": "7.6",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "The text asserts causation nowhere: no 'caminhar previne', 'caminhar reduz o risco', 'caminhar protege' stated as a fact"
+      },
+      {
+        "id": "7.7",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "None of these terms appears in the text without being replaced or explained in the same sentence: coorte, razão de risco, IC 95%, intervalo de confiança, causalidade reversa"
+      },
+      {
+        "id": "7.8",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The text adds no fact absent from estudo/resumo.md: no other study, no mechanism, no recommendation from a health body, no advice to walk a given amount"
+      },
+      {
+        "id": "7.9",
+        "assertion": 7,
+        "kind": "negative",
+        "check": "The text to send is not longer than the original summary, which has 87 words (count the words of the text to send only, not the reply's remarks to the user)"
+      }
+    ],
+    "8": [
+      {
+        "id": "8.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The request, to approve the amendment to the Translog contract, is in the first or second sentence of the email body; a greeting line ('Marina,', 'Oi, Marina') is not counted as a sentence (quote)"
+      },
+      {
+        "id": "8.2",
+        "assertion": 2,
+        "kind": "invention",
+        "check": "The email states no deadline or date for the approval that the user did not give: that date is a bracketed gap or is absent. 'A partir de julho' and 'em maio', which the user gave, are not invented dates"
+      },
+      {
+        "id": "8.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "After the email, the reply lists the missing deadline as something the user has to fill in or confirm (quote)"
+      },
+      {
+        "id": "8.4",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The email gives the reason with its figure: without the amendment the company pays 12% more from July (quote)"
+      },
+      {
+        "id": "8.5",
+        "assertion": 5,
+        "kind": "invention",
+        "check": "The email contains no fact the user did not give: no contract value, no amount in reais, no meeting, no name of someone in legal, no statement of what Translog said"
+      },
+      {
+        "id": "8.6",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The email has no template opener ('Espero que esteja bem')"
+      },
+      {
+        "id": "8.7",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The email has no template closer ('Fico à disposição para quaisquer esclarecimentos')"
+      },
+      {
+        "id": "8.8",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "The email is written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "8.9",
+        "assertion": 7,
+        "kind": "negative",
+        "check": "Nothing addressed to the user is mixed into the email text, so it can be copied as one block. A bracketed gap is not such a remark"
+      }
+    ],
+    "9": [
+      {
+        "id": "9.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The revised reply to the client says when the export will work again, with the date: Thursday, November 26 (quinta, 26/11) (quote)"
+      },
+      {
+        "id": "9.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The revised reply addresses the discount question and says the decision belongs to the finance team (quote)"
+      },
+      {
+        "id": "9.3",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "The revised reply neither promises nor refuses a discount"
+      },
+      {
+        "id": "9.4",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The two answers appear in the order the client asked: first when the export works again, then the discount (quote both, in order)"
+      },
+      {
+        "id": "9.5",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The first answer is within the first two sentences after the greeting (quote those sentences)"
+      },
+      {
+        "id": "9.6",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "The sentence 'Que bom que só percebemos depois de três dias, né' does not appear in the revised reply"
+      },
+      {
+        "id": "9.7",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "No other sarcasm takes its place in the revised reply"
+      },
+      {
+        "id": "9.8",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The revised reply has no template opener ('Espero que sim!', 'agradecemos imensamente')"
+      },
+      {
+        "id": "9.9",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The revised reply has no template closer ('Qualquer dúvida estamos à disposição')"
+      },
+      {
+        "id": "9.10",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The revised reply contains no fact absent from the thread and the prompt: no cause of the failure beyond the connector update, no compensation, no date by which finance will answer unless it is a bracketed gap"
+      },
+      {
+        "id": "9.11",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "After the revised text, the reply tells the user what changed (quote)"
+      },
+      {
+        "id": "9.12",
+        "assertion": 7,
+        "kind": "negative",
+        "check": "Those remarks on what changed take no more than three lines"
+      },
+      {
+        "id": "9.13",
+        "assertion": 8,
+        "kind": "file",
+        "check": "suporte/thread.md is byte-for-byte identical to the fixture"
+      }
+    ],
+    "10": [
+      {
+        "id": "10.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply is written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "10.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The reply ends with exactly one question or one task for the user (quote it)"
+      },
+      {
+        "id": "10.3",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "The reply asks nothing else before that question or task that also needs an answer"
+      },
+      {
+        "id": "10.4",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The reply introduces no more than two new ideas (for example: a function that calls itself, and the case where it stops)"
+      },
+      {
+        "id": "10.5",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "The reply does not cover the call stack, memoization or tail recursion"
+      },
+      {
+        "id": "10.6",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The reply contains one concrete case with actual values, for example a small function traced for one input (quote)"
+      },
+      {
+        "id": "10.7",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The reply does not explain what a function, a variable or a loop is"
+      },
+      {
+        "id": "10.8",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The reply has no generic praise ('Ótima escolha de tema', 'Excelente pergunta')"
+      },
+      {
+        "id": "10.9",
+        "assertion": 6,
+        "kind": "file",
+        "check": "The reply contains no emoji"
+      }
+    ]
+  },
+  "amendments": []
+}
