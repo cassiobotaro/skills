@@ -1,0 +1,27 @@
+{
+  "skill_name": "explain",
+  "description": "Explain a topic so that one specific reader understands it, and write or revise texts meant for other people (messages, emails, replies, announcements, posts) so that the reader gets the point and knows what to do next. The usual defaults fail in known ways: an explanation pitched at nobody in particular, an analogy with no stated limit, a simplification that widens the claim, a message with the request buried in the third paragraph. Use this skill whenever the user asks to understand something (\"explain X\", \"how does X work\", \"why does this code do Y\", \"ELI5\", \"what is the difference between X and Y\", \"I don't get it\", \"explica\", \"me ensina\", \"não entendi\"), about code or anything else, and whenever they ask for help communicating with someone (\"write an email to\", \"help me reply to this\", \"how do I tell my manager\", \"make this clearer\", \"simplify this for\", \"responde esse cliente\", \"melhora essa mensagem\"). Use it even when they never say \"explain\" or \"didactic\". Do not use it for a fact that fits in one line, for a design doc, an ADR, a diagram, code comments, a translation, or a request to run unslop by name.",
+  "results": [
+    {
+      "query": "explica o que é um mutex. to começando com go agora, vim do javascript",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 10,
+      "runs": 10,
+      "pass": true
+    },
+    {
+      "query": "why does internal/sync/worker.go take the lock twice in drain()? I've read it three times and I still don't see what the second one protects",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 10,
+      "pass": false
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "passed": 1,
+    "failed": 1
+  }
+}

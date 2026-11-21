@@ -1,0 +1,199 @@
+{
+  "skill_name": "explain",
+  "description": "Explain a topic so that one specific reader understands it, and write or revise texts meant for other people (messages, emails, replies, announcements, posts) so that the reader gets the point and knows what to do next. The usual defaults fail in known ways: an explanation pitched at nobody in particular, an analogy with no stated limit, a simplification that widens the claim, a message with the request buried in the third paragraph. Use this skill whenever the user asks to understand something (\"explain X\", \"how does X work\", \"why does this code do Y\", \"ELI5\", \"what is the difference between X and Y\", \"I don't get it\", \"explica\", \"me ensina\", \"não entendi\"), about code or anything else, and whenever they ask for help communicating with someone (\"write an email to\", \"help me reply to this\", \"how do I tell my manager\", \"make this clearer\", \"simplify this for\", \"responde esse cliente\", \"melhora essa mensagem\"). Use it even when they never say \"explain\" or \"didactic\". Do not use it for a fact that fits in one line, for a design doc, an ADR, a diagram, code comments, a translation, or a request to run unslop by name.",
+  "protocol": {
+    "model": "claude-sonnet-5-5",
+    "timeout": 120,
+    "num_workers": 1,
+    "positive_runs": 3,
+    "negative_runs": 3,
+    "canary_runs": 3
+  },
+  "results": [
+    {
+      "query": "explica o que é um mutex. to começando com go agora, vim do javascript",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "why does internal/sync/worker.go take the lock twice in drain()? I've read it three times and I still don't see what the second one protects",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": false
+    },
+    {
+      "query": "eli5 how does a VPN actually hide my traffic, and from who",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "I keep mixing up authentication and authorization, every article says something slightly different. what's the actual difference?",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "não entendi nada do que o contador falou sobre lucro presumido vs simples nacional pra minha MEI que vai virar ME. me ajuda a entender o que muda pra mim",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "quero aprender recursão de verdade, não só decorar. me ensina aos poucos e vai me testando",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "escreve um email pra Marina, a diretora financeira, pedindo pra ela aprovar o aditivo do contrato com a Translog. a Translog mudou a tabela em maio e sem o aditivo a gente paga 12% a mais a partir de julho",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "a customer just wrote this in the support channel and he's pretty annoyed, help me reply without sounding defensive: \"third time this month the export breaks. are you people even testing this?\"",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "how do I tell my manager that the migration is going to slip two weeks without it turning into a whole thing? she hates surprises",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "tá aqui o aviso que eu vou mandar pro condomínio sobre a obra do telhado, deixa mais claro, o pessoal nunca lê até o fim: Prezados condôminos, vimos por meio desta informar que, em virtude da necessidade de reparos estruturais...",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "simplify this paragraph from the incident review so the sales team can follow it, they don't know what a replica is: \"Failover to the standby replica was delayed by replication lag of 40s, during which writes were rejected.\"",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 3,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "qual a porta padrão do postgres?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "write a design doc for moving the notification service from polling to webhooks, the team needs to align before we build",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "we decided to use Postgres instead of DynamoDB for the orders service, record that as an ADR",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "unslop this paragraph before I paste it in the PR: Our new retry layer serves as a robust foundation for a comprehensive resilience story.",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "draw a sequence diagram of the checkout flow: browser, api gateway, payments service, and the webhook coming back from the acquirer",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "traduz esse email pro inglês mantendo o tom formal: Prezado Sr. Almeida, conforme combinado em nossa reunião de terça...",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "add docstrings to the public functions in billing/invoice.py",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "add a function unique_slug(title, existing) to slugs/slugify.py that appends -2, -3 and so on when the slug is taken",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "run the test suite and tell me which tests fail on main",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "what's the command to list the docker images sorted by size?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    },
+    {
+      "query": "document the structure of our payments system as a C4 container diagram, there are four services and a shared postgres",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 3,
+      "pass": true
+    }
+  ],
+  "canary": {
+    "query": "explica o que é um mutex. to começando com go agora, vim do javascript",
+    "should_trigger": true,
+    "trigger_rate": 1.0,
+    "triggers": 3,
+    "runs": 3,
+    "pass": true,
+    "positive_score": "3/3"
+  }
+}
