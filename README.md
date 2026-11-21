@@ -2,17 +2,33 @@
 
 Agent skills for software architecture, engineering, communication, and learning. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
 
-| Area | Skill | What it does | Builds on |
-|---|---|---|---|
-| Architecture | [`adr`](adr/skills/adr/SKILL.md) | Write and maintain Architecture Decision Records in the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), file-compatible with [adr-tools](https://github.com/npryce/adr-tools). | Michael Nygard, Nat Pryce ([NOTICE](adr/skills/adr/NOTICE.md)) |
-| Architecture | [`structurizr`](structurizr/skills/structurizr/SKILL.md) | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl). | Simon Brown ([NOTICE](structurizr/skills/structurizr/NOTICE.md)) |
-| Engineering | [`design-doc`](design-doc/skills/design-doc/SKILL.md) | Write and review software design documents through interactive discovery, producing trade-off-focused Markdown. | Cássio Botaro ([Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/)), Malte Ubl, Rina Artstain, Gergely Orosz, Tech Leads Club ([NOTICE](design-doc/skills/design-doc/NOTICE.md)) |
-| Engineering | [`mermaid-sequence`](mermaid-sequence/skills/mermaid-sequence/SKILL.md) | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced code blocks that render directly in Markdown. | The Mermaid project ([NOTICE](mermaid-sequence/skills/mermaid-sequence/NOTICE.md)) |
-| Engineering | [`code-comments`](code-comments/skills/code-comments/SKILL.md) | Keep the comments in code an agent writes or changes useful, precise, and compact: comment what the reader cannot get from the code, never what they can. | Dustin Boswell and Trevor Foucher, *The Art of Readable Code* ([NOTICE](code-comments/skills/code-comments/NOTICE.md)) |
-| Communication | [`unslop`](unslop/skills/unslop/SKILL.md) | Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese. It runs only when you ask for it by name or another skill calls it. | Lauren Tan, pstack ([NOTICE](unslop/skills/unslop/NOTICE.md)) |
-| Communication, learning | [`explain`](explain/skills/explain/SKILL.md) | Explain a topic to one specific reader, and write or revise messages, emails, and replies, choosing the device by the reader's situation instead of running one fixed format. | Research on instruction, plain language, and science communication; Diátaxis; Julia Evans ([NOTICE](explain/skills/explain/NOTICE.md)) |
+## Skills
 
-**Record, don't invent.** No skill states as fact something that you or your repository did not establish: no invented metrics, technologies, relationships, endpoints, failure paths, or reasons. A gap is shown to you and never filled with a guess, because a gap gets asked about and a fabrication gets believed. How the gap is shown depends on what the skill delivers:
+### Architecture
+
+| Skill | What it does | Builds on |
+|---|---|---|
+| [`adr`](adr/skills/adr/SKILL.md) | Write and maintain Architecture Decision Records in the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), file-compatible with [adr-tools](https://github.com/npryce/adr-tools). | Michael Nygard, Nat Pryce ([NOTICE](adr/skills/adr/NOTICE.md)) |
+| [`structurizr`](structurizr/skills/structurizr/SKILL.md) | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl). | Simon Brown ([NOTICE](structurizr/skills/structurizr/NOTICE.md)) |
+
+### Engineering
+
+| Skill | What it does | Builds on |
+|---|---|---|
+| [`design-doc`](design-doc/skills/design-doc/SKILL.md) | Write and review software design documents through interactive discovery, producing trade-off-focused Markdown. | Cássio Botaro ([Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/)), Malte Ubl, Rina Artstain, Gergely Orosz, Tech Leads Club ([NOTICE](design-doc/skills/design-doc/NOTICE.md)) |
+| [`mermaid-sequence`](mermaid-sequence/skills/mermaid-sequence/SKILL.md) | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced code blocks that render directly in Markdown. | The Mermaid project ([NOTICE](mermaid-sequence/skills/mermaid-sequence/NOTICE.md)) |
+| [`code-comments`](code-comments/skills/code-comments/SKILL.md) | Keep the comments in code an agent writes or changes useful, precise, and compact: comment what the reader cannot get from the code, never what they can. | Dustin Boswell and Trevor Foucher, *The Art of Readable Code* ([NOTICE](code-comments/skills/code-comments/NOTICE.md)) |
+
+### Communication and learning
+
+| Skill | What it does | Builds on |
+|---|---|---|
+| [`unslop`](unslop/skills/unslop/SKILL.md) | Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese. It runs only when you ask for it by name or another skill calls it. | Lauren Tan, pstack ([NOTICE](unslop/skills/unslop/NOTICE.md)) |
+| [`explain`](explain/skills/explain/SKILL.md) | Explain a topic to one specific reader, and write or revise messages, emails, and replies, choosing the device by the reader's situation instead of running one fixed format. | Research on instruction, plain language, and science communication; Diátaxis; Julia Evans ([NOTICE](explain/skills/explain/NOTICE.md)) |
+
+## Record, don't invent
+
+No skill states as fact something that you or your repository did not establish: no invented metrics, technologies, relationships, endpoints, failure paths, or reasons. A gap is shown to you and never filled with a guess, because a gap gets asked about and a fabrication gets believed. How the gap is shown depends on what the skill delivers:
 
 - A skill that writes a document or a diagram asks: when a request is too vague to fill honestly, you get a few targeted questions (batched, in the conversation language), and those questions are the deliverable.
 - A skill that works inside a code change does not stop to ask: a reason nobody established stays out of the file and is reported in the reply.
@@ -32,7 +48,7 @@ No skill *requires* Docker, and none uses an MCP server. Only `structurizr` and 
 
 ### Claude Code
 
-Add the marketplace, then install each skill you want by its name in the table above:
+Add the marketplace, then install each skill you want by its name under [Skills](#skills):
 
 ```bash
 claude plugin marketplace add cassiobotaro/skills
@@ -71,4 +87,4 @@ Each skill ships as a plugin in its own directory (`<skill>/`) with a `.claude-p
 
 ## License and attribution
 
-[MIT](LICENSE). Each skill builds on prior art: the table at the top names it, and the skill's `NOTICE.md` credits it in full.
+[MIT](LICENSE). Each skill builds on prior art: the tables under [Skills](#skills) name it, and the skill's `NOTICE.md` credits it in full.
