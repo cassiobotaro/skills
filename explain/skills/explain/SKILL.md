@@ -4,10 +4,8 @@ license: MIT
 description: >
   Explain a topic so that one specific reader understands it, and write or revise texts
   meant for other people (messages, emails, replies, announcements, posts) so that the
-  reader gets the point and knows what to do next. The usual defaults fail in known ways:
-  an explanation pitched at nobody in particular, an analogy with no stated limit, a
-  simplification that widens the claim, a message with the request buried in the third
-  paragraph. Use this skill whenever the user asks to understand something ("explain X",
+  reader gets the point and knows what to do next.
+  Use this skill whenever the user asks to understand something ("explain X",
   "how does X work", "why does this code do Y", "ELI5", "what is the difference between X
   and Y", "I don't get it", "explica", "me ensina", "não entendi"), about code or anything
   else, and whenever they ask for help communicating with someone ("write an email to",
