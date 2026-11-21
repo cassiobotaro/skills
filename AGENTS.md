@@ -22,6 +22,7 @@ Markdown instructions (`SKILL.md` + `references/`). The plugins are `adr`, `desi
 - `<plugin>/skills/<name>/` — the actual skill: `SKILL.md` (frontmatter `name` + `description`, then the body), `NOTICE.md` (upstream attribution), and `references/*.md` (loaded on demand).
 - `<plugin>-workspace/` — eval/benchmark artifacts only. **Committed but not part of the installed plugin.** Never reference a workspace path from inside a `skills/` file.
 - `eval-tools/` — Python helpers for trigger evals (`run_trigger_eval.py`, `capture_trigger_transcripts.py`) and for grading (`judge.py`). They drive the Claude Code CLI. `eval-tools/README.md` holds how the evals are run and read.
+- `scripts/validate.py` — checks the repository's own rules (see "Validating a change"); `.github/workflows/validate.yml` runs it on every push and pull request.
 - `MAINTAINING.md` — the contract the skills share and one note per skill.
 - `README.md` — user-facing installation and tooling guide. Keep it in sync when a skill's external tooling or install path changes.
 
@@ -48,14 +49,16 @@ There is no build or unit-test step. Before committing a skill change:
 
 ```bash
 claude plugin validate <plugin-dir>     # e.g. claude plugin validate design-doc
+scripts/validate.py                     # this repository's rules; CI runs it on every push
 ```
 
-Check by hand that:
+`scripts/validate.py` fails when:
 
-- `SKILL.md` frontmatter has `name` (matching the directory) and `description`.
-- `marketplace.json` and `plugin.json` descriptions still match each other.
-- `plugin.json` `version` was bumped if anything under `skills/` changed.
-- No `skills/` file references a `*-workspace/` path.
+- `SKILL.md` frontmatter lacks a `name` matching the directory, or a `description` within the 1024 characters of the Agent Skills spec.
+- `marketplace.json` and `plugin.json` descriptions differ, or a `marketplace.json` entry has a `version`.
+- `plugin.json` `version` was not bumped although something under `skills/` changed.
+- A `references/` file is named but missing, or exists and is never named in its `SKILL.md`.
+- A `skills/` file references a `*-workspace/` path.
 
 Correctness is measured by **evals**, not asserts.
 
