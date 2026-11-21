@@ -1,0 +1,102 @@
+[
+ {
+  "query": "write a bash script that deletes docker images older than 30 days and prints how much disk space it freed",
+  "should_trigger": true,
+  "note": "script from scratch, never mentions comments"
+ },
+ {
+  "query": "add a function unique_slug(title, existing) next to this one. when the slug is already in the set `existing` it appends -2, -3 and so on until the result is free:\n\nimport re\n\ndef slugify(title):\n    return re.sub(r\"[^a-z0-9]+\", \"-\", title.lower()).strip(\"-\")",
+  "should_trigger": true,
+  "note": "new feature, code pasted"
+ },
+ {
+  "query": "esse vencimento tá caindo em sábado e domingo. o banco só compensa boleto em dia útil, então quando cair no fim de semana tem que ir pra segunda seguinte. corrige:\n\nfrom datetime import timedelta\n\ndef vencimento(emissao, prazo_dias):\n    return emissao + timedelta(days=prazo_dias)",
+  "should_trigger": true,
+  "note": "bug fix with a reason given, pt-BR, code pasted"
+ },
+ {
+  "query": "refactor this into smaller functions, it does three things at once:\n\nexport function importUsers(path: string) {\n  const rows = readFileSync(path, \"utf8\").split(\"\\n\").map((l) => l.split(\",\"));\n  const valid = rows.filter((r) => r.length === 3 && r[1].includes(\"@\"));\n  for (const [name, email, plan] of valid) db.insert(\"users\", { name, email, plan });\n}",
+  "should_trigger": true,
+  "note": "refactor, TypeScript, code pasted"
+ },
+ {
+  "query": "write pytest tests for this, cover the empty list and a row with negative bytes:\n\ndef total_bytes(rows):\n    return sum(r[\"bytes\"] for r in rows if r[\"bytes\"] >= 0)",
+  "should_trigger": true,
+  "note": "writing a test"
+ },
+ {
+  "query": "muda o intervalo desse poller de 10 pra 45 segundos:\n\nPOLL_INTERVAL = 10  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)",
+  "should_trigger": true,
+  "note": "one-line change next to an existing comment, pt-BR"
+ },
+ {
+  "query": "comenta esse código pra mim, vou passar o arquivo pra uma pessoa nova no time:\n\nclass TTLCache:\n    def __init__(self, ttl):\n        self.ttl = ttl\n        self.data = {}\n\n    def get(self, key):\n        value, at = self.data.get(key, (None, 0))\n        if time.time() - at > self.ttl:\n            return None\n        return value",
+  "should_trigger": true,
+  "note": "\"comment this code\", pt-BR"
+ },
+ {
+  "query": "add docstrings to these functions:\n\ndef parse_range(s):\n    lo, hi = s.split(\"-\")\n    return int(lo), int(hi)\n\ndef overlaps(a, b):\n    return a[0] <= b[1] and b[0] <= a[1]",
+  "should_trigger": true,
+  "note": "\"add docstrings\""
+ },
+ {
+  "query": "limpa os comentários desse trecho, tá cheio de comentário que não diz nada:\n\n# incrementa o contador\ncontador += 1\n# verifica se passou do limite\nif contador > LIMITE:\n    # reseta\n    contador = 0  # o gateway derruba a conexão depois de 100 requisições",
+  "should_trigger": true,
+  "note": "\"clean up these comments\", pt-BR"
+ },
+ {
+  "query": "are these comments any good?\n\n// loop over the users\nfor (const user of users) {\n  // check if active\n  if (user.active) {\n    // send the email\n    send(user.email);\n  }\n}",
+  "should_trigger": true,
+  "note": "\"are these comments any good\""
+ },
+ {
+  "query": "what does this regex match? ^\\d{3}-\\d{4}$",
+  "should_trigger": false,
+  "note": "the boundary: explains code, changes nothing"
+ },
+ {
+  "query": "review this function and tell me if you see a bug, don't change anything yet:\n\ndef average(xs):\n    return sum(xs) / len(xs)",
+  "should_trigger": false,
+  "note": "the boundary: reviews code, changes nothing"
+ },
+ {
+  "query": "escreve a mensagem de commit pro que tá em stage",
+  "should_trigger": false,
+  "note": "the boundary: text about a change, not code, pt-BR"
+ },
+ {
+  "query": "what's the command to list the docker images sorted by size?",
+  "should_trigger": false,
+  "note": "one-line command, no source file"
+ },
+ {
+  "query": "run the test suite and tell me which tests fail on main",
+  "should_trigger": false,
+  "note": "runs code, writes none"
+ },
+ {
+  "query": "atualiza o README com o passo de instalação pelo npx skills add",
+  "should_trigger": false,
+  "note": "documentation edit, pt-BR"
+ },
+ {
+  "query": "write a design doc for moving the notification service from polling to webhooks, the team needs to align before we build",
+  "should_trigger": false,
+  "note": "design-doc"
+ },
+ {
+  "query": "we decided to use Postgres instead of DynamoDB for the orders service, record that as an ADR",
+  "should_trigger": false,
+  "note": "adr"
+ },
+ {
+  "query": "draw a sequence diagram of the checkout flow: browser, api gateway, payments service, and the webhook coming back from the acquirer",
+  "should_trigger": false,
+  "note": "mermaid-sequence"
+ },
+ {
+  "query": "unslop this paragraph before I paste it in the PR: Our new retry layer serves as a robust foundation for a comprehensive resilience story.",
+  "should_trigger": false,
+  "note": "unslop"
+ }
+]

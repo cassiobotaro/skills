@@ -1,0 +1,25 @@
+{
+  "skill": "code-comments",
+  "model": "claude-sonnet-5-5",
+  "query": "write a bash script that deletes docker images older than 30 days and prints how much disk space it freed",
+  "runs": [
+    {
+      "candidate": "code-comments-skill-d91d5552",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(code-comments-skill-d91d5552)"
+      ],
+      "first_text": "",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-pilot-sonnet/script/code-comments-run00.jsonl"
+    },
+    {
+      "candidate": "code-comments-skill-9a2124d7",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(code-comments-skill-9a2124d7)"
+      ],
+      "first_text": "",
+      "transcript": "code-comments-workspace/trigger-evals/transcripts-pilot-sonnet/script/code-comments-run01.jsonl"
+    }
+  ]
+}
