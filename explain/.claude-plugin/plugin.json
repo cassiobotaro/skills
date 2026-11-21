@@ -1,0 +1,9 @@
+{
+  "name": "explain",
+  "description": "Explain a topic to one specific reader and write clear messages, emails, and replies, choosing the device by the reader's situation: a worked example, a mapped analogy with its limit, a wrong idea named and corrected, the request first",
+  "version": "1.0.0",
+  "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
+  "repository": "https://github.com/cassiobotaro/skills",
+  "license": "MIT",
+  "keywords": ["explanation", "teaching", "writing", "communication", "plain-language"]
+}

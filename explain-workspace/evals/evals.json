@@ -1,0 +1,168 @@
+{
+  "skill_name": "explain",
+  "note": "Ten evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given (files/ratelimit/limiter.py becomes ratelimit/limiter.py). The study in files/estudo/resumo.md and the thread in files/suporte/thread.md are made up for the evals. Evals 1 to 6 are explanations, 7 to 9 are texts for someone else, 10 is the opt-in teaching loop. The reply of the run is the output to save. No eval has been run yet; before the first run, split the assertions into atomic checks in checks-baseline.json (see eval-tools/README.md). Several assertions are negative ('no invented fact', 'no praise opener'): their evidence is a search, so run three judge passes on those.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "one-off-question-novice-signal",
+      "prompt": "explica o que é um mutex. to começando com go agora, vim do javascript",
+      "expected_output": "An explanation in Portuguese that starts explaining at once, with no question back to the user first. The first sentence or two say what a mutex is. It uses a concrete case (two goroutines and one shared value, with actual values) and does not assume the user knows what a data race is without saying so. It uses the signals given: the user is new to Go and comes from JavaScript, so the level is 'programs, but new to shared-memory concurrency'. No praise opener, no emoji. It ends with a check the reader could get wrong, a specific offer, or nothing; not with a generic offer of more help.",
+      "files": [],
+      "assertions": [
+        "The reply is in Portuguese",
+        "The reply explains before asking anything: it contains no question to the user ahead of the explanation",
+        "Within the first two sentences the reply states what a mutex is (something that lets only one goroutine or thread at a time run a piece of code or touch a value)",
+        "The reply contains a concrete case with specific values or a specific sequence of events (for example two goroutines incrementing the same counter and losing an update), not only a general statement",
+        "The reply does not open by praising or restating the question ('Ótima pergunta', 'Claro!', 'Você quer saber o que é um mutex')",
+        "The reply uses no emoji",
+        "The level fits the signals: it does not explain what a variable or a function is, and any term from concurrency that the user did not use (race condition, critical section, goroutine scheduling) is defined or replaced where it first appears",
+        "If the reply contains an analogy, it says what corresponds to what and where the analogy stops working; a reply with no analogy passes this check",
+        "The reply does not end with a generic offer of more help ('Se tiver mais dúvidas, é só perguntar', 'Quer que eu explique mais?')"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "wrong-premise-in-the-question",
+      "prompt": "já que o python é interpretado linha por linha, por que dá SyntaxError por causa da linha 40 antes mesmo de rodar o print que tá na linha 1?",
+      "expected_output": "The reply corrects the premise before explaining: Python does not read and run a file one line at a time. It first compiles the whole file to bytecode, and a syntax error is found in that step, before any line runs. The wrong idea, the statement that it is wrong, and the replacing cause are in the same passage, near the start. It then answers the question (the print on line 1 never ran because nothing ran). It may contrast with an error that does appear only when its line runs (a NameError, a ZeroDivisionError). In Portuguese.",
+      "files": [],
+      "assertions": [
+        "The reply says explicitly that the premise is wrong: Python does not execute a file by reading and running one line at a time",
+        "The correction comes before any explanation built on the premise, within the first three sentences",
+        "The reply gives the replacing model: the whole file is parsed or compiled (to bytecode) before any of it is executed",
+        "The reply answers the question that was asked: the syntax error is found in that first step, so line 1 never ran",
+        "The reply does not overcorrect into a false claim: it does not say that Python is a compiled language like C or that it is not interpreted at all",
+        "The reply is in Portuguese and does not open with praise"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "experienced-reader-code-in-repo",
+      "prompt": "Senior backend dev here, new to this codebase. In ratelimit/limiter.py, why does TokenBucket refill inside allow() instead of with a timer that adds tokens every second?",
+      "expected_output": "The reply reads ratelimit/limiter.py (and ideally ratelimit/api.py) and answers the contrast that was asked: lazy refill computed from elapsed time versus a periodic timer. The first sentences give the answer. The reasons are tied to this code (one bucket per API key in api.py, so a timer design needs a background task touching every bucket; lazy refill needs none and does no work for idle keys; elapsed time times rate gives fractional tokens). Because no comment or commit states the author's motive, the reply presents the reasons as what this design gives, or as inference, not as what the author intended. It does not explain what a token bucket or a rate limiter is from zero. No file is modified.",
+      "files": [
+        "files/ratelimit/limiter.py",
+        "files/ratelimit/api.py"
+      ],
+      "assertions": [
+        "The reply answers the contrast in its first three sentences: what computing the refill from elapsed time gives that a periodic timer does not",
+        "The reply refers to something specific in the files: the elapsed-time computation in allow(), time.monotonic(), or the per-API-key dictionary of buckets in api.py",
+        "The reply does not state the author's motive as a fact ('the author chose this because', 'this was done to'): it describes what the design gives, or marks the motive as an inference",
+        "The reply does not walk through what a rate limiter or a token bucket is for a beginner (no definition of 'rate limiting', no analogy introducing the bucket)",
+        "The reply invents no fact about the project: no measurement, no incident, no traffic figure, no requirement that is not in the two files",
+        "No file in the working directory was created or modified"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "fuzzy-boundary-two-concepts",
+      "prompt": "I keep mixing up concurrency and parallelism. What's the actual difference? I write Python scripts for data cleanup, nothing fancy.",
+      "expected_output": "The reply states the difference in one or two sentences near the start, then shows it with cases that differ in the deciding trait (for example one core switching between two tasks versus two cores running two tasks at the same instant), ideally with a case from the reader's world (a Python script waiting on downloads versus crunching rows on several cores). The trait that separates the two is named. Terms the reader did not use (GIL, event loop, threads versus processes) are defined or left out. No praise opener.",
+      "files": [],
+      "assertions": [
+        "Within the first three sentences the reply states the difference: concurrency is about dealing with several tasks in overlapping periods, parallelism is about executing several at the same instant",
+        "The reply contains at least one pair of cases that differ in the deciding trait (the same tasks on one core versus on several, or waiting versus computing)",
+        "The reply names the trait that separates the two concepts (whether tasks actually run at the same instant)",
+        "At least one case is about what this reader does: a Python script, files, downloads or rows of data",
+        "Every term the reader did not use and the reply relies on (GIL, event loop, asyncio, context switch) is defined where it first appears, or is absent",
+        "The reply does not open by praising or restating the question"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "relative-risk-without-a-baseline",
+      "prompt": "o cardiologista da minha mãe disse que o remédio novo reduz o risco de infarto em 50%. isso é muito? vale a pena?",
+      "expected_output": "The reply says that 50% cannot be judged without the baseline risk, and shows why with numbers that are explicitly hypothetical (for example from 2 in 100 to 1 in 100 versus from 2 in 10,000 to 1 in 10,000). It does not state a real baseline for the mother or for the drug, since neither was given, and it does not name a drug or cite a study. It says what to ask the cardiologist (her risk without the drug, over what period, and the side effects). It does not tell the user whether to take the drug. In Portuguese.",
+      "files": [],
+      "assertions": [
+        "The reply says that a 50% reduction cannot be judged without knowing the risk before the drug (the baseline)",
+        "The reply shows the point with absolute numbers out of a group (N in 100, N in 1,000) for at least two different baselines",
+        "The numbers used are presented as hypothetical ('suponha', 'por exemplo', 'se o risco fosse'), not as the mother's risk or the drug's data",
+        "The reply states no real-world figure about the drug or about the mother, names no drug, and cites no study",
+        "The reply names at least one question to take to the cardiologist: her risk without the drug, or over what period the figure was measured",
+        "The reply does not decide for the user whether the drug is worth taking",
+        "The reply is in Portuguese"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "one-line-fact",
+      "prompt": "qual a porta padrão do postgres?",
+      "expected_output": "One short answer: 5432. At most one more sentence. No analogy, no headings, no list, no closing question, no offer of more help.",
+      "files": [],
+      "assertions": [
+        "The reply states that the default port is 5432",
+        "The reply has at most two sentences",
+        "The reply has no heading, no list, no analogy and no closing question or offer of more help"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "simplify-keeps-the-scope",
+      "prompt": "minha prima mandou esse resumo de um estudo (estudo/resumo.md). deixa mais simples pra eu mandar no grupo da família, o pessoal não é da área",
+      "expected_output": "A short text in Portuguese, ready to paste in a family group, in common words. It keeps the scope of the claim: people who walked at least 30 minutes a day had fewer dementia diagnoses (about 4 in 100 against about 6 in 100 over 8 years), and the study does not show that walking is the cause. It does not say that walking prevents or reduces dementia as a fact. It drops or replaces the jargon (coorte, razão de risco, IC 95%, causalidade reversa) and adds no fact that is not in the file. The numbers appear as absolute figures.",
+      "files": [
+        "files/estudo/resumo.md"
+      ],
+      "assertions": [
+        "The text is in Portuguese and is delivered ready to paste, with nothing in front of it that would be pasted by mistake",
+        "The text gives the two absolute figures, exactly or rounded: about 4 in 100 (4.1%) among those who walked and about 6 in 100 (6.3%) among those who walked less",
+        "The text says that the study does not show that walking is the cause of the difference",
+        "The text does not assert causation anywhere: no 'caminhar previne', 'caminhar reduz o risco', 'caminhar protege' stated as a fact",
+        "None of these terms appears without being replaced or explained in the same sentence: coorte, razão de risco, IC 95%, intervalo de confiança, causalidade reversa",
+        "The text adds no fact absent from the file: no other study, no mechanism, no recommendation from a health body, no advice to walk a given amount",
+        "The text is shorter than the original summary or at most the same length"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "request-email-with-a-missing-fact",
+      "prompt": "escreve um email pra Marina (diretora financeira) pedindo pra ela aprovar o aditivo do contrato com a Translog. contexto: a Translog mudou a tabela de preços em maio, e sem o aditivo a gente paga 12% a mais a partir de julho. o aditivo trava o preço antigo por 12 meses. o jurídico já revisou e não viu problema.",
+      "expected_output": "An email in Portuguese with the request in the first or second sentence. The deadline was not given, so the email carries a bracketed gap for the date instead of an invented one, and the gap is listed after the text. Every fact in the email is one the user gave. No template opener or closer. After the email: the gaps, and one line on what was assumed about Marina. Nothing is sent.",
+      "files": [],
+      "assertions": [
+        "The request (approve the amendment to the Translog contract) is in the first or second sentence of the email body",
+        "The email does not state a deadline that the user did not give: the date by which approval is needed is a bracketed gap or is absent, and no date is invented",
+        "After the email, the reply lists the missing fact (the deadline) as something the user has to fill in or confirm",
+        "The email contains the reason with its figure: without the amendment the company pays 12% more from July",
+        "The email contains no fact the user did not give: no contract value, no amount in reais, no meeting, no name of someone in legal, no statement of what Translog said",
+        "The email has no template opener or closer ('Espero que esteja bem', 'Fico à disposição para quaisquer esclarecimentos')",
+        "The email is in Portuguese and is delivered ready to paste"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "revise-draft-reply-to-a-client",
+      "prompt": "melhora essa resposta antes de eu mandar pro cliente, tá em suporte/thread.md. a correção entra quinta dia 26/11. sobre desconto eu não sei, quem decide é o financeiro.",
+      "expected_output": "A revised reply in Portuguese that answers the client's two questions in the order asked: the fix goes live on Thursday, November 26, and the discount is not the writer's decision, so it was or will be forwarded to the finance team. No discount is promised or refused. The sarcastic line about noticing after three days is gone or replaced by a literal statement. The nested sentence about the connector is un-nested or cut. Template opener and closer are gone. After the text, at most three lines on what changed. No file is modified and nothing is sent.",
+      "files": [
+        "files/suporte/thread.md"
+      ],
+      "assertions": [
+        "The revised reply states when the export will work again, with the date: Thursday, November 26 (quinta, 26/11)",
+        "The revised reply addresses the discount question and neither promises nor refuses a discount: it says the decision belongs to the finance team",
+        "The two answers appear in the order the client asked, and the first one is within the first two sentences after the greeting",
+        "The sarcastic sentence ('Que bom que só percebemos depois de três dias, né') does not appear, and no other sarcasm replaces it",
+        "The revised reply has no template opener or closer ('Espero que sim!', 'agradecemos imensamente', 'Qualquer dúvida estamos à disposição')",
+        "The revised reply contains no fact absent from the thread and the prompt: no cause of the failure beyond the connector update, no compensation, no date by which finance will answer unless it is a bracketed gap",
+        "After the text, the reply says what changed in at most three lines",
+        "suporte/thread.md is byte-for-byte unchanged"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "teaching-loop-opt-in",
+      "prompt": "quero aprender recursão de verdade, não só decorar. me ensina aos poucos e vai me testando. já programo em python faz uns meses.",
+      "expected_output": "The first turn of a teaching loop, in Portuguese. It is short: one idea and one case, not a full lecture on recursion. It ends with exactly one question or one small task for the user and waits. It uses the level given (programs in Python for a few months), so it does not explain what a function is. It does not cover base case, recursive case, the call stack, memoization and tail calls all in the same turn.",
+      "files": [],
+      "assertions": [
+        "The reply is in Portuguese",
+        "The reply ends with exactly one question or one task for the user, and asks nothing else before it that also needs an answer",
+        "The reply introduces at most two new ideas (for example: a function that calls itself, and the case where it stops) and does not also cover the call stack, memoization or tail recursion",
+        "The reply contains one concrete case with actual values (for example a small function traced for one input)",
+        "The reply does not explain what a function, a variable or a loop is",
+        "The reply has no generic praise ('Ótima escolha de tema', 'Excelente pergunta') and no emoji"
+      ]
+    }
+  ]
+}

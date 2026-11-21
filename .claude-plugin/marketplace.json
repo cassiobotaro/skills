@@ -32,6 +32,11 @@
       "name": "code-comments",
       "source": "./code-comments",
       "description": "Keep the comments in code an agent writes or changes useful, precise, and compact, following The Art of Readable Code: comment what the reader cannot get from the code, never what they can"
+    },
+    {
+      "name": "explain",
+      "source": "./explain",
+      "description": "Explain a topic to one specific reader and write clear messages, emails, and replies, choosing the device by the reader's situation: a worked example, a mapped analogy with its limit, a wrong idea named and corrected, the request first"
     }
   ]
 }

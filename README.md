@@ -10,8 +10,9 @@ Agent skills for software architecture, engineering, communication, and learning
 | `mermaid-sequence` | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced ```` ```mermaid ```` code blocks that render directly in Markdown (GitHub, GitLab, most wikis). |
 | `unslop` | Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese, without changing its meaning or adding a fact. It runs only when you ask for it by name ("unslop this"), or when another skill calls it. |
 | `code-comments` | Keep the comments in code an agent writes or changes useful, precise, and compact, following *The Art of Readable Code* (Boswell & Foucher): comment what the reader cannot get from the code — the reason, the pitfall, the big picture — and never what they can. |
+| `explain` | Explain a topic to one specific reader, and write or revise messages, emails, and replies so the reader gets the point and knows what to do. It picks the device by the reader's situation (a worked example, a mapped analogy with its limit, a wrong idea named and corrected, the request first) instead of running one format such as ELI5, following research on instruction, science communication, and plain language. |
 
-**Record, don't invent.** Every skill documents only what you or your repository established — no invented metrics, technologies, relationships, endpoints, failure paths, or reasons. When a request is too vague to fill honestly, the skill asks a few targeted questions (batched, in the conversation language) instead of guessing, and those questions are the deliverable: a gap gets asked about, a fabrication gets believed. `code-comments` works inside a code change, so it does not stop to ask: a reason nobody established stays out of the file and is reported in the reply.
+**Record, don't invent.** Every skill documents only what you or your repository established — no invented metrics, technologies, relationships, endpoints, failure paths, or reasons. When a request is too vague to fill honestly, the skill asks a few targeted questions (batched, in the conversation language) instead of guessing, and those questions are the deliverable: a gap gets asked about, a fabrication gets believed. `code-comments` works inside a code change, so it does not stop to ask: a reason nobody established stays out of the file and is reported in the reply. `explain` has to build examples and analogies, so it separates the two: facts are recorded, illustrations are built and shown as illustrations, and a fact a message needs and nobody gave is left as a bracketed gap.
 
 ## Installation
 
@@ -22,7 +23,7 @@ Agent skills for software architecture, engineering, communication, and learning
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
 | Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | same |
 
-No skill *requires* Docker, and none uses an MCP server: `adr`, `design-doc`, `unslop`, and `code-comments` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
+No skill *requires* Docker, and none uses an MCP server: `adr`, `design-doc`, `unslop`, `code-comments`, and `explain` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
 
 ### Claude Code
 
@@ -37,6 +38,7 @@ claude plugin install structurizr@cassiobotaro-skills
 claude plugin install mermaid-sequence@cassiobotaro-skills
 claude plugin install unslop@cassiobotaro-skills
 claude plugin install code-comments@cassiobotaro-skills
+claude plugin install explain@cassiobotaro-skills
 ```
 
 Or interactively from inside Claude Code with `/plugin`.
@@ -67,7 +69,7 @@ The diagram skills validate and render through tooling you provide, and degrade 
 
 ## Repository layout
 
-Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`, `unslop/`, `code-comments/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
+Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`, `unslop/`, `code-comments/`, `explain/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
 
 ## License and attribution
 
@@ -79,3 +81,4 @@ Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `struc
 - [mermaid-sequence](mermaid-sequence/skills/mermaid-sequence/NOTICE.md) — the Mermaid project
 - [unslop](unslop/skills/unslop/NOTICE.md) — Lauren Tan (pstack)
 - [code-comments](code-comments/skills/code-comments/NOTICE.md) — Dustin Boswell and Trevor Foucher (*The Art of Readable Code*)
+- [explain](explain/skills/explain/NOTICE.md) — research on instruction (Sweller, Renkl, Mayer, Kulgemeyer, and others), on plain language and science communication (Martínez, Rogers, Gigerenzer, ISO 24495-1, and others), and practice (Diátaxis, Julia Evans)
