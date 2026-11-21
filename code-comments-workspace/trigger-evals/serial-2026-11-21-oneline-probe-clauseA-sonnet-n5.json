@@ -1,0 +1,43 @@
+{
+  "skill_name": "code-comments",
+  "description": "Decide which comments belong in the source code you are writing or changing, and word them, following The Art of Readable Code (Boswell & Foucher). Every code change is also a set of comment decisions, and the usual defaults are wrong: comments that restate the line below, comments that narrate the edit (\"added null check\", \"fixed the bug\"), a header that repeats the signature, an invented reason next to a constant, an old comment left contradicting the new code. Use this skill whenever you write or modify code in any language — implementing a feature, fixing a bug, refactoring, writing a script or a test — even when the user never mentions comments, and before handing the change back. It applies just as much when the code is pasted in the message and the change is one line that looks obvious: the comments around that line are checked first and the code is returned second, never the change alone. Also use it for \"comment this code\", \"add docstrings\", \"clean up these comments\", \"are these comments any good\".",
+  "results": [
+    {
+      "query": "muda o intervalo desse poller de 10 pra 45 segundos:\n\nPOLL_INTERVAL = 10  # seconds between polls\n\ndef run():\n    while True:\n        poll()\n        time.sleep(POLL_INTERVAL)",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "bump the retry limit here from 3 to 5:\n\nconst MAX_RETRIES = 3; // give up after three attempts\n\nasync function fetchWithRetry(url) {\n  for (let i = 0; i < MAX_RETRIES; i++) {\n    try {\n      return await fetch(url);\n    } catch (e) {\n      if (i === MAX_RETRIES - 1) throw e;\n    }\n  }\n}",
+      "should_trigger": true,
+      "trigger_rate": 0.6,
+      "triggers": 3,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "make this return an empty slice instead of nil when nobody is active:\n\n// activeNames returns nil when no user is active.\nfunc activeNames(users []User) []string {\n\tvar out []string\n\tfor _, u := range users {\n\t\tif u.Active {\n\t\t\tout = append(out, u.Name)\n\t\t}\n\t}\n\treturn out\n}",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    },
+    {
+      "query": "write pytest tests for this, cover the empty list and a row with negative bytes:\n\ndef total_bytes(rows):\n    return sum(r[\"bytes\"] for r in rows if r[\"bytes\"] >= 0)",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 5,
+      "runs": 5,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0
+  }
+}

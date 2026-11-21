@@ -9,9 +9,11 @@ description: >
   header that repeats the signature, an invented reason next to a constant, an old comment
   left contradicting the new code. Use this skill whenever you write or modify code in any
   language — implementing a feature, fixing a bug, refactoring, writing a script or a test
-  — even when the user never mentions comments, and before handing the change back. Also
-  use it for "comment this code", "add docstrings", "clean up these comments", "are these
-  comments any good".
+  — even when the user never mentions comments, and before handing the change back. It
+  applies just as much when the code is pasted in the message and the change is one line
+  that looks obvious: the comments around that line are checked first and the code is
+  returned second, never the change alone. Also use it for "comment this code", "add
+  docstrings", "clean up these comments", "are these comments any good".
 ---
 
 # Code comments
