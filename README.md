@@ -32,6 +32,7 @@ No skill states as fact something that you or your repository did not establish:
 ## Installation
 
 | Host | Install with | Without Docker |
+| --- | --- | --- |
 | Claude Code | `claude plugin install <skill>@cassiobotaro-skills`, or `/plugin` | DSL and Mermaid are authored but not validated; you get the command to run later |
 | GitHub Copilot CLI | `gh skill install cassiobotaro/skills <skill>` | same |
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
