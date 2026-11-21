@@ -1,7 +1,7 @@
 {
   "name": "cassiobotaro-skills",
   "owner": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
-  "description": "Architecture documentation skills: design docs, ADRs, C4/Structurizr models, Mermaid sequence diagrams",
+  "description": "Software documentation skills: design docs, ADRs, C4/Structurizr models, Mermaid sequence diagrams, code comments, and a prose editor",
   "plugins": [
     {
       "name": "adr",
@@ -27,6 +27,11 @@
       "name": "unslop",
       "source": "./unslop",
       "description": "Remove machine-writing patterns from prose in English or Brazilian Portuguese without changing its meaning or adding facts; runs only when you ask for it by name or another skill calls it"
+    },
+    {
+      "name": "code-comments",
+      "source": "./code-comments",
+      "description": "Keep the comments in code an agent writes or changes useful, precise, and compact, following The Art of Readable Code: comment what the reader cannot get from the code, never what they can"
     }
   ]
 }

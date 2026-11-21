@@ -1,6 +1,6 @@
 # cassiobotaro-skills
 
-Agent skills for software architecture documentation: decision records, design docs, and diagrams, plus a prose editor the other skills can call. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
+Agent skills for software documentation: decision records, design docs, diagrams, and code comments, plus a prose editor the other skills can call. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
 
 | Skill | What it does |
 |---|---|
@@ -9,8 +9,9 @@ Agent skills for software architecture documentation: decision records, design d
 | `structurizr` | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl) (`workspace.dsl`): system context, container, component, deployment, and dynamic diagrams. |
 | `mermaid-sequence` | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced ```` ```mermaid ```` code blocks that render directly in Markdown (GitHub, GitLab, most wikis). |
 | `unslop` | Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese, without changing its meaning or adding a fact. It runs only when you ask for it by name ("unslop this"), or when another skill calls it. |
+| `code-comments` | Keep the comments in code an agent writes or changes useful, precise, and compact, following *The Art of Readable Code* (Boswell & Foucher): comment what the reader cannot get from the code — the reason, the pitfall, the big picture — and never what they can. |
 
-**Record, don't invent.** Every skill documents only what you or your repository established — no invented metrics, technologies, relationships, endpoints, or failure paths. When a request is too vague to fill honestly, the skill asks a few targeted questions (batched, in the conversation language) instead of guessing, and those questions are the deliverable: a gap gets asked about, a fabrication gets believed.
+**Record, don't invent.** Every skill documents only what you or your repository established — no invented metrics, technologies, relationships, endpoints, failure paths, or reasons. When a request is too vague to fill honestly, the skill asks a few targeted questions (batched, in the conversation language) instead of guessing, and those questions are the deliverable: a gap gets asked about, a fabrication gets believed. `code-comments` works inside a code change, so it does not stop to ask: a reason nobody established stays out of the file and is reported in the reply.
 
 ## Installation
 
@@ -21,7 +22,7 @@ Agent skills for software architecture documentation: decision records, design d
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
 | Any Agent Skills host | copy the skill folder (e.g. `design-doc/skills/design-doc/`) into the agent's skills directory | same |
 
-No skill *requires* Docker, and none uses an MCP server: `adr`, `design-doc`, and `unslop` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
+No skill *requires* Docker, and none uses an MCP server: `adr`, `design-doc`, `unslop`, and `code-comments` need no external tooling, `structurizr` and `mermaid-sequence` validate through Docker images (mermaid-sequence falls back to a local mermaid-cli), and both diagram skills degrade gracefully, as the last column says.
 
 ### Claude Code
 
@@ -35,6 +36,7 @@ claude plugin install design-doc@cassiobotaro-skills
 claude plugin install structurizr@cassiobotaro-skills
 claude plugin install mermaid-sequence@cassiobotaro-skills
 claude plugin install unslop@cassiobotaro-skills
+claude plugin install code-comments@cassiobotaro-skills
 ```
 
 Or interactively from inside Claude Code with `/plugin`.
@@ -65,7 +67,7 @@ The diagram skills validate and render through tooling you provide, and degrade 
 
 ## Repository layout
 
-Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`, `unslop/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
+Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `structurizr/`, `mermaid-sequence/`, `unslop/`, `code-comments/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<name>/`. The `*-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
 
 ## License and attribution
 
@@ -76,3 +78,4 @@ Each skill ships as a plugin in its own directory (`adr/`, `design-doc/`, `struc
 - [structurizr](structurizr/skills/structurizr/NOTICE.md) — Simon Brown (C4 model, Structurizr)
 - [mermaid-sequence](mermaid-sequence/skills/mermaid-sequence/NOTICE.md) — the Mermaid project
 - [unslop](unslop/skills/unslop/NOTICE.md) — Lauren Tan (pstack)
+- [code-comments](code-comments/skills/code-comments/NOTICE.md) — Dustin Boswell and Trevor Foucher (*The Art of Readable Code*)

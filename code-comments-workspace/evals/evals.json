@@ -1,0 +1,105 @@
+{
+  "skill_name": "code-comments",
+  "note": "Six evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given (files/billing/invoice.py becomes billing/invoice.py). Only eval 6 mentions comments in its prompt: the skill's main job is the comments of code an agent writes while doing something else. No eval has been run yet; before the first run, split the assertions into atomic checks in checks-baseline.json (see eval-tools/README.md).",
+  "evals": [
+    {
+      "id": 1,
+      "name": "new-function-no-mention-of-comments",
+      "prompt": "Add a function unique_slug(title, existing) to slugs/slugify.py. It returns the slug of title; when that slug is already in the set `existing` it appends -2, -3 and so on until the result is free.",
+      "expected_output": "unique_slug is added to slugs/slugify.py and works. The new code carries no comment that restates a statement and none that narrates the edit. If it has a docstring, the docstring says something the signature does not (for instance what is returned when the slug is taken, ideally with an input/output example), in English and in the docstring form slugify already uses. slugify itself is untouched.",
+      "files": [
+        "files/slugs/slugify.py"
+      ],
+      "assertions": [
+        "slugs/slugify.py defines unique_slug(title, existing): it returns slugify(title) when that is not in `existing`, otherwise the first of '<slug>-2', '<slug>-3', … that is not in `existing`",
+        "No comment in the added code restates what the statement next to it does (e.g. '# loop until the slug is free' over the loop, '# return the slug' over the return)",
+        "No comment narrates the edit or the conversation: no 'added', 'new function', 'as requested' or similar",
+        "If unique_slug has a docstring or header comment, it states something the signature does not (the suffix scheme, what happens on a collision, or an input/output example) rather than repeating the parameter names in prose",
+        "Every comment and docstring added is in English, the language of the existing docstring",
+        "The existing slugify function, its docstring and the imports are byte-for-byte unchanged"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "bugfix-updates-stale-comment",
+      "prompt": "No billing/invoice.py o vencimento está caindo em sábado e domingo. O banco só compensa boleto em dia útil, então quando cair no fim de semana o vencimento tem que ir pra segunda-feira seguinte. Corrige pra mim.",
+      "expected_output": "due_date moves a Saturday or Sunday result to the following Monday. The existing comment that says 'weekends included' is updated or removed, since the fix makes it false. No comment narrates the fix. Comments are in English, the language of the file, although the conversation is in Portuguese. A reason, if written, is the one the user gave (the bank only settles on business days); holidays are not claimed to be handled. late_fee and its comment are untouched.",
+      "files": [
+        "files/billing/invoice.py"
+      ],
+      "assertions": [
+        "due_date returns the following Monday when issued + terms_days falls on a Saturday or a Sunday, and the unchanged date otherwise",
+        "The comment 'Due terms_days calendar days after issue, weekends included.' no longer appears as it was: it is rewritten to match the new behavior or removed",
+        "No comment narrates the edit: no 'fixed', 'corrigido', 'now', 'agora', 'changed', 'bug' describing the change itself",
+        "Every comment in the file is in English, the language of the comments already there, although the conversation is in Portuguese",
+        "Any reason given in a comment is the user's (the bank only settles on business days); no comment or reply claims that holidays are handled, and no other motive, incident or rule is supplied",
+        "late_fee and its comment are byte-for-byte unchanged"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "constant-reason-stated",
+      "prompt": "In sync/client.ts, make push send the records in batches of at most 500 per request. The API rejects request bodies over 1 MB and our largest records are about 2 KB, so 500 is a safe ceiling.",
+      "expected_output": "push sends the records in requests of at most 500. The limit is a named constant whose comment carries the user's reason (1 MB body limit, records of about 2 KB). Nothing else is asserted about the API. No comment narrates the edit.",
+      "files": [
+        "files/sync/client.ts"
+      ],
+      "assertions": [
+        "push sends the records in successive requests of at most 500 records each, and still throws when a response is not ok",
+        "The limit of 500 is a named constant (not a bare literal inside the loop) and a comment next to it gives the user's reason: the API rejects bodies over 1 MB and the largest records are about 2 KB",
+        "No comment states a fact about the API, the records or performance that the user did not give (no rate limits, timeouts, measured sizes or throughput claims)",
+        "No comment narrates the edit ('added batching', 'now sends in batches', 'as requested')",
+        "No comment restates a statement of the batching loop"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "constant-no-reason-given",
+      "prompt": "Make the poller in worker/poller.py wait 45 seconds between polls instead of 10.",
+      "expected_output": "POLL_INTERVAL_S becomes 45 and nothing else in the file changes. The user gave no reason for the value, so the file gains no comment that supplies one. The constant may stay uncommented; the reply may say that no reason was recorded.",
+      "files": [
+        "files/worker/poller.py"
+      ],
+      "assertions": [
+        "POLL_INTERVAL_S is 45 and the run function is unchanged",
+        "No comment in the file gives a reason for the value 45 (no 'to reduce load', 'to avoid rate limiting', 'balances …' or any other motive): the user stated none",
+        "No comment narrates the edit ('changed from 10', 'increased', 'was 10')",
+        "The reply does not present an invented reason for the value as a fact"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "bad-name-suggested-not-renamed",
+      "prompt": "summarize in reports/usage.py should ignore rows whose bytes value is negative. Those are corrections that billing writes into the same table and they must not count as usage.",
+      "expected_output": "summarize skips rows with negative bytes. The existing variable d, whose comment exists only to explain its name, is not renamed; the reply suggests renaming it (for instance to bytes_by_account) and leaves the decision to the user. A comment on the new condition, if any, carries the user's reason (negative rows are billing corrections) and does not restate the condition. top_accounts is untouched.",
+      "files": [
+        "files/reports/usage.py"
+      ],
+      "assertions": [
+        "summarize skips rows whose 'bytes' value is negative and still sums the others per account",
+        "The existing variable `d` keeps its name in the file",
+        "The reply suggests giving `d` a descriptive name, as a suggestion the user may decline, separate from the change that was made",
+        "A comment on the new condition, if present, gives the user's reason (negative rows are corrections written by billing) instead of restating the condition ('skip negative bytes')",
+        "No comment narrates the edit, and top_accounts is byte-for-byte unchanged"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "comment-existing-file-pt",
+      "prompt": "comenta o cache/ttl.py pra mim, por favor. vou passar esse arquivo pra uma pessoa nova no time",
+      "expected_output": "cache/ttl.py gains comments and nothing else: the code is unchanged. The file has no comments and it is the only file in the project, so the comments are in Portuguese, the language of the conversation. They are not a line-by-line narration: there is a short description of what the class is for and comments on what a reader could not see quickly, such as an expired entry being removed only when it is read, expired entries counting toward MAX_ENTRIES, eviction removing the entry stored longest ago with a scan of every entry, or a stored None being indistinguishable from a miss with the default default. No reason is supplied for the value 1024; the reply may say it could not be established.",
+      "files": [
+        "files/cache/ttl.py"
+      ],
+      "assertions": [
+        "With comments and docstrings removed, cache/ttl.py is the same code as the fixture: no statement added, removed, reordered or renamed",
+        "The comments and docstrings are in Portuguese",
+        "The file is not narrated line by line: no comment restates a single statement (e.g. 'retorna o valor' over `return value`, 'inicializa o dicionário' over `self._entries = {}`)",
+        "There is a description of what TTLCache is for at the class or the file level",
+        "At least two of these behaviors, which the code has but does not make obvious, are stated: an expired entry is removed only when get reads it; expired entries still count toward MAX_ENTRIES; put evicts the entry stored longest ago (not the least recently read); the eviction scans every entry; a stored None cannot be told from a miss when default is None",
+        "Every behavior a comment states is one the code actually has",
+        "No comment gives a reason for MAX_ENTRIES being 1024 or for any other design choice: the file and the user establish none"
+      ]
+    }
+  ]
+}

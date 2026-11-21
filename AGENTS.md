@@ -6,17 +6,17 @@ host. Two more files are read on demand; see "Read on demand" at the end.
 
 ## What this repo is
 
-`cassiobotaro-skills` — architecture-documentation skills, and one prose-editing skill, in the open **Agent Skills** standard
+`cassiobotaro-skills` — architecture-documentation skills, one code-comments skill, and one prose-editing skill, in the open **Agent Skills** standard
 (`SKILL.md`), installable in any compatible host (Claude Code, GitHub Copilot, Google Antigravity,
 OpenCode, … — via `npx skills add cassiobotaro/skills` or `gh skill install cassiobotaro/skills <skill>`).
 The repository is also a Claude Code **plugin marketplace** where each skill ships as an
 independently installable plugin. There is no application code: the "source" is the skills'
-Markdown instructions (`SKILL.md` + `references/`). The five plugins are `adr`, `design-doc`,
-`structurizr`, `mermaid-sequence`, and `unslop`.
+Markdown instructions (`SKILL.md` + `references/`). The six plugins are `adr`, `design-doc`,
+`structurizr`, `mermaid-sequence`, `unslop`, and `code-comments`.
 
 ## Layout
 
-- `.claude-plugin/marketplace.json` — root marketplace manifest listing the five plugins and their `source` dirs.
+- `.claude-plugin/marketplace.json` — root marketplace manifest listing the six plugins and their `source` dirs.
 - `<plugin>/.claude-plugin/plugin.json` — per-plugin manifest (name, version, description, license, keywords).
 - `<plugin>/skills/<name>/` — the actual skill: `SKILL.md` (frontmatter `name` + `description`, then the body), `NOTICE.md` (upstream attribution), and `references/*.md` (loaded on demand).
 - `<plugin>-workspace/` — eval/benchmark artifacts only. **Committed but not part of the installed plugin.** Never reference a workspace path from inside a `skills/` file.
