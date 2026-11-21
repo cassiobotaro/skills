@@ -6,25 +6,19 @@ Agent skills for software architecture, engineering, communication, and learning
 
 ### Architecture
 
-| Skill | What it does | Builds on |
-|---|---|---|
-| [`adr`](adr/skills/adr/SKILL.md) | Write and maintain Architecture Decision Records in the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), file-compatible with [adr-tools](https://github.com/npryce/adr-tools). | Michael Nygard, Nat Pryce ([NOTICE](adr/skills/adr/NOTICE.md)) |
-| [`structurizr`](structurizr/skills/structurizr/SKILL.md) | Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl). | Simon Brown ([NOTICE](structurizr/skills/structurizr/NOTICE.md)) |
+- [`adr`](adr/skills/adr/SKILL.md): Write and maintain Architecture Decision Records in the [Michael Nygard format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), file-compatible with [adr-tools](https://github.com/npryce/adr-tools). Builds on Michael Nygard and Nat Pryce ([NOTICE](adr/skills/adr/NOTICE.md)).
+- [`structurizr`](structurizr/skills/structurizr/SKILL.md): Author, evolve, and validate [C4 model](https://c4model.com) architecture documentation as [Structurizr DSL](https://docs.structurizr.com/dsl). Builds on Simon Brown ([NOTICE](structurizr/skills/structurizr/NOTICE.md)).
 
 ### Engineering
 
-| Skill | What it does | Builds on |
-|---|---|---|
-| [`design-doc`](design-doc/skills/design-doc/SKILL.md) | Write and review software design documents through interactive discovery, producing trade-off-focused Markdown. | Cássio Botaro ([Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/)), Malte Ubl, Rina Artstain, Gergely Orosz, Tech Leads Club ([NOTICE](design-doc/skills/design-doc/NOTICE.md)) |
-| [`mermaid-sequence`](mermaid-sequence/skills/mermaid-sequence/SKILL.md) | Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced code blocks that render directly in Markdown. | The Mermaid project ([NOTICE](mermaid-sequence/skills/mermaid-sequence/NOTICE.md)) |
-| [`code-comments`](code-comments/skills/code-comments/SKILL.md) | Keep the comments in code an agent writes or changes useful, precise, and compact: comment what the reader cannot get from the code, never what they can. | Dustin Boswell and Trevor Foucher, *The Art of Readable Code* ([NOTICE](code-comments/skills/code-comments/NOTICE.md)) |
+- [`design-doc`](design-doc/skills/design-doc/SKILL.md): Write and review software design documents through interactive discovery, producing trade-off-focused Markdown. Builds on Cássio Botaro's [Design Docs series](https://cassiobotaro.dev/posts/design-docs-parte-1/), Malte Ubl, Rina Artstain, Gergely Orosz, and Tech Leads Club ([NOTICE](design-doc/skills/design-doc/NOTICE.md)).
+- [`mermaid-sequence`](mermaid-sequence/skills/mermaid-sequence/SKILL.md): Write and edit [Mermaid](https://mermaid.js.org) sequence diagrams as fenced code blocks that render directly in Markdown. Builds on the Mermaid project ([NOTICE](mermaid-sequence/skills/mermaid-sequence/NOTICE.md)).
+- [`code-comments`](code-comments/skills/code-comments/SKILL.md): Keep the comments in code an agent writes or changes useful, precise, and compact: comment what the reader cannot get from the code, never what they can. Builds on *The Art of Readable Code* by Dustin Boswell and Trevor Foucher ([NOTICE](code-comments/skills/code-comments/NOTICE.md)).
 
 ### Communication and learning
 
-| Skill | What it does | Builds on |
-|---|---|---|
-| [`unslop`](unslop/skills/unslop/SKILL.md) | Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese. It runs only when you ask for it by name or another skill calls it. | Lauren Tan, pstack ([NOTICE](unslop/skills/unslop/NOTICE.md)) |
-| [`explain`](explain/skills/explain/SKILL.md) | Explain a topic to one specific reader, and write or revise messages, emails, and replies, choosing the device by the reader's situation instead of running one fixed format. | Research on instruction, plain language, and science communication; Diátaxis; Julia Evans ([NOTICE](explain/skills/explain/NOTICE.md)) |
+- [`unslop`](unslop/skills/unslop/SKILL.md): Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese. It runs only when you ask for it by name or another skill calls it. Builds on pstack by Lauren Tan ([NOTICE](unslop/skills/unslop/NOTICE.md)).
+- [`explain`](explain/skills/explain/SKILL.md): Explain a topic to one specific reader, and write or revise messages, emails, and replies, choosing the device by the reader's situation instead of running one fixed format. Builds on research on instruction, plain language, and science communication, on Diátaxis, and on Julia Evans ([NOTICE](explain/skills/explain/NOTICE.md)).
 
 ## Record, don't invent
 
@@ -38,7 +32,6 @@ No skill states as fact something that you or your repository did not establish:
 ## Installation
 
 | Host | Install with | Without Docker |
-|---|---|---|
 | Claude Code | `claude plugin install <skill>@cassiobotaro-skills`, or `/plugin` | DSL and Mermaid are authored but not validated; you get the command to run later |
 | GitHub Copilot CLI | `gh skill install cassiobotaro/skills <skill>` | same |
 | Antigravity, OpenCode, others | `npx skills add cassiobotaro/skills` | same |
@@ -87,4 +80,4 @@ Each skill ships as a plugin in its own directory (`<skill>/`) with a `.claude-p
 
 ## License and attribution
 
-[MIT](LICENSE). Each skill builds on prior art: the tables under [Skills](#skills) name it, and the skill's `NOTICE.md` credits it in full.
+[MIT](LICENSE). Each skill builds on prior art: the list under [Skills](#skills) names it, and the skill's `NOTICE.md` credits it in full.
