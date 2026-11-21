@@ -5,9 +5,9 @@
   "note": "explain, pt-BR, level stated"
  },
  {
-  "query": "why does internal/sync/worker.go take the lock twice in drain()? I've read it three times and I still don't see what the second one protects",
+  "query": "why does this take the lock twice? I've read it three times and I still don't see what the second one protects:\n\nfunc (w *Worker) drain() {\n\tw.mu.Lock()\n\tpending := w.queue\n\tw.queue = nil\n\tw.mu.Unlock()\n\n\tfor _, job := range pending {\n\t\tjob.Run()\n\t}\n\n\tw.mu.Lock()\n\tw.draining = false\n\tw.mu.Unlock()\n}",
   "should_trigger": true,
-  "note": "why does this code do Y"
+  "note": "why does this code do Y, code pasted in the question"
  },
  {
   "query": "eli5 how does a VPN actually hide my traffic, and from who",
