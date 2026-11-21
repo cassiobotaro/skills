@@ -155,6 +155,13 @@ substance is missing.
   opening paragraph that announces what the document contains; and the same sentence
   shape recurring as a gap marker ("the team has not yet decided…" in every section —
   state the gap once, in Open questions, and link to it).
+- **Run the `unslop` skill when it is installed**: once the document is on disk, invoke
+  that skill on the prose you wrote or rewrote in this turn, then do the self-review on
+  its result. It owns the full catalog of these tics, and the two bullets above are the
+  floor that holds without it. Headings, a governing template's structure, and diagram
+  sources are not prose and stay as they are. A fact it finds missing becomes an open
+  question (contract 2). In a review, the author's own text is never run through it: the
+  review names what it found and the author decides.
 - The design is not one section but a **series** of sections — the solution overview
   first, then only the details that earn their place. `references/sections.md` holds the
   menu and the two tests (longevity, freedom) for whether a detail belongs in the
@@ -169,6 +176,8 @@ substance is missing.
 
 Before declaring done, check:
 
+- The `unslop` skill, when it is installed, was invoked on this turn's prose (step 3).
+  Reading its file is not running it. If it was not run, run it now.
 - Nothing in the document that the user or the repository didn't establish. Read each
   open question against the body: no section may state as fact what the question asks.
 - The header's state reflects reality, and dates are real (`date +%Y-%m-%d`).
