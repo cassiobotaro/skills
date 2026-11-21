@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "First sentence: \"Because it makes the timer unnecessary.\" This names what computing refill inside allow() gives over a periodic timer: no timer is needed."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` creates one `TokenBucket` per `api_key` in a module-level dict.\" Also: \"`allow()` works out how many tokens should have accrued since the last call (`elapsed * rate`)\" and \"It uses `time.monotonic()`.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched for motive stated as fact ('the author chose', 'this was done to'): none found. The reply marks its reasons as inference: \"The code doesn't record the author's reasoning, so the reasons below are inferred from the code.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for a definition of rate limiting or a token bucket, and for an introductory bucket analogy: none found. The reply goes straight to the design trade-offs."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures and requirements. The figures used (5 tokens/sec, burst 20) come from api.py:3-4. Concurrency remarks are conditional (\"If this ever runs with multiple threads\"). \"buckets ... is never pruned\" matches api.py. The worked example (50 accrued, capped at 20, returns True, leaves 19) follows from limiter.py:14-17. No invented project facts found."
+ }
+]

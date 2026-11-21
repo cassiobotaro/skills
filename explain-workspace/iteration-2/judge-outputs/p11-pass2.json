@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 2: \"**Concurrency** means juggling several tasks, so that they overlap in time. Only one of them may actually be running at any instant.\" Line 3: \"**Parallelism** means several tasks literally running at the same instant, on different CPU cores.\" These are the reply's first three sentences."
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 5: \"One cook with three pots on the stove... Only one thing gets attention at a time, but all three dishes make progress. That's concurrency. Now hire three cooks, one per pot, all working at once. That's parallelism.\" Also line 13: \"**Waiting (I/O-bound):** ... Concurrency fixes this.\" versus line 17: \"**Computing (CPU-bound):** ... Only parallelism helps, because you need more cores working.\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 2: \"Only one of them may actually be running at any instant.\" Line 3: \"several tasks literally running at the same instant\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 15: \"Example: fetching 500 URLs.\" Line 17: \"heavy regex over millions of rows\" Line 9: \"What this means for your cleanup scripts\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "GIL is defined where it first appears (line 19: \"the GIL, which lets only one thread run Python bytecode at a time\"). But asyncio first appears as a recommended tool with no definition, line 14: \"Tools: `threading`, `concurrent.futures.ThreadPoolExecutor`, or `asyncio`.\" The terms event loop and context switch do not appear."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise. The reply opens with \"**Short version:**\" followed directly by the definitions."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. The reply opens with \"**Short version:**\" and goes straight into the definitions."
+ }
+]

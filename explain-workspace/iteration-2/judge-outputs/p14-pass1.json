@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "line 1: \"concurrency is about *juggling* several tasks so they overlap in time. Parallelism is about *actually running* several at the same instant on different CPU cores.\""
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "line 7: \"**Case A: the slow part is waiting.** ... That's **concurrency without parallelism**.\"; line 8: \"**Case B: the slow part is computing.** ... That's **parallelism**.\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "line 1: \"Parallelism is about *actually running* several at the same instant on different CPU cores. You can have concurrency without parallelism\"; line 7: \"Only one thing runs at any instant, but the waits overlap ... That's **concurrency without parallelism**.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "line 5: \"Say you have 100 files to clean.\"; line 7: \"Each file comes from a web API, and each download takes 2 seconds\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "asyncio first appears undefined at line 3: \"you haven't used `threading`, `asyncio` or `multiprocessing` much\". The reply then recommends it as a tool to use at line 7: \"In Python you'd use `threading`, `ThreadPoolExecutor` or `asyncio`.\" It never defines it. GIL is defined at its first use on line 12. 'event loop' and 'context switch' do not appear."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening (line 1) for praise of the question. It begins \"**Short answer:** concurrency is about...\" and contains no praise."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening (line 1) for a restatement of the question. It goes straight to the answer: \"**Short answer:** concurrency is about *juggling* several tasks\"."
+ }
+]

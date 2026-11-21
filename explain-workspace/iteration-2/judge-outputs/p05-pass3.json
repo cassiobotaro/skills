@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Um **mutex** (de *mutual exclusion*, exclusão mútua) é uma trava que garante que só uma goroutine por vez execute um trecho de código.\""
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for question marks or questions to the user. None appear; the reply opens directly with the definition on line 1."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"é uma trava que garante que só uma goroutine por vez execute um trecho de código.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Lines 14-22: 1000 goroutines each run `contador++`, with the comment \"quase nunca dá 1000\". Line 26: \"Duas goroutines podem ler o mesmo valor e uma sobrescreve o resultado da outra.\""
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise such as 'Ótima pergunta' or 'Claro!'. None found; line 1 starts \"Um **mutex**...\"."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. None found; line 1 goes straight to the definition."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched for explanations of what a variable or a function is. None found; both are used without being explained."
+ },
+ {
+  "id": "1.9",
+  "verdict": "unmet",
+  "evidence": "Line 61: \"**Mantenha a seção crítica pequena.**\" The term 'seção crítica' is not defined in this sentence or the one before it (line 56 is about defer). Borderline: the following sentence mentions holding the lock, but it never says what a critical section is. 'race condition' (line 7) and 'deadlock' (line 76) are defined in their sentences."
+ },
+ {
+  "id": "1.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 52: \"Pense numa porta de banheiro com chave: quem pega a chave (`Lock`) entra, os outros esperam na fila...\". The key is mapped to Lock and Unlock, but the people are never mapped to goroutines and the bathroom is never mapped to the protected code."
+ },
+ {
+  "id": "1.11",
+  "verdict": "unmet",
+  "evidence": "Searched lines 52 and after for where the bathroom analogy stops working. Nothing is said about its limits."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "Searched the ending for a generic offer of more help. The reply ends with a specific tip, line 83: \"rode seu código com `go run -race main.go` ou `go test -race`.\""
+ }
+]

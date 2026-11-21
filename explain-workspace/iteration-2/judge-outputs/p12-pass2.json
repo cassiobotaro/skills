@@ -1,0 +1,62 @@
+[
+ {
+  "id": "9.1",
+  "verdict": "met",
+  "evidence": "line 3: \"A exportação de notas para o ERP volta a funcionar na quinta-feira, 26/11, quando a correção entra em produção.\""
+ },
+ {
+  "id": "9.2",
+  "verdict": "met",
+  "evidence": "line 7: \"Sobre o desconto na mensalidade, ainda não consigo confirmar. Quem decide é o financeiro.\""
+ },
+ {
+  "id": "9.3",
+  "verdict": "met",
+  "evidence": "Searched lines 1-7 of the revised text for a promise or refusal of the discount. The only words on it are \"ainda não consigo confirmar. Quem decide é o financeiro. Retorno a você com a resposta até [data].\" These neither promise nor refuse."
+ },
+ {
+  "id": "9.4",
+  "verdict": "met",
+  "evidence": "line 3: \"volta a funcionar na quinta-feira, 26/11\". Then line 7: \"Sobre o desconto na mensalidade, ainda não consigo confirmar.\""
+ },
+ {
+  "id": "9.5",
+  "verdict": "met",
+  "evidence": "Greeting at line 1: \"Olá, Paulo, bom dia.\" The first sentence after it is line 3: \"A exportação de notas para o ERP volta a funcionar na quinta-feira, 26/11, quando a correção entra em produção.\" The second sentence is line 5: \"A falha vem do conector de exportação, que foi atualizado na última versão da plataforma.\""
+ },
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "Searched revised text lines 1-7 for 'Que bom que só percebemos'. It is absent; the phrase appears only in the change note at line 13."
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "Searched lines 1-7 for sarcasm. The replacement is a sincere apology: \"Lamentamos o transtorno e o fato de só termos identificado o problema depois de três dias.\" No ironic phrasing was found."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Searched lines 1-7 for 'Espero que sim', 'agradecemos imensamente', and any other stock opener. None found; the greeting is only \"Olá, Paulo, bom dia.\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Searched lines 1-7 for 'Qualquer dúvida' or 'à disposição'. None found; the text ends at line 7 with the discount follow-up."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched lines 1-7 for new facts. Cause: the connector updated in the last version, which is in the draft at thread.md:11-12. Date 26/11: from the prompt. No compensation is offered. The finance deadline is the bracketed gap '[data]'."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "line 11: \"**O que mudei:**\". line 12: \"Pus a data da correção na primeira frase, porque era a primeira pergunta dele...\""
+ },
+ {
+  "id": "9.12",
+  "verdict": "unmet",
+  "evidence": "borderline: the 'O que mudei' section is a header (line 11) plus three bullets (lines 12-14), so four source lines. Each bullet is also long enough to wrap to several display lines. It exceeds three lines unless the header is excluded and bullets count as single lines."
+ }
+]

@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"There's no comment or doc in the repo that records the author's reasoning.\" / \"What follows is what the code shows plus the usual trade-offs.\" / \"**What `allow()` does:** it refills lazily.\" The first two are a preamble about what the repository records, and the third describes the mechanism without saying what it buys over a timer. The benefits (\"An idle key would still cost you wakeups. With lazy refill, an idle bucket costs only its memory.\") first appear later, in the 'Why that beats a timer here' section."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` creates a bucket the first time it sees a key and keeps it in the module-level `buckets` dict.\" Also: \"On each call it works out `elapsed * rate`\" and \"It uses `time.monotonic()`.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for motive stated as fact (\"the author chose\", \"this was done to\", \"designed to\", \"because the author\"). None found. The reply disclaims knowledge of motive (\"There's no comment or doc in the repo that records the author's reasoning\") and frames points as what the design gives (\"Why that beats a timer here\") and as \"the usual trade-offs\"."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or token buckets, or an introductory bucket analogy. None found. The reply goes straight to how `allow()` refills and the trade-offs against a timer."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements not in the files. The numbers used (\"rate 5\", \"lumps of 5\", \"0.2s ... adds exactly 1 token\") derive from RATE_PER_SECOND = 5 at api.py:3. Deployment remarks are conditional (\"fine if you run single-threaded or on asyncio, and a problem under a threaded server\"), and git history is explicitly marked unchecked (\"I haven't checked either\")."
+ }
+]

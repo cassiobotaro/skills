@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "line 1: \"Um **mutex** (de *mutual exclusion*, exclusão mútua) é uma trava que garante que só uma goroutine por vez execute um trecho de código.\""
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for '?' and for questions addressed to the user. None appear; the reply starts directly with the definition on line 1."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "line 1: \"é uma trava que garante que só uma goroutine por vez execute um trecho de código.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "line 14: \"for i := 0; i < 1000; i++ {\"; line 22: \"fmt.Println(contador) // quase nunca dá 1000\"; line 26: \"Duas goroutines podem ler o mesmo valor e uma sobrescreve o resultado da outra.\""
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Checked the opening on line 1, which begins \"Um **mutex** (de *mutual exclusion*...\". It has no praise such as 'Ótima pergunta' or 'Claro!'."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Checked the opening on line 1. It goes straight to the definition and does not restate the user's question."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched for explanations of what a variable or a function is. None found: variables and functions are used but never defined."
+ },
+ {
+  "id": "1.9",
+  "verdict": "unmet",
+  "evidence": "line 61: \"**Mantenha a seção crítica pequena.**\" This is where 'seção crítica' first appears. Neither this sentence nor the one before it (line 56-60, about defer) says what it is. The other terms pass: 'race condition' is defined in its own sentence on line 7, and 'deadlock' is glossed on line 76 as \"isso trava o programa\"."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "line 52: \"quem pega a chave (`Lock`) entra, os outros esperam na fila, e quando a pessoa sai e devolve a chave (`Unlock`), o próximo entra.\" The analogy maps the key to Lock and Unlock and the people waiting to the other goroutines."
+ },
+ {
+  "id": "1.11",
+  "verdict": "unmet",
+  "evidence": "Searched line 52 and the surrounding text for any statement of where the bathroom analogy stops working. None found."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "The reply ends on line 83 with a specific tip: \"Para detectar race conditions, rode seu código com `go run -race main.go` ou `go test -race`.\" It has no generic offer of more help."
+ }
+]

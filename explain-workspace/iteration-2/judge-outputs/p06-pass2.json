@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "\"Um mutex é um cadeado que garante que só uma goroutine por vez mexa em um dado compartilhado.\" (line 1)"
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched lines 1-58 for a question to the user. None found; the only question mark is the comprehension question at line 59. The explanation starts at line 1. Line 3 ('Se já conhece, me diga e eu pulo essa parte') comes after it and is an offer, not a question."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "\"Um mutex é um cadeado que garante que só uma goroutine por vez mexa em um dado compartilhado.\" (line 1)"
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "\"Suponha que duas goroutines leiam `41` ao mesmo tempo. As duas gravam `42`, e um incremento se perde.\" (line 28)"
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched the opening (lines 1-3) for praise such as 'Ótima pergunta' or 'Claro!'. None found; the reply opens directly with the definition."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the opening (lines 1-3) for a restatement of the question. None found; line 1 is the definition."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for an explanation of what a variable or a function is. None found; 'variável' and 'função' are only used, never defined (for example line 7: 'Uma função não é interrompida no meio por outra')."
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "Searched for the listed terms. 'data race' first appears at line 28 as 'Isso se chama *data race*', right after the sentences describing the lost increment. 'seção crítica' appears at line 50 as 'o banheiro é o trecho protegido (a *seção crítica*)'. Neither 'race condition'/'condição de corrida', 'deadlock', 'scheduler' nor 'GOMAXPROCS' appears."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "Searched for analogies. The only one is the bathroom at line 50, which maps each part: 'A chave é o mutex, o banheiro é o trecho protegido (a *seção crítica*) e esperar na porta é o `Lock()` bloqueando.'"
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "Searched for analogies. The only one is the bathroom at line 50, which states its limit: 'A analogia falha em um ponto: o mutex não protege a variável em si.'"
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "Checked the ending (line 59). It is a comprehension question ('se duas goroutines só *leem* a mesma variável e nenhuma escreve, você precisa de mutex?'), not a generic offer of more help."
+ }
+]

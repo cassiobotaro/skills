@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "\"Um **mutex** (de *mutual exclusion*, exclusão mútua) é uma trava que garante que só uma goroutine por vez execute um trecho de código.\""
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched lines 1-83 for any question to the user, especially before the explanation. There is none, and line 1 starts directly with the definition."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"é uma trava que garante que só uma goroutine por vez execute um trecho de código.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Line 26: \"Duas goroutines podem ler o mesmo valor e uma sobrescreve o resultado da outra.\" Also lines 14-22 show 1000 goroutines incrementing, with \"quase nunca dá 1000\"."
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise such as 'Ótima pergunta' or 'Claro!'. Line 1 opens with the definition."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. Line 1 opens with the definition, not with 'Você quer saber...'."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched lines 1-83 for any explanation of what a variable or a function is. None found."
+ },
+ {
+  "id": "1.9",
+  "verdict": "unmet",
+  "evidence": "Line 61: \"**Mantenha a seção crítica pequena.**\" The term 'seção crítica' is not defined in this sentence or in the one before it (line 56, about defer). 'race condition' (line 7) and 'deadlock' (line 76) are explained where they appear."
+ },
+ {
+  "id": "1.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 52 maps the key to Lock and returning it to Unlock: \"quem pega a chave (`Lock`) entra\". It does not say that the people are goroutines or that the bathroom is the protected section of code."
+ },
+ {
+  "id": "1.11",
+  "verdict": "unmet",
+  "evidence": "Searched near the bathroom analogy (line 52) and the rest of the reply for any statement of where the analogy stops working, such as the waiting not being an ordered queue. None found."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "Searched the ending for a generic offer of more help. The reply ends at line 83 with \"rode seu código com `go run -race main.go` ou `go test -race`.\""
+ }
+]

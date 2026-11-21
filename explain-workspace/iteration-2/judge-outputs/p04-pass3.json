@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 2: \"**Concurrency** means juggling several tasks so they overlap in time. They take turns, and only one may be running at any instant.\" Line 3: \"**Parallelism** means actually running several tasks at the same moment, on different CPU cores.\" These are the first three sentences."
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 5: \"That's concurrency: one cook, two tasks in progress, switching whenever one is waiting. Two cooks, one on soup and one on bread, working at the same time is parallelism.\" Also line 15 vs line 16: \"waits on files, network, APIs, or a database | I/O-bound\" vs \"crunches numbers, parses, or transforms lots of data | CPU-bound\"."
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 2: \"only one may be running at any instant\"; line 3: \"actually running several tasks at the same moment\"."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 34: \"CPU-bound, such as cleaning 50 big CSV files. Processes use all cores:\"; line 50: \"If you're cleaning many independent files, `ProcessPoolExecutor` is usually the easiest win.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "GIL is defined where it first appears (line 18: \"Python's GIL (Global Interpreter Lock) lets only one thread run Python code at a time\"). But asyncio is recommended as a tool without any definition, at line 15: \"concurrency: `threading`, `asyncio`, or `concurrent.futures.ThreadPoolExecutor`\". It is never explained anywhere in the reply. Searched for event loop and context switch: neither appears."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise of the question. The reply opens with \"**Short version:**\" followed directly by definitions. There is no praise."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. The reply opens with \"**Short version:**\" and goes straight to the definitions. It does not restate the question."
+ }
+]

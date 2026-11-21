@@ -1,0 +1,62 @@
+[
+ {
+  "id": "9.1",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"a correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\""
+ },
+ {
+  "id": "9.2",
+  "verdict": "met",
+  "evidence": "Reply line 7: \"Sobre o desconto na mensalidade, quem decide é o financeiro.\""
+ },
+ {
+  "id": "9.3",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for a promise or a refusal of a discount. None found. Line 7 only says finance decides and that a reply will follow."
+ },
+ {
+  "id": "9.4",
+  "verdict": "met",
+  "evidence": "First, line 3: \"a correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\" Then, line 7: \"Sobre o desconto na mensalidade, quem decide é o financeiro.\""
+ },
+ {
+  "id": "9.5",
+  "verdict": "met",
+  "evidence": "First sentence after the greeting \"Olá, Paulo,\" is \"a correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\" The second is \"A falha vem do conector do ERP, que mudou na última atualização da plataforma.\""
+ },
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "Searched the revised client text (reply lines 1-10) for 'Que bom que só percebemos'. Absent. It appears only in the user-facing note on line 14, which explains its removal."
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for sarcastic or ironic phrasing. None found. The text is neutral and factual."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for 'Espero que sim', 'agradecemos imensamente' or similar openers. None found. The opener is only \"Olá, Paulo,\"."
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for 'Qualquer dúvida estamos à disposição' or a similar closer. None found. The closing is only \"Atenciosamente,\" and \"[seu nome]\"."
+ },
+ {
+  "id": "9.10",
+  "verdict": "unmet",
+  "evidence": "Line 7: \"Já levei sua pergunta para eles\". Neither the thread nor the prompt says the question was already taken to finance, so this is an invented fact in the client text. Flagging it in the notes does not remove it from the reply. The cause in line 5 (connector update) and the bracketed [data] are fine."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Line 12: \"**O que mudou**\". Line 13: \"Pedido e data vêm primeiro, e o desconto ganhou resposta direta...\". Line 14: \"Tirei a abertura e o fecho de modelo, as \\\"melhorias\\\" e o \\\"Que bom que só percebemos...\\\"\""
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "Counted the 'O que mudou' section in lines 12-14: one heading and two bullet lines, so three lines at most. 'Lacunas para preencher' is a separate section about gaps, not about what changed."
+ }
+]

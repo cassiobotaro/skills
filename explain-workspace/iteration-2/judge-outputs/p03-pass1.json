@@ -1,0 +1,62 @@
+[
+ {
+  "id": "9.1",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"a correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\""
+ },
+ {
+  "id": "9.2",
+  "verdict": "met",
+  "evidence": "Reply line 7: \"Sobre o desconto na mensalidade, quem decide é o financeiro.\""
+ },
+ {
+  "id": "9.3",
+  "verdict": "met",
+  "evidence": "Searched the client text (reply lines 1-10) for any promise or refusal of a discount. None found. Line 7 only says finance decides and that an answer will follow: \"te aviso a resposta até [data]\"."
+ },
+ {
+  "id": "9.4",
+  "verdict": "met",
+  "evidence": "First, line 3: \"a correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\" Then line 7: \"Sobre o desconto na mensalidade, quem decide é o financeiro.\""
+ },
+ {
+  "id": "9.5",
+  "verdict": "met",
+  "evidence": "The first sentence after the greeting \"Olá, Paulo,\" is line 3: \"a correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\" The second is line 5: \"A falha vem do conector do ERP, que mudou na última atualização da plataforma.\""
+ },
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "Searched the client text (reply lines 1-10) for the sentence. It is absent there. It appears only in the remarks to the user at line 14, which are not part of the revised reply."
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for ironic or sarcastic phrasing. None found. The text is factual statements only."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for 'Espero que sim!', 'agradecemos imensamente' or a similar template opener. Neither is present. The opener is just \"Olá, Paulo,\"."
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Searched reply lines 1-10 for 'Qualquer dúvida estamos à disposição' or a similar template closer. Not present. The closer is \"Atenciosamente, [seu nome]\"."
+ },
+ {
+  "id": "9.10",
+  "verdict": "unmet",
+  "evidence": "Line 7 states a fact found in neither the thread nor the prompt: \"Já levei sua pergunta para eles\". The note at line 19 flags it, but the claim remains in the client text."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Line 12: \"**O que mudou**\". Line 13: \"- Pedido e data vêm primeiro, e o desconto ganhou resposta direta...\". Line 14: \"- Tirei a abertura e o fecho de modelo...\""
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "Counted the 'O que mudou' section: lines 12-14, a header plus two bullets, which is three lines. The 'Lacunas' section is about gaps to fill, not about what changed."
+ }
+]

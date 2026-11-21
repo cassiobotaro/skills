@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are a preamble and a description of the mechanism: \"There's no comment or doc in the repo that records the author's reasoning.\" / \"What follows is what the code shows plus the usual trade-offs.\" / \"**What `allow()` does:** it refills lazily.\" The check rules out both a preamble about what the repo records and a description that doesn't say what it buys. The benefit over a timer only appears later, under \"Why that beats a timer here\"."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` creates a bucket the first time it sees a key and keeps it in the module-level `buckets` dict.\" and \"**It uses `time.monotonic()`.**\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the reply for motive-as-fact phrasing ('the author chose', 'was done to', 'because the author'). None found. The reply disclaims: \"There's no comment or doc in the repo that records the author's reasoning\" and \"If you want the actual history behind the choice, `git log` or `git blame`... I haven't checked either.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or token buckets, or an introductory bucket analogy. None found. The reply goes straight to lazy refill versus a timer."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements. The only numbers are rate 5 (RATE_PER_SECOND = 5, api.py:3) and the arithmetic derived from it (\"0.2s ... adds exactly 1 token at rate 5\", \"lumps of 5\"). The unbounded `buckets` growth follows from api.py:6-12. Nothing invented."
+ }
+]

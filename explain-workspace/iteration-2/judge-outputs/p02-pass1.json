@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"The code doesn't record why it was written this way, so I'm inferring the reasoning from what's in `limiter.py` and `api.py`.\" / \"There are no comments, docs or commit history for this.\" / \"This is the standard lazy-refill pattern, and the design supports these reasons:\". These are a preamble about what the repository records plus a label for the pattern. None of them says what refilling in allow() gives over a timer. That contrast first appears in point 1, after the third sentence."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` keeps a `buckets` dict and creates a `TokenBucket` the first time a key shows up.\" Also: \"Tokens are `min(capacity, tokens + elapsed * rate)`\" and \"`time.monotonic()` is also immune to wall-clock changes\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for an author's motive stated as fact (\"the author chose\", \"was done to\", \"because the author\"). None found. The reasoning is marked as an inference: \"so I'm inferring the reasoning\" and \"If the original author left a rationale somewhere ... I haven't seen one.\" The remaining points describe what the design gives."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or token buckets, or an introductory analogy. None found. The reply starts from 'the standard lazy-refill pattern' and discusses design tradeoffs at an expert level."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for invented measurements, incidents, traffic figures or requirements. None found. The figures that appear (rate, capacity, elapsed) come from the files. The Redis and multi-worker remarks are framed as conditionals (\"If you need a global limit\"), not as project facts."
+ }
+]

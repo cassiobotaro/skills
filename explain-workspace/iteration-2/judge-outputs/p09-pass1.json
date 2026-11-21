@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Um **mutex** (de *mutual exclusion*, exclusão mútua) é um \"cadeado\" que garante que só **uma goroutine por vez** mexa em um dado compartilhado.\""
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched lines 1-48, where the explanation runs, for any question to the user. None found. Line 1 opens with the definition directly."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"é um \"cadeado\" que garante que só **uma goroutine por vez** mexa em um dado compartilhado.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Line 30: \"fmt.Println(contador) // esperado 1000, mas pode dar 937, 981...\" and line 34: \"Duas goroutines podem ler o mesmo valor, e uma atualização se perde.\""
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Checked the opening, line 1, for praise such as 'Ótima pergunta' or 'Claro!'. None found. It opens with \"Um **mutex** (de *mutual exclusion*...\"."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Checked the opening, line 1, for a restatement of the question. None found. It opens with the definition itself."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for explanations of what a variable or a function is. None found. Variables and functions are used without being explained."
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "Searched for race condition, data race, critical section/seção crítica, deadlock, scheduler and GOMAXPROCS. Each term that appears is defined in its own sentence. Line 7: \"Se duas delas alteram a mesma variável ao mesmo tempo, você tem uma *race condition*\". Line 48: \"O trecho entre `Lock()` e `Unlock()` é chamado de **seção crítica**\". Line 72: \"**Deadlock**: se você dá `Lock()` duas vezes na mesma goroutine sem `Unlock()`, ela trava para sempre.\" Data race, scheduler and GOMAXPROCS do not appear."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "The analogy is the lock and key. Line 1 maps the mutex to the \"cadeado\". Lines 43 and 45 map the calls: \"mu.Lock()    // \"pego a chave\"; se outra goroutine está com ela, espero\" and \"mu.Unlock()  // \"devolvo a chave\"\"."
+ },
+ {
+  "id": "1.11",
+  "verdict": "unmet",
+  "evidence": "The reply uses the cadeado/chave analogy (lines 1, 43, 45). Searched the whole reply for any statement of where the analogy stops working or its limits. None found."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "The closing is a specific offer, not a generic one. Line 85: \"Se quiser, posso mostrar como proteger um `map` (que em Go **não** é seguro para uso concorrente) ou comparar com a versão usando channels.\""
+ }
+]

@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "\"Concurrency is about *dealing with* several tasks at once. Parallelism is about *running* several tasks at the same instant.\" Concurrency means the tasks overlap in time, and it works even on one CPU core. These are the first sentences of line 1."
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 7: \"Concurrent, not parallel: one worker starts file 1, and while it waits on the disk or network, it starts file 2...\". Line 8: \"Parallel: four workers, each cleaning its own files at the same time on four cores.\" Also lines 16-17: \"waits (downloads, reads from a database or API, many small files) | concurrency\" versus \"computes (heavy regex, big transformations in pure Python) | parallelism\"."
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 10: \"The trait that differs is whether more than one thing is actually executing at the same instant.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 5: \"Suppose you clean 100 CSV files.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "asyncio first appears at line 3 (\"you may not have used `threading`, `asyncio` or `multiprocessing` yet\") with no definition. It is then recommended as a tool at line 16 (\"`threading`, `asyncio`, or `concurrent.futures.ThreadPoolExecutor`\"), still without a definition. GIL is defined where it first appears (line 19: \"because of the GIL (global interpreter lock)\"), so it passes."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening (line 1) for praise such as \"great question\". None found; the reply opens with the definition."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the opening (line 1) for a restatement of the user's question. None found; it opens directly with the answer."
+ }
+]

@@ -1,0 +1,37 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Line 2: \"**Concurrency** means juggling several tasks, so that they overlap in time. Only one of them may actually be running at any instant.\" Line 3: \"**Parallelism** means several tasks literally running at the same instant, on different CPU cores.\" These are the first three sentences after the \"Short version:\" label."
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Line 13: \"**Waiting (I/O-bound):** downloading files, calling APIs... The CPU is mostly idle. Concurrency fixes this.\" Line 17: \"**Computing (CPU-bound):** heavy regex over millions of rows... The CPU is busy the whole time. Only parallelism helps, because you need more cores working.\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 2: \"Only one of them may actually be running at any instant.\" Line 3: \"several tasks literally running at the same instant, on different CPU cores.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 15: \"Example: fetching 500 URLs.\" Line 17: \"heavy regex over millions of rows\". Line 9: \"What this means for your cleanup scripts\"."
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "Line 14: \"Tools: `threading`, `concurrent.futures.ThreadPoolExecutor`, or `asyncio`.\" asyncio is recommended as a tool to use but is never defined. GIL is defined where it first appears (line 19), but asyncio is not."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the opening line 1 (\"**Short version:**\") and line 2 for praise such as \"great question\". None found."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "The reply opens with \"**Short version:**\" and goes straight into definitions. Searched lines 1-2 for any restatement of the user's question. None found."
+ }
+]

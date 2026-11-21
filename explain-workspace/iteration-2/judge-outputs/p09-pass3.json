@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Um **mutex** (de *mutual exclusion*, exclusão mútua) é um \"cadeado\" que garante que só **uma goroutine por vez** mexa em um dado compartilhado.\""
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched the reply for any question before the explanation. Line 1 starts the explanation directly. The only question-like text is the closing offer on line 85."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"Um **mutex** ... é um \"cadeado\" que garante que só **uma goroutine por vez** mexa em um dado compartilhado.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Line 30: \"// esperado 1000, mas pode dar 937, 981...\"; line 34: \"O `contador++` são três passos (ler, somar, gravar). Duas goroutines podem ler o mesmo valor, e uma atualização se perde.\""
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise such as 'Ótima pergunta' or 'Claro!'. The reply opens with the definition on line 1, with no praise."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. Line 1 gives the definition directly."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for explanations of what a variable or a function is. None found. Variables and functions are used without being explained."
+ },
+ {
+  "id": "1.9",
+  "verdict": "unmet",
+  "evidence": "Borderline. 'race condition' (line 7), 'seção crítica' (line 48) and 'Deadlock' (line 72) are each explained where they appear. But 'atômico' first appears in the code comment on line 25, \"ler, somar e escrever não é atômico\", with no definition in that sentence or the one before; the explanation only comes later, on line 34. Likewise 'channels' first appears on line 78, \"Go também tem *channels*\", and is only described on line 81."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "Line 1 maps the analogy: \"cadeado\" = mutex, which lets only one goroutine at a time touch the data. Lines 43/45 map \"pego a chave\" to mu.Lock() and \"devolvo a chave\" to mu.Unlock()."
+ },
+ {
+  "id": "1.11",
+  "verdict": "unmet",
+  "evidence": "Searched the reply for where the cadeado/chave analogy stops working. No such limit is stated anywhere in the reply."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "Line 85 makes a specific offer, not a generic one: \"posso mostrar como proteger um `map` ... ou comparar com a versão usando channels.\""
+ }
+]

@@ -1,0 +1,27 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "unmet",
+  "evidence": "The first three sentences are: \"There's no comment or doc in the repo that records the author's reasoning.\" / \"What follows is what the code shows plus the usual trade-offs.\" / \"**What `allow()` does:** it refills lazily.\" The first two are a preamble about what the repo records. The third describes the mechanism without saying what it buys over a timer. The benefits (no per-bucket timers, idle keys cost nothing) only appear later, at line 7."
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "\"`api.py` creates a bucket the first time it sees a key and keeps it in the module-level `buckets` dict.\" Also: \"On each call it works out `elapsed * rate`\" and \"It uses `time.monotonic()`.\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "Searched for phrasings that state the author's motive as fact, such as 'the author chose', 'this was done to' or 'was designed to'. None found. The reply says \"There's no comment or doc in the repo that records the author's reasoning\" and frames the points as trade-offs (\"Why that beats a timer here\"). It points to git log/blame for the actual history."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "Searched for a definition of rate limiting or a token bucket, or an introductory bucket analogy. None found. The reply goes straight to how this code behaves and its trade-offs."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched for measurements, incidents, traffic figures or requirements not in the files. The numbers used (\"rate 5\", \"lumps of 5\") come from RATE_PER_SECOND = 5 in api.py:3. Threading and asyncio deployment are mentioned only as conditionals (\"If you call `allow()` from threads\"). No invented project facts found."
+ }
+]

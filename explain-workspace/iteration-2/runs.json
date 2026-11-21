@@ -1,0 +1,134 @@
+{
+  "checks": "../evals/checks-baseline.json",
+  "evals": "../evals/evals.json",
+  "runs": [
+    {
+      "key": "9/1.0.1/run-1",
+      "eval": "9",
+      "cell": "1.0.1",
+      "reply": "eval-9-revise-draft-reply-to-a-client/with_skill/run-1/response.md",
+      "root": "eval-9-revise-draft-reply-to-a-client/with_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-9"
+    },
+    {
+      "key": "9/1.0.1/run-2",
+      "eval": "9",
+      "cell": "1.0.1",
+      "reply": "eval-9-revise-draft-reply-to-a-client/with_skill/run-2/response.md",
+      "root": "eval-9-revise-draft-reply-to-a-client/with_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-9"
+    },
+    {
+      "key": "9/1.0.1/run-3",
+      "eval": "9",
+      "cell": "1.0.1",
+      "reply": "eval-9-revise-draft-reply-to-a-client/with_skill/run-3/response.md",
+      "root": "eval-9-revise-draft-reply-to-a-client/with_skill/run-3/outputs",
+      "fixture": "../iteration-1/fixtures/eval-9"
+    },
+    {
+      "key": "9/1.0.1/run-4",
+      "eval": "9",
+      "cell": "1.0.1",
+      "reply": "eval-9-revise-draft-reply-to-a-client/with_skill/run-4/response.md",
+      "root": "eval-9-revise-draft-reply-to-a-client/with_skill/run-4/outputs",
+      "fixture": "../iteration-1/fixtures/eval-9"
+    },
+    {
+      "key": "1/1.0.0/run-1",
+      "eval": "1",
+      "cell": "1.0.0",
+      "reply": "../iteration-1/eval-1-one-off-question-novice-signal/with_skill/run-1/response.md",
+      "root": "../iteration-1/eval-1-one-off-question-novice-signal/with_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-1"
+    },
+    {
+      "key": "1/1.0.0/run-2",
+      "eval": "1",
+      "cell": "1.0.0",
+      "reply": "../iteration-1/eval-1-one-off-question-novice-signal/with_skill/run-2/response.md",
+      "root": "../iteration-1/eval-1-one-off-question-novice-signal/with_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-1"
+    },
+    {
+      "key": "1/no-skill/run-1",
+      "eval": "1",
+      "cell": "no-skill",
+      "reply": "../iteration-1/eval-1-one-off-question-novice-signal/without_skill/run-1/response.md",
+      "root": "../iteration-1/eval-1-one-off-question-novice-signal/without_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-1"
+    },
+    {
+      "key": "1/no-skill/run-2",
+      "eval": "1",
+      "cell": "no-skill",
+      "reply": "../iteration-1/eval-1-one-off-question-novice-signal/without_skill/run-2/response.md",
+      "root": "../iteration-1/eval-1-one-off-question-novice-signal/without_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-1"
+    },
+    {
+      "key": "3/1.0.0/run-1",
+      "eval": "3",
+      "cell": "1.0.0",
+      "reply": "../iteration-1/eval-3-experienced-reader-code-in-repo/with_skill/run-1/response.md",
+      "root": "../iteration-1/eval-3-experienced-reader-code-in-repo/with_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-3"
+    },
+    {
+      "key": "3/1.0.0/run-2",
+      "eval": "3",
+      "cell": "1.0.0",
+      "reply": "../iteration-1/eval-3-experienced-reader-code-in-repo/with_skill/run-2/response.md",
+      "root": "../iteration-1/eval-3-experienced-reader-code-in-repo/with_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-3"
+    },
+    {
+      "key": "3/no-skill/run-1",
+      "eval": "3",
+      "cell": "no-skill",
+      "reply": "../iteration-1/eval-3-experienced-reader-code-in-repo/without_skill/run-1/response.md",
+      "root": "../iteration-1/eval-3-experienced-reader-code-in-repo/without_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-3"
+    },
+    {
+      "key": "3/no-skill/run-2",
+      "eval": "3",
+      "cell": "no-skill",
+      "reply": "../iteration-1/eval-3-experienced-reader-code-in-repo/without_skill/run-2/response.md",
+      "root": "../iteration-1/eval-3-experienced-reader-code-in-repo/without_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-3"
+    },
+    {
+      "key": "4/1.0.0/run-1",
+      "eval": "4",
+      "cell": "1.0.0",
+      "reply": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/with_skill/run-1/response.md",
+      "root": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/with_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-4"
+    },
+    {
+      "key": "4/1.0.0/run-2",
+      "eval": "4",
+      "cell": "1.0.0",
+      "reply": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/with_skill/run-2/response.md",
+      "root": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/with_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-4"
+    },
+    {
+      "key": "4/no-skill/run-1",
+      "eval": "4",
+      "cell": "no-skill",
+      "reply": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/without_skill/run-1/response.md",
+      "root": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/without_skill/run-1/outputs",
+      "fixture": "../iteration-1/fixtures/eval-4"
+    },
+    {
+      "key": "4/no-skill/run-2",
+      "eval": "4",
+      "cell": "no-skill",
+      "reply": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/without_skill/run-2/response.md",
+      "root": "../iteration-1/eval-4-fuzzy-boundary-two-concepts/without_skill/run-2/outputs",
+      "fixture": "../iteration-1/fixtures/eval-4"
+    }
+  ]
+}

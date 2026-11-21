@@ -1,0 +1,57 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"Um mutex é um cadeado que garante que só uma goroutine por vez mexa em um dado compartilhado.\""
+ },
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "Searched for a question before the explanation. The explanation starts at line 1 (the definition). Line 3 (\"Se já conhece, me diga e eu pulo essa parte.\") is an offer, not a question, and comes after the explanation starts. The only question mark is at line 59, at the end."
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Line 1: \"Um mutex é um cadeado que garante que só uma goroutine por vez mexa em um dado compartilhado.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Line 28: \"Suponha que duas goroutines leiam `41` ao mesmo tempo. As duas gravam `42`, e um incremento se perde.\""
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched the opening for praise ('Ótima pergunta', 'Claro!'). Line 1 opens directly with the definition."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the opening for a restatement of the question. Line 1 opens with the definition, not a restatement."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Searched for explanations of what a variable or a function is. None found. Line 7 mentions 'função' and 'variável' but does not define them."
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "Searched for race condition, data race, critical section/seção crítica, deadlock, scheduler, GOMAXPROCS. 'data race' first appears at line 28 (\"Isso se chama *data race*\"), defined by the preceding sentences about the lost increment. 'seção crítica' at line 50 is glossed as \"o trecho protegido (a *seção crítica*)\". 'races' at line 56 comes after the definition. No deadlock, scheduler or GOMAXPROCS."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "Searched for analogies. The one analogy (bathroom, line 50) maps its parts: \"A chave é o mutex, o banheiro é o trecho protegido (a *seção crítica*) e esperar na porta é o `Lock()` bloqueando.\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "Searched for analogies. The bathroom analogy states its limit at line 50: \"A analogia falha em um ponto: o mutex não protege a variável em si.\""
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "Searched the ending for a generic offer of more help. None found. The reply ends at line 59 with a comprehension question: \"se duas goroutines só *leem* a mesma variável e nenhuma escreve, você precisa de mutex?\""
+ }
+]
