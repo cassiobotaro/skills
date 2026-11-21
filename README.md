@@ -1,6 +1,6 @@
 # cassiobotaro-skills
 
-Agent skills for software engineering: decision records, design docs, diagrams, and code comments, plus a prose editor the other skills can call. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
+Agent skills for software architecture, engineering, communication, and learning. The skills follow the open [Agent Skills](https://agentskills.io) standard, so they work in any compatible agent — Claude Code, GitHub Copilot, Google Antigravity, OpenCode, and others. The repository is also a [Claude Code](https://code.claude.com) plugin marketplace, where each skill is an independently installable plugin.
 
 | Skill | What it does |
 |---|---|

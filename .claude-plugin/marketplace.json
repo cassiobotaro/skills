@@ -1,7 +1,7 @@
 {
   "name": "cassiobotaro-skills",
   "owner": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
-  "description": "Software engineering skills:design docs, ADRs, C4/Structurizr models, Mermaid sequence diagrams, code comments, and a prose editor",
+  "description": "Agent skills for software architecture, engineering, communication, and learning",
   "plugins": [
     {
       "name": "adr",
