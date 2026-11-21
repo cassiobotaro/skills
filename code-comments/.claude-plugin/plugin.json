@@ -1,0 +1,9 @@
+{
+  "name": "code-comments",
+  "description": "Keep the comments in code an agent writes or changes useful, precise, and compact, following The Art of Readable Code: comment what the reader cannot get from the code, never what they can",
+  "version": "1.0.0",
+  "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
+  "repository": "https://github.com/cassiobotaro/skills",
+  "license": "MIT",
+  "keywords": ["comments", "readable-code", "code-quality", "documentation"]
+}
