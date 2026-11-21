@@ -49,13 +49,20 @@ Rules:
 2. A check of kind `invention` is a negative ("nothing invented"). When it is MET there is
    nothing to quote: `evidence` records what you searched for and where. When it is UNMET,
    quote the invented words.
-3. Any other UNMET check records in `evidence` what you looked for and where.
+{negative}3. Any other UNMET check records in `evidence` what you looked for and where.
 4. Borderline is UNMET. Say "borderline" in `evidence` and why.
 5. More text or more files never raise a verdict. Judge the proposition only.
 
 Return ONLY a JSON array, no prose around it, with one entry per check listed under
 "Checks", in the same order:
 [{{"id": "<check id>", "verdict": "met" or "unmet", "evidence": "<quote or search>"}}]
+"""
+
+
+# Added to rule 2 only in a packet that has a check of kind `negative`, so the packets of
+# evals without one stay byte-identical to those judged before the kind existed.
+NEGATIVE_RULE = """   A check of kind `negative` is a negative too ("no comment that ..."), under the same
+   rule: when MET, `evidence` records the search; when UNMET, quote the offending words.
 """
 
 
@@ -125,7 +132,8 @@ def packet(pid, run, it, base, prompts):
     reply = re.sub(r"\n+MODEL: \S+\s*$", "", reply_path.read_text(encoding="utf-8").strip())
     root = it / run["root"]
     fixture = it / run["fixture"] if run.get("fixture") else None
-    parts = [RULES.format(pid=pid), "## The user's message\n\n" + prompts[ev]]
+    negative = NEGATIVE_RULE if any(c["kind"] == "negative" for c in checks) else ""
+    parts = [RULES.format(pid=pid, negative=negative), "## The user's message\n\n" + prompts[ev]]
     before = {}
     if fixture:
         sec = ["## Files in the project before the run"]
