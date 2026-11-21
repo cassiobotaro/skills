@@ -5,9 +5,9 @@
   "note": "script from scratch, never mentions comments"
  },
  {
-  "query": "add a function unique_slug(title, existing) next to this one. when the slug is already in the set `existing` it appends -2, -3 and so on until the result is free:\n\nimport re\n\ndef slugify(title):\n    return re.sub(r\"[^a-z0-9]+\", \"-\", title.lower()).strip(\"-\")",
+  "query": "here's a helper I already have:\n\ndef clean_filename(name):\n    return name.strip().lower().replace(\" \", \"-\")\n\nnow write dedupe_filename(name, taken): it returns clean_filename(name), and when that is already in the set `taken` it appends -2, -3 and so on until the result is free",
   "should_trigger": true,
-  "note": "new feature, code pasted"
+  "note": "new feature, code pasted, no file to look for"
  },
  {
   "query": "esse vencimento tá caindo em sábado e domingo. o banco só compensa boleto em dia útil, então quando cair no fim de semana tem que ir pra segunda seguinte. corrige:\n\nfrom datetime import timedelta\n\ndef vencimento(emissao, prazo_dias):\n    return emissao + timedelta(days=prazo_dias)",
