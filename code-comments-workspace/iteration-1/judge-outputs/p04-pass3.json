@@ -1,0 +1,22 @@
+[
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "Reply line 6: \"Renaming it to something like `bytes_by_account` would let you delete the comment.\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "Reply line 6: \"**Suggested rename (not applied):** ... I left it alone because it's outside this change, so it's your call.\""
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Checked the comment above the new condition at reports/usage.py:4: \"# Negative bytes are billing corrections stored in the same table, not usage.\" It states the user's reason (billing corrections in the same table) and does not just restate the condition. No other comment is on the condition."
+ },
+ {
+  "id": "5.6",
+  "verdict": "met",
+  "evidence": "Checked every comment in reports/usage.py after the run: line 2 (\"# d maps account id to total bytes used\", which was already there) and line 4 (the reason comment). Neither describes the edit (no 'added', 'now skips', 'changed' or similar wording)."
+ }
+]

@@ -1,0 +1,22 @@
+[
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Searched the added code, slugs/slugify.py lines 14-26, for '#' comments. None found. The only text is the docstring at lines 15-19, and it describes behaviour rather than restating the statements next to it."
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Searched the comments and docstrings in slugs/slugify.py, lines 6-9 and 15-19, for 'added', 'new function', 'as requested' and similar narration. None found."
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "The docstring states the suffix scheme with an example. slugs/slugify.py:17: \"Taken slugs get a numeric suffix starting at 2: with {\"a\", \"a-2\"}, \"A\" -> \"a-3\".\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the added docstring, slugs/slugify.py lines 15-19, for non-English text. All of it is English. The non-English 'Olá, Mundo!' example is at line 8, which was there before the run."
+ }
+]

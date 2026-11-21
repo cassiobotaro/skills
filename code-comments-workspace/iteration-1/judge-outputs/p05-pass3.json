@@ -1,0 +1,32 @@
+[
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "Searched every comment in cache/ttl.py after the run: lines 3, 7-11, 13-14, 18, 21-23, 34, 37-39. All are in Portuguese, e.g. line 18 'chave -> (valor, instante em que foi gravada)'. The only English words are code identifiers such as MAX_ENTRIES, put(), get() and time.monotonic."
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "Checked each comment against the code beside it. None just paraphrases one statement. Line 18 documents the dict's shape, not the assignment. Lines 37-39 add the eviction policy and the O(n) cost to the min/del lines. Lines 21-23 and 34 describe contracts and edge cases."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "cache/ttl.py:7 '# Cache em memória em que cada entrada expira `ttl_s` segundos depois de gravada.'"
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "(1) Expired entries still count toward MAX_ENTRIES: cache/ttl.py:9-10 'Até lá ela continua ocupando uma das MAX_ENTRIES vagas.' (2) The eviction scans every entry: cache/ttl.py:38-39 'É uma busca linear, O(n) por put() com o cache cheio.' Also present: cache/ttl.py:37 'expulsa a entrada gravada há mais tempo'."
+ },
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "Checked each claim against the code: lazy expiry; no lock; age == ttl_s still valid (the comparison is >); reading does not refresh the deadline; rewriting a key resets its deadline without evicting; eviction by oldest stored_at with a linear min; time.monotonic is unaffected by clock changes. All hold. Line 3 'ao atingi-lo, put() descarta a entrada mais antiga' leaves out the new-key condition, but line 34 states it. No unsupported behavior found."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "Searched for 'porque', 'para', 'motivo' and any explanation of 1024 or of the injectable clock. None is given. Line 3 says only what MAX_ENTRIES does. Line 14 states a property of time.monotonic, not why it was chosen. The reply says the 1024 value and the clock injection were left unexplained."
+ }
+]

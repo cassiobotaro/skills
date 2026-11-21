@@ -1,0 +1,17 @@
+[
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Searched worker/poller.py (after) lines 1-10 for any comment ('#'). There are no comments, so no reason is given for 45."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Searched worker/poller.py (after) lines 1-10 for comments narrating the edit ('changed', 'increased', 'was 10'). There are no comments; line 3 is just 'POLL_INTERVAL_S = 45'."
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Searched reply line 1 for a motive for 45 (load, rate limiting, 'because', 'to'). The reply only states the change ('I changed `POLL_INTERVAL_S` from `10` to `45`') and gives no reason."
+ }
+]

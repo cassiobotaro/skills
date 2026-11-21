@@ -1,0 +1,42 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "sync/client.ts:14-20: `for (let i = 0; i < records.length; i += MAX_BATCH_SIZE) {` / `const batch = records.slice(i, i + MAX_BATCH_SIZE);` / `const response = await fetch(`${this.baseUrl}/records`, {` ... `body: JSON.stringify(batch),`"
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "sync/client.ts:21-23: `if (!response.ok) {` / `throw new Error(`push failed: ${response.status}`);` / `}`"
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "sync/client.ts:8: `const MAX_BATCH_SIZE = 500;` (module level, outside push and the loop)"
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "sync/client.ts:6: `// The API rejects request bodies over 1 MB.`"
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "sync/client.ts:6-7: `Our largest records are about` / `// 2 KB`"
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched every comment in sync/client.ts (lines 6-7, the only comments). They state the 1 MB limit and the ~2 KB record size, both given by the user. They also state '500 per batch (~1 MB worst case) stays under the limit', which is arithmetic on those numbers plus the user's own 'safe ceiling' claim. No rate limit, timeout, measured size or throughput claim was found."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the comments in sync/client.ts (lines 6-7) for edit narration such as 'added', 'now', 'as requested' or 'batching added'. None found. The comments give only the reason for the limit."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "Searched sync/client.ts for comments on or above the loop and request (lines 13-25). There are none. The only comment (lines 6-7) explains why the constant has its value and does not restate a statement."
+ }
+]

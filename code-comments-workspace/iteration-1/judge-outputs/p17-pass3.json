@@ -1,0 +1,32 @@
+[
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "Searched every comment and docstring in cache/ttl.py (lines 1-5, 9-10, 16-20, 23, 27, 32-34, 41-43, 45-46). All are in Portuguese. The only non-Portuguese tokens are code names (time.monotonic, sleep, TTL, O(n))."
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "Searched each comment against the line under it. cache/ttl.py:23 \"chave -> (valor, instante em que foi gravado)\" describes the dict's structure; it does not restate `self._entries = {}`. cache/ttl.py:45 adds eviction order and cost beyond the `min` call. No comment merely paraphrases a single statement."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "cache/ttl.py:1 \"Cache em memória com expiração por tempo (TTL).\" and cache/ttl.py:3-4 \"Cada valor guardado vale por `ttl_s` segundos; depois disso é tratado como inexistente.\""
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Lazy removal, cache/ttl.py:32-33: \"A expiração é preguiçosa: entradas vencidas só são removidas quando alguém tenta lê-las.\" Linear scan, cache/ttl.py:45: \"Despeja a entrada gravada há mais tempo (varredura linear, O(n)).\" Oldest-stored rather than least-recently-read, cache/ttl.py:46: \"não há prioridade por uso.\""
+ },
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "Checked each behavioral claim against the code. Not thread-safe or cross-process: plain dict, no locks. Strict > at TTL boundary: line 35. Eviction only for new keys: line 44. Oldest by stored_at: line 47. put resets the TTL: line 49 stores the clock again. monotonic is unaffected by system clock changes: true. No unsupported behavior found."
+ },
+ {
+  "id": "6.8",
+  "verdict": "unmet",
+  "evidence": "cache/ttl.py:19-20 \"Existe como parâmetro para os testes poderem simular a passagem do tempo sem usar sleep.\" This gives a reason for the clock-injection design choice, and neither the file nor the user establishes that reason."
+ }
+]

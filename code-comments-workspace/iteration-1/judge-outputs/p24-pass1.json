@@ -1,0 +1,22 @@
+[
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched the comments in billing/invoice.py after the run: lines 6-7 ('Due terms_days calendar days after issue, moved to the following Monday when that lands on a weekend: the bank only clears boletos on business days.'), line 9 ('Saturday=5, Sunday=6') and line 15 ('Contract clause 7.2: ...'). None contains 'fixed', 'corrigido', 'now', 'agora', 'changed' or 'bug'. All describe current behavior."
+ },
+ {
+  "id": "2.5",
+  "verdict": "met",
+  "evidence": "Searched the comments at billing/invoice.py:6-7, :9 and :15. All are in English, and no Portuguese or other-language comment was found."
+ },
+ {
+  "id": "2.6",
+  "verdict": "met",
+  "evidence": "Searched the comments for a stated motive. The only reason is at billing/invoice.py:7, 'the bank only clears boletos on business days', which matches the user's reason. No other incident, rule or motive was found in the comments."
+ },
+ {
+  "id": "2.7",
+  "verdict": "met",
+  "evidence": "Searched the comments and the reply for any claim that holidays are handled. None was found. The reply says the opposite: 'Feriados bancários não são tratados' (reply line 13). No comment mentions holidays."
+ }
+]

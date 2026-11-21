@@ -1,0 +1,42 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "sync/client.ts:14-15 `for (let i = 0; i < records.length; i += MAX_RECORDS_PER_REQUEST) {` / `await this.pushBatch(records.slice(i, i + MAX_RECORDS_PER_REQUEST));` with sync/client.ts:8 `const MAX_RECORDS_PER_REQUEST = 500;`"
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "sync/client.ts:25-26 `if (!response.ok) {` / `throw new Error(`push failed: ${response.status}`);` inside pushBatch, which push awaits at sync/client.ts:15, so the error reaches push's caller"
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "sync/client.ts:8 `const MAX_RECORDS_PER_REQUEST = 500;` (module level, outside the loop at lines 14-16)"
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "sync/client.ts:6 `// The API rejects request bodies over 1 MB.`"
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "sync/client.ts:6 `Our largest records are about 2 KB,`"
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched every comment in sync/client.ts after the run. The only comment is lines 6-7. It contains 1 MB and 2 KB, both given by the user, and 'batches of at most 500 stay under that limit', which follows from the user's numbers and the user's statement that 500 is a safe ceiling. No rate limit, timeout, measured size or throughput claim appears."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched all comments in sync/client.ts (only lines 6-7) for narration such as 'added', 'now', 'as requested' or 'batching added'. None found."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "Searched for comments around the loop (lines 13-17) and the request (lines 19-28). There are none. The only comment (lines 6-7) explains the constant's rationale and does not restate a statement of the loop."
+ }
+]

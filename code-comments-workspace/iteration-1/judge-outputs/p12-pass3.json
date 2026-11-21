@@ -1,0 +1,22 @@
+[
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched every comment in billing/invoice.py after the run (lines 6-7, 9, 16) for 'fixed', 'corrigido', 'now', 'agora', 'changed' and 'bug'. None appear. Lines 6-7 describe the current behaviour in the present tense ('if that lands on a weekend, move to the following Monday'). Line 9 is a weekday-numbering note. Line 16 is unchanged."
+ },
+ {
+  "id": "2.5",
+  "verdict": "met",
+  "evidence": "Checked the comments at lines 6-7, 9 and 16 of billing/invoice.py. All are in English, for example 'the bank only clears boletos on business days'. 'boletos' is the domain term from the user, inside an English sentence."
+ },
+ {
+  "id": "2.6",
+  "verdict": "met",
+  "evidence": "Searched the comments in billing/invoice.py for a stated reason. The only one is at line 7, '(the bank only clears boletos on business days)', which is the user's reason. Searched for any other motive, incident or rule and found none. Line 16 is the pre-existing clause 7.2 comment on late_fee, which is unchanged and not about the weekend rule."
+ },
+ {
+  "id": "2.7",
+  "verdict": "met",
+  "evidence": "Searched the reply and the comments for claims that holidays are handled. No comment mentions holidays. The reply only denies it: 'Feriados bancários não entram, então um vencimento em feriado continua caindo no feriado.'"
+ }
+]

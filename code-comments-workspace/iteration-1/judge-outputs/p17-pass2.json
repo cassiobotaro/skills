@@ -1,0 +1,32 @@
+[
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "Searched every comment and docstring in cache/ttl.py after the run (lines 1-5, 9-10, 16-20, 23, 27, 32-34, 41-46). All are in Portuguese. Only code names appear inside them (ttl_s, time.monotonic, sleep, O(n))."
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "Checked each comment against the statement below it. Line 23 'chave -> (valor, instante em que foi gravado)' documents the tuple structure, which `{}` does not show. Line 45 adds the scan cost and the eviction criterion beyond the `min(...)` line. Lines 42-43 explain the effect of the condition. None of them merely restates a single statement."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "cache/ttl.py:1 \"Cache em memória com expiração por tempo (TTL).\" and cache/ttl.py:3-4 \"Cada valor guardado vale por `ttl_s` segundos; depois disso é tratado como inexistente.\""
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Lazy removal: cache/ttl.py:32-33 \"A expiração é preguiçosa: entradas vencidas só são removidas quando alguém tenta lê-las.\" Full scan: cache/ttl.py:45 \"Despeja a entrada gravada há mais tempo (varredura linear, O(n)).\""
+ },
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "Compared each claimed behavior against the code. Not thread-safe and not shared between processes: no locks, plain in-process dict. Monotonic default: line 7 of the original. Lazy deletion: get, lines 17-18. Exactly-TTL still valid: `>`. TTL restarts on put: put stores self._clock(). Overwrite does not trigger eviction: `key not in self._entries`. Oldest-by-stored_at eviction via min. Found no claim that the code contradicts."
+ },
+ {
+  "id": "6.8",
+  "verdict": "unmet",
+  "evidence": "cache/ttl.py:19-20 \"Existe como parâmetro para os testes poderem simular a passagem do tempo sem usar sleep.\" This gives a reason for the clock parameter design choice that neither the file nor the user establishes."
+ }
+]

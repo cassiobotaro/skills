@@ -1,0 +1,42 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "sync/client.ts:14-15 `for (let i = 0; i < records.length; i += MAX_BATCH_SIZE) {` / `await this.pushBatch(records.slice(i, i + MAX_BATCH_SIZE));`. sync/client.ts:20 sends each batch: `const response = await fetch(`${this.baseUrl}/records`, {`"
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "sync/client.ts:25-26 `if (!response.ok) {` / `throw new Error(`push failed: ${response.status}`);`. This sits in pushBatch, which push awaits at line 15, so the error reaches push's caller."
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "sync/client.ts:8 `const MAX_BATCH_SIZE = 500;` is declared at module level, outside the loop at line 14."
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "sync/client.ts:6 `// The API rejects request bodies over 1 MB.`"
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "sync/client.ts:6-7 `Our largest records are about` / `// 2 KB`"
+ },
+ {
+  "id": "3.6",
+  "verdict": "unmet",
+  "evidence": "sync/client.ts:7 `so 500 records per request stays well under that limit.` The user said only that 500 is 'a safe ceiling'. The user's own numbers give 500 × 2 KB ≈ 1 MB, which is at the limit, not well under it. So this is not arithmetic on the user's numbers. It is an unsupported size claim that the arithmetic contradicts, and the reply itself says 'That is right at the API's limit rather than comfortably under it'."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched every comment in sync/client.ts after the run (lines 6-7 are the only comments) for narration of the edit such as 'added', 'now', 'as requested' or 'batching added'. None found."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "Searched sync/client.ts for comments above the loop (line 14), the pushBatch call (line 15) and the fetch (line 20). No comments are there. The only comment (lines 6-7) gives the reason for the constant and does not restate a statement."
+ }
+]

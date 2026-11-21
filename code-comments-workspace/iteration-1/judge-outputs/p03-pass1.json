@@ -1,0 +1,32 @@
+[
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "Searched every comment and docstring in cache/ttl.py after the run (lines 3-4, 9-16, 19-26, 29, 34-37, 43-50). All are in Portuguese, e.g. \"Cache em memória em que cada entrada expira após `ttl_s` segundos.\" English appears only as code names (TTLCache.put, MAX_ENTRIES, time.monotonic, ttl_s, stored_at)."
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "Checked each line comment against the statement below it. Each adds information the statement lacks. cache/ttl.py:19 \"Tempo de vida de cada entrada, em segundos.\" adds the unit. :25 \"chave -> (valor, instante em que foi gravado)\" gives the tuple layout. :34-35 gives the strict-inequality boundary. :37 \"Remove na leitura, já que nada mais limpa entradas vencidas.\" gives a reason. No comment merely restates its line."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "cache/ttl.py:9 \"Cache em memória em que cada entrada expira após `ttl_s` segundos.\""
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "Expired entry removed only on get: cache/ttl.py:11-12 \"entradas vencidas só são removidas quando alguém chama `get` para a mesma chave\". Evicts oldest stored, not least recently read: cache/ttl.py:47-48 \"Despeja a entrada gravada há mais tempo (não a menos usada: ler não atualiza `stored_at`)\"."
+ },
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "Checked every behavioral claim against the code. Lazy expiry: :17-19. No background cleanup: no thread in the file. No lock: none in the file. put resets the TTL: :26. Overwriting a key skips eviction: :23. Eviction takes the min stored_at: :24. Strict > comparison: :17. Can evict a valid entry while expired ones remain: :24 does not check expiry. The time.monotonic note is true of Python. No claim contradicts the code."
+ },
+ {
+  "id": "6.8",
+  "verdict": "unmet",
+  "evidence": "Two comments give design rationale that neither the file nor the user establishes. cache/ttl.py:48-49 \"É uma busca linear, O(n), aceitável com MAX_ENTRIES pequeno.\" cache/ttl.py:21-22 \"É injetável para os testes poderem avançar o tempo sem dar sleep.\""
+ }
+]

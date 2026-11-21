@@ -1,0 +1,32 @@
+[
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "Searched every comment and docstring in cache/ttl.py after the run (lines 1-5, 8, 15-16, 18, 22-25, 31, 38, 40-41). All are written in Portuguese. The only non-Portuguese tokens are code names (ttl_s, put, MAX_ENTRIES, _clock, default) and the acronym 'LRU'."
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "Searched every comment and docstring for a paraphrase of the single statement next to it. Each one adds information beyond its statement. Line 8 gives the eviction behaviour. Line 18 gives the dict format. Line 31 explains the strict '>'. Lines 40-41 cover eviction scope and cost. The docstrings at 22-25 and 38 describe expiry and ttl reset. None merely restates a statement."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "cache/ttl.py:1 \"Cache em memória em que cada entrada expira `ttl_s` segundos após ser gravada.\""
+ },
+ {
+  "id": "6.6",
+  "verdict": "met",
+  "evidence": "cache/ttl.py:24-25 \"Entrada expirada só é removida aqui, na leitura: uma chave que nunca mais é lida continua ocupando espaço (e contando para MAX_ENTRIES).\" and cache/ttl.py:40-41 \"Varre todas as entradas (O(n))\""
+ },
+ {
+  "id": "6.7",
+  "verdict": "unmet",
+  "evidence": "Borderline. cache/ttl.py:41 \"custo que se paga em todo put com o cache cheio\" overstates what the code does. The O(n) scan runs only when put stores a new key into a full cache (line 39: `key not in self._entries and ...`). A put that rewrites an existing key into a full cache does no scan."
+ },
+ {
+  "id": "6.8",
+  "verdict": "unmet",
+  "evidence": "cache/ttl.py:15 \"`clock` é injetável para testes controlarem o tempo.\" This gives a reason for a design choice (the injectable clock). Neither the file nor the user establishes that reason. The MAX_ENTRIES comment (line 8) gives no reason for 1024."
+ }
+]

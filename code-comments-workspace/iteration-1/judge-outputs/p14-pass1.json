@@ -1,0 +1,22 @@
+[
+ {
+  "id": "5.3",
+  "verdict": "unmet",
+  "evidence": "Searched the reply for any suggestion to rename `d`. The reply mentions only the skip, the comment, the untested state, the all-negative accounts behaviour and `top_accounts`. It never mentions renaming `d`."
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "No rename suggestion appears anywhere in the reply, so it cannot be presented as an optional suggestion separate from the change. The only offer is \"If you'd rather such accounts show as 0, I can change that,\" which is about zero totals, not naming."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Searched the comments on the new condition in reports/usage.py. The only one is reports/usage.py:4: \"# Negative bytes are billing corrections stored in the same table; not usage.\" It gives the user's reason (billing corrections) and does not merely restate the condition."
+ },
+ {
+  "id": "5.6",
+  "verdict": "met",
+  "evidence": "Searched every comment in the after-run reports/usage.py (lines 2 and 4) for edit narration such as 'added', 'now', 'changed' or 'fix'. Neither comment narrates the edit."
+ }
+]

@@ -1,0 +1,102 @@
+{
+  "1/with_skill/run-1": {
+    "1.1": true,
+    "1.2": true,
+    "1.7": true
+  },
+  "1/with_skill/run-2": {
+    "1.1": true,
+    "1.2": true,
+    "1.7": true
+  },
+  "1/without_skill/run-1": {
+    "1.1": true,
+    "1.2": true,
+    "1.7": true
+  },
+  "1/without_skill/run-2": {
+    "1.1": true,
+    "1.2": true,
+    "1.7": true
+  },
+  "2/with_skill/run-1": {
+    "2.1": true,
+    "2.2": true,
+    "2.3": true,
+    "2.8": true
+  },
+  "2/with_skill/run-2": {
+    "2.1": true,
+    "2.2": true,
+    "2.3": true,
+    "2.8": true
+  },
+  "2/without_skill/run-1": {
+    "2.1": true,
+    "2.2": true,
+    "2.3": true,
+    "2.8": true
+  },
+  "2/without_skill/run-2": {
+    "2.1": true,
+    "2.2": true,
+    "2.3": true,
+    "2.8": true
+  },
+  "3/with_skill/run-1": {},
+  "3/with_skill/run-2": {},
+  "3/without_skill/run-1": {},
+  "3/without_skill/run-2": {},
+  "4/with_skill/run-1": {
+    "4.1": true,
+    "4.2": true
+  },
+  "4/with_skill/run-2": {
+    "4.1": true,
+    "4.2": true
+  },
+  "4/without_skill/run-1": {
+    "4.1": true,
+    "4.2": true
+  },
+  "4/without_skill/run-2": {
+    "4.1": true,
+    "4.2": true
+  },
+  "5/with_skill/run-1": {
+    "5.1": true,
+    "5.2": true,
+    "5.7": true
+  },
+  "5/with_skill/run-2": {
+    "5.1": true,
+    "5.2": true,
+    "5.7": true
+  },
+  "5/without_skill/run-1": {
+    "5.1": true,
+    "5.2": true,
+    "5.7": true
+  },
+  "5/without_skill/run-2": {
+    "5.1": true,
+    "5.2": true,
+    "5.7": true
+  },
+  "6/with_skill/run-1": {
+    "6.1": true,
+    "6.2": true
+  },
+  "6/with_skill/run-2": {
+    "6.1": true,
+    "6.2": true
+  },
+  "6/without_skill/run-1": {
+    "6.1": true,
+    "6.2": true
+  },
+  "6/without_skill/run-2": {
+    "6.1": true,
+    "6.2": true
+  }
+}
