@@ -1,0 +1,27 @@
+[
+ {
+  "id": "6.1",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3: \"Certificates are rotated every 90 days, and alerts fire when rotation fails. The keys were generated in the HSM.\") for 'It is important to note that'. It does not appear there. The phrase appears only in the change notes at line 6."
+ },
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Searched line 3, the edited text, for any team, person, service or tool named as the actor. None is named, and the passive voice is kept. 'a cron job, cert-manager, an operator' appear only on line 9, as questions to the user."
+ },
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "line 3: \"Certificates are rotated every 90 days\""
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "line 3: \"alerts fire when rotation fails\". 'Fire' keeps the meaning of alerts being sent on rotation failure."
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "line 3: \"The keys were generated in the HSM.\""
+ }
+]

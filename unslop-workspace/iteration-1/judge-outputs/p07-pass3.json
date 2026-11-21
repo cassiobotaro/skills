@@ -1,0 +1,17 @@
+[
+ {
+  "id": "2.12",
+  "verdict": "met",
+  "evidence": "Searched README.md after the run and the reply for any cited study, source, author or citation backing the claim that reconciliation reduces incidents. None found. The claim was removed from README.md. The reply only quotes the original sentence as deleted: \"I deleted two claims because the text gave no source or number for them\"."
+ },
+ {
+  "id": "2.13",
+  "verdict": "met",
+  "evidence": "Compared README.md after the run with the original. Line 3 now reads \"Ledger sync reconciles the billing database and the warehouse. The new version is faster than the old one.\" It has no speedup figure. 'Reconciles' restates the original's 'reconciliation pipeline'. 'Faster' is from the original. No new claim was found."
+ },
+ {
+  "id": "2.15",
+  "verdict": "met",
+  "evidence": "Reply lines 7-9: \"I deleted two claims because the text gave no source or number for them:\" / \"- \\\"Studies show that reconciliation reduces incidents.\\\"\" / \"- The size of the speed gain. The text now says only that the new version is faster.\""
+ }
+]

@@ -1,0 +1,27 @@
+[
+ {
+  "id": "6.1",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3, the quoted block) for 'It is important to note that'. Not present. The phrase appears only in the change notes on line 6."
+ },
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for any team, person, service or tool. None is named, and the passive 'were generated' is kept. 'cert-manager' and 'on-call team' appear only on line 10, as a suggested example outside the edited text."
+ },
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "line 3: \"Certificates rotate every 90 days\""
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "line 3: \"an alert fires if rotation fails\""
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "line 3: \"The keys were generated in the HSM.\""
+ }
+]

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "Line 3: \"O novo serviço de cache, construído pelo time de plataforma, é mais rápido que o anterior e reduz custos.\""
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for '—'. None found. The clauses are joined with commas."
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for 'não é apenas' and 'mas também'. Neither appears."
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for 'Vale ressaltar que'. It does not appear."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for 'No mundo atual'. It does not appear."
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "The edited text ends with \"Ele é a base da nossa escalabilidade.\" 'Em resumo' does not appear in the edited text."
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "Line 3: \"construído pelo time de plataforma\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 3 says \"é mais rápido que o anterior\". That states it IS faster. The original only said it was designed to be faster (\"projetado para ser\"), so the design intent is not preserved."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "Searched the edited text and the whole reply for a named study, company, person or publication. None found. Line 9 says the claim \"não citava ninguém\" and asks the user to supply a source."
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for numbers, benchmarks or reasons. None found. The \"3x\" on line 8 is only an example in the notes, not part of the edited text."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "'Especialistas afirmam que caches reduzem custos' is gone from the edited text. The cost claim that remains is flagged on line 13: \"Se não for verdade, remova essa parte.\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "Line 9: \"Tirei \\\"Especialistas afirmam que\\\", que não citava ninguém.\""
+ }
+]

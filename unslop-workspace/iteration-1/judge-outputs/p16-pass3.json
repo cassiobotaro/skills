@@ -1,0 +1,42 @@
+[
+ {
+  "id": "4.1",
+  "verdict": "met",
+  "evidence": "Compared reply:3 against the user's original text. They are identical, word for word. No rewrite was found."
+ },
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "reply:3 \"The worker pulls export jobs from RabbitMQ\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "reply:3 \"and writes each file to S3\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "reply:3 \"A job that fails three times\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "reply:3 \"goes to the dead-letter queue\""
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "reply:3 \"and the on-call engineer gets a page\""
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "reply:3 \"Exports above 100,000 rows are not supported yet.\""
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Checked the returned text at reply:3 for sentences not in the original. It has three sentences, and all three are in the original. The commentary on reply:1 is framing and not part of the returned text."
+ }
+]

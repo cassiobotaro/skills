@@ -1,0 +1,62 @@
+[
+ {
+  "id": "1.1",
+  "verdict": "met",
+  "evidence": "line 3: \"O novo serviço de cache, construído pelo time de plataforma, é mais rápido que o anterior e reduz custos.\""
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "Searched the edited text (line 3) for '—'. It uses commas instead: \"O novo serviço de cache, construído pelo time de plataforma, é...\". No em dash found."
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "Searched line 3 for 'não é apenas' and 'mas também'. Neither appears."
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "Searched line 3 for 'Vale ressaltar que'. Not present."
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "Searched line 3 for 'No mundo atual'. Not present."
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "Searched line 3 for 'Em resumo'. Not present. The text ends with \"Ele é a base da nossa escalabilidade.\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "line 3: \"construído pelo time de plataforma\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 3 says \"é mais rápido que o anterior\". This states as fact that the service is faster. The original's 'foi projetado para ser' (designed to be) is gone, so the edited text no longer says the service was designed to be faster."
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "Searched the edited text and the notes for any named study, company, person or publication tied to the cost claim. None found. Line 9 only says \"Se você tem uma fonte ou um dado de custo, coloque no lugar.\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "Searched line 3 for numbers, benchmarks or added reasons. None found. The '3x' appears only as a suggestion in the notes on line 8, not in the edited text."
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "'Especialistas afirmam que caches reduzem custos' is gone from line 3. The reworded cost claim is also flagged on line 13: \"afirmar que *este* serviço reduz custos é uma afirmação mais forte... Se não for verdade, remova essa parte.\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "line 9: \"Tirei 'Especialistas afirmam que', que não citava ninguém. Mantive só a ideia de que caches reduzem custos, e ela agora é atribuída ao serviço.\""
+ }
+]

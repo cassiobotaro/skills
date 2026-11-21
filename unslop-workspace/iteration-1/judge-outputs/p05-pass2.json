@@ -1,0 +1,27 @@
+[
+ {
+  "id": "6.1",
+  "verdict": "met",
+  "evidence": "Searched reply line 1 for 'It is important to note that': not present. The text reads 'The certificates are rotated every 90 days. Alerts are sent when rotation fails. The keys were generated in the HSM.'"
+ },
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Searched reply line 1 for any named team, person, service or tool acting as agent: none found. Passive voice kept: 'are rotated', 'are sent', 'were generated'. 'HSM' is the location where the keys were generated (from the original), not an added actor."
+ },
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "line 1: 'The certificates are rotated every 90 days.'"
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "line 1: 'Alerts are sent when rotation fails.'"
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "line 1: 'The keys were generated in the HSM.'"
+ }
+]

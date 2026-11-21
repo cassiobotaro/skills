@@ -1,0 +1,27 @@
+[
+ {
+  "id": "6.1",
+  "verdict": "met",
+  "evidence": "Searched the edited text (reply line 1) for 'It is important to note that'. Not present. Line 1 reads: 'The certificates are rotated every 90 days. Alerts are sent when rotation fails. The keys were generated in the HSM.'"
+ },
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "Searched the edited text (reply line 1) for any named team, person, service or tool acting as the agent. None found: all three sentences stay passive. Line 3 is a note, not edited text. It only offers examples ('a rotation job or an on-call team') while asking the user who the actors are, which the check allows."
+ },
+ {
+  "id": "6.3",
+  "verdict": "met",
+  "evidence": "Line 1: 'The certificates are rotated every 90 days.'"
+ },
+ {
+  "id": "6.4",
+  "verdict": "met",
+  "evidence": "Line 1: 'Alerts are sent when rotation fails.'"
+ },
+ {
+  "id": "6.5",
+  "verdict": "met",
+  "evidence": "Line 1: 'The keys were generated in the HSM.'"
+ }
+]

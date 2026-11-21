@@ -1,0 +1,17 @@
+[
+ {
+  "id": "2.12",
+  "verdict": "met",
+  "evidence": "Searched the after-run README.md and the reply for any named study, source or author behind the incidents claim. README.md lines 1-14 contain no 'studies' sentence and no citation. The reply only says \"It cited no study.\" (reply:6) and names no source."
+ },
+ {
+  "id": "2.13",
+  "verdict": "unmet",
+  "evidence": "No speedup figure was added, but README.md:3 gains a claim the original lacked: \"it compares both sides and reports the differences\". The reply admits this at reply:14: \"One claim the original didn't make: that the sync \\\"compares both sides and reports the differences\\\"\"."
+ },
+ {
+  "id": "2.15",
+  "verdict": "met",
+  "evidence": "reply:6 \"\\\"Studies show that reconciliation reduces incidents\\\". It cited no study.\" and reply:7 \"\\\"significantly faster\\\". I cut the adverb because the README gives no numbers.\""
+ }
+]

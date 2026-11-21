@@ -1,0 +1,17 @@
+[
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "notes.md:3 \"Redis is the session store. See doc/adr/0002-use-redis-for-sessions.md for the decision.\""
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "\"I unslopped `notes.md` and left the ADR alone.\" and \"**Not edited: `doc/adr/0002-use-redis-for-sessions.md`**\""
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "\"This is an accepted decision record, which is a history file. The skill leaves those unchanged unless you name them.\""
+ }
+]
