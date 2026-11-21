@@ -1,0 +1,102 @@
+[
+ {
+  "query": "unslop this paragraph before i paste it in the PR: Our new retry layer serves as a robust foundation — it's not just retries, it's a comprehensive resilience story.",
+  "should_trigger": true,
+  "note": "named, pasted text"
+ },
+ {
+  "query": "/unslop docs/architecture/overview.md",
+  "should_trigger": true,
+  "note": "slash form with a path"
+ },
+ {
+  "query": "run unslop on the README, it reads like a press release",
+  "should_trigger": true,
+  "note": "named, file"
+ },
+ {
+  "query": "passa o unslop nesse texto: Vale ressaltar que o serviço não é apenas rápido, mas também robusto.",
+  "should_trigger": true,
+  "note": "named, pt-BR"
+ },
+ {
+  "query": "can you unslop the release notes in CHANGELOG-draft.md? keep the facts as they are",
+  "should_trigger": true,
+  "note": "named, as a verb"
+ },
+ {
+  "query": "roda o unslop na seção de contexto do docs/design/exportacao.md",
+  "should_trigger": true,
+  "note": "named, pt-BR, a section"
+ },
+ {
+  "query": "apply the unslop skill to the summary you just wrote",
+  "should_trigger": true,
+  "note": "named as a skill"
+ },
+ {
+  "query": "usa a skill unslop no texto do e-mail que eu colei acima",
+  "should_trigger": true,
+  "note": "named as a skill, pt-BR"
+ },
+ {
+  "query": "unslop that, no em dashes",
+  "should_trigger": true,
+  "note": "terse, refers to the previous message"
+ },
+ {
+  "query": "dá uma passada de unslop no docs/onboarding.md antes de eu mandar pro time",
+  "should_trigger": true,
+  "note": "named, pt-BR, file"
+ },
+ {
+  "query": "this paragraph sounds like ChatGPT wrote it, can you fix it? Our platform leverages cutting-edge technology to deliver seamless experiences.",
+  "should_trigger": false,
+  "note": "the boundary: asks for this job without naming the skill"
+ },
+ {
+  "query": "esse texto tá com cara de IA, dá um jeito: Vale ressaltar que a nossa jornada de dados é fundamental.",
+  "should_trigger": false,
+  "note": "the boundary, pt-BR"
+ },
+ {
+  "query": "proofread this email for typos before i send it to the client",
+  "should_trigger": false,
+  "note": "proofreading"
+ },
+ {
+  "query": "melhora esse parágrafo do README pra ficar mais claro",
+  "should_trigger": false,
+  "note": "general improvement, pt-BR"
+ },
+ {
+  "query": "make the introduction of docs/guide.md shorter, about half the length",
+  "should_trigger": false,
+  "note": "shortening"
+ },
+ {
+  "query": "translate the onboarding doc to Brazilian Portuguese",
+  "should_trigger": false,
+  "note": "translation"
+ },
+ {
+  "query": "review my design doc at docs/design/webhooks.md and tell me what is missing",
+  "should_trigger": false,
+  "note": "design-doc review"
+ },
+ {
+  "query": "write a README for this repository",
+  "should_trigger": false,
+  "note": "writing from scratch"
+ },
+ {
+  "query": "deslop this diff: remove the dead code and the leftover debug logging",
+  "should_trigger": false,
+  "note": "code cleanup under a similar name"
+ },
+ {
+  "query": "revisa a gramática e a pontuação desse texto pra mim",
+  "should_trigger": false,
+  "note": "grammar check, pt-BR"
+ }
+]

@@ -1,0 +1,91 @@
+{
+  "skill_name": "unslop",
+  "note": "Six evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. Every eval names the skill, because it is explicit only. None has been run yet: there is no checks-baseline.json and no iteration directory.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "pt-br-pasted-text",
+      "prompt": "passa o unslop nesse texto: No mundo atual, a performance é crucial. Vale ressaltar que o novo serviço de cache — construído pelo time de plataforma — não é apenas rápido, mas também robusto: ele foi projetado para ser muito mais rápido que o anterior. Especialistas afirmam que caches reduzem custos. Para limpar, use `cache.flush_all()`. Em resumo, o serviço serve como base fundamental para a nossa jornada de escalabilidade, garantindo confiabilidade, eficiência e inovação.",
+      "expected_output": "Devolve o texto editado em português, sem os vícios, com o comando `cache.flush_all()` intacto. Não inventa fonte para 'especialistas afirmam' nem número para 'muito mais rápido': apaga a afirmação ou pergunta, e lista o que apagou ou perguntou.",
+      "files": [],
+      "assertions": [
+        "The reply contains an edited version of the text in Portuguese; it is not translated",
+        "The inline code `cache.flush_all()` appears unchanged",
+        "The edited text has no em dash used as a connector, no 'não é apenas ... mas também', no 'Vale ressaltar que', no 'No mundo atual', and no 'Em resumo' closing",
+        "The edited text still says that the platform team built the cache service and that it was designed to be faster than the previous one",
+        "Nothing invented: no source is named for the experts claim, and no number, benchmark, or reason is added that the original did not contain",
+        "The vague attribution ('Especialistas afirmam que caches reduzem custos') is deleted or asked about, and the reply says which"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "en-file-with-code-and-quote",
+      "prompt": "Run unslop on README.md.",
+      "expected_output": "Edits README.md in place. The prose loses its tells; the fenced bash block (including its comment), the inline code, and the quoted sentence from the billing team stay byte-identical. 'Studies show' and 'significantly faster' get no invented source or number. Reports the path and the claims deleted or asked about.",
+      "files": [
+        "files/readme-en/README.md"
+      ],
+      "assertions": [
+        "README.md was edited in place and no other file was created or changed",
+        "The fenced bash block is byte-identical to the original, comment line included",
+        "The quoted sentence attributed to the billing team is byte-identical to the original",
+        "`ledger_snapshots` and the H1 are unchanged",
+        "The prose outside the code block and the quotation no longer contains 'In today's fast-paced world', 'serves as', 'not just', 'In conclusion', or 'Let me know if'",
+        "Nothing invented: no study is cited, and no speedup figure or new claim is added",
+        "The reply names README.md and lists the claims it deleted or asked about"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "history-file-out-of-reach",
+      "prompt": "unslop the docs in this repo",
+      "expected_output": "Edits notes.md. Leaves doc/adr/0002-use-redis-for-sessions.md untouched, because an accepted decision record is history and the user did not name it, and says so.",
+      "files": [
+        "files/decision-log/notes.md",
+        "files/decision-log/doc/adr/0002-use-redis-for-sessions.md"
+      ],
+      "assertions": [
+        "doc/adr/0002-use-redis-for-sessions.md is byte-identical to the fixture",
+        "notes.md was edited: 'In order to', 'it is worth noting that', and 'serves as' are gone, and it still says that Redis is the session store and still points to the ADR path",
+        "The reply says that the accepted decision record was left unchanged and why"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "clean-text-unchanged",
+      "prompt": "unslop this: The worker pulls export jobs from RabbitMQ and writes each file to S3. A job that fails three times goes to the dead-letter queue, and the on-call engineer gets a page. Exports above 100,000 rows are not supported yet.",
+      "expected_output": "Says the text needs no edit and returns it unchanged, or with at most a trivial edit. Does not rewrite it to justify the call.",
+      "files": [],
+      "assertions": [
+        "The reply says that the text needed no edit, or makes at most one small wording change",
+        "Every fact of the original is present: RabbitMQ, S3, three failures, dead-letter queue, on-call page, 100,000 rows not supported",
+        "No sentence is added"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "other-language-structural-only",
+      "prompt": "pasa el unslop a este texto: En el mundo actual, la observabilidad es crucial. Cabe destacar que el nuevo panel — creado por el equipo de plataforma — no es solo un tablero, sino una solución integral: muestra la latencia p99 de cada servicio. En resumen, el panel sirve como base fundamental para nuestro viaje de fiabilidad.",
+      "expected_output": "Edita o texto em espanhol aplicando só as regras estruturais, sem traduzir, e avisa que não existe lista de vocabulário para espanhol.",
+      "files": [],
+      "assertions": [
+        "The edited text is in Spanish",
+        "The reply tells the user that no vocabulary list exists for Spanish",
+        "The edited text has no em dash used as a connector and no 'no es solo ... sino'",
+        "The fact that the panel shows the p99 latency of each service is kept, and nothing is added"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "missing-actor-not-invented",
+      "prompt": "unslop this paragraph from our runbook: The certificates are rotated every 90 days. Alerts are sent when rotation fails. It is important to note that the keys were generated in the HSM.",
+      "expected_output": "Removes the filler. The text never says who rotates, sends, or generated, so the skill does not make up an actor: it keeps the passive or asks who the actor is.",
+      "files": [],
+      "assertions": [
+        "'It is important to note that' is gone",
+        "No actor is invented: the edited text names no team, person, service, or tool as the one that rotates the certificates, sends the alerts, or generated the keys",
+        "The three facts are kept: rotation every 90 days, alerts on a failed rotation, keys generated in the HSM"
+      ]
+    }
+  ]
+}
