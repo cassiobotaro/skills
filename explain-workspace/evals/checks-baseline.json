@@ -55,7 +55,7 @@
         "id": "1.9",
         "assertion": 7,
         "kind": "negative",
-        "check": "No concurrency term the user did not use (race condition or condição de corrida, critical section or seção crítica, goroutine scheduling) appears without being defined or replaced where it first appears. A reply that uses none of them passes"
+        "check": "No term of concurrency theory or of the Go scheduler that the user did not use (race condition or condição de corrida, data race, critical section or seção crítica, deadlock, scheduler, GOMAXPROCS) appears without being defined or replaced: the sentence where it first appears, or the one before it, says what it is. `goroutine` is the Go word for the thing the user asked about and does not count. A reply that uses none of these terms passes"
       },
       {
         "id": "1.10",
@@ -131,7 +131,7 @@
         "id": "3.1",
         "assertion": 1,
         "kind": "reply",
-        "check": "Within its first three sentences the reply answers the contrast: what computing the refill from elapsed time inside allow() gives that a periodic timer does not (quote)"
+        "check": "Within its first three sentences the reply answers the contrast: what computing the refill from elapsed time inside allow() gives that a periodic timer does not (quote). Saying that no timer or background task is needed, or that idle keys cost nothing, is such an answer. Describing how the refill is computed without saying what that buys is not, and neither is a preamble about what the repository records"
       },
       {
         "id": "3.2",
@@ -199,7 +199,7 @@
         "id": "4.5",
         "assertion": 5,
         "kind": "negative",
-        "check": "No term the reader did not use and the reply relies on (GIL, event loop, asyncio, context switch) appears without being defined where it first appears. A reply that uses none of them passes"
+        "check": "No term the reader did not use and the reply relies on (GIL, event loop, asyncio, context switch) appears without being defined where it first appears. The reply relies on a term when it uses it to explain something or recommends it as the thing to use; a term it only names as something to look up later, and says so, does not count. A reply that uses none of them passes"
       },
       {
         "id": "4.6",
@@ -356,12 +356,6 @@
         "assertion": 6,
         "kind": "invention",
         "check": "The text adds no fact absent from estudo/resumo.md: no other study, no mechanism, no recommendation from a health body, no advice to walk a given amount"
-      },
-      {
-        "id": "7.9",
-        "assertion": 7,
-        "kind": "negative",
-        "check": "The text to send is not longer than the original summary, which has 87 words (count the words of the text to send only, not the reply's remarks to the user)"
       }
     ],
     "8": [
@@ -557,5 +551,11 @@
       }
     ]
   },
-  "amendments": []
+  "amendments": [
+    "2026-11-21, after iteration-1 and before iteration-2: check 7.9 retired ('The text to send is not longer than the original summary, whic…'). It asked for a simplified text no longer than its source. SKILL.md asks for no such thing, and the check pulls against 7.3 to 7.5 and 7.7, which keep both figures and the caveat about cause and have five terms replaced or explained. All four runs of iteration-1 failed it, with and without the skill (about 100 to 160 words against 87). Assertion 7 of eval 7 was removed from evals.json with it.",
+    "2026-11-21, same date: rule text of 1.9 amended. Three of its four verdicts in iteration-1 were judge splits, on whether `goroutine` is a term to define. The eval's own expected output speaks of goroutines, so the word is exempt; the terms that count are named, and 'defined where it first appears' is given a span. Before: 'No concurrency term the user did not use (race condition or condição de corrida, critical section or seção crítica, goroutine scheduling) appears without being defined or replaced where it first appears. A reply that uses none of them passes'.",
+    "2026-11-21, same date: rule text of 3.1 amended. A reply opening with 'Because it makes the timer unnecessary' was judged borderline. The eval's expected output lists 'lazy refill needs [no background task] and does no work for idle keys' among the reasons, so the check now says that such an opening answers the contrast and that a description of the computation or a preamble does not. Before: 'Within its first three sentences the reply answers the contrast: what computing the refill from elapsed time inside allow() gives that a periodic timer does not (quote)'.",
+    "2026-11-21, same date: rule text of 4.5 amended to say what 'relies on' means. All four runs of iteration-1 were judged borderline on `asyncio`, named among tools and never defined. Before: 'No term the reader did not use and the reply relies on (GIL, event loop, asyncio, context switch) appears without being defined where it first appears. A reply that uses none of them passes'.",
+    "The verdicts of iteration-1 on 1.9, 3.1, 4.5 and 7.9 were given on the earlier text and are not comparable with later ones: iteration-2 re-judges the iteration-1 runs of evals 1, 3 and 4 on the amended text."
+  ]
 }
