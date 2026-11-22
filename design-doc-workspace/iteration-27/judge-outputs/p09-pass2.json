@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "unmet",
+  "evidence": "No documentation was written in this run: docs/design/exportacao-de-relatorios.md is unchanged and no new file was created. The reply only describes a planned mini-doc and asks questions first."
+ },
+ {
+  "id": "9.7",
+  "verdict": "unmet",
+  "evidence": "No documentation was written in this run. The reason appears only in the reply ('com dois workers, o download caía no worker sem o arquivo e devolvia 404'), not in any written documentation."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Reply line 6: \"**Quem serve o download agora?** `GET /exports/<job_id>/download` continua passando pelo worker, que lê do S3, ou a API redireciona para uma URL pré-assinada?\"; line 7: \"**Retenção:** os 7 dias e o cron que apagava os arquivos viraram uma lifecycle rule do bucket, ou o cron continua apagando objetos?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"Já tenho o motivo: com dois workers, o download caía no worker sem o arquivo e devolvia 404.\" The whole reply is in Portuguese; the only English is the header label `Amended by`, which is a quoted field name. No other text was written."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply for asserted costs, retention, credentials, download mechanism, URLs, metrics, dates, outcomes and alternatives. Its only factual statements are the original's state ('Implementado'), that the service started with local disk (from the original doc) and the user's 404 reason. Bucket, presigned URL, lifecycle and role details appear only as questions. No files were written."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched for any statement of who serves the download after the change. It appears only as a question in reply line 6 ('Quem serve o download agora?'). No files were written."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "No text written in this run contains a 'do nothing' or keep-as-is alternative. No files were created or changed, and the reply lists no such entry."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched the reply for any component, team or person named as performing an action. Worker, API and approver appear only inside questions (lines 6-8, e.g. 'Quem aprovou ou revisou a mudança?'). No files were written."
+ }
+]

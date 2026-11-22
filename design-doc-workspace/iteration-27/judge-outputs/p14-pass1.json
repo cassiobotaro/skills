@@ -1,0 +1,82 @@
+[
+ {
+  "id": "1.2",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:24 \"Hoje a API gera os relatórios exportados dentro da própria request, e as exportações grandes estouram o timeout do gateway.\""
+ },
+ {
+  "id": "1.3",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:86 \"✗ O usuário perde o download imediato, inclusive nas exportações pequenas que hoje respondem na hora.\""
+ },
+ {
+  "id": "1.4",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:96 \"| Geração síncrona com timeout maior | ✗ Descartada | Só empurra o problema. |\""
+ },
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:97 \"| Ferramenta de BI externa | ✗ Descartada | Custo e exposição de dado de cliente. |\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:95 \"| Não fazer nada | ✗ Descartada | 12% das exportações acima de 50 mil linhas falham e o suporte abre ticket toda semana. |\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:104 \"Os jobs de exportação entram na fila RabbitMQ compartilhada, então o design adiciona carga a um sistema que o time de Plataforma mantém.\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:108 \"O arquivo exportado contém PII e fica acessível por um link assinado enviado por e-mail. O time de Segurança revisa esse desenho.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-em-background.md:14 \"## Glossário\" and :20 \"**PII**: dados pessoais que identificam uma pessoa.\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "Searched the glossary at lines 14-20. Its entries are Job, Worker, Streaming, Link assinado and PII. There is no entry for API, HTTP or URL. 'URL' appears only inside the definition of Link assinado."
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "Searched the glossary at lines 14-20. It has no entry for C4, DSL or Structurizr."
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched for diagrams. The only one is the Mermaid diagram at lines 56-72. Line 74 explains it: \"A API só enfileira o job, então a resposta ao usuário não depende do tamanho do relatório...\""
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It states 30 segundos (lines 29, 52, 82), 12% and 50 mil linhas (lines 30, 95), 100 mil linhas (lines 39, 83) and ticket toda semana (lines 31, 95). All of these come from the user. Daily volume appears only as open question 5. The header dates are document metadata, not metrics."
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "\"## Visão geral\" (line 22) has a single paragraph, beginning \"Hoje a API gera os relatórios exportados...\" (line 24)."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Searched line 24, the only paragraph of the overview. It contains no schema, payload, endpoint, retry policy or configuration value."
+ },
+ {
+  "id": "1.19",
+  "verdict": "met",
+  "evidence": "Searched the document, including the diagram participants and labels. It names RabbitMQ, S3, CSV/XLSX, e-mail and link assinado, all of which appear in the user's message. Mermaid is the format of the document's diagram, not a component of the system."
+ },
+ {
+  "id": "1.20",
+  "verdict": "unmet",
+  "evidence": "Line 50: \"O worker sobe o arquivo para o S3 e envia ao usuário um e-mail com um link assinado\". Line 70: \"Worker-->>Usuário: e-mail com o link assinado\". The user only said 'o usuário recebe um link assinado por e-mail' and did not say which component sends it. Line 108 also asserts \"O time de Segurança revisa esse desenho\", but the user said only that the project impacts Security."
+ }
+]

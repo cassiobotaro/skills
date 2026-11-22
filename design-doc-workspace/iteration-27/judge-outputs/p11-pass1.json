@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "docs/design/webhooks-de-saida.md:25 \"Hoje cada serviço que precisa avisar um cliente externo faz o POST por conta própria, sem retry e sem registro central.\""
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "Searched both diagrams and the text after each. Structurizr diagram (lines 53-102) is followed by prose at line 104: \"Os serviços de domínio continuam a publicar eventos no Kafka e deixam de falar com o cliente. O serviço de entrega é o único componente que envia POST ao endpoint do cliente...\". Mermaid sequence diagram (lines 110-135) is followed by prose at line 137: \"O serviço de entrega recebe o evento do Kafka e entra em um ciclo de tentativas...\". No diagram lacks explanatory prose after it."
+ },
+ {
+  "id": "6.10",
+  "verdict": "unmet",
+  "evidence": "docs/design/webhooks-de-saida.md:148 \"A equipe passa a operar um serviço novo e a manter o Postgres com o histórico de tentativas.\" The user never said which team operates the service or maintains the Postgres. Also line 104 \"Os serviços de domínio continuam a publicar eventos no Kafka\": the user only said the domain events are already in Kafka, not which services publish them."
+ }
+]

@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:14 \"O documento original de exportação de relatórios guardava cada CSV gerado no disco local do worker. Este documento registra a mudança: os arquivos gerados agora ficam num bucket S3.\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:20 \"O time subiu um segundo worker. Quando o pedido de download chegava ao worker que não tinha gerado o arquivo, o endpoint devolvia 404.\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:50 \"Quem serve `GET /exports/<job_id>/download` hoje: o worker lendo do S3, a API, ou um link direto para o bucket\"; :51 \"A retenção de 7 dias continua? Se sim, quem apaga os arquivos antigos: o cron do worker ou uma regra de ciclo de vida do bucket?\"; :57 \"O que o time decidiu aceitar com o S3 (custo, latência, credenciais, acesso ao bucket)?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply line 1 \"Como o serviço já está em produção, não reescrevi o corpo do design doc original.\" The new document and the header edits to the original are also in Portuguese."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply and both documents for costs, retention, credentials, download mechanism, metrics, change date, outcomes and alternatives. Each of these is either attributed to the original (s3.md:18, :32, :33), taken from the user (\"desde março de 2026\" uses the year from the original's dates), or asked as an open question (Q1–Q7). The date 2026-11-22 is the date the document was written, not the date of the change. \"Os workers passam a ter acesso ao mesmo armazenamento\" follows from the shared bucket the user described."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched s3.md and the original's header edits for who serves the download. s3.md:25 says only \"Agora: o arquivo gerado fica num bucket S3.\" The server of the download is asked at s3.md:50 (Q2) and in reply item 2."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "s3.md:37 \"Manter o disco local do worker. Descartada: com dois workers, parte dos downloads devolve 404.\" This reason contains only the second worker and the 404 from the user's message."
+ },
+ {
+  "id": "9.13",
+  "verdict": "unmet",
+  "evidence": "Borderline. s3.md:6 \"| **Autores** | Time de Relatórios |\" names Time de Relatórios as the author of the change, outside the open questions. The user said only \"A gente mudou\", which does not establish which team made the change. The run itself asks this at Q10 and in reply item 10 (\"Usei esse nome porque é o do original\"), so the header asserts as fact something the run treats as unconfirmed."
+ }
+]

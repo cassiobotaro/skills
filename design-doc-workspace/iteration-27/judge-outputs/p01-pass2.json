@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. I looked in the reply and in the document for a question asking the user what the risks are. None exists. The document lists risks it chose itself and asks only about how to handle specific failures, for example doc:62 \"O que acontece com a ingestão quando o serviço ou o Redis fica indisponível...?\". That asks for mitigations of risks the document named, not for the risks."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:66 \"Como o serviço entra em produção: em fases, com que critério de avanço, e como volta atrás se algo falhar?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:43 \"Falha do serviço ou do Redis no caminho crítico.\" and doc:44 \"Reenvio depois da janela de 24 horas.\" are risks the user did not give. doc:42 adds a mitigation the user did not give: \"Vamos medir a latência real no rollout\"."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "I searched doc:46-48 for phases, advance criteria and rollback steps. The section only says \"As fases, os critérios de avanço e o rollback ainda não existem. Estão nas Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:29 \"### Alternativas consideradas\"; doc:34 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; doc:35 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:22 \"### Trade-offs\"; doc:26 \"✗ O serviço é mais um salto no caminho crítico da ingestão. Estimamos +5 ms de latência. O time aceita esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:6 \"coloquei \"Trade-offs\" e \"Alternativas consideradas\" como subseções (`###`) dentro dela... Se a arquitetura preferir sem as subseções, é só remover\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "I checked the Revisores row at doc:8. It is empty: \"| **Revisores** | |\"."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:59 \"Quem revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "I searched the document for every figure. Found: 4%, 24 horas, +5 ms, 0,1%, duas vezes, plus the document id and the dates. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "I searched the document for technologies, teams and stakeholders. Found: Redis, Kafka, ingestor, produtores, consumidores, financeiro and arquitetura, all named by the user. The \"times donos\" mentions appear only inside questions (doc:59, doc:67)."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "I searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "I searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "unmet",
+  "evidence": "doc:42 \"Vamos medir a latência real no rollout\". This asserts that the team will measure latency during the rollout. Neither the user's message nor the template establishes it."
+ }
+]

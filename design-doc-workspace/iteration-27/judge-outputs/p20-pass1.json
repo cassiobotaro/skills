@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written in this run. The files after the run contain only docs/design/TEMPLATE.md, unchanged. The reply opens 'Ainda não criei o arquivo.' There is no document sentence to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"**Riscos:** além dos +5ms no caminho crítico, que riscos vocês já discutiram?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 14: \"**Plano de rollout:** como vocês pretendem entrar em produção (modo sombra que só mede duplicatas, percentual de tráfego, por produtor)? Qual é o critério para avançar de fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched for a Riscos section: no document was created, so there is none. In the reply, risks appear only as questions to the user (lines 9-13), and questions are not assertions."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched for a Plano de rollout section: no document was created, so there is none. In the reply, rollout phases and criteria appear only as questions (line 14)."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "No document exists, so no heading records the two alternatives. The reply only promises a future 'Alternativas consideradas' section (line 3) and does not record either alternative's line."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "No document exists, so no heading records the accepted +5ms cost. The reply mentions '+5ms' only inside a question (line 9)."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"O template não tem seção para as alternativas, então vou acrescentar uma seção \\\"Alternativas consideradas\\\" depois de Proposta... Aviso aqui para você aceitar ou vetar.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched for a Revisores row naming a reviewer: no document was created, so no reviewer is named. The reply only asks who the reviewers are (line 8)."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Reply line 8: \"**Revisores:** quem entra no cabeçalho (arquitetura, financeiro, outros)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the reply for figures: 4%, duas vezes, 24h, 0,1% and +5ms all come from the user. 'DD-2026-NNN' and 'p99' appear only inside questions. There is no document, and no other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders: only Redis, Kafka, arquitetura and financeiro appear, and all are in the user's message. Anything else appears only as an option inside a question. There is no document."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No document was created, so there is no Structurizr DSL."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No document was created, so there is no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the reply's assertions for actors performing actions. The statements either restate the user's proposal or describe the directory contents ('O docs/design/ só tem o TEMPLATE.md'). Who forms the key, the protocol and failure handling are asked as questions."
+ }
+]

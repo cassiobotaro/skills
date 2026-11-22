@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written: the reply says 'Ainda não escrevi o arquivo.' The after-run files show only TEMPLATE.md, unchanged, so there is no first sentence to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 4: 'Que outros riscos o time viu, e qual é a mitigação de cada um?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 3: 'Como o serviço entra em produção? Preciso das fases (...), do critério para avançar de uma fase para a próxima e do critério de rollback.'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the project files after the run for a Riscos section: none exists because no document was written. The risks listed in the reply (Redis down, dedup service down, retry after 24h) are framed as questions to the user, not stated as risks of the proposal."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched for a Plano de rollout section: no document was written. The phases in the reply ('por exemplo, shadow mode...') are an example inside a question."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "No document exists, so there is no heading recording the alternatives. The reply only announces a future 'Alternativas consideradas' section."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "No document exists, so there is no heading recording the +5ms trade-off."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 14: 'Vou acrescentar uma seção \"Alternativas consideradas\" (...) Aviso porque é um desvio do formato, e você decide se o time de arquitetura aceita assim.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "No document or header was written, so no reviewer is named anywhere."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Reply line 11: 'Quem são os revisores, ou deixo o campo vazio?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "No document was written. Searched the reply for figures beyond the user's: p99 appears only inside a question, and DD-2026-001 is a numbering proposal put to the user for confirmation, not a metric."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "No document was written. The reply names only Redis, Kafka, the ingestor, the producer and the architecture team, all from the user's message."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No document and no Structurizr DSL exist."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No document and no Mermaid block exist."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the reply for sentences that assign an action to an actor. Who generates the key is asked as a question ('Quem gera a chave: o produtor ou o ingestor?'). No assertions assign actions to actors."
+ }
+]

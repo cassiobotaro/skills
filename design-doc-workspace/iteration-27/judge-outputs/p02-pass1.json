@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:26 \"Os arquivos gerados ficam agora num bucket S3, e não mais no disco local do worker.\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:22 \"O time subiu um segundo worker. Quando o download caía no worker que não gerou o arquivo, esse worker não o encontrava no disco e devolvia 404.\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:49 \"Os arquivos ainda ficam 7 dias? Quem apaga os antigos agora: o cron do worker ou uma regra de ciclo de vida do bucket?\"; line 48 \"Como o download funciona agora? O worker lê do bucket e devolve o arquivo, ou o usuário baixa direto do S3?\"; line 51 \"O que a mudança piorou e o time decidiu aceitar?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply: \"Como o serviço está em produção desde março, não reescrevi o design doc original.\"; new doc line 14: \"Este documento registra uma mudança no serviço de exportação de relatórios\". All written text is in Portuguese."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the new doc, the header edit in the original, and the reply for costs, retention, credentials, download mechanism, URLs, metrics, change dates, outcomes and alternatives. Cost, retention, credentials, download mechanism and change date appear only as questions (lines 47-54). The trade-off at line 30 restates the fix the user gave as the reason for the move. Line 31's S3 dependency follows from the move. The original-doc points at lines 20, 31 and 39 are attributed to it. The 2026-11-22 date is the doc's creation date, not the date of the change."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched for statements about who serves the download after the change. Line 30 says only that \"o download deixa de depender de qual worker gerou o arquivo\" and names no server. The mechanism is asked at line 48 and in reply item 2."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:37 \"Não fazer nada. Descartada: com dois workers, o download devolvia 404 quando caía no worker que não tinha o arquivo.\" This contains only the user's stated elements."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched for actors named as performing actions. \"O time subiu um segundo worker\" matches the user's \"subimos\". Worker gravava/servia (line 20) restates the original doc. The worker returning 404 is from the user. Who deletes files, who manages credentials and who reviews appear only as questions (lines 49, 50, 54)."
+ }
+]

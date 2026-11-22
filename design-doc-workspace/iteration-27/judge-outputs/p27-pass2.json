@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:12 \"Os arquivos gerados agora ficam num bucket S3.\" and :22 \"| Onde o arquivo é gravado | Disco local do worker que gerou | Bucket S3 |\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:16 \"Quando o time subiu um segundo worker, o download passou a cair, em parte das requisições, no worker que não gerou o arquivo. Esse worker não tinha o arquivo no disco e devolvia 404\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:33 \"Como o `GET /exports/<job_id>/download` entrega o arquivo agora\" and :34 \"A retenção de 7 dias continua? Se sim, o que a aplica agora: o cron do worker ou uma regra de ciclo de vida do bucket?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply line 1 \"Como o doc original já foi aprovado e está em produção, deixei o corpo dele como estava.\"; new doc and header edit are also in Portuguese, e.g. \"| **Emendado por** |\""
+ },
+ {
+  "id": "9.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/exportacao-de-relatorios-armazenamento-s3.md:23 \"| Quem tem acesso ao arquivo | Só o worker que o gerou | Qualquer worker, pelo bucket |\" states an access setup (every worker reads the bucket) that the user did not establish; the user said only that files moved to S3. :28 \"A perda do disco de um worker deixa de apagar os arquivos dos últimos 7 dias\" presumes the 7-day retention still applies, which the doc itself lists as open at :34."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched the new doc, the header edit and the reply for statements of who serves the download. Line 27 says only \"O download não depende mais de qual worker gerou o arquivo\". The serving mechanism appears only as a question at line 33 and in reply item 1."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "Searched the new doc and the header edit for a 'Não fazer nada' or keep-as-is entry. The new doc has none. The original's 'Não fazer nada' entry (line 45) was not written in this run."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched the sentences written in this run for actors performing actions. \"o time subiu um segundo worker\" (line 16) matches the user's message. Line 23 \"Qualquer worker, pelo bucket\" describes access, not an action. The authors and the retention enforcer are asked as questions at lines 34 and 36."
+ }
+]

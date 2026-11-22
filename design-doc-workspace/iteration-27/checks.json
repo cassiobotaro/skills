@@ -1,0 +1,568 @@
+{
+ "note": "Check list of design-doc iteration-27 (1.7.0 against 1.6.0 on evals 1, 4, 6, 7 and 9, the evals whose expected output is a written document). Frozen before any run of this iteration and before any run of technical-writing iteration-1, and not to be edited to fit an output. Local to the iteration: nothing here is added to ../evals/checks-baseline.json. Eval 9: checks 9.1 to 9.12 and the anchor cases are copied verbatim from ../evals/checks-baseline.json. Evals 1, 4, 6 and 7 had no atomic checks: each assertion of ../evals/evals.json is decomposed here, and the field `assertion` gives its number. Not decomposed: 'the Structurizr DSL validates' (eval 7, assertion 8), which no run of this iteration checks. The last check of each eval (assertion 0) is not from evals.json: it states what 1.7.0 claims to add (an actor nobody established becomes an open question, never a likely component). It overlaps the other invention checks of its eval, so it is reported on its own line and never summed with them. kind=file and kind=absence are decided by grade.py from the bytes on disk and, for 6.9, from the tool calls run.py recorded; 'the document' is the one new .md file under docs/design/, and such a check is not met when there is none. kind=reply, kind=negative and kind=invention are decided by eval-tools/judge.py, three passes, met only when unanimous. Two things are measured outside the met/unmet table, by grade.py, and reported as counts per run. Observations on the document: O.2 analytic passives without an agent and O.3 words, both with the regex and the text selection of iteration-26/grade.py, and O.4 words ending in '-se' as a rough count of the 'se' forms. Mechanics from the transcript: M.1 the Skill tool was called with design-doc, M.2 with technical-writing, M.3 with unslop, M.4 technical-writing before unslop; tokens, cost and turns per run. A run in which design-doc was never invoked says nothing about either version: it is reported as invalid next to the totals and rerun once. A borderline case resolves to not met. More text never raises a verdict.",
+ "frozen_on": "2026-11-22",
+ "prediction": "Mechanics: M.2 is met in every 1.7.0 run and in no 1.6.0 run, M.3 in every run of both, and a 1.7.0 run costs more tokens, since it reads one more skill and makes one more pass. Document: iteration-26 measured 0 to 1 agentless passive per document on claude-sonnet-5-5 with the active-voice bullet alone, and 1.6.0 adds unslop on top, so O.2 has little room to fall and is expected not to separate the versions. If 1.7.0 adds something the checks can see, it shows on the actor check of each eval and on the invention checks next to it (9.10, 9.11, 1.19, 4.19, 7.19, 7.20), with 1.7.0 meeting them in more runs. If it harms, it shows on the structure checks (4.2, 4.3, 7.3, 7.4, 7.5, 1.12 to 1.14), since technical-writing has its own rules for headings and structure and is told to leave the calling skill's alone. Two runs per cell measure no rate: a difference of one run on one check is not a finding. 'The checks do not separate' means no check differs by two runs out of two in the same direction on more than one eval, and the totals by kind differ by less than what one run moves.",
+ "cells": {
+  "v160": "design-doc 1.6.0, the skill directory at commit 53c2dae",
+  "v170": "design-doc 1.7.0, the skill directory at commit cb8c72e",
+  "v160w": "design-doc 1.6.0 with the sentence of the amendment appended to the prompt (evals 7 and 9)",
+  "v170w": "design-doc 1.7.0 with the sentence of the amendment appended to the prompt (evals 7 and 9)"
+ },
+ "runs_per_cell": 2,
+ "amendments": [
+  "2026-11-22, cells v160w and v170w, for evals 7 and 9 only, two runs each. Decided after the first 20 runs and the six reruns and before any judge call: given the prompt alone, every session of eval 7 that invoked design-doc asked its questions first and wrote no file (4 of 4), and design-doc was invoked through the Skill tool in none of the 8 sessions of eval 9, so on those two evals the write step that 1.7.0 changes never ran and the document checks cannot compare the versions. The w cells append one sentence to the user's message (' Não vou conseguir responder perguntas agora: escreve o documento com o que eu já disse e deixa as perguntas no final.') and, on eval 9, name the skill first (' Usa a skill design-doc.'). No check was changed. The sentence pushes a run toward writing instead of asking (eval-tools/README.md), so the checks about asking (7.6, 7.7, 7.17, 9.8) are no evidence about a live interview in those cells, and the judge packet shows the user's message without the added sentence. The w cells are reported in their own columns and never pooled with v160 and v170. Order of events: the decision was written as a comment in run.py before the eight runs, but this entry was written right after them, because the script that was to record it stopped on an unrelated assertion; no output of those runs had been read."
+ ],
+ "anchors": {
+  "invention": [
+   {
+    "verdict": "MET",
+    "case": "User: 'subimos um segundo worker e o download caía no worker que não tinha o arquivo e devolvia 404'. Document, under Alternativas consideradas: 'Não fazer nada. Descartada: com dois workers, o download caía no worker que não tinha o arquivo e devolvia 404.'",
+    "why": "The status quo the user described, with the user's own reason for leaving it. Listing it under alternatives asserts nothing the user did not say."
+   },
+   {
+    "verdict": "UNMET",
+    "case": "Same user message. Document: 'Não fazer nada. Descartada: os 404 geravam chamados no suporte e o time avaliou que o custo de manter o disco local era maior.'",
+    "why": "Support tickets, an evaluation by the team and a cost comparison are not in the user's message. The entry now reports a deliberation that was never described."
+   },
+   {
+    "verdict": "UNMET",
+    "case": "User states a solution and no problem. Document: 'Não fazer nada. Descartada: o cadastro ficaria incompleto.'",
+    "why": "The user described no pain, so there is nothing to build the entry from. Its reason is composed, and belongs in a question."
+   }
+  ]
+ },
+ "evals": {
+  "1": [
+   {
+    "id": "1.1",
+    "assertion": 1,
+    "kind": "file",
+    "check": "Exactly one new .md file exists under docs/design/ after the run"
+   },
+   {
+    "id": "1.2",
+    "assertion": 2,
+    "kind": "reply",
+    "check": "The document written in this run is in Portuguese (quote its first sentence)"
+   },
+   {
+    "id": "1.3",
+    "assertion": 3,
+    "kind": "reply",
+    "check": "The document states the loss of the immediate download for small exports as a cost of the chosen solution (quote file:line)"
+   },
+   {
+    "id": "1.4",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The alternatives in the document include generating synchronously with a longer timeout (quote file:line)"
+   },
+   {
+    "id": "1.5",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The alternatives in the document include an external BI tool (quote file:line)"
+   },
+   {
+    "id": "1.6",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The alternatives in the document include doing nothing or keeping things as they are (quote file:line)"
+   },
+   {
+    "id": "1.7",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The document covers the platform team together with the shared queue (quote file:line)"
+   },
+   {
+    "id": "1.8",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The document covers the security team together with the signed link that carries PII (quote file:line)"
+   },
+   {
+    "id": "1.9",
+    "assertion": 6,
+    "kind": "reply",
+    "check": "A glossary sits at the beginning of the document, or the reply suggests one, and it covers at least one of PII, BI, S3 (quote)"
+   },
+   {
+    "id": "1.10",
+    "assertion": 6,
+    "kind": "negative",
+    "check": "The glossary has no entry for API, HTTP or URL. Met when there is no glossary"
+   },
+   {
+    "id": "1.11",
+    "assertion": 6,
+    "kind": "negative",
+    "check": "The glossary has no entry for C4, DSL or Structurizr. Met when there is no glossary"
+   },
+   {
+    "id": "1.12",
+    "assertion": 7,
+    "kind": "file",
+    "check": "The document has a <details> block that holds Structurizr DSL (the word 'workspace')"
+   },
+   {
+    "id": "1.13",
+    "assertion": 7,
+    "kind": "file",
+    "check": "The document has a Markdown image reference ('![') outside code and <details> blocks"
+   },
+   {
+    "id": "1.14",
+    "assertion": 7,
+    "kind": "file",
+    "check": "Every fenced mermaid block of the document is a sequenceDiagram, so the architecture is not redrawn in Mermaid. Met when the document has no mermaid block"
+   },
+   {
+    "id": "1.15",
+    "assertion": 8,
+    "kind": "negative",
+    "check": "No diagram in the document is left without prose after it that explains it"
+   },
+   {
+    "id": "1.16",
+    "assertion": 9,
+    "kind": "invention",
+    "check": "Every metric in the document is one the user gave (30 s timeout, about 12% of the exports above 50 thousand rows failing, 100 thousand rows, a ticket every week). No other figure is stated as fact; an unknown value appears as an open question or an explicit blank"
+   },
+   {
+    "id": "1.17",
+    "assertion": 10,
+    "kind": "reply",
+    "check": "The overview section of the document has at most two paragraphs (quote its heading and the first words of each paragraph)"
+   },
+   {
+    "id": "1.18",
+    "assertion": 10,
+    "kind": "negative",
+    "check": "The overview section has no schema, payload, endpoint, retry policy or configuration value"
+   },
+   {
+    "id": "1.19",
+    "assertion": 11,
+    "kind": "invention",
+    "check": "No invented technology: every technology, protocol, datastore and product named in the document, including inside a diagram's DSL technology slots and relationship labels, is named in the user's message or in the files in the project before the run"
+   },
+   {
+    "id": "1.20",
+    "assertion": 0,
+    "kind": "invention",
+    "check": "No sentence written in this run names a component, service, team or person as the one that performs an action when neither the user's message nor the files in the project before the run establish that this actor performs it. A question, or an entry under open questions, is not an assertion"
+   }
+  ],
+  "4": [
+   {
+    "id": "4.1",
+    "assertion": 7,
+    "kind": "file",
+    "check": "Exactly one new .md file exists under docs/design/ after the run besides dd-2026-007-cache-de-catalogo.md"
+   },
+   {
+    "id": "4.2",
+    "assertion": 1,
+    "kind": "file",
+    "check": "The new document has the level-2 headings Resumo, Contexto, Proposta, Riscos and Plano de entrega, in that order (other headings may sit between them)"
+   },
+   {
+    "id": "4.3",
+    "assertion": 1,
+    "kind": "file",
+    "check": "The new document has a '### Compensações' heading between '## Proposta' and '## Riscos'"
+   },
+   {
+    "id": "4.4",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The name of the new file contains 'dd-2026-008' (case-insensitive)"
+   },
+   {
+    "id": "4.5",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The header table of the new document has a Documento row that holds 'DD-2026-008'"
+   },
+   {
+    "id": "4.6",
+    "assertion": 3,
+    "kind": "negative",
+    "check": "The document does not list a false positive with shared NAT or shared IP as a risk"
+   },
+   {
+    "id": "4.7",
+    "assertion": 4,
+    "kind": "file",
+    "check": "The new document contains 'INC-4412'"
+   },
+   {
+    "id": "4.8",
+    "assertion": 4,
+    "kind": "file",
+    "check": "The new document contains '429'"
+   },
+   {
+    "id": "4.9",
+    "assertion": 4,
+    "kind": "file",
+    "check": "The new document contains 'Retry-After'"
+   },
+   {
+    "id": "4.10",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The document says that the client sent 40 times the normal traffic (quote file:line)"
+   },
+   {
+    "id": "4.11",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The document says that the API was down for 25 minutes (quote file:line)"
+   },
+   {
+    "id": "4.12",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The document gives the limit of the free plan as 10 rps (quote file:line)"
+   },
+   {
+    "id": "4.13",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The document gives the limit of the pro plan as 100 rps (quote file:line)"
+   },
+   {
+    "id": "4.14",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The Black Friday trade-off (a legitimate client in a peak may get 429) appears as a cost marked with ✗ (quote file:line)"
+   },
+   {
+    "id": "4.15",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "That cost comes with its mitigation: the Retry-After header and the alert for the accounts team to warn the enterprise clients (quote file:line)"
+   },
+   {
+    "id": "4.16",
+    "assertion": 6,
+    "kind": "reply",
+    "check": "The session Redis becoming a point of contention is listed as a risk (quote file:line)"
+   },
+   {
+    "id": "4.17",
+    "assertion": 6,
+    "kind": "reply",
+    "check": "That risk comes with its mitigation: measure before (quote file:line)"
+   },
+   {
+    "id": "4.18",
+    "assertion": 7,
+    "kind": "reply",
+    "check": "The document written in this run is in Portuguese (quote its first sentence)"
+   },
+   {
+    "id": "4.19",
+    "assertion": 8,
+    "kind": "invention",
+    "check": "No invented technology: every technology, protocol, datastore and product named in the document, including inside a diagram's DSL technology slots and relationship labels, is named in the user's message or in the files in the project before the run"
+   },
+   {
+    "id": "4.20",
+    "assertion": 9,
+    "kind": "negative",
+    "check": "Every section of the new document beyond the house pattern (Resumo, Contexto, Proposta with Compensações, Riscos, Plano de entrega) holds only substance the user supplied. Met when there is no such section"
+   },
+   {
+    "id": "4.21",
+    "assertion": 9,
+    "kind": "reply",
+    "check": "The reply tells the user that the document stepped outside the house pattern (quote). Met, with the search as evidence, when the document has no section beyond the pattern"
+   },
+   {
+    "id": "4.22",
+    "assertion": 0,
+    "kind": "invention",
+    "check": "No sentence written in this run names a component, service, team or person as the one that performs an action when neither the user's message nor the files in the project before the run establish that this actor performs it. A question, or an entry under open questions, is not an assertion"
+   }
+  ],
+  "6": [
+   {
+    "id": "6.1",
+    "assertion": 1,
+    "kind": "file",
+    "check": "Exactly one new .md file exists under docs/design/ after the run"
+   },
+   {
+    "id": "6.2",
+    "assertion": 1,
+    "kind": "reply",
+    "check": "The document written in this run is in Portuguese (quote its first sentence)"
+   },
+   {
+    "id": "6.3",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The document has a <details> block that holds Structurizr DSL (the word 'workspace')"
+   },
+   {
+    "id": "6.4",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The document has a Markdown image reference ('![') outside code and <details> blocks"
+   },
+   {
+    "id": "6.5",
+    "assertion": 3,
+    "kind": "file",
+    "check": "Every fenced mermaid block of the document is a sequenceDiagram, so the architecture is not redrawn in Mermaid"
+   },
+   {
+    "id": "6.6",
+    "assertion": 4,
+    "kind": "file",
+    "check": "The document has at least one fenced mermaid block that is a sequenceDiagram"
+   },
+   {
+    "id": "6.7",
+    "assertion": 5,
+    "kind": "file",
+    "check": "The document has no validation disclaimer outside code and <details> blocks (não validad*, not validated, not machine-validated, apenas ilustra*)"
+   },
+   {
+    "id": "6.8",
+    "assertion": 6,
+    "kind": "negative",
+    "check": "No diagram in the document is left without prose after it that explains it"
+   },
+   {
+    "id": "6.9",
+    "assertion": 7,
+    "kind": "absence",
+    "check": "The session ran no command that installs something: no Bash call with a package manager's install (apt, brew, dnf, yum, pacman, snap, npm, pip, pipx, uv tool) and no 'docker pull' among its recorded tool calls"
+   },
+   {
+    "id": "6.10",
+    "assertion": 0,
+    "kind": "invention",
+    "check": "No sentence written in this run names a component, service, team or person as the one that performs an action when neither the user's message nor the files in the project before the run establish that this actor performs it. A question, or an entry under open questions, is not an assertion"
+   }
+  ],
+  "7": [
+   {
+    "id": "7.1",
+    "assertion": 1,
+    "kind": "file",
+    "check": "Exactly one new .md file exists under docs/design/ after the run besides TEMPLATE.md"
+   },
+   {
+    "id": "7.2",
+    "assertion": 1,
+    "kind": "reply",
+    "check": "The document written in this run is in Portuguese (quote its first sentence)"
+   },
+   {
+    "id": "7.3",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The new document has the level-2 headings Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso and Perguntas abertas, in that order (other headings may sit between them)"
+   },
+   {
+    "id": "7.4",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The new document has the template's header table: a row for each of Documento, Estado, Autores, Revisores, Criado em and Última atualização"
+   },
+   {
+    "id": "7.5",
+    "assertion": 3,
+    "kind": "file",
+    "check": "No heading of the new document is 'Visão geral', 'Escopo e contexto' or 'Objetivos e fora de escopo' (case-insensitive)"
+   },
+   {
+    "id": "7.6",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The reply or the document asks the user for the risks (quote the question)"
+   },
+   {
+    "id": "7.7",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The reply or the document asks the user for the rollout plan (quote the question)"
+   },
+   {
+    "id": "7.8",
+    "assertion": 4,
+    "kind": "invention",
+    "check": "The Riscos section states no risk and no mitigation that the user did not give. A marker saying the section is pending the user's answer passes"
+   },
+   {
+    "id": "7.9",
+    "assertion": 4,
+    "kind": "invention",
+    "check": "The Plano de rollout section states no phase, criterion to advance or rollback step that the user did not give. A marker saying the section is pending the user's answer passes"
+   },
+   {
+    "id": "7.10",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The two alternatives the user discussed (deduplicating in the consumer, the native idempotence of the Kafka producer) are recorded under a heading of their own, at any level (quote the heading and one line of each)"
+   },
+   {
+    "id": "7.11",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The accepted cost of +5 ms of latency is recorded under a heading of its own or under the heading that holds the alternatives, at any level (quote the heading and the line)"
+   },
+   {
+    "id": "7.12",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The reply names the heading added beyond the template as a deviation, so that the user can accept it (quote)"
+   },
+   {
+    "id": "7.13",
+    "assertion": 6,
+    "kind": "file",
+    "check": "The Autores row of the header table holds 'Rafael Nunes'"
+   },
+   {
+    "id": "7.14",
+    "assertion": 6,
+    "kind": "file",
+    "check": "The Estado row of the header table holds 'Rascunho' (case-insensitive)"
+   },
+   {
+    "id": "7.15",
+    "assertion": 6,
+    "kind": "file",
+    "check": "Every ISO date (YYYY-MM-DD) in the new document is the run date, and the run date appears at least once"
+   },
+   {
+    "id": "7.16",
+    "assertion": 6,
+    "kind": "invention",
+    "check": "The header names no reviewer: the Revisores row is empty or marked as pending"
+   },
+   {
+    "id": "7.17",
+    "assertion": 6,
+    "kind": "reply",
+    "check": "The reply or the document asks the user who the reviewers are (quote)"
+   },
+   {
+    "id": "7.18",
+    "assertion": 7,
+    "kind": "invention",
+    "check": "Every metric in the document is one the user gave (4% of duplicates last month, the key kept for 24 h, +5 ms of latency, the target below 0,1%, two complaints from finance). No other figure is stated as fact"
+   },
+   {
+    "id": "7.19",
+    "assertion": 7,
+    "kind": "invention",
+    "check": "The document names no technology, team or stakeholder that the user's message and the template do not name"
+   },
+   {
+    "id": "7.20",
+    "assertion": 8,
+    "kind": "invention",
+    "check": "In the Structurizr DSL, a technology slot is filled only with a technology the user named (Redis, Kafka) and no relationship carries a protocol the user did not name. Met when the document has no DSL"
+   },
+   {
+    "id": "7.21",
+    "assertion": 8,
+    "kind": "invention",
+    "check": "The Mermaid flow has no endpoint, header, status code or failure branch that the user did not give. Met when the document has no Mermaid block"
+   },
+   {
+    "id": "7.22",
+    "assertion": 0,
+    "kind": "invention",
+    "check": "No sentence written in this run names a component, service, team or person as the one that performs an action when neither the user's message nor the files in the project before the run establish that this actor performs it. A question, or an entry under open questions, is not an assertion"
+   }
+  ],
+  "9": [
+   {
+    "id": "9.1",
+    "assertion": 1,
+    "kind": "file",
+    "check": "Exactly one new .md file exists under docs/design/ besides exportacao-de-relatorios.md"
+   },
+   {
+    "id": "9.2",
+    "assertion": 2,
+    "kind": "file",
+    "check": "In docs/design/exportacao-de-relatorios.md, everything from the line '## Visão geral' to the end of the file is byte-identical to the fixture"
+   },
+   {
+    "id": "9.3",
+    "assertion": 3,
+    "kind": "file",
+    "check": "The part of the original document above '## Visão geral' contains a Markdown link whose target resolves to the new file"
+   },
+   {
+    "id": "9.4",
+    "assertion": 3,
+    "kind": "file",
+    "check": "The new file contains a Markdown link whose target resolves to exportacao-de-relatorios.md"
+   },
+   {
+    "id": "9.5",
+    "assertion": 6,
+    "kind": "file",
+    "check": "Every ISO date (YYYY-MM-DD) in any created or modified file under docs/ is either the run date or a date already present in the fixture, and the run date appears at least once"
+   },
+   {
+    "id": "9.6",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The documentation written in this run (the new document, or the edits to the original when there is no new document) states that the generated files moved from the worker's local disk to an S3 bucket"
+   },
+   {
+    "id": "9.7",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The documentation written in this run gives the user's reason: a second worker was added and the download reached the worker that did not have the file, returning 404"
+   },
+   {
+    "id": "9.8",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "At least one of these gaps is asked of the user or recorded as an open question, in the reply or in the documentation: what got worse with S3, what happens to the 7-day retention or its cleanup cron, who or what serves the download now"
+   },
+   {
+    "id": "9.9",
+    "assertion": 6,
+    "kind": "reply",
+    "check": "The reply and the text written in this run are in Portuguese"
+   },
+   {
+    "id": "9.10",
+    "assertion": 5,
+    "kind": "invention",
+    "check": "Neither the reply nor any text written in this run asserts, as a fact about the team or the system, a cost, retention policy, credential or access setup, download mechanism or URL scheme, metric, date of the change, outcome, or alternative that neither the user's message nor the original document established. Restating what the original document says, attributed to it, is not an invention; questions and entries listed as open questions are not assertions"
+   },
+   {
+    "id": "9.11",
+    "assertion": 5,
+    "kind": "invention",
+    "check": "No text written in this run states as fact who or what serves the download after the change (for example that any worker serves it, or that the endpoint reads the file from the bucket). Asking it, or listing it as an open question, is not stating it"
+   },
+   {
+    "id": "9.12",
+    "assertion": 5,
+    "kind": "invention",
+    "check": "If the text written in this run lists a 'do nothing' or keep-as-is alternative, the reason given for discarding it contains only what the user's message said (a second worker, the download reaching the worker without the file, the 404). The check is met when there is no such entry"
+   },
+   {
+    "id": "9.13",
+    "assertion": 0,
+    "kind": "invention",
+    "check": "No sentence written in this run names a component, service, team or person as the one that performs an action when neither the user's message nor the files in the project before the run establish that this actor performs it. A question, or an entry under open questions, is not an assertion"
+   }
+  ]
+ }
+}

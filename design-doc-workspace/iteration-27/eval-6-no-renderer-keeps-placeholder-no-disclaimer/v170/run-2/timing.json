@@ -1,0 +1,120 @@
+{
+  "project": "p006",
+  "total_tokens": 274105,
+  "output_tokens": 9648,
+  "cost_usd": 0.2142127,
+  "num_turns": 17,
+  "total_duration_seconds": 70.7,
+  "dates": [
+    "2026-11-22"
+  ],
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "skills_listed": [
+    "design-doc",
+    "technical-writing",
+    "unslop",
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring"
+  ],
+  "skills_invoked": [
+    "design-doc",
+    "unslop"
+  ],
+  "skill_files_read": [
+    "design-doc/references/sections.md",
+    "technical-writing/SKILL.md",
+    "unslop/references/pt-br.md"
+  ],
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01YPhp1At9GFFHDC3Udf5V4o",
+      "tool_input": {
+        "command": "cd docs/design 2>/dev/null || cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design\npython3 - <<'EOF'\np='webhooks-de-saida.md'\ns=open(p).read()\nr=[(\"2. Cada tentativa de entrega fica registrada e consult\u00e1vel, com o resultado.\",\"2. O servi\u00e7o registra cada tentativa de entrega com o seu resultado, e o time passa a ver cada uma delas.\"),\n(\"Se a entrega falha, o servi\u00e7o agenda nova tentativa com backoff exponencial.\",\"Se a entrega falha, o servi\u00e7o tenta de novo depois de um intervalo que cresce a cada falha (backoff exponencial).\"),\n(\"- \u2713 Cada tentativa fica registrada no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\",\"- \u2713 O servi\u00e7o registra cada tentativa no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\"),\n(\"Um evento s\u00f3 deixa de ser entregue ao esgotar as 24 horas de retry, e nesse caso ele vai para a DLQ.\",\"Se o endpoint continua fora do ar depois de 24 horas de retry, o evento vai para a DLQ em vez de se perder.\")]\nfor a,b in r:\n    assert a in s; s=s.replace(a,b)\nopen(p,'w').write(s)\nEOF"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01H4bHY6dLPX4Xi83J4ZPDyS",
+      "tool_input": {
+        "command": "cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design && python3 - <<'EOF'\np='webhooks-de-saida.md'\ns=open(p).read()\nr=[(\"2. Cada tentativa de entrega fica registrada e consult\u00e1vel, com o resultado.\",\"2. O servi\u00e7o registra cada tentativa de entrega com o seu resultado, e o time passa a ver cada uma delas.\"),\n(\"Se a entrega falha, o servi\u00e7o agenda nova tentativa com backoff exponencial.\",\"Se a entrega falha, o servi\u00e7o tenta de novo depois de um intervalo que cresce a cada falha (backoff exponencial).\"),\n(\"- \u2713 Cada tentativa fica registrada no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\",\"- \u2713 O servi\u00e7o registra cada tentativa no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\"),\n(\"Um evento s\u00f3 deixa de ser entregue ao esgotar as 24 horas de retry, e nesse caso ele vai para a DLQ.\",\"Se o endpoint continua fora do ar depois de 24 horas de retry, o evento vai para a DLQ em vez de se perder.\")]\nfor a,b in r:\n    assert a in s,a; s=s.replace(a,b)\nopen(p,'w').write(s)\nEOF\ngrep -c '\u2014' webhooks-de-saida.md"
+      }
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "Skill",
+      "target": "design-doc"
+    },
+    {
+      "tool": "Bash",
+      "target": "cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project; ls -R docs 2>/dev/null | head; ls .claude/skills .claude/skills/design-doc/references; cat .claude/skills/design-doc/references/diagrams.md; date +%Y-%m-%d; git ls-files | head -30"
+    },
+    {
+      "tool": "Read",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/.claude/skills/design-doc/references/sections.md"
+    },
+    {
+      "tool": "Bash",
+      "target": "cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project; mkdir -p docs/design/diagrams; cat > docs/design/webhooks-de-saida.md <<'EOF'\n# Servi\u00e7o de entrega de webhooks de sa\u00edda\n\n| | |\n|---|---|\n| **Documento** | DESIGN-DOC |\n| **Estado** | Rascunho |\n| **T\u00edtulo** | Servi\u00e7o de entrega de webhooks de sa\u00edda |\n| **Autores** | A confirmar |\n| **Revisores** | A confirmar (sugest\u00e3o: Seguran\u00e7a, Plataforma, times dos servi\u00e7os produtores de eventos) |\n| **Criado** | 2026-11-22 |\n| **\u00daltima atualiza\u00e7\u00e3o** | 2026-11-22 |\n| **Tags** | webhooks, kafka, postgres, retry, dlq |\n\n## Gloss\u00e1rio\n\n- **Evento de dom\u00ednio**: mensagem publicada no Kafka por um servi\u00e7o nosso para registrar que algo aconteceu no neg\u00f3cio.\n- **HMAC**: assinatura calculada sobre o corpo da requisi\u00e7\u00e3o com um segredo compartilhado. O cliente recalcula a assinatura para confirmar que a mensagem veio de n\u00f3s e n\u00e3o foi alterada.\n- **Backoff exponencial**: pol\u00edtica de retry em que o intervalo entre tentativas cresce a cada falha.\n- **DLQ** (dead-letter queue): destino dos eventos cuja entrega esgotou todas as tentativas.\n- **Tentativa**: um POST ao endpoint do cliente, com o resultado registrado.\n\n## Vis\u00e3o geral\n\nHoje cada servi\u00e7o que precisa avisar um cliente externo faz o POST por conta pr\u00f3pria, sem retry e sem registro central. Este documento prop\u00f5e um servi\u00e7o \u00fanico de entrega de webhooks. Ele consome os eventos de dom\u00ednio que j\u00e1 circulam no Kafka, registra cada tentativa no Postgres, assina o POST com HMAC e reenvia com backoff exponencial por at\u00e9 24 horas. Depois disso, o evento vai para a DLQ.\n\n## Contexto\n\n- Cada servi\u00e7o que notifica um cliente externo implementa o POST sozinho.\n- N\u00e3o h\u00e1 retry. Quando o endpoint do cliente est\u00e1 fora do ar, o evento se perde.\n- N\u00e3o h\u00e1 log central das entregas. A equipe s\u00f3 descobre uma falha quando o suporte avisa.\n- Os eventos de dom\u00ednio j\u00e1 est\u00e3o no Kafka, e a proposta reaproveita esse fluxo.\n\n## Objetivos\n\n1. Nenhum evento se perde por indisponibilidade do endpoint do cliente. Um evento s\u00f3 deixa de ser entregue ao esgotar as 24 horas de retry, e nesse caso ele vai para a DLQ.\n2. Cada tentativa de entrega fica registrada e consult\u00e1vel, com o resultado.\n\nA lista de itens fora de escopo est\u00e1 em [Quest\u00f5es em aberto](#quest\u00f5es-em-aberto).\n\n## O design\n\n### Vis\u00e3o da solu\u00e7\u00e3o\n\nO servi\u00e7o de entrega l\u00ea os eventos de dom\u00ednio do Kafka. Para cada evento destinado a um cliente externo, ele grava a tentativa no Postgres, assina o corpo com HMAC e faz o POST no endpoint do cliente. Se a entrega falha, o servi\u00e7o agenda nova tentativa com backoff exponencial. Passadas 24 horas sem sucesso, ele envia o evento para a DLQ. Os servi\u00e7os de dom\u00ednio deixam de falar com o cliente: s\u00f3 publicam eventos.\n\nO trade-off central est\u00e1 no caminho: como o webhook passa pela fila, a entrega deixa de ser imediata em alguns casos. Em troca, nenhum evento depende de o endpoint do cliente estar no ar naquele instante.\n\n### Arquitetura\n\n![Diagrama de containers: servi\u00e7o de entrega de webhooks](diagrams/architecture.svg)\n\n> Imagem pendente: esta m\u00e1quina n\u00e3o tem Docker nem a CLI do Structurizr. Renderize o DSL abaixo e salve em `diagrams/architecture.svg`.\n\n<details>\n<summary>Fonte do diagrama (Structurizr DSL)</summary>\n\n```\nworkspace \"Webhooks de sa\u00edda\" {\n\n    model {\n        cliente = softwareSystem \"Endpoint do cliente\" \"Recebe os webhooks assinados.\" \"External\"\n\n        kafka = softwareSystem \"Kafka\" \"J\u00e1 existente. Carrega os eventos de dom\u00ednio.\" \"Existing\"\n\n        servicos = softwareSystem \"Servi\u00e7os de dom\u00ednio\" \"Publicam eventos de dom\u00ednio. Deixam de fazer POST direto ao cliente.\" \"Existing\"\n\n        webhooks = softwareSystem \"Entrega de webhooks\" \"Entrega eventos de dom\u00ednio a clientes externos.\" {\n            entrega = container \"Servi\u00e7o de entrega\" \"Consome eventos, assina com HMAC, faz o POST, reenvia com backoff exponencial por at\u00e9 24h.\"\n            banco = container \"Banco de tentativas\" \"Guarda cada tentativa de entrega e seu resultado.\" \"\" \"Database\"\n            dlq = container \"DLQ\" \"Recebe eventos que esgotaram as 24h de retry.\"\n        }\n\n        servicos -> kafka \"Publica eventos de dom\u00ednio\"\n        entrega -> kafka \"Consome eventos de dom\u00ednio\"\n        entrega -> banco \"Registra cada tentativa\"\n        entrega -> cliente \"Envia POST assinado com HMAC\"\n        entrega -> dlq \"Envia eventos n\u00e3o entregues ap\u00f3s 24h\"\n    }\n\n    views {\n        container webhooks \"containers\" {\n            include *\n            autolayout lr\n        }\n\n        styles {\n            element \"Element\" {\n                background #1168bd\n                color #ffffff\n            }\n            element \"External\" {\n                background #999999\n            }\n            element \"Existing\" {\n                background #6b8fb5\n            }\n            element \"Database\" {\n                shape Cylinder\n            }\n        }\n    }\n}\n```\n\n</details>\n\nO servi\u00e7o de entrega \u00e9 o \u00fanico componente novo com l\u00f3gica. Ele l\u00ea do Kafka, que j\u00e1 existe, e escreve no banco de tentativas, onde cada POST fica registrado com seu resultado. O POST ao endpoint do cliente leva a assinatura HMAC. Quando o prazo de 24 horas termina sem sucesso, o servi\u00e7o envia o evento para a DLQ. Os servi\u00e7os de dom\u00ednio s\u00f3 publicam eventos e n\u00e3o conhecem o endpoint do cliente.\n\n### Fluxo de entrega com retry\n\n```mermaid\nsequenceDiagram\n    participant K as Kafka\n    participant S as Servi\u00e7o de entrega\n    participant B as Banco de tentativas\n    participant C as Endpoint do cliente\n    participant D as DLQ\n\n    K->>S: Evento de dom\u00ednio\n    loop At\u00e9 sucesso ou 24h desde o primeiro envio\n        S->>B: Registra a tentativa\n        S->>C: POST assinado com HMAC\n        alt Cliente aceita\n            C-->>S: Resposta de sucesso\n            S->>B: Marca a tentativa como entregue\n        else Cliente indispon\u00edvel ou rejeita\n            C-->>S: Falha ou sem resposta\n            S->>B: Marca a tentativa como falha\n            Note over S: Espera o pr\u00f3ximo intervalo do backoff exponencial\n        end\n    end\n    opt 24h sem sucesso\n        S->>D: Envia o evento\n        S->>B: Marca o evento como enviado \u00e0 DLQ\n    end\n```\n\nO servi\u00e7o trata cada evento em ciclos. A cada ciclo ele registra a tentativa, faz o POST e grava o resultado. Em caso de sucesso, o ciclo termina. Em caso de falha, o servi\u00e7o espera um intervalo maior que o anterior e tenta de novo. Quando passam 24 horas sem sucesso, ele envia o evento para a DLQ e registra isso no banco. O crit\u00e9rio exato de sucesso e o mecanismo de espera entre tentativas est\u00e3o em [Quest\u00f5es em aberto](#quest\u00f5es-em-aberto).\n\n## Trade-offs da solu\u00e7\u00e3o escolhida\n\n- \u2713 Uma indisponibilidade do endpoint do cliente deixa de perder o evento: o servi\u00e7o reenvia por at\u00e9 24 horas.\n- \u2713 Cada tentativa fica registrada no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\n- \u2713 O payload n\u00e3o sai da nossa borda para um terceiro.\n- \u2713 Os servi\u00e7os de dom\u00ednio deixam de implementar o POST, e a l\u00f3gica de entrega fica em um lugar s\u00f3.\n- \u2717 A entrega deixa de ser imediata em alguns casos, porque o evento passa pela fila. Esse \u00e9 o custo aceito.\n- \u2717 O time passa a construir e operar o servi\u00e7o, o que um SaaS evitaria.\n\n## Alternativas consideradas\n\n| Op\u00e7\u00e3o | Resultado |\n|---|---|\n| **Servi\u00e7o pr\u00f3prio de entrega (escolhida)** | \u2713 O payload fica na nossa borda. \u2713 Sem custo por evento de terceiro. \u2717 Constru\u00e7\u00e3o e opera\u00e7\u00e3o por nossa conta. \u2717 Entrega nem sempre imediata. |\n| SaaS de webhooks | \u2717 Custo por evento. \u2717 O payload sairia da nossa borda. Descartada. |\n| N\u00e3o fazer nada | \u2717 Quando o endpoint do cliente cai, o evento se perde, sem retry e sem log central, e a equipe s\u00f3 descobre pelo suporte. Descartada. |\n\n## Quest\u00f5es em aberto\n\nOs pontos abaixo n\u00e3o foram definidos at\u00e9 aqui. O texto acima n\u00e3o assume resposta para nenhum deles.\n\n1. **Fora de escopo**: o que algu\u00e9m poderia esperar deste servi\u00e7o e que fica de fora desta vers\u00e3o?\n2. **Crit\u00e9rio de sucesso**: quais respostas do cliente contam como entrega bem-sucedida e quais contam como falha?\n3. **Agenda de retry**: qual o intervalo inicial, o fator de crescimento e o teto do backoff? O que dispara cada nova tentativa (o mecanismo de espera)?\n4. **DLQ**: de que tipo \u00e9 a DLQ, quem a consome e como um evento volta de l\u00e1 para reenvio, se volta?\n5. **Garantia de entrega**: o cliente pode receber o mesmo evento mais de uma vez? Se puder, ele recebe um identificador para deduplicar?\n6. **Ordena\u00e7\u00e3o**: a ordem dos eventos para um mesmo cliente precisa ser preservada, inclusive durante os retries?\n7. **Segredo do HMAC**: onde o segredo de cada cliente fica guardado, quem o gera e como ele \u00e9 rotacionado?\n8. **Cadastro de destinos**: como o servi\u00e7o sabe qual evento vai para qual endpoint de qual cliente?\n9. **Dados no Postgres**: o registro da tentativa guarda o payload? Por quanto tempo? O payload cont\u00e9m dados pessoais?\n10. **Migra\u00e7\u00e3o**: como e em que ordem os servi\u00e7os atuais abandonam o POST direto?\n11. **Observabilidade e testes**: quais m\u00e9tricas e alertas indicam que a entrega funciona, e como o time verifica o design antes de publicar?\n12. **Autores e revisores**: quem assina o documento e quem o revisa?\nEOF"
+    },
+    {
+      "tool": "Read",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/.claude/skills/technical-writing/SKILL.md"
+    },
+    {
+      "tool": "Bash",
+      "target": "cd docs/design 2>/dev/null || cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design\npython3 - <<'EOF'\np='webhooks-de-saida.md'\ns=open(p).read()\nr=[(\"2. Cada tentativa de entrega fica registrada e consult\u00e1vel, com o resultado.\",\"2. O servi\u00e7o registra cada tentativa de entrega com o seu resultado, e o time passa a ver cada uma delas.\"),\n(\"Se a entrega falha, o servi\u00e7o agenda nova tentativa com backoff exponencial.\",\"Se a entrega falha, o servi\u00e7o tenta de novo depois de um intervalo que cresce a cada falha (backoff exponencial).\"),\n(\"- \u2713 Cada tentativa fica registrada no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\",\"- \u2713 O servi\u00e7o registra cada tentativa no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\"),\n(\"Um evento s\u00f3 deixa de ser entregue ao esgotar as 24 horas de retry, e nesse caso ele vai para a DLQ.\",\"Se o endpoint continua fora do ar depois de 24 horas de retry, o evento vai para a DLQ em vez de se perder.\")]\nfor a,b in r:\n    assert a in s; s=s.replace(a,b)\nopen(p,'w').write(s)\nEOF"
+    },
+    {
+      "tool": "Skill",
+      "target": "unslop"
+    },
+    {
+      "tool": "Read",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/.claude/skills/unslop/references/pt-br.md"
+    },
+    {
+      "tool": "Bash",
+      "target": "cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design && python3 - <<'EOF'\np='webhooks-de-saida.md'\ns=open(p).read()\nr=[(\"2. Cada tentativa de entrega fica registrada e consult\u00e1vel, com o resultado.\",\"2. O servi\u00e7o registra cada tentativa de entrega com o seu resultado, e o time passa a ver cada uma delas.\"),\n(\"Se a entrega falha, o servi\u00e7o agenda nova tentativa com backoff exponencial.\",\"Se a entrega falha, o servi\u00e7o tenta de novo depois de um intervalo que cresce a cada falha (backoff exponencial).\"),\n(\"- \u2713 Cada tentativa fica registrada no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\",\"- \u2713 O servi\u00e7o registra cada tentativa no Postgres, e o time deixa de depender do suporte para saber que uma entrega falhou.\"),\n(\"Um evento s\u00f3 deixa de ser entregue ao esgotar as 24 horas de retry, e nesse caso ele vai para a DLQ.\",\"Se o endpoint continua fora do ar depois de 24 horas de retry, o evento vai para a DLQ em vez de se perder.\")]\nfor a,b in r:\n    assert a in s,a; s=s.replace(a,b)\nopen(p,'w').write(s)\nEOF\ngrep -c '\u2014' webhooks-de-saida.md"
+    },
+    {
+      "tool": "Edit",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design/webhooks-de-saida.md"
+    },
+    {
+      "tool": "Edit",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design/webhooks-de-saida.md"
+    },
+    {
+      "tool": "Edit",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design/webhooks-de-saida.md"
+    },
+    {
+      "tool": "Edit",
+      "target": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design/webhooks-de-saida.md"
+    },
+    {
+      "tool": "Bash",
+      "target": "cd /tmp/claude-1000/-home-cassiobotaro-Projetos-skills/fb3cd090-d616-4f36-afbf-c763a9b2fa6e/scratchpad/dd27/projects/p006/project/docs/design && grep -c '\u2014' webhooks-de-saida.md; grep -nE 'utiliz|possui|realiza|Em resumo|robust' webhooks-de-saida.md"
+    }
+  ]
+}

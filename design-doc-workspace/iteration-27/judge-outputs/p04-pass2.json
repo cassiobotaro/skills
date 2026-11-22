@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "docs/design/webhooks-de-saida.md:26 \"Hoje cada serviço que precisa avisar um cliente externo faz o POST por conta própria, sem retry e sem registro central.\""
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "Searched both diagrams in docs/design/webhooks-de-saida.md. The architecture diagram (lines 58-105) is followed by prose at line 107: \"O serviço de entrega lê do Kafka os eventos que os serviços de domínio já publicam...\". The Mermaid retry flow (lines 113-137) is followed by prose at line 139: \"O serviço de entrega registra no Postgres cada tentativa e seu resultado...\". No diagram lacks explanatory prose after it."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "Searched every actor-action sentence in the document and the reply. The delivery service consuming Kafka, persisting attempts, signing the POST with HMAC, retrying for 24h and sending to the DLQ is all from the user's message. Domain services publishing to Kafka (lines 52, 80, 107) follows from \"consome os eventos de domínio do Kafka que já temos\". Learning of failures through support (line 32) is from the user. Line 148, \"A equipe passa a operar mais um serviço\", follows from the user calling it \"nosso serviço\". Who reviews, the DLQ consumer and reprocessing are left as open questions (lines 160, 165)."
+ }
+]

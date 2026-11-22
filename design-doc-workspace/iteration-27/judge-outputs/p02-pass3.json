@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:14 \"os arquivos gerados saíram do disco local do worker e passaram para um bucket S3\"; line 26 \"Os arquivos gerados ficam agora num bucket S3, e não mais no disco local do worker.\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:22 \"O time subiu um segundo worker. Quando o download caía no worker que não gerou o arquivo, esse worker não o encontrava no disco e devolvia 404.\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:49 \"Os arquivos ainda ficam 7 dias? Quem apaga os antigos agora: o cron do worker ou uma regra de ciclo de vida do bucket?\"; line 48 \"Como o download funciona agora? O worker lê do bucket e devolve o arquivo, ou o usuário baixa direto do S3?\"; line 51 \"O que a mudança piorou e o time decidiu aceitar?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "The reply is in Portuguese, e.g. reply:1 \"Como o serviço está em produção desde março, não reescrevi o design doc original.\" The new doc is also in Portuguese, e.g. line 14 \"Este documento registra uma mudança no serviço de exportação de relatórios\". The only English words are the skill names `technical-writing` and `unslop`."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply, the new doc and the header edit for asserted costs, retention, credentials, download mechanism, URL, metrics, change dates and alternatives. Credentials, retention and the download mechanism appear only as open questions (lines 47-54). Facts taken from the original are attributed to it (lines 20, 31, 39). The only date is the doc date 2026-11-22. Trade-off line 30 (\"o segundo worker não causa mais 404\") follows from the user's stated reason for the move."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched the new doc and the reply for who or what serves the download after the change. Line 30 says only that the download \"deixa de depender de qual worker gerou o arquivo\" and names no server. The mechanism is asked in open question 2 (line 48) and in reply question 2."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "Searched for a 'do nothing' entry. Line 37 reads \"Não fazer nada. Descartada: com dois workers, o download devolvia 404 quando caía no worker que não tinha o arquivo.\" The reason contains only what the user said."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched for named actors performing actions. \"O time subiu um segundo worker\" comes from the user's \"subimos\". The worker writing to and serving from disk comes from the original doc line 29. Credential ownership, cleanup and review appear only as open questions 3, 4 and 8. Marina Prado is cited only as the reviewer of the original."
+ }
+]

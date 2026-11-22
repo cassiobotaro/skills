@@ -1,0 +1,230 @@
+{
+  "checks": "checks.json",
+  "evals": "../evals/evals.json",
+  "runs": [
+    {
+      "key": "1/v160/run-1",
+      "eval": "1",
+      "cell": "v160",
+      "reply": "eval-1-rich-write-new-doc/v160/run-1/response.md",
+      "root": "eval-1-rich-write-new-doc/v160/run-1/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "1/v160/run-2",
+      "eval": "1",
+      "cell": "v160",
+      "reply": "eval-1-rich-write-new-doc/v160/run-2/response.md",
+      "root": "eval-1-rich-write-new-doc/v160/run-2/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "1/v170/run-1",
+      "eval": "1",
+      "cell": "v170",
+      "reply": "eval-1-rich-write-new-doc/v170/run-1/response.md",
+      "root": "eval-1-rich-write-new-doc/v170/run-1/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "1/v170/run-2",
+      "eval": "1",
+      "cell": "v170",
+      "reply": "eval-1-rich-write-new-doc/v170/run-2/response.md",
+      "root": "eval-1-rich-write-new-doc/v170/run-2/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "4/v160/run-1",
+      "eval": "4",
+      "cell": "v160",
+      "reply": "eval-4-house-template-repo/v160/run-1/response.md",
+      "root": "eval-4-house-template-repo/v160/run-1/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "4/v160/run-2",
+      "eval": "4",
+      "cell": "v160",
+      "reply": "eval-4-house-template-repo/v160/run-2/response.md",
+      "root": "eval-4-house-template-repo/v160/run-2/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "4/v170/run-1",
+      "eval": "4",
+      "cell": "v170",
+      "reply": "eval-4-house-template-repo/v170/run-1/response.md",
+      "root": "eval-4-house-template-repo/v170/run-1/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "4/v170/run-2",
+      "eval": "4",
+      "cell": "v170",
+      "reply": "eval-4-house-template-repo/v170/run-2/response.md",
+      "root": "eval-4-house-template-repo/v170/run-2/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "6/v160/run-1",
+      "eval": "6",
+      "cell": "v160",
+      "reply": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v160/run-1/response.md",
+      "root": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v160/run-1/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "6/v160/run-2",
+      "eval": "6",
+      "cell": "v160",
+      "reply": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v160/run-2/response.md",
+      "root": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v160/run-2/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "6/v170/run-1",
+      "eval": "6",
+      "cell": "v170",
+      "reply": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v170/run-1/response.md",
+      "root": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v170/run-1/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "6/v170/run-2",
+      "eval": "6",
+      "cell": "v170",
+      "reply": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v170/run-2/response.md",
+      "root": "eval-6-no-renderer-keeps-placeholder-no-disclaimer/v170/run-2/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "7/v160/run-1",
+      "eval": "7",
+      "cell": "v160",
+      "reply": "eval-7-user-template-governs/v160/run-1/response.md",
+      "root": "eval-7-user-template-governs/v160/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/v160/run-2",
+      "eval": "7",
+      "cell": "v160",
+      "reply": "eval-7-user-template-governs/v160/run-2/response.md",
+      "root": "eval-7-user-template-governs/v160/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/v170/run-1",
+      "eval": "7",
+      "cell": "v170",
+      "reply": "eval-7-user-template-governs/v170/run-1/response.md",
+      "root": "eval-7-user-template-governs/v170/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/v170/run-2",
+      "eval": "7",
+      "cell": "v170",
+      "reply": "eval-7-user-template-governs/v170/run-2/response.md",
+      "root": "eval-7-user-template-governs/v170/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "9/v160/run-1",
+      "eval": "9",
+      "cell": "v160",
+      "reply": "eval-9-amend-shipped-doc/v160/run-1/response.md",
+      "root": "eval-9-amend-shipped-doc/v160/run-1/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "9/v160/run-2",
+      "eval": "9",
+      "cell": "v160",
+      "reply": "eval-9-amend-shipped-doc/v160/run-2/response.md",
+      "root": "eval-9-amend-shipped-doc/v160/run-2/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "9/v170/run-1",
+      "eval": "9",
+      "cell": "v170",
+      "reply": "eval-9-amend-shipped-doc/v170/run-1/response.md",
+      "root": "eval-9-amend-shipped-doc/v170/run-1/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "9/v170/run-2",
+      "eval": "9",
+      "cell": "v170",
+      "reply": "eval-9-amend-shipped-doc/v170/run-2/response.md",
+      "root": "eval-9-amend-shipped-doc/v170/run-2/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "7/v160w/run-1",
+      "eval": "7",
+      "cell": "v160w",
+      "reply": "eval-7-user-template-governs/v160w/run-1/response.md",
+      "root": "eval-7-user-template-governs/v160w/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/v160w/run-2",
+      "eval": "7",
+      "cell": "v160w",
+      "reply": "eval-7-user-template-governs/v160w/run-2/response.md",
+      "root": "eval-7-user-template-governs/v160w/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/v170w/run-1",
+      "eval": "7",
+      "cell": "v170w",
+      "reply": "eval-7-user-template-governs/v170w/run-1/response.md",
+      "root": "eval-7-user-template-governs/v170w/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/v170w/run-2",
+      "eval": "7",
+      "cell": "v170w",
+      "reply": "eval-7-user-template-governs/v170w/run-2/response.md",
+      "root": "eval-7-user-template-governs/v170w/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "9/v160w/run-1",
+      "eval": "9",
+      "cell": "v160w",
+      "reply": "eval-9-amend-shipped-doc/v160w/run-1/response.md",
+      "root": "eval-9-amend-shipped-doc/v160w/run-1/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "9/v160w/run-2",
+      "eval": "9",
+      "cell": "v160w",
+      "reply": "eval-9-amend-shipped-doc/v160w/run-2/response.md",
+      "root": "eval-9-amend-shipped-doc/v160w/run-2/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "9/v170w/run-1",
+      "eval": "9",
+      "cell": "v170w",
+      "reply": "eval-9-amend-shipped-doc/v170w/run-1/response.md",
+      "root": "eval-9-amend-shipped-doc/v170w/run-1/outputs",
+      "fixture": "fixtures/eval-9"
+    },
+    {
+      "key": "9/v170w/run-2",
+      "eval": "9",
+      "cell": "v170w",
+      "reply": "eval-9-amend-shipped-doc/v170w/run-2/response.md",
+      "root": "eval-9-amend-shipped-doc/v170w/run-2/outputs",
+      "fixture": "fixtures/eval-9"
+    }
+  ]
+}

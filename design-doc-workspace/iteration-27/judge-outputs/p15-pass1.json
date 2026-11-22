@@ -1,0 +1,72 @@
+[
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the Riscos table (dd-2026-008:62-65) for NAT, shared IP or false positive. It has only two rows: Redis contention and 429 at peak. NAT appears only in Proposta, dd-2026-008:40, where it is stated as not a risk: 'esse cenário não é um risco deste desenho'."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "dd-2026-008:19 'um cliente com uma integração mal feita enviou 40x o tráfego normal'"
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "dd-2026-008:19 'a API ficou indisponível para todos os clientes por 25 minutos (INC-4412)'"
+ },
+ {
+  "id": "4.12",
+  "verdict": "met",
+  "evidence": "dd-2026-008:36 '| Free | 10 rps |'"
+ },
+ {
+  "id": "4.13",
+  "verdict": "met",
+  "evidence": "dd-2026-008:37 '| Pro | 100 rps |'"
+ },
+ {
+  "id": "4.14",
+  "verdict": "met",
+  "evidence": "dd-2026-008:46 '- ✗ Um cliente legítimo em pico (por exemplo, Black Friday) pode receber `429`'"
+ },
+ {
+  "id": "4.15",
+  "verdict": "met",
+  "evidence": "dd-2026-008:49 'Para o primeiro custo, o `Retry-After` diz ao cliente quando tentar de novo, e um alerta chega ao time de contas, que avisa os clientes enterprise.'"
+ },
+ {
+  "id": "4.16",
+  "verdict": "met",
+  "evidence": "dd-2026-008:64 '| O Redis de sessão vira ponto de contenção |'"
+ },
+ {
+  "id": "4.17",
+  "verdict": "met",
+  "evidence": "dd-2026-008:64 'O time mede a carga no Redis antes de ativar o limite'"
+ },
+ {
+  "id": "4.18",
+  "verdict": "met",
+  "evidence": "dd-2026-008:15 'Hoje a API pública não limita o tráfego por cliente.'"
+ },
+ {
+  "id": "4.19",
+  "verdict": "met",
+  "evidence": "Searched dd-2026-008 for named technologies. Found Kong, Redis, 429, Retry-After and NAT, all named in the user's message. The document has no diagram and names no other product, protocol or datastore."
+ },
+ {
+  "id": "4.20",
+  "verdict": "met",
+  "evidence": "Checked the three extra sections. Objetivos (lines 25-26) restates the user's objective. Alternativas consideradas (lines 55-58) uses the user's alternatives and reasons. Its 'Não fazer nada' row cites only INC-4412 facts the user gave, which matches the MET anchor. Perguntas em aberto (lines 75-79) holds only questions, not assertions."
+ },
+ {
+  "id": "4.21",
+  "verdict": "met",
+  "evidence": "Reply lines 7-9: '**Onde fugi do padrão:** - Acrescentei **Objetivos** e **Alternativas consideradas**... - Acrescentei **Perguntas em aberto**'"
+ },
+ {
+  "id": "4.22",
+  "verdict": "met",
+  "evidence": "Searched dd-2026-008 for sentences that assign an action to an actor. 'O Kong aplica o limite' (line 30) and 'o gateway responde 429' match the user's 'rate limit... no gateway (Kong)'. 'O time mede a carga' (line 64) matches the user's 'vamos medir antes'. 'um alerta chega ao time de contas, que avisa os clientes enterprise' (lines 49, 65) matches 'alerta pro time de contas avisar os enterprise'. No actor found that the user did not establish."
+ }
+]

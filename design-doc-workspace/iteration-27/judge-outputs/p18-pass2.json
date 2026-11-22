@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written in this run. The reply says 'Ainda não escrevi o arquivo.', and the only file in docs/design/ after the run is TEMPLATE.md, unchanged. There is no first sentence to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "\"1. **Riscos:** além dos +5ms, o que pode dar errado?\" and \"Como o time pretende mitigar cada risco?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "\"2. **Plano de rollout:** quais são as fases (shadow mode, percentual de tráfego, por produtor)? Qual critério faz avançar de uma fase para a próxima? Qual gatilho e qual procedimento levam ao rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched for a Riscos section; none exists because no document was written. In the reply, risk scenarios appear only inside questions (e.g. 'Se o Redis cair ou ficar lento, o serviço falha aberto ... ou fechado ...?'). They are not stated as risks or mitigations."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched for a Plano de rollout section; none exists because no document was written. 'shadow mode, percentual de tráfego, por produtor' appear only as examples inside a question, not as stated phases."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "No document was written, so no heading exists. The reply has a bold list label '**Alternativas descartadas:** deduplicar no consumidor e usar a idempotência nativa do produtor Kafka.' This is a summary bullet in the reply, not a recorded heading in a document. Borderline at most, so unmet."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "No document was written. The reply has only a bullet label '**Trade-off aceito:** mais um salto no caminho crítico, com cerca de +5ms de latência.' in its summary, not a document heading. Borderline, so unmet."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "\"Vou manter a ordem e os títulos do template e incluir as duas alternativas descartadas dentro de **Proposta**, como subseção. Aviso porque isso é um desvio pequeno do formato, e o time de arquitetura pode preferir outro lugar.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "No header was written, so no reviewer is named. The reply also says 'Se ainda não houver, deixo o campo em branco.'"
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "\"5. **Cabeçalho:** quem são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the reply for figures. It contains only 4%, 24h, +5ms, 0,1% and 'duas reclamações', all from the user, plus the document ID DD-2026-001, which is not a metric. No document exists."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "No document was written. The reply names only Redis and Kafka, both from the user. 'C4' and 'shadow mode' appear only inside questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No document and no Structurizr DSL exist."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No document and no Mermaid block exist."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the reply for assertions that assign actions to components, teams or people. Actor-related content appears only as questions ('Quem é dono do serviço?', 'o produtor envia, ou o serviço a deriva do payload?'). The proposal summary restates the user's own description."
+ }
+]

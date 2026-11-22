@@ -1,0 +1,72 @@
+[
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched dd-2026-008 for 'NAT', 'IP compartilhado' and 'falso positivo': none found. The only IP mention, line 40 'O limite é por token e não por IP.', is in Proposta, not in Riscos. The Riscos table (lines 61-64) lists only Redis contention and legitimate peak 429."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "dd-2026-008:19 'um cliente com uma integração mal feita enviou 40x o tráfego normal'"
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "dd-2026-008:19 'a API ficou fora do ar para todos os clientes por 25 minutos (INC-4412)'"
+ },
+ {
+  "id": "4.12",
+  "verdict": "met",
+  "evidence": "dd-2026-008:27 '| Free | 10 rps |'"
+ },
+ {
+  "id": "4.13",
+  "verdict": "met",
+  "evidence": "dd-2026-008:28 '| Pro | 100 rps |'"
+ },
+ {
+  "id": "4.14",
+  "verdict": "met",
+  "evidence": "dd-2026-008:47 '- ✗ Um cliente legítimo em pico (Black Friday, por exemplo) pode receber 429.'"
+ },
+ {
+  "id": "4.15",
+  "verdict": "met",
+  "evidence": "dd-2026-008:47 'O `Retry-After` indica quando tentar de novo e um alerta avisa o time de contas, que avisa os clientes enterprise.'"
+ },
+ {
+  "id": "4.16",
+  "verdict": "met",
+  "evidence": "dd-2026-008:63 '| O Redis de sessão vira ponto de contenção |'"
+ },
+ {
+  "id": "4.17",
+  "verdict": "met",
+  "evidence": "dd-2026-008:63 'Medir a carga dos contadores antes de ativar o enforcing (a fase em shadow mode serve a isso)'"
+ },
+ {
+  "id": "4.18",
+  "verdict": "met",
+  "evidence": "dd-2026-008:15 'Hoje a API pública não tem nenhum limite de requisições por cliente.'"
+ },
+ {
+  "id": "4.19",
+  "verdict": "met",
+  "evidence": "Listed every technology named in dd-2026-008: Kong, Redis, HTTP 429, Retry-After, API token. All appear in the user's message. The document has no diagram. Postgres and other technologies from the 007 doc are not used."
+ },
+ {
+  "id": "4.20",
+  "verdict": "met",
+  "evidence": "Sections beyond the pattern are Objetivos, Alternativas consideradas and Questões em aberto. Objetivos (lines 35-36) restates the user's goals. Alternativas (lines 54-57) uses the user's reasons: 'não fazer nada' rests on the user's INC-4412 pain, and the chosen option's reason restates the user's points. Questões em aberto (lines 74-78) contains only questions, which assert nothing."
+ },
+ {
+  "id": "4.21",
+  "verdict": "met",
+  "evidence": "Reply line 5: 'Duas coisas fogem do padrão. Acrescentei **Objetivos**... Também coloquei **Alternativas consideradas** dentro da Proposta... e uma seção **Questões em aberto** no fim.'"
+ },
+ {
+  "id": "4.22",
+  "verdict": "met",
+  "evidence": "Checked each actor assertion against the user's message. Kong counting and responding 429 (lines 40, 44): the user said the limit is in the Kong gateway and responds 429. The alert to the accounts team, who warn enterprise clients (line 47): the user said 'alerta pro time de contas avisar os enterprise'. Kong counting in shadow mode (line 68): the user said the limit is at the Kong gateway and shadow mode is 'só medindo'. 'Redis que a equipe já opera' (line 45): paraphrases the user's 'Redis que já usamos', judged faithful. The Redis-down behavior is asked as an open question (line 76), so it is not an assertion."
+ }
+]

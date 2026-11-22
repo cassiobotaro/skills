@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "docs/design/webhooks-de-saida.md:26 \"Hoje cada serviço que precisa avisar um cliente externo faz o POST por conta própria, sem retry e sem registro central.\""
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "Searched both diagrams. Architecture diagram (image at :58, DSL at :62-105) is followed by prose at :107: \"O serviço de entrega lê do Kafka os eventos que os serviços de domínio já publicam...\". Mermaid flow (:113-137) is followed by prose at :139: \"O serviço de entrega registra no Postgres cada tentativa e seu resultado, seja sucesso ou falha...\". No diagram is left without explanatory prose after it."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "Searched every sentence outside Perguntas em aberto that names an actor doing something. The delivery service consuming, persisting, signing, retrying and sending to the DLQ comes from the user. Domain services publishing to Kafka follows from \"eventos de domínio do Kafka que já temos\". Support alerting the team comes from \"só descobre pelo suporte\". \"A equipe passa a operar mais um serviço\" (:148) and \"a equipe consulte o registro\" (:40) refer to the user's own team, matching \"nosso serviço\" and \"a gente\", and the user's goal of visibility. The proposed reviewers (Segurança, the domain teams) appear only in open questions and the reply's suggestions. No unestablished actor assignment found."
+ }
+]

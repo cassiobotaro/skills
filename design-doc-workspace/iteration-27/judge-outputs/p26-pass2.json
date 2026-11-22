@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:30 \"Os arquivos gerados deixam de ficar no disco local do worker e passam a ficar em um bucket S3.\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:14 \"com dois workers, o download podia cair no worker que não tinha o arquivo e devolvia 404.\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:55 \"O que essa abordagem piorou, e o que o time decidiu aceitar?\"; :56 \"Como funciona o download hoje?\"; :57 \"A retenção de 7 dias continua? Se sim, quem a aplica hoje\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"Terminei a atualização e passei o `unslop` na prosa nova.\"; new doc line 1: \"# Armazenamento dos relatórios exportados em bucket S3\". The reply and all new text are in Portuguese."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply and both docs for costs, retention, credentials, download mechanism, URL scheme, metrics, change date, outcomes and alternatives. These appear only as open questions (new doc :53-62) or as restatements attributed to the original (:37, :39, :45). Line 32 explicitly leaves path, retention and download unstated. The 404 reason comes from the user."
+ },
+ {
+  "id": "9.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. new doc :18 says, in the present tense, \"O endpoint `GET /exports/<job_id>/download` é servido pelo worker que recebe a request.\" It sits in Contexto, next to past-tense sentences, but the present tense can be read as describing who serves the download now. Line 32 and question 4 do leave the post-change download open."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "new doc :43 \"Manter o disco local. O design original escolheu essa opção por assumir um único worker. A premissa deixou de valer quando o segundo worker subiu, e o 404 no download é a consequência.\" The reason uses only the user's content (the second worker, the 404) plus a restatement of the original's premise."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched the new doc and the reply for named actors. \"o time subiu um segundo worker\" comes from the user (\"subimos\"). The worker serving the endpoint restates original :29. Plataforma, the cron and the bucket lifecycle appear only inside questions (:57, :58)."
+ }
+]

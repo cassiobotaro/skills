@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written in this run. The reply begins 'Ainda não escrevi o arquivo.' and the only file after the run is docs/design/TEMPLATE.md, unchanged. There is no document sentence to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 15: \"**Riscos:** além dos +5ms, o que pode dar errado?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 20: \"**Plano de rollout:** quais são as fases (shadow mode, percentual de tráfego, por produtor)? Qual critério faz avançar de uma fase para a próxima? Qual gatilho e qual procedimento levam ao rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "No document was written, so there is no Riscos section. I searched the reply for risks or mitigations stated as fact. Its risk items (Redis falling, the window between writing the key and publishing, single point of failure) appear only as questions on lines 15-19."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "No document was written, so there is no Plano de rollout section. In the reply, phases such as 'shadow mode' appear only inside a question on line 20, not as assertions."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "No document was written. The reply's own summary has the bold label '**Alternativas descartadas:**' on line 9, but no document heading records the alternatives."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "No document was written. The reply line '**Trade-off aceito:** mais um salto no caminho crítico, com cerca de +5ms de latência.' (line 10) is a summary in the reply, not a heading in a document."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 4: \"incluir as duas alternativas descartadas dentro de **Proposta**, como subseção. Aviso porque isso é um desvio pequeno do formato, e o time de arquitetura pode preferir outro lugar.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "No header was written. The reply names no reviewer and says on line 26: 'Se ainda não houver, deixo o campo em branco.'"
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Reply line 26: \"**Cabeçalho:** quem são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "No document was written. The figures stated as fact in the reply (4%, 24h, +5ms, 0,1%, duas reclamações) all come from the user's message."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "No document was written. I searched the reply for technologies, teams or stakeholders; 'C4' and 'shadow mode' appear only inside questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No document exists, so there is no Structurizr DSL."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No document exists, so there is no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "I searched the reply for actor assertions. The questions about ownership and key origin (e.g. 'Quem é dono do serviço?') are questions, not assertions. The statements with an actor are the assistant's own plans ('Vou usar', 'Vou manter')."
+ }
+]

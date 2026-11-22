@@ -1,0 +1,9 @@
+Ainda não escrevi o arquivo. O template exige Riscos e Plano de rollout, e o que você me passou não cobre essas duas seções. Inventar esse conteúdo seria pior do que deixar a seção vazia. Preciso destas respostas:
+
+1. **Plano de rollout:** como o serviço entra em produção? Pense em fases (por exemplo, shadow mode, percentual de tráfego, 100%), no critério para avançar de uma fase à outra e no gatilho e no procedimento de rollback.
+2. **Riscos:** você citou só os +5ms de latência no caminho crítico. O que acontece com a ingestão se o Redis ficar indisponível? O serviço deixa passar os eventos (*fail-open*, com duplicatas voltando) ou bloqueia (*fail-closed*)? Há outros riscos que o time já discutiu, como perda de chaves, falsos positivos que descartam evento legítimo ou o próprio serviço fora do ar? Se vocês ainda não decidiram, registro isso em Perguntas abertas.
+3. **Numeração:** não há outro doc em `docs/design/` para eu seguir a sequência. Qual é o número do doc (`DD-2026-???`)? Se preferir, uso `DD-2026-001`.
+4. **Revisores:** quem são? Posso deixar o campo vazio.
+5. **Chave idempotente:** o produtor gera a chave ou o ingestor a deriva do payload? Isso decide a Proposta e hoje não sei a resposta. Também preciso saber se o doc deve registrar a meta de 0,1% como medida sobre a mesma base dos 4% (taxa de duplicatas nos eventos ingeridos).
+
+Com essas respostas, escrevo o doc em `docs/design/` seguindo o template. A explicação das alternativas descartadas (dedup no consumidor e idempotência nativa do Kafka) não cabe em nenhuma seção do template. Vou colocá-la em uma seção extra, "Alternativas consideradas", logo depois da Proposta. Todas as seções do template ficam na ordem original, e aviso você dessa adição. Se o time de arquitetura não aceitar a seção extra, a alternativa pode ir como subseção dentro de Proposta.

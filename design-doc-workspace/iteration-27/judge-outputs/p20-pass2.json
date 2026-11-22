@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written in this run. The reply says \"Ainda não criei o arquivo.\" and the after-run files show only TEMPLATE.md, unchanged. There is no document sentence to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "\"**Riscos:** além dos +5ms no caminho crítico, que riscos vocês já discutiram?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "\"**Plano de rollout:** como vocês pretendem entrar em produção (modo sombra que só mede duplicatas, percentual de tráfego, por produtor)? Qual é o critério para avançar de fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched for a Riscos section with stated risks or mitigations. No document was written, so there is none. In the reply, the possible risks (Redis failure, the window between writing the key and publishing, the 24h limit, single point of failure) appear only as questions."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched for a Plano de rollout section with phases, criteria or rollback steps. No document was written, so there is none. In the reply, shadow mode and traffic percentage appear only inside a question."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "No document was written. The reply only announces the intent to add \"Alternativas consideradas\". Neither alternative is recorded under any heading."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "No document was written. The +5ms cost is not recorded under any heading. The reply mentions it only inside a question."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "\"O template não tem seção para as alternativas, então vou acrescentar uma seção \"Alternativas consideradas\" depois de Proposta, com o resto do esqueleto na ordem original. Aviso aqui para você aceitar ou vetar.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched for a header naming reviewers. No document was written, so no header exists. In the reply, reviewers are only asked about."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "\"**Revisores:** quem entra no cabeçalho (arquitetura, financeiro, outros)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched for metrics stated as fact. No document was written. The reply's \"DD-2026-NNN\" and \"p99\" appear only inside questions, not as asserted metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams or stakeholders not named by the user or the template. No document was written. In the reply, \"arquitetura, financeiro, outros\" appear only inside a question."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for Structurizr DSL. No document was written, so there is no DSL."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched for a Mermaid block. No document was written, so there is no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the reply's statements for actor attributions not given by the user or the files. The reply's statements restate the user's facts or describe the directory contents. Every attribution beyond that is phrased as a question."
+ }
+]

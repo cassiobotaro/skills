@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:54 under **Riscos**: \"Se o serviço ou o Redis ficar indisponível, o ingestor deve deixar o evento passar sem deduplicar (aceitando duplicatas) ou rejeitar o evento (aceitando perda de disponibilidade da ingestão)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:66 \"Como o serviço entra em produção: em fases, por produtor ou por percentual de tráfego? Qual critério permite avançar de fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "borderline: Riscos does more than mark itself pending. doc:39 names risks the user never gave: \"Os demais riscos (indisponibilidade do serviço ou do Redis, retries fora da janela de 24 horas)\". doc:37 also adds a quasi-mitigation: \"A medição entra nas métricas de sucesso.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc:41-43 for phases, advance criteria and rollback steps. It contains only the pending marker: \"O plano de fases, os critérios de avanço e o critério de rollback ainda não existem. Estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:24 \"### Alternativas consideradas\"; doc:26 \"**Deduplicar no consumidor.** Descartada.\"; doc:27 \"**Usar a idempotência nativa do produtor Kafka.** Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:31 \"### Trade-off aceito\"; doc:33 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "The reply does not name the added headings ('Alternativas consideradas', 'Trade-off aceito'). It presents them as compliance rather than a deviation to accept: \"não criei nenhuma seção de topo nova. As alternativas descartadas e o trade-off dos +5 ms entraram como subseções dentro de **Proposta**.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header at doc:8. The row is \"| **Revisores** | |\", which is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:70 \"Quem são os revisores deste documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole doc for figures. Found 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\", all given by the user, plus dates (2026-11-22, outubro de 2026) and question numbering. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the doc for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro and time, all from the user's message or the template."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the doc for a Mermaid block. There is none, and the reply says \"Sem diagrama\"."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence. All follow from the user's message: the ingestor sends to the service (the service sits between ingestor and Kafka), the service keeps keys in Redis and discards repeats, the producer resends on retry, and the team accepts the trade-off. No actor is assigned an unstated action."
+ }
+]

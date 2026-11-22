@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. Neither the reply nor the document asks the user which risks exist. The document fills in three risks itself. Questions 4 and 7 ask only how two of those risks are handled: \"Se o Redis ou o serviço de deduplicação ficar indisponível, a ingestão continua e aceita duplicatas, ou para?\" and \"Reenvios depois de 24h acontecem na prática?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:83 \"Como o serviço entra em produção? Quais são as fases, o critério para avançar de uma fase à seguinte e o critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:63 states a mitigation the user did not give: \"Medir a latência real antes de ampliar o rollout\". doc:64-65 state risks the user did not give: \"Uma falha em qualquer um dos dois afeta a ingestão.\" and \"Um reenvio que chega depois de 24h passa como evento novo.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Checked the Plano de rollout section for phases, advance criteria and rollback steps. Found none. doc:69 is only a pending marker: \"Ainda não definido. As fases, o critério de avanço entre elas e o critério de rollback estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:48 \"## Alternativas consideradas\"; doc:55 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; doc:56 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:42 \"### Trade-off aceito\"; doc:44 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:10 \"**Seção extra:** acrescentei \\\"Alternativas consideradas\\\" entre Proposta e Riscos ... O template não tem lugar para isso, e a seção está marcada no próprio doc como fora do template.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header for named reviewers. Found none. doc:8 has an empty row: \"| **Revisores** | |\""
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:82 \"Quem revisa este documento?\"; reply:15 \"Quem revisa o doc?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found only 4%, 24h, +5ms, 0,1% and \"duas vezes\". \"outubro de 2026\" restates the user's \"mês passado\", since today is 2026-11-22. The dates 2026-11-22 are header fields, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtor, financeiro and time de arquitetura, all named by the user. \"mermaid\" appears only as the diagram fence language, which the template's \"Diagramas\" allows."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. Found none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block at doc:22-38 for endpoints, headers, status codes and failure branches. Found none. The only branches are new key/publish and existing key/discard, which the user gave."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every assertion that assigns an action to an actor. Produtor→ingestor, ingestor→serviço→Kafka and serviço registra/descarta all follow from the user's \"fica entre o ingestor e o Kafka, guarda a chave ... e descarta repetidos\". The statement that \"o time de arquitetura precisa estar na lista\" sits inside an open-questions entry, so it is not an assertion."
+ }
+]

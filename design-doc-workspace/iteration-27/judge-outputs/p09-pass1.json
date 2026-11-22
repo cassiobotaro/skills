@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "unmet",
+  "evidence": "No documentation was written in this run. The original doc is unchanged and no new file exists. The reply only proposes a mini-doc and asks questions first."
+ },
+ {
+  "id": "9.7",
+  "verdict": "unmet",
+  "evidence": "No documentation was written in this run. The reason appears only in the reply ('com dois workers, o download caía no worker sem o arquivo e devolvia 404'), not in any written doc."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Reply line 6: '**Quem serve o download agora?** `GET /exports/<job_id>/download` continua passando pelo worker, que lê do S3, ou a API redireciona para uma URL pré-assinada?'; line 7: '**Retenção:** os 7 dias e o cron que apagava os arquivos viraram uma lifecycle rule do bucket, ou o cron continua apagando objetos?'"
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply is in Portuguese, e.g. 'Já tenho o motivo: com dois workers, o download caía no worker sem o arquivo e devolvia 404.' English tokens such as `Amended by` and `TODO` are quoted labels."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply for asserted costs, retention, credentials, download mechanism, URL scheme, dates, outcomes and alternatives. Each appears only inside questions (lines 5-8). No documentation text was written."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched for statements about who serves the download after the change. It appears only as a question in reply line 6 ('continua passando pelo worker... ou a API redireciona...?'). No doc text was written."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "No 'não fazer nada' or keep-as-is entry was written in this run. No documentation was produced."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched the reply for sentences naming an actor performing an action. Worker, API and approver appear only in questions (lines 6, 8). No documentation text was written."
+ }
+]

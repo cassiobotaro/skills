@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "unmet",
+  "evidence": "No documentation was written in this run. docs/design/exportacao-de-relatorios.md is unchanged and no new file exists. The reply only proposes a mini-doc and asks questions first."
+ },
+ {
+  "id": "9.7",
+  "verdict": "unmet",
+  "evidence": "No documentation was written, so no written text gives the reason. The reply mentions it ('com dois workers, o download caía no worker sem o arquivo e devolvia 404'), but only as conversation, not as documentation."
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "Reply line 6: '**Quem serve o download agora?** `GET /exports/<job_id>/download` continua passando pelo worker, que lê do S3, ou a API redireciona para uma URL pré-assinada?' Reply line 7: '**Retenção:** os 7 dias e o cron que apagava os arquivos viraram uma lifecycle rule do bucket, ou o cron continua apagando objetos?'"
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "The reply is in Portuguese, e.g. 'O design doc está em produção (estado \"Implementado\", e você confirmou). Por isso não vou reescrever o corpo dele.' 'Amended by' is quoted as a header label. No other text was written."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply for asserted cost, retention, credentials, download mechanism, URL scheme, metric, date, outcome or alternative. Retention, credentials, download mechanism, bucket name and date appear only inside questions (items 1–4). 'Ele é o registro de por que o serviço nasceu com disco local' restates the original document. No files were written."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched the reply for any statement of who serves the download after the change. It appears only as a question: 'Quem serve o download agora? ... continua passando pelo worker, que lê do S3, ou a API redireciona para uma URL pré-assinada?' No files were written."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "No text was written in this run, so there is no 'do nothing' or keep-as-is entry. The reply contains no such alternative either."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched the reply for sentences that name an actor performing an action. The worker, API, cron and approver appear only inside questions (items 2–4). No files were written."
+ }
+]

@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written in this run. The reply says 'Ainda não escrevi o arquivo.' and the only file after the run is TEMPLATE.md (unchanged), so there is no first sentence of a document to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 4: 'O que acontece com a ingestão se o Redis ficar indisponível? ... Há outros riscos que o time já discutiu, como perda de chaves, falsos positivos que descartam evento legítimo ou o próprio serviço fora do ar?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 3: '**Plano de rollout:** como o serviço entra em produção?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the files after the run and the reply for a Riscos section. No document exists. Risks appear in the reply only inside questions, not as stated risks or mitigations."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the files after the run and the reply for a Plano de rollout section. No document exists. The phases in the reply ('por exemplo, shadow mode, percentual de tráfego, 100%') are examples inside a question, not stated content."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "No document was written, so the alternatives are recorded under no heading. The reply only plans it: 'Vou colocá-la em uma seção extra, \"Alternativas consideradas\"'."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "No document was written. The +5 ms cost is not recorded under any heading in any file after the run."
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline: the reply names a planned extra section ('Vou colocá-la em uma seção extra, \"Alternativas consideradas\" ... aviso você dessa adição. Se o time de arquitetura não aceitar a seção extra...'). But no document was written, so no heading was actually added beyond the template."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched for a header with a Revisores row. No document was written, so no reviewer is named. The reply says 'Posso deixar o campo vazio.'"
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Reply line 6: '**Revisores:** quem são?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the files after the run and the reply for figures stated as fact. No document exists. The reply's 'DD-2026-001' is an offered document number, not a metric."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the files after the run for technologies, teams or stakeholders not in the user's message or the template. No document was written."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No document and no Structurizr DSL exist in the files after the run."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No document and no Mermaid block exist in the files after the run."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the reply for actor-action assertions. The ones present are questions ('o produtor gera a chave ou o ingestor a deriva do payload?') or come from the template file ('O template exige Riscos e Plano de rollout'). No document was written."
+ }
+]

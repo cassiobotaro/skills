@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "unmet",
+  "evidence": "No document was written in this run. The reply says 'Ainda não escrevi o arquivo.' (reply:1), and the only file after the run is TEMPLATE.md, unchanged. There is no first sentence of a document to quote."
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "reply:4 'Que outros riscos o time viu, e qual é a mitigação de cada um?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "reply:3 'Como o serviço entra em produção? Preciso das fases (...), do critério para avançar de uma fase para a próxima e do critério de rollback.'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched for a Riscos section: no document was written, so none exists. The risks listed in reply:5-7 are given as questions to the user, not stated as fact."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched for a Plano de rollout section: no document was written. The phases in reply:3 are offered as examples inside a question ('por exemplo, shadow mode...')."
+ },
+ {
+  "id": "7.10",
+  "verdict": "unmet",
+  "evidence": "Looked for a heading in a written document that holds the consumer-side dedup and the Kafka producer idempotence alternatives. No document was written; reply:14 only announces a future section."
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Looked for the +5ms trade-off under its own heading or under the alternatives heading in a written document. No document was written."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:14 'Vou acrescentar uma seção \"Alternativas consideradas\"... Aviso porque é um desvio do formato, e você decide se o time de arquitetura aceita assim.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched for a header Revisores row: no document was written, so no reviewer is named. The reply asks who the reviewers are instead."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "reply:11 'Quem são os revisores, ou deixo o campo vazio?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the reply for figures stated as fact: only 0,1%, 4%, 24h and +5ms appear, all given by the user. 'p99' is a question and 'DD-2026-001' is a document ID put to the user for confirmation. No document was written."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "No document was written. Searched the reply for technologies, teams or stakeholders: only Redis, Kafka and 'time de arquitetura' appear, all named by the user."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No document and no Structurizr DSL exist."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No document and no Mermaid block exist."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the reply for actor assertions: who generates the key (produtor or ingestor) is posed as a question at reply:12. The only declarative actions are the assistant's own ('Vou acrescentar'). No document was written."
+ }
+]

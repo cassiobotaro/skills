@@ -1,0 +1,77 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:52-54 under \"**Riscos**\": \"Se o serviço ou o Redis ficar indisponível, o ingestor deve deixar o evento passar sem deduplicar (aceitando duplicatas) ou rejeitar o evento (aceitando perda de disponibilidade da ingestão)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:66 \"Como o serviço entra em produção: em fases, por produtor ou por percentual de tráfego? Qual critério permite avançar de fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Riscos section, at doc:39, names risks the user did not give: \"Os demais riscos (indisponibilidade do serviço ou do Redis, retries fora da janela de 24 horas)\". It also adds a measure the user did not give, at doc:37: \"A medição entra nas métricas de sucesso.\" These are stated in the section itself, not only as a pending marker."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (doc:41-43) for phases, criteria and rollback steps. It contains only a pending marker: \"O plano de fases, os critérios de avanço e o critério de rollback ainda não existem. Estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:24 \"### Alternativas consideradas\"; doc:26 \"**Deduplicar no consumidor.** Descartada.\"; doc:27 \"**Usar a idempotência nativa do produtor Kafka.** Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:31 \"### Trade-off aceito\"; doc:33 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. Reply:3 names the subsections: \"As alternativas descartadas e o trade-off dos +5 ms entraram como subseções dentro de **Proposta**\". But it frames them as conforming to the template (\"não criei nenhuma seção de topo nova\"), not as a deviation for the user to accept."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header row at doc:8: \"| **Revisores** | |\" is empty. Reply:6 also says \"O campo Revisores está vazio.\""
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:70 \"Quem são os revisores deste documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found only 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\". The remaining numbers are dates and IDs (DD-2026-001, 2026-11-22, outubro de 2026), not metrics. No other quantity is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro and \"o time\". All appear in the user's message. \"unslop\" appears only in the reply, not in the document."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked each actor assertion against the user's message: ingestor sends to the service (service sits between ingestor and Kafka), service stores the key in Redis and discards repeats, producer resends on retry, the team accepts the trade-off. All are established by the user's message. Open decisions about who generates keys and how failures are handled are posed only as questions."
+ }
+]

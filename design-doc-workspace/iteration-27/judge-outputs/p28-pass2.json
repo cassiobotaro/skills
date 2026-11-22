@@ -1,0 +1,72 @@
+[
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched dd-2026-008 for NAT, shared IP and false positives: none found. The Riscos table (lines 61-64) lists only Redis contention and the legitimate client in a peak getting 429. Line 40 only says 'O limite é por token e não por IP.'"
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:19 'um cliente com uma integração mal feita enviou 40x o tráfego normal'"
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:19 'a API ficou fora do ar para todos os clientes por 25 minutos (INC-4412)'"
+ },
+ {
+  "id": "4.12",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:27 '| Free | 10 rps |'"
+ },
+ {
+  "id": "4.13",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:28 '| Pro | 100 rps |'"
+ },
+ {
+  "id": "4.14",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:47 '- ✗ Um cliente legítimo em pico (Black Friday, por exemplo) pode receber 429.'"
+ },
+ {
+  "id": "4.15",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:47 'O `Retry-After` indica quando tentar de novo e um alerta avisa o time de contas, que avisa os clientes enterprise.'"
+ },
+ {
+  "id": "4.16",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:63 '| O Redis de sessão vira ponto de contenção |'"
+ },
+ {
+  "id": "4.17",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:63 'Medir a carga dos contadores antes de ativar o enforcing (a fase em shadow mode serve a isso)'"
+ },
+ {
+  "id": "4.18",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:15 'Hoje a API pública não tem nenhum limite de requisições por cliente.'"
+ },
+ {
+  "id": "4.19",
+  "verdict": "met",
+  "evidence": "Searched the new doc for technologies, protocols, datastores and products. Found Kong, Redis, API/gateway, the 429 status, the Retry-After header and rps, all named in the user's message. No other technology appears, including in the tags on line 11. The doc has no diagram."
+ },
+ {
+  "id": "4.20",
+  "verdict": "met",
+  "evidence": "Checked each extra section. Objetivos (35-36) holds the user's two goals. In Alternativas consideradas (52-57), 'Não fazer nada' gives the user's own pain (no per-client limit, 40x traffic, 25 minutes, INC-4412), matching the MET anchor. The other rows repeat the user's reasons for discarding or choosing. Questões em aberto (74-78) contains only questions and asserts no new substance."
+ },
+ {
+  "id": "4.21",
+  "verdict": "met",
+  "evidence": "Reply line 5: 'Duas coisas fogem do padrão. Acrescentei **Objetivos**, porque o 007 não tem onde pôr a meta de 1s ... Também coloquei **Alternativas consideradas** dentro da Proposta ... e uma seção **Questões em aberto** no fim.'"
+ },
+ {
+  "id": "4.22",
+  "verdict": "met",
+  "evidence": "Checked each sentence where an actor performs an action. The Kong counting and responding 429 (40, 44) matches the user's 'rate limit por token de API no gateway (Kong)'. The alert to the accounts team, who warn the enterprise clients (47, 64), matches the user's message. 'a equipe já opera' the Redis (45) matches 'que já usamos'. Shadow mode with the Kong counting (68) follows from the limiter being in Kong. The Kong behaviour when Redis is down is asked only as an open question (76)."
+ }
+]

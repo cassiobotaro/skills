@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:14 \"Este documento registra a mudança: os arquivos gerados agora ficam num bucket S3.\"; lines 24-25 \"Antes: o worker gravava o CSV no disco local e servia o download a partir dele.\" / \"Agora: o arquivo gerado fica num bucket S3.\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "exportacao-de-relatorios-armazenamento-s3.md:20 \"O time subiu um segundo worker. Quando o pedido de download chegava ao worker que não tinha gerado o arquivo, o endpoint devolvia 404.\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "exportacao-de-relatorios-armazenamento-s3.md:50 \"Quem serve `GET /exports/<job_id>/download` hoje: o worker lendo do S3, a API, ou um link direto para o bucket\"; :51 \"A retenção de 7 dias continua? Se sim, quem apaga os arquivos antigos\"; :57 \"O que o time decidiu aceitar com o S3 (custo, latência, credenciais, acesso ao bucket)?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply: \"Como o serviço já está em produção, não reescrevi o corpo do design doc original.\" New doc:1 \"Exportação de relatórios: arquivos gerados passam para o S3\". Original-doc edit:9 \"Alterado por\". All written text is Portuguese."
+ },
+ {
+  "id": "9.10",
+  "verdict": "met",
+  "evidence": "Searched the reply, the new doc and the edited lines of the original for asserted costs, retention, credentials, download mechanism, URL scheme, metrics, change date, outcomes and alternatives. Retention, download mechanism, change date and costs are left as open questions 1-6. The original's choices are restated with attribution (new doc:18, :33). \"Criado em 2026-11-22\" is the document's own creation date, not the date of the change. Line 31, \"Os workers passam a ter acesso ao mesmo armazenamento\", follows from the workers writing to one bucket. The reply says it removed the inferred \"elimina o 404\"."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched the new doc and the reply for any statement of who serves the download after the change. It appears only as a question: new doc:50 and reply item 2 \"Quem serve o download hoje: o worker lendo do S3, a API ou uma URL pré-assinada?\". Line 31 describes storage access, not who serves the download."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "exportacao-de-relatorios-armazenamento-s3.md:37 \"Manter o disco local do worker. Descartada: com dois workers, parte dos downloads devolve 404.\" The reason uses only the user's elements: two workers and the 404."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched the new doc for named actors performing actions. \"O time subiu um segundo worker\" matches the user's \"subimos\". Workers writing to the bucket follows from the user's message. \"Autores: Time de Relatórios\" carries over the original's authors and is flagged in open question 10. The original's reviewer is cited with attribution (:62). Who serves the download and who cleans up old files are only asked (:50, :51)."
+ }
+]

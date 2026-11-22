@@ -1,0 +1,42 @@
+[
+ {
+  "id": "9.6",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:12 \"Os arquivos gerados agora ficam num bucket S3.\"; line 22 \"| Onde o arquivo é gravado | Disco local do worker que gerou | Bucket S3 |\""
+ },
+ {
+  "id": "9.7",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:16 \"Quando o time subiu um segundo worker, o download passou a cair, em parte das requisições, no worker que não gerou o arquivo. Esse worker não tinha o arquivo no disco e devolvia 404\""
+ },
+ {
+  "id": "9.8",
+  "verdict": "met",
+  "evidence": "docs/design/exportacao-de-relatorios-armazenamento-s3.md:33 \"Como o `GET /exports/<job_id>/download` entrega o arquivo agora: o worker lê do S3 e devolve, ou redireciona para uma URL do bucket?\"; line 34 \"A retenção de 7 dias continua? Se sim, o que a aplica agora: o cron do worker ou uma regra de ciclo de vida do bucket?\""
+ },
+ {
+  "id": "9.9",
+  "verdict": "met",
+  "evidence": "Reply line 1 \"Como o doc original já foi aprovado e está em produção, deixei o corpo dele como estava.\"; new doc line 1 \"# Exportação de relatórios: arquivos gerados passam para o S3\". Everything written is in Portuguese."
+ },
+ {
+  "id": "9.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/exportacao-de-relatorios-armazenamento-s3.md:23 \"| Quem tem acesso ao arquivo | Só o worker que o gerou | Qualquer worker, pelo bucket |\" states an access setup the user never described. Line 27 \"o que elimina o 404 com mais de um worker\" states an outcome the user did not report."
+ },
+ {
+  "id": "9.11",
+  "verdict": "met",
+  "evidence": "Searched the new doc, the edited original and the reply for a statement of who serves the download. The new doc says who has access (line 23) and that the download does not depend on the generating worker (line 27), but it never names the server. The mechanism appears only as the open question at line 33 and as question 1 in the reply."
+ },
+ {
+  "id": "9.12",
+  "verdict": "met",
+  "evidence": "Searched the new doc and the edited original for a 'Não fazer nada' or keep-as-is entry written in this run. There is none; the only such entry is the unchanged original line 45."
+ },
+ {
+  "id": "9.13",
+  "verdict": "met",
+  "evidence": "Searched sentences written in this run for actors performing actions. \"o time subiu um segundo worker\" (line 16) comes from the user's \"subimos\". Line 23 describes access as a capability, not an action performed. Who serves the download and who applies retention appear only as open questions (lines 33-34)."
+ }
+]

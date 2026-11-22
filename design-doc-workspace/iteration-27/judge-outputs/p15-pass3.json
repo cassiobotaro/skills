@@ -1,0 +1,72 @@
+[
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Searched the Riscos table (docs/design/dd-2026-008-rate-limiting-api-publica.md:62-65): it has only Redis contention and 429 in peak. NAT appears only at line 40, in Proposta: \"esse cenário não é um risco deste desenho\"."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:19 \"um cliente com uma integração mal feita enviou 40x o tráfego normal\""
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:19 \"a API ficou indisponível para todos os clientes por 25 minutos (INC-4412)\""
+ },
+ {
+  "id": "4.12",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:36 \"| Free | 10 rps |\""
+ },
+ {
+  "id": "4.13",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:37 \"| Pro | 100 rps |\""
+ },
+ {
+  "id": "4.14",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:46 \"- ✗ Um cliente legítimo em pico (por exemplo, Black Friday) pode receber `429`\""
+ },
+ {
+  "id": "4.15",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:49 \"Para o primeiro custo, o `Retry-After` diz ao cliente quando tentar de novo, e um alerta chega ao time de contas, que avisa os clientes enterprise.\""
+ },
+ {
+  "id": "4.16",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:64 \"| O Redis de sessão vira ponto de contenção |\""
+ },
+ {
+  "id": "4.17",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:64 \"O time mede a carga no Redis antes de ativar o limite\""
+ },
+ {
+  "id": "4.18",
+  "verdict": "met",
+  "evidence": "dd-2026-008-rate-limiting-api-publica.md:15 \"Hoje a API pública não limita o tráfego por cliente.\""
+ },
+ {
+  "id": "4.19",
+  "verdict": "met",
+  "evidence": "Searched the document for named technologies, protocols and products. Found: Kong, Redis, 429, Retry-After, NAT, IP and the paid gateway module. All of them appear in the user's message. The document has no diagram."
+ },
+ {
+  "id": "4.20",
+  "verdict": "met",
+  "evidence": "Checked the three sections beyond the pattern. Objetivos (lines 25-26) is the user's objective. Alternativas (lines 55-58) uses the user's own reasons; 'Não fazer nada' cites INC-4412, which matches the MET anchor. Perguntas em aberto (lines 75-79) holds only questions, which assert nothing."
+ },
+ {
+  "id": "4.21",
+  "verdict": "met",
+  "evidence": "Reply lines 7-9: \"**Onde fugi do padrão:** - Acrescentei **Objetivos** e **Alternativas consideradas**... - Acrescentei **Perguntas em aberto**\""
+ },
+ {
+  "id": "4.22",
+  "verdict": "met",
+  "evidence": "Checked every sentence that names an actor. Kong/gateway applies the limit and responds 429: user said 'no gateway (Kong)'. Time de contas warns enterprise clients: user said 'alerta pro time de contas avisar os enterprise'. 'O time mede' (line 64): user said 'vamos medir antes'. No actor is established beyond what the user stated."
+ }
+]

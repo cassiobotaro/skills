@@ -1,0 +1,17 @@
+[
+ {
+  "id": "6.2",
+  "verdict": "met",
+  "evidence": "docs/design/webhooks-de-saida.md:26 \"Hoje cada serviço que precisa avisar um cliente externo faz o POST por conta própria, sem retry e sem registro central.\""
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "Searched both diagrams for prose after them. Architecture diagram (lines 58-105) is followed at line 107 by \"O serviço de entrega lê do Kafka os eventos que os serviços de domínio já publicam...\". Mermaid flow (lines 113-137) is followed at line 139 by \"O serviço de entrega registra no Postgres cada tentativa e seu resultado...\". No diagram is left unexplained."
+ },
+ {
+  "id": "6.10",
+  "verdict": "unmet",
+  "evidence": "docs/design/webhooks-de-saida.md:148 \"✗ A equipe passa a operar mais um serviço, com seu banco de tentativas e a DLQ.\" This names 'a equipe' as the operator of the new service. The user never said who operates it, and it is asserted as a con, not raised as a question. Borderline also: line 52 \"Os serviços de domínio continuam publicando eventos no Kafka\" and the DSL relation dominio -> kafka \"Publica eventos de domínio\". The user said only that the events are in Kafka ('que já temos'), not which services publish them."
+ }
+]
