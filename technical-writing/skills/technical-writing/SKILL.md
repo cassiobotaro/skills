@@ -146,6 +146,8 @@ user (contract 2). Then check:
 - The document does one job. Material for another job is a link.
 - Each thing has one name, and it is the name the code uses.
 - A final read as the reader fixed in step 1, from the top, doing what the page says.
+- After a revision, the reply says what changed in three lines at most and retells
+  nothing the document says. The user has the file.
 
 ## The rules
 

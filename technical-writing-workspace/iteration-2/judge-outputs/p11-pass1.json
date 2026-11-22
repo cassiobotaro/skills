@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7 \"When a client requests an export, the gateway validates the payload.\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7-8 \"The gateway rejects requests above 100,000 rows.\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue and returns a `202`.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The worker picks up the job and generates the CSV file.\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The worker encrypts the file\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"The worker encrypts the file before it uploads the file to the bucket.\""
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14-15 \"the worker tries the job again, up to three attempts in total.\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:15-16 \"the worker moves the job to the dead-letter queue.\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:20 \"the notifier sends a download link by email.\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md Delivery section (lines 18-21) for 'is sent'. Not found. The section uses \"the notifier sends\"."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section for 'is expired'. Not found. Line 21 reads \"The link expires after 24 hours.\""
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Checked every sentence in docs/pipeline.md lines 7-9. All are active with an agent: 'the gateway validates', 'The gateway rejects', 'the gateway publishes ... and returns'. No passive found."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Checked every sentence in lines 13-16. All are active with 'the worker' as agent: picks up, generates, encrypts, uploads, tries again, moves. 'failed attempt' is an adjective, not a passive."
+ },
+ {
+  "id": "1.19",
+  "verdict": "met",
+  "evidence": "Checked lines 20-21: 'the worker has uploaded', 'the notifier sends', 'The link expires'. No agentless passive found."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:25 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched the Backups section (lines 23-25). It contains only the passive 'are rotated weekly'. No job, service, team, person or AWS feature is named."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"Nothing in the repository says what rotates the backups... Which job, lifecycle rule or team does it?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Listed the components named in docs/pipeline.md: gateway, worker, notifier, bucket, `exports` queue, dead-letter queue, and the generic 'client'. All of these appear in the fixture files."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names. Found only `exports` (line 9) and 'the dead-letter queue' (line 16)."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for status codes. Found only `202` (line 9)."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures. Found 100,000 rows, three attempts/third, 24 hours and weekly. All appear in the fixtures."
+ },
+ {
+  "id": "1.27",
+  "verdict": "unmet",
+  "evidence": "The change account exceeds three lines. It includes reply line 1 \"I rewrote `docs/pipeline.md` in place so each step names the component that does it\", three bullets (lines 3-5), and line 7 \"I wrote 'up to three attempts in total'\"."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "The bullets restate the pipeline section by section. For example: \"the gateway (`exporter/gateway.py`) validates the payload and rejects requests above 100,000 rows. It also publishes the job...\" and \"the worker ... generates the CSV, encrypts it, uploads it, retries failed jobs\"."
+ }
+]

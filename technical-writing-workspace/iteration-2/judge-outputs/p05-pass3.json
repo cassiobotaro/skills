@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:9 \"`POST /exports` in the gateway:\" and docs/pipeline.md:11 \"`validate_payload` rejects the request with `422` if `account_id` is missing\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:11-12 \"`validate_payload` rejects the request ... and with `413` if `rows` is above 100,000 (`MAX_ROWS`).\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"the gateway publishes it to the `exports` queue in RabbitMQ\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"the gateway publishes it ... and returns `202` with `{\"status\": \"queued\"}`\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:18-20 \"The worker consumes the `exports` queue. For each job it: 1. Builds the CSV in memory (`build_csv`).\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:18,21 \"The worker ... For each job it: ... 2. Encrypts the CSV with Fernet\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:18,22 \"The worker ... For each job it: ... 3. Uploads the encrypted file to the S3 bucket in `EXPORT_BUCKET`\""
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:26 \"If any step raises, the worker publishes the job back to `exports` with an incremented\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:27-28 \"On the third failure (`MAX_ATTEMPTS`) it publishes the job to the `exports.dead` queue instead.\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:37 \"the notifier asks S3 for a presigned download URL and sends it with SES\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched Delivery section (docs/pipeline.md:35-39) for 'is sent': none. The sentence there is active: 'the notifier ... sends it with SES'."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched Delivery section (docs/pipeline.md:35-39) for 'is expired': none. It says 'S3 stops honoring the URL after 24 hours'."
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Searched Request section (docs/pipeline.md:7-14) for agentless passives: every clause has an actor ('`validate_payload` rejects', 'the gateway publishes ... and returns')."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Searched Processing section (docs/pipeline.md:16-33) for agentless passives: every sentence has an actor (worker, it, Prometheus) or is an imperative ('run'). 'dead-lettered jobs' and 'the number moved' are participial modifiers, not passive sentences."
+ },
+ {
+  "id": "1.19",
+  "verdict": "met",
+  "evidence": "Searched Delivery section (docs/pipeline.md:35-39) for agentless passives: none. The actors are 'the notifier' and 'S3'."
+ },
+ {
+  "id": "1.20",
+  "verdict": "unmet",
+  "evidence": "borderline: docs/pipeline.md:43-44 no longer asserts the claim. It quotes it only as disputed: 'TODO: unverified. Nothing in this repository rotates bucket backups, so the previous claim (\"backups are rotated weekly\") has no actor'. The reply also says 'I replaced the sentence with a TODO'."
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched Backups section (docs/pipeline.md:41-45) for an asserted rotator. It states 'Nothing in this repository rotates bucket backups'. 'an S3 lifecycle rule or an AWS Backup plan' appears only as an example of what the user might name, not as an assertion."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "reply line 9: \"nothing in the repo rotates backups, so I couldn't say who does it ... Tell me what does the rotation\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "unmet",
+  "evidence": "docs/pipeline.md:31 \"Prometheus fires the `ExportsDeadLetterHigh` alert\". 'Prometheus' appears in no fixture file. docs/pipeline.md:45 also names \"an AWS Backup plan\", which is not in the fixtures."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names: only `exports` (lines 13, 18, 26, 30) and `exports.dead` (lines 28, 32)."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for status codes: only 422 and 413 (line 11) and 202 (line 14)."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures: 100,000 (line 12), third/MAX_ATTEMPTS (line 27), default 100 (line 31), more than 10 for 5 minutes (lines 32-33), 24 hours (line 38) and weekly (line 44). 'two services and two AWS services' counts the document's own parts. Every figure appears in a fixture file."
+ },
+ {
+  "id": "1.27",
+  "verdict": "unmet",
+  "evidence": "The reply describes changes in the opening sentence (line 1), five bullets (lines 3-7) and the Backups replacement (line 9). That is far more than three lines."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "reply lines 4-7 restate the pipeline section by section, e.g. 'the gateway's `validate_payload` returns `422` when `account_id` is missing...', 'the worker's steps are numbered (build the CSV, encrypt it with Fernet, upload to S3, call the notifier)', 'the notifier asks S3 for a presigned URL and sends it through SES'."
+ }
+]

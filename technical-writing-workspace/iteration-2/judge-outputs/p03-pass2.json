@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7 \"When a client requests an export, the gateway validates the payload.\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7-8 \"The gateway rejects requests above 100,000 rows.\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway enqueues a job in the `exports` queue\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway enqueues a job in the `exports` queue and returns `202`.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The worker picks up the job and generates the CSV file.\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"The worker encrypts the file\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"The worker encrypts the file before it uploads the file to the bucket.\" ('it' refers to the worker)"
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14-15 \"the worker retries the job up to three times\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14-15 \"the worker retries the job up to three times, then moves it to the dead-letter queue (`exports.dead`).\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:19 \"the notifier emails a download link.\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section (docs/pipeline.md:17-20) for 'is sent' and found none. The section uses \"the notifier emails a download link\"."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section for 'is expired' and found none. Line 19-20 reads \"The link expires after 24 hours.\""
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Searched the Request section (lines 5-9) for agentless passives and found none. All verbs are active with gateway or client as subject. \"is valid\" is an adjective, not a passive."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Searched the Processing section (lines 11-15) for agentless passives and found none. The verbs are active: worker picks up, generates, encrypts, uploads, retries, moves; and 'any step fails'."
+ },
+ {
+  "id": "1.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: docs/pipeline.md:19 \"Once the upload is done\" is be + past participle with no agent. It can be read as an adjective ('finished') or as an agentless passive. Borderline counts as unmet."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:24 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched the Backups section (lines 22-24) for any named actor and found none. The passive \"Backups of the bucket are rotated weekly.\" is kept."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 4: \"nothing in the repository says who rotates them ... I left the sentence as it was. Who does it?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for named components: client, gateway, worker, notifier, `exports` queue, bucket, dead-letter queue `exports.dead`. All appear in the fixture files. Nothing is invented."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched for queue names. Only `exports` (line 9) and `exports.dead` (line 15) appear, plus 'the dead-letter queue'."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched for HTTP status codes. Only `202` (line 9) appears."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched for figures. Found 100,000 rows, three times, 24 hours and weekly. All appear in the fixture files."
+ },
+ {
+  "id": "1.27",
+  "verdict": "unmet",
+  "evidence": "Reply line 1 has more than three change-describing sentences: \"Each step now names the component that does it...\", \"The gateway validates, rejects and enqueues.\", \"The worker generates, encrypts, uploads and retries.\", \"The notifier emails the link.\", \"The queue is named `exports` and the dead-letter queue `exports.dead`.\", \"The structure and facts are unchanged.\""
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "The reply restates the pipeline step by step: \"The gateway validates, rejects and enqueues. The worker generates, encrypts, uploads and retries. The notifier emails the link.\""
+ }
+]

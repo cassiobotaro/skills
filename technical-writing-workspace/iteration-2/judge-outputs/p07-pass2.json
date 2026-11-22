@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7 \"When a client requests an export, the gateway (`exporter/gateway.py`) validates the\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8 \"payload. It rejects requests above 100,000 rows.\" Here 'It' refers to the gateway named on line 7."
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:9 \"publishes a job to the `exports` queue and returns a `202`.\" The subject of this sentence is the gateway."
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The worker (`exporter/worker.py`) takes the job from the `exports` queue and generates the\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"The worker encrypts the file before it uploads it to the bucket.\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"The worker encrypts the file before it uploads it to the bucket.\""
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:15 \"goes wrong, the worker republishes the job to `exports` for another attempt\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:16-17 \"After the third failure, the worker moves the job to the `exports.dead` queue.\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:21 \"the notifier (`exporter/notifier.py`) sends a download link by\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section (docs/pipeline.md:19-22) for 'is sent'. It does not occur; the sentence there is active: 'the notifier ... sends'."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section (docs/pipeline.md:19-22) for 'is expired'. It does not occur; line 22 reads 'The link expires after 24 hours.'"
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md:5-9 for passive verbs. Every clause has an agent (client, gateway, 'It'). In 'If the payload is valid', 'valid' is an adjective, not a passive."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md:11-17 for passive verbs. Every clause has the worker as subject; 'If something goes wrong' is active."
+ },
+ {
+  "id": "1.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: docs/pipeline.md:21 \"Once the upload is done\" has the form 'is' plus past participle with no agent. It may be read as an adjective meaning 'finished', but that reading is uncertain, so it is treated as borderline."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:26 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched the Backups section (docs/pipeline.md:24-26) for any named job, service, team, person or AWS feature. None is named; the passive is kept."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"Nothing in the repo shows what rotates the backups. Is it a bucket lifecycle rule, an external job, or a team?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for named components: gateway, worker, notifier, SES, exports queue, bucket. All appear in the fixture files; SES comes from exporter/notifier.py:14 boto3.client(\"ses\")."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names. Only `exports` (lines 9, 13, 15) and `exports.dead` (line 16) occur."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for HTTP status codes. Only `202` (line 9) occurs."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures: 100,000 rows, three attempts / third failure, 24 hours, weekly. All are in the fixture files; no other figures appear."
+ },
+ {
+  "id": "1.27",
+  "verdict": "met",
+  "evidence": "Reply line 1 has three change-describing sentences: \"Every step now names what does it: ...\", \"I took each actor from `exporter/` and added the file path beside it.\" and \"The structure and facts are unchanged.\" The sentence 'I edited `docs/pipeline.md` in place' only gives the file path. The Backups sentence on line 5 is the lead-in to the question to the user."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "Borderline: reply line 1 restates the pipeline step by step: \"the gateway validates and publishes, the worker generates, encrypts, uploads and retries, and the notifier sends the email.\" It is framed as a description of the change, but it walks through what the pipeline does."
+ }
+]

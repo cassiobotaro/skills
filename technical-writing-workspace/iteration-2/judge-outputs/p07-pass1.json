@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7 \"When a client requests an export, the gateway (`exporter/gateway.py`) validates the\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8 \"payload. It rejects requests above 100,000 rows.\" ('It' = the gateway)"
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue and returns a `202`.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"The worker (`exporter/worker.py`) takes the job from the `exports` queue and generates the CSV file.\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"The worker encrypts the file\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"The worker encrypts the file before it uploads it to the bucket.\""
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:15 \"the worker republishes the job to `exports` for another attempt\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:16-17 \"After the third failure, the worker moves the job to the `exports.dead` queue.\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:21-22 \"the notifier (`exporter/notifier.py`) sends a download link by email through SES\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section (docs/pipeline.md:19-22) for 'is sent'. Not found. The verb used is 'sends', with the notifier as subject."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section for 'is expired'. Not found. Line 22 reads 'The link expires after 24 hours.'"
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Checked the Request section (docs/pipeline.md:5-9) for agentless passives. The sentences have active subjects (client, gateway, It). 'is valid' is an adjective, not a passive."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Checked the Processing section (docs/pipeline.md:11-17) for agentless passives. Every clause has an active subject: the worker, it, something."
+ },
+ {
+  "id": "1.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: docs/pipeline.md:21 \"Once the upload is done\". This can be read as an agentless passive (done by the worker) rather than as the stative 'finished'. It hides the actor in the section."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:26 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched the Backups section (docs/pipeline.md:24-26) for a named rotator. The passive is kept and no job, service, team, person or AWS feature is named."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"Nothing in the repo shows what rotates the backups. Is it a bucket lifecycle rule, an external job, or a team?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Checked every component named in docs/pipeline.md: gateway, worker, notifier, `exports`, `exports.dead`, bucket and SES. Each appears in the fixtures (SES via boto3.client(\"ses\") in notifier.py)."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names. Only `exports` (lines 9, 13, 15) and `exports.dead` (line 16) appear."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for HTTP status codes. Only `202` appears (line 9)."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures. Found 100,000 rows, three attempts / third failure, 24 hours and weekly, all present in the fixtures."
+ },
+ {
+  "id": "1.27",
+  "verdict": "met",
+  "evidence": "Reply line 1, excluding the path-only opener 'I edited `docs/pipeline.md` in place.' Three change sentences remain: 'Every step now names what does it...', 'I took each actor from `exporter/` and added the file path beside it.', 'The structure and facts are unchanged.' The Backups 'untouched' line belongs to the question."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "Reply line 1: \"the gateway validates and publishes, the worker generates, encrypts, uploads and retries, and the notifier sends the email\". This restates the pipeline step by step."
+ }
+]

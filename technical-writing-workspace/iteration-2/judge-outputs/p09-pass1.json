@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:9 \"The gateway handles `POST /exports`:\"; docs/pipeline.md:11 \"`validate_payload` rejects the request with `422` if `account_id` is missing\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:11-12 \"`validate_payload` rejects the request ... with `413` if `rows` is above 100,000 (`MAX_ROWS`).\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The gateway publishes the payload to the `exports` queue.\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"The gateway returns `202` with `{\"status\": \"queued\"}`.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:18 \"The worker consumes the `exports` queue. For each job it:\"; docs/pipeline.md:20 \"Generates the CSV file (`build_csv`).\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:21 \"Encrypts the CSV with Fernet, using the key in `EXPORT_KEY`.\" (item in the list introduced by \"For each job it:\", where \"it\" is the worker, line 18)"
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:22 \"Uploads the encrypted file to the `EXPORT_BUCKET` S3 bucket\" (item in the worker's list, line 18)"
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:26 \"If any step raises an exception, the worker publishes the job again with an `x-attempts`\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:27-28 \"the worker publishes the job to the `exports.dead` queue instead\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:37-38 \"The notifier asks S3 for a presigned download URL ... It then sends the URL through SES\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section (docs/pipeline.md:35-40) for 'is sent'. Not found. Sending is attributed to the notifier with 'It then sends'."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched the Delivery section (docs/pipeline.md:35-40) for 'is expired'. Not found. The section uses 'valid for 24 hours'."
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Checked every sentence at docs/pipeline.md:9-14. All are active with a named agent: 'The gateway handles', '`validate_payload` rejects', 'The gateway publishes', 'The gateway returns'. No agentless passive found."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Checked every sentence at docs/pipeline.md:18-33. All are active: 'The worker consumes', list items under 'it', 'any step raises', 'the worker publishes', 'the worker then acknowledges', 'An alert ... pages', 'An operator moves'. 'encrypted file' and 'failed attempt' are adjectives, not passives. No agentless passive found."
+ },
+ {
+  "id": "1.19",
+  "verdict": "met",
+  "evidence": "Checked every sentence at docs/pipeline.md:37-40. All are active: 'The notifier asks', 'It then sends', 'the notifier runs', 'an email failure causes', 'the worker uploads'. 'is valid' is an adjective, not a passive. No agentless passive found."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:47 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched the Backups section (docs/pipeline.md:42-47). The TODO says \"nothing in this repository rotates bucket backups\" and only asks, as questions, '(a bucket lifecycle rule? an infrastructure job?)'. It does not assert that any job, service, team, person or AWS feature rotates them. The passive sentence is kept."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 13: \"Who rotates them, and where is that configured (a bucket lifecycle rule, an infrastructure job)?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Checked every component named in docs/pipeline.md: gateway, worker, notifier, RabbitMQ (alerts.yaml 'rabbitmq_queue_messages', pika), S3, SES, Fernet, deploy/alerts.yaml, scripts/requeue_dead.py. All appear in the fixture files. The TODO's 'bucket lifecycle rule?' and 'infrastructure job?' are generic questions, not named components."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names. Found only `exports` (lines 13, 18, 33) and `exports.dead` (lines 28, 31)."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for HTTP status codes. Found only 422 and 413 (lines 11-12) and 202 (line 14)."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures. Found 100,000 (line 12), third attempt (line 27), more than 10 messages for 5 minutes (lines 31-32), 24 hours (line 37) and weekly (line 47). All are in fixture files. 'three components' (line 3) is a count of the document's own parts and does not count."
+ },
+ {
+  "id": "1.27",
+  "verdict": "unmet",
+  "evidence": "The reply describes its changes in six bullets (Actors, Numbered steps, Details from the code with three sub-bullets, Retries, Operations, Email failures) plus the Backups paragraph, at reply lines 3-13. That is far more than three lines."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "Reply lines 6-11 restate the pipeline step by step: \"The gateway answers `422` when `account_id` is missing and `413` when `rows` is above 100,000.\" / \"The file is encrypted with Fernet and uploaded as `<account_id>/<delivery_tag>.csv.enc`.\" / \"The download link is a presigned S3 URL, sent by SES.\" / \"If the email fails, the job runs again and uploads a new file.\""
+ }
+]

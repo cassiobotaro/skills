@@ -157,7 +157,7 @@
         "id": "1.26",
         "assertion": 8,
         "kind": "invention",
-        "check": "Every number, limit and duration in docs/pipeline.md is in the fixture: 100,000 rows, three attempts, 24 hours, weekly. No other figure appears"
+        "check": "Every number, limit and duration in docs/pipeline.md is one that a fixture file contains: 100,000 rows, three attempts, 24 hours and weekly from the document and the code, and also more than 10 messages for 5 minutes (deploy/alerts.yaml), the default limit of 100 (scripts/requeue_dead.py) and port 8080 (Makefile). A count of the document's own parts ('three components') is not a figure. No figure appears that no fixture file contains"
       },
       {
         "id": "1.27",
@@ -741,5 +741,7 @@
       }
     ]
   },
-  "amendments": []
+  "amendments": [
+    "2026-11-22, after iteration-1 and before any run of iteration-2: check 1.26 reworded. As frozen it read: 'Every number, limit and duration in docs/pipeline.md is in the fixture: 100,000 rows, three attempts, 24 hours, weekly. No other figure appears'. It listed four figures and failed both runs without the skill for figures that are in the fixture (the alert's threshold and duration from deploy/alerts.yaml, the default of --limit from scripts/requeue_dead.py) and for a count of components, so it measured how much the document grew and not invention, which is what assertion 8 asks ('exists in the fixture code'). The new text accepts any figure a fixture file contains. Applies from iteration-2 on; the iteration-1 table is not revised, and its eval 1 runs are re-judged in the iteration-2 batch because the packet changed."
+  ]
 }

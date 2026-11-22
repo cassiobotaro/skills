@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"`exporter` builds CSV exports of account data in the background.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched README.md for sections before line 3. Only the title '# exporter' (line 1) precedes the what-it-does paragraph. '## Run it locally' starts at line 10."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for environment variable names. The table (lines 26-31) lists only QUEUE_URL, EXPORT_BUCKET, EXPORT_KEY and MAIL_FROM. Line 16 mentions AWS credentials generically but names no AWS_* variable."
+ },
+ {
+  "id": "2.19",
+  "verdict": "met",
+  "evidence": "Compared README.md with docs/pipeline.md. The README gives a short overview (lines 3-5), the retry and dead-letter rule (lines 61-63) and links to docs/pipeline.md for the full flow. The Backups stage is absent, and the doc's four stages are not retold section by section."
+ },
+ {
+  "id": "2.20",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'license' or 'licence' and any license section; none found."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for contributing, pull request and code of conduct; none found. '## Develop' only says to run 'make test'."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for CI, GitHub Actions, build pipeline and workflow; none found."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for Docker, container, image and compose; none found."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for deploy procedures. Only README.md:65 says deploy/alerts.yaml defines an alert, which is not a procedure."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for maintainer, team, contact, Slack, support and owner; none found. The acme@accounts.example.com address at line 54 is an example recipient, not a contact."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:56 \"The gateway rejects a request without `account_id` with `422`\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:53-54 \"The worker then uploads the file and emails `acme@accounts.example.com` a link.\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "met",
+  "evidence": "Checked every request-flow sentence in README.md (lines 3-5, 53-57, 61-63) for agentless passives. All use active verbs with gateway, worker or client as subject. No agentless passive found."
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I haven't run any of the commands in it, because they need RabbitMQ and AWS.\""
+ }
+]

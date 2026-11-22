@@ -32,6 +32,10 @@ will change it. Serve the user first.
 4. For contributors: how to build, test, and send a change.
 5. License, and where to ask for help.
 
+Parts 4 and 5 go in only when the repository states them: a license file, a contribution
+guide, a named place to ask. Leave out a part it does not state. A heading over a `TODO`
+tells the reader nothing about the project, so say in the reply what is missing instead.
+
 **Usual failure.** Commands written from convention instead of from the repository:
 `npm install` in a project that uses pnpm, a `make test` target that does not exist. Take
 each command from the build and task files. Other failures: the history of the project

@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"`exporter` generates CSV exports on request. A FastAPI gateway accepts an export request and queues it in RabbitMQ.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched README.md lines 1-3: only the title `# exporter` (line 1) comes before the what-it-does paragraph at line 3. Prerequisites starts at line 7 and Run it at line 14."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for environment variables. The table at lines 24-29 lists only QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET and MAIL_FROM. Line 63 mentions QUEUE_URL again. There are no AWS_* or other variables."
+ },
+ {
+  "id": "2.19",
+  "verdict": "met",
+  "evidence": "Compared README.md with docs/pipeline.md. README.md gives a one-paragraph summary (line 3) plus a retry line (line 62), and links to docs/pipeline.md (line 5). The Backups stage is not retold, and the stages are not repeated in full."
+ },
+ {
+  "id": "2.20",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'license'/'License'/'MIT'/'Apache': no matches and no license section."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'contribut', 'pull request', 'PR', 'code of conduct': no matches."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'CI', 'GitHub Actions', 'pipeline', 'build': no CI or build pipeline mentioned. The only 'pipeline' is the docs/pipeline.md link (line 5)."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'Docker', 'container', 'image', 'compose': no matches."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'deploy': only line 64 references deploy/alerts.yaml as holding an alert rule. There is no deployment procedure."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for maintainer, team, contact, Slack, support, email of owners: none. acme@accounts.example.com at line 51 is an example recipient, not a contact."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A FastAPI gateway accepts an export request and queues it in RabbitMQ.\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A worker builds the CSV, encrypts it, uploads it to an S3 bucket, and emails the account a download link\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "unmet",
+  "evidence": "README.md:62 \"A job that fails is retried up to three times, then moves to `exports.dead`.\" ('is retried' is passive with no agent)"
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I ran no commands, including `make test`.\""
+ }
+]

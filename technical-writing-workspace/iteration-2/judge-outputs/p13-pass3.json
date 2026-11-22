@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"`exporter` generates CSV exports on request. A FastAPI gateway accepts an export request and queues it in RabbitMQ. A worker builds the CSV, encrypts it, uploads it to an S3 bucket, and emails the account a download link that expires after 24 hours.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched README.md lines 1-3: only the title (line 1) comes before the what-it-does paragraph (line 3). Prerequisites starts at line 7."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for environment variables. The table at lines 24-29 lists only QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET and MAIL_FROM, and line 63 mentions QUEUE_URL. No AWS_* or other variable appears."
+ },
+ {
+  "id": "2.19",
+  "verdict": "met",
+  "evidence": "Compared README.md with docs/pipeline.md. README gives a summary at line 3 and links to pipeline.md at line 5. It mentions retries at line 62 but does not retell the four stages with their details, and the backups stage is absent."
+ },
+ {
+  "id": "2.20",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'license' or a license section. None found."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for contributing, pull request or code of conduct text. None found."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for CI, build pipeline, GitHub Actions or similar. None found."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for Docker, container or image. None found."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for a deployment procedure. Line 64 only describes the alert rule in deploy/alerts.yaml. No deploy steps found."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for a contact, maintainer, team or support channel. None found."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:51 \"The gateway answers `202` with `{\"status\":\"queued\"}`.\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:51 \"The worker then uploads the file and emails `acme@accounts.example.com` the link.\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "unmet",
+  "evidence": "README.md:62 \"A job that fails is retried up to three times\": a passive with no agent, describing what happens to an export request."
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I ran no commands, including `make test`.\""
+ }
+]

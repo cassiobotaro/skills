@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7 \"the gateway (`exporter/gateway.py`) validates the payload.\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8 \"The gateway rejects requests above 100,000 rows.\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway publishes a job to the `exports` queue and returns a `202`.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The worker (`exporter/worker.py`) picks up the job and generates the CSV file.\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"The worker encrypts the file\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"before it uploads the file to the bucket.\" (subject: the worker)"
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14-15 \"the worker republishes the job to the `exports` queue, up to three attempts in total.\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:16 \"the worker publishes the job to the dead-letter queue, `exports.dead`.\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:20-21 \"the worker calls the notifier (`exporter/notifier.py`), which emails a download link to the account.\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched Delivery section (docs/pipeline.md:18-21) for 'is sent' / 'sent': not found"
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched Delivery section for 'is expired': not found. Line 21 reads \"The link expires after 24 hours.\""
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Checked Request section sentences, docs/pipeline.md:7-9. All are active: 'the gateway validates', 'The gateway rejects', 'the gateway publishes ... and returns'. No agentless passive found."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Checked Processing section sentences, docs/pipeline.md:13-16. All main verbs have the worker as subject. 'something goes wrong' is active and 'failed attempt' is adjectival. No agentless passive found."
+ },
+ {
+  "id": "1.19",
+  "verdict": "unmet",
+  "evidence": "borderline: docs/pipeline.md:20 \"Once the upload is done\" is be + past participle with no agent stated. It could be read as adjectival ('finished'), but it is ambiguous."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:25 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched Backups section (docs/pipeline.md:23-25) and the whole file for any job, service, team, person or AWS feature named as rotating backups: none. The passive is kept."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"Nothing in the repository says what rotates the backups, so I didn't guess. Which job or service does it, and where is it configured?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for named components. Found gateway (exporter/gateway.py), worker (exporter/worker.py), notifier (exporter/notifier.py), `exports` and `exports.dead` queues, and the bucket. All are in the fixture. 'client' and 'account' are generic. No outside component found."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names: only `exports` (lines 9, 15) and `exports.dead` (line 16), plus 'dead-letter queue'"
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for status codes: only `202` (line 9)"
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures: 100,000 rows (line 8), three attempts / third (lines 15-16), 24 hours (line 21), weekly (line 25). All appear in the fixture. No other figures found."
+ },
+ {
+  "id": "1.27",
+  "verdict": "met",
+  "evidence": "Reply lines that describe changes: \"Every action now names who does it\" (1), the Request bullet (2), the Processing and delivery bullet (3). Line 5 is a question about an unchanged line. Line 7 states assumptions."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "The reply restates the pipeline section by section: \"**Request:** the gateway validates and rejects the payload, then publishes the job to the `exports` queue.\" / \"**Processing and delivery:** the worker builds, encrypts and uploads the CSV, retries the job, and moves it to `exports.dead` after the third failed attempt. The notifier emails the link.\""
+ }
+]

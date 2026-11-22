@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"`exporter` is a service that generates CSV exports on request.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched README.md for sections before line 3. Only the title '# exporter' (line 1) comes before the what-it-does paragraph. Prerequisites starts at line 10."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for environment variables. The table at lines 27-32 lists only QUEUE_URL, EXPORT_BUCKET, EXPORT_KEY and MAIL_FROM. No AWS_* or other variables appear."
+ },
+ {
+  "id": "2.19",
+  "verdict": "met",
+  "evidence": "Compared README.md with docs/pipeline.md. The README gives a short summary (lines 3-5), links to docs/pipeline.md (line 8), and adds operational details drawn from the code. It does not retell all four stages: Backups is omitted. Not a full repeat."
+ },
+ {
+  "id": "2.20",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'license'. No mention and no license section."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for contributing, pull request and code of conduct. None found."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for CI, GitHub Actions, pipeline and build. The only pipeline mention is the docs/pipeline.md link for the request flow. No CI is mentioned."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for Docker, container and image. None found."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for deploy steps. The only mention is the alert rule in deploy/alerts.yaml (lines 63-64). No deployment procedure."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for contact, maintainer, team, Slack and support. None found."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:57 \"The gateway rejects a request without `account_id` with `422`\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:62 \"The worker retries a failed job up to three times, then moves it to the `exports.dead` queue.\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "met",
+  "evidence": "Checked the request-flow sentences in README.md at lines 3-5, 54-58 and 62-64. All are active with gateway or worker subjects ('accepts', 'queues', 'builds', 'answers', 'emails', 'rejects', 'retries', 'moves'). No agentless passives found."
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I didn't run any commands.\""
+ }
+]
