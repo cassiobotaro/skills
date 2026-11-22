@@ -21,7 +21,7 @@ Markdown instructions (`SKILL.md` + `references/`). The plugins are `adr`, `desi
 - `<plugin>/.claude-plugin/plugin.json` — per-plugin manifest (name, version, description, license, keywords).
 - `<plugin>/skills/<name>/` — the actual skill: `SKILL.md` (frontmatter `name` + `description`, then the body), `NOTICE.md` (upstream attribution), and `references/*.md` (loaded on demand).
 - `<plugin>-workspace/` — eval/benchmark artifacts only. **Committed but not part of the installed plugin.** Never reference a workspace path from inside a `skills/` file.
-- `eval-tools/` — Python helpers for trigger evals (`run_trigger_eval.py`, `capture_trigger_transcripts.py`) and for grading (`judge.py`). They drive the Claude Code CLI. `eval-tools/README.md` holds how the evals are run and read.
+- `eval-tools/` — Python helpers for trigger evals (`run_trigger_eval.py`, `capture_trigger_transcripts.py`, `probe_in_project.py`) and for grading (`judge.py`). They drive the Claude Code CLI. `eval-tools/README.md` holds how the evals are run and read.
 - `scripts/validate.py` — checks the repository's own rules (see "Validating a change"); `.github/workflows/validate.yml` runs it on every push and pull request.
 - `MAINTAINING.md` — the contract the skills share and one note per skill.
 - `README.md` — user-facing installation and tooling guide. Keep it in sync when a skill's external tooling or install path changes.

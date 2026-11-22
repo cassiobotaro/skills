@@ -1,0 +1,470 @@
+{
+ "count": "adr",
+ "plugins": [
+  "adr",
+  "unslop"
+ ],
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0002-store-sessions-in-redis.md",
+    "doc/adr/0004-use-stateless-jwt-sessions.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0855085,
+   "turns": 13,
+   "denials": 2,
+   "reply_start": "Escrevi o ADR 4, que substitui o ADR 2, e a única mudança no ADR 2 é a seção Status.\n\n**Arquivos**\n- Criei `doc/adr/0004-use-stateless-jwt-sessions.md`, com status `Accepted` e a linha `Supersedes [2. Store sessions in Redis](0002-store-ses"
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0002-store-sessions-in-redis.md",
+    "doc/adr/0004-use-stateless-jwt-sessions.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0831433,
+   "turns": 10,
+   "denials": 2,
+   "reply_start": "Criei o ADR 4, que substitui o ADR 2, e atualizei o Status do ADR 2.\n\n- **`doc/adr/0004-use-stateless-jwt-sessions.md`** é novo. Está `Accepted`, datado de 2026-11-22, com a linha `Supersedes [2. Store sessions in Redis](0002-store-sessions"
+  },
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0002-store-sessions-in-redis.md",
+    "doc/adr/0004-use-stateless-jwt-sessions.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.08086579999999999,
+   "turns": 11,
+   "denials": 2,
+   "reply_start": "Escrevi o ADR 4, que substitui o ADR 2. O log está em inglês, então o ADR novo também está.\n\n- **`doc/adr/0004-use-stateless-jwt-sessions.md` (novo):** status `Accepted`, com a linha `Supersedes [2. Store sessions in Redis](0002-store-sessi"
+  },
+  {
+   "eval": "4",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/architecture/decisions/0003-version-the-public-api-by-url-path.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.08165830000000002,
+   "turns": 11,
+   "denials": 3,
+   "reply_start": "Não consegui ler a lista de vocabulário em inglês do unslop, porque o acesso a esse diretório foi bloqueado. Apliquei só as regras do núcleo (S1 a S21) e o texto não precisou de edição: não tem travessão, nem dois-pontos de efeito, nem agru"
+  },
+  {
+   "eval": "6",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0003-use-redis-for-user-session-cache.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0866143,
+   "turns": 13,
+   "denials": 2,
+   "reply_start": "Registrei a decisão como ADR 3, em `doc/adr/0003-use-redis-for-user-session-cache.md`. O status é `Accepted` e a data é 2026-11-22.\n\n- **Idioma:** o log existente (ADRs 1 e 2) está em inglês, então escrevi o ADR em inglês para manter a cons"
+  },
+  {
+   "eval": "12",
+   "run": 1,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.055259300000000004,
+   "turns": 9,
+   "denials": 2,
+   "reply_start": "I've found the log: `doc/adr/` has ADRs 1 and 2, so this will be ADR 3. Before I write it, I need to ask you one thing.\n\nYou've given me the decision and the reasons: Asia users waited 3–4 seconds for first paint, and the assets are fingerp"
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0002-store-sessions-in-redis.md",
+    "doc/adr/0004-use-stateless-jwt-sessions.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0788039,
+   "turns": 9,
+   "denials": 2,
+   "reply_start": "Escrevi o ADR 4 e marquei o ADR 2 como substituído. Não rodei `git diff`, então não conferi o diff. O Edit no ADR 2 trocou só a linha de status.\n\n- **`doc/adr/0004-use-stateless-jwt-sessions.md`** (novo): status `Accepted`, com a linha `Sup"
+  },
+  {
+   "eval": "4",
+   "run": 2,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/architecture/decisions/0003-version-the-public-api-by-url-path.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0775363,
+   "turns": 12,
+   "denials": 2,
+   "reply_start": "O `unslop` não encontrou nada para mudar no texto, então deixei o arquivo como estava. O ADR é curto e usa frases diretas, sem travessões nem fechamento redundante.\n\nDocumentei a decisão como ADR 3.\n\n**Arquivo criado:** `docs/architecture/d"
+  },
+  {
+   "eval": "6",
+   "run": 2,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0003-use-redis-for-user-session-cache.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07765879999999999,
+   "turns": 12,
+   "denials": 2,
+   "reply_start": "Registrei a decisão como ADR 3 em `doc/adr/0003-use-redis-for-user-session-cache.md`. Ele tem status `Accepted` e a data de hoje, 2026-11-22.\n\n- **Idioma:** o log existente está em inglês, então escrevi o ADR em inglês para manter a consist"
+  },
+  {
+   "eval": "12",
+   "run": 2,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.04504140000000001,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "The decision log is in `doc/adr/`, and the next record will be 0003. Before I write it, I need one more thing from you.\n\nYou've given me the decision (CloudFront in front of the static assets) and the forces (Asia users waited 3–4 seconds f"
+  },
+  {
+   "eval": "3",
+   "run": 3,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0002-store-sessions-in-redis.md",
+    "doc/adr/0004-use-stateless-jwt-sessions.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0964998,
+   "turns": 14,
+   "denials": 3,
+   "reply_start": "Escrevi o ADR 4, que substitui o ADR 2, e marquei o ADR 2 como superado. Não rodei `adr list` nem outra ferramenta. Conferi só o diff do ADR 2 e o conteúdo do arquivo novo.\n\n- **`doc/adr/0004-use-stateless-jwt-sessions.md` (novo):** o statu"
+  },
+  {
+   "eval": "4",
+   "run": 3,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/architecture/decisions/0003-version-the-public-api-by-url-path.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0863592,
+   "turns": 12,
+   "denials": 4,
+   "reply_start": "Criei o ADR em `docs/architecture/decisions/0003-version-the-public-api-by-url-path.md`, com status `Accepted` e data 2026-11-22. Não rodei nenhum comando de verificação depois de escrever o arquivo, e o `git status` foi bloqueado pela perm"
+  },
+  {
+   "eval": "6",
+   "run": 3,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0003-use-redis-for-user-session-cache.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0889038,
+   "turns": 14,
+   "denials": 2,
+   "reply_start": "Registrei a decisão como ADR 3 em `doc/adr/0003-use-redis-for-user-session-cache.md`. Não commitei nada.\n\n- **Idioma:** o log existente (ADRs 1 e 2) está em inglês. Escrevi a prosa em inglês para manter o log num só idioma. Se preferir, pos"
+  },
+  {
+   "eval": "12",
+   "run": 3,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0476967,
+   "turns": 6,
+   "denials": 1,
+   "reply_start": "I found the log in `doc/adr/`. The next record will be `0003`. Before I write it, I need one thing from you.\n\nYou've given the decision and the reasons (Asia first paint of 3–4 seconds, fingerprinted assets, app servers no longer serving st"
+  },
+  {
+   "eval": "3",
+   "run": 4,
+   "canary": false,
+   "project": "p15",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0002-store-sessions-in-redis.md",
+    "doc/adr/0004-use-stateless-jwt-sessions.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0814214,
+   "turns": 10,
+   "denials": 2,
+   "reply_start": "Não consegui ler a lista de vocabulário em inglês do unslop, porque a leitura foi negada. Apliquei só as regras gerais S1 a S21 ao texto do ADR 4. Nenhuma regra pegou nada: não há travessão, dois-pontos de revelação, grupo de três forçado n"
+  },
+  {
+   "eval": "4",
+   "run": 4,
+   "canary": false,
+   "project": "p16",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/architecture/decisions/0003-version-the-public-api-by-url-path.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.08697950000000002,
+   "turns": 12,
+   "denials": 3,
+   "reply_start": "Criei o ADR 0003 em `docs/architecture/decisions/0003-version-the-public-api-by-url-path.md`. Não fiz commit.\n\n- **Idioma:** o log existente (ADRs 0001 e 0002) está em inglês, então o texto do ADR também está. Só os rótulos e títulos de seç"
+  },
+  {
+   "eval": "6",
+   "run": 4,
+   "canary": false,
+   "project": "p17",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "doc/adr/0003-use-redis-for-user-session-cache.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0850128,
+   "turns": 14,
+   "denials": 3,
+   "reply_start": "Registrei a decisão como ADR 3 em `doc/adr/0003-use-redis-for-user-session-cache.md`, com status `Accepted` e data 2026-11-22. É o único arquivo criado ou alterado.\n\n- **Idioma:** o log existente (ADRs 1 e 2) está em inglês, então escrevi o"
+  },
+  {
+   "eval": "12",
+   "run": 4,
+   "canary": false,
+   "project": "p18",
+   "installed": [
+    "adr:adr",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "adr"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0459168,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "I haven't written the ADR yet. The log is in `doc/adr/` and the next record would be `0003`. You gave me the decision, the forces (Asia users waiting 3–4 seconds for first paint, assets already fingerprinted) and the benefits. You didn't sa"
+  }
+ ]
+}

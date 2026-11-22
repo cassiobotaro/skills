@@ -1,0 +1,409 @@
+{
+ "count": "code-comments",
+ "plugins": [
+  "code-comments"
+ ],
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [
+    "code-comments"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "slugs/slugify.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.03871290000000001,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "I added `unique_slug(title, existing)` to `slugs/slugify.py`. I haven't run it or written tests for it.\n\nIt slugifies `title`. If that slug is already in `existing`, it tries `-2`, `-3` and so on until it finds one that's free.\n\nI gave it a"
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [
+    "code-comments"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "slugs/slugify.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.037960400000000005,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "I added `unique_slug(title, existing)` to `slugs/slugify.py`. I haven't run it or any tests.\n\nIt takes `slugify(title)` and returns it if it's free. Otherwise it tries `-2`, `-3` and so on until it finds a slug that isn't in `existing`. It "
+  },
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "slugs/slugify.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0287673,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "I added `unique_slug(title, existing)` to `slugs/slugify.py`. I haven't run it or added tests.\n\nIt takes the slug of `title`. If that slug is in `existing`, it tries `-2`, then `-3`, and so on until it finds one that is free. It doesn't mod"
+  },
+  {
+   "eval": "2",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "billing/invoice.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0279097,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Corrigi `due_date` em `billing/invoice.py`. Se o vencimento cair em sábado, passa para a segunda-feira seguinte (+2 dias). Se cair em domingo, também passa para a segunda (+1 dia). Os dias úteis não mudam. Não rodei testes nem executei o có"
+  },
+  {
+   "eval": "4",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "worker/poller.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0248658,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "The poller in `worker/poller.py` now waits 45 seconds between polls. I changed `POLL_INTERVAL_S` from 10 to 45. I didn't run anything or check whether other code or tests refer to the old 10-second value."
+  },
+  {
+   "eval": "5",
+   "run": 1,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "reports/usage.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0263996,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "`summarize` in `reports/usage.py` now skips any row whose `bytes` value is negative. I haven't run it or any tests.\n\nAn account whose rows are all negative won't appear in the result at all, rather than showing up with a total of 0. `top_ac"
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "slugs/slugify.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.029552299999999997,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "I added `unique_slug(title, existing)` to `slugs/slugify.py`. I haven't run it or added tests.\n\nIt slugifies `title` and returns that slug if it isn't in `existing`. Otherwise it tries `-2`, `-3` and so on until it finds a free one. For exa"
+  },
+  {
+   "eval": "2",
+   "run": 2,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "billing/invoice.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0278322,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Corrigi o `due_date` em `billing/invoice.py`. Se o vencimento cair em sábado ou domingo, ele agora vai para a segunda-feira seguinte. Sábado (`weekday()` 5) soma 2 dias e domingo (6) soma 1. Não rodei o código nem testes.\n\nFeriados bancário"
+  },
+  {
+   "eval": "4",
+   "run": 2,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "worker/poller.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0239082,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "The poller in `worker/poller.py` now waits 45 seconds between polls. I changed `POLL_INTERVAL_S` from 10 to 45, and the sleep on line 10 reads that constant. I didn't run it or any tests."
+  },
+  {
+   "eval": "5",
+   "run": 2,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "reports/usage.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0268217,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "`summarize` in `reports/usage.py` now skips any row whose `bytes` value is negative, with a short comment saying those rows are billing corrections. I haven't run it or any tests.\n\nAn account whose rows are all negative no longer appears in"
+  },
+  {
+   "eval": "1",
+   "run": 3,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "slugs/slugify.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0288096,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "I added `unique_slug(title, existing)` to `slugs/slugify.py`. I haven't run it or written tests for it.\n\nIt slugifies `title`. If that slug is in `existing`, it tries `-2`, `-3` and so on until it finds one that isn't. For example, `unique_"
+  },
+  {
+   "eval": "2",
+   "run": 3,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "billing/invoice.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.027617,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Corrigi `due_date` em `billing/invoice.py`. Se o vencimento cair em sábado ou domingo, ele agora vai para a segunda-feira seguinte. Sábado soma 2 dias e domingo soma 1. Não rodei testes nem executei o código.\n\nFeriados bancários continuam f"
+  },
+  {
+   "eval": "4",
+   "run": 3,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "worker/poller.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.023806,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "The poller in `worker/poller.py` now waits 45 seconds between polls. I changed `POLL_INTERVAL_S` from 10 to 45. I didn't run the poller or any tests."
+  },
+  {
+   "eval": "5",
+   "run": 3,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "reports/usage.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.026499599999999998,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "`summarize` in `reports/usage.py` now skips any row whose `bytes` value is negative, so billing corrections no longer count as usage. I haven't run it or any tests.\n\nAn account whose rows are all negative won't appear in the result at all, "
+  },
+  {
+   "eval": "1",
+   "run": 4,
+   "canary": false,
+   "project": "p15",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "slugs/slugify.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0288623,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "I added `unique_slug(title, existing)` to `slugs/slugify.py`. I haven't run it or written tests for it.\n\nIt takes the slug from `slugify(title)`. If that slug is already in `existing`, it tries `-2`, then `-3`, and so on until it finds one "
+  },
+  {
+   "eval": "2",
+   "run": 4,
+   "canary": false,
+   "project": "p16",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "billing/invoice.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.028157200000000004,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Corrigi `due_date` em `billing/invoice.py`. Se o vencimento calculado cair no sábado, ele passa para a segunda-feira (+2 dias). Se cair no domingo, também vai para a segunda (+1 dia). Não rodei testes nem executei o código.\n\nA função só tra"
+  },
+  {
+   "eval": "4",
+   "run": 4,
+   "canary": false,
+   "project": "p17",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "worker/poller.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.024140900000000003,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "The poller in `worker/poller.py` now waits 45 seconds between polls instead of 10. I changed `POLL_INTERVAL_S` from 10 to 45, and the loop's `time.sleep(POLL_INTERVAL_S)` call picks that up. I haven't run the poller or any tests."
+  },
+  {
+   "eval": "5",
+   "run": 4,
+   "canary": false,
+   "project": "p18",
+   "installed": [
+    "code-comments:code-comments"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "reports/usage.py"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.026939400000000002,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "`summarize` in `reports/usage.py` now skips any row whose `bytes` value is negative, with a short comment saying why. I haven't run it or any tests.\n\nAn account whose rows are all negative won't appear in the result, rather than showing up "
+  }
+ ]
+}
