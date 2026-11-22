@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "File is unchanged by the run. docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\". I searched the file for any named author or writer of the service and found none."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "File is unchanged by the run, so its content matches the fixture exactly. I searched for prerequisites and roles: only `kubectl` access to `prod` and `secrets-admin` (line 9), both from the fixture."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "File is unchanged by the run. I searched for commands, flags and file names: only the fixture's openssl and kubectl commands and signing.pem (lines 16, 23, 29, 32) are present."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "File is unchanged by the run. I searched for durations and numbers: only 90 days (line 3), 15 minutes (line 39) and the step numbers from the fixture."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "File is unchanged by the run. I searched for explanations, reasons and claims: all text is identical to the fixture, so nothing was added."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I didn't edit `docs/rotate-signing-key.md`, because it already meets the skill's rules.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "The reply says it changed nothing. Reply line 1: \"I didn't edit `docs/rotate-signing-key.md`\""
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "File is unchanged by the run (\"unchanged by the run\"). I checked for removed fixture content and reordered steps: none, since an unchanged file passes."
+ }
+]

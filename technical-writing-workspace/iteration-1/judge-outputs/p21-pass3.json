@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:3 \"Use este runbook quando o alerta `ExportsDeadLetterHigh` disparar.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:7 \"quando a métrica `rabbitmq_queue_messages{queue=\"exports.dead\"}` fica acima de 10 por 5 minutos\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:7 \"fica acima de 10 por 5 minutos\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Only `exports.dead` and `exports` appear (lines 7, 9, 13, 63, 67, 95). \"fila de falhas\" (line 42) refers to exports.dead."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Commands found: `uv run python scripts/requeue_dead.py --dry-run --limit 1000` (l.27), `--limit 5` (l.72), `--limit 100` (l.82), `make setup` (l.18), and `make run-worker` (inside the TODO at l.59). No rabbitmqctl, kubectl or curl."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched for URLs, links and console addresses. None found. The RabbitMQ panel is mentioned only inside the TODO at l.40."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "l.27 \"uv run python scripts/requeue_dead.py --dry-run --limit 1000\" comes before l.72 \"uv run python scripts/requeue_dead.py --limit 5\""
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "l.24 \"Conte as mensagens na fila sem mover nenhuma\"; l.57 \"Corrija a dependência que você achou no passo 2.\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched steps 1–4 and the escalation section for agentless passives. Steps are imperative (\"Comece com um lote pequeno\", \"Espere cerca de um minuto e rode a contagem\", \"mova o resto\"). No passive found."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for person, team or contact names. Only the generic \"a equipe dona do `exporter`\" appears, and the TODO at l.97 says the contact is missing."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for chat channels, mailing lists and phone numbers. None found. The TODO at l.97 and reply item 1 say the channel is missing."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "Searched for SLAs, time limits and escalation policy. The time limit is left to the TODO at l.97 (\"o tempo máximo antes de escalar\"). The when-to-call conditions at l.93-95 are procedural triggers, not an invented policy or SLA."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for causes stated as fact. l.51 says \"Ela mostra onde uma falha pode nascer, e não qual falha está acontecendo agora.\" Step 2 tells the reader to look for the cause."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "reply l.6 \"quem é a equipe dona do `exporter`, qual canal ou escala de plantão chamar e em quanto tempo escalar? Não há nenhum contato no repositório\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'normalmente', 'na maioria', 'geralmente', 'costuma' and similar wording. None found."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "Searched for management UIs, log systems, dashboards and tracing tools. The worker logs and the RabbitMQ panel appear only with the TODO at l.40 saying the repo does not say where they are. Prometheus (l.7, l.87) is implied by the deploy/alerts.yaml rule format."
+ }
+]

@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "unmet",
+  "evidence": "Borderline. The groups are 'Content gaps (these matter most)', 'Structure and tone', 'Smaller points' and 'What works well'. None is framed as questions for the author versus proposed edits. Requests to the author ('Please state:', 'Please also confirm the list is complete') sit with critique under Content gaps. 'Smaller points' mixes a request ('The email on disable should say who receives it') with an edit suggestion ('Do the same for the dashboard path if you like')."
+ },
+ {
+  "id": "4.3",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply calls the history paragraph 'internal background, and readers don't need it before setup', but it never says the page mixes kinds of document (history or explanation, a procedure, a reference list). I searched the 'Structure and tone' section and the whole reply."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "\"Cut it, or move it to a changelog or an \\\"About\\\" note.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Taken literally: the reply quotes \"it is retried\" (Retries item), \"the endpoint must be registered\" and \"It is done in the dashboard\" (passive-voice point). All three are actorless clauses from the file. Only the last two are explicitly flagged as hiding the actor ('don't say who acts')."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "\"the number of attempts and the backoff schedule;\" and \"which email goes to whom when an endpoint is disabled, and how to re-enable it.\""
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "I searched the reply for any count of retry attempts. The only numbers are 'Three events' (about the event table) and 2xx/2023 references. The reply says 'I don't want to invent numbers like retry counts or timeouts.'"
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "I searched for any party named as signer or secret generator. The reply only restates the file's 'the secret is generated after registration' and asks 'whether the secret is used directly as the key'. No component is named."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "I searched for durations, retention, timeouts and backoff values. None is stated. The reply asks for 'the timeout' and 'the tolerance window'. 'return 2xx quickly' gives no duration."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "I searched for the email recipient. The reply says 'The email on disable should say who receives it, such as the account owner or an alert address.' These are examples of what to document, not a statement of fact."
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "\"**\\\"In this guide you will learn everything about webhooks\\\"** overpromises\" and \"**\\\"Simply\\\"** in \\\"Simply paste the URL\\\" is filler\""
+ }
+]

@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "File unchanged. docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\". Searched lines 1-39 for any author or team named as writer: none found."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "File unchanged. The only prerequisites are at docs/rotate-signing-key.md:9, \"`kubectl` access to the `prod` cluster and the `secrets-admin` role\", and they match the fixture. Searched for any added prerequisite or role: none."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "File unchanged. The commands at lines 16, 23, 29 and 32 and the file name signing.pem are identical to the fixture. Searched for any new command, flag or file name: none."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "File unchanged. The only durations are \"90 days\" (line 3) and \"15 minutes\" (lines 38-39), and both are in the fixture. Searched for other numbers or durations: none besides the step numbers and the ed25519 algorithm name, which are in the fixture."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "File unchanged, identical to the fixture. Searched for any added explanation, reason or claim: none."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "\"I left `docs/rotate-signing-key.md` unchanged, because it already meets the skill's rules and an edit would only add churn.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "The reply says it changed nothing: \"I left `docs/rotate-signing-key.md` unchanged\""
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run, so the unchanged-file clause applies. Searched for removed content or reordered steps: none."
+ }
+]

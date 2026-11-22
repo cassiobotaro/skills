@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "unmet",
+  "evidence": "Looked for two distinct groups, one of questions for the author and one of proposed edits. The reply groups its points by severity ('**Blocking issues**', '**Should fix**', '**Minor**') and mixes questions and edits inside each group. The closing line 'I'd need the retry policy, the signature format and the payload shapes from you first' is not a separate group of questions."
+ },
+ {
+  "id": "4.3",
+  "verdict": "unmet",
+  "evidence": "Borderline. Reply line 22 says 'The intro is history, not guidance.' That marks one paragraph as off-purpose. It never says the page mixes several kinds of document (history or explanation, a procedure, a reference list)."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Reply line 22: \"Cut it, or move it to a changelog or design note.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Reply line 31: \"Passive voice hides the actor in several places: \\\"the endpoint must be registered\\\", \\\"it is retried\\\", \\\"an email is sent\\\".\""
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Reply line 12: \"State the number of attempts, the backoff schedule and the timeout per delivery.\" Reply line 14: \"Say which email address gets the disable notice.\""
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the reply for any number of retry attempts. None found. Line 12 only asks the author to \"State the number of attempts\"."
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Searched the reply for any claim about who signs the delivery or generates the secret. The only one is hedged: line 7, \"presumably it's the secret from setup\". It is not stated as fact."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "Searched the reply for durations and retention periods. None are stated. Line 36 says only \"return a 2xx quickly\", which is not a duration."
+ },
+ {
+  "id": "4.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. Reply line 31 proposes the rewrite \"We email the account owner…\". This names the recipient, and it is not marked as a placeholder, although line 14 asks the author which address gets the notice."
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "Reply line 23: \"\\\"In this guide you will learn everything about webhooks\\\" overpromises... Replace it with a concrete list of what's covered.\""
+ }
+]

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "First line: \"**Title:** Reject uploads over 1 MiB and parse the CSV in chunks (OPS-412)\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "unmet",
+  "evidence": "The first three body sentences are \"Production workers were being OOM-killed when someone uploaded a very large CSV.\", \"`upload()` read the whole body with `request.body()` and then parsed it, so memory use grew with the size of the upload.\" and \"Ticket: OPS-412.\" None mentions 413. The 413 first appears on line 11. The title mentions rejection, but a title is not a sentence."
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "The first three body sentences (lines 5) describe only the old whole-body read. Streaming is first mentioned on line 12: \"the body is now read with `request.stream()`\"."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "\"Production workers were being OOM-killed when someone uploaded a very large CSV.\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Testing section says \"The new unit test covers the `Content-Length` rejection path.\" and line 14 describes the test. Neither gives a command or steps to verify the change. They only state what the test covers."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "\"`upload()` returns `413` before reading any of the body.\" and \"`rows.extend(...)` still collects every parsed row before `store(rows)` runs.\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "unmet",
+  "evidence": "\"the body is now read with `request.stream()`\" (line 12) and \"a new `MAX_BODY_BYTES` constant is set to 1 MiB\" (line 11)"
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched the description for memory measurements, MB/GB usage figures and benchmarks. The only figure is the 1 MiB limit, which comes from the diff and is not a memory measurement."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched for counts of customers, uploads or incidents. None found. The only numbers are the 1 MiB limit and the status code 413."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched for rollout, deploy, canary, flag or staging plans. None found. \"Please confirm 1 MiB is enough\" asks a question and is not a rollout plan."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched for person names and reviewer mentions. None found. The only addressee is the generic \"you\"."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched for history of attempts, commit order or how the author arrived at the change. None found. \"I left that out of this PR\" records a scope decision, not branch narration. Line 31 comes after the --- separator and is outside the description."
+ }
+]

@@ -1,0 +1,68 @@
+{
+  "total_tokens": 88422,
+  "duration_ms": 13793,
+  "total_duration_seconds": 15.3,
+  "cost_usd": 0.053568199999999996,
+  "num_turns": 4,
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "skills_listed": [
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring"
+  ],
+  "plugins_listed": [
+    {
+      "name": "cc-plugin-agents-md",
+      "path": "builtin",
+      "source": "cc-plugin-agents-md@builtin"
+    },
+    {
+      "name": "cc-plugin-telemetry",
+      "path": "builtin",
+      "source": "cc-plugin-telemetry@builtin"
+    },
+    {
+      "name": "cc-plugin-privacy",
+      "path": "builtin",
+      "source": "cc-plugin-privacy@builtin"
+    },
+    {
+      "name": "cc-plugin-plugin-authoring",
+      "path": "builtin",
+      "source": "cc-plugin-plugin-authoring@builtin"
+    }
+  ],
+  "skill_files_read": [],
+  "permission_denials": [],
+  "tool_calls": [
+    {
+      "tool": "Bash",
+      "target": "cat docs/pipeline.md; ls -R . | head -50"
+    },
+    {
+      "tool": "Bash",
+      "target": "cat exporter/*.py scripts/requeue_dead.py deploy/alerts.yaml Makefile"
+    },
+    {
+      "tool": "Bash",
+      "target": "cat > docs/pipeline.md <<'EOF'\n# Export pipeline\n\nAn export passes through three components: the gateway (`exporter/gateway.py`), a RabbitMQ\nqueue, and the worker (`exporter/worker.py`). The worker calls the notifier\n(`exporter/notifier.py`) at the end.\n\n## Request\n\nThe gateway handles `POST /exports`:\n\n1. `validate_payload` rejects the request with `422` if `account_id` is missing, and with\n   `413` if `rows` is above 100,000 (`MAX_ROWS`).\n2. The gateway publishes the payload to the `exports` queue.\n3. The gateway returns `202` with `{\"status\": \"queued\"}`.\n\n## Processing\n\nThe worker consumes the `exports` queue. For each job it:\n\n1. Generates the CSV file (`build_csv`).\n2. Encrypts the CSV with Fernet, using the key in `EXPORT_KEY`.\n3. Uploads the encrypted file to the `EXPORT_BUCKET` S3 bucket as\n   `<account_id>/<delivery_tag>.csv.enc`.\n4. Calls the notifier (see Delivery).\n\nIf any step raises an exception, the worker publishes the job again with an `x-attempts`\nheader that counts the attempts. After the third failed attempt (`MAX_ATTEMPTS`), the worker\npublishes the job to the `exports.dead` queue instead. In all cases the worker then\nacknowledges the original message.\n\nAn alert (`deploy/alerts.yaml`) pages the on-call engineer when `exports.dead` holds more\nthan 10 messages for 5 minutes. An operator moves dead jobs back to `exports` with\n`scripts/requeue_dead.py` (`--dry-run` counts them, `--limit` caps how many move).\n\n## Delivery\n\nThe notifier asks S3 for a presigned download URL that is valid for 24 hours\n(`LINK_TTL_SECONDS`). It then sends the URL through SES, from `MAIL_FROM` to\n`<account_id>@accounts.example.com`. Because the notifier runs inside the worker's retry\nblock, an email failure causes the job to run again, and the worker uploads a new file.\n\n## Backups\n\n<!-- TODO: nothing in this repository rotates bucket backups. Name who does it (a bucket\nlifecycle rule? an infrastructure job?) and where it is configured. -->\n\nBackups of the bucket are rotated weekly.\nEOF"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "First line: \"**Title:** Reject uploads over 1 MiB and parse the CSV in chunks (OPS-412)\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "unmet",
+  "evidence": "The body's first three sentences are on line 5: \"Production workers were being OOM-killed when someone uploaded a very large CSV.\" / \"`upload()` read the whole body with `request.body()` and then parsed it, so memory use grew with the size of the upload.\" / \"Ticket: OPS-412.\" None of them mentions 413. The 413 first appears on line 11."
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "The first three sentences (line 5) describe only the old whole-body read. Streaming is first mentioned on line 12: \"the body is now read with `request.stream()`\"."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Line 5: \"Production workers were being OOM-killed when someone uploaded a very large CSV.\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 14 says what the new test does (\"a new test posts a body of `MAX_BODY_BYTES + 1` bytes and asserts a `413`\") and line 26 says \"The new unit test covers the `Content-Length` rejection path.\" Neither gives a step or command for verifying the change, so this does not clearly say how to verify it."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "Line 11: \"`upload()` returns `413` before reading any of the body.\" Line 14: \"a new test posts a body of `MAX_BODY_BYTES + 1` bytes and asserts a `413`.\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "unmet",
+  "evidence": "Line 12: \"the body is now read with `request.stream()`\". Line 11: \"a new `MAX_BODY_BYTES` constant is set to 1 MiB\". Both are agentless passives about the change."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched lines 1-27 for memory figures, MB/GB usage, timings and benchmark results. The only sizes are the 1 MiB limit, which is a configured value and not a measurement."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched lines 1-27 for counts of customers, uploads or incidents. Found none; line 5 says only \"someone uploaded a very large CSV\"."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched lines 1-27 for rollout, deploy, staging, feature flag or release plan. Found none."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched lines 1-27 for personal names, reviewers and @mentions. Found none; line 5 has only the generic \"someone\"."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched lines 1-27 for attempts made first, commit order and narrative of how the change was reached. Found none. \"I left that out of this PR\" (line 18) is about scope, not branch history."
+ }
+]

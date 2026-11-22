@@ -1,0 +1,745 @@
+{
+  "note": "Frozen check list for technical-writing evals 1-6. Written before any run of these evals and not to be edited to fit an output. Its author had read the skill, evals.json, the fixtures and the note on this skill in MAINTAINING.md, which describes in a few lines three smoke sessions of 2026-11-22 whose outputs were not kept (eval 1 with and without the skill, eval 3 with it): no output was read, but checks 1.4, 3.20 and 3.21 touch things that note mentions (a section added without the skill; a management UI and a usual cause stated with it). Each assertion in evals.json is decomposed into atomic yes/no checks. kind=file and kind=absence are decided by a script from the bytes on disk after the run; in eval 5, which has no fixture, the only file is the reply, and check 5.2 is decided on the tool calls the session recorded. kind=reply, kind=invention and kind=negative are decided by an LLM judge. A met kind=reply check quotes the words or the file:line that satisfy it. kind=invention and kind=negative are negatives: when met there is nothing to quote and the evidence is the search; when unmet the offending words are quoted. 'A passive without an agent' means a passive verb whose sentence does not say who or what performs the action; a verb that describes a state ('is written in Go') is not one. In eval 3 the expected output accepts questions asked before writing: checks 3.2, 3.3, 3.4, 3.8 and 3.9 describe the runbook and are not met in a run that wrote no runbook, the negatives of that eval are then decided on the reply, and the iteration reports such a run apart, with the totals given both ways. In evals 2 and 3 the document may be written at any path: the judge decides on the file the run created, and on the reply when it created none. A fact that must be present is one check per fact. A borderline case resolves to not met. More text never raises a verdict.",
+  "frozen_on": "2026-11-22",
+  "evals": {
+    "1": [
+      {
+        "id": "1.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/pipeline.md differs from the fixture"
+      },
+      {
+        "id": "1.2",
+        "assertion": 1,
+        "kind": "absence",
+        "check": "Every file of the fixture other than docs/pipeline.md is byte-for-byte identical after the run, and no file exists under the project root that the fixture did not have"
+      },
+      {
+        "id": "1.3",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/pipeline.md has the level-2 headings '## Request', '## Processing', '## Delivery' and '## Backups', in that order"
+      },
+      {
+        "id": "1.4",
+        "assertion": 1,
+        "kind": "file",
+        "check": "Every level-2 heading of docs/pipeline.md is one of those four"
+      },
+      {
+        "id": "1.5",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "In the Request section of docs/pipeline.md, the gateway (or its handler `create_export` / `validate_payload`) is named as what validates the payload (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.6",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "In the Request section, the gateway (or its handler) is named as what rejects a request above 100,000 rows (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.7",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "In the Request section, the gateway (or its handler) is named as what enqueues or publishes the job (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.8",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "In the Request section, the gateway (or its handler) is named as what returns `202` (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.9",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "In the Processing section, the worker is named as what builds or generates the CSV (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.10",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "In the Processing section, the worker is named as what encrypts the file (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.11",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "In the Processing section, the worker is named as what uploads the file to the bucket (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.12",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "In the Processing section, the worker is named as what retries or republishes a failed job (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.13",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "In the Processing section, the worker is named as what moves or sends the job to the dead-letter queue (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.14",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The Delivery section names what sends the email: the notifier, or the worker through `notify` (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.15",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "The Delivery section does not use 'is sent' without saying who or what sends"
+      },
+      {
+        "id": "1.16",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "The Delivery section does not use 'is expired' without saying who or what expires the link. 'The link expires after 24 hours' passes"
+      },
+      {
+        "id": "1.17",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No sentence in the Request section of docs/pipeline.md is a passive without an agent"
+      },
+      {
+        "id": "1.18",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No sentence in the Processing section of docs/pipeline.md is a passive without an agent"
+      },
+      {
+        "id": "1.19",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No sentence in the Delivery section of docs/pipeline.md is a passive without an agent"
+      },
+      {
+        "id": "1.20",
+        "assertion": 6,
+        "kind": "reply",
+        "check": "The Backups section still says that backups of the bucket are rotated weekly: the claim was not deleted (quote docs/pipeline.md:line)"
+      },
+      {
+        "id": "1.21",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "docs/pipeline.md names no job, service, team, person or AWS feature as what rotates the backups. Keeping the passive passes; so does a sentence saying that the repository does not say who rotates them"
+      },
+      {
+        "id": "1.22",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "The reply asks who or what rotates the backups, or says that the repository does not say"
+      },
+      {
+        "id": "1.23",
+        "assertion": 8,
+        "kind": "invention",
+        "check": "docs/pipeline.md names no component, service or tool that the fixture files do not contain"
+      },
+      {
+        "id": "1.24",
+        "assertion": 8,
+        "kind": "invention",
+        "check": "Every queue name in docs/pipeline.md is `exports` or `exports.dead` ('the dead-letter queue' is the fixture's own wording and passes)"
+      },
+      {
+        "id": "1.25",
+        "assertion": 8,
+        "kind": "invention",
+        "check": "Every HTTP status code in docs/pipeline.md is one the fixture code returns: 202, 413 or 422"
+      },
+      {
+        "id": "1.26",
+        "assertion": 8,
+        "kind": "invention",
+        "check": "Every number, limit and duration in docs/pipeline.md is in the fixture: 100,000 rows, three attempts, 24 hours, weekly. No other figure appears"
+      },
+      {
+        "id": "1.27",
+        "assertion": 9,
+        "kind": "reply",
+        "check": "The reply's account of what it changed in the file takes at most three lines. Count each bullet, numbered item or prose sentence that describes a change as one line; do not count a question to the user or a line that only gives the file path"
+      },
+      {
+        "id": "1.28",
+        "assertion": 9,
+        "kind": "negative",
+        "check": "The reply does not summarize the document: it does not restate, section by section or step by step, what the pipeline does"
+      }
+    ],
+    "2": [
+      {
+        "id": "2.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "README.md exists at the project root"
+      },
+      {
+        "id": "2.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "Every file of the fixture is byte-for-byte identical after the run"
+      },
+      {
+        "id": "2.3",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The first paragraph of README.md (the first block of prose after the title) says what the project does (quote README.md:line)"
+      },
+      {
+        "id": "2.4",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "No install, setup or history section comes before the paragraph that says what the project does"
+      },
+      {
+        "id": "2.5",
+        "assertion": 3,
+        "kind": "file",
+        "check": "README.md contains the setup command as the Makefile gives it: 'make setup' or 'uv sync'"
+      },
+      {
+        "id": "2.6",
+        "assertion": 3,
+        "kind": "file",
+        "check": "README.md contains the command that runs the gateway as the Makefile gives it: 'make run-gateway' or 'uv run uvicorn exporter.gateway:app --port 8080'"
+      },
+      {
+        "id": "2.7",
+        "assertion": 3,
+        "kind": "file",
+        "check": "README.md contains the command that runs the worker as the Makefile gives it: 'make run-worker' or 'uv run python -m exporter.worker'"
+      },
+      {
+        "id": "2.8",
+        "assertion": 3,
+        "kind": "file",
+        "check": "README.md contains the test command as the Makefile gives it: 'make test' or 'uv run pytest -q'"
+      },
+      {
+        "id": "2.9",
+        "assertion": 3,
+        "kind": "file",
+        "check": "In README.md, no fenced code block and no inline code span contains 'pip install' (case-insensitive)"
+      },
+      {
+        "id": "2.10",
+        "assertion": 3,
+        "kind": "file",
+        "check": "In README.md, no fenced code block and no inline code span contains the word 'npm' (case-insensitive)"
+      },
+      {
+        "id": "2.11",
+        "assertion": 3,
+        "kind": "file",
+        "check": "In README.md, no fenced code block and no inline code span contains the word 'docker' (case-insensitive)"
+      },
+      {
+        "id": "2.12",
+        "assertion": 3,
+        "kind": "file",
+        "check": "In README.md, no fenced code block and no inline code span contains the word 'poetry' (case-insensitive)"
+      },
+      {
+        "id": "2.13",
+        "assertion": 4,
+        "kind": "file",
+        "check": "README.md contains 'QUEUE_URL'"
+      },
+      {
+        "id": "2.14",
+        "assertion": 4,
+        "kind": "file",
+        "check": "README.md contains 'EXPORT_KEY'"
+      },
+      {
+        "id": "2.15",
+        "assertion": 4,
+        "kind": "file",
+        "check": "README.md contains 'EXPORT_BUCKET'"
+      },
+      {
+        "id": "2.16",
+        "assertion": 4,
+        "kind": "file",
+        "check": "README.md contains 'MAIL_FROM'"
+      },
+      {
+        "id": "2.17",
+        "assertion": 4,
+        "kind": "negative",
+        "check": "README.md lists no environment variable that the fixture code does not read. The code reads exactly QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET and MAIL_FROM through os.environ; a variable that only a library would read (an AWS_* credential variable, for example) is a variable the code does not read"
+      },
+      {
+        "id": "2.18",
+        "assertion": 5,
+        "kind": "file",
+        "check": "README.md contains 'docs/pipeline.md'"
+      },
+      {
+        "id": "2.19",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "README.md does not repeat the content of docs/pipeline.md in full. A summary of a few sentences passes; the four stages retold with their details do not"
+      },
+      {
+        "id": "2.20",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md states no license and has no license section"
+      },
+      {
+        "id": "2.21",
+        "assertion": 6,
+        "kind": "file",
+        "check": "README.md has no badge: no image nested in a link ('[![') and no image whose URL contains 'badge' or 'shields'"
+      },
+      {
+        "id": "2.22",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md describes no contribution process (how to contribute, pull request rules, a code of conduct)"
+      },
+      {
+        "id": "2.23",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md mentions no CI or build pipeline as something the project has"
+      },
+      {
+        "id": "2.24",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md mentions no Docker image or container setup as something the project has"
+      },
+      {
+        "id": "2.25",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md describes no deployment procedure. Saying that deploy/alerts.yaml holds an alert rule is not a deployment procedure"
+      },
+      {
+        "id": "2.26",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "README.md names no contact, maintainer, team or support channel"
+      },
+      {
+        "id": "2.27",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "README.md has a sentence about behavior with the gateway as the subject of an active verb (quote README.md:line)"
+      },
+      {
+        "id": "2.28",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "README.md has a sentence about behavior with the worker as the subject of an active verb (quote README.md:line)"
+      },
+      {
+        "id": "2.29",
+        "assertion": 7,
+        "kind": "negative",
+        "check": "No sentence of README.md that describes what happens to an export request is a passive without an agent"
+      },
+      {
+        "id": "2.30",
+        "assertion": 8,
+        "kind": "reply",
+        "check": "The reply says which commands it did not run, or that it ran none"
+      }
+    ],
+    "3": [
+      {
+        "id": "3.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The runbook, or the questions asked instead of it, is written in Portuguese (quote its first sentence)"
+      },
+      {
+        "id": "3.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The runbook names the alert `ExportsDeadLetterHigh` (not met when no runbook was written)"
+      },
+      {
+        "id": "3.3",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The runbook states the threshold as more than 10 messages in `exports.dead` (not met when no runbook was written)"
+      },
+      {
+        "id": "3.4",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The runbook states that the condition holds for 5 minutes before the alert fires (not met when no runbook was written)"
+      },
+      {
+        "id": "3.5",
+        "assertion": 2,
+        "kind": "negative",
+        "check": "Every queue the runbook names is `exports` or `exports.dead`"
+      },
+      {
+        "id": "3.6",
+        "assertion": 3,
+        "kind": "invention",
+        "check": "Every command the runbook presents as this project's procedure exists in the fixture: `scripts/requeue_dead.py` with `--dry-run` or `--limit` (bare, or through `uv run python` as its docstring shows), or a Makefile target. No `rabbitmqctl`, `kubectl`, `curl` or other command absent from the fixture. A TODO that says a command is missing passes"
+      },
+      {
+        "id": "3.7",
+        "assertion": 3,
+        "kind": "invention",
+        "check": "The runbook gives no URL, dashboard link or console address that the fixture does not contain"
+      },
+      {
+        "id": "3.8",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "In the runbook, the `--dry-run` command comes before the command that moves messages (quote both lines; not met when no runbook was written)"
+      },
+      {
+        "id": "3.9",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "The steps of the runbook are written in the imperative (quote two steps; not met when no runbook was written)"
+      },
+      {
+        "id": "3.10",
+        "assertion": 5,
+        "kind": "file",
+        "check": "No file the run created and not the reply contains 'deve-se' (case-insensitive)"
+      },
+      {
+        "id": "3.11",
+        "assertion": 5,
+        "kind": "file",
+        "check": "No file the run created and not the reply contains 'é necessário' (case-insensitive)"
+      },
+      {
+        "id": "3.12",
+        "assertion": 5,
+        "kind": "file",
+        "check": "No file the run created and not the reply contains 'precisa-se' (case-insensitive)"
+      },
+      {
+        "id": "3.13",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "No step of the runbook is a passive without an agent ('as mensagens são movidas', 'o script deve ser executado')"
+      },
+      {
+        "id": "3.14",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The runbook and the reply name no person, team or on-call contact that neither the fixture nor the user's message gives. 'O plantão' is the user's word and passes; a TODO that says the contact is missing passes"
+      },
+      {
+        "id": "3.15",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The runbook and the reply name no chat channel, mailing list or phone number as where to escalate. A TODO that says it is missing passes"
+      },
+      {
+        "id": "3.16",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The runbook states no escalation policy and no SLA or time limit to respond that the fixture does not contain. A TODO that says it is missing passes"
+      },
+      {
+        "id": "3.17",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The runbook states no root cause of the failed exports as fact. A cause marked as a guess, or a step that tells the reader to look for the cause, passes"
+      },
+      {
+        "id": "3.18",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "The reply asks whom to escalate to, or states that the repository does not say"
+      },
+      {
+        "id": "3.19",
+        "assertion": 8,
+        "kind": "file",
+        "check": "Every file of the fixture is byte-for-byte identical after the run"
+      },
+      {
+        "id": "3.20",
+        "assertion": 9,
+        "kind": "invention",
+        "check": "The runbook presents no statement about how these incidents usually go or what usually causes the failures as established ('na maioria dos casos', 'normalmente a causa é')"
+      },
+      {
+        "id": "3.21",
+        "assertion": 9,
+        "kind": "invention",
+        "check": "The runbook presents no tooling that the fixture does not show as available to the reader: a management UI, a log system, a dashboard, a tracing tool"
+      }
+    ],
+    "4": [
+      {
+        "id": "4.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/webhooks.md is byte-for-byte identical to the fixture"
+      },
+      {
+        "id": "4.2",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "The reply separates questions for the author from proposed edits, as two distinct groups (quote the heading or lead-in of each)"
+      },
+      {
+        "id": "4.3",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply says that the page mixes more than one kind of document (history or explanation, a procedure, a reference list)"
+      },
+      {
+        "id": "4.4",
+        "assertion": 3,
+        "kind": "reply",
+        "check": "The reply proposes to split the page, to move a part of it, or to link to a part moved elsewhere"
+      },
+      {
+        "id": "4.5",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The reply quotes at least three sentences or clauses of the file that hide their actor (quote the three as the reply quotes them)"
+      },
+      {
+        "id": "4.6",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "The reply asks the author for at least two of these facts: what signs the delivery or generates the secret, how many attempts before the endpoint is disabled, who receives the email (quote the two questions)"
+      },
+      {
+        "id": "4.7",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The reply does not state a number of retry attempts as fact"
+      },
+      {
+        "id": "4.8",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The reply does not state as fact which component, service or party signs the delivery or generates the secret. A placeholder in a proposed rewrite that is marked as one passes"
+      },
+      {
+        "id": "4.9",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The reply does not state a retention period or any other duration as fact"
+      },
+      {
+        "id": "4.10",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The reply does not state as fact who receives the email. A placeholder in a proposed rewrite that is marked as one passes"
+      },
+      {
+        "id": "4.11",
+        "assertion": 7,
+        "kind": "reply",
+        "check": "The reply flags 'Simply' or the sentence 'In this guide you will learn everything about webhooks' as something to change"
+      }
+    ],
+    "5": [
+      {
+        "id": "5.1",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The reply contains a pull request description as text ready to paste (quote its first line)"
+      },
+      {
+        "id": "5.2",
+        "assertion": 1,
+        "kind": "absence",
+        "check": "The session ran no command that opens or posts a pull request or that commits or pushes: no Bash call with `gh`, `git commit` or `git push` among its recorded tool calls"
+      },
+      {
+        "id": "5.3",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "Within the first three sentences of the description's body (a title line and headings are not sentences), the description says that the handler rejects a body above the limit with 413"
+      },
+      {
+        "id": "5.4",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "Within the first three sentences of the description's body, the description says that the handler reads or parses the body as a stream instead of whole"
+      },
+      {
+        "id": "5.5",
+        "assertion": 2,
+        "kind": "reply",
+        "check": "Within the first three sentences of the description's body, the description says why: workers were OOM-killed on large uploads"
+      },
+      {
+        "id": "5.6",
+        "assertion": 3,
+        "kind": "file",
+        "check": "The reply contains 'OPS-412'"
+      },
+      {
+        "id": "5.7",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The description says how to verify the change"
+      },
+      {
+        "id": "5.8",
+        "assertion": 4,
+        "kind": "file",
+        "check": "The reply contains 'test_upload_rejects_body_above_limit'"
+      },
+      {
+        "id": "5.9",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "At least two sentences of the description about behavior have a named actor as the subject of an active verb, such as 'the handler rejects' (quote the two)"
+      },
+      {
+        "id": "5.10",
+        "assertion": 5,
+        "kind": "negative",
+        "check": "The description has no passive without an agent about the change ('tests were added', 'the handler was refactored', 'a limit was introduced')"
+      },
+      {
+        "id": "5.11",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The description states no memory figure and no benchmark"
+      },
+      {
+        "id": "5.12",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The description states no number of affected customers, uploads or incidents"
+      },
+      {
+        "id": "5.13",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The description states no rollout or deployment plan"
+      },
+      {
+        "id": "5.14",
+        "assertion": 6,
+        "kind": "invention",
+        "check": "The description names no reviewer and no other person"
+      },
+      {
+        "id": "5.15",
+        "assertion": 7,
+        "kind": "file",
+        "check": "The reply states the limit as the diff gives it: '1,048,576', '1_048_576', '1048576', '1 MiB' or '1 MB'"
+      },
+      {
+        "id": "5.16",
+        "assertion": 8,
+        "kind": "negative",
+        "check": "The description does not narrate the branch: nothing about what was tried first, the order of the commits, or how the author got to the change"
+      }
+    ],
+    "6": [
+      {
+        "id": "6.1",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/rotate-signing-key.md has a fenced block whose content is the fixture's first block (`openssl genpkey …`), byte-for-byte once the indentation of the list is set aside"
+      },
+      {
+        "id": "6.2",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/rotate-signing-key.md has a fenced block whose content is the fixture's second block (`kubectl -n auth create secret …`), byte-for-byte once the indentation of the list is set aside"
+      },
+      {
+        "id": "6.3",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/rotate-signing-key.md has a fenced block whose content is the fixture's third block (`kubectl -n auth rollout restart deployment/auth`), byte-for-byte once the indentation of the list is set aside"
+      },
+      {
+        "id": "6.4",
+        "assertion": 1,
+        "kind": "file",
+        "check": "Every fenced block of docs/rotate-signing-key.md is one of the fixture's three"
+      },
+      {
+        "id": "6.5",
+        "assertion": 1,
+        "kind": "file",
+        "check": "docs/rotate-signing-key.md contains the inline command `kubectl -n auth rollout status deployment/auth`, backticks included, byte for byte"
+      },
+      {
+        "id": "6.6",
+        "assertion": 2,
+        "kind": "file",
+        "check": "The heading lines of docs/rotate-signing-key.md are the fixture's, in the same order, and there is no other heading"
+      },
+      {
+        "id": "6.7",
+        "assertion": 3,
+        "kind": "negative",
+        "check": "docs/rotate-signing-key.md still says that the `auth` service is written in Go, and names nobody as who wrote it. The sentence unchanged passes"
+      },
+      {
+        "id": "6.8",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "docs/rotate-signing-key.md has no prerequisite and no role that the fixture does not contain"
+      },
+      {
+        "id": "6.9",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "docs/rotate-signing-key.md has no command, flag or file name that the fixture does not contain"
+      },
+      {
+        "id": "6.10",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "docs/rotate-signing-key.md has no duration and no number that the fixture does not contain (the fixture has 90 days and 15 minutes)"
+      },
+      {
+        "id": "6.11",
+        "assertion": 4,
+        "kind": "invention",
+        "check": "docs/rotate-signing-key.md has no explanation, reason or claim that the fixture does not contain"
+      },
+      {
+        "id": "6.12",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "The reply says that the guide needed little or no change"
+      },
+      {
+        "id": "6.13",
+        "assertion": 5,
+        "kind": "reply",
+        "check": "The reply's account of what it changed takes at most three lines. Count each bullet, numbered item or prose sentence that describes a change as one line; a reply that says it changed nothing passes"
+      },
+      {
+        "id": "6.14",
+        "assertion": 6,
+        "kind": "file",
+        "check": "docs/rotate-signing-key.md has exactly four top-level numbered steps, 1 to 4, and the three command blocks come in the fixture's order"
+      },
+      {
+        "id": "6.15",
+        "assertion": 6,
+        "kind": "negative",
+        "check": "The changes to docs/rotate-signing-key.md are limited to wording or to moving the 15-minute wait before step 4: nothing the fixture says was removed and no step was reordered. An unchanged file passes"
+      }
+    ]
+  },
+  "amendments": []
+}

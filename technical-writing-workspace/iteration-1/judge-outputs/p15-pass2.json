@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "line 1: \"**Title:** Reject uploads above 1 MiB with 413 (OPS-412)\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "line 3, sentence 1: \"`upload` in `importer/handler.py` now returns `413` when the `Content-Length` header is above `MAX_BODY_BYTES` (1,048,576 bytes).\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "line 3, sentence 2: \"It also reads the body as a stream and parses it chunk by chunk.\""
+ },
+ {
+  "id": "5.5",
+  "verdict": "unmet",
+  "evidence": "The OOM reason first appears in sentence 4 of the body (line 3): \"Prod workers were getting OOM-killed when someone uploaded a huge CSV (OPS-412).\" Sentence 3 (\"Before, it called `request.body()`, which loads the whole upload into memory.\") mentions memory but does not say workers were OOM-killed."
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "lines 5-11: \"**How to verify**\" ... \"pytest tests/test_handler.py::test_upload_rejects_body_above_limit\" ... \"The new test posts 1,048,577 bytes to `/upload` and expects `413`.\""
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "line 3: \"`upload` in `importer/handler.py` now returns `413` when ...\"; line 15: \"the handler reads `0`, skips the check, and streams the whole body.\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "unmet",
+  "evidence": "borderline: line 15 \"That upload is not capped.\" is an agentless passive about the change's behavior. It is stative rather than describing an action taken, which is why this is borderline."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched lines 1-25 for memory sizes, MB/GB usage figures, timings and benchmarks. The only figures are the limit from the diff (1 MiB / 1,048,576 bytes) and the test size (1,048,577 bytes). No memory figure or benchmark is given."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched lines 1-25 for counts of customers, uploads or incidents. None found. Line 3 says only \"when someone uploaded a huge CSV\"."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched lines 1-25 for rollout, deploy, staging, flag or phased release. None found."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched description lines 1-25 for person names, @mentions and reviewer assignments. None found. \"ops\" and \"reviewer\" appear only after the --- separator (lines 29 and 32) and name no person."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched lines 1-25 for earlier attempts, commit order or how the author arrived at the change. None found. \"I left this out of this PR\" (line 15) and \"I could not see its implementation in this diff\" (line 18) concern scope and review, not branch history."
+ }
+]

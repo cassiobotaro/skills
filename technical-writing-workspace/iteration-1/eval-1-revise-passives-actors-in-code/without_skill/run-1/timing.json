@@ -1,0 +1,68 @@
+{
+  "total_tokens": 88362,
+  "duration_ms": 13831,
+  "total_duration_seconds": 15.3,
+  "cost_usd": 0.0529781,
+  "num_turns": 4,
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "skills_listed": [
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring"
+  ],
+  "plugins_listed": [
+    {
+      "name": "cc-plugin-agents-md",
+      "path": "builtin",
+      "source": "cc-plugin-agents-md@builtin"
+    },
+    {
+      "name": "cc-plugin-telemetry",
+      "path": "builtin",
+      "source": "cc-plugin-telemetry@builtin"
+    },
+    {
+      "name": "cc-plugin-privacy",
+      "path": "builtin",
+      "source": "cc-plugin-privacy@builtin"
+    },
+    {
+      "name": "cc-plugin-plugin-authoring",
+      "path": "builtin",
+      "source": "cc-plugin-plugin-authoring@builtin"
+    }
+  ],
+  "skill_files_read": [],
+  "permission_denials": [],
+  "tool_calls": [
+    {
+      "tool": "Bash",
+      "target": "cat docs/pipeline.md; ls -R . | head -50"
+    },
+    {
+      "tool": "Bash",
+      "target": "cat exporter/*.py scripts/requeue_dead.py deploy/alerts.yaml Makefile"
+    },
+    {
+      "tool": "Bash",
+      "target": "cat > docs/pipeline.md <<'EOF'\n# Export pipeline\n\nAn export passes through two services and two AWS services: the gateway (`exporter/gateway.py`)\naccepts the request, RabbitMQ holds the job, the worker (`exporter/worker.py`) builds and uploads\nthe file, and the notifier (`exporter/notifier.py`, called by the worker) emails the link.\n\n## Request\n\n`POST /exports` in the gateway:\n\n1. `validate_payload` rejects the request with `422` if `account_id` is missing, and with `413`\n   if `rows` is above 100,000 (`MAX_ROWS`).\n2. If the payload is valid, the gateway publishes it to the `exports` queue in RabbitMQ and\n   returns `202` with `{\"status\": \"queued\"}`.\n\n## Processing\n\nThe worker consumes the `exports` queue. For each job it:\n\n1. Builds the CSV in memory (`build_csv`).\n2. Encrypts the CSV with Fernet, using the key in `EXPORT_KEY`.\n3. Uploads the encrypted file to the S3 bucket in `EXPORT_BUCKET`, under\n   `<account_id>/<delivery_tag>.csv.enc`.\n4. Calls the notifier (see Delivery).\n\nIf any step raises, the worker publishes the job back to `exports` with an incremented\n`x-attempts` header. On the third failure (`MAX_ATTEMPTS`) it publishes the job to the\n`exports.dead` queue instead. The worker acknowledges the original message in both cases.\n\nTo move dead-lettered jobs back to `exports`, run `scripts/requeue_dead.py` (`--dry-run` counts\nwithout moving, `--limit` caps the number moved, default 100). Prometheus fires the\n`ExportsDeadLetterHigh` alert (`deploy/alerts.yaml`) and pages when `exports.dead` holds more\nthan 10 messages for 5 minutes.\n\n## Delivery\n\nAfter the upload, the notifier asks S3 for a presigned download URL and sends it with SES to\n`<account_id>@accounts.example.com`. S3 stops honoring the URL after 24 hours\n(`LINK_TTL_SECONDS`).\n\n## Backups\n\nTODO: unverified. Nothing in this repository rotates bucket backups, so the previous claim\n(\"backups are rotated weekly\") has no actor. Name who does it (for example an S3 lifecycle rule\nor an AWS Backup plan) and where it is configured.\nEOF"
+    }
+  ]
+}

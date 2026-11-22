@@ -1,0 +1,122 @@
+[
+ {
+  "id": "1.5",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7 \"When a client requests an export, the gateway validates the payload.\""
+ },
+ {
+  "id": "1.6",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:7-8 \"The gateway rejects requests above 100,000 rows.\""
+ },
+ {
+  "id": "1.7",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway enqueues a job on the `exports` queue\""
+ },
+ {
+  "id": "1.8",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:8-9 \"the gateway enqueues a job on the `exports` queue and returns `202`.\""
+ },
+ {
+  "id": "1.9",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13 \"The worker picks up the job from the `exports` queue and generates the CSV file.\""
+ },
+ {
+  "id": "1.10",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14 \"worker encrypts the file before it uploads the file to the bucket.\""
+ },
+ {
+  "id": "1.11",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:13-14 \"The worker encrypts the file before it uploads the file to the bucket.\" ('it' refers to the worker)"
+ },
+ {
+  "id": "1.12",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:14-15 \"If something goes wrong, the worker puts the job back on the queue.\""
+ },
+ {
+  "id": "1.13",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:15-16 \"After three failed attempts, the worker moves the job to the dead-letter queue (`exports.dead`).\""
+ },
+ {
+  "id": "1.14",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:20 \"the worker calls the notifier, which emails a download link.\""
+ },
+ {
+  "id": "1.15",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md:18-21 (Delivery) for 'is sent' and 'sent': no match."
+ },
+ {
+  "id": "1.16",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md:18-21 (Delivery) for 'is expired': no match. Line 20-21 reads \"The link expires after 24 hours.\""
+ },
+ {
+  "id": "1.17",
+  "verdict": "met",
+  "evidence": "Checked docs/pipeline.md:5-9 (Request) for be + past participle without an agent: none. 'is valid' is an adjective. Every action has a named subject: client or gateway."
+ },
+ {
+  "id": "1.18",
+  "verdict": "met",
+  "evidence": "Checked docs/pipeline.md:11-16 (Processing) for agentless passives: none. 'failed attempts' is adjectival. Every clause has the worker or 'something' as its subject."
+ },
+ {
+  "id": "1.19",
+  "verdict": "unmet",
+  "evidence": "borderline: docs/pipeline.md:20 \"Once the upload is done\" is a be + past participle construction with no agent. It could be read as an adjective ('finished')."
+ },
+ {
+  "id": "1.20",
+  "verdict": "met",
+  "evidence": "docs/pipeline.md:25 \"Backups of the bucket are rotated weekly.\""
+ },
+ {
+  "id": "1.21",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md:23-25 (Backups) and the rest of the file for any named rotator (job, service, team, person, S3 lifecycle, AWS Backup): none. The passive is kept."
+ },
+ {
+  "id": "1.22",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"Nothing in the repository says what rotates them, and I did not guess. What does, and where is it configured?\""
+ },
+ {
+  "id": "1.23",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for named components: gateway, worker, notifier, `exports` queue, dead-letter queue / `exports.dead`, bucket. All appear in the fixture files. 'client' is a generic requester, not a named component."
+ },
+ {
+  "id": "1.24",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for queue names: `exports` (lines 9, 13), `exports.dead` (line 16), 'the dead-letter queue' (line 16). No other queue names."
+ },
+ {
+  "id": "1.25",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for HTTP status codes: only `202` (line 9)."
+ },
+ {
+  "id": "1.26",
+  "verdict": "met",
+  "evidence": "Searched docs/pipeline.md for figures: 100,000 rows (line 8), three failed attempts (line 15), 24 hours (line 21), weekly (line 25). No other figures."
+ },
+ {
+  "id": "1.27",
+  "verdict": "unmet",
+  "evidence": "Counted change-describing lines in the reply: line 1 \"I rewrote `docs/pipeline.md` in place so each step names what does it.\", the Actors bullet with its three sub-bullets (lines 3-6), Fact corrected (line 7), Link expiry (line 8). That is more than three."
+ },
+ {
+  "id": "1.28",
+  "verdict": "unmet",
+  "evidence": "Reply lines 4-6 restate the pipeline step by step: \"The gateway (`exporter/gateway.py`) validates the payload, enqueues the job and returns `202`.\" / \"The worker ... picks up the job, builds the CSV, encrypts it, uploads it, requeues failures and moves a job to `exports.dead`.\""
+ }
+]

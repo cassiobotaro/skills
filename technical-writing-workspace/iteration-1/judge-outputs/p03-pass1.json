@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\". Searched the file for any named author and found none."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched the prerequisites in docs/rotate-signing-key.md:9: only `kubectl` access to `prod` and the `secrets-admin` role, both from the fixture."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched every command, flag and file name in docs/rotate-signing-key.md:16, 23, 29 and 32: all are identical to the fixture."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched docs/rotate-signing-key.md for durations and numbers: only 90 days (line 3), 15 minutes (lines 38-39) and the step numbers, all from the fixture."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched docs/rotate-signing-key.md for explanations and claims: every one is the fixture's original text, with nothing added."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "\"I didn't change `docs/rotate-signing-key.md`. It's already a good how-to, so editing it would add churn without making it better.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "The reply says it changed nothing: \"I didn't change `docs/rotate-signing-key.md`.\""
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Compared the file after the run with the fixture: no text removed and no step reordered."
+ }
+]

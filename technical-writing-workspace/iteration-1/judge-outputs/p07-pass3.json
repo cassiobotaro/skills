@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"`exporter` generates CSV exports for an account. A FastAPI gateway accepts an export request and queues it on RabbitMQ.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched README.md lines 1-3. Only the title (line 1) comes before the what-it-does paragraph at line 3. Prerequisites starts at line 7 and Run it at line 14, both after it."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for environment variable names. The table at lines 24-29 lists only QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET and MAIL_FROM. Line 11 says 'AWS credentials' but names no AWS_* variable."
+ },
+ {
+  "id": "2.19",
+  "verdict": "met",
+  "evidence": "Compared README.md with docs/pipeline.md. The README summarises the flow in two sentences at line 3 and links to the doc at line 5. It does not retell the four stages in detail, and the Backups stage is absent."
+ },
+ {
+  "id": "2.20",
+  "verdict": "unmet",
+  "evidence": "README.md:83 \"## License and help\". A license section heading exists, though its content is only a TODO (line 85), so the README is not free of a license section."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for contribute, pull request and code of conduct. None found."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for CI, pipeline, GitHub Actions and build. None claimed. 'pipeline description' at line 5 refers to docs/pipeline.md."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for Docker, container, image and compose. None found."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for deploy steps. Line 62 only says the alert rule lives in deploy/alerts.yaml. Line 10's TODO mentions 'a deploy step' as an open question, not a procedure."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for a contact, maintainer, team or channel. None is named, and line 85 says the repo 'names no contact or channel'."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A FastAPI gateway accepts an export request and queues it on RabbitMQ.\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A worker builds the CSV, encrypts it, uploads it to S3, and emails the account a download link that expires after 24 hours.\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "met",
+  "evidence": "Checked the request and pipeline sentences at lines 3, 51, 57-58 and 62 for agentless passives. All are active, with gateway, worker or job as subject, e.g. line 62 'the worker moves it to `exports.dead`'."
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I ran nothing\""
+ }
+]

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"**Title:** importer: reject uploads over 1 MiB and parse CSV as a stream (OPS-412)\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "unmet",
+  "evidence": "The body's first three sentences are: (1) \"Production workers were being OOM-killed when someone uploaded a very large CSV.\" (2) \"`upload` called `await request.body()`, which buffers the whole request in memory before parsing, so one big file could exhaust a worker's memory.\" (3) \"Add `MAX_BODY_BYTES = 1_048_576` (1 MiB).\" The 413 rejection first appears in the 4th sentence (line 9). The title mentions rejecting uploads, but the title is excluded."
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "Streaming first appears at line 10 (\"Read the body with `request.stream()`\"), after the first three body sentences. The title mentions streaming, but the title is excluded."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Line 5: \"Production workers were being OOM-killed when someone uploaded a very large CSV.\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 11 describes the test (\"It posts `MAX_BODY_BYTES + 1` bytes and expects a `413`\") and line 23 says \"Added the unit test above. I haven't run the suite.\" There is no explicit step or command telling the reader how to verify the change."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "Line 9: \"`upload` returns `413` before reading any of the body.\" Line 16: \"`rows.extend(...)` collects all rows before `store(rows)` runs.\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "met",
+  "evidence": "Searched for agentless passives about authoring the change (\"was added\", \"was refactored\", \"was introduced\"). None found. The changes use imperatives (\"Add\", \"Read\", \"Added\"). The remaining passives (\"is not rejected\", \"will be parsed wrongly\") describe runtime behavior, not the act of making the change."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched for memory usage figures and benchmarks. The only number is the 1 MiB limit constant, taken from the diff. No memory measurement or benchmark appears."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched for counts of customers, uploads or incidents. None found. Only the ticket ID OPS-412, which the user gave."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched for rollout, deploy, staging or flag plans. None found."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched for names, reviewers and @mentions. None found. Only \"someone\" and \"a client\", both generic."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched for history of attempts, commit order or process narrative. None found. The closing note covers how the description was written, not how the change was developed."
+ }
+]

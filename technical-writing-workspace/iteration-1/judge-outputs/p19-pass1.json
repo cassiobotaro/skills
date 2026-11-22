@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "unmet",
+  "evidence": "Searched the reply's group headings. The only groups are severity tiers: '**Blocking issues**', '**Should fix**', '**Minor**'. Questions and edits are mixed inside each tier. No heading or lead-in separates questions for the author from proposed edits. The closing line 'I'd need the retry policy, the signature format and the payload shapes from you first' is one sentence, not a group."
+ },
+ {
+  "id": "4.3",
+  "verdict": "unmet",
+  "evidence": "Borderline. Reply line 22 says 'The intro is history, not guidance... Cut it, or move it to a changelog or design note.' This calls one part of the page a different kind of document. It never says the page as a whole mixes kinds of document (history, procedure, reference list)."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Reply line 22: 'Cut it, or move it to a changelog or design note.'"
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Reply line 31: 'Passive voice hides the actor in several places: \"the endpoint must be registered\", \"it is retried\", \"an email is sent\".'"
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Number of attempts, reply line 12: 'State the number of attempts, the backoff schedule and the timeout per delivery.' Email recipient, reply line 14: 'Say which email address gets the disable notice.'"
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for any count of retry attempts. Line 12 only asks for one ('State the number of attempts'). No number is stated."
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Searched for any claim about who or what signs the delivery or generates the secret. Line 7 is hedged: 'presumably it's the secret from setup'. It names a key, not a party, and is not stated as fact. No component, service or party is named as signer or secret generator."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "Searched for retention periods, timeouts and other durations. The reply only asks for them (line 12, 'the timeout per delivery'). Line 36 says 'return a 2xx quickly', which gives no duration. No duration is stated as fact."
+ },
+ {
+  "id": "4.10",
+  "verdict": "unmet",
+  "evidence": "Reply line 31 proposes the rewrite \"We email the account owner…\". This names the account owner as the recipient and is not marked as a placeholder. Line 14 does ask the author to 'Say which email address gets the disable notice', but the example still states a recipient."
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "Reply line 23: '\"In this guide you will learn everything about webhooks\" overpromises... Replace it with a concrete list of what's covered.'"
+ }
+]

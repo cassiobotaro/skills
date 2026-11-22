@@ -1,0 +1,60 @@
+{
+  "total_tokens": 45662,
+  "duration_ms": 24077,
+  "total_duration_seconds": 25.2,
+  "cost_usd": 0.054063599999999996,
+  "num_turns": 2,
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "skills_listed": [
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring"
+  ],
+  "plugins_listed": [
+    {
+      "name": "cc-plugin-agents-md",
+      "path": "builtin",
+      "source": "cc-plugin-agents-md@builtin"
+    },
+    {
+      "name": "cc-plugin-telemetry",
+      "path": "builtin",
+      "source": "cc-plugin-telemetry@builtin"
+    },
+    {
+      "name": "cc-plugin-privacy",
+      "path": "builtin",
+      "source": "cc-plugin-privacy@builtin"
+    },
+    {
+      "name": "cc-plugin-plugin-authoring",
+      "path": "builtin",
+      "source": "cc-plugin-plugin-authoring@builtin"
+    }
+  ],
+  "skill_files_read": [],
+  "permission_denials": [],
+  "tool_calls": [
+    {
+      "tool": "Write",
+      "target": "/home/cassiobotaro/Projetos/skills/technical-writing-workspace/iteration-1/eval-3-runbook-pt-br-missing-contact/without_skill/run-1/outputs/runbook-exports-dead-letter-high.md"
+    }
+  ]
+}

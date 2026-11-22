@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "File unchanged by the run; docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\" and names no author. Searched the file for any author name: none."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for prerequisites and roles: only `kubectl` access to `prod` and `secrets-admin` (line 9), both in the fixture."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for commands, flags and file names: only the fixture's openssl/kubectl commands and signing.pem (lines 16, 23, 29, 32)."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for durations and numbers: only 90 days (line 3), 15 minutes (lines 38-39) and the step numbers, all in the fixture."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for explanations, reasons and claims: the text is identical to the fixture, so none is added."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "\"I made no changes to `docs/rotate-signing-key.md`, because it's already a good how-to.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "\"I made no changes to `docs/rotate-signing-key.md`\" (the reply says it changed nothing)"
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "The file is listed as \"unchanged by the run\", so nothing was removed or reordered. An unchanged file passes."
+ }
+]

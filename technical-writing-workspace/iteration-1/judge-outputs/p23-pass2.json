@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "First line: \"**Title:** importer: reject uploads over 1 MiB and parse CSV as a stream (OPS-412)\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "unmet",
+  "evidence": "First three body sentences: (1) \"Production workers were being OOM-killed when someone uploaded a very large CSV.\" (2) \"`upload` called `await request.body()`, which buffers the whole request in memory before parsing, so one big file could exhaust a worker's memory.\" (3) \"Add `MAX_BODY_BYTES = 1_048_576` (1 MiB).\" The 413 rejection first appears in sentence 4: \"If the `Content-Length` header is larger, `upload` returns `413`\"."
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "None of the first three body sentences (lines 5 and 9) says the handler reads or parses the body as a stream. Streaming first appears at line 10: \"Read the body with `request.stream()`\"."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "\"Production workers were being OOM-killed when someone uploaded a very large CSV.\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Testing section says only \"Added the unit test above. I haven't run the suite.\" It gives no instruction on how to verify the change, such as a command to run or steps to follow."
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "\"`upload` returns `413` before reading any of the body.\" and \"It posts `MAX_BODY_BYTES + 1` bytes and expects a `413`.\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. Agentless passives describe the change's behavior: \"counts as 0 and is not rejected\", \"A client that sends a false header is not rejected either\" and \"rows that span two chunks will be parsed wrongly\". They are not authoring passives like 'tests were added', but they hide the actor (the handler)."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched for memory sizes, MB/GB usage figures and benchmark results. The only number is the 1 MiB request limit, which is a configuration value, not a memory figure or benchmark."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched for counts of customers, uploads or incidents. None found. The reply says only \"Production workers were being OOM-killed\" and cites the ticket OPS-412."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched for rollout, deploy, staging, feature flag and phased release. None found."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched for person names and @-mentions. None found. The reply uses only generic terms like 'someone' and 'client'."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched for earlier attempts, commit order and how the author arrived at the change. None found. The closing note concerns the basis of the description, not the branch history."
+ }
+]

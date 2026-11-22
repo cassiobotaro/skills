@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"Asynchronous CSV exports. A FastAPI gateway accepts export requests and queues them on RabbitMQ. A worker builds the CSV, encrypts it, uploads it to S3, and emails the account a download link.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched for sections before README.md:3. Only the title (line 1) comes before it. Requirements, Setup and the other sections start at line 19 or later. There is no history section."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for environment variable names. The table at lines 36-41 lists only QUEUE_URL, EXPORT_BUCKET, EXPORT_KEY and MAIL_FROM. Line 43 refers to 'standard boto3 configuration' but names no AWS_* variable."
+ },
+ {
+  "id": "2.19",
+  "verdict": "met",
+  "evidence": "Compared README.md with docs/pipeline.md. The README links to pipeline.md at line 5 and describes behavior from the code. It does not retell all four stages: the Backups stage ('rotated weekly') is absent, so pipeline.md is not repeated in full."
+ },
+ {
+  "id": "2.20",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'license', 'MIT', 'Apache' and 'copyright': none found, and there is no license section."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'contribut', 'pull request', 'PR' and 'code of conduct': none found."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'CI', 'GitHub Actions', 'pipeline' as a build pipeline, and 'build': none found. 'Tests' only shows `make test`."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'Docker', 'container', 'image' and 'compose': none found."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'deploy'. The only match is line 68, which names the alert file deploy/alerts.yaml. No deployment procedure is described."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'contact', 'maintainer', 'team', 'support', 'Slack' and 'email us': none found."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A FastAPI gateway accepts export requests and queues them on RabbitMQ.\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A worker builds the CSV, encrypts it, uploads it to S3, and emails the account a download link.\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "unmet",
+  "evidence": "README.md:77 \"Requeued messages are published without the `x-attempts` header\" (passive, no agent). Also README.md:62 \"The job was queued\" (passive, no agent)."
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I did not run any of the commands in it.\""
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "Reply: \"Escrevi o runbook em português e salvei em `runbook-ExportsDeadLetterHigh.md`.\" Runbook line 7: \"O alerta dispara quando a dead-letter queue (DLQ) de exportações acumula mais mensagens do que o limite configurado.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "runbook-ExportsDeadLetterHigh.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "unmet",
+  "evidence": "The runbook leaves the threshold as a placeholder (line 10: \"**Limite do alerta:** `[PREENCHER: ex. > 50 mensagens por 10 min]`\") and the queue as one too (line 11: \"`[PREENCHER: nome da DLQ]`\"). It never states > 10 in exports.dead."
+ },
+ {
+  "id": "3.4",
+  "verdict": "unmet",
+  "evidence": "No statement that the condition must hold for 5m before the alert fires. The only '5 minutos' is the triage heading at line 22 (\"Triagem (primeiros 5 minutos)\"), and the threshold placeholder suggests '10 min'."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. None are named: the DLQ is a placeholder ('[PREENCHER: nome da DLQ]') and 'fila principal' is generic. No queue other than exports or exports.dead appears."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched for commands (rabbitmqctl, kubectl, curl, scripts). Every command slot is a TODO, e.g. '[PREENCHER: comando para inspecionar mensagens da DLQ]' and '[PREENCHER: comando/ferramenta de redrive da DLQ]'. No invented command is present."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched for URLs, links and addresses. Only placeholders appear: 'Dashboard: [PREENCHER: link]' and 'Logs: [PREENCHER: link/query]'. No URL is given."
+ },
+ {
+  "id": "3.8",
+  "verdict": "unmet",
+  "evidence": "Searched the runbook for --dry-run and requeue_dead.py. Neither appears; the redrive step is a placeholder at line 71."
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "Line 26: \"Abra o dashboard e veja a tendência da DLQ\". Line 69: \"Reprocesse **um lote pequeno** (ex.: 5 mensagens) e confirme que as exportações concluem\"."
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the numbered steps and action bullets for agentless passives. Steps use the imperative ('Abra', 'Veja', 'Verifique', 'Inspecione', 'Reprocesse', 'Anote'). The passive 'as mensagens são perdidas' (line 20) is in the Impacto description, not in a step."
+ },
+ {
+  "id": "3.14",
+  "verdict": "unmet",
+  "evidence": "Borderline: the contacts are TODOs, but the runbook presumes teams and roles the fixture never gives, e.g. line 93 \"**Escalonamento de plantão (secundário):** `[PREENCHER: nome/rotação/PagerDuty]`\" and line 94 \"**Suporte ao cliente:**\"; the reply repeats \"o plantão secundário e o suporte ao cliente\"."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for channels, lists and phone numbers. Only TODOs appear: '[PREENCHER: canal do Slack/e-mail]' and '[PREENCHER: canal]'. No concrete channel is named."
+ },
+ {
+  "id": "3.16",
+  "verdict": "unmet",
+  "evidence": "runbook line 86: \"A causa não for identificada em **30 minutos**.\" This is an escalation time limit that the fixture does not contain."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for causes stated as fact. The table labels them 'Causa provável', and section 2 tells the reader to find the cause ('Diagnóstico: descobrir o motivo da falha'). No cause is asserted as fact."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply: \"Não conheço o sistema, então não inventei nomes de fila, comandos nem contatos. O que falta preencher: ... **os contatos de escalonamento**: o time dono das exportações, o plantão secundário e o suporte ao cliente\"."
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'na maioria', 'normalmente', 'geralmente', 'costuma'. None found. Causes appear only as 'Causa provável', and the generalization about common patterns is in the reply, flagged as not from this alert's history."
+ },
+ {
+  "id": "3.21",
+  "verdict": "unmet",
+  "evidence": "runbook line 26: \"Abra o dashboard e veja a tendência da DLQ\". Line 43 also has \"[PREENCHER: query de logs filtrando erros do worker de exportação]\". The fixture shows no dashboard or log system."
+ }
+]

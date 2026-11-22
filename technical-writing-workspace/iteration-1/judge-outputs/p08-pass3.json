@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "runbook-exports-dead-letter-high.md:3 \"Os trechos marcados com **[PREENCHER]** dependem de informações que só o time dono do serviço tem (nomes de fila, links, comandos, contatos).\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "runbook-exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "unmet",
+  "evidence": "The runbook leaves the threshold as a placeholder: line 9 \"**Condição de disparo:** [PREENCHER: expressão/limite do alerta, ex.: profundidade da DLQ > N por M minutos]\". It never states > 10 messages in exports.dead."
+ },
+ {
+  "id": "3.4",
+  "verdict": "unmet",
+  "evidence": "The runbook never states the 5m `for` duration. Line 9 has only the placeholder \"por M minutos\"."
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Lines 10-11 \"Fila principal: [PREENCHER]\" and \"DLQ: [PREENCHER]\" are placeholders, and the rest refers only to \"DLQ\" and \"fila principal\" generically. No queue name other than exports/exports.dead appears."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands such as rabbitmqctl, kubectl and curl. None found. Every command is a placeholder TODO, e.g. line 46 \"[PREENCHER comando]\" and line 58 \"[PREENCHER comando/console de redrive]\"."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for URLs, links and console addresses. Only placeholders are present (line 13 \"[PREENCHER link]\", line 14 \"[PREENCHER link/query]\"). No concrete URL appears."
+ },
+ {
+  "id": "3.8",
+  "verdict": "unmet",
+  "evidence": "The runbook contains neither a --dry-run command nor scripts/requeue_dead.py. The redrive step at line 58 is \"[PREENCHER comando/console de redrive]\"."
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "Line 26 \"Abra o dashboard e veja a profundidade da DLQ nos últimos 60 min\". Line 32 \"Leia 3 a 5 mensagens da DLQ sem removê-las\"."
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the steps for agentless passives such as 'são movidas' or 'deve ser executado'. Every step is in the imperative. Line 59 \"Confirme que foram processadas\" contains a passive only inside a clause governed by the imperative \"Confirme\"."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for people, teams and contacts. Only generic references and TODOs appear: line 84 \"**Contato de escalonamento:** [PREENCHER: ...]. Esta informação não foi fornecida\" and line 52 \"time dono: [PREENCHER]\". No named person or team."
+ },
+ {
+  "id": "3.15",
+  "verdict": "unmet",
+  "evidence": "borderline: line 48 \"avise o canal de incidentes\" names a chat channel (not in the fixture) as where to report an external dependency problem. Line 73 also has \"Anote no canal do plantão/ticket\"."
+ },
+ {
+  "id": "3.16",
+  "verdict": "unmet",
+  "evidence": "Line 79 \"Você não identifica a causa em 30 min.\" is an escalation time limit absent from the fixture. Line 20 also has \"investigue em horário comercial\"."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for causes stated as fact. The table at lines 36-42 lists a \"Causa provável\" column, which marks the causes as guesses, and line 34 tells the reader \"Classifique a causa\". No root cause is asserted."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply line 12: \"**Contato de escalonamento:** você não me passou quem acionar quando o plantão não resolve. Deixei o campo em aberto e avisei no documento.\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'normalmente', 'na maioria', 'geralmente', 'costuma' and similar phrases about how incidents usually go. None found. Line 67 \"nível normal\" refers to DLQ depth, not to typical causes."
+ },
+ {
+  "id": "3.21",
+  "verdict": "unmet",
+  "evidence": "Line 26 \"Abra o dashboard e veja a profundidade da DLQ\" and line 33 \"Procure nos logs do worker ... [PREENCHER query]\" present a dashboard and a log system as available. The fixture shows neither."
+ }
+]

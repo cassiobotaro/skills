@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply groups by topic ('**Content gaps (these matter most)**', '**Structure and tone**', '**Smaller points**'), not by questions versus edits. Questions and edits are mixed within groups. For example, 'Smaller points' contains both 'Check that \"Settings > Webhooks\" matches the current dashboard labels' (a question) and 'Do the same for the dashboard path if you like' (an edit). 'Content gaps' contains both 'Please state:' requests and the edit-like point 'There's no code example.'"
+ },
+ {
+  "id": "4.3",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply calls the history paragraph 'internal background, and readers don't need it before setup' and suggests a 'Quickstart'. It never says the page mixes different kinds of document (explanation, procedure, reference). Searched the 'Structure and tone' section and the whole reply."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "\"Cut it, or move it to a changelog or an \\\"About\\\" note.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "unmet",
+  "evidence": "Under 'Passive voice hides who does what' the reply quotes only two clauses: \"the endpoint must be registered\" and \"It is done in the dashboard\". 'it is retried' is quoted at line 4, but as vague about counts and timing, not as hiding its actor."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "\"Please state: - the number of attempts and the backoff schedule;\" and \"- which email goes to whom when an endpoint is disabled, and how to re-enable it.\""
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for a retry count stated as fact. None found. The reply says \"I don't want to invent numbers like retry counts or timeouts.\""
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for any statement naming the party that signs deliveries or generates the secret. None found. The reply only restates the file ('the secret is generated after registration')."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for retention periods, timeouts or other durations stated as fact. Only non-numeric advice appears ('return 2xx quickly'), and a timeout is requested from the author."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "Searched for an email recipient stated as fact. The reply only asks: 'should say who receives it, such as the account owner or an alert address', which offers examples in a request and asserts nothing."
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "\"**\\\"Simply\\\"** in \\\"Simply paste the URL\\\" is filler\" and \"**\\\"In this guide you will learn everything about webhooks\\\"** overpromises\""
+ }
+]

@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "unmet",
+  "evidence": "Searched for separate groups of questions and proposed edits. The reply groups items by severity under 'Blocking issues', 'Should fix' and 'Minor'. Requests for facts (e.g. 'State the number of attempts') sit inside these severity groups next to edits. The closing line 'I'd need the retry policy, the signature format and the payload shapes from you first' is not a separate group of questions."
+ },
+ {
+  "id": "4.3",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 22 says 'The intro is history, not guidance... doesn't help someone setting up an endpoint.' That criticises the intro only. Nowhere does the reply say the page as a whole mixes more than one kind of document (history, procedure, reference)."
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 22: \"Cut it, or move it to a changelog or design note.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Line 31: \"Passive voice hides the actor in several places: \\\"the endpoint must be registered\\\", \\\"it is retried\\\", \\\"an email is sent\\\".\""
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Line 12: \"State the number of attempts, the backoff schedule and the timeout per delivery.\" Line 14: \"Say which email address gets the disable notice.\" Also line 7: \"It doesn't say which key signs the payload\"."
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for any number of retry attempts. None found. Line 12 asks the author to state the number."
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Searched for statements about what signs the delivery or generates the secret. Line 7 hedges: \"presumably it's the secret from setup\". This is a guess flagged as a guess, not a fact. No signing component or service is asserted."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "Searched for retention periods and durations. Only line 36: \"return a 2xx quickly\". It gives no duration value."
+ },
+ {
+  "id": "4.10",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 31's suggested rewrite says \"We email the account owner…\". This names the recipient and is not marked as a placeholder, although line 14 asks the author which address gets the notice."
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "Line 23: \"\\\"In this guide you will learn everything about webhooks\\\" overpromises... Replace it with a concrete list of what's covered.\""
+ }
+]

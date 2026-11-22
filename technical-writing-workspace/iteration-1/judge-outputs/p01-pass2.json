@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\". I searched the file for any named author or writer and found none."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I searched it for prerequisites and roles: docs/rotate-signing-key.md:9 is the only prerequisite line (`kubectl` access to `prod`, `secrets-admin` role), and the fixture contains it. Nothing was added."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I searched it for commands, flags and file names. The only ones are openssl genpkey (line 16), kubectl create secret/apply (line 23), rollout restart (line 29), rollout status (line 32) and signing.pem, all present in the fixture. Nothing was added."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I searched it for durations and numbers. It has only 90 days (line 3), 15 minutes (line 39) and the step numbers, all in the fixture. Nothing was added."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I searched it for explanations, reasons and claims. Every one, such as the restart reason (lines 4-5), accepting either key (lines 19-20) and token lifetime (lines 38-39), is in the fixture. Nothing was added."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "\"I didn't edit `docs/rotate-signing-key.md`, because it already meets the skill's rules.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "\"I didn't edit `docs/rotate-signing-key.md`\" — the reply says it changed nothing."
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I compared it with the fixture for removed content and reordered steps and found none."
+ }
+]

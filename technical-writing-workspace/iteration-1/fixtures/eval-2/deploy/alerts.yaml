@@ -1,0 +1,10 @@
+groups:
+  - name: exporter
+    rules:
+      - alert: ExportsDeadLetterHigh
+        expr: rabbitmq_queue_messages{queue="exports.dead"} > 10
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: "More than 10 exports failed three times"

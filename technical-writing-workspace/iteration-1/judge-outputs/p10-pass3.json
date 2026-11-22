@@ -1,0 +1,72 @@
+[
+ {
+  "id": "2.3",
+  "verdict": "met",
+  "evidence": "README.md:3 \"A service that builds CSV exports in the background. The gateway accepts an export request and queues it. The worker generates the CSV, encrypts it, uploads it to S3, and emails the requester a download link.\""
+ },
+ {
+  "id": "2.4",
+  "verdict": "met",
+  "evidence": "Searched README.md lines 1-3. Only the title `# exporter` (line 1) comes before the descriptive paragraph at line 3. Setup starts at line 21."
+ },
+ {
+  "id": "2.17",
+  "verdict": "met",
+  "evidence": "Searched README.md for variable names. The Configuration table (lines 31-36) lists only QUEUE_URL, EXPORT_BUCKET, EXPORT_KEY and MAIL_FROM. Line 38 says \"boto3 reads AWS credentials and region from its usual sources\" but names no AWS_* variable."
+ },
+ {
+  "id": "2.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. README.md:9-12 retells request, processing and delivery with their details: \"validates the payload and publishes it ... returns `202`\", \"builds the CSV, encrypts it ... uploads it\", \"presigned S3 URL valid for 24 hours\", \"On the third failed attempt the job goes to `exports.dead`\". Line 61 adds the 100,000-row limit. Only the one-line Backups section of docs/pipeline.md is omitted, so this is more than a few-sentence summary."
+ },
+ {
+  "id": "2.20",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'license', 'MIT', 'Apache' and 'copyright'. None found."
+ },
+ {
+  "id": "2.22",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'contribut', 'pull request', 'PR' and 'code of conduct'. None found."
+ },
+ {
+  "id": "2.23",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'CI', 'GitHub Actions', 'pipeline' (as CI) and 'build'. No CI is mentioned. The only 'pipeline' is the docs/pipeline.md link."
+ },
+ {
+  "id": "2.24",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'Docker', 'container', 'image' and 'compose'. None found."
+ },
+ {
+  "id": "2.25",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'deploy'. It appears only in line 71 (alert file reference) and line 87 (layout entry). Neither describes a deployment procedure."
+ },
+ {
+  "id": "2.26",
+  "verdict": "met",
+  "evidence": "Searched README.md for 'contact', 'maintainer', 'team', 'support', 'Slack' and email addresses. Only `<account_id>@accounts.example.com` appears, which is the recipient pattern, not a contact."
+ },
+ {
+  "id": "2.27",
+  "verdict": "met",
+  "evidence": "README.md:3 \"The gateway accepts an export request and queues it.\""
+ },
+ {
+  "id": "2.28",
+  "verdict": "met",
+  "evidence": "README.md:3 \"The worker generates the CSV, encrypts it, uploads it to S3, and emails the requester a download link.\""
+ },
+ {
+  "id": "2.29",
+  "verdict": "unmet",
+  "evidence": "README.md:59 \"The job was queued\". README.md:80 \"Requeued messages are published without the `x-attempts` header\". Both are agentless passives describing what happens to an export request."
+ },
+ {
+  "id": "2.30",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I haven't run any of the commands in it.\""
+ }
+]

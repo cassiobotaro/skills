@@ -1,0 +1,198 @@
+{
+  "checks": "../evals/checks-baseline.json",
+  "evals": "../evals/evals.json",
+  "runs": [
+    {
+      "key": "1/with_skill/run-1",
+      "eval": "1",
+      "cell": "with_skill",
+      "reply": "eval-1-revise-passives-actors-in-code/with_skill/run-1/response.md",
+      "root": "eval-1-revise-passives-actors-in-code/with_skill/run-1/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "1/with_skill/run-2",
+      "eval": "1",
+      "cell": "with_skill",
+      "reply": "eval-1-revise-passives-actors-in-code/with_skill/run-2/response.md",
+      "root": "eval-1-revise-passives-actors-in-code/with_skill/run-2/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "1/without_skill/run-1",
+      "eval": "1",
+      "cell": "without_skill",
+      "reply": "eval-1-revise-passives-actors-in-code/without_skill/run-1/response.md",
+      "root": "eval-1-revise-passives-actors-in-code/without_skill/run-1/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "1/without_skill/run-2",
+      "eval": "1",
+      "cell": "without_skill",
+      "reply": "eval-1-revise-passives-actors-in-code/without_skill/run-2/response.md",
+      "root": "eval-1-revise-passives-actors-in-code/without_skill/run-2/outputs",
+      "fixture": "fixtures/eval-1"
+    },
+    {
+      "key": "2/with_skill/run-1",
+      "eval": "2",
+      "cell": "with_skill",
+      "reply": "eval-2-readme-from-repository/with_skill/run-1/response.md",
+      "root": "eval-2-readme-from-repository/with_skill/run-1/outputs",
+      "fixture": "fixtures/eval-2"
+    },
+    {
+      "key": "2/with_skill/run-2",
+      "eval": "2",
+      "cell": "with_skill",
+      "reply": "eval-2-readme-from-repository/with_skill/run-2/response.md",
+      "root": "eval-2-readme-from-repository/with_skill/run-2/outputs",
+      "fixture": "fixtures/eval-2"
+    },
+    {
+      "key": "2/without_skill/run-1",
+      "eval": "2",
+      "cell": "without_skill",
+      "reply": "eval-2-readme-from-repository/without_skill/run-1/response.md",
+      "root": "eval-2-readme-from-repository/without_skill/run-1/outputs",
+      "fixture": "fixtures/eval-2"
+    },
+    {
+      "key": "2/without_skill/run-2",
+      "eval": "2",
+      "cell": "without_skill",
+      "reply": "eval-2-readme-from-repository/without_skill/run-2/response.md",
+      "root": "eval-2-readme-from-repository/without_skill/run-2/outputs",
+      "fixture": "fixtures/eval-2"
+    },
+    {
+      "key": "3/with_skill/run-1",
+      "eval": "3",
+      "cell": "with_skill",
+      "reply": "eval-3-runbook-pt-br-missing-contact/with_skill/run-1/response.md",
+      "root": "eval-3-runbook-pt-br-missing-contact/with_skill/run-1/outputs",
+      "fixture": "fixtures/eval-3"
+    },
+    {
+      "key": "3/with_skill/run-2",
+      "eval": "3",
+      "cell": "with_skill",
+      "reply": "eval-3-runbook-pt-br-missing-contact/with_skill/run-2/response.md",
+      "root": "eval-3-runbook-pt-br-missing-contact/with_skill/run-2/outputs",
+      "fixture": "fixtures/eval-3"
+    },
+    {
+      "key": "3/without_skill/run-1",
+      "eval": "3",
+      "cell": "without_skill",
+      "reply": "eval-3-runbook-pt-br-missing-contact/without_skill/run-1/response.md",
+      "root": "eval-3-runbook-pt-br-missing-contact/without_skill/run-1/outputs",
+      "fixture": "fixtures/eval-3"
+    },
+    {
+      "key": "3/without_skill/run-2",
+      "eval": "3",
+      "cell": "without_skill",
+      "reply": "eval-3-runbook-pt-br-missing-contact/without_skill/run-2/response.md",
+      "root": "eval-3-runbook-pt-br-missing-contact/without_skill/run-2/outputs",
+      "fixture": "fixtures/eval-3"
+    },
+    {
+      "key": "4/with_skill/run-1",
+      "eval": "4",
+      "cell": "with_skill",
+      "reply": "eval-4-review-mixed-jobs-no-edit/with_skill/run-1/response.md",
+      "root": "eval-4-review-mixed-jobs-no-edit/with_skill/run-1/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "4/with_skill/run-2",
+      "eval": "4",
+      "cell": "with_skill",
+      "reply": "eval-4-review-mixed-jobs-no-edit/with_skill/run-2/response.md",
+      "root": "eval-4-review-mixed-jobs-no-edit/with_skill/run-2/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "4/without_skill/run-1",
+      "eval": "4",
+      "cell": "without_skill",
+      "reply": "eval-4-review-mixed-jobs-no-edit/without_skill/run-1/response.md",
+      "root": "eval-4-review-mixed-jobs-no-edit/without_skill/run-1/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "4/without_skill/run-2",
+      "eval": "4",
+      "cell": "without_skill",
+      "reply": "eval-4-review-mixed-jobs-no-edit/without_skill/run-2/response.md",
+      "root": "eval-4-review-mixed-jobs-no-edit/without_skill/run-2/outputs",
+      "fixture": "fixtures/eval-4"
+    },
+    {
+      "key": "5/with_skill/run-1",
+      "eval": "5",
+      "cell": "with_skill",
+      "reply": "eval-5-pr-description-from-diff/with_skill/run-1/response.md",
+      "root": "eval-5-pr-description-from-diff/with_skill/run-1/outputs",
+      "fixture": "fixtures/eval-5"
+    },
+    {
+      "key": "5/with_skill/run-2",
+      "eval": "5",
+      "cell": "with_skill",
+      "reply": "eval-5-pr-description-from-diff/with_skill/run-2/response.md",
+      "root": "eval-5-pr-description-from-diff/with_skill/run-2/outputs",
+      "fixture": "fixtures/eval-5"
+    },
+    {
+      "key": "5/without_skill/run-1",
+      "eval": "5",
+      "cell": "without_skill",
+      "reply": "eval-5-pr-description-from-diff/without_skill/run-1/response.md",
+      "root": "eval-5-pr-description-from-diff/without_skill/run-1/outputs",
+      "fixture": "fixtures/eval-5"
+    },
+    {
+      "key": "5/without_skill/run-2",
+      "eval": "5",
+      "cell": "without_skill",
+      "reply": "eval-5-pr-description-from-diff/without_skill/run-2/response.md",
+      "root": "eval-5-pr-description-from-diff/without_skill/run-2/outputs",
+      "fixture": "fixtures/eval-5"
+    },
+    {
+      "key": "6/with_skill/run-1",
+      "eval": "6",
+      "cell": "with_skill",
+      "reply": "eval-6-good-howto-left-alone/with_skill/run-1/response.md",
+      "root": "eval-6-good-howto-left-alone/with_skill/run-1/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "6/with_skill/run-2",
+      "eval": "6",
+      "cell": "with_skill",
+      "reply": "eval-6-good-howto-left-alone/with_skill/run-2/response.md",
+      "root": "eval-6-good-howto-left-alone/with_skill/run-2/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "6/without_skill/run-1",
+      "eval": "6",
+      "cell": "without_skill",
+      "reply": "eval-6-good-howto-left-alone/without_skill/run-1/response.md",
+      "root": "eval-6-good-howto-left-alone/without_skill/run-1/outputs",
+      "fixture": "fixtures/eval-6"
+    },
+    {
+      "key": "6/without_skill/run-2",
+      "eval": "6",
+      "cell": "without_skill",
+      "reply": "eval-6-good-howto-left-alone/without_skill/run-2/response.md",
+      "root": "eval-6-good-howto-left-alone/without_skill/run-2/outputs",
+      "fixture": "fixtures/eval-6"
+    }
+  ]
+}
