@@ -156,6 +156,18 @@ the totals are 98/104 against 98/104 on the prompt alone.
   pending. Earlier iterations ran this eval with a brief that said the user could not
   reply.
 
+**Added later the same day.** The first finding above is an artifact of this harness, and
+`technical-writing-workspace/trigger-evals/border-design-doc-2026-11-22/README.md` has the
+probe that showed it. With the skills inside the project and committed there, a session
+lists them with `git ls-files` and reads `design-doc`'s files without the Skill tool, so
+"invoked in none of eight" was never a trigger count. With each plugin loaded from
+outside the project, sixteen sessions on the same request invoked no skill at all, with
+`technical-writing` installed or not, and all sixteen rewrote the body of the shipped
+document; two canary sessions on eval 6 invoked `design-doc`. The request of eval 9 does
+not trigger `design-doc`, and `technical-writing` is not what keeps it away. The
+comparison of the versions does not depend on this: it rests on runs in which
+`design-doc` was invoked.
+
 **Limits.** Two runs per cell measure no rate. The judge could tell the version in every
 1.7.0 packet with a document: all ten replies say that `technical-writing` was applied.
 The `w` cells change the user's message, and the judge packet shows it without the added
