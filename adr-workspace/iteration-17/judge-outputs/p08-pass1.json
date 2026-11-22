@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply line 7: \"**What did the team accept as a trade-off?** Examples would be new cost, another piece of infrastructure to run, or how cache invalidation and deploys work.\" Line 8 also asks: \"**Were other options considered?**\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Checked every line of doc/adr/0003 (lines 1-21) for costs, risks, downsides, alternatives, trade-offs or motives the user did not state. I found none. Context (line 11) rewords the user's points about Asia first paint and fingerprinted assets ('forever' becomes 'indefinitely'). Decision (line 15) matches the user's message. Consequences (lines 19, 21) reword the user's two stated benefits. No cost, invalidation, infrastructure or alternative claims were added."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply line 31: \"You said no trade-offs were discussed, so the Consequences section lists only benefits. A decision with no downsides is unusual, so you may want to add the costs later.\""
+ }
+]

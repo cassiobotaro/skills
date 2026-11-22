@@ -231,12 +231,57 @@
         "kind": "absence",
         "check": "No file other than the one new ADR was created or edited under the project root"
       }
+    ],
+    "12": [
+      {
+        "id": "12.1",
+        "assertion": 1,
+        "kind": "absence",
+        "check": "The first turn wrote no file: the project after it is byte-for-byte the fixture"
+      },
+      {
+        "id": "12.2",
+        "assertion": 1,
+        "kind": "reply",
+        "check": "The first reply asks the user what the decision gives up or what was passed over: a trade-off, cost, constraint or alternative. Asking only for a 'downside' or 'negative' counts"
+      },
+      {
+        "id": "12.3",
+        "assertion": 2,
+        "kind": "file",
+        "check": "After the user's answer, exactly one new file exists under doc/adr/, named 0003-<slug>.md, whose slug equals its title lowercased with each run of non-alphanumerics collapsed to one hyphen and edge hyphens stripped, and whose first line is '# 3. <title>'"
+      },
+      {
+        "id": "12.4",
+        "assertion": 2,
+        "kind": "file",
+        "check": "The new file has a 'Date: YYYY-MM-DD' line with the calendar date of the run, exactly the four '## ' headings Status, Context, Decision, Consequences in that order, the status word 'Accepted', and one-blank-line discipline"
+      },
+      {
+        "id": "12.5",
+        "assertion": 3,
+        "kind": "invention",
+        "check": "The new ADR asserts nothing beyond the user's message and the two existing ADRs: no cost, risk, downside, alternative or trade-off the user did not state. Rewording the user's own statements is not an invention. When no ADR was written, this check is UNMET"
+      },
+      {
+        "id": "12.6",
+        "assertion": 4,
+        "kind": "reply",
+        "check": "The final reply tells the user that the record carries no trade-off (no cost, downside or alternative was recorded), in any words"
+      },
+      {
+        "id": "12.7",
+        "assertion": 5,
+        "kind": "file",
+        "check": "doc/adr/0001-*.md and 0002-*.md are byte-for-byte identical to the fixture and no file other than the one new ADR was created"
+      }
     ]
   },
   "amendments": [
     "2026-11-15, after iteration-9: a met kind=invention check is a negative (\"nothing invented\") and has no sentence to quote; its evidence is the recorded search. No check of evals 8-10 was changed.",
     "2026-11-15, before iteration-10: checks for eval 11 added, before any run of it. Judge passes: three for kind=invention, where iteration-9 saw its only split; one is enough for kind=reply (59/60 unanimous).",
-    "2026-11-15, after iteration-10: anchor cases for kind=invention, because 'direct logical restatement' split the judges 2/3 on 'adds load'. A restatement says the same fact in other words or points at what a file already records; anything that adds a property the user did not state is an inference and makes the check UNMET. Applies from iteration-11 on; earlier gradings are not revised."
+    "2026-11-15, after iteration-10: anchor cases for kind=invention, because 'direct logical restatement' split the judges 2/3 on 'adds load'. A restatement says the same fact in other words or points at what a file already records; anything that adds a property the user did not state is an inference and makes the check UNMET. Applies from iteration-11 on; earlier gradings are not revised.",
+    "2026-11-22, before iteration-17: checks for eval 12 added, before any run of it. The packet's reply holds both turns, labelled: the first reply, the user's fixed answer, the final reply. 12.2 is graded on the first, 12.6 on the final one."
   ],
   "anchors": {
     "invention": [

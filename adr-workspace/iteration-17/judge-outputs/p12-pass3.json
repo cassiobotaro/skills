@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply line 5: \"**Trade-offs:** What gets harder or riskier with CloudFront in front of the static assets?\" and line 6: \"**Alternatives:** Did you consider anything else, such as a different CDN, a second region, or doing nothing?\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Searched all of doc/adr/0003-put-cloudfront-in-front-of-static-assets.md (lines 1-23) for any cost, risk, downside, alternative, trade-off or motive the user did not state. Found none. Line 11 restates the user's Asia latency and fingerprinting points. 'The app servers currently serve those static files themselves' is implied by the user's 'app servers stop serving static files'. Line 15's 'cache them with a long lifetime' rewords 'can be cached forever'. Lines 19 and 21 restate the user's benefits. Line 23 records the user's own statement that nothing else was discussed, plus a process note that asserts no cost."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply line 27: \"I also added a line saying no trade-offs or alternatives were discussed, so the record doesn't read as if there were none.\""
+ }
+]

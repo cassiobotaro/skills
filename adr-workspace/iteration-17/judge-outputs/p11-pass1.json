@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "unmet",
+  "evidence": "Searched the first reply (lines 1-15) for any question about trade-offs, costs, constraints, alternatives or downsides. The only request to the user is 'so check that you agree with them' (line 9). That asks for agreement with consequences the model added. It does not ask what the decision gives up or what was passed over."
+ },
+ {
+  "id": "12.5",
+  "verdict": "unmet",
+  "evidence": "Invented cost and dependency: 'We take on CloudFront as a new dependency, including its configuration and cost.' (0003:27). Invented constraint: 'every change to an asset must produce a new fingerprinted filename. Assets that are not fingerprinted must not be served through this cache without a shorter cache lifetime.' (0003:25). Invented load claim: 'which reduces their load' (0003:23)."
+ },
+ {
+  "id": "12.6",
+  "verdict": "unmet",
+  "evidence": "Searched the final reply (the first reply, lines 1-15) for any statement that the record carries no trade-off, cost, downside or alternative. There is none. The reply instead says it added consequences: 'I added two consequences you didn't mention' (line 9)."
+ }
+]

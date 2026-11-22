@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply: \"2. **Cost:** What are you taking on in exchange? This could be CDN spend, invalidation or deploy changes, or something else.\" and \"1. **Alternatives:** Did you consider anything else, such as a different CDN, a second region, or leaving things as they are? If so, why did you pass on it?\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Compared each line of doc/adr/0003 against the user's message. Context (lines 11) restates first-paint latency in Asia and fingerprinted assets. Decision (line 15) restates the CloudFront decision. Consequences lines 19 and 21 restate faster loads and app servers no longer serving static files; 'should' only hedges the user's claim. Line 23 ('No alternatives were considered and no downsides were identified') rewords the user's answer 'nothing else was discussed' and adds no cost, risk, alternative or trade-off. Searched for added load, cost, invalidation or vendor claims and found none."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply: \"The record has no trade-off. You said nothing else was discussed, so there are no alternatives or costs in it.\""
+ }
+]

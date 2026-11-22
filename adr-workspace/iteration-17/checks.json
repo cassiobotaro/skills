@@ -1,0 +1,25 @@
+{
+ "note": "Frozen check list of iteration-17 for evals 1 to 7, written while the first runs were in flight and before any output was read. Evals 11 and 12 are graded by their checks in ../evals/checks-baseline.json. Every check here is decided by grade.py from bytes. 'The decision ADR' is the new Markdown file with the highest number in its name, wherever the run put it.",
+ "frozen_on": "2026-11-22",
+ "prediction": "Written before reading any output. no_skill on sonnet: meets h1, date, heads, blank and status in the English evals (it did in 27 sessions on adr-tools' own log earlier today), and meets `old` and `loc` on evals 4 and 6. It misses: `seed` on evals 1, 5 and 7 (it has no reason to write one), hence `loc` there (its decision is 0001); `slug` on evals 1 and 5 when the title has an accent (it transliterates); `heads` or `date` on evals 1 and 5 (headings translated); `lang` on evals 3, 4 and 6 (writes Portuguese into an English log); `old_status` on eval 3 (keeps `Accepted` beside the link, or uses another wording). A check the baseline meets in 3/3 marks a part of SKILL.md that is a candidate for cutting; one it misses marks a part to keep.",
+ "checks": {
+  "loc": "The decision ADR sits in the directory and carries the number the eval expects (doc/adr/0002- on a fresh log, the next number of an existing one, the .adr-dir directory on eval 4)",
+  "h1": "Its first line is '# N. <title>' with N un-padded and equal to the filename's number",
+  "slug": "Its filename is NNNN-<slug>.md, the slug being its own title with ASCII letters and digits lowercased and every other run of characters, accented letters included, collapsed to one hyphen",
+  "date": "It has a line 'Date: YYYY-MM-DD' (English label) with the calendar date of the run",
+  "heads": "Outside code fences its '##' headings are exactly Status, Context, Decision, Consequences, in English and in that order",
+  "blank": "No two consecutive blank lines, and a blank line on both sides of the H1, the Date line and every heading",
+  "status": "The non-blank lines of its Status section are exactly 'Accepted' (eval 3: 'Accepted', then 'Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)')",
+  "lang": "Its prose is in the language the eval expects: Portuguese on evals 1 and 5, English on evals 3, 4, 6, 7 (decided by counting function words of each language)",
+  "seed": "Evals 1, 5, 7: a second new file doc/adr/0001-*.md exists and holds the address of Nygard's article and a mention of adr-tools",
+  "seed_format": "Evals 1, 5, 7: the seed meets h1, slug, date and heads, and its Status is 'Accepted'",
+  "seed_pt": "Evals 1, 5: the seed's prose is in Portuguese",
+  "seed_verbatim": "Eval 7: the seed is the canonical adr-tools text, the date apart",
+  "old": "Every fixture file is byte-for-byte unchanged",
+  "old_status": "Eval 3: the Status section of 0002 holds exactly one non-blank line, 'Superseded by [4. <the new title>](<the new basename>)'",
+  "old_body": "Eval 3: 0002 is unchanged outside its Status section, and 0001 and 0003 are byte-for-byte unchanged",
+  "only": "The run created the decision ADR (and the seed, where one is expected) and no other file",
+  "nofile": "Eval 2: no file was created or changed",
+  "asks": "Eval 2: the reply holds at least two question marks"
+ }
+}

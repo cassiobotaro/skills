@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply, line 7: \"Did you consider anything else, such as a different CDN, a second region, or leaving things as they are? If so, why did you pass on it?\" and line 8: \"What are you taking on in exchange? This could be CDN spend, invalidation or deploy changes, or something else.\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Searched every line of doc/adr/0003 (lines 1-23) for a cost, risk, downside, alternative or trade-off the user did not state. None found. Line 11 rewords the user's 'three to four seconds for first paint' and 'cached forever' (as 'indefinitely'). Line 15 restates the decision. Lines 19-21 reword the user's stated benefits. Line 23 ('No alternatives were considered and no downsides were identified') states that none exist, which matches the user's 'nothing else was discussed'. The 2026-11-22 date is today's date, not a claim about the decision."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply, line 32: \"The record has no trade-off. You said nothing else was discussed, so there are no alternatives or costs in it.\""
+ }
+]

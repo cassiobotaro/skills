@@ -1,0 +1,146 @@
+{
+ "11/no_skill/run-1": {
+  "11.1": true,
+  "11.2": false,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/no_skill/run-2": {
+  "11.1": true,
+  "11.2": false,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/no_skill/run-3": {
+  "11.1": true,
+  "11.2": false,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/skill_150/run-1": {
+  "11.1": true,
+  "11.2": true,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/skill_150/run-2": {
+  "11.1": true,
+  "11.2": true,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/skill_150/run-3": {
+  "11.1": true,
+  "11.2": true,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/skill_160/run-1": {
+  "11.1": true,
+  "11.2": true,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/skill_160/run-2": {
+  "11.1": true,
+  "11.2": true,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "11/skill_160/run-3": {
+  "11.1": true,
+  "11.2": true,
+  "11.3": true,
+  "11.4": true,
+  "11.5": true,
+  "11.6": true,
+  "11.11": true,
+  "11.12": true
+ },
+ "12/no_skill/run-1": {
+  "12.1": false,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/no_skill/run-2": {
+  "12.1": false,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/no_skill/run-3": {
+  "12.1": false,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/skill_150/run-1": {
+  "12.1": true,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/skill_150/run-2": {
+  "12.1": true,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/skill_150/run-3": {
+  "12.1": true,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/skill_160/run-1": {
+  "12.1": true,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/skill_160/run-2": {
+  "12.1": true,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ },
+ "12/skill_160/run-3": {
+  "12.1": true,
+  "12.3": true,
+  "12.4": true,
+  "12.7": true
+ }
+}

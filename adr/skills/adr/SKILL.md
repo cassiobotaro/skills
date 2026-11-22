@@ -48,7 +48,7 @@ one. Its whole value is the recorded *why* — an invented rationale poisons it.
 1. **Record, don't invent.** The ADR documents a real decision and the user's actual
    reasons. Never fabricate forces, alternatives, metrics, or consequences that the user
    (or the repository) did not establish. When the decision is too vague to fill the
-   sections honestly, ask — see step 3. Polishing the user's words into good prose is
+   sections honestly, ask — see step 2. Polishing the user's words into good prose is
    your job; supplying missing facts is not.
 
 2. **Prose follows the log's language; the adr-tools scaffolding stays canonical English.**
@@ -138,20 +138,23 @@ e.g. `Supersedes [2. Store sessions in Redis](0002-store-sessions-in-redis.md)`.
   the log's language); the verb stays English (rule 2). Keep these links inside the Status
   section — the importer scans only the lines between `## Status` and `## Context` to build
   decision relationships.
-- Supersede pair: the new ADR keeps `Accepted` and gains `Supersedes […]`; the old ADR's
-  status word is *removed* and replaced by `Superseded by […]` (the link line becomes
-  its status).
+- Supersede pair: the new ADR keeps `Accepted` and gains `Supersedes […]`, one line per
+  superseded ADR; in each old ADR the status word is *removed* and replaced by
+  `Superseded by […]` (the link line becomes its status), with no doubled blank line left
+  behind.
 - `Amends` / `Amended by` and `Clarifies` / `Clarified by` use the same mechanism, but
   both files keep their status word — only supersession removes it. Use Amends when the
   new decision adjusts part of an old one that otherwise stands; Supersedes when it
   replaces it.
+- The link line is the whole edit to the old file (rule 4): verify with a diff that
+  nothing outside its Status section changed.
 - Write the modern spelling `Superseded by` / `Supersedes`; on read, treat the legacy
   adr-tools spelling `Superceded` as the same relation, and leave it alone in files you
   aren't otherwise required to edit.
 
 ## Workflow
 
-### 1. Locate the decision log
+### 1. Locate the decision log and read it
 
 In order:
 
@@ -162,36 +165,37 @@ In order:
 3. An existing ADR collection elsewhere: look for `NNNN-*.md` files under `docs/adr`,
    `docs/adrs`, `docs/decisions`, `docs/architecture/decisions`, `adr/`. If found, work
    where it lives.
-4. Nothing found → this is a fresh log; see step 5.
+4. Nothing found → this is a fresh log; see step 4.
 
-Peek at one existing ADR before writing. If the log visibly follows a different
-template (e.g. MADR with YAML frontmatter) or a different language than the
-conversation, match the log's own format and language and tell the user.
+Read the most recent two or three ADRs and any ADR the new one will supersede or amend:
+they give the next number, the exact H1 titles for link text, and the house tone. If the
+log visibly follows a different template (e.g. MADR with YAML frontmatter) or a different
+language than the conversation, match the log's own format and language and tell the
+user.
 
-### 2. Read the neighbors
-
-Read the most recent two or three ADRs and any ADR the new one will supersede or amend.
-This gives you the next number, the exact H1 titles you'll need for link text, and the
-house tone to match.
-
-### 3. Get the substance — or ask
+### 2. Get the substance — or ask
 
 An honest ADR needs three ingredients: **the decision** (what we will do, concretely),
 **the forces** (why now — the technical, political, social, or project pressures in
-tension, and what's wrong with the status quo), and **the trade-offs** (what becomes
-harder, riskier, or more expensive).
+tension, and what's wrong with the status quo), and **the trade-off** (what the decision
+gives up in exchange for what it gets: an alternative passed over, a cost, a constraint
+taken on).
 
 If the user already gave all three, do not interrogate them — write. If any are
 missing, ask 2–4 targeted questions in the conversation language before writing: what
 is replacing the current choice, and why now? what alternatives were on the table?
-what downside did the team accept? who hasn't agreed yet (Accepted vs Proposed)?
+what did the team give up or accept in exchange? who hasn't agreed yet (Accepted vs
+Proposed)? Don't ask what the repository already answers (numbering, directory,
+existing titles).
 
-Don't ask what the repository already answers (numbering, directory, existing titles).
-And treat a decision with zero downsides as a red flag: ask for the accepted trade-off
-rather than writing a sales pitch — Consequences must list *all* of them, not just the
-positive ones.
+The trade-off is what makes the record worth keeping: "this is how we will do it", with
+no alternative or cost beside it, gives a future reader nothing to weigh. It is not
+necessarily a negative consequence, so ask what was given up or passed over, not for a
+downside as if one had to exist. Ask once and never supply one (rule 1): if the user says
+there was none, write the record with what they gave and say in your reply that it
+carries no trade-off.
 
-### 4. Write the ADR
+### 3. Write the ADR
 
 Write as if in conversation with a future developer — full sentences organized into
 paragraphs, good prose. Beyond what the template already embeds:
@@ -205,17 +209,17 @@ paragraphs, good prose. Beyond what the template already embeds:
   transactional data"). The future reader cannot tell the team's reasons from yours, so
   leave both out: two sentences of real context are a complete Context. Ask when the gap
   matters.
-- **Consequences**: every one — positive, negative, neutral — as a short standalone
-  paragraph or sentence; bullets are visual style for full sentences, never an excuse
-  for fragments.
+- **Consequences**: every one the user gave — what gets easier, what gets harder, what
+  is left to do — and the trade-off of step 2, each as a short standalone paragraph or
+  sentence; bullets are visual style for full sentences, never an excuse for fragments.
 
 When the `unslop` skill is installed, invoke it on the record once the file is written and
 before the self-review: on the H1 title text and the three section bodies. The scaffolding of rule 2 is
-not prose and stays exact. The seed of step 5 stays as `references/examples.md` gives it,
-and no existing record is in its reach (step 6). A fact it finds missing is a question for
+not prose and stays exact. The seed of step 4 stays as `references/examples.md` gives it,
+and no existing record is in its reach (rule 4). A fact it finds missing is a question for
 the user (rule 1).
 
-### 5. Initialize a fresh log
+### 4. Initialize a fresh log
 
 When no ADR log exists anywhere, mirror `adr init`: create `doc/adr/`, seed it with the
 canonical "record architecture decisions" ADR (content in `references/examples.md`),
@@ -228,40 +232,25 @@ about the seed file. If the user asked for a non-default directory, also write a
 `.adr-dir` file at the repo root containing that path so adr-tools and future
 invocations find it.
 
-### 6. Supersede / amend an old ADR
-
-When the new decision replaces ADR N:
-
-1. In the new ADR's Status section: `Accepted`, blank line,
-   `Supersedes [N. Old title](NNNN-old-slug.md)` (one such line per superseded ADR).
-2. In each old ADR: append `Superseded by [M. New title](MMMM-new-slug.md)` as the last
-   line of its Status section, then delete its standalone status word (`Accepted` or
-   `Proposed`) and the doubled blank line that deletion leaves. Touch nothing else —
-   verify with a diff that only the Status section changed.
-
-For Amends/Clarifies, do step 1–2 with the right verb pair (`Amends` / `Amended by`,
-`Clarifies` / `Clarified by`) but keep both status words.
-
-### 7. Self-review
+### 5. Self-review
 
 Before declaring done, check the new file and every edited file:
 
-- The `unslop` skill, when it is installed, was invoked on the new record's prose (step 4).
+- The `unslop` skill, when it is installed, was invoked on the new record's prose (step 3).
   If it was not run, run it now.
-- Four sections in order, one-blank-line discipline; the title text and section bodies in the
-  log's language, and every piece of scaffolding in canonical English — the `Date:` label, the
-  four headings, the status word, the link verbs (rule 2).
-- H1 number (un-padded) matches the filename number (padded); slug derived correctly.
-- The `Date:` value is today's real date, ISO 8601.
-- Context is neutral; Decision says "We will …"; Consequences include at least one
-  negative or trade-off.
+- Four sections in order, one-blank-line discipline, scaffolding in canonical English
+  whatever the prose language (rule 2); the H1 number matches the filename number and the
+  slug derives from the H1 title; the `Date:` value is today's real date.
+- Context is neutral; Decision says "We will …".
 - Nothing in the file that the user or the repository didn't establish: reread Context
   and Consequences one sentence at a time — each traces to the user's words or to a file,
   and none is a motive or a generality you supplied.
-- Link text matches the target's H1 exactly; href is a bare basename.
-- Superseded/amended files: diff shows changes in the Status section only.
+- Consequences carry the trade-off the user gave. If they gave none and you have not
+  asked, ask now instead of adding one.
+- Superseded/amended files: link text matches the target's H1 exactly, and the diff shows
+  changes in the Status section only.
 
-### 8. Hand off
+### 6. Hand off
 
 Report every file created or edited, by path. The files are plain adr-tools format, so
 `adr list`, `adr generate toc` / `graph`, and Structurizr's `!adrs <log dir>` import them
@@ -271,9 +260,11 @@ installing anything.
 
 ## Reference files
 
-Read `references/examples.md` before writing your first ADR of the session: the canonical
-seed ADR (verbatim), a model well-written ADR, and a complete before/after supersede pair
-showing the exact Status sections.
+Read `references/examples.md` when the task needs one of its parts, not before every
+record: the canonical seed ADR (initializing a fresh log), a Portuguese-language record
+(a log kept in another language), the supersede and amend pairs with their exact Status
+sections (linking to an existing record), and the slug table (a title with accents or
+punctuation).
 
 ## Attribution
 

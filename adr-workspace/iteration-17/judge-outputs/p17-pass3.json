@@ -1,0 +1,22 @@
+[
+ {
+  "id": "11.7",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without preserving their disks.\""
+ },
+ {
+  "id": "11.8",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:21 \"Every file read becomes a network call to S3\""
+ },
+ {
+  "id": "11.9",
+  "verdict": "unmet",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:11 \"and would not be visible to the other instances\". The user never raised sharing files across instances, so this adds a motive the user did not give. Borderline at most: it is a plausible inference but goes beyond the user's statement, so it counts as unmet. The rest of line 11 rewords the user's own statement, as in the MET anchor."
+ },
+ {
+  "id": "11.10",
+  "verdict": "unmet",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:21 \"with more latency than a local disk read and a new dependency on S3 availability\". This is a performance and availability claim the user did not make, matching the UNMET anchor. Also doc/adr/0003-store-user-uploads-in-s3.md:23 \"Existing files on local disk will have to be migrated to S3 before the app servers move into the autoscaling group.\" The reply itself admits this is \"my own addition\"."
+ }
+]

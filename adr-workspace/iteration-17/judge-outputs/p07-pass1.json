@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply, line 5: \"**What did you give up or pass over?** For example, another CDN or serving from the app servers in more regions, or a cost or constraint you're taking on\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Searched doc/adr/0003-serve-static-assets-through-cloudfront.md lines 1-21 for any cost, risk, downside, alternative or trade-off the user did not state, and found none. Context (line 11) rewords the user's statements: Asia first paint of three to four seconds, and fingerprinted assets that can be cached ('indefinitely' for 'forever'). Decision (line 15) matches the user's decision. Consequences (lines 19, 21) restate the user's two benefits. The cache invalidation and AWS dependency mentioned in the replies do not appear in the ADR."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply, line 28: \"This record has no trade-off. You said no alternatives or costs were discussed, so I didn't add any.\""
+ }
+]

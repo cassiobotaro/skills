@@ -1,0 +1,44 @@
+{
+  "project": "p201",
+  "total_tokens": 36047,
+  "cost_usd": 0.0229,
+  "num_turns": 2,
+  "first_turn_tokens": 36047,
+  "first_turn_turns": 2,
+  "total_duration_seconds": 8.5,
+  "dates": [
+    "2026-11-22"
+  ],
+  "answered": false,
+  "models": [
+    "claude-sonnet-5-5"
+  ],
+  "skills_listed": [
+    "deep-research",
+    "design",
+    "design-sync",
+    "dataviz",
+    "update-config",
+    "verify",
+    "debug",
+    "code-review",
+    "simplify",
+    "batch",
+    "fewer-permission-prompts",
+    "doctor",
+    "loop",
+    "claude-api",
+    "workflow-authoring",
+    "run",
+    "run-skill-generator",
+    "plugin-authoring"
+  ],
+  "skill_files_read": [],
+  "permission_denials": [],
+  "tool_calls": [
+    {
+      "tool": "Bash",
+      "target": "ls; ls docs doc adr docs/adr docs/adr* 2>/dev/null; grep -ril redis . --exclude-dir=.git | head -20"
+    }
+  ]
+}

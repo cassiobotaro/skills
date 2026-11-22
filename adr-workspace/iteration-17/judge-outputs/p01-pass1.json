@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "unmet",
+  "evidence": "Searched the whole first reply (lines 1-13) for a question to the user about a trade-off, cost, constraint, alternative, downside or negative. There is none. The reply only reports what was written ('I recorded the decision as ADR 3...') and offers 'Remove that line if you'd rather not state it.' That is not a question about what the decision gives up."
+ },
+ {
+  "id": "12.5",
+  "verdict": "unmet",
+  "evidence": "The ADR adds a load claim the user did not make: 'which reduces their load' (0003:21). The anchor case treats load claims as invention. It also adds a risk and constraint the user did not state: 'every asset must keep a fingerprinted filename; changing content without changing the name would serve stale files' (0003:23). The reply itself admits 'I added one consequence you didn't mention.'"
+ },
+ {
+  "id": "12.6",
+  "verdict": "unmet",
+  "evidence": "Searched the final reply for any statement that the record carries no trade-off, cost, downside or alternative. There is none. The reply instead says it added a constraint ('they must always keep fingerprinted filenames, or users will get stale files')."
+ }
+]

@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "unmet",
+  "evidence": "Searched the first reply (lines 1-15) for any question to the user about trade-offs, costs, constraints, alternatives or downsides. None found. The reply says 'Edit those if they don't match what you intend' (line 11), which invites edits but asks nothing about what the decision gives up or what was passed over."
+ },
+ {
+  "id": "12.5",
+  "verdict": "unmet",
+  "evidence": "The ADR asserts trade-offs and costs the user did not state: 'We take on CloudFront as a new piece of infrastructure to configure and operate.' (0003:25) and 'Non-fingerprinted files would need a different caching policy or explicit invalidation.' (0003:23). It also adds claims the user did not make: 'which reduces their load' (0003:21) and 'because static assets were served from the app servers in our home region' (0003:11)."
+ },
+ {
+  "id": "12.6",
+  "verdict": "unmet",
+  "evidence": "The reply does not tell the user that the record carries no trade-off. It says the opposite: 'I added two consequences you didn't mention. Caching forever only works while filenames stay fingerprinted, and CloudFront is new infrastructure to operate.' (reply line 11). The ADR does record invented costs."
+ }
+]

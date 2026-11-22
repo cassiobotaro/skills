@@ -1,0 +1,22 @@
+[
+ {
+  "id": "11.7",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers move into an autoscaling group, where instances are replaced without keeping their disks.\""
+ },
+ {
+  "id": "11.8",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call instead of a local disk read. The team accepted this cost\""
+ },
+ {
+  "id": "11.9",
+  "verdict": "met",
+  "evidence": "Searched the Context section (0003 line 11) for motives, general claims about S3, object storage, durability or common practice, incidents, numbers and alternatives. Found none. Its sentences reword the user's message: files 'currently stored on the local disk' (user: 'moving ... from the app servers' local disk'), and the autoscaling-group sentence matches the user's own words. 'Files kept on an instance's local disk would be lost whenever that instance is replaced' matches the MET anchor case."
+ },
+ {
+  "id": "11.10",
+  "verdict": "met",
+  "evidence": "Searched Decision (line 15) and Consequences (lines 19, 21) for performance, cost or load claims, general S3 properties, and alternatives. Found none. Line 15 restates the user's decision. Line 19 ('no longer depend on the life of any single app server, so instances ... can be replaced freely') follows directly from moving files off local disk. Line 21 restates the accepted trade-off. 'durability across instance replacement' restates the user's stated reason; it makes no general claim about S3."
+ }
+]

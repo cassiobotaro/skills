@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "unmet",
+  "evidence": "Searched the first reply (lines 1-13) for any question about a trade-off, cost, constraint, alternative, downside or negative. The reply asks no question. The nearest text is 'Remove that line if you'd rather not state it', which invites deleting a line and does not ask what the decision gives up."
+ },
+ {
+  "id": "12.5",
+  "verdict": "unmet",
+  "evidence": "doc/adr/0003-serve-static-assets-through-cloudfront.md:21 'which reduces their load' asserts a load property the user did not state. :23 'every asset must keep a fingerprinted filename; changing content without changing the name would serve stale files' asserts a constraint and risk the user did not state. :11 'because static assets were served from our single region' is a supplied cause."
+ },
+ {
+  "id": "12.6",
+  "verdict": "unmet",
+  "evidence": "Searched the final reply (lines 1-13) for any statement that the record carries no trade-off, cost, downside or alternative. None found. The reply instead says 'I added one consequence you didn't mention', presenting an added constraint rather than noting that no trade-off was recorded."
+ }
+]

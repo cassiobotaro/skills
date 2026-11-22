@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply: \"1. **Alternatives:** Did you consider anything else, such as a different CDN, a second region, or leaving things as they are? If so, why did you pass on it?\" and \"2. **Cost:** What are you taking on in exchange? This could be CDN spend, invalidation or deploy changes, or something else.\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Checked every line of doc/adr/0003-put-cloudfront-in-front-of-static-assets.md for a cost, risk, downside, alternative, trade-off or motive the user did not state. None found. Lines 11, 15, 19 and 21 reword the user's own statements: Asia users waiting three to four seconds for first paint, fingerprinted assets cacheable forever (written as 'indefinitely'), CloudFront in front of static assets, faster loads far from the region, and app servers no longer serving static files. Line 23 says 'No alternatives were considered and no downsides were identified when this decision was made.' This rewords the user's answer 'That is everything we have on this one; nothing else was discussed.' It records an absence and asserts no new cost or alternative. The date 2026-11-22 is the run date. No CDN cost, invalidation burden, load or performance claims beyond the user's words were found."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply line 32: \"The record has no trade-off. You said nothing else was discussed, so there are no alternatives or costs in it.\""
+ }
+]

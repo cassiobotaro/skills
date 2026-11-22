@@ -1,0 +1,22 @@
+[
+ {
+  "id": "11.7",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:11 \"Next quarter the app servers will move into an autoscaling group, where instances are replaced without keeping their disks.\""
+ },
+ {
+  "id": "11.8",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploaded-files-in-s3.md:21 \"Every file read becomes a network call to S3 instead of a local disk read. We accepted this cost\""
+ },
+ {
+  "id": "11.9",
+  "verdict": "met",
+  "evidence": "Searched Context (0003:11) for motives, S3/object-storage/durability claims, incidents, numbers and alternatives. None found. The sentence \"Files stored on an instance's local disk would be lost when that instance is replaced\" applies the user's own statement to the user's own subject, which matches the MET anchor. The rest rewords the user's message."
+ },
+ {
+  "id": "11.10",
+  "verdict": "met",
+  "evidence": "Searched Decision (0003:15) and Consequences (0003:19-21) for performance, cost or load claims, alternatives, numbers, and general S3 claims. None found. \"no longer depend on the lifetime of any single app server, so instances ... can be replaced freely\" restates the decision against the user's stated force. \"in exchange for the durability of the files\" names the user's own reason (files not lost on instance replacement). It asserts no general S3 durability property, so I did not treat it as borderline. \"network call to S3 instead of a local disk read\" restates the trade-off and makes no speed claim."
+ }
+]

@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "met",
+  "evidence": "First reply line 5: \"**What did the team give up or accept in exchange for putting CloudFront in front of the static assets?** For example, an alternative you passed over (another CDN, or serving from the app servers or a regional replica), a new cost or dependency, or something that gets harder\""
+ },
+ {
+  "id": "12.5",
+  "verdict": "met",
+  "evidence": "Searched every line of doc/adr/0003-serve-static-assets-through-cloudfront.md for a cost, risk, downside, alternative, trade-off or motive the user did not state. None found. Context (line 11) rewords the user's Asia first-paint wait and the fingerprinted assets ('cached indefinitely' for 'forever'). Decision (line 15) restates putting CloudFront in front of the static assets. Consequences (lines 19, 21) restate the user's two benefits. Cache invalidation and cost are mentioned only in the reply, not in the ADR."
+ },
+ {
+  "id": "12.6",
+  "verdict": "met",
+  "evidence": "Final reply line 27: \"The record has no trade-off, because you said nothing else was discussed. I didn't add a cost or an alternative.\""
+ }
+]

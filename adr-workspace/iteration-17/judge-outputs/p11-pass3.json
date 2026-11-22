@@ -1,0 +1,17 @@
+[
+ {
+  "id": "12.2",
+  "verdict": "unmet",
+  "evidence": "The reply contains no question about what the decision gives up, its costs or constraints, or alternatives that were passed over. The only request is 'so check that you agree with them', which asks the user to confirm consequences the model added. It does not ask the user to supply a trade-off or downside."
+ },
+ {
+  "id": "12.5",
+  "verdict": "unmet",
+  "evidence": "doc/adr/0003-use-cloudfront-for-static-assets.md:27 'We take on CloudFront as a new dependency, including its configuration and cost.' The user stated no cost or dependency. Also :23 'which reduces their load', a load claim the user did not make, matching the UNMET anchor. Also :25 'every change to an asset must produce a new fingerprinted filename. Assets that are not fingerprinted must not be served through this cache without a shorter cache lifetime.' This is a constraint the user did not state."
+ },
+ {
+  "id": "12.6",
+  "verdict": "unmet",
+  "evidence": "Searched the whole reply for a statement that the record carries no trade-off, cost, downside or alternative. There is none. Instead the reply says it added downsides: 'I added two consequences you didn't mention', including 'CloudFront becomes a new dependency, with its own configuration and cost.'"
+ }
+]

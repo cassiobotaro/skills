@@ -1,0 +1,22 @@
+[
+ {
+  "id": "11.7",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:13 \"Next quarter the application servers move into an autoscaling group. Instances in that group are replaced without their disks being kept\""
+ },
+ {
+  "id": "11.8",
+  "verdict": "met",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:23 \"Every file read becomes a network call to S3 instead of a local disk read.\""
+ },
+ {
+  "id": "11.9",
+  "verdict": "unmet",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:13 \"Local disk is also not shared between instances, so a file uploaded through one instance would not be readable through another.\" The user gave only instance replacement as the reason. Disk sharing is an added motive the user did not state."
+ },
+ {
+  "id": "11.10",
+  "verdict": "unmet",
+  "evidence": "doc/adr/0003-store-user-uploads-in-s3.md:23 \"We accept the added latency and the dependency on S3 availability.\" This is a performance claim the user did not make. Also :21 \"every instance sees the same files, so the application servers can scale in and out freely\" and :25 \"Existing files on the current servers must be migrated to S3 before the move to the autoscaling group.\""
+ }
+]

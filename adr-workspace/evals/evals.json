@@ -1,6 +1,6 @@
 {
   "skill_name": "adr",
-  "note": "Eleven evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. Assertion wording follows SKILL.md rule 2: the human prose (H1 title text, section bodies) follows the log's language, while the adr-tools scaffolding (the `Date:` label, the four `## Status/Context/Decision/Consequences` headings, the status word, and the supersede/amend verbs) stays canonical English so Structurizr's `!adrs` importer and `adr generate` keep parsing.",
+  "note": "Twelve evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. Assertion wording follows SKILL.md rule 2: the human prose (H1 title text, section bodies) follows the log's language, while the adr-tools scaffolding (the `Date:` label, the four `## Status/Context/Decision/Consequences` headings, the status word, and the supersede/amend verbs) stays canonical English so Structurizr's `!adrs` importer and `adr generate` keep parsing.",
   "evals": [
     {
       "id": 1,
@@ -177,6 +177,25 @@
         "Decision and Consequences assert nothing beyond the user's message and the existing ADRs, apart from direct logical restatements of the decision",
         "The two existing ADR files (0001, 0002) are byte-for-byte untouched and no other file is created"
       ]
+    },
+    {
+      "id": 12,
+      "name": "upsides-only-asks-for-trade-off",
+      "prompt": "Record this decision: we're putting CloudFront in front of the web app's static assets. Our users in Asia were waiting three to four seconds for first paint, and the assets are already fingerprinted, so they can be cached forever. With that, pages load faster for users far from our region and the app servers stop serving static files.",
+      "followup": "That is everything we have on this one; nothing else was discussed. Please record it now with what I gave you.",
+      "expected_output": "The user gave the decision, the forces and two gains, and nothing the decision gives up. First reply: asks, once, what the team gave up or passed over (a cost, a constraint, an alternative not taken) and writes no file; it does not ask for a 'downside' as if one had to exist, and it does not propose a trade-off of its own as fact. After the user's answer that nothing else was discussed: writes doc/adr/0003-<slug>.md in exact adr-tools format, English, Accepted, with only what the user said; Consequences carries the two stated gains and no cost, risk or alternative the user did not state; the reply says plainly that the record carries no trade-off. The two existing ADRs stay untouched.",
+      "files": [
+        "files/english-log/doc/adr/0001-record-architecture-decisions.md",
+        "files/english-log/doc/adr/0002-use-postgresql-for-persistence.md"
+      ],
+      "assertions": [
+        "Before the user's answer, no file is written and the reply asks what the decision gives up (a trade-off, cost, constraint or alternative passed over)",
+        "After the answer, a new doc/adr/0003-<slug>.md is created: H1 '# 3. <title>', ISO 8601 date with today's real date, the four sections in order, Accepted status, one-blank-line discipline",
+        "The record asserts nothing beyond the user's message and the existing ADRs: no cost, risk, downside, alternative or trade-off the user did not state",
+        "The final reply tells the user that the record carries no trade-off",
+        "The two existing ADR files (0001, 0002) are byte-for-byte untouched and no other file is created"
+      ],
+      "note": "Two turns: the harness answers a session that wrote no file with `followup`, once. Not the 'eval-12-rambling-request' of iterations 13 and 14, which was local to them and never in this file."
     }
   ]
 }
