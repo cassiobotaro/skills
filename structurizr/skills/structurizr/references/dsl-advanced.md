@@ -91,14 +91,25 @@ Cross-cutting annotations on elements/relationships (Security, Ownership, Tech D
 
 ```
 perspectives {
-    "Technical Debt" "Legacy auth module pending rewrite" "High"
+    perspective "Technical Debt" {
+        value "High"
+        description "Legacy auth module pending rewrite"
+    }
     perspective "Health" {
-        url "https://example.com/health"      // dynamic: polled, value shown live
+        url "https://example.com/health"
     }
 }
 ```
 
-Style by value: `element "Perspective:Technical Debt[value==High]" { stroke red }`.
+`value` is what a style matches on; `url` makes the perspective dynamic (polled, the
+response shown live). Write the block form, and a `description` only when the user gave one. The one-line form
+`"<name>" "<description>" ["<value>"]` is still valid, so leave it alone in a file that
+uses it, but its second token is the description: a value written there matches no style,
+and repeating the value to fill the slot states a description nobody gave.
+
+Style by value, on elements or relationships:
+`element "Perspective:Technical Debt[value==High]" { stroke #ff0000 }`,
+`relationship "Perspective:Ownership[value==Team 2]" { color #2d79d6 }`.
 
 ## 5. Scripts and plugins
 

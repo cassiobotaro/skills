@@ -37,9 +37,10 @@ env = deploymentEnvironment "Production" {
 ```
 
 `a -/> b { … }` removes the inherited a→b instance relationship and substitutes the
-block's relationships. A second `-/>` for another backend reuses the already-routed hop
-(`gw.apiGateway -> ss.service2` only). Lightweight alternative — keep the relationship,
-annotate it: `!relationships "ss.ui -> ss.service1" { technology "via API Gateway" }`.
+block's relationships. Both ends need an instance in the environment: with none of `a`
+deployed, the parser answers that the relationship does not exist. A second `-/>` for
+another backend reuses the already-routed hop (`gw.apiGateway -> ss.service2` only).
+Lightweight alternative — keep the relationship, annotate it: `!relationships "ss.ui -> ss.service1" { technology "via API Gateway" }`.
 A firewall sits the same way, typically as an `infrastructureNode` *inside* the server
 node it protects. Make infrastructure nodes read differently from servers:
 `element "Infrastructure Node" { shape ellipse }` in `styles`.
@@ -70,12 +71,15 @@ AWS, with ALB reroute and bundled theme:
 
 ```
 live = deploymentEnvironment "Live" {
+    deploymentNode "Web Browser" {
+        instanceOf ss.spa
+    }
     aws = deploymentNode "Amazon Web Services" {
-        tags "Amazon Web Services - Cloud"
+        tags "Amazon Web Services - AWS Cloud"
         region = deploymentNode "us-east-1" {
             tags "Amazon Web Services - Region"
             alb = infrastructureNode "Load Balancer" "" "Application Load Balancer" {
-                tags "Amazon Web Services - Elastic Load Balancing"
+                tags "Amazon Web Services - Load Balancing"
             }
             deploymentNode "Amazon ECS" "" "AWS Fargate" {
                 deploymentNode "API Task" "" "Docker Container" {
@@ -108,6 +112,32 @@ views {
 
 Use bundled theme names (dsl-reference §10) — the Structurizr cloud service is being
 retired, and `static.structurizr.com` theme URLs depend on it.
+
+**Theme tags.** A tag draws an icon only when the theme named in `views` defines it, and
+`validate` does not report one that it doesn't. `amazon-web-services-2025.07` renamed
+tags that the older themes and most examples online still use (`Cloud` is now
+`AWS Cloud`, `Elastic Load Balancing` is `Load Balancing`), and no version has the
+abbreviations (`S3`, `SQS`, `ECS`): the names are spelled out. Its names for the usual
+services, each prefixed with `Amazon Web Services - `:
+
+`AWS Cloud` · `Region` · `Virtual private cloud VPC` · `Public subnet` ·
+`Private subnet` · `Route 53` · `CloudFront` · `API Gateway` · `Load Balancing` · `WAF` ·
+`EC2` · `Auto Scaling group` · `Elastic Container Service` · `Fargate` ·
+`Elastic Kubernetes Service` · `App Runner` · `Lambda` · `RDS` · `Aurora` · `DynamoDB` ·
+`ElastiCache` · `Simple Storage Service` · `Simple Queue Service` ·
+`Simple Notification Service` · `EventBridge` · `Cognito` · `Secrets Manager`
+
+For a service not listed, or another theme (Azure, Google Cloud, Kubernetes), read the
+tags from the theme file in the image, which has no shell to `cat` it with:
+
+```
+docker create --name structurizr-themes structurizr/structurizr version
+docker cp structurizr-themes:/usr/local/structurizr-themes/<theme>/theme.json theme.json
+docker rm structurizr-themes
+```
+
+Delete `theme.json` afterwards. When you could not check a tag, say in the hand-off which
+icons are unverified.
 
 ## 3. Serverless functions (AWS Lambda and kin)
 

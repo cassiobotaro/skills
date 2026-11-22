@@ -174,7 +174,7 @@ Don't create ADRs the user didn't ask for; if there are none, simply don't emit 
 ### 6. Validate — always, before declaring done
 
 The validator is the `structurizr/structurizr` Docker image — the same one that serves
-the preview UI and the exports in step 8. Nothing else is needed: no MCP server, no local
+the preview UI in step 8 and the exports in `references/export.md`. Nothing else is needed: no MCP server, no local
 Java install. Run it from the directory that holds the DSL file:
 
 ```
@@ -228,57 +228,27 @@ who wasn't in the room:
 
 ### 8. Hand off
 
-Tell the user how to see and export the result. The image for both is
-`structurizr/structurizr` (current, consolidated) — never suggest `structurizr/lite`,
-it is deprecated.
+Tell the user how to see the result. The image is `structurizr/structurizr` (current,
+consolidated) — never suggest `structurizr/lite`, it is deprecated.
 
-- **Preview UI** at `http://localhost:8080` — live-reloads on DSL changes and saves
-  manual layout into `workspace.json`:
+The preview UI at `http://localhost:8080` live-reloads on DSL changes and saves manual
+layout into `workspace.json`:
 
-  ```
-  docker run --rm -it -p 8080:8080 -u $(id -u):$(id -g) \
-      -v "$PWD":/usr/local/structurizr \
-      -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
-      -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
-      -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-      structurizr/structurizr local
-  ```
+```
+docker run --rm -it -p 8080:8080 -u $(id -u):$(id -g) \
+    -v "$PWD":/usr/local/structurizr \
+    -e STRUCTURIZR_AUTOREFRESHINTERVAL=2000 \
+    -e STRUCTURIZR_AUTOSAVEINTERVAL=5000 \
+    -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
+    structurizr/structurizr local
+```
 
-  (the two interval variables make the UI pick up DSL edits every 2 s and persist manual
-  layout every 5 s, so the user doesn't lose an arrangement between edits)
+(the two interval variables make the UI pick up DSL edits every 2 s and persist manual
+layout every 5 s, so the user doesn't lose an arrangement between edits)
 
-- **Export** to `diagrams/` in a text format (`plantuml`, `plantuml/c4plantuml`,
-  `mermaid`, `websequencediagrams`, `json`, `theme`, `static`) with the regular image:
-
-  ```
-  docker run --rm -u $(id -u):$(id -g) \
-      -v "$PWD":/usr/local/structurizr \
-      -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-      structurizr/structurizr export -workspace workspace.json -format <format> -output diagrams
-  ```
-
-  This reads `workspace.json` (where saved layout lives), so preview with the UI at
-  least once first — or export straight from the DSL with `-workspace workspace.dsl`
-  (autolayout only). `dot`, `d2`, and `ilograph` are not formats this CLI knows.
-
-- **Export PNG/SVG** — only the `-playwright` variant of the image can render them; the
-  regular one answers `Exporting to PNG/SVG is not supported in this build`. The variant
-  is published per version (`structurizr/structurizr:<version>-playwright`, no floating
-  tag), bundles the same themes, and is a far larger pull (~2 GB). Match the version of
-  the regular image already in use (`docker run --rm structurizr/structurizr version`):
-
-  ```
-  docker run --rm -u $(id -u):$(id -g) \
-      -v "$PWD":/usr/local/structurizr \
-      -e STRUCTURIZR_THEMES=/usr/local/structurizr-themes \
-      structurizr/structurizr:<version>-playwright export \
-      -workspace workspace.json -format svg -output diagrams
-  ```
-
-  Writes one `<view key>.svg` (or `.png`) plus a `<view key>-key.svg` legend per view;
-  `-mode dark` renders the dark theme. The same `-workspace workspace.dsl` note applies.
-  When the variant isn't pulled and can't be, don't pull it on the user's behalf unless
-  asked — hand over this command instead, as with validation.
+When the user asks for exported diagrams (PlantUML, Mermaid, JSON, a static site, PNG,
+SVG), or another skill needs a rendered image, read `references/export.md` for the
+commands. Don't write them from memory: PNG and SVG need a different variant of the image.
 
 If the user has their own wrappers/aliases around these images, respect those instead.
 
@@ -293,6 +263,7 @@ Read only what the task needs — each file read is a per-invocation token cost.
 | `references/diagrams.md` | Choosing which diagrams to create, when step 3 leaves doubt: the seven view types, when each earns its place, and C4's notation rules. |
 | `references/deployment-patterns.md` | Deployment work: `-/>` rerouting, Docker/K8s/EKS/Fargate/App Runner nesting, serverless (Lambda + local emulator), multi-environment, deployment groups. |
 | `references/modeling-patterns.md` | Microservices, messaging, landscape/system catalog, hardware/devices as custom elements, monorepo composition. |
+| `references/export.md` | The user asks for exported diagrams (PlantUML, Mermaid, JSON, static site, PNG, SVG), or another skill needs a rendered image. |
 | `references/dsl-advanced.md` | Rare: archetypes, workspace extension, filtered/custom/image views, perspectives, scripts/plugins; plus the full include/exclude expression grammar and style property list. |
 
 ## Attribution

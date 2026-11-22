@@ -261,7 +261,9 @@ Avoid `https://static.structurizr.com/themes/...` URLs: the Structurizr cloud se
 is being retired (the docs list it under "End of life") and those URLs depend on it.
 
 Tag elements with the theme's tag names (e.g. `tags "Amazon Web Services - RDS"`) for
-icons. Local `styles` combine with themes.
+icons. Local `styles` combine with themes. A tag the theme does not define draws no icon
+and no command reports it, and the names changed between theme versions — take them from
+the list in `deployment-patterns.md` §2 or from the theme file, never from memory.
 
 **REMOVED:** `theme default` and `branding { }` (gone in v6).
 
