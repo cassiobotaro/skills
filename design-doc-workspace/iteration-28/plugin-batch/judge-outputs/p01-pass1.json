@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:77 \"Quais riscos e mitigações a equipe vê?\"; reply line 12 \"Quais são os riscos e as mitigações?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:79 \"Como o serviço entra em produção? Quais fases, com que critério de avanço e de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:60 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, aguardam resposta (pergunta 2).\" The user did not give Redis or service unavailability as a risk. Line 60 is a pending marker, but it still names these risks, so it is not a bare marker."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 62-64) for phases, criteria and rollback steps. It contains only \"Aguarda resposta (pergunta 4).\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:44 \"## Alternativas consideradas\"; :50 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :52 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "Under \"## Alternativas consideradas\" (line 44), line 54: \"Em troca, adiciona um salto ao caminho crítico da ingestão, com +5 ms estimados.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 8: \"**Desvio do template:** acrescentei a seção \"Alternativas consideradas\" entre Proposta e Riscos.\" and \"Se o time não aceitar seção extra, é só remover essa seção\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. Line 8 reads \"| **Revisores** | Aguarda resposta (pergunta 1) |\", which is pending and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:76 \"Quem revisa este documento?\"; reply line 11 \"Quem são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures stated as fact. Found only 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\". \"outubro de 2026\" is the user's \"mês passado\" resolved against today's date. The header dates and DD number are metadata, not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtor, financeiro and time de arquitetura, all named by the user. Mermaid is only the diagram format required by the template's diagram request."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. The document has no DSL block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-36) for endpoints, headers, status codes and failure branches. Its only branches are \"chave nova\" and \"chave repetida\", which match the user's description (descarta repetidos)."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the document's sentences for actor attributions. Produtor envia, ingestor repassa, serviço guarda/descarta/encaminha and equipe aceita o custo all follow from the user's message (serviço entre ingestor e Kafka, guarda a chave no Redis, trade-off aceito). Open questions are excluded."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:60 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, aguardam resposta (pergunta 2).\"; :58 \"A mitigação e o limite máximo aceitável aguardam resposta (pergunta 5).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:60 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, aguardam resposta (pergunta 2).\" This sentence sits outside Perguntas abertas and names risks the user did not give, inside a pending marker."
+ }
+]

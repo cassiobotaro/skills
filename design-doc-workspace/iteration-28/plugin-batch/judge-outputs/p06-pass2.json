@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:49 \"Riscos. O que pode dar errado com o serviço e como mitigamos?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:50 \"Plano de rollout. Como o serviço entra em produção? Quais são as fases (...), o critério para avançar de uma fase à seguinte e o critério para fazer rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 29-33). It states only the user's +5 ms extra hop as an accepted cost, plus the marker \"Os demais riscos e as mitigações aguardam resposta do autor\". No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 35-37). It contains only the marker \"aguardam resposta do autor (ver Perguntas abertas, 2)\" and states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:20 \"## Alternativas consideradas\"; :26 \"| Deduplicar em cada consumidor | Cada consumidor teria que reimplementar a deduplicação. |\"; :27 \"| Usar a idempotência nativa do produtor Kafka | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms appears at :31 under the template heading \"## Riscos\", which it shares with the pending marker, and at :45 under \"## Métricas de sucesso\". \"Latência no caminho crítico (custo aceito).\" is bold-free body text, not a heading. There is no heading of its own and the cost is not under \"Alternativas consideradas\"."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:9 \"**Desvio do template.** Ele não tem lugar para as alternativas que vocês descartaram. Acrescentei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos (...) Se a arquitetura não aceitar a seção extra, é só remover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Revisores e numeração. Quem revisa o doc na arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, duas vezes, 24 horas, +5 ms and 0,1%, all from the user. The other numbers are only the document ID and dates in the header, and 0,1% inside a question. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro, arquitetura and equipe, all named by the user or implied by \"time de arquitetura\" and \"Trade-off aceito\". Nothing else is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "The document has no Structurizr DSL."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "The document has no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked actor sentences at :14, :18 and :31. The service checking and recording the key in Redis and discarding repeats, the producers resending on retry, and the team accepting the cost all follow from the user's message. Actor questions such as who generates the key are left in Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:33 \"Os demais riscos e as mitigações aguardam resposta do autor (ver Perguntas abertas, 1).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched every section outside Perguntas abertas (Motivação, Proposta, Alternativas, Riscos, Rollout, Métricas). The only risk is the user's +5 ms cost. Redis unavailability appears only as a question at :49."
+ }
+]

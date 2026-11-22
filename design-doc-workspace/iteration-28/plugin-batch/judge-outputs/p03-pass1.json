@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:85 \"Quais outros riscos o time enxerga, e qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:89 \"Como entra em produção: tudo de uma vez ou em fases (por exemplo, modo observação sem descartar, depois por produtor)?\" and :90 \"Qual critério avança cada fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 53-56). The only risk is the user's +5 ms extra hop (line 55). No mitigation is stated: \"A mitigação está em Perguntas abertas.\" Line 56 defers the remaining risks to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 58-60). It only says \"Ainda não definido. As fases, os critérios de avanço e o rollback dependem das respostas em Perguntas abertas.\" No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "Heading :40 \"### Alternativas consideradas\"; :45 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; :46 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "Heading :49 \"### Trade-off aceito\"; :51 \"O serviço adiciona um salto no caminho crítico da ingestão. Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply, under \"**Desvio do template**\": \"Coloquei os dois como subseções de Proposta (`### Alternativas consideradas` e `### Trade-off aceito`), sem criar seção de primeiro nível. ... Se o time de arquitetura só aceita as seis seções sem subseção, é só mover o conteúdo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:73 \"Quem revisa? Arquitetura é o destino do documento, mas faltam os nomes e as áreas impactadas ...\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4% (mapped to outubro de 2026, which is last month relative to 2026-11-22), 24 horas, +5 ms, 0,1% and \"duas vezes\". Only the header dates appear besides these. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. :73 lists \"as áreas impactadas (financeiro, donos dos produtores, donos dos consumidores, infraestrutura do Redis e do Kafka)\". This names an infrastructure team as an impacted area, which the user never named. It sits inside a question but asserts that those areas are impacted."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL (workspace/model/container blocks). None present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-36) for endpoints, headers, status codes and failure branches. The only alt branches are new vs repeated key, which come from the user's \"descarta repetidos\". There is no endpoint, header, status code, or Redis/Kafka failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "unmet",
+  "evidence": "Borderline. Mermaid :34 \"D-->>I: descarta o evento\" shows the dedup service sending a message back to the Ingestor. The user never established this, and the document itself leaves it open at :82 \"O serviço descarta o evento repetido em silêncio ou devolve uma resposta ao ingestor?\""
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Os demais riscos e suas mitigações também estão em Perguntas abertas.\" and :55 \"A mitigação está em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched every section outside Perguntas abertas: Motivação, Proposta, Alternativas, Trade-off, Riscos, Rollout and Métricas. The only risk is the user's +5 ms hop. No failure mode (e.g. Redis down, race) or mitigation is stated outside lines 69-93."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 20: \"Quais são os riscos além da latência?\"; doc line 57: \"O que pode dar errado além da latência?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 21: \"Como é o rollout: fases, critério para avançar e plano de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched doc lines 35-37 (Riscos). The only risk named is the +5 ms latency, which the user gave. No mitigation is stated. The other risks are deferred to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc lines 39-41 (Plano de rollout). It says only \"O plano ainda não foi definido. Ver [Perguntas abertas]\". No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:22 \"## Alternativas consideradas\"; doc:25 \"**Deduplicar no consumidor.** Descartada: cada consumidor teria que reimplementar a deduplicação.\"; doc:26 \"**Idempotência nativa do produtor Kafka.** Descartada: ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:29 \"## Trade-offs aceitos\"; doc:33 \"✗ Um salto a mais no caminho crítico da ingestão, com estimativa de +5 ms de latência. O time aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"**Desvio do template:** ... Criei duas seções extras, \\\"Alternativas consideradas\\\" e \\\"Trade-offs aceitos\\\", entre Proposta e Riscos. ... Se a arquitetura só aceita o formato exato, mova esse conteúdo para dentro de Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. doc:8 reads \"| **Revisores** | Ver Perguntas abertas |\". This is a pending marker and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:56 \"Quem revisa, e de quais áreas (por exemplo, arquitetura, financeiro, quem opera o Redis e o Kafka)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the doc for figures. It contains only 4%, 0,1%, 24 h, +5 ms and the two complaints, all given by the user. The dates (2026-11-22) and the year in DD-2026 are header metadata, not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for named technologies, teams and stakeholders. The doc names Redis, Kafka, the ingestor, producers, consumers, finance and architecture. All appear in the user's message; architecture and finance appear only inside an open question."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "The document has no Structurizr DSL block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "The document has no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every action sentence. The service consults, stores and discards keys and forwards events to Kafka, which matches the user's description of a service between the ingestor and Kafka. Producers resend on retry and finance complained, both stated by the user. \"O time aceitou esse custo\" matches the user's \"Trade-off aceito\". \"Rafael não pôde responder\" matches the user's message. No unestablished actor is assigned an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:37 \"O único risco que o time levantou até agora é a latência adicional ... Os demais riscos e suas mitigações estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched Motivação, Proposta, Alternativas, Trade-offs, Riscos, Rollout and Métricas for risks, failure modes and mitigations. The only one found is the user's +5 ms latency. The Redis failure and the 24 h window appear only as questions under Perguntas abertas."
+ }
+]

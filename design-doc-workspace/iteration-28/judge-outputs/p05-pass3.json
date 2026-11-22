@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:58 \"Quais riscos você enxerga nesta proposta e como cada um será mitigado?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:59 \"Como o serviço entra em produção? Em fases ou de uma vez, com qual critério de avanço e qual plano de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section (lines 41-43). It holds only a pending marker: \"Aguarda resposta: o autor ainda não listou os riscos e as mitigações\". No risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 45-47). It holds only a pending marker: \"Aguarda resposta: fases, critérios de avanço e de rollback ainda não foram informados\". No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:22 \"### Alternativas consideradas\"; :28 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; :29 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:34 \"### Trade-offs aceitos\"; :39 \"✗ Um salto a mais no caminho crítico da ingestão, com +5 ms de latência estimados.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"**Desvio do template:** ... Criei duas subseções dentro de Proposta, \\\"Alternativas consideradas\\\" e \\\"Trade-offs aceitos\\\" ... Se a arquitetura não aceitar seções extras, é só mover o conteúdo ou removê-las.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. Line 8 reads \"| **Revisores** | Aguarda resposta (ver Perguntas abertas) |\", which is a pending marker. No reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:57 \"quem são os revisores, com a área de cada um?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the document. Found 4% (lines 14, 51), duas reclamações (line 14), 24 horas (line 18), +5 ms (lines 20, 39, 60) and 0,1% (line 51). All of these are the user's. The only other figures are the dates and year in the header, which are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names Redis, Kafka, ingestor, produtores, consumidores and o financeiro, all of which the user named. It names no other technology or team."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the actor assertions. Line 18 says the service consults, discards, stores the key for 24h and forwards to Kafka. Each follows from the user's \"fica entre o ingestor e o Kafka, guarda a chave idempotente ... no Redis por 24h e descarta repetidos\". Line 14 (produtores reenviam em retry) is the user's statement. No other actor is assigned an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:43 \"Aguarda resposta: o autor ainda não listou os riscos e as mitigações (pergunta 2 em Perguntas abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-54, outside Perguntas abertas, for risks, failure modes and mitigations. The only cost stated is the user's +5 ms. The Redis-unavailability scenario appears only in question 2 under Perguntas abertas (line 58)."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:52 \"Quais outros riscos o time identificou, e qual é a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:53 \"Rollout. Em que fases o serviço entra em produção, com qual critério de avanço e qual critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 32-36) for risks or mitigations the user did not give. It holds only the +5 ms latency the user accepted (line 34) and the pending marker \"Os demais riscos e suas mitigações aguardam resposta\" (line 36). Nothing invented."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 38-40). It contains only the pending marker \"Aguarda resposta, ver a pergunta 4 em Perguntas abertas.\" No phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:24 \"## Alternativas consideradas\"; :28 \"Deduplicar no consumidor: descartada.\"; :30 \"Idempotência nativa do produtor Kafka: descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms appears under \"## Proposta\" (line 20, \"O custo aceito é um salto a mais...\") and under \"## Riscos\" (line 34). Neither heading is dedicated to the trade-off, and the alternatives heading (lines 24-30) does not contain it."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"**Desvio do template, para você aceitar ou não:** acrescentei uma seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header row at docs/design/deduplicacao-de-eventos.md:8: \"| **Revisores** | |\". It is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:50 \"Quem são os revisores da arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It has 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\". \"Outubro de 2026\" is the user's \"mês passado\" resolved against today's date (2026-11-22). The DD number and dates are header metadata, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for named technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, financeiro, arquitetura and time, all from the user's message."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence. The service consulting, storing and discarding keys and delivering to Kafka follows from the user's \"fica entre o ingestor e o Kafka, guarda a chave... descarta repetidos\". The team accepting the cost is the user's \"Trade-off aceito\". Who generates the key is left as a question (line 51)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:36 \"Os demais riscos e suas mitigações aguardam resposta, ver a pergunta 3 em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:22 (Proposta, outside Perguntas abertas): \"comportamento quando o Redis não responde, garantias de atomicidade entre o Redis e o Kafka\". This names a failure mode and an atomicity risk the user never gave, inside a sentence saying they await an answer."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:59 \"**Riscos e mitigações:** além da latência, que riscos a equipe enxerga (...) e como cada um é mitigado?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:60 \"**Rollout:** como o serviço entra em produção (fases, por produtor, em modo sombra antes de descartar)? Qual o critério de avanço e como se faz rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section (lines 37-39). It states only the user's +5 ms latency cost and says \"A mitigação e os demais riscos estão em Perguntas abertas.\" No other risk and no mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 41-43). It contains only the marker \"Ainda não definido. As fases, os critérios de avanço e o plano de rollback estão em Perguntas abertas.\" No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:28 \"## Alternativas consideradas\"; line 32 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; line 33 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:22 \"### Trade-offs\"; line 26 \"✗ O serviço é mais um salto no caminho crítico da ingestão. Estimamos +5 ms de latência.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Fora do template:** ele não tem lugar para as alternativas que você descreveu, então criei uma seção \"Alternativas consideradas\" logo depois de Proposta. (...) confirme se o time de arquitetura aceita essa seção extra.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/servico-de-deduplicacao-de-eventos.md:8 reads \"| **Revisores** | A definir (ver Perguntas abertas) |\", which marks the row as pending and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:55 \"qual é o número de sequência deste documento (DD-2026-?) e quem deve revisar (...)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found only 4%, 24 horas/24h, +5 ms, 0,1% and the two complaints (\"reclamou duas vezes\"). The dates and year in the header are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline, judged unmet: docs/design/servico-de-deduplicacao-de-eventos.md:63 names \"(financeiro, produtores, plataforma)\". A team called \"plataforma\" is not named in the user's message or the template. The check does not exempt open questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the sentences that assign actions outside Perguntas abertas. In Proposta (line 20) the service checks, discards, stores the key for 24h and forwards to Kafka; the user established all of this. Line 34 has producers sending duplicates and finance complaining; this is the user's status quo. Lines 24-25 restate the user's reasons. No unestablished actor performs an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:39 \"A mitigação e os demais riscos estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched Motivação, Proposta, Trade-offs, Alternativas, Riscos, Rollout and Métricas. The only risk stated is the user's +5 ms latency. The \"Não fazer nada\" row restates the status quo the user described. Redis failure, the 24h window and key collision appear only as questions under Perguntas abertas."
+ }
+]

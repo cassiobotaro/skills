@@ -1,0 +1,12 @@
+[
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Riscos.** Além dos +5ms, o que pode dar errado e como mitigamos?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 6: \"**Plano de rollout.** Quais são as fases (por exemplo, sombra, percentual do tráfego, 100%)? Qual critério faz avançar de uma fase para a outra e qual dispara rollback?\""
+ }
+]

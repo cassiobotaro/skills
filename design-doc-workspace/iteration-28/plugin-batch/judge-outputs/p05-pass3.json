@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:55 \"Há outros riscos que o time já identificou, como dimensionamento do Redis para 24 horas de chaves ou o novo serviço virar ponto único de falha?\"; reply:21 \"O que acontece se o Redis cair? Há outros riscos que o time já identificou?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:57 \"Como o serviço entra em produção: em fases, com qual critério de avanço de uma fase para a seguinte e qual critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Read Riscos at doc:34-38. It holds only the user's accepted +5 ms trade-off and \"Os demais riscos e suas mitigações aguardam resposta, ver pergunta 4.\" Found no other risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Read Plano de rollout at doc:40-42. It holds only \"Aguarda resposta, ver pergunta 6.\" Found no phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:26 \"## Alternativas consideradas\"; doc:31 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; doc:32 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor...\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms appears under Proposta (doc:22 \"Estimamos +5 ms de latência por evento.\") and under the template's Riscos heading (doc:36). There is no heading dedicated to the trade-off, and the line is not under Alternativas consideradas (doc:26-32)."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:9 \"criei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos. Isso é um desvio do formato, e o time de arquitetura precisa aceitá-lo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked doc:8. The Revisores row reads \"Aguardando resposta, ver pergunta 1\" and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "reply:18 \"Quem revisa o doc e quais outros times são impactados?\"; doc:52 \"Quem revisa este documento pelo time de arquitetura...\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the doc for figures. Found 4%, 0,1%, 24 horas, +5 ms and 'duas vezes', all from the user. Also found the dates and DD-2026-001 (header metadata, the number flagged as a guess in question 8) and p99 (only inside a question). Found no other figure stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. doc:52 names stakeholders the user did not name: \"(financeiro, donos dos produtores, donos dos consumidores)\". doc:59 names \"wiki do time de arquitetura\". Both appear inside questions, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL and found none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the doc for a Mermaid block and found none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences in doc:14-48. The service keeps the key and discards repeats (user), producers resend on retry (user), finance complained (user), each consumer would have to reimplement (user). Found no actor assigned an action the user did not establish outside the questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:38 \"Os demais riscos e suas mitigações aguardam resposta, ver pergunta 4.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:24 names a failure mode outside Perguntas abertas, in a sentence saying it is not settled: \"comportamento quando o Redis estiver indisponível\". doc:20 also states a failure mode the user did not give: \"um reenvio que chegue depois de 24 horas do primeiro evento não é reconhecido como repetido.\""
+ }
+]

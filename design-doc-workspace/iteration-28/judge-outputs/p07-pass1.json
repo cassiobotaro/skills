@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:57 \"**Riscos.** O que pode dar errado além da latência? ... Como o time mitiga cada risco?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"**Plano de rollout.** Como o serviço entra em produção, em fases? Qual o critério para avançar de fase e qual o plano de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 35-37) for risks or mitigations the user did not give. The only risk stated is the +5 ms latency, which the user gave as the accepted trade-off. No mitigation is stated. The other risks are deferred to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 39-41). It contains only \"O plano ainda não foi definido. Ver [Perguntas abertas](#perguntas-abertas).\" No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:22 \"## Alternativas consideradas\"; :25 \"**Deduplicar no consumidor.** Descartada: cada consumidor teria que reimplementar a deduplicação.\"; :26 \"**Idempotência nativa do produtor Kafka.** Descartada: ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:29 \"## Trade-offs aceitos\"; :33 \"✗ Um salto a mais no caminho crítico da ingestão, com estimativa de +5 ms de latência. O time aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"**Desvio do template:** ... Criei duas seções extras, \\\"Alternativas consideradas\\\" e \\\"Trade-offs aceitos\\\", entre Proposta e Riscos. ... Se a arquitetura só aceita o formato exato, mova esse conteúdo para dentro de Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header Revisores row at line 8: \"| **Revisores** | Ver Perguntas abertas |\". This is a pending marker. No reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Quem revisa, e de quais áreas (por exemplo, arquitetura, financeiro, quem opera o Redis e o Kafka)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 0,1%, +5 ms, 24 horas and \"duas vezes\", all given by the user. The only other numbers are the header dates (2026-11-22), which are the creation date and not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, consumidores, financeiro and arquitetura. All of them appear in the user's message. No other technology, team or stakeholder is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None was found."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None was found."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences. The Proposta (line 18) has the service check, store and discard keys and forward events to Kafka, which matches the user's description of a service between the ingestor and Kafka. Line 33 \"O time aceitou esse custo\" matches the user's \"Trade-off aceito\". Line 37 \"risco que o time levantou\" restates the latency the user discussed. No actor is assigned an action the user did not establish."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:37 \"O único risco que o time levantou até agora ... Os demais riscos e suas mitigações estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched the sections outside Perguntas abertas (Motivação, Proposta, Alternativas, Trade-offs, Riscos, Rollout, Métricas) for risks, failure modes and mitigations. The only one found is the +5 ms latency, which is the user's accepted cost. The Redis-failure mode appears only as a question at line 57."
+ }
+]

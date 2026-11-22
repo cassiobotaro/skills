@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. I searched the reply and Perguntas abertas (lines 72-84) for a question asking the user which risks exist. Q4 (Redis indisponível), Q5 (24h) and Q6 (teto de latência) ask how specific risks are handled or bounded. None asks the user to name the risks. Riscos only says \"Mitigação: pendente, ver Perguntas abertas\", which points to mitigations, not to a request for the risks themselves."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:80 \"Como será o rollout: fases, critério de avanço e de rollback? Existe um modo de observação (medir sem descartar) antes de ligar o descarte?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"**Redis passa a ser dependência da ingestão.** Todo evento consulta o Redis antes de chegar ao Kafka.\" and :57 \"**Duplicatas fora da janela de 24h.** Um reenvio que chega depois de 24 horas da primeira entrega não é reconhecido.\" The user did not give these as risks; they were derived."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "I searched the Plano de rollout section (lines 59-61) for phases, advance criteria and rollback steps and found none. Line 61 reads \"Ainda não definido. As fases, os critérios de avanço e o critério de rollback dependem das respostas em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:41 \"### Alternativas consideradas\"; :45 \"**Deduplicar no consumidor.** Descartada: cada consumidor teria que reimplementar a deduplicação.\"; :46 \"**Idempotência nativa do produtor Kafka.** Descartada: não cobre reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:49 \"### Trade-off aceito\"; :51 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"o template não tem lugar para as alternativas que vocês discutiram. Criei \"Alternativas consideradas\" e \"Trade-off aceito\" como subseções de Proposta, e o doc avisa que elas não vêm do template. Se a arquitetura só aceita o formato exato, mova esse conteúdo para onde preferirem ou remova.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "I checked the header table: docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:72 \"Quem são os revisores deste documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "I searched the document for figures. The only ones stated are 4%, 24 horas, +5ms, 0,1% and duas reclamações, all given by the user. The latency baseline is \"não medida\". The remaining numbers are the dates and the doc number, which are header fields, not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/deduplicacao-de-eventos.md:83 \"Quais equipes além da de ingestão são afetadas (financeiro, donos de produtores e consumidores, plataforma do Redis e do Kafka)?\" This names an ingestion team and a Redis/Kafka platform team, which neither the user nor the template names. It sits inside a question, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "I searched the document for a Structurizr DSL block and found none; there is only a Mermaid block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "I searched the Mermaid block (lines 20-35) for endpoints, headers, status codes and failure branches. It has none. Its only branches are \"chave nova\" and \"chave repetida\" (descarta), both from the user."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "I searched every actor-action sentence. Ingestor→serviço→Redis→Kafka, the service storing the key for 24h and the service discarding repeats are all from the user's message. Who generates the key and the store/publish order are left as questions (Q2, Q3), not asserted."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:55 \"Mitigação: pendente, ver Perguntas abertas.\" (repeated at :56 and :57)"
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Redis passa a ser dependência da ingestão.\"; :57 \"Um reenvio que chega depois de 24 horas da primeira entrega não é reconhecido.\"; :39 \"o serviço só reconhece reenvios que chegam dentro dessa janela.\" These are risks and failure modes the user did not state."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:60 \"Quais riscos adicionais a equipe enxerga e como cada um é mitigado?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:63 \"Como o serviço entra em produção: em fases? Qual o critério para avançar de uma fase para a seguinte e qual o critério e o procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 37-41). The only risk is the user's +5ms latency. No mitigation is stated: \"A mitigação está nas Perguntas abertas.\" The rest is a pending marker (line 41)."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 43-45). It holds only the pending marker \"O plano ainda não foi definido. Ver Perguntas abertas.\" No phases, criteria or rollback steps."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:28 \"### Alternativas consideradas\"; :33 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; :34 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:22 \"### Trade-offs da proposta\"; :26 \"✗ O serviço entra como mais um salto no caminho crítico da ingestão. Estimamos +5ms de latência. A equipe aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 4: \"**Seção extra:** o template não tem lugar para os trade-offs nem para as alternativas que você discutiu. Coloquei os dois como subseções dentro de Proposta... Se a arquitetura não aceitar subseções extras, mova ou remova.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header. deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:55 \"Quem do time de arquitetura e de quais áreas (por exemplo, financeiro, plataforma, donos do Redis e do Kafka) deve revisar este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the doc. Found only 4%, 24 horas, +5ms, 0,1% and duas vezes, all from the user. The DD number and dates are header fields, not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: deduplicacao-de-eventos.md:55 names the team/stakeholder \"plataforma\" (and \"donos do Redis e do Kafka\") as example reviewers. The user's message and the template do not name them. The check does not exempt questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None found."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None found."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched every actor-action sentence outside questions. The service consults, stores, discards and forwards, which follows from the user's description. \"A equipe aceitou esse custo\" restates the user's \"Trade-off aceito\". No unestablished actor found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:41 \"Os demais riscos e suas mitigações dependem de informação que ainda falta. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched Motivação, Proposta, Trade-offs, Alternativas, Riscos, Rollout and Métricas for risks, failure modes and mitigations. The only one is the user's +5ms latency. Redis failure and the 24h window appear only as questions (lines 58, 60)."
+ }
+]

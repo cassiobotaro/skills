@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:49 \"Riscos. O que pode dar errado com o serviço e como mitigamos?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:50 \"Plano de rollout. Como o serviço entra em produção? Quais são as fases (...), o critério para avançar de uma fase à seguinte e o critério para fazer rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos section, lines 29-33. Line 31 holds only the user's accepted cost: one more hop and +5 ms. Line 33 is a pending marker: \"Os demais riscos e as mitigações aguardam resposta do autor\". No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout section, lines 35-37. It holds only a pending marker: \"As fases, os critérios de avanço e o critério de rollback aguardam resposta do autor (ver Perguntas abertas, 2).\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:20 \"## Alternativas consideradas\"; :26 \"| Deduplicar em cada consumidor | Cada consumidor teria que reimplementar a deduplicação. |\"; :27 \"| Usar a idempotência nativa do produtor Kafka | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms cost is at docs/design/deduplicacao-de-eventos.md:31 (\"Latência no caminho crítico (custo aceito)... Estimamos +5 ms de latência por evento.\"). It sits under \"## Riscos\", which is a general template heading. That heading is neither dedicated to the trade-off nor the alternatives heading. The text \"Latência no caminho crítico (custo aceito).\" is inline prose, not a heading."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"**Desvio do template.** Ele não tem lugar para as alternativas que vocês descartaram. Acrescentei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos... Se a arquitetura não aceitar a seção extra, é só remover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Revisores e numeração. Quem revisa o doc na arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole doc for figures. Found 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\", all given by the user. DD-2026-001 and the dates are header metadata, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro/faturamento and arquitetura, all named by the user. Nothing else is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every action sentence. The service consults/registers the key in Redis and discards repeats (user said this). Producers resend on retry (user said this). \"A equipe aceitou esse custo\" matches the user's \"Trade-off aceito\". Actor questions (who generates the key, who reviews) are only in Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:33 \"Os demais riscos e as mitigações aguardam resposta do autor (ver Perguntas abertas, 1).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-45 outside Perguntas abertas for risks, failure modes and mitigations. Only the user's +5 ms accepted cost appears. Redis unavailability and the post-24h resend appear only as questions at lines 49 and 53."
+ }
+]

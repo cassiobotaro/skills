@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:55 \"Há outros riscos que o time já identificou, como dimensionamento do Redis para 24 horas de chaves ou o novo serviço virar ponto único de falha?\"; reply:21 \"O que acontece se o Redis cair? Há outros riscos que o time já identificou?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:57 \"Como o serviço entra em produção: em fases, com qual critério de avanço de uma fase para a seguinte e qual critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos, lines 34-38. Line 36 states only the +5 ms hop the user accepted. Line 38 is a pending marker: \"Os demais riscos e suas mitigações aguardam resposta, ver pergunta 4.\" No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout, lines 40-42. The only content is \"Aguarda resposta, ver pergunta 6.\" It states no phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:26 \"## Alternativas consideradas\"; :31 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :32 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Looked for +5 ms under a heading of its own or under 'Alternativas consideradas'. It appears only under '## Proposta' (line 22, \"Estimamos +5 ms de latência por evento.\") and '## Riscos' (line 36). Neither is a dedicated trade-off heading or the alternatives heading."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:9 \"criei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos. Isso é um desvio do formato, e o time de arquitetura precisa aceitá-lo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. Line 8 reads \"| **Revisores** | Aguardando resposta, ver pergunta 1 |\", which is pending and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:52 \"Quem revisa este documento pelo time de arquitetura e quais outros times são impactados\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4%, 24 horas, +5 ms, 0,1% and 'duas vezes', all from the user. Dates and DD-2026-001 are header metadata, and DD-2026-001 is flagged as a question. 'p99' appears only inside question 7. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 59 names a tool the user never named: \"existe sequência em outro lugar (wiki do time de arquitetura)?\". Line 52 also names stakeholders \"donos dos produtores, donos dos consumidores\". Both appear inside questions, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL; none present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block; none present (the reply confirms \"Não pus diagrama\")."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked actor assertions outside questions. 'o serviço ... descarta o evento' and 'guarda a chave no Redis por 24 horas' (line 18) come from the user. So do 'produtores, que reenviam' (line 14) and 'cada consumidor teria que reimplementar' (line 31). Who generates the key and the operation order are left to questions 2 and 3. No unsupported actor attribution."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:38 \"Os demais riscos e suas mitigações aguardam resposta, ver pergunta 4.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Outside Perguntas abertas, line 24 names a failure mode in a sentence saying it is not settled: \"comportamento quando o Redis estiver indisponível\". Line 20 states another failure mode the user did not give: \"um reenvio que chegue depois de 24 horas do primeiro evento não é reconhecido como repetido.\""
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-eventos.md:79 \"O que o serviço faz quando o Redis está indisponível: deixa os eventos passarem (aceitando duplicatas) ou bloqueia a ingestão?\" and :81 \"Um reenvio depois de 24 horas é aceitável como duplicata residual?\" Both are under the heading \"Falhas e riscos\"."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-eventos.md:75 \"Como o serviço entra em produção? Em fases (por exemplo, por produtor ou por percentual do tráfego), ou de uma vez?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/dedup-eventos.md:56 \"O serviço depende do Redis para decidir cada evento.\" and :57 \"A janela é de 24 horas, então um reenvio após esse prazo não é detectado.\" The user did not state either risk. :55 also gives the mitigation \"Validar a estimativa antes do rollout\", which the user did not give."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (dedup-eventos.md:59-61) for phases, advance criteria and rollback steps. It holds only the marker \"A definir. As fases, os critérios de avanço e de rollback estão nas Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "dedup-eventos.md:39 \"### Alternativas consideradas\"; :41 \"**Deduplicar no consumidor.** Descartada.\"; :43 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "dedup-eventos.md:47 \"### Trade-off aceito\"; :49 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 6: \"**Desvio:** o template não tem lugar para as alternativas que vocês discutiram nem para o trade-off aceito. Coloquei os dois como subseções de Proposta (`Alternativas consideradas` e `Trade-off aceito`)... A arquitetura pode preferir outro lugar para eles, então vale conferir.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header table. dedup-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "dedup-eventos.md:89 \"Quem revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the document: 4%, 24 horas, +5 ms, 0,1%, duas vezes and DD-2026-001 (an identifier, not a metric). \"outubro de 2026\" is the user's \"mês passado\" read against today's date. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names ingestor, Kafka, Redis and financeiro, all from the user. Mermaid is the diagram format, not system technology. \"times produtores\"/\"times consumidores\" appear only inside question 9 and derive from the user's producers and consumers."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. None present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-35) for endpoints, headers, status codes and failure branches. It has none. Its only alternative branch is the user's discard of repeated keys."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the document's actor sentences. \"O ingestor entrega cada evento ao serviço\" follows from the user's \"fica entre o ingestor e o Kafka\". The service registering keys and discarding repeats is the user's proposal. Who generates the key is asked only as question 6."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "dedup-eventos.md:56 \"| O serviço depende do Redis para decidir cada evento. | A definir (ver Perguntas abertas). |\"; :57 \"A definir (ver Perguntas abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "dedup-eventos.md:56 \"O serviço depende do Redis para decidir cada evento.\"; :57 \"um reenvio após esse prazo não é detectado\"; :37 \"Um reenvio que chegue depois de 24 horas passa como evento novo.\"; :55 mitigation \"Validar a estimativa antes do rollout\". None of these was given by the user."
+ }
+]

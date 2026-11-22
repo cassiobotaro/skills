@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento em caso de retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:63 \"O que pode dar errado com esta proposta e como mitigamos cada risco?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:64 \"Como o serviço entra em produção: em fases ou de uma vez? Qual o critério de avanço e qual o plano de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section (lines 43-45). Line 45 is \"Aguarda resposta (pergunta 5).\" plus the +5ms latency, which the user gave. It states no other risk and no mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 47-49). Line 49 is only \"Aguarda resposta (pergunta 6).\" It states no phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:36 \"### Alternativas consideradas\"; :39 \"**Deduplicar no consumidor.** Descartada: cada consumidor teria que reimplementar a deduplicação.\"; :40 \"**Idempotência nativa do produtor Kafka.** Descartada: não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:30 \"### Trade-offs aceitos\"; :34 \"O serviço é mais um salto no caminho crítico da ingestão. Estimamos +5ms de latência, e o time aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply: \"O template não tem lugar para metas, trade-offs e alternativas, e você me deu esse conteúdo. Criei três subseções para ele\" ... \"Se a arquitetura não aceitar essas subseções, é só removê-las ou mover o conteúdo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the Revisores row. docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | Aguarda resposta (pergunta 2) |\" names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:60 \"Quem revisa, e de quais áreas?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 0,1%, 24h/24 horas, +5ms and \"duas vezes\", all given by the user. The only other numbers are dates and the question numbers, which are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found ingestor, Kafka, Redis, produtores, consumidores, financeiro and arquitetura, all named in the user's message. No other name appears."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched for a Mermaid block. The document has none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor assertion. \"o serviço consulta a chave... guarda... descarta\" matches the user's proposal. \"os consumidores... não precisam implementar nada\" follows from the user's rejected alternative. \"o time aceitou esse custo\" matches \"Trade-off aceito\". \"A arquitetura aceita o documento\" matches the user's message. Reviewer roles appear only as questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:45 \"Aguarda resposta (pergunta 5).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Outside Perguntas abertas, docs/design/deduplicacao-de-eventos.md:28 names a failure mode the user did not give: \"o que o serviço faz quando o Redis não responde\". The sentence says it awaits an answer, but under the check that still counts as stating the failure mode."
+ }
+]

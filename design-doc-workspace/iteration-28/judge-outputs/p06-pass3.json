@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:54 \"5. Quais riscos vocês enxergam e como mitigá-los\"; reply line 20 \"5. Quais riscos você enxerga e como mitigá-los?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:55 \"6. Como o serviço entra em produção: em fases, com qual critério de avanço e qual de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section (lines 34-36). It contains only the pending marker \"Aguarda resposta. Veja a pergunta 5 em Perguntas abertas.\" and states no risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 38-40). It contains only \"Aguarda resposta. Veja a pergunta 6 em Perguntas abertas.\" and states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:28 \"### Alternativas consideradas\"; doc:30 \"**Deduplicar no consumidor** (descartada): cada consumidor teria que reimplementar a deduplicação.\"; doc:31 \"**Idempotência nativa do produtor Kafka** (descartada): não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:22 \"### Trade-offs da solução escolhida\"; doc:26 \"✗ O serviço vira mais um salto no caminho crítico da ingestão. Estimamos +5ms de latência. Aceitamos esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply line 8: \"**Desvio do template, para você aceitar ou não:** ... Criei duas subseções dentro de Proposta, \\\"Trade-offs da solução escolhida\\\" e \\\"Alternativas consideradas\\\".\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the Revisores row at doc:8. It reads \"Aguarda a pergunta 2\", a pending marker, and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "reply line 17 \"2. Quem são os revisores e de quais áreas?\"; doc:51 \"2. Quem revisa, e de quais áreas?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4% (lines 14, 32, 44), 24 horas (18), +5ms (26, 56), 0,1% (44) and \"duas vezes\" (14), all given by the user. The dates and the year are header metadata, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, consumidores, financeiro and time de arquitetura, all named by the user. No other name appears."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the assertions at doc:14, 18, 24 and 30-32. The service consults the key in Redis, discards repeats, keeps the key 24h and forwards to Kafka; this follows from the user saying it sits between the ingestor and Kafka, stores the key in Redis for 24h and drops repeats. Producers resending on retry is also the user's. The time de arquitetura appears only in a question."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:36 \"Aguarda resposta. Veja a pergunta 5 em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:20 (Proposta, outside Perguntas abertas): \"Os detalhes ... do comportamento quando o Redis fica indisponível ... aguardam resposta\". This names a failure mode, Redis being unavailable, that the user did not give, in a sentence that says it is still pending."
+ }
+]

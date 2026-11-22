@@ -1,0 +1,195 @@
+{
+ "note": "Check list of design-doc iteration-28: does a paragraph added to step 2 stop the skill from writing risks nobody gave when the user wants the document before they can answer? Frozen before any run of this iteration. Eval 71 is eval 7 with the sentence in which the user says they cannot answer now; its checks 7.1 to 7.22 are iteration-27's, verbatim, and 7.23 and 7.24 are new: 7.23 states what the section should hold instead, 7.24 widens 7.8 from the Riscos section to the whole document, so that a risk moved to another section does not pass. 7.8 and 7.24 overlap and are reported per check. Eval 7 is the same request without that sentence, a guard: the skill must still ask first and write no file (7.G1 by script, 7.6 and 7.7 judged). kind=file and kind=absence by grade.py, the rest by eval-tools/judge.py, three passes, unanimous. A borderline case resolves to not met.",
+ "frozen_on": "2026-11-22",
+ "prediction": "Cells: a is design-doc 1.9.0 as shipped (skill-a, a copy), b is the same with one paragraph added to step 2 (skill-b; diff skill-a/SKILL.md skill-b/SKILL.md). Four runs per cell on eval 71, two on eval 7. iteration-27 saw 7.8 unmet in 4 of 4 runs with the sentence (two with 1.6.0, whose body is 1.9.0's, two with 1.7.0), in another harness (the skill invoked through the Skill tool). If the defect shows here too, a meets 7.8 and 7.24 in one run of four or none. Rule: the paragraph is adopted if b meets 7.8 and 7.24 in at least three of four runs while a meets them in at most one, no other check of eval 71 is met in two runs fewer in b than in a, and on eval 7 both runs of b write no file and ask for the risks and the rollout plan. If a meets 7.8 in three runs or more, the defect did not reproduce in this harness and nothing is edited on this evidence. Four runs measure no rate; this separates 'nearly every time' from 'nearly never'.",
+ "amendments": [
+  "2026-11-22, after the twelve runs of cells a and b were judged and before any run of the cells it adds. Result of the first batch, by the rule above: a met 7.8 and 7.24 in 4 of 4 runs, so the defect did not reproduce in this harness (a brief that tells the session to read the skill), and b is rejected on its own account: on eval 7 both of its runs wrote the document without being asked to (7.G1 0/2 against 2/2), which the words 'or nobody is there to reply' of its paragraph invite in a headless session, and it met 7.24 in 2 of 4. Nothing is edited on that batch. iteration-27 saw the defect in another harness, where the skill is installed and invoked through the Skill tool and `unslop` runs after it, so the pilot is repeated there: cells pa (skill-a) and pc (skill-c, a revised paragraph written before any pa output: it applies only when the user says so, and it also bars a clause in another section), design-doc and unslop loaded with --plugin-dir from copies outside the project, the prompt alone, run_plugin.py. First pa on eval 71, four runs. If pa meets 7.8 in three runs or more, the defect does not reproduce with 1.9.0 in either harness and the iteration ends with no edit. Otherwise pc runs four times on eval 71 and pa and pc twice each on eval 7, and the rule of the prediction applies to pa and pc as it did to a and b. A run in which design-doc is not invoked through the Skill tool is invalid, kept aside and rerun once. No check was changed."
+ ],
+ "anchors": {
+  "invention": [
+   {
+    "verdict": "MET",
+    "case": "User: 'subimos um segundo worker e o download caía no worker que não tinha o arquivo e devolvia 404'. Document, under Alternativas consideradas: 'Não fazer nada. Descartada: com dois workers, o download caía no worker que não tinha o arquivo e devolvia 404.'",
+    "why": "The status quo the user described, with the user's own reason for leaving it. Listing it under alternatives asserts nothing the user did not say."
+   },
+   {
+    "verdict": "UNMET",
+    "case": "Same user message. Document: 'Não fazer nada. Descartada: os 404 geravam chamados no suporte e o time avaliou que o custo de manter o disco local era maior.'",
+    "why": "Support tickets, an evaluation by the team and a cost comparison are not in the user's message. The entry now reports a deliberation that was never described."
+   },
+   {
+    "verdict": "UNMET",
+    "case": "User states a solution and no problem. Document: 'Não fazer nada. Descartada: o cadastro ficaria incompleto.'",
+    "why": "The user described no pain, so there is nothing to build the entry from. Its reason is composed, and belongs in a question."
+   }
+  ]
+ },
+ "evals": {
+  "7": [
+   {
+    "id": "7.G1",
+    "assertion": 4,
+    "kind": "absence",
+    "check": "No file other than TEMPLATE.md exists under the project root after the run: the session wrote nothing"
+   },
+   {
+    "id": "7.6",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The reply or the document asks the user for the risks (quote the question)"
+   },
+   {
+    "id": "7.7",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The reply or the document asks the user for the rollout plan (quote the question)"
+   }
+  ],
+  "71": [
+   {
+    "id": "7.1",
+    "assertion": 1,
+    "kind": "file",
+    "check": "Exactly one new .md file exists under docs/design/ after the run besides TEMPLATE.md"
+   },
+   {
+    "id": "7.2",
+    "assertion": 1,
+    "kind": "reply",
+    "check": "The document written in this run is in Portuguese (quote its first sentence)"
+   },
+   {
+    "id": "7.3",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The new document has the level-2 headings Motivação, Proposta, Riscos, Plano de rollout, Métricas de sucesso and Perguntas abertas, in that order (other headings may sit between them)"
+   },
+   {
+    "id": "7.4",
+    "assertion": 2,
+    "kind": "file",
+    "check": "The new document has the template's header table: a row for each of Documento, Estado, Autores, Revisores, Criado em and Última atualização"
+   },
+   {
+    "id": "7.5",
+    "assertion": 3,
+    "kind": "file",
+    "check": "No heading of the new document is 'Visão geral', 'Escopo e contexto' or 'Objetivos e fora de escopo' (case-insensitive)"
+   },
+   {
+    "id": "7.6",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The reply or the document asks the user for the risks (quote the question)"
+   },
+   {
+    "id": "7.7",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The reply or the document asks the user for the rollout plan (quote the question)"
+   },
+   {
+    "id": "7.8",
+    "assertion": 4,
+    "kind": "invention",
+    "check": "The Riscos section states no risk and no mitigation that the user did not give. A marker saying the section is pending the user's answer passes"
+   },
+   {
+    "id": "7.9",
+    "assertion": 4,
+    "kind": "invention",
+    "check": "The Plano de rollout section states no phase, criterion to advance or rollback step that the user did not give. A marker saying the section is pending the user's answer passes"
+   },
+   {
+    "id": "7.10",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The two alternatives the user discussed (deduplicating in the consumer, the native idempotence of the Kafka producer) are recorded under a heading of their own, at any level (quote the heading and one line of each)"
+   },
+   {
+    "id": "7.11",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The accepted cost of +5 ms of latency is recorded under a heading of its own or under the heading that holds the alternatives, at any level (quote the heading and the line)"
+   },
+   {
+    "id": "7.12",
+    "assertion": 5,
+    "kind": "reply",
+    "check": "The reply names the heading added beyond the template as a deviation, so that the user can accept it (quote)"
+   },
+   {
+    "id": "7.13",
+    "assertion": 6,
+    "kind": "file",
+    "check": "The Autores row of the header table holds 'Rafael Nunes'"
+   },
+   {
+    "id": "7.14",
+    "assertion": 6,
+    "kind": "file",
+    "check": "The Estado row of the header table holds 'Rascunho' (case-insensitive)"
+   },
+   {
+    "id": "7.15",
+    "assertion": 6,
+    "kind": "file",
+    "check": "Every ISO date (YYYY-MM-DD) in the new document is the run date, and the run date appears at least once"
+   },
+   {
+    "id": "7.16",
+    "assertion": 6,
+    "kind": "invention",
+    "check": "The header names no reviewer: the Revisores row is empty or marked as pending"
+   },
+   {
+    "id": "7.17",
+    "assertion": 6,
+    "kind": "reply",
+    "check": "The reply or the document asks the user who the reviewers are (quote)"
+   },
+   {
+    "id": "7.18",
+    "assertion": 7,
+    "kind": "invention",
+    "check": "Every metric in the document is one the user gave (4% of duplicates last month, the key kept for 24 h, +5 ms of latency, the target below 0,1%, two complaints from finance). No other figure is stated as fact"
+   },
+   {
+    "id": "7.19",
+    "assertion": 7,
+    "kind": "invention",
+    "check": "The document names no technology, team or stakeholder that the user's message and the template do not name"
+   },
+   {
+    "id": "7.20",
+    "assertion": 8,
+    "kind": "invention",
+    "check": "In the Structurizr DSL, a technology slot is filled only with a technology the user named (Redis, Kafka) and no relationship carries a protocol the user did not name. Met when the document has no DSL"
+   },
+   {
+    "id": "7.21",
+    "assertion": 8,
+    "kind": "invention",
+    "check": "The Mermaid flow has no endpoint, header, status code or failure branch that the user did not give. Met when the document has no Mermaid block"
+   },
+   {
+    "id": "7.22",
+    "assertion": 0,
+    "kind": "invention",
+    "check": "No sentence written in this run names a component, service, team or person as the one that performs an action when neither the user's message nor the files in the project before the run establish that this actor performs it. A question, or an entry under open questions, is not an assertion"
+   },
+   {
+    "id": "7.23",
+    "assertion": 4,
+    "kind": "reply",
+    "check": "The Riscos section says that it awaits the user's answer, or that it is pending, and points to the open questions or to the reply (quote file:line)"
+   },
+   {
+    "id": "7.24",
+    "assertion": 4,
+    "kind": "invention",
+    "check": "Outside Perguntas abertas, the document states no risk, failure mode or mitigation that the user did not give. The accepted cost of +5 ms is the user's and passes wherever it is written; a risk put as a question under Perguntas abertas passes; a risk named in a sentence that says it was not discussed yet is still stated and does not pass"
+   }
+  ]
+ }
+}

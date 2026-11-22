@@ -1,0 +1,12 @@
+[
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "reply:3 \"**Riscos:** o que pode dar errado com o serviço e como vocês mitigam cada risco?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "reply:7 \"**Plano de rollout:** como o serviço entra em produção? Preciso das fases (shadow mode, canário, por produtor etc.), do critério para avançar de uma fase para a outra e do critério e procedimento de rollback.\""
+ }
+]

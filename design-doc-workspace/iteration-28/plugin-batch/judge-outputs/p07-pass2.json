@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "dd-2026-001...md:53 \"O que acontece com a ingestão se o Redis ficar indisponível: o serviço deixa passar os eventos (e as duplicatas voltam), bloqueia a ingestão ou faz outra coisa?\" (under ### Riscos, questions 3–7)"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "dd-2026-001...md:48 \"Como o serviço entra em produção: em fases, com tráfego parcial ou em modo sombra antes de descartar de verdade? Qual critério libera cada avanço?\"; :49 \"Qual condição dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos section (lines 30-34). It holds only the user's +5 ms trade-off (line 32) and a pending marker at line 34: \"Falta levantar os demais riscos da proposta e a mitigação de cada um.\" No invented risk or mitigation found."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout section (lines 36-38). It contains only a pending marker: \"Ainda não definido. As fases, os critérios de avanço e de rollback estão em Perguntas abertas.\" No phase, criterion or rollback step found."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "dd-2026-001...md:22 \"## Alternativas consideradas\"; :26 \"Deduplicar no consumidor. Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :27 \"Idempotência nativa do produtor Kafka. Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms line is at :32 (\"Estimamos +5 ms de latência por evento. A equipe aceitou esse custo...\"). It sits under \"## Riscos\", the template's risk heading, which also holds the pending marker. That is not a heading dedicated to the trade-off, and it is not the Alternativas consideradas heading."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"Desvio do template: acrescentei a seção \"Alternativas consideradas\", entre Proposta e Riscos. ... Se a arquitetura não aceitar a seção extra, é só remover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked header line 8: \"| **Revisores** | |\". The row is empty and no reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "dd-2026-001...md:65 \"Quais equipes fora a nossa são afetadas (...) e quem precisa revisar o documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4% (:14, :28, :42), 24 horas (:18, :20), +5 ms (:32, :43, :56), 0,1% (:42, :62) and duas vezes (:14), all from the user. The only other figures are dates and the DD number in the header, which are not metrics, and the question numbering. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. dd-2026-001...md:65 lists \"infraestrutura do Redis e do Kafka\" as an affected team. The user's message never names an infrastructure team. The mention is inside a question, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a ```mermaid block. None is present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor sentence. The service consulting, recording and discarding (:18) follows the user's 'guarda a chave idempotente ... e descarta repetidos'. The pipeline receiving duplicates (:14) is the user's. \"A equipe aceitou esse custo\" (:32) matches the user's 'Trade-off aceito'. No unsupported actor assignment found outside the questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "dd-2026-001...md:34 \"Falta levantar os demais riscos da proposta e a mitigação de cada um. As dúvidas que já existem estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas for risks, failure modes and mitigations. Line 32 is the user's +5 ms cost. Line 20 restates the 24 h window as the definition of the user's design, not a new failure mode. Line 28 describes the status quo with the user's numbers. Redis outage, key loss and false discards appear only as questions (:53-57)."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:57 \"Há outros riscos que o time já discutiu (perda de dados do Redis, capacidade, evento descartado por engano)? Qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:61 \"A entrada em produção é de uma vez ou em fases (por exemplo, por produtor)?\" and :62 \"Qual o critério para avançar de uma fase à seguinte e qual o critério e o procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos section (lines 36-40). It has only the user's +5ms latency cost (line 38) and a pending marker (line 40). No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 42-44). It says only \"Ainda não definido. As perguntas estão em Perguntas abertas.\" No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:26 \"## Alternativas consideradas\"; :30 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; :31 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:22 \"### Trade-off aceito\"; :24 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Desvio do template que você precisa aceitar:** o template não tem lugar para as alternativas que você descreveu, então criei a seção \"Alternativas consideradas\" logo depois da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:72 \"Quem deve revisar?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4%, 24 horas, +5ms, 0,1%, \"duas vezes\", plus dates and document IDs. All figures come from the user."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: the suggestion sits inside an open question, but this check has no exemption for questions. docs/design/servico-de-deduplicacao-de-eventos.md:72 \"Sugestão: as áreas de infraestrutura (Redis e Kafka), o financeiro (consumidor dos relatórios de faturamento) e as equipes produtoras dos eventos.\" The user never named \"áreas de infraestrutura\" as a team."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None is present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked actor sentences outside the open questions. Line 18: the service checks, stores and discards keys, as the user said. Line 24: \"O time aceita\" the trade-off, as the user said. Line 14: producers resend on retry, as the user said. The reviewer suggestion at line 72 is inside Perguntas abertas, so it is not an assertion."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:40 \"Os demais riscos e suas mitigações dependem de informação que ainda não temos. As perguntas estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-50 outside Perguntas abertas for risks, failure modes and mitigations. Found only the +5ms latency cost (lines 24, 32, 38) and the status-quo consequence at line 34, which comes from the user's statement about inflated billing. No Redis outage or other risk appears outside the questions."
+ }
+]

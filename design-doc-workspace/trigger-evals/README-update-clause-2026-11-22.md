@@ -51,3 +51,24 @@ consult the skill; in a project where the file exists it edits the file. A reque
 change a file that is in the project cannot be measured by this harness, and the evidence
 that the clause wins it is `update-request-2026-11-22/` (8/8 against 0/16, eight sessions
 with the candidate, no body rewritten).
+
+## The haiku number for 1.9.0
+
+One sweep on claude-haiku-5-5 with the 1.9.0 text, positives at 5 runs and negatives at
+3 (`serial-2026-11-22-routine-haiku-1.9.0.json`, 91 sessions, Claude Code 2.1.330).
+
+| | 1.9.0, 2026-11-22 | old text, 2026-11-20 (`serial-2026-11-20-routine-haiku.json`) |
+|---|---|---|
+| the ten old positives | 40/50 (80%) | 31/50 (62%) |
+| the new positive | 5/5 | not in the set |
+| negatives | 0/33, the new one included | 0/10 |
+| canary | 3/3 | 5/5 |
+
+Per query, old positives in the order of the set: 5, 4, 0, 5, 5, 5, 4, 5, 2, 5 against
+5, 1, 0, 5, 3, 5, 5, 5, 0, 2. The RFC query stays at 0/5 on both days.
+
+This is the early-warning number the release asks for, and it shows no warning. The 18
+points between the two sweeps are not a measured effect of the clause: the sweeps are two
+days apart, one each, and no haiku sweep was taken on the old text the same day. Two
+identical sweeps move 4 to 6 points at this size, so the difference is larger than that
+noise and still not attributable. Do not tune the description to it.

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:54 \"Quais riscos vocês enxergam e como mitigá-los\"; reply line 20 \"Quais riscos você enxerga e como mitigá-los?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:55 \"Como o serviço entra em produção: em fases, com qual critério de avanço e qual de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section (lines 34-36). It contains only the marker \"Aguarda resposta. Veja a pergunta 5 em Perguntas abertas.\" It states no risk and no mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 38-40). It contains only the marker \"Aguarda resposta. Veja a pergunta 6 em Perguntas abertas.\" It states no phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:28 \"### Alternativas consideradas\"; :30 \"**Deduplicar no consumidor** (descartada): cada consumidor teria que reimplementar a deduplicação.\"; :31 \"**Idempotência nativa do produtor Kafka** (descartada): não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:22 \"### Trade-offs da solução escolhida\"; :26 \"✗ O serviço vira mais um salto no caminho crítico da ingestão. Estimamos +5ms de latência. Aceitamos esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply line 8: \"**Desvio do template, para você aceitar ou não:** ... Criei duas subseções dentro de Proposta, \"Trade-offs da solução escolhida\" e \"Alternativas consideradas\".\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. Line 8 reads \"| **Revisores** | Aguarda a pergunta 2 |\", which marks the row as pending and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:51 \"Quem revisa, e de quais áreas?\"; reply line 17 \"Quem são os revisores e de quais áreas?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4%, 24 horas/24h, +5ms, 0,1% and \"duas vezes\". Beyond those there are only the date, the document ID year and the question numbers, none of which is a stated metric."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names Redis and Kafka (both from the user), the time de arquitetura and financeiro (both from the user), and produtores/consumidores (from the user's pipeline description). No other technology, team or stakeholder appears."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None is present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched every sentence that names an actor. Line 18 assigns consulting the key, discarding repeats, keeping the key 24h and forwarding to Kafka to the service, which matches the user's proposal (\"fica entre o ingestor e o Kafka, guarda a chave ... descarta repetidos\"). Line 51 is an open question. No unsupported actor assignment found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:36 \"Aguarda resposta. Veja a pergunta 5 em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:20 (Proposta) \"Os detalhes ... do comportamento quando o Redis fica indisponível ... aguardam resposta (perguntas 3 e 4).\" This names a failure mode the user did not give, outside Perguntas abertas, in a sentence that says it is pending. The check rules that such a sentence does not pass."
+ }
+]

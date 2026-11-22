@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:57 \"Há outros riscos que o time já discutiu (perda de dados do Redis, capacidade, evento descartado por engano)? Qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:61 \"A entrada em produção é de uma vez ou em fases (por exemplo, por produtor)?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 36-40). The only risk listed is the user's +5ms latency, described as the accepted cost. No mitigation is stated. Line 40 marks the rest as pending: \"Os demais riscos e suas mitigações dependem de informação que ainda não temos.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 42-44). It holds only the pending marker \"Ainda não definido. As perguntas estão em Perguntas abertas.\" No phases, advance criteria or rollback steps."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:26 \"## Alternativas consideradas\"; :30 \"Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação.\"; :31 \"Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:22 \"### Trade-off aceito\"; :24 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Desvio do template que você precisa aceitar:** o template não tem lugar para as alternativas que você descreveu, então criei a seção \"Alternativas consideradas\" logo depois da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:72 \"Quem deve revisar?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 0,1%, +5ms/5ms, 24 horas/24h and \"duas vezes\", all given by the user. The only other numbers are the date and the doc number. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:72 \"Sugestão: as áreas de infraestrutura (Redis e Kafka)\". An infrastructure team is named, but neither the user's message nor the template names it. This check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor assertion outside Perguntas abertas. The service checks, stores and discards keys, which the user stated. The team accepting the trade-off matches the user's \"Trade-off aceito\". The reviewer suggestions sit under open questions, which are exempt."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:40 \"Os demais riscos e suas mitigações dependem de informação que ainda não temos. As perguntas estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-50 for risks, failure modes and mitigations. Found only the user's +5ms cost, which is allowed. Line 34 restates the user's status quo (4% inflating billing). Redis outage, data loss and similar risks appear only in Perguntas abertas."
+ }
+]

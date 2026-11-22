@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:85 \"Quais outros riscos o time enxerga, e qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:89 \"Como entra em produção: tudo de uma vez ou em fases (por exemplo, modo observação sem descartar, depois por produtor)?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 53-56). The only risk named is the user's own trade-off: the extra hop estimated at +5 ms. The section states no mitigation and points to Perguntas abertas: \"A mitigação está em Perguntas abertas.\" / \"Os demais riscos e suas mitigações também estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 58-60). It contains only the marker \"Ainda não definido. As fases, os critérios de avanço e o rollback dependem das respostas em Perguntas abertas.\" and states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:40 \"### Alternativas consideradas\"; :45 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; :46 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:49 \"### Trade-off aceito\"; :51 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3-4: \"**Desvio do template** - O template não tem lugar para alternativas nem para o trade-off aceito ... Coloquei os dois como subseções de Proposta (`### Alternativas consideradas` e `### Trade-off aceito`) ... Se o time de arquitetura só aceita as seis seções sem subseção, é só mover o conteúdo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:73 \"Quem revisa? Arquitetura é o destino do documento, mas faltam os nomes...\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the document. Found 4% (written as 'outubro de 2026', which matches 'mês passado' given today's date of 2026-11-22), 24 horas, +5 ms, 0,1% and 'duas vezes'. The only other figures are the header dates, which are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/deduplicacao-de-eventos.md:73 names \"infraestrutura do Redis e do Kafka\" as an impacted area/stakeholder (\"as áreas impactadas (financeiro, donos dos produtores, donos dos consumidores, infraestrutura do Redis e do Kafka)\"). The user never named that team. The sentence sits inside a question but asserts these as impacted areas."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. There is none; the only diagram is a Mermaid sequenceDiagram."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-36). It has no endpoint, header or status code. Its only branches are 'chave nova' and 'chave repetida', both from the user's description (store the key and discard repeats). There is no failure branch, such as Redis being down."
+ },
+ {
+  "id": "7.22",
+  "verdict": "unmet",
+  "evidence": "Borderline. Mermaid line 34 \"D-->>I: descarta o evento\" shows the service sending a message back to the Ingestor on discard. Neither the user nor the files establish that the service answers the ingestor, and the document itself asks this at line 82: \"descarta o evento repetido em silêncio ou devolve uma resposta ao ingestor?\""
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Os demais riscos e suas mitigações também estão em Perguntas abertas.\" (and :55 \"A mitigação está em Perguntas abertas.\")"
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched every section outside Perguntas abertas (Motivação, Proposta, Alternativas, Trade-off, Riscos, Rollout, Métricas). The only risk stated is the user's +5 ms extra hop. No failure mode (such as Redis down or TTL expiry) and no mitigation is asserted. Those appear only as questions at lines 76-81."
+ }
+]

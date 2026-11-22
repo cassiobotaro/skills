@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:52 \"Quais outros riscos o time identificou, e qual é a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:53 \"Rollout. Em que fases o serviço entra em produção, com qual critério de avanço e qual critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section, lines 32-36. It holds only the user's +5 ms latency trade-off (line 34) and a pending marker (line 36: \"Os demais riscos e suas mitigações aguardam resposta\"). No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section, lines 38-40. It holds only \"Aguarda resposta, ver a pergunta 4 em Perguntas abertas.\" No phases, advance criteria or rollback steps are stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:24 \"## Alternativas consideradas\"; :28 \"Deduplicar no consumidor: descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :30 \"Idempotência nativa do produtor Kafka: descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms cost appears under \"## Proposta\" (line 20) and under \"## Riscos\" (line 34). Neither is a heading of its own for the trade-off, and neither is the Alternativas consideradas heading (lines 24-30), which does not mention it."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"**Desvio do template, para você aceitar ou não:** acrescentei uma seção \"Alternativas consideradas\" entre Proposta e Riscos.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the document header. Line 8 reads \"| **Revisores** | |\", which is empty; no reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:50 \"Quem são os revisores da arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24 horas, +5 ms, 0,1%, \"duas vezes\". \"outubro de 2026\" is the user's \"mês passado\" resolved against today's date (2026-11-22). The DD-2026-001 number and the header dates are document metadata, and the number is flagged in question 1. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for named technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, financeiro, time/arquitetura and consumidor, all of which appear in the user's message or the template."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None is present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence. The service sitting between ingestor and Kafka, storing the key in Redis for 24h and discarding repeats is from the user. Producers resending on retry is from the user. The team accepting the trade-off reflects the user's \"Trade-off aceito\". Who generates the key is left as question 2. No unestablished actor assignment found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:36 \"Os demais riscos e suas mitigações aguardam resposta, ver a pergunta 3 em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:22 \"Detalhes do serviço (origem da chave idempotente, comportamento quando o Redis não responde, garantias de atomicidade entre o Redis e o Kafka) aguardam resposta\". This names a Redis-unavailability failure mode and a Redis/Kafka atomicity risk outside Perguntas abertas, in a sentence that marks them as pending."
+ }
+]

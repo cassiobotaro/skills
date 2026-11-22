@@ -1,0 +1,102 @@
+{
+  "checks": "checks.json",
+  "evals": "evals.json",
+  "runs": [
+    {
+      "key": "71/a/run-1",
+      "eval": "71",
+      "cell": "a",
+      "reply": "eval-71-user-template-governs-write-now/a/run-1/response.md",
+      "root": "eval-71-user-template-governs-write-now/a/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/a/run-2",
+      "eval": "71",
+      "cell": "a",
+      "reply": "eval-71-user-template-governs-write-now/a/run-2/response.md",
+      "root": "eval-71-user-template-governs-write-now/a/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/a/run-3",
+      "eval": "71",
+      "cell": "a",
+      "reply": "eval-71-user-template-governs-write-now/a/run-3/response.md",
+      "root": "eval-71-user-template-governs-write-now/a/run-3/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/a/run-4",
+      "eval": "71",
+      "cell": "a",
+      "reply": "eval-71-user-template-governs-write-now/a/run-4/response.md",
+      "root": "eval-71-user-template-governs-write-now/a/run-4/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/b/run-1",
+      "eval": "71",
+      "cell": "b",
+      "reply": "eval-71-user-template-governs-write-now/b/run-1/response.md",
+      "root": "eval-71-user-template-governs-write-now/b/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/b/run-2",
+      "eval": "71",
+      "cell": "b",
+      "reply": "eval-71-user-template-governs-write-now/b/run-2/response.md",
+      "root": "eval-71-user-template-governs-write-now/b/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/b/run-3",
+      "eval": "71",
+      "cell": "b",
+      "reply": "eval-71-user-template-governs-write-now/b/run-3/response.md",
+      "root": "eval-71-user-template-governs-write-now/b/run-3/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "71/b/run-4",
+      "eval": "71",
+      "cell": "b",
+      "reply": "eval-71-user-template-governs-write-now/b/run-4/response.md",
+      "root": "eval-71-user-template-governs-write-now/b/run-4/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/a/run-1",
+      "eval": "7",
+      "cell": "a",
+      "reply": "eval-7-user-template-governs/a/run-1/response.md",
+      "root": "eval-7-user-template-governs/a/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/a/run-2",
+      "eval": "7",
+      "cell": "a",
+      "reply": "eval-7-user-template-governs/a/run-2/response.md",
+      "root": "eval-7-user-template-governs/a/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/b/run-1",
+      "eval": "7",
+      "cell": "b",
+      "reply": "eval-7-user-template-governs/b/run-1/response.md",
+      "root": "eval-7-user-template-governs/b/run-1/outputs",
+      "fixture": "fixtures/eval-7"
+    },
+    {
+      "key": "7/b/run-2",
+      "eval": "7",
+      "cell": "b",
+      "reply": "eval-7-user-template-governs/b/run-2/response.md",
+      "root": "eval-7-user-template-governs/b/run-2/outputs",
+      "fixture": "fixtures/eval-7"
+    }
+  ]
+}

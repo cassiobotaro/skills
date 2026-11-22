@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:51-53 under \"### Riscos\": \"3. O que acontece com a ingestão se o Redis ficar indisponível: o serviço deixa passar os eventos (e as duplicatas voltam), bloqueia a ingestão ou faz outra coisa?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:48 \"1. Como o serviço entra em produção: em fases, com tráfego parcial ou em modo sombra antes de descartar de verdade? Qual critério libera cada avanço?\" and doc:49 \"2. Qual condição dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (doc:30-34) for risks and mitigations. The only content is the user's +5 ms trade-off (line 32) and a pending marker at line 34: \"Falta levantar os demais riscos da proposta e a mitigação de cada um.\" No invented risk or mitigation found."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (doc:36-38). It holds only the pending marker \"Ainda não definido. As fases, os critérios de avanço e de rollback estão em Perguntas abertas.\" No phase, advance criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:22 \"## Alternativas consideradas\"; doc:26 \"Deduplicar no consumidor. Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; doc:27 \"Idempotência nativa do produtor Kafka. Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms cost sits only under the template heading \"## Riscos\" (doc:32), which is not a heading of its own (such as a trade-offs heading). It is not under \"## Alternativas consideradas\" either."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:9 \"**Desvio do template:** acrescentei a seção \\\"Alternativas consideradas\\\", entre Proposta e Riscos. ... Se a arquitetura não aceitar a seção extra, é só remover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header table: doc:8 \"| **Revisores** | |\" is empty. No reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:65 \"12. Quais equipes fora a nossa são afetadas (...) e quem precisa revisar o documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\", all given by the user. The only other numbers are the doc ID and the dates, which are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. doc:65 names \"infraestrutura do Redis e do Kafka\" as a team. The user's message names no such team. It appears inside a question, but this check makes no exception for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence outside Perguntas abertas: the service consults and writes Redis, discards, and delivers to Kafka (line 18); producers resend on retry (line 14); the team accepted the cost (line 32). Each actor-action pair is backed by the user's message."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:34 \"Falta levantar os demais riscos da proposta e a mitigação de cada um. As dúvidas que já existem estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Borderline. doc:20 in Proposta states a failure mode the user did not give: \"A janela de 24 horas significa que o serviço só reconhece como duplicado um reenvio que chegue até 24 horas depois do primeiro envio.\" Late resends slipping through is asserted outside Perguntas abertas."
+ }
+]

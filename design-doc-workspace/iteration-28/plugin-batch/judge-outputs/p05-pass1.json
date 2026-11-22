@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 21: \"O que acontece se o Redis cair? Há outros riscos que o time já identificou?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 23: \"Como é o rollout, com fases e critérios de avanço e de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Read Riscos (doc lines 34-38) for any risk or mitigation the user did not give. Line 36 holds only the user's +5 ms hop and the trade-off they accepted. Line 38 is a pending marker: \"Os demais riscos e suas mitigações aguardam resposta, ver pergunta 4.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Read Plano de rollout (doc lines 40-42) for any phase, advance criterion or rollback step. The only content is \"Aguarda resposta, ver pergunta 6.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:26 \"## Alternativas consideradas\"; doc:31 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; doc:32 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor...\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. Looked for the +5 ms under a heading of its own or under the alternatives heading. It appears under Proposta (doc:22 \"Estimamos +5 ms de latência por evento.\") and under the template heading Riscos (doc:36). Neither is a heading of its own, and Alternativas consideradas (doc:26-32) does not mention it."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"criei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos. Isso é um desvio do formato, e o time de arquitetura precisa aceitá-lo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the Revisores row in the header. doc:8 \"| **Revisores** | Aguardando resposta, ver pergunta 1 |\" is a pending marker and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Reply line 18: \"Quem revisa o doc e quais outros times são impactados?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole doc for figures. Stated as fact: 4% (doc:14, 46), duas vezes (doc:14), 24 horas (doc:18, 20), +5 ms (doc:22, 36), 0,1% (doc:46), all from the user. The dates and the DD-2026-001 id are not metrics. p99 appears only inside a question (doc:58)."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the doc for technologies, teams and stakeholders. Found Redis, Kafka, financeiro, time de arquitetura, produtores, consumidores, ingestor, all named by the user. The generic \"wiki do time de arquitetura\" appears only as a hypothetical inside question 8 (doc:59)."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched for a Mermaid block. The document has none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence outside the questions. The service checks, discards and stores the key in Redis for 24h (doc:18), as the user described. Producers resend on retry (doc:14), as the user said. Finance complained (doc:14), as the user said. Who generates the key is left to question 2."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:38 \"Os demais riscos e suas mitigações aguardam resposta, ver pergunta 4.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:20 states a failure mode the user did not give: \"um reenvio que chegue depois de 24 horas do primeiro evento não é reconhecido como repetido.\" doc:24 names a risk in a sentence that says it is not settled yet: \"comportamento quando o Redis estiver indisponível\"."
+ }
+]

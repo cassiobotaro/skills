@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:57 \"Há outros riscos que o time já discutiu (perda de dados do Redis, capacidade, evento descartado por engano)? Qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:61 \"A entrada em produção é de uma vez ou em fases (por exemplo, por produtor)?\" and :62 \"Qual o critério para avançar de uma fase à seguinte e qual o critério e o procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 36-40). The only risk is the +5ms latency the user gave. Line 40 is a pending marker: \"Os demais riscos e suas mitigações dependem de informação que ainda não temos.\" No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 42-44). It contains only \"Ainda não definido. As perguntas estão em Perguntas abertas.\" No phases, advance criteria or rollback steps."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:26 \"## Alternativas consideradas\"; :30 \"| Deduplicar no consumidor | ✗ Descartada | Cada consumidor teria que reimplementar a deduplicação. |\"; :31 \"| Idempotência nativa do produtor Kafka | ✗ Descartada | Não cobre o reenvio entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:22 \"### Trade-off aceito\"; :24 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Desvio do template que você precisa aceitar:** o template não tem lugar para as alternativas que você descreveu, então criei a seção \\\"Alternativas consideradas\\\" logo depois da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" (the row is empty)."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:72 \"Quem deve revisar?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found only 4%, 24 horas, +5ms, 0,1%, \"duas vezes\" and the year 2026 in the header and date. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:72 \"Sugestão: as áreas de infraestrutura (Redis e Kafka)\". The user's message and the template do not name an infrastructure team. The check makes no exception for open questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None found."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None found."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the sentences that assign actions. The service consulting, discarding and storing the key in Redis, and \"O time aceita esse custo\", all match what the user said. Reviewer areas appear only as a suggestion under Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:40 \"Os demais riscos e suas mitigações dependem de informação que ainda não temos. As perguntas estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas (lines 1-50). The only risk is the user's +5ms latency (lines 24 and 38). Line 34 restates the status-quo problem the user gave. Redis outage, data loss and late retries appear only as questions in lines 55-57."
+ }
+]
