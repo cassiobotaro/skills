@@ -18,6 +18,7 @@ Agent skills for software architecture, engineering, communication, and learning
 ### Communication and learning
 
 - [`unslop`](unslop/skills/unslop/SKILL.md): Remove the patterns that mark prose as machine-written, in English or Brazilian Portuguese. It runs only when you ask for it by name or another skill calls it. Builds on pstack by Lauren Tan ([NOTICE](unslop/skills/unslop/NOTICE.md)).
+- [`technical-writing`](technical-writing/skills/technical-writing/SKILL.md): Write, revise, and review technical documents (README, how-to guide, tutorial, reference, runbook, release notes, pull request description) in the active voice, where every verb has a named actor that is looked up in the code and never guessed. Builds on pstack by Lauren Tan, Tanya Reilly's *The Staff Engineer's Path*, [Diátaxis](https://diataxis.fr), Google's Technical Writing courses, the Microsoft Writing Style Guide, the US plain language guidelines, Write the Docs, Gopen and Swan, and Rebecca Johnson's "by zombies" test ([NOTICE](technical-writing/skills/technical-writing/NOTICE.md)).
 - [`explain`](explain/skills/explain/SKILL.md): Explain a topic to one specific reader, and write or revise messages, emails, and replies, choosing the device by the reader's situation instead of running one fixed format. Builds on research on instruction, plain language, and science communication, on Diátaxis, and on Julia Evans ([NOTICE](explain/skills/explain/NOTICE.md)).
 
 ## Record, don't invent

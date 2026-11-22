@@ -34,6 +34,11 @@
       "description": "Keep the comments in code an agent writes or changes useful, precise, and compact, following The Art of Readable Code: comment what the reader cannot get from the code, never what they can"
     },
     {
+      "name": "technical-writing",
+      "source": "./technical-writing",
+      "description": "Write, revise, and review technical documents (README, how-to, tutorial, reference, runbook, release notes, PR description) in the active voice: every verb has a named actor, looked up in the code and never guessed"
+    },
+    {
       "name": "explain",
       "source": "./explain",
       "description": "Explain a topic to one specific reader and write clear messages, emails, and replies, choosing the device by the reader's situation: a worked example, a mapped analogy with its limit, a wrong idea named and corrected, the request first"

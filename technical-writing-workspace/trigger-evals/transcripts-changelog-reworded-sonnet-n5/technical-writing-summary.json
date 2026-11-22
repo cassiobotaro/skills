@@ -1,0 +1,50 @@
+{
+  "skill": "technical-writing",
+  "model": "claude-sonnet-5-5",
+  "query": "write the CHANGELOG entry for today's fix, I'll paste it in: `parse_date` accepted 31/02 and returned March 3rd, now it raises ValueError. we follow keep-a-changelog, the file currently starts with:\n\n## [Unreleased]\n\n## [1.4.0] - 2026-10-02\n### Added\n- `parse_date` accepts ISO week dates.",
+  "runs": [
+    {
+      "candidate": "technical-writing-skill-714587f9",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-714587f9)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-changelog-reworded-sonnet-n5/technical-writing-run00.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-a806e379",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-a806e379)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-changelog-reworded-sonnet-n5/technical-writing-run01.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-595b6741",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-595b6741)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-changelog-reworded-sonnet-n5/technical-writing-run02.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-81863b1d",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-81863b1d)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-changelog-reworded-sonnet-n5/technical-writing-run03.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-9aa386fe",
+      "outcome": "prose_only",
+      "tools": [],
+      "first_text": "Since the fix isn't released yet, it goes under `[Unreleased]`:\n\n```markdown\n## [Unreleased]\n### Fixed\n- `parse_date` raises `ValueError` for dates that do not exist, such as `31/02`. It used to roll them over and return March 3rd.\n\n## [1.4.0] - 2026-10-02\n### Added\n- `parse_date` accepts ISO week dates.\n```\n\nCallers that relied on the rollover will now get an exception. If you want to flag that, ",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-changelog-reworded-sonnet-n5/technical-writing-run04.jsonl"
+    }
+  ]
+}

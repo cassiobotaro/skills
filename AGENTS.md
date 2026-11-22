@@ -13,7 +13,7 @@ OpenCode, … — via `npx skills add cassiobotaro/skills` or `gh skill install 
 The repository is also a Claude Code **plugin marketplace** where each skill ships as an
 independently installable plugin. There is no application code: the "source" is the skills'
 Markdown instructions (`SKILL.md` + `references/`). The plugins are `adr`, `design-doc`,
-`structurizr`, `mermaid-sequence`, `unslop`, `code-comments`, and `explain`.
+`structurizr`, `mermaid-sequence`, `unslop`, `code-comments`, `explain`, and `technical-writing`.
 
 ## Layout
 

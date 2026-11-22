@@ -1,0 +1,36 @@
+{
+  "skill": "technical-writing",
+  "model": "claude-sonnet-5-5",
+  "query": "this repo has no README and people keep asking me how to run it locally. write one, the commands are in the Makefile",
+  "runs": [
+    {
+      "candidate": "technical-writing-skill-c8fb7eec",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(ls -a && ls Makefile makefile GNUmakefile 2>&1; wc -l README.md; git s)",
+        "Bash(ls -a; find . -iname 'makefile*' -not -path './.git/*' | head)"
+      ],
+      "first_text": "Your description doesn't match what git shows. `README.md` is modified, so it exists. AGENTS.md also says the repo has no build step. I'll check the files before writing anything.",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-miss-sonnet/technical-writing-run00.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-769ab3d8",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(ls -la && ls Makefile makefile GNUmakefile 2>&1; find . -iname 'makefi)"
+      ],
+      "first_text": "I'll check the repo first. The project notes mention a `README.md` and no Makefile.",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-miss-sonnet/technical-writing-run01.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-60215840",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(ls -a && ls Makefile makefile GNUmakefile 2>&1; git status --short REA)",
+        "Bash(find . -iname 'makefile*' -not -path './.git/*' | head; git log --onel)"
+      ],
+      "first_text": "I'll check the repo first, since the project notes mention a README.md and don't mention a Makefile.",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-miss-sonnet/technical-writing-run02.jsonl"
+    }
+  ]
+}

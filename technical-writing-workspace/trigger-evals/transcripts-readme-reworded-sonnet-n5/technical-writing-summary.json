@@ -1,0 +1,52 @@
+{
+  "skill": "technical-writing",
+  "model": "claude-sonnet-5-5",
+  "query": "write the README for my project, I'll paste it in myself. it's called ledger-export: a FastAPI gateway takes export requests on POST /exports and puts them on a RabbitMQ queue, a worker builds an encrypted CSV, uploads it to S3 and emails a download link. Makefile targets: `make setup` (uv sync), `make run-gateway`, `make run-worker`, `make test`. env vars: QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET, MAIL_FROM. people keep asking me how to run it locally",
+  "runs": [
+    {
+      "candidate": "technical-writing-skill-152ea730",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-152ea730)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-reworded-sonnet-n5/technical-writing-run00.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-d5ba406e",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-d5ba406e)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-reworded-sonnet-n5/technical-writing-run01.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-8a55ff6e",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-8a55ff6e)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-reworded-sonnet-n5/technical-writing-run02.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-0812d1ea",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-0812d1ea)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-reworded-sonnet-n5/technical-writing-run03.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-6f475851",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-6f475851)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-readme-reworded-sonnet-n5/technical-writing-run04.jsonl"
+    }
+  ]
+}

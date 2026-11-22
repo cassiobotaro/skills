@@ -1,0 +1,141 @@
+{
+  "skill_name": "technical-writing",
+  "note": "Six evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. No prompt names the skill. None has been run yet: there is no checks-baseline.json and no iteration directory. Before the first run, split each assertion into atomic checks (eval-tools/README.md). The prompt of eval 3 asks for Portuguese by name: the only doc in the fixture is in English, and contract 4 makes a new document follow the docs around it (a smoke session on 2026-11-22 wrote the runbook in English for that reason and said so).",
+  "evals": [
+    {
+      "id": 1,
+      "name": "revise-passives-actors-in-code",
+      "prompt": "improve docs/pipeline.md, when I read it I can't tell what does what",
+      "expected_output": "Edits docs/pipeline.md in place, keeping its four sections. Each action gets the actor the code gives: the gateway (create_export / validate_payload) validates, rejects above 100,000 rows with 413, publishes to the `exports` queue and returns 202; the worker builds the CSV, encrypts it and uploads it; the worker republishes a failed job and sends it to `exports.dead` after the third attempt; the notifier (called by the worker) emails a presigned link that expires after 24 hours. 'Backups of the bucket are rotated weekly' has no actor anywhere in the repository: the sentence stays and the reply asks who or what rotates the backups.",
+      "files": [
+        "files/exporter/Makefile",
+        "files/exporter/pyproject.toml",
+        "files/exporter/exporter/__init__.py",
+        "files/exporter/exporter/gateway.py",
+        "files/exporter/exporter/worker.py",
+        "files/exporter/exporter/notifier.py",
+        "files/exporter/scripts/requeue_dead.py",
+        "files/exporter/deploy/alerts.yaml",
+        "files/exporter/docs/pipeline.md"
+      ],
+      "assertions": [
+        "docs/pipeline.md was edited in place, no other file was created or changed, and the document keeps its sections Request, Processing, Delivery and Backups",
+        "The Request section names the gateway (or its handler `create_export` / `validate_payload`) as what validates the payload, rejects large requests, enqueues the job and returns 202",
+        "The Processing section names the worker as what builds the CSV, encrypts it and uploads it, and as what retries a failed job and moves it to the dead-letter queue",
+        "The Delivery section names what sends the email (the notifier, or the worker through `notify`) and does not use 'is sent' or 'is expired' without an actor",
+        "No sentence in the Request, Processing or Delivery sections is a passive without an agent",
+        "The backup sentence is not given an actor: no job, service, team or AWS feature is named as what rotates the backups",
+        "The reply asks who or what rotates the backups, or says that the repository does not say",
+        "Nothing invented: every component, queue name, status code and number in the edited file exists in the fixture code (`exports`, `exports.dead`, 202, 413, 422, 100,000, three attempts, 24 hours)",
+        "The reply says what changed in at most three lines and does not summarize the document"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "readme-from-repository",
+      "prompt": "this repo has no README. write one",
+      "expected_output": "Creates README.md at the project root. The first paragraph says what the service does (an export service: a gateway accepts export requests, a worker builds an encrypted CSV, uploads it to S3 and emails a link). The commands are the Makefile's (`make setup`, `make run-gateway`, `make run-worker`, `make test`), the environment variables are the ones the code reads (QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET, MAIL_FROM), and it links to docs/pipeline.md. It invents no license, badge, contribution process, Docker command or deployment step. The reply names the reader it assumed and the commands it did not run.",
+      "files": [
+        "files/exporter/Makefile",
+        "files/exporter/pyproject.toml",
+        "files/exporter/exporter/__init__.py",
+        "files/exporter/exporter/gateway.py",
+        "files/exporter/exporter/worker.py",
+        "files/exporter/exporter/notifier.py",
+        "files/exporter/scripts/requeue_dead.py",
+        "files/exporter/deploy/alerts.yaml",
+        "files/exporter/docs/pipeline.md"
+      ],
+      "assertions": [
+        "README.md exists at the project root and no fixture file was changed",
+        "The first paragraph says what the project does, before any install or history section",
+        "The setup, run and test commands are the Makefile targets or the exact commands those targets run; no `pip install -r requirements.txt`, `npm`, `docker` or `poetry` command appears",
+        "The four environment variables the code reads (QUEUE_URL, EXPORT_KEY, EXPORT_BUCKET, MAIL_FROM) are listed, and no variable the code does not read is listed",
+        "The README links to or names docs/pipeline.md instead of repeating its content in full",
+        "Nothing invented: no license, badge, contribution process, CI, Docker image, deployment procedure, or contact appears that the fixture does not contain",
+        "Sentences that describe behavior name the component that acts (gateway, worker, notifier); no passive without an agent describes the pipeline",
+        "The reply says which commands were not run, or that none was run"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "runbook-pt-br-missing-contact",
+      "prompt": "escreve em português um runbook pro alerta ExportsDeadLetterHigh, o pessoal do plantão nunca sabe o que fazer quando ele dispara",
+      "expected_output": "Escreve o runbook em português (ou faz as perguntas antes de escrever). O alerta, o limiar (mais de 10 mensagens em `exports.dead` por 5 minutos) e a severidade vêm de deploy/alerts.yaml; a confirmação e a mitigação usam scripts/requeue_dead.py com `--dry-run` e `--limit`, como o script documenta. Os passos estão no imperativo, sem 'deve-se' nem 'é necessário'. O repositório não diz para quem escalar, nem a causa das falhas: o runbook não inventa contato, canal, time ou causa, e a resposta pergunta.",
+      "files": [
+        "files/exporter/Makefile",
+        "files/exporter/pyproject.toml",
+        "files/exporter/exporter/__init__.py",
+        "files/exporter/exporter/gateway.py",
+        "files/exporter/exporter/worker.py",
+        "files/exporter/exporter/notifier.py",
+        "files/exporter/scripts/requeue_dead.py",
+        "files/exporter/deploy/alerts.yaml",
+        "files/exporter/docs/pipeline.md"
+      ],
+      "assertions": [
+        "The runbook, or the questions asked instead of it, is in Portuguese",
+        "The alert name, the threshold (more than 10 messages in `exports.dead` for 5 minutes) and the queue names match deploy/alerts.yaml and the code",
+        "Every command in the runbook exists in the fixture: `scripts/requeue_dead.py` with `--dry-run` or `--limit`, or a Makefile target; no `rabbitmqctl`, `kubectl`, dashboard URL or other command absent from the fixture is presented as this project's procedure",
+        "The dry run comes before the command that moves messages",
+        "Steps are written in the imperative; no step uses 'deve-se', 'é necessário', 'precisa-se', or a passive without an agent",
+        "Nothing invented: no on-call contact, team name, chat channel, escalation policy, SLA, or root cause appears that the fixture does not contain",
+        "The reply asks whom to escalate to, or states that the repository does not say",
+        "No fixture file was changed",
+        "Nothing inferred as fact: no statement about how incidents usually go, what usually causes the failures, or tooling the fixture does not show (a management UI, a log system) is presented as established"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "review-mixed-jobs-no-edit",
+      "prompt": "can you review docs/webhooks.md before I publish it?",
+      "expected_output": "Does not edit the file. Reports in two groups. Questions for the author: who or what signs the delivery, how many attempts before the endpoint is disabled, who gets the email, what 'stored safely' requires. Proposed edits, each with its reason and the sentence quoted: the page mixes history (explanation), a setup procedure (how-to) and an event list (reference) and should be split or reordered; the opening says nothing about what webhooks do for the reader; 'In this guide you will learn everything' pre-announces; the setup steps are passives and not numbered imperative steps; 'Simply' goes; 'It is done in the dashboard' and 'It should be stored' have unclear pronouns.",
+      "files": [
+        "files/webhooks/docs/webhooks.md"
+      ],
+      "assertions": [
+        "docs/webhooks.md is byte-identical to the fixture",
+        "The reply separates questions for the author from proposed edits",
+        "The reply says that the page mixes more than one kind of document (history or explanation, a procedure, a reference list) and proposes to split, move or link",
+        "The reply quotes at least three sentences that hide their actor ('the endpoint must be registered', 'a secret is generated', 'Each delivery is signed', 'it is retried', 'an email is sent', or others from the file)",
+        "The reply asks the author for at least two facts the page leaves out, among: what signs or generates, how many retry attempts, who receives the email",
+        "Nothing invented: the reply does not state a retry count, a signing component, a retention period or a recipient as fact",
+        "The reply flags 'Simply' or the pre-announcing sentence 'In this guide you will learn everything about webhooks'"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "pr-description-from-diff",
+      "prompt": "write the PR description for this. context: prod workers were getting OOM-killed when someone uploaded a huge CSV, ticket is OPS-412.\n\n```diff\n--- a/importer/handler.py\n+++ b/importer/handler.py\n@@ -1,12 +1,18 @@\n+MAX_BODY_BYTES = 1_048_576\n+\n async def upload(request):\n-    body = await request.body()\n-    rows = parse_csv(body)\n+    if int(request.headers.get(\"content-length\", 0)) > MAX_BODY_BYTES:\n+        return Response(status_code=413)\n+    rows = []\n+    async for chunk in request.stream():\n+        rows.extend(parse_csv_chunk(chunk))\n     return await store(rows)\n--- a/tests/test_handler.py\n+++ b/tests/test_handler.py\n@@ -20,0 +21,6 @@\n+async def test_upload_rejects_body_above_limit(client):\n+    response = await client.post(\"/upload\", content=b\"x\" * (1_048_576 + 1))\n+    assert response.status_code == 413\n```",
+      "expected_output": "Replies with the description ready to paste. The first two sentences say what the change does (the handler rejects a body above 1 MB with 413 and parses the rest as a stream instead of reading it whole) and why (workers were OOM-killed on large uploads, OPS-412). It says how to verify with the test the diff adds, and does not invent a test command the diff does not show without flagging it. It does not narrate the work, and it does not claim memory figures, benchmarks or a rollout plan. It is not posted anywhere.",
+      "files": [],
+      "assertions": [
+        "The reply contains a PR description as text ready to paste, and no command was run to open or post a pull request",
+        "Within its first three sentences the description says what the handler now does (rejects above the limit with 413, reads the body as a stream) and why (workers OOM-killed on large uploads)",
+        "The description mentions OPS-412",
+        "The description says how to verify the change and names the new test `test_upload_rejects_body_above_limit`",
+        "Sentences about behavior are active with a named actor ('the handler rejects', 'the handler reads'); the description does not say 'tests were added' or 'the handler was refactored'",
+        "Nothing invented: no memory figure, benchmark, affected-customer count, rollout plan or reviewer name appears",
+        "The limit is stated as the value in the diff (1,048,576 bytes, 1 MiB or 1 MB)",
+        "The description does not narrate the branch (what was tried first, the order of the commits)"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "good-howto-left-alone",
+      "prompt": "improve docs/rotate-signing-key.md",
+      "expected_output": "Says the guide already does its job and changes little or nothing. It does not rewrite 'The `auth` service is written in Go' (a state, no actor to ask for), keeps the commands byte-identical, and does not add sections (overview, troubleshooting, FAQ) or facts. A defensible edit is to move the 15-minute wait before step 4, since the warning currently follows the step it guards; if it makes that edit it says so.",
+      "files": [
+        "files/rotate-key/docs/rotate-signing-key.md"
+      ],
+      "assertions": [
+        "Every fenced bash block and every inline command is byte-identical to the fixture",
+        "The file has the same headings as the fixture and no new section",
+        "'The `auth` service is written in Go' is unchanged or still describes the state without an invented actor",
+        "Nothing invented: no new prerequisite, command, role, duration or explanation appears that the fixture does not contain",
+        "The reply says that the guide needed little or no change, in at most three lines about what changed",
+        "If the file changed, the changes are limited to wording or to moving the 15-minute wait before step 4; the four steps keep their order"
+      ]
+    }
+  ]
+}
