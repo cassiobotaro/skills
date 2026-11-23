@@ -70,6 +70,37 @@ miss is a decision about the skill and not a measurement: `code-comments` chose 
 the one-line change (1.1.0), and what this skill would add to a number that changed is
 not on any check of its eval set. The description was not changed.
 
+## What the eight one-number sessions wrote (2026-11-23)
+
+**Why.** Whether 0/8 is a miss depends on what the sessions did without the skill. Their
+transcripts (`transcripts/eval-90-run-*.jsonl`) were read by the maintainer's session
+against `SKILL.md`, at no cost; no judge, no new runs.
+
+**What they did.** All eight alike: a `grep` for the old figure, a read of
+`docs/pipeline.md` and `exporter/gateway.py`, one `Edit` from "above 100,000 rows" to
+"above 250,000 rows" in the page's own number format, and a reply of two or three
+sentences that says it was the page's only mention and that `exporter/gateway.py:8`
+still sets `MAX_ROWS = 100_000`, so the API still answers 413 above 100,000 rows. None
+touched the code; each offered to.
+
+| Rule of the skill | Met |
+|---|---|
+| contract 2: the fact looked up in the repository | 8/8, the mismatch with the code found |
+| contract 4: in a revision the author's structure and voice stay | 8/8, the number alone changed |
+| a number with its unit, the exact form | 8/8 |
+| a reply of at most three lines that retells nothing | 8/8 |
+
+**Two places the skill might differ, neither measured.** The edited sentence is an
+agentless passive ("Requests above … rows are rejected"); the actor pass covers prose
+"you wrote or rewrote in this turn", and whether changing a figure counts, against
+contract 4, is open. And contract 2 says "write what the code does": the skill might ask
+before writing a figure the code contradicts, where the sessions wrote it and flagged it.
+
+**Reading.** The miss costs little: what the skill is for, looking the fact up and not
+guessing, every session did without it. The author accepted it on 2026-11-23 and the
+description stays. This does not cover a value in several pages, a page whose passives
+surround the change, or another model.
+
 **Limits.** Four sessions per request measure no rate; 20/20 against 0/8 separates
 "every time" from "never" for these requests and no others. Only `technical-writing` and
 `unslop` were installed: this says nothing about which skill wins when `explain` or
