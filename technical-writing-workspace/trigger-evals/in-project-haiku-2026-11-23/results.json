@@ -1,0 +1,639 @@
+{
+ "count": "technical-writing",
+ "plugins": [
+  "technical-writing",
+  "unslop"
+ ],
+ "model": "claude-haiku-5-5",
+ "runs": [
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.01638112,
+   "turns": 14,
+   "denials": 2,
+   "reply_start": "The rewrite of `docs/pipeline.md` is done. The unslop pass made no further edits: I could not read its vocabulary file (`references/en.md`, permission denied), so I checked the text against the rules in the skill itself, and it had no hits."
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.0163857,
+   "turns": 22,
+   "denials": 2,
+   "reply_start": "I rewrote `docs/pipeline.md` so each part has a named file, a job, and a place in the flow. I assumed the reader is a developer or on-call operator who knows Python but not this service. Nothing is committed.\n\n**Corrections to the old text*"
+  },
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.01314572,
+   "turns": 15,
+   "denials": 3,
+   "reply_start": "I rewrote `docs/pipeline.md` so each stage names the component that runs it, with the file path, and the queues, settings, and on-call steps are spelled out. Nothing was committed.\n\n**What changed**\n- A component table at the top (gateway, "
+  },
+  {
+   "eval": "2",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.0085447,
+   "turns": 14,
+   "denials": 0,
+   "reply_start": "I wrote `README.md` at the repo root. It is in English to match `docs/pipeline.md`, and it covers what the service does, requirements, setup, env vars, running the gateway and worker, the requeue script, tests, the alert, and a file map. I "
+  },
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.0124507,
+   "turns": 8,
+   "denials": 2,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/ExportsDeadLetterHigh.md`. Ele não foi commitado.\n\nAssumi que o leitor é o plantonista que acabou de ser acordado pelo alerta e não conhece o pipeline. O documento segue o caminho da mensagem (gateway → f"
+  },
+  {
+   "eval": "4",
+   "run": 1,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.0042788,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "I reviewed `docs/webhooks.md` (34 lines). The repo has no webhook code, so I could not check any claim against an implementation. The event names, header name, algorithm, and retry behavior all need checking against the real service before "
+  },
+  {
+   "eval": "6",
+   "run": 1,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/rotate-signing-key.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00884859,
+   "turns": 8,
+   "denials": 2,
+   "reply_start": "I rewrote `docs/rotate-signing-key.md`. The repository holds only this file, so I could not check the `auth` service, the cluster, or the role against any code. I did not run any of the commands.\n\n**Reader I assumed:** an operator who alrea"
+  },
+  {
+   "eval": "5",
+   "run": 1,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.005485830000000001,
+   "turns": 4,
+   "denials": 1,
+   "reply_start": "Here's the PR description, ready to paste:\n\n---\n\n**Title:** Reject CSV uploads over 1 MiB with 413 and stream the body (OPS-412)\n\n## Summary\n\nLarge CSV uploads were OOM-killing prod workers. `upload` read the whole request body into memory "
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.011146440000000002,
+   "turns": 8,
+   "denials": 1,
+   "reply_start": "I rewrote `docs/pipeline.md` in place. I assumed the reader is an engineer who maintains or operates the pipeline. I haven't committed it.\n\nThe page now starts with a component table: which file does what, and which queue each one uses. The"
+  },
+  {
+   "eval": "2",
+   "run": 2,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.0114247,
+   "turns": 18,
+   "denials": 3,
+   "reply_start": "I wrote `README.md` at the repository root. It's not committed.\n\nThe README is for developers and operators of the service. It covers what the service does, setup, the environment variables, how to create an export, the dead-letter alert an"
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00848304,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`. Ele não foi commitado.\n\nO documento segue a ordem que o plantão precisa: confirmar que o alerta é real, olhar uma mensagem sem removê-la, achar a causa, mitigar por cenário, "
+  },
+  {
+   "eval": "4",
+   "run": 2,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.005640330000000001,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "## Review of `docs/webhooks.md`\n\nI did not edit the file. I assumed the reader is a developer who will build a receiver endpoint for these webhooks.\n\nThe repository holds only this file. Nothing in it implements webhooks, so I could not che"
+  },
+  {
+   "eval": "6",
+   "run": 2,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/rotate-signing-key.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.01041402,
+   "turns": 9,
+   "denials": 0,
+   "reply_start": "I revised `docs/rotate-signing-key.md` in place. I did not commit it.\n\n**What changed**\n- The steps now say who acts and what to do, in the imperative.\n- The 15-minute wait is its own step (4), so the restart and promotion are separate step"
+  },
+  {
+   "eval": "5",
+   "run": 2,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00436808,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "**Title:** Reject CSV uploads above 1 MiB before reading the body (OPS-412)\n\n## Summary\n\nProd workers were OOM-killed when a very large CSV was uploaded to `upload` in `importer/handler.py`. The handler called `request.body()`, which loads "
+  },
+  {
+   "eval": "1",
+   "run": 3,
+   "canary": false,
+   "project": "p15",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.016078319999999997,
+   "turns": 13,
+   "denials": 2,
+   "reply_start": "I rewrote `docs/pipeline.md`. Each step now names the component that does it, using the code's own names. I also fixed one factual error and added a section the page was missing.\n\n**What changed**\n- **Components table and env vars up front."
+  },
+  {
+   "eval": "2",
+   "run": 3,
+   "canary": false,
+   "project": "p16",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.011981100000000001,
+   "turns": 18,
+   "denials": 3,
+   "reply_start": "I wrote `README.md` at the repository root. It is untracked and not committed.\n\nIt covers what the service does, requirements, setup, the four environment variables, how to run the gateway and worker, the `POST /exports` API, the dead-lette"
+  },
+  {
+   "eval": "3",
+   "run": 3,
+   "canary": false,
+   "project": "p17",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.01253516,
+   "turns": 9,
+   "denials": 2,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`, em português. Ele não está commitado.\n\nO documento segue o fluxo do plantonista: confirmar o disparo, ver se a fila cresce ou está parada, achar a causa nos logs, reprocessar"
+  },
+  {
+   "eval": "4",
+   "run": 3,
+   "canary": false,
+   "project": "p18",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00392021,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "The page is not ready to publish. The biggest gap is that a reader can't implement signature verification from it. The repo contains only `docs/webhooks.md`, so I could not check any claim against code. Event names, the header name, and the"
+  },
+  {
+   "eval": "6",
+   "run": 3,
+   "canary": false,
+   "project": "p19",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/rotate-signing-key.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.008690070000000001,
+   "turns": 6,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/rotate-signing-key.md`. The file is modified but not committed.\n\nWhat changed:\n\n- **Step 2 is now a `kubectl patch`.** The old `create secret ... --dry-run | kubectl apply` pipeline rebuilds the whole secret from the new fil"
+  },
+  {
+   "eval": "5",
+   "run": 3,
+   "canary": false,
+   "project": "p20",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00519088,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "```markdown\n## Limit CSV upload size and parse uploads as a stream (OPS-412)\n\nProd workers were getting OOM-killed when someone uploaded a very large CSV. `upload` in `importer/handler.py` read the whole body into memory with `request.body("
+  },
+  {
+   "eval": "1",
+   "run": 4,
+   "canary": false,
+   "project": "p21",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.012783039999999997,
+   "turns": 17,
+   "denials": 2,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step names the file that does it. I did not commit it.\n\nI assumed the reader is a developer on this project who needs to find which file handles each step. The page now has:\n\n- **Components table:** gate"
+  },
+  {
+   "eval": "2",
+   "run": 4,
+   "canary": false,
+   "project": "p22",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.011252210000000002,
+   "turns": 17,
+   "denials": 3,
+   "reply_start": "I wrote `README.md` at the repository root. It is not committed.\n\nI assumed the reader is an engineer or operator who needs to set up, run, and operate the service. The README covers what the service does, requirements, setup, configuration"
+  },
+  {
+   "eval": "3",
+   "run": 4,
+   "canary": false,
+   "project": "p23",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/exports-dead-letter-high.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.013988100000000002,
+   "turns": 12,
+   "denials": 3,
+   "reply_start": "Escrevi o runbook em `docs/exports-dead-letter-high.md`, em português. Ele segue a regra do alerta em `deploy/alerts.yaml` e o código do worker, do requeue e do gateway.\n\nO que ele cobre:\n- **O que o alerta significa:** mais de 10 mensagens"
+  },
+  {
+   "eval": "4",
+   "run": 4,
+   "canary": false,
+   "project": "p24",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00435604,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "I reviewed `docs/webhooks.md` (34 lines). The repo contains only this file, so I could not check any claim against code. Everything below is about the prose and what the reader can do after reading it. I did not edit the file.\n\n## Blocking:"
+  },
+  {
+   "eval": "6",
+   "run": 4,
+   "canary": false,
+   "project": "p25",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [
+    "docs/rotate-signing-key.md"
+   ],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.00870419,
+   "turns": 5,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/rotate-signing-key.md` in place. Nothing is committed. I did not run any `kubectl` or `openssl` commands, because I have no cluster access here and the repo contains only `docs/`.\n\n**Reader assumed:** an engineer with `prod`"
+  },
+  {
+   "eval": "5",
+   "run": 4,
+   "canary": false,
+   "project": "p26",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-haiku-5-5"
+   ],
+   "usd": 0.0047526800000000004,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "The PR text is below. Before merging, note that the cap doesn't hold for chunked uploads. The check reads `Content-Length`, which is 0 when the header is missing, and the streaming loop has no byte counter. A chunked upload therefore passes"
+  }
+ ]
+}
