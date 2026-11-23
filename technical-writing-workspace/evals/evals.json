@@ -1,6 +1,12 @@
 {
   "skill_name": "technical-writing",
   "note": "Six evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. No prompt names the skill. None has been run yet: there is no checks-baseline.json and no iteration directory. Before the first run, split each assertion into atomic checks (eval-tools/README.md). The prompt of eval 3 asks for Portuguese by name: the only doc in the fixture is in English, and contract 4 makes a new document follow the docs around it (a smoke session on 2026-11-22 wrote the runbook in English for that reason and said so).",
+  "fixture_strip": 2,
+  "smoke": [
+    1,
+    3,
+    6
+  ],
   "evals": [
     {
       "id": 1,

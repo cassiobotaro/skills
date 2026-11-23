@@ -1,3 +1,0 @@
-[
-  {"id": "10.8", "verdict": "met", "evidence": "Searched the reply (lines 1-10) and the file list ('(none)') for any problem statement, goal, metric, alternative, risk, validation rule or impacted team asserted as fact. Found none: line 3 restates only the user's scope (nullable column, form field, PUT /clientes/{id}) plus general remarks about design docs; 'o code review já cobre isso' is a general process remark, not a fact in any listed category. Validation formats (E.164, DDI), uniqueness, other flows, API consumers/integrations, backfill and LGPD in line 7 appear only as examples inside a question ('Existe algo ainda indefinido neste desenho? Alguns exemplos: ...'). Line 8 promises 'sem alternativas ou riscos inventados'. No files were written."}
-]

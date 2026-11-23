@@ -1,7 +1,0 @@
-[
-  {"id": "9.6", "verdict": "met", "evidence": "Doc line 29: \"Um worker lê os jobs pendentes, gera o CSV e grava o arquivo num bucket S3.\"; line 31: \"Até então o worker gravava o CSV no disco local, em `/var/exports/<job_id>.csv`\""},
-  {"id": "9.7", "verdict": "met", "evidence": "Doc line 31: \"Com a entrada de um segundo worker, o download caía no worker que não tinha o arquivo e devolvia 404.\""},
-  {"id": "9.8", "verdict": "met", "evidence": "Doc Questões em aberto line 53: \"Por quanto tempo os arquivos ficam no bucket? Os 7 dias e o cron do worker continuam valendo, ou a retenção passou para uma regra do bucket?\"; line 54: \"Quem serve o download agora: o worker lendo do bucket, ou a API devolvendo um link direto para o bucket?\""},
-  {"id": "9.9", "verdict": "met", "evidence": "Reply line 1: \"Atualizei `docs/design/exportacao-de-relatorios.md` com o que você contou.\"; all written doc text is Portuguese, e.g. line 31 \"Os arquivos ficam num bucket S3 desde a atualização de 2026-11-16.\""},
-  {"id": "9.10", "verdict": "unmet", "evidence": "Searched reply and written doc for unsupported dates, mechanisms, outcomes. Doc line 45 asserts \"**Adotada em 2026-11-16**\" and line 31 \"Os arquivos ficam num bucket S3 desde a atualização de 2026-11-16\" (reply line 7 too: \"passou a constar como adotada em 2026-11-16\") — a date of the change the user never gave (user only said service in production since March). Also doc line 37 \"Qualquer worker serve o download\" asserts a download mechanism the doc itself lists as open (line 54)."}
-]

@@ -14,7 +14,7 @@ check as met only when every pass says so. Checks decided from bytes (kind `file
 
 A judge call is `claude -p` with no tools, its own system prompt and no user-scope
 settings, started in an empty directory: about 2.8k tokens, against ~43k for a subagent
-(adr-workspace/iteration-16). One session per call, so no judge sees two packets.
+(adr iteration-16, in the git tag archive/evals-2026-11-23). One session per call, so no judge sees two packets.
 
 runs.json:
     {"checks": "../evals/checks-baseline.json", "evals": "../evals/evals.json",

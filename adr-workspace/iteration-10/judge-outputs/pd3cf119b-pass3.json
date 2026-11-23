@@ -1,6 +1,0 @@
-{"packet": "pd3cf119b", "checks": [
-{"id": "10.7", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:11 \"The API gateway cannot see account ids, so it cannot enforce a per-account limit.\"", "search": ""},
-{"id": "10.8", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:21 \"The session service now keeps rate-limit counters in Redis\"", "search": ""},
-{"id": "10.9", "passed": true, "evidence": "doc/adr/0004-rate-limit-login-attempts-in-the-session-service.md:19 \"The limit is applied per account, which the gateway could not do.\"; :21 \"which adds load and state to a dependency that already holds sessions.\"", "search": "Any metric, incident, alternative, technology or consequence in the new ADR (lines 1-21) not in the user's message or ADRs 0001-0003; 'already holds sessions' comes from 0002-store-sessions-in-redis.md:15, 'adds load and state' follows directly from keeping counters in Redis, line 19 restates the Context reason; no invented fact found"},
-{"id": "10.12", "passed": true, "evidence": "\"That belongs to the `structurizr` skill, not the ADR skill, so I did not write it here.\"", "search": ""}
-]}

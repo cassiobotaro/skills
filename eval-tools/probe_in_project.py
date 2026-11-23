@@ -10,14 +10,14 @@ project, and sends the eval's prompt and nothing else. It counts invocations. It
 grade what the session wrote: without --add-dir a plugin's references/ cannot be read.
 
     eval-tools/probe_in_project.py --workspace adr-workspace --plugins adr,unslop \\
-        --evals 3,6 --count adr --scratch /tmp/somewhere --out adr-workspace/trigger-evals/in-project-<date>
+        --evals 3,6 --count adr --scratch /tmp/somewhere --out adr-workspace/run-<date>-in-project
 
 --count names the skill whose invocations are the point; --canary-eval (default: the first
 of --evals) is run twice with "Use the <skill> skill." before its prompt, because a zero
 from a broken harness looks like a zero from the description. Writes <out>/results.json
 and <out>/transcripts/. Skills inside the project (.claude/skills/, committed) are found
 by `git ls-files` and read without the Skill tool, which is why the plugins stay outside:
-see technical-writing-workspace/trigger-evals/border-design-doc-2026-11-22/README.md.
+see eval-tools/README.md.
 """
 import argparse, concurrent.futures as cf, json, os, shutil, subprocess
 
@@ -86,12 +86,12 @@ def main():
     ap.add_argument("--count", required=True, help="the skill whose invocations are counted")
     ap.add_argument("--scratch", required=True, help="a directory outside the repository")
     ap.add_argument("--out", required=True)
-    ap.add_argument("--strip", type=int, default=2,
-                    help="leading path parts to drop from each fixture file: 2 for files/<fixture>/<path>, the "
-                         "layout of most workspaces; 1 for files/<path>, the layout of code-comments-workspace")
+    ap.add_argument("--strip", type=int,
+                    help="leading path parts to drop from each fixture file (default: fixture_strip in "
+                         "evals.json, else 2): 2 for files/<fixture>/<path>, 1 for files/<path>")
     ap.add_argument("--runs", type=int, default=4)
     ap.add_argument("--canary-eval")
-    ap.add_argument("--model", default="claude-sonnet-5-5", help="a model id, not an alias")
+    ap.add_argument("--model", default="claude-opus-5-5", help="a model id, not an alias")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--timeout", type=int, default=1500)
     ap.add_argument("--plugin-src", action="append", default=[], metavar="NAME=DIR",
@@ -102,7 +102,10 @@ def main():
         raise SystemExit("--scratch must be outside the repository")
     plugins = a.plugins.split(",")
     ids = a.evals.split(",")
-    evals = {str(e["id"]): e for e in json.load(open(os.path.join(REPO, a.workspace, "evals", "evals.json")))["evals"]}
+    spec = json.load(open(os.path.join(REPO, a.workspace, "evals", "evals.json")))
+    evals = {str(e["id"]): e for e in spec["evals"]}
+    if a.strip is None:
+        a.strip = spec.get("fixture_strip", 2)
     shutil.rmtree(os.path.join(a.scratch, "plugins"), ignore_errors=True)
     src = dict(x.split("=", 1) for x in a.plugin_src)
     for name in plugins:

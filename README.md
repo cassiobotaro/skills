@@ -78,7 +78,7 @@ The diagram skills validate and render through tooling you provide, and degrade 
 
 ## Repository layout
 
-Each skill ships as a plugin in its own directory (`<skill>/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<skill>/`. The `<skill>-workspace/` directories hold development artifacts (evals, iterations) and are not part of the installed plugins.
+Each skill ships as a plugin in its own directory (`<skill>/`) with a `.claude-plugin/plugin.json` manifest and the skill under `skills/<skill>/`. The `<skill>-workspace/` directories hold each skill's eval spec and are not part of the installed plugins.
 
 ## License and attribution
 

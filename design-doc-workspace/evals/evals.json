@@ -1,5 +1,12 @@
 {
   "skill_name": "design-doc",
+  "fixture_strip": 2,
+  "smoke": [
+    1,
+    7,
+    71,
+    9
+  ],
   "evals": [
     {
       "id": 1,
@@ -127,6 +134,17 @@
         "No invented facts: every metric (4% duplicates, 24h key retention, +5ms, 0.1% target) traces to the prompt; no invented technology, team, or stakeholder",
         "Diagrams carry only established facts: the Structurizr DSL validates, its technology slots are filled only for technologies the prompt names (Redis, Kafka), relationships carry no invented protocol, and the Mermaid flow has no invented endpoints, headers, status codes, or failure branches"
       ]
+    },
+    {
+      "id": 71,
+      "eval_name": "template-cannot-answer-now",
+      "note": "The defect of design-doc 1.9.0 found in iteration-28 (2026-11-22): with the user unable to answer, the skill filled the template's Riscos with risks nobody gave. 1.10.0's contract-2 paragraph is the fix. Checks 7.1-7.24 of key 71 in checks-baseline.json.",
+      "prompt": "Nosso template de design doc tá em docs/design/TEMPLATE.md — segue ele à risca, o time de arquitetura só aceita doc nesse formato. Preciso do doc do nosso novo serviço de deduplicação de eventos. Hoje o pipeline de ingestão recebe eventos duplicados dos produtores (reenvio em retry): medimos 4% de duplicatas no mês passado, e isso infla os relatórios de faturamento, o financeiro já reclamou duas vezes. A proposta é um serviço que fica entre o ingestor e o Kafka, guarda a chave idempotente de cada evento no Redis por 24h e descarta repetidos. Alternativas que discutimos: deduplicar no consumidor (cada consumidor teria que reimplementar, descartado) e usar a idempotência nativa do produtor Kafka (não cobre reenvio entre reinícios do produtor, descartado). Trade-off aceito: mais um salto no caminho crítico da ingestão, estimamos +5ms de latência. Meta: duplicatas abaixo de 0,1%. Autor sou eu, Rafael Nunes. Salva em docs/design/. Não vou conseguir responder perguntas agora: escreve o documento com o que eu já disse e deixa as perguntas no final.",
+      "expected_output": "Eval 7 with one more sentence: the user cannot answer now and wants the document anyway. The document follows the template, records only what the user said, puts every gap in Perguntas abertas, and lists no risk, mitigation or example nobody gave (the Redis dependency, the 24-hour window).",
+      "files": [
+        "files/template/docs/design/TEMPLATE.md"
+      ],
+      "assertions": []
     },
     {
       "id": 8,

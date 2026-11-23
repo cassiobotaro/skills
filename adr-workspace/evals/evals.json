@@ -1,6 +1,13 @@
 {
   "skill_name": "adr",
   "note": "Twelve evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. Assertion wording follows SKILL.md rule 2: the human prose (H1 title text, section bodies) follows the log's language, while the adr-tools scaffolding (the `Date:` label, the four `## Status/Context/Decision/Consequences` headings, the status word, and the supersede/amend verbs) stays canonical English so Structurizr's `!adrs` importer and `adr generate` keep parsing.",
+  "fixture_strip": 2,
+  "smoke": [
+    2,
+    3,
+    8,
+    12
+  ],
   "evals": [
     {
       "id": 1,

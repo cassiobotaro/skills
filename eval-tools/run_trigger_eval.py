@@ -24,13 +24,12 @@ Usage (from the repo root):
     ./eval-tools/run_trigger_eval.py \
         --eval-set design-doc-workspace/trigger-evals/trigger_eval.json \
         --skill-path design-doc/skills/design-doc \
-        --model claude-sonnet-5-5 -o design-doc-workspace/trigger-evals/some-run.json
+        --model claude-opus-5-5 -o design-doc-workspace/trigger-evals/some-run.json
 
 It also defaults `--num-workers` to 1, against upstream's 10. Concurrency is an experimental
 variable here, not a speed knob: it depresses the trigger rate specifically for queries that
 make the session read the repository first, which manufactured a 21pp gap between two skills
-that vanished once both were re-measured serially. See
-`structurizr-workspace/trigger-evals/README-21pp-analysis.md`.
+that vanished once both were re-measured serially (eval-tools/README.md).
 
 Any other flags are passed straight through to run_eval.py.
 
@@ -45,7 +44,7 @@ query, then the negatives at 3 runs per query with the best-scoring positive as 
 serially, with a 120 s timeout, under `systemd-inhibit` when it exists. About 63 sessions
 per skill.
 
-It defaults to the target model, claude-sonnet-5-5: the model that reads the user's request
+It defaults to the target model, claude-opus-5-5: the model that reads the user's request
 is the one that decides to invoke a skill, and for this repository's skills that is a large
 model. There the positives sit at 98-100%, so they are a regression guard (a warning prints
 under 90%), and the runs go to the negatives, where the only trigger defect ever found on a
@@ -67,7 +66,7 @@ SKILL_CREATOR_CANDIDATES = [
     Path.home() / ".claude/plugins/cache/claude-plugins-official/skill-creator/unknown/skills/skill-creator",
 ]
 
-ROUTINE_MODEL = "claude-sonnet-5-5"  # the target model; see eval-tools/README.md
+ROUTINE_MODEL = "claude-opus-5-5"  # the target model; see eval-tools/README.md
 ROUTINE_POSITIVE_RUNS = 3
 ROUTINE_NEGATIVE_RUNS = 3
 ROUTINE_CEILING = 0.90  # the target model has held 98-100% on every skill's positives

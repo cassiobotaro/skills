@@ -1,6 +1,12 @@
 {
   "skill_name": "code-comments",
   "note": "Six evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given (files/billing/invoice.py becomes billing/invoice.py). Only eval 6 mentions comments in its prompt: the skill's main job is the comments of code an agent writes while doing something else. No eval has been run yet; before the first run, split the assertions into atomic checks in checks-baseline.json (see eval-tools/README.md).",
+  "fixture_strip": 1,
+  "smoke": [
+    2,
+    4,
+    5
+  ],
   "evals": [
     {
       "id": 1,

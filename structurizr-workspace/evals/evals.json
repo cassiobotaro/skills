@@ -1,5 +1,11 @@
 {
   "skill_name": "structurizr",
+  "fixture_strip": 2,
+  "smoke": [
+    3,
+    10,
+    11
+  ],
   "evals": [
     {
       "id": 1,

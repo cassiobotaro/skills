@@ -1,6 +1,12 @@
 {
   "skill_name": "unslop",
   "note": "Six evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given. Every eval names the skill, because it is explicit only. None has been run yet: there is no checks-baseline.json and no iteration directory.",
+  "fixture_strip": 2,
+  "smoke": [
+    2,
+    3,
+    6
+  ],
   "evals": [
     {
       "id": 1,

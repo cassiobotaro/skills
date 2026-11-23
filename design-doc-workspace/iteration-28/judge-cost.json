@@ -1,8 +1,0 @@
-{
- "calls": 36,
- "total_tokens": 246121,
- "cost_usd": 1.9647,
- "models": [
-  "claude-opus-5-5"
- ]
-}

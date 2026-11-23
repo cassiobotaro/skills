@@ -1,61 +1,126 @@
 # Evals
 
 Read this before running an eval or quoting a number from one. It is not loaded automatically:
-`AGENTS.md` points here. The helpers in this directory are `run_trigger_eval.py`,
-`capture_trigger_transcripts.py` and `probe_in_project.py` for trigger evals, and `judge.py` for
-grading (last two sections).
+`AGENTS.md` points here.
+
+## What is kept, and where the rest went
+
+Each `<plugin>-workspace/` holds only the spec:
+
+- `evals/evals.json` — the eval set (prompt, `expected_output`, optional `files/`, assertions),
+  its `smoke` list and its `fixture_strip` (2 for `files/<fixture>/<path>`, 1 for
+  `files/<path>`). This is the spec for what the skill must do; **read it before changing a
+  skill's behavior**.
+- `evals/checks-baseline.json` — the frozen yes/no checks the judges grade against, where the
+  skill has one. Do not edit a check to fit an output; amend it with a dated note.
+- `trigger-evals/trigger_eval.json` — the trigger set (positives and negatives).
+
+Every run, transcript, iteration and experiment README until 2026-11-23 is in the git tag
+`archive/evals-2026-11-23` (`git show archive/evals-2026-11-23:<path>`, or
+`git checkout archive/evals-2026-11-23 -- <dir>` into a scratch branch). The per-skill notes in
+`MAINTAINING.md` keep the decisions and the numbers that made them. New runs go to
+`<plugin>-workspace/run-<date>-<label>/`, which is gitignored: write what a run decided into
+the skill's note, not a new committed directory.
 
 ## Which model
 
-The target model is **claude-sonnet-5-5**. The model that reads the user's request is the one that decides to invoke a skill and the one that follows it, and for the work these skills do (documents, diagrams, code changes) that is a large model; haiku mostly runs delegated execution steps. So:
+The target model is **claude-opus-5-5**, the model the author runs these skills on. Every
+helper defaults to it. Quote numbers by model id, never by alias.
 
-- **Quote numbers on the target model**, by id. `--routine` defaults to it; run the executors of a behavioral eval on it.
-- **Trigger positives there are a regression guard**, not a measurement: sonnet, fable and opus sit at 98-100% on every skill. What is left to measure on a large model is the negatives, where the one trigger defect found so far was (`design-doc` on "write a PRD for the new referral program", ~17% on opus).
-- **No haiku arm in a behavioral A/B.** It doubled the cost of the ablations (`adr` iterations 12-15, `design-doc` iteration-26), and the one effect that mattered showed more clearly on sonnet.
-- **One haiku trigger number per release**, as an early warning and a stand-in for hosts that run smaller models. It is not a target: do not lengthen or sharpen a description to move it. A haiku rate also moves with what the repository's own `AGENTS.md` says about the skills (`structurizr-workspace/trigger-evals/agentsmd-ab-2026-11-20/README.md`).
+Other models are not measured by default. Most numbers recorded until 2026-11-23 are on
+claude-sonnet-5-5, and some behaviors differ: sonnet and haiku skip an `unslop` call from
+another skill that opus makes in every session (`unslop` note in `MAINTAINING.md`). Do not
+change a skill to fix a behavior seen only on a model the author does not use.
 
-Most of what follows was learned on haiku, because it is the only model on which the numbers move. Read it as how to measure, not as what to optimize.
+## The routine for a skill change
 
-Evals are authored and run through the **skill-creator** skill, not by scripts in this repo. Each skill has:
+1. **Smoke set, one run, read it yourself.**
 
-- `<plugin>-workspace/evals/evals.json` — the eval set (prompt, `expected_output`, optional `files/`, optional `assertions`). This is the spec for what the skill must do; **read it before changing a skill's behavior**.
-- `<plugin>-workspace/iteration-N/` — per-run outputs, `with_skill/` vs `without_skill/` configs, `grading.json`, `benchmark.md` (the A/B summary).
-- `<plugin>-workspace/trigger-evals/` — trigger-rate sweeps. The reference numbers are in `structurizr-workspace/trigger-evals/README-serial-baseline.md`; compare new numbers against those, never against an older figure.
+   ```bash
+   eval-tools/run_evals.py <plugin>                       # smoke ids, 1 run each, opus
+   eval-tools/run_evals.py <plugin> --skill-dir <copy>    # a candidate text
+   ```
 
-Gotchas when running evals in this repo (learned the hard way). They are written against the Claude Code CLI, which is what the eval tooling drives, but the statistical rules hold for any harness:
+   Read every `response.md` and the files under `outputs/` against the eval's
+   `expected_output`. A few dollars at most. This is enough for most changes.
+2. **Full set with judges, only for a large change** (a new rule, a rewritten step, a
+   description change that moves what the skill claims):
 
-- Spawn eval subagents in the **foreground** (parallel calls in one message). Background agents (`run_in_background: true`) are blocked from Write/Edit in the main checkout regardless of allowlist; if you must, salvage outputs from their final messages.
-- **Cap the fan-out at ~4-6 concurrent runs.** Launching a whole multi-skill eval sweep in one message (19 agents, iteration-6/12) had 8 of them killed by the stall watchdog with no progress for 600s, and the survivors reported wall-clock in the millions of ms — pure queueing. Batch the runs and re-seed any fixture directory before re-running a killed agent, since a partial run may have edited it. Wall clock from a contended sweep is not a comparable metric; tokens are.
-- The allowlist that lets foreground eval agents save outputs is scoped to `*-workspace/**` in `.claude/settings.local.json` (gitignored). Extend it there for new skills, not in tracked settings. Write it as an `Edit(path)` rule — file-permission checks only match `Edit(...)`, which covers every file-editing tool (Write, Edit, NotebookEdit); a `Write(path)` rule matches nothing and triggers a startup warning.
-- When transcribing Mermaid output from an agent's message, HTML-unescape `&gt;`/`&lt;`/`&amp;`.
-- The reliable token metric for an optimization A/B is the deterministic `SKILL.md` body reduction; the end-to-end subagent `total_tokens` delta is in the noise (dominated by task work + reading `references/`).
-- **`--num-workers` is an experimental variable, not a speed knob.** Sweeps at different worker counts are not comparable, and the bias is not uniform: it falls on queries that make the session touch the repository before acting. Same query, same code, same description — 7/10 at `--num-workers 1` against 4/10 at 10. Across a whole set it moved `structurizr` from 60% to 78% while leaving `adr` at ~80%, manufacturing a 21pp "gap" that does not exist. **Use `--num-workers 1` for any number you will quote**; reserve concurrency for rough smoke tests, and never mix worker counts in one table. Every trigger number recorded here before the serial baseline of 2026-08-20 was measured at ten workers, **on every skill and both models** — the largest correction found was `adr`/opus at 67% → 98% (+31pp), bigger than structurizr's own. See `structurizr-workspace/trigger-evals/README-21pp-analysis.md`.
-- **Three runs per query cannot rank descriptions — and pooling two such sweeps does not fix it.** Per-query trigger probabilities cluster between 0.4 and 0.7, where a 3-run sample carries almost no information and the 0.5 threshold is a coin flip. Two `structurizr` queries scored 0/6 pooled across two sweeps, read as a reproducible defect, and drove two failed description rewrites; at 30 runs each they score 33% and 40%. "Reproducible across two sweeps" is an ordinary outcome at p≈0.35, not confirmation. For a **per-query** claim use `--runs-per-query 10` or more; for a **skill-level** comparison the 10-query aggregate at 3 runs (n=30) is usable but still moved 12pp on `adr` when resampled at n=10. See `structurizr-workspace/trigger-evals/README-haiku-investigation.md`.
-- **The serial baseline is `structurizr-workspace/trigger-evals/README-serial-baseline.md`** (2026-08-20): all four skills on haiku and opus, `--num-workers 1`, positives at 5 runs/query and negatives at 3. Haiku: design-doc 96%, mermaid-sequence 90%, adr 86%, structurizr 74%. Opus: 98-100% across the board, i.e. no measurable difference between the descriptions. Compare new numbers against these, never against a pre-baseline number. **Except on haiku**: the `haiku` alias pointed at claude-haiku-4-5 then and at claude-haiku-5-5 since (the transcripts record the id), so the baseline's haiku column is a different model — the current haiku reference is `structurizr-workspace/trigger-evals/README-model-sweep-2026-10-31.md` (Haiku 5.5: design-doc 74%, structurizr 69%, mermaid-sequence 92%; sonnet, fable and opus at 98-100%, i.e. all three at the ceiling). `adr` was out of the repository for that sweep; measured alone on 2026-11-15 with the same method it scores 56% (28/50) on claude-haiku-5-5, negatives 0/30 — one sweep, see `adr-workspace/trigger-evals/README-serial-2026-11-15.md`. Always record the model id, not the alias, next to any number you quote.
-- **Two identical serial sweeps move ±4-6pp at n=50** (structurizr 78% then 74%; adr 80% then 86%). A skill-level difference smaller than ~12pp at that sample size is not a finding — a 12pp gap between two skills on haiku did not separate (p = 0.21; p = 0.29 pooling two sweeps).
-- **Grade against a frozen check list, script first.** Before the first run, split each assertion into atomic yes/no checks in `<plugin>-workspace/evals/checks-baseline.json` and do not edit a check to fit an output (rule text and anchor cases may be amended, dated). Everything decidable from bytes — a file exists, a hash is unchanged, headings, dates, nothing else was written — goes to a script; in the `adr` pilot that was 10 of 25 checks. The judge gets only the rest, in a packet that does not name the arm, and must quote the words that satisfy a check or record what it searched; borderline is unmet. A *negative* check ("nothing invented") has nothing to quote: its evidence is the search. See `adr-workspace/iteration-9/README.md`.
-- **One judge pass is enough, except for "nothing invented".** Three independent passes agreed on 59 of 60 verdicts; the split, and every later split, was an invention check. Run three passes there and one elsewhere. A judge call costs ~43k tokens of fixed subagent overhead whatever the packet size, so 36 calls outweighed the 12 runs they graded (1.5M against 0.6M).
-- **One judge per packet, never one judge per pass.** Letting a single agent grade every packet of a pass cut the cost fivefold and turned one strict reading into a per-pass bias: three 2/3 splits, all from the same pass (`adr-workspace/iteration-10/README.md`). If cost forces batching, batch by packet across passes, not by pass across packets.
-- **Adding a check changes what the judges see, so counts across that change are not comparable.** A 1.5.2 `design-doc` output was passed by two of three judges on "nothing invented" in iteration-22 and failed by all three in iteration-23, byte-identical, after an atomic check naming the suspect fact (how the download is served) joined the packet. Re-judge the old outputs in the same batch as the new ones instead of quoting the earlier figure; reusing the *runs* is fine and halves the executor cost. See `design-doc-workspace/iteration-23/README.md`.
-- **Anchor cases plus an atomic check stop the splits on invention.** Without them, two of eight `design-doc` packets split on one broad invention check (iterations 21-22); with three anchor cases in the packet and the broad check split into the two ways it had failed, none of eight did (24 of 24 calls unanimous per packet). Checks added this way overlap the broad one: report each on its own line and never sum them into one invention total.
-- **Do not fold the checks into a weighted score.** A 60/40 composite to two decimals reads as precision that two runs per arm do not have. Report checks met over total, by kind.
-- **Run a one-arm pilot before editing on a defect predicted from the skill's text.** Two defects read off contract 3 of `design-doc` against real templates — optional sections kept and demanded, a large template turned into a one-question-per-section interrogation — did not appear in four runs each of the unchanged skill: 0/16 optional sections kept; 0/28 empty sections filled with boilerplate, 9-12 grouped questions per reply. Four runs measure no rate, but they separate a defect that shows every time from one that never shows, for ~0.25M tokens and no judge calls. Freeze the checks first with the prediction written in them, and keep what is being watched out of the executor's brief. A brief saying the user cannot answer in this turn pushes the run toward writing instead of asking, so such a pilot is no evidence about a live interview. See `design-doc-workspace/iteration-24/README.md` and `design-doc-workspace/iteration-25/README.md`.
-- **False fires are near-zero, not zero.** 1 in 240 serial negative samples: `design-doc`/opus on "write a PRD for the new referral program", 3/18 (17%) when probed. Everything else stayed at 0. Say "one adjacent-artifact query at ~17%", not "never over-triggers".
-- **A negatives-only sweep cannot tell a clean zero from a broken harness** — both print 0. Splice the skill's strongest positive into the set as a canary and check it scores full marks before believing the zeros.
-- **Wrap long sweeps in `systemd-inhibit --what=idle:sleep --mode=block`.** A laptop suspend mid-sweep expires the in-flight session's wall-clock timeout and records it as a non-trigger; the sweep still looks healthy. One baseline sweep was discarded for this (kept as `serial-baseline-positives-haiku-n5-SUSPENDED-DISCARDED.json`).
-- **Score a trigger eval by aggregate trigger rate, not by the sweep's pass/fail count.** With the default 3 runs per query, a query whose true trigger probability sits near the threshold flips pass/fail between identical sweeps: the same description scored 19/20 and then 15/20 on the same set, same day. That 4-query swing is noise, and any conclusion drawn from a single sweep's headline is worthless. Pool `triggers`/`runs` across sweeps and compare rates over a group of queries — 0/27 versus 5/18 on the same three queries is a signal; "19 beat 17" is not.
-- **Use `eval-tools/run_trigger_eval.py`, not the cached `run_eval.py` directly.** The cached script is wrong here in two ways, and each one reports a healthy-looking sweep of near-zero triggers that reads as a description regression: it does not pass `--setting-sources project,local` (the user-scope installed plugins then mask the injected candidate — positives score 0/30 on opus), and it counts a trigger only when the session picks the calling worker's own uuid, so with `--num-workers 10` recall comes out divided by ~10 (2/30 vs 14-20/30). The wrapper applies both patches to a throwaway copy and fails loudly if upstream changes. **Sweeps also degrade intermittently** — a baseline scored 22/30 and the very next sweep of the same text scored 2/30 with distribution `[0,0,0,0,0,0,0,0,1,1]`. The wrapper prints the per-query distribution and warns when no positive reaches a full run; never pool a degraded sweep into a result.
-- **Run trigger evals from the repo root**, with `PYTHONPATH` pointing at the skill-creator directory — never by `cd`-ing into skill-creator first. The wrapper enforces this. The script injects the candidate description as a temp command under `<project_root>/.claude/commands/` and runs `claude -p` there, and it derives `project_root` by walking up from the cwd to the first directory containing `.claude/`. From inside the skill-creator plugin cache that resolves to `$HOME`, so the temp command lands in the *user* commands dir while the nested session evaluates a different project: every query scores 0/3, positives and negatives alike. The tell is a uniform `trigger_rate` of 0.0 with the negatives "passing" — that is a broken harness run, not a description regression. Smoke-test one obvious positive before paying for a full 20-query set.
-- **`AGENTS.md` is in the context of every run, so skill behavior and eval lore stay out of it.** A host loads it into each executor subagent and each `claude -p` trigger session started in the repository, in every arm: a `without_skill` or `old_skill` executor reads whatever it says the skills do. Until 2026-11-20 it carried the per-skill notes and the content of this file; a zero-tool probe quoted the `adr` note back from a subagent and from a headless session. Measured on claude-haiku-5-5 with `--setting-sources project,local`: 26,125 context tokens per session at the repo root before the split, 20,575 after, 18,169 in an empty directory. Two things that were in both arms: the scope-check note during `adr` iteration-9, and "Generated prose is plain active-voice" during `design-doc` iteration-26. Re-run on `adr` eval 8 with the old and the trimmed file (`adr-workspace/iteration-16/README.md`): the frozen checks did not separate (28/28 against 27/28), so the leak did not make that result; it did change the route, since 1.3.2 inspected the repository in 4/4 runs without the old file and in 0/4 with it. Iteration-26 was not re-run. `AGENTS.md` still names the skills and the repository's purpose; a run that must see none of that has to start outside the repository.
-- **A session keeps the `AGENTS.md` it started with, and so do its subagents.** After the file was trimmed on 2026-11-20, a subagent spawned by the session that trimmed it still quoted the old headings, while a new headless session read the new file. After editing `AGENTS.md`, run executors from a new session or as headless sessions, and probe one before paying for the rest.
-- **A copy of the repository under a temp directory loads no `AGENTS.md`.** Two copies that differed only in that file gave the same context size (22,487 and 22,486 tokens) and a probe that saw no instructions file in either. The likely cause is that the directory was never trusted in the CLI; that was not verified. To control which text a headless run sees, start it in a directory below the repository root that holds its own `AGENTS.md`: the root file and the nested one both load (probed, iteration-16). Delete that file afterwards.
-- **A bare `ls` can come back empty in a headless session.** On the machine these evals run on, the user's shell aliases `ls` to `eza`, and `eza` given no path lists nothing when its input is not a terminal. An executor that typed `ls -la` in a project that had files got no output, replied that the repository was empty and did nothing (`unslop-workspace/iteration-1/README.md`, one run of 24; seven of the 48 runs of that day issued a bare `ls`, and the other six went on with `cat` or `find`). Read the reply of a run that did nothing before counting it, and report an invalidated run next to the totals instead of dropping it. Every `run.py` now starts its sessions with `SHELL=/bin/bash`, under which `ls` lists the files (probed on 2026-11-21); the iteration-1 runs of `code-comments` and `unslop` were made before that.
-- **Build the fixture copies before the workers start.** A `run.py` that copies an eval's fixture on first use is not safe with several workers: two runs of the same eval start together, one creates the directory, and the other copies it before the files are in. That run starts in an empty project and says so (`explain-workspace/iteration-2/README.md`, one run of four, repeated). The `run.py` of that iteration builds every copy first; the three written before it got the same fix afterwards, and their runs were made without it.
-- **To count which skill a session invokes with several installed, load each plugin with `--plugin-dir` from a copy outside the project, and run a canary.** Skills copied into the project's `.claude/skills/` and committed there are listed by `git ls-files` and matched by `grep -r`: 15 of 16 sessions read `design-doc`'s files without calling the Skill tool, followed them, and the count of invocations read 0 for a reason that had nothing to do with the description (`technical-writing-workspace/trigger-evals/border-design-doc-2026-11-22/README.md`). Loaded with `--plugin-dir`, a plugin's `references/` are outside the project and a Read of them is refused without `--add-dir`, so that setup counts invocations and does not grade documents.
-- **The trigger harness cannot measure a request to change a file that is in the project.** It runs in this repository and has no fixture, so such a query has to carry the document in the message, and then the session has no file to edit and consults the skill: "update the docs" for a shipped design doc scored 3/3 there with a description that scored 0/16 in a project holding the file, where every session edited the file directly (`design-doc-workspace/trigger-evals/README-update-clause-2026-11-22.md`). For that kind of request, run sessions in a project with the fixture and the plugins loaded from outside it: `probe_in_project.py` does that and counts invocations, with a canary. On 2026-11-22 it gave 16/16 for `adr`, 20/20 for `technical-writing` and 0/16 for `code-comments`, whose routine check on pasted code reads 27/30 (`code-comments-workspace/trigger-evals/in-project-2026-11-22/README.md`). Pass `--strip 1` for a workspace whose fixtures are `files/<path>`; a first `code-comments` run without it put the files at the wrong paths and was discarded.
-- **No project instructions load under `/tmp`.** A `claude -p` session started in a fresh git repository under `/tmp` (the session scratchpad included) loads neither `AGENTS.md` nor `CLAUDE.md` from it; the same directory under `$HOME` loads `AGENTS.md`, and so does any directory inside this repository (Claude Code 2.1.330, `--setting-sources project,local`, three codeword probes, 2026-11-23). Every plugin cell and in-project probe so far ran under `/tmp`, so none of them saw an instructions file, which is what they meant to do. A cell that needs one must put its projects under `$HOME`, and should confirm it with a codeword probe first.
-- **Close stdin on every nested `claude -p`.** The CLI appends piped stdin to the prompt. A capture launched from a Python script that was itself fed by a heredoc gave each of twelve sessions that script as part of the user's message; one haiku session then tried to run it ("the eval script you included"), and the twelve transcripts were discarded (2026-11-22). Every `run.py` already passed `stdin=subprocess.DEVNULL`; `capture_trigger_transcripts.py` and `judge.py` did not and now do. A marker test the same day showed that a nested session sees nothing else of the session that launched it: same context size and no marker, with the `CLAUDE*` environment variables present or removed.
-- **A judge does not need a subagent.** `claude -p` with `--tools ""`, its own `--system-prompt`, `--setting-sources project,local` and `--disable-slash-commands`, started in an empty directory, used about 2.8 k tokens per call against the ~43 k of a subagent judge, and gave the four re-judged iteration-9 outputs the verdicts their subagent judges had given. One session per call keeps the "one judge per packet" rule. `judge.py` in this directory is that judge.
+   ```bash
+   eval-tools/run_evals.py <plugin> --evals all --runs 2 --label full
+   eval-tools/judge.py packets <plugin>-workspace/run-<date>-full
+   eval-tools/judge.py judge   <plugin>-workspace/run-<date>-full
+   eval-tools/judge.py table   <plugin>-workspace/run-<date>-full
+   ```
+
+   Checks of kind `file` and `absence` need a `script-checks.json` in the run directory
+   (`{"<run key>": {"<check id>": true}}`); without it they are reported as not scored.
+3. **Trigger check, only when the description changes**: `run_trigger_eval.py --routine` on
+   the current text and on the candidate, the same day.
+
+Write the rule for reading a result before the runs, in the commit message or the note:
+what count would make you adopt the change, and what count would make you drop it.
+
+## Rules for reading a number
+
+- **Four runs measure no rate.** They separate a defect that shows every time from one that
+  never shows. Do not rank two texts on fewer than ten runs each.
+- **Three runs per trigger query cannot rank descriptions, and pooling two such sweeps does
+  not fix it.** Per-query trigger probabilities cluster between 0.4 and 0.7. For a per-query
+  claim use ten runs or more; compare skills by the aggregate over a group of queries, never
+  by a sweep's pass/fail count.
+- **Two identical serial sweeps move ±4-6 pp at n=50**; a difference under ~12 pp there is not
+  a finding.
+- **False fires are near zero, not zero** (one adjacent-artifact query at ~17% for
+  `design-doc` on opus, "write a PRD"). A negatives-only sweep cannot tell a clean zero from a
+  broken harness: run a canary, the skill's strongest positive, and believe the zeros only
+  when it fires.
+- **Do not fold checks into a weighted score.** Report checks met over total, by kind.
+- **Adding or rewording a check changes what the judges see.** Re-judge old runs in the same
+  batch instead of quoting their earlier figure.
+- **Read the reply of a run that did nothing before counting it**, and report an invalid run
+  next to the totals instead of dropping it.
+
+## Harness lessons
+
+They cost real runs; each one produced a healthy-looking wrong number.
+
+- **`--num-workers` is an experimental variable.** Concurrency depresses the trigger rate of
+  queries that make the session read the repository first (7/10 serial against 4/10 at ten
+  workers, a 21 pp gap between two skills that vanished serially). Quote serial numbers only.
+- **Use `run_trigger_eval.py`, not skill-creator's `run_eval.py` directly.** The cached script
+  does not pass `--setting-sources project,local` (installed plugins mask the candidate) and
+  miscounts with several workers. The wrapper patches a throwaway copy, prints the per-query
+  distribution and warns on a degraded sweep (positives collapsing to near zero); never pool a
+  degraded sweep. Run it from the repo root.
+- **The trigger harness cannot measure a request about a file that is in the project.** It runs
+  here, with no fixture, so the session has nothing to edit and consults the skill; in a real
+  project it may edit the file directly (`design-doc` update requests: 3/3 there, 0/16 in a
+  project). Use `probe_in_project.py`, which gives each session its own project with the
+  fixture and loads the plugins with `--plugin-dir` from outside it, plus a canary.
+- **Skills inside the project are read without the Skill tool.** A session finds committed
+  `.claude/skills/` files with `git ls-files` and follows them, so an invocation count reads 0
+  for a reason unrelated to the description. Load plugins from outside the project.
+- **With `--plugin-dir`, a plugin's `references/` are outside the project** and their Read is
+  refused without `--add-dir`: such a probe counts invocations and does not grade documents.
+- **`AGENTS.md` is in the context of every run started in the repository, in every arm.** Keep
+  skill behavior and eval lore out of it. A session keeps the `AGENTS.md` it started with, and
+  so do its subagents.
+- **No project instructions load under `/tmp`.** A session in a git repository under `/tmp`
+  loads neither `AGENTS.md` nor `CLAUDE.md`; under `$HOME` it does. Confirm with a codeword
+  probe when a cell depends on it.
+- **Close stdin on every nested `claude -p`** (`stdin=subprocess.DEVNULL`): the CLI appends
+  piped stdin to the prompt. The helpers do this.
+- **Start headless sessions with `SHELL=/bin/bash`.** The author's zsh aliases `ls` to `eza`,
+  which lists nothing without a terminal, and one executor concluded the project was empty.
+- **Build fixture copies before the workers start**: two threads copying the same fixture on
+  first use left one run in an empty project.
+- **Wrap long runs in `systemd-inhibit --what=idle:sleep --mode=block`**: a suspend expires the
+  in-flight session and records it as a non-trigger.
+- **A sweep is visible to other sessions in the checkout**: the candidate it injects under
+  `.claude/commands/` shows in an interactive session's skill list. Do not run two at once.
+- **Background subagents cannot write in the main checkout**; executors here are headless
+  `claude -p` sessions, which can.
 
 ## The routine trigger check
 
@@ -63,41 +128,31 @@ Gotchas when running evals in this repo (learned the hard way). They are written
 ./eval-tools/run_trigger_eval.py --routine \
     --eval-set adr-workspace/trigger-evals/trigger_eval.json \
     --skill-path adr/skills/adr \
-    -o adr-workspace/trigger-evals/serial-<date>-routine-haiku.json
+    -o adr-workspace/run-<date>-trigger.json
 ```
 
-`--routine` runs the serial protocol of the baselines in one command and on one model, where it used to be two hand-split eval sets, a hand-spliced canary and a `systemd-inhibit` wrapper per model:
-
-- **One model, the target (`claude-sonnet-5-5`) by default.** Pass an id, not an alias; the id is written into the result. For the per-release haiku number: `--model claude-haiku-5-5 --runs-per-query 5`.
-- **Positives at 3 runs per query** (`--runs-per-query`): a regression guard. Under 90% on the target model it prints a warning; re-run before reading that as a regression.
-- **Negatives at 3 runs per query** (`--negative-runs`), with the best-scoring positive of the first pass as the canary (`--canary-runs`, 3). This is where the runs are worth paying for on a large model. A false fire is listed by query; probe that query on its own at ten runs or more before calling it a rate.
-- **About 63 sessions per skill**, against 332 for four models at 5 and 3 runs. A sweep session on sonnet cost US$ 0.03 to 0.04 when it ran to completion (three sessions measured, 2026-11-20), so a routine check is about US$ 2 per skill at most; `run_eval.py` does not report cost.
-- **Take the reference when you need it.** No routine sweep has been run on sonnet since the `AGENTS.md` split. Before changing a description, run `--routine` on the current text, then on the candidate, the same day: that pair is the comparison, and it is better than a stored baseline taken weeks and CLI versions earlier.
-- **It stops early and says why.** Positives with the degraded-sweep signature end the run before the negatives are paid for; a canary that never fires exits non-zero, because the zeros then mean nothing.
-- Serial only (`--num-workers` is refused), 120 s timeout, under `systemd-inhibit` when it works on the machine (`--no-inhibit` to skip).
-- The result keeps the old shape (`results` with `triggers` and `runs` per query) and adds `protocol` and `canary`, so pooling scripts read it unchanged.
-
-Without `--routine` the wrapper runs a single sweep exactly as before.
-
-Two things to keep in mind when reading a routine number:
-
-- **Every trigger number recorded before 2026-11-20 was measured with the old `AGENTS.md` in each session's context**, which named the four skills and described what each one does. The haiku reference on the trimmed file is `structurizr-workspace/trigger-evals/README-routine-2026-11-20.md` (claude-haiku-5-5: adr 42%, design-doc 62%, structurizr 72%, mermaid-sequence 76%; one sweep each, positives at 5 and negatives at 1, the routine's defaults that day). None of the four separates from its earlier number, so that sweep does not show the split changed the rate; compare a description change against these, not against the older figures. An A/B of the two files on eight indirect queries (`structurizr-workspace/trigger-evals/agentsmd-ab-2026-11-20/README.md`) found no general effect by its frozen rule (27/80 against 14/80, but only four of eight queries moving the same way) and one query that depends on the old text (8/10 against 0/10).
-- **A sweep is visible to other sessions in the checkout.** The candidate command it injects under `.claude/commands/` showed up in the skill list of an interactive session open in the repository while the sweep ran. Do not run executors or a second sweep there at the same time.
+- One model, the target (`claude-opus-5-5`) by default; pass an id, not an alias.
+- Positives at 3 runs per query, a regression guard: large models sit at 98-100%, and a warning
+  prints under 90%. Negatives at 3 runs per query, with the best positive of the first pass as
+  the canary; a canary that never fires exits non-zero.
+- Serial only, 120 s timeout, under `systemd-inhibit` when it works (`--no-inhibit` to skip).
+- About 63 sessions per skill. Take the reference the same day as the candidate; a stored
+  baseline from weeks and CLI versions earlier is a worse comparison.
 
 ## Grading with `judge.py`
 
-`judge.py` holds the part of grading that each iteration used to rewrite in its own `grade.py`: blind packets, the judge calls, and the count. What only the iteration knows stays with it: which runs exist, and the checks decided from bytes.
+`judge.py` builds blind packets, runs the judge calls and counts the verdicts. `run_evals.py`
+writes the `runs.json` it reads; for runs laid out by hand, `judge.py manifest <dir>` builds one
+from `eval-<id>-*/<cell>/run-*/`.
 
-```bash
-./eval-tools/judge.py manifest adr-workspace/iteration-N   # discover the runs -> runs.json
-./eval-tools/judge.py packets  adr-workspace/iteration-N   # -> judge-inputs/pNN.md, judge-map.json
-./eval-tools/judge.py judge    adr-workspace/iteration-N   # -> judge-outputs/pNN-passK.json, judge-cost.json
-./eval-tools/judge.py table    adr-workspace/iteration-N   # -> results.json and a table per eval
-```
-
-- **`runs.json` is the only input to edit.** `manifest` finds `eval-<id>-*/<cell>/run-*/` with the reply at `response.md` or `outputs/reply.md`. Each run takes a `fixture` (the project as it was before the run), so the packet shows the files before, and tags each file after as unchanged, changed or new. Add a run of an older iteration to the list to re-judge it in the same batch, which a changed packet requires.
-- **Checks come from the frozen `checks-baseline.json`** of the workspace. Kinds `file` and `absence` are not judged: the iteration's script writes `script-checks.json` (`{"<run key>": {"<check id>": true}}`, or the same under a `checks` key) and `table` merges it. A script check with no verdict is reported as not scored and counted unmet. Every other kind goes to the judge, with the anchor cases when the eval has a check of kind `invention`. Kind `negative`, first used by `code-comments`, is a negative that is not an invention ("no comment restates the statement next to it") and is judged like `invention`, without anchors; its rule enters a packet only when the eval has such a check, so the packets of the other skills are unchanged.
-- **Three passes on every check by default**, met only when all agree; a split is listed, never averaged. The rule of one pass outside invention was a cost rule for subagent judges, and at ~2.8 k tokens a call it no longer pays to build two packet variants. `--passes 1` restores it for a whole batch.
-- **`judge` resumes.** A call whose output exists is skipped, a failed one is reported and the command exits non-zero, and running it again retries only what is missing. `--only 2` is the smoke test before a full batch. `packets` refuses to renumber packets once verdicts exist.
-- **Name the judge by id** (`--model`, default `claude-opus-5-5`); `judge-cost.json` records the id the session reported, the calls, tokens and cost. Calls go through `claude -p`, so they are billed like the trigger evals.
-- Checked on the iteration-16 data: fed the 48 verdicts of that iteration, `table` gives the table in its README. The packet text differs from iteration-16's (it follows `design-doc` iteration-23's, with a JSON answer), and only two calls were run on the new text, so a full batch on it has not been compared with the old judges.
+- **Checks come from the frozen `checks-baseline.json`.** Kinds `file` and `absence` come from
+  `script-checks.json`; every other kind goes to the judge, with the anchor cases when the eval
+  has a check of kind `invention`. Kind `negative` (a negative that is not an invention) is
+  judged like `invention`, without anchors.
+- **Three passes on every check by default**, met only when all agree; a split is listed, never
+  averaged. `--passes 1` for a whole batch when cost matters more.
+- **One judge per packet, never one judge per pass**: a single agent grading every packet of a
+  pass turned one strict reading into a per-pass bias.
+- **`judge` resumes**: a call whose output exists is skipped. `--only 2` is the smoke test.
+- **Name the judge by id** (`--model`, default `claude-opus-5-5`); `judge-cost.json` records
+  calls, tokens and cost. A judge is a `claude -p` call with no tools, about 2.8 k tokens.

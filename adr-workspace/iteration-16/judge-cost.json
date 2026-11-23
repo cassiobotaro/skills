@@ -1,7 +1,0 @@
-{
-  "calls": 48,
-  "total_tokens": 133275,
-  "cost_usd": 0.9209,
-  "model": "claude-opus-5-5",
-  "note": "48 calls in two invocations (1 smoke test + 47)"
-}

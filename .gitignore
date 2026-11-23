@@ -2,3 +2,4 @@
 *-workspace/**/viewer.log
 *-workspace/**/review.html
 __pycache__/
+*-workspace/run-*

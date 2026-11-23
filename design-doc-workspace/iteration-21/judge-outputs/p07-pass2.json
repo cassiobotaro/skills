@@ -1,7 +1,0 @@
-[
-  {
-    "id": "9.10",
-    "verdict": "unmet",
-    "evidence": "Searched the reply and the written doc for system facts absent from the user's message and the original doc. Doc line 29 asserts a download mechanism: \"O endpoint `GET /exports/<job_id>/download` lê o arquivo do bucket, então qualquer worker atende o download.\" The user never said how the download works after the move, and the run itself lists it as unknown (doc line 55 / reply line 11: \"O download continua passando pela API ou o usuário recebe um link direto para o bucket?\"), so line 29 asserts as fact what the run treats as open. Also doc line 31 asserts retention \"Os arquivos ficam 7 dias; um cron apaga os mais antigos.\" for the bucket while marking it open, and doc line 42 asserts \"agora o serviço precisa de ambas\" (new credentials and retention policy) as a current fact about the system, which the user did not establish."
-  }
-]

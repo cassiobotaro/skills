@@ -1,6 +1,13 @@
 {
   "skill_name": "explain",
   "note": "Ten evals. Fixture directories under files/ are copied into the run's working directory as the project root before the prompt is given (files/ratelimit/limiter.py becomes ratelimit/limiter.py). The study in files/estudo/resumo.md and the thread in files/suporte/thread.md are made up for the evals. Evals 1 to 6 are explanations, 7 to 9 are texts for someone else, 10 is the opt-in teaching loop. The reply of the run is the output to save. No eval has been run yet; before the first run, split the assertions into atomic checks in checks-baseline.json (see eval-tools/README.md). Several assertions are negative ('no invented fact', 'no praise opener'): their evidence is a search, so run three judge passes on those.",
+  "fixture_strip": 1,
+  "smoke": [
+    3,
+    7,
+    9,
+    10
+  ],
   "evals": [
     {
       "id": 1,

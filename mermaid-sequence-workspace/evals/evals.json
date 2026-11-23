@@ -1,5 +1,11 @@
 {
   "skill_name": "mermaid-sequence",
+  "fixture_strip": 2,
+  "smoke": [
+    0,
+    2,
+    6
+  ],
   "evals": [
     {
       "id": 0,

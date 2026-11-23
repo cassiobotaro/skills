@@ -1,7 +1,0 @@
-[
-  {
-    "id": "9.10",
-    "verdict": "unmet",
-    "evidence": "Searched the reply and both files for costs, retention, credentials, download mechanism/URL scheme, metrics, change date, outcomes and alternatives. Costs, retention and credentials appear only as attributed restatements of the original ('custos que o documento original citou ao descartar o bucket') or as open questions. Change date: none asserted. But the new doc states a download mechanism as fact: Solução line 23, 'qualquer worker acessa o arquivo, e o download deixa de depender de qual worker gerou o relatório', and Trade-offs line 27, 'O download funciona em qualquer worker, então o 404 causado pelo segundo worker desaparece'. Both say downloads are still served by the workers, reading from the bucket. The user never said this, and the doc's own open question at line 39 ('O download continua passando pelo worker ou o cliente recebe uma URL do bucket?') leaves it unresolved. At best this is borderline, so the check is unmet."
-  }
-]
