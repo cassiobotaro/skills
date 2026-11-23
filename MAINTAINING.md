@@ -57,7 +57,7 @@ Do not undo:
 - References are an always-read core (`dsl-reference`) plus conditional pattern files; the export commands are one of them (`export`), so the hand-off carries only the preview.
 - Theme tag names in the references are checked against the theme files the image bundles: a tag the theme does not define draws no icon and nothing reports it (1.6.4 carried two that `amazon-web-services-2025.07` had renamed).
 
-Measured: in a project holding the workspace, 8/8 sessions invoked it first on evals 3 and 11, 4/4 on a new workspace, 0/4 on real AWS icons (excluded) (`structurizr-workspace/trigger-evals/in-project-2026-11-23/`). Open: which of `adr` and `structurizr` takes eval 11 when both are installed was never measured.
+Measured: in a project holding the workspace, 8/8 sessions invoked it first on evals 3 and 11, 4/4 on a new workspace, 0/4 on real AWS icons (excluded) (`structurizr-workspace/trigger-evals/in-project-2026-11-23/`). With `adr` installed too (claude-opus-5-5, 2026-11-23, four sessions, `probe_in_project.py`): every session invoked `adr` first and `structurizr` second, added `!adrs docs/adr` at workspace scope, and left the ADR unwritten because the request gives no reason for the decision; each asked for the reason, the trade-off, the status and whether 0004 supersedes or amends 0003, and asked before changing the queue's technology in the model. The two skills split the request as designed.
 
 ## mermaid-sequence
 
