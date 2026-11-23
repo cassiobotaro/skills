@@ -1,0 +1,460 @@
+{
+ "count": "mermaid-sequence",
+ "plugins": [
+  "mermaid-sequence",
+  "unslop"
+ ],
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "2",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0994488,
+   "turns": 6,
+   "denials": 2,
+   "reply_start": "Não consegui ler o `references/syntax.md` da skill nem rodar o validador (Docker ou `mmdc`), porque as duas chamadas pediram permissão que não foi concedida. Escrevi o diagrama com a sintaxe básica do Mermaid, e **ele não foi validado aqui*"
+  },
+  {
+   "eval": "2",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.11346439999999999,
+   "turns": 9,
+   "denials": 2,
+   "reply_start": "Não consegui ler o `references/syntax.md` da skill nem rodar o validador, porque as duas chamadas ficaram sem permissão. Escrevi o diagrama só com a sintaxe básica e conservadora do Mermaid, sem validar.\n\n```mermaid\nsequenceDiagram\n    auto"
+  },
+  {
+   "eval": "2",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1253069,
+   "turns": 11,
+   "denials": 3,
+   "reply_start": "Não consegui rodar nenhum validador: o ambiente bloqueou os comandos de shell que eu usaria para isso. O diagrama abaixo **não foi validado aqui**.\n\n## Diagrama\n\n```mermaid\nsequenceDiagram\n    autonumber\n    actor C as Cliente\n    participa"
+  },
+  {
+   "eval": "4",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0774879,
+   "turns": 4,
+   "denials": 1,
+   "reply_start": "Não consegui ler o `references/syntax.md` da skill (a permissão foi negada). Usei só a sintaxe básica do Mermaid, que funciona em qualquer renderizador.\n\n```mermaid\nsequenceDiagram\n    autonumber\n    actor U as Usuário\n    participant W as "
+  },
+  {
+   "eval": "6",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0374422,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "```mermaid\nflowchart TD\n    A([Início do deploy]) --> B{\"Testes passam?\"}\n    B -- Não --> X1([Deploy interrompido])\n    B -- Sim --> C[Deploy em staging]\n    C --> D{\"Smoke test em staging passa?\"}\n    D -- Não --> X2([Deploy interrompido]"
+  },
+  {
+   "eval": "2",
+   "run": 2,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1033851,
+   "turns": 8,
+   "denials": 4,
+   "reply_start": "Não consegui validar o diagrama. O sandbox negou a leitura do `references/syntax.md` da skill e a execução de `docker info` e `mmdc`. Usei só a sintaxe básica do Mermaid, que o GitHub e o GitLab renderizam.\n\n```mermaid\nsequenceDiagram\n    a"
+  },
+  {
+   "eval": "4",
+   "run": 2,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0713372,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "```mermaid\nsequenceDiagram\n    autonumber\n    actor U as Usuário\n    participant W as App Web\n    participant A as API\n    participant S as S3\n\n    U->>W: Escolhe o arquivo\n    W->>+A: POST /v1/attachments/presign\n    A-->>-W: 201 Created\n "
+  },
+  {
+   "eval": "6",
+   "run": 2,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0341662,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "```mermaid\nflowchart TD\n    A([Início]) --> B{Testes passam?}\n    B -- Não --> F1([Falha: deploy interrompido])\n    B -- Sim --> C[Deploy em staging]\n    C --> D{Smoke test<br/>em staging passa?}\n    D -- Não --> F2([Falha: deploy interromp"
+  },
+  {
+   "eval": "2",
+   "run": 3,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1380043,
+   "turns": 12,
+   "denials": 4,
+   "reply_start": "Não consegui validar o diagrama aqui. Tentei gravar o `.mmd` e checar `docker` e `mmdc`, mas o sandbox bloqueou essas chamadas. Também não consegui ler o `references/syntax.md` da skill e usei a sintaxe básica do Mermaid, sem recursos de ve"
+  },
+  {
+   "eval": "4",
+   "run": 3,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07814209999999999,
+   "turns": 5,
+   "denials": 2,
+   "reply_start": "Aqui está o diagrama do fluxo de upload de anexo:\n\n```mermaid\nsequenceDiagram\n    autonumber\n    actor U as Usuário\n    participant W as App Web\n    participant A as API\n    participant S as S3\n\n    U->>W: Escolhe o arquivo\n    W->>+A: POST"
+  },
+  {
+   "eval": "6",
+   "run": 3,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.036786200000000005,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "```mermaid\nflowchart TD\n    A([Início]) --> B{Testes passam?}\n    B -- Não --> X([Deploy abortado])\n    B -- Sim --> C[Deploy em staging]\n    C --> D{Smoke test em staging passa?}\n    D -- Não --> X\n    D -- Sim --> E[Sobe canary com 5% do "
+  },
+  {
+   "eval": "2",
+   "run": 4,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "post-orders.mmd"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.151568,
+   "turns": 11,
+   "denials": 6,
+   "reply_start": "Aqui está o diagrama do `POST /orders`, montado a partir do código de `main.py`, `payments.py`, `db.py` e `events.py`. **Não foi validado aqui.** Os comandos de verificação (`docker info`, `command -v mmdc`) precisaram de aprovação e não ro"
+  },
+  {
+   "eval": "4",
+   "run": 4,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07477969999999999,
+   "turns": 4,
+   "denials": 1,
+   "reply_start": "Você já avisou que não há Docker nem mermaid-cli, então não insisti na verificação.\n\n```mermaid\nsequenceDiagram\n    autonumber\n    actor U as Usuário\n    participant W as App Web\n    participant A as API\n    participant S as S3\n\n    U->>W: "
+  },
+  {
+   "eval": "6",
+   "run": 4,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0364182,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "```mermaid\nflowchart TD\n    A([Início do deploy]) --> B{Testes passam?}\n    B -- Não --> X1([Deploy abortado])\n    B -- Sim --> C[Deploy em staging]\n    C --> D{Smoke test em staging passa?}\n    D -- Não --> X2([Deploy abortado])\n    D -- S"
+  },
+  {
+   "eval": "2",
+   "run": 5,
+   "canary": false,
+   "project": "p15",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1262462,
+   "turns": 8,
+   "denials": 4,
+   "reply_start": "Aqui está o diagrama. **Não consegui validá-lo aqui**, porque o ambiente bloqueou os comandos de validação (mermaid-cli via Docker). Como o código de `main.py`, `payments.py`, `db.py` e `events.py` foi lido, o conteúdo vem dele. Só a sintax"
+  },
+  {
+   "eval": "4",
+   "run": 5,
+   "canary": false,
+   "project": "p16",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0840902,
+   "turns": 6,
+   "denials": 2,
+   "reply_start": "Aqui está o diagrama, só com o caminho feliz.\n\n```mermaid\nsequenceDiagram\n    autonumber\n    actor U as Usuário\n    participant W as App Web\n    participant A as API\n    participant S as S3\n\n    U->>W: Escolhe o arquivo\n    W->>+A: POST /v1"
+  },
+  {
+   "eval": "6",
+   "run": 5,
+   "canary": false,
+   "project": "p17",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0348882,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "```mermaid\nflowchart TD\n    A([Início]) --> B{Testes passaram?}\n    B -- Não --> X1([Deploy abortado])\n    B -- Sim --> C[Deploy em staging]\n    C --> D{Smoke test em staging passou?}\n    D -- Não --> X2([Deploy abortado])\n    D -- Sim --> "
+  },
+  {
+   "eval": "2",
+   "run": 6,
+   "canary": false,
+   "project": "p18",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.11444760000000001,
+   "turns": 8,
+   "denials": 4,
+   "reply_start": "```mermaid\nsequenceDiagram\n    autonumber\n    actor C as Cliente\n    participant API as Order API (FastAPI)\n    participant PG as PayGate\n    participant DB as PostgreSQL\n    participant MQ as RabbitMQ\n\n    C->>API: POST /orders\n    Note ov"
+  },
+  {
+   "eval": "4",
+   "run": 6,
+   "canary": false,
+   "project": "p19",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "mermaid-sequence"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0764117,
+   "turns": 4,
+   "denials": 1,
+   "reply_start": "```mermaid\nsequenceDiagram\n    autonumber\n    actor U as Usuário\n    participant W as App Web\n    participant A as API\n    participant S as S3\n\n    U->>W: Escolhe o arquivo\n    W->>+A: POST /v1/attachments/presign\n    A-->>-W: 201 Created\n "
+  },
+  {
+   "eval": "6",
+   "run": 6,
+   "canary": false,
+   "project": "p20",
+   "installed": [
+    "mermaid-sequence:mermaid-sequence",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0342042,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "```mermaid\nflowchart TD\n    A([Início do deploy]) --> B{Testes passam?}\n    B -- Não --> X([Deploy abortado])\n    B -- Sim --> C[Deploy em staging]\n    C --> D{Smoke test em staging passa?}\n    D -- Não --> R\n    D -- Sim --> E[Sobe canary "
+  }
+ ]
+}
