@@ -119,6 +119,37 @@ Counting the documents written with the skill invoked through the Skill tool: it
 0 of 4 met 7.8, `pa` 2 of 4 (one of the two after `unslop` removed the lines), `pn` 0 of
 4. The step that runs `unslop` hides part of the defect; it does not cause it.
 
+**Fourth batch, 2026-11-23: meant as `pn` with AGENTS.md, read as four more `pn` runs**
+(`run_plugin.py`, cell `pg`, `plugin-batch-agents-md/`). The cell copied the repository's
+AGENTS.md into each project to see whether it is what keeps the brief cells clean. It did
+not test that: the projects were under `/tmp`, where a `claude -p` session loads no
+project instructions file at all (codeword probes of the same day, in
+`../../eval-tools/README.md`). AGENTS.md was a file in the tree; run-1 read it with the
+Read tool, the others did not open it. All four invoked `design-doc` through the Skill
+tool, none listed `unslop`, and each wrote one document, so they are valid runs of the
+`pn` setup.
+
+| Check | pn | pg (same setup) |
+|---|---|---|
+| 7.8 Riscos states no risk nobody gave | 0/4 | 2/4 |
+| 7.24 no such risk anywhere outside Perguntas abertas | 0/4 | 1/4 |
+| 7.23 Riscos says it awaits the answer | 2/4 | 3/4 |
+| 7.11 the +5 ms cost under a heading of its own | 3/4 | 2/4 |
+| 7.19 no technology, team or stakeholder nobody named | 2/4 | 1/4 |
+| all 24 checks of eval 71 | 81/96 | 85/96 |
+
+Two splits in `pg` (7.23, 7.19), counted as not met. What fails 7.8: run-2 lists
+"indisponibilidade do Redis, perda de chaves, janela de 24h" as the risks not yet
+discussed, and run-4 gives the +5 ms a mitigation ("medir a latência real antes de
+ampliar o tráfego") and names the Redis being down as an example. Run-1 and run-3 keep
+Riscos to the accepted +5 ms and a pointer to Perguntas abertas.
+
+Counting every document written with the skill invoked through the Skill tool, outside
+the repository and with the prompt alone: iteration-27 0 of 4 met 7.8, `pa` 2 of 4,
+`pn` 0 of 4, `pg` 2 of 4, so 4 of 16. The brief cell `a`, inside the repository, met it
+in 4 of 4. The question of what separates them is still open, and the harness finding
+above means the next cell has to put its projects under `$HOME`.
+
 **Reading, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -159,4 +190,5 @@ with a brief that frames the task and asks for a final reply, the other two outs
 with the prompt alone.
 
 **Cost.** Executors: 24 sessions, US$ 2.57. Judges: 72 calls, US$ 4.06. Third batch:
-4 sessions, US$ 0.38; 12 judge calls, US$ 0.95.
+4 sessions, US$ 0.38; 12 judge calls, US$ 0.95. Fourth batch: 4 sessions, US$ 0.50;
+12 judge calls, US$ 1.21; four codeword probes on haiku, a few cents.

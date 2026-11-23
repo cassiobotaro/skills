@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:76 \"O que acontece se o serviço de deduplicação cair? Ele é um ponto único de falha no caminho crítico?\" and doc:77 \"Qual é o dimensionamento esperado do Redis (volume de chaves em 24h) e o risco de perder chaves (reinício, eviction)?\" Both sit under the 'Riscos' group of Perguntas abertas."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:81 \"Em quais fases o serviço entra em produção (por exemplo, por produtor ou por tópico)? Qual é o critério de avanço e como fazemos rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:54 \"Os demais riscos (indisponibilidade do Redis, perda de chaves, janela de 24h) ainda não foram discutidos\". This sentence in Riscos names three risks that the user did not give."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc:56-58 for phases, advance criteria and rollback steps. The section has only \"Ainda não definido. As fases, os critérios de avanço e o plano de rollback estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:42 \"### Alternativas consideradas\"; doc:44 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação.\"; doc:45 \"**Idempotência nativa do produtor Kafka.** Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms appears at doc:52 under \"## Riscos\" (\"Estimamos +5ms de latência por evento. A equipe aceitou esse custo\"). That is a general template heading, not one dedicated to the trade-off, and it is not under Alternativas consideradas."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:3 \"**Desvio do template:** ... Acrescentei \"Alternativas consideradas\" como subseção dentro de Proposta ... Se a arquitetura não aceitar subseção extra, é só mover ou tirar.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header row at doc:8 \"| **Revisores** | |\". It is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:84 \"Quem revisa este doc?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole doc for figures. Found only 4%, 24h, +5ms, 0,1% and 'duas vezes', plus the doc ID and dates, which are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "doc:84 \"Quais times além do de ingestão são afetados (financeiro, consumidores, infraestrutura do Redis e do Kafka)?\". This names an ingestion team and Redis/Kafka infrastructure teams, which the user did not name."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL. There is none; only a Mermaid block at doc:20-38."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block at doc:20-38. It has no endpoints, headers or status codes. The only alt branch is new key vs existing key (discard), which the user described. There is no failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences at doc:18, 40 and 52. The producer sends, the ingestor hands off to the service, the service queries and stores the key in Redis and discards repeats, and the team accepted the cost. All follow from the user's message."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:54 \"Os demais riscos (...) ainda não foram discutidos e estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:54 \"Os demais riscos (indisponibilidade do Redis, perda de chaves, janela de 24h) ainda não foram discutidos\". These risks are named in a 'not discussed yet' sentence. doc:40 also states the failure mode \"Um reenvio depois desse prazo não é reconhecido como duplicata.\""
+ }
+]

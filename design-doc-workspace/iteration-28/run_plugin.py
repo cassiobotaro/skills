@@ -13,6 +13,10 @@ them: eval-<id>-<name>/<cell>/run-<n>/.
 records the skills the session listed at start (`skills_listed` in timing.json), so that
 the absence of `unslop` is read from the session and not assumed.
 
+`pg`, added on 2026-11-23, is `pn` with a copy of the repository's AGENTS.md at the root
+of the project, committed with the fixture, so that it loads as project instructions.
+It is left out of the copied outputs, so the judge packets match those of `pn`.
+
 Usage: run_plugin.py --scratch DIR <eval>:<cell>:<run> [...] [--workers N]
 """
 import argparse, concurrent.futures as cf, datetime, json, os, shutil, subprocess, time
@@ -21,8 +25,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WS = os.path.dirname(HERE)
 REPO = os.path.dirname(WS)
 MODEL = "claude-sonnet-5-5"
-CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a"}
-NO_UNSLOP = {"pn"}
+CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a"}
+NO_UNSLOP = {"pn", "pg"}
+WITH_AGENTS = {"pg"}
 EVALS = {str(e["id"]): e for e in json.load(open(os.path.join(HERE, "evals.json")))["evals"]}
 ALLOWED = ["Skill", "Bash(date:*)", "Bash(ls:*)", "Bash(find:*)", "Bash(mkdir:*)", "Bash(cat:*)", "Bash(pwd)"]
 GIT = ["git", "-c", "user.name=eval", "-c", "user.email=eval@example.invalid", "-c", "commit.gpgsign=false"]
@@ -48,6 +53,8 @@ def run(job, scratch):
         out = os.path.join(project, *rel.split("/")[2:])
         os.makedirs(os.path.dirname(out), exist_ok=True)
         shutil.copyfile(os.path.join(WS, "evals", rel), out)
+    if cell in WITH_AGENTS:
+        shutil.copyfile(os.path.join(REPO, "AGENTS.md"), os.path.join(project, "AGENTS.md"))
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "-m", "start"]):
         subprocess.run([*GIT, *args], cwd=project, check=True)
     dd, un = os.path.join(scratch, "plugins", cell, "design-doc"), os.path.join(scratch, "plugins", "unslop")
@@ -85,7 +92,7 @@ def run(job, scratch):
         return {"eval": ev, "cell": cell, "run": n, "error": (p.stderr or p.stdout)[-300:]}
     shutil.rmtree(rundir, ignore_errors=True)
     os.makedirs(rundir)
-    shutil.copytree(project, os.path.join(rundir, "outputs"), ignore=shutil.ignore_patterns(".git"))
+    shutil.copytree(project, os.path.join(rundir, "outputs"), ignore=shutil.ignore_patterns(".git", *(["AGENTS.md"] if cell in WITH_AGENTS else [])))
     open(os.path.join(rundir, "response.md"), "w").write((final.get("result") or "").strip() + "\n")
     u = final.get("usage") or {}
     invoked = [t["target"].split(":")[-1] for t in tools if t["tool"] == "Skill"]

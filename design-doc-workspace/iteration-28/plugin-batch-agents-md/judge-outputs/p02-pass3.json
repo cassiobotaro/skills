@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:65 \"Há risco de descartar um evento legítimo (por exemplo, colisão ou reutilização de chave idempotente por um produtor)? Como mitigamos?\" and :63 \"O que acontece com a ingestão se o Redis ficar indisponível ou lento...\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:59 \"Como o serviço entra em produção? Há fases (por produtor, por percentual do tráfego, modo sombra que só mede duplicatas sem descartar)?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 40-44). It holds only the user's +5 ms cost (line 42) and a marker at line 44: \"Os demais riscos, e a mitigação de cada um, não foram levantados até agora... entram aqui quando o autor responder.\" No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 46-48). It holds only a marker: \"O plano ainda não foi definido: fases, critério de avanço e critério de rollback estão em [Perguntas abertas]\". No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:27 \"### Alternativas consideradas\"; :31 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :32 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:36 \"### Trade-off aceito\"; :38 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 10: \"Acrescentei uma subseção \\\"Alternativas consideradas\\\" dentro de Proposta, porque o template não tem lugar para elas. Também pus \\\"Trade-off aceito\\\" nessa seção.\" This sits under the heading \"Onde fugi do template\"."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:80 \"...e quem revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It states 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\", all from the user. The dates 2026-11-23 and DD-2026-001 are header metadata, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: dd-2026-001-deduplicacao-de-eventos.md:80 names \"plataforma/infra que opera o Redis\", a team the user never named. It appears inside a question, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None found."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None found."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched every sentence outside Perguntas abertas for an actor performing an action. The service's grava/encaminha/descarta (lines 20-23) and the producers' retry (line 14) come from the user. The time accepting the trade-off (line 38) matches the user's \"Trade-off aceito\". No unestablished actor is assigned an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:44 \"Eles estão como perguntas em [Perguntas abertas](#perguntas-abertas) e entram aqui quando o autor responder.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:25 states a failure mode the user did not give: \"um reenvio só é detectado se chegar até 24 horas depois do primeiro envio.\" The same line also names a risk while deferring it: \"o comportamento do serviço quando o Redis não responde estão em [Perguntas abertas]\"."
+ }
+]

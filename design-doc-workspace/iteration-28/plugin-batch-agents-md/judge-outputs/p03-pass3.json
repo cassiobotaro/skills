@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos em caso de retry, e o pipeline de ingestão recebe essas duplicatas.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:49 \"O que acontece com a ingestão quando o Redis fica indisponível: o serviço descarta, repassa sem deduplicar ou bloqueia?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Quais são as fases (por exemplo, por produtor ou por percentual de tráfego), e qual critério avança cada uma?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 31-35). The only risk is the +5ms latency, which the user gave. The user also stated the trade-off was accepted. The remaining line only points to Perguntas abertas. No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 37-39). It contains only a pointer to Perguntas abertas. No phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:24 \"## Alternativas consideradas\"; :28 \"**Deduplicar no consumidor.** Descartada.\"; :29 \"**Idempotência nativa do produtor Kafka.** Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms appears under Proposta (:22), Riscos (:33) and Métricas (:44), not under Alternativas consideradas. None of these is a dedicated heading for the trade-off. Riscos is a general template section, not a heading of its own for the accepted cost."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Seção extra:** acrescentei \\\"Alternativas consideradas\\\" depois de Proposta... Se a arquitetura não aceitar seção fora do template, mova esse conteúdo para dentro de Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:64 \"Quem são os revisores?\"; reply line 12 \"Quais são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4%, 24 horas, 5ms, 0,1% and duas vezes, all given by the user. p50/p99 appear only inside a question (:60). No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, financeiro, produtores, consumidores and ingestor, all named by the user. \"eviction\" appears only inside a question (:51)."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "The document has no Structurizr DSL."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "The document has no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor assertions. The service consulting, discarding, storing and forwarding (:18) follows the user's proposal of a service between the ingestor and Kafka. Producers resending (:14) is from the user. \"A equipe aceitou\" (:33) restates the user's \"Trade-off aceito\". Other actor-attributed actions appear only in questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/deduplicacao-de-eventos.md:35 \"Os demais riscos da proposta e suas mitigações estão em [Perguntas abertas]\" points to the open questions. It does not say the section is pending or awaits the user's answer."
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched every section outside Perguntas abertas (lines 12-44) for risks, failure modes and mitigations. The only one is the user's +5ms latency. Redis outage, partial failure, key loss and the 24h window appear only as questions (:49-53)."
+ }
+]

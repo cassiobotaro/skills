@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos em caso de retry, e o pipeline de ingestão recebe essas duplicatas.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:49 \"O que acontece com a ingestão quando o Redis fica indisponível: o serviço descarta, repassa sem deduplicar ou bloqueia?\" (under 'Riscos' in Perguntas abertas)"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:56 \"Quais são as fases (por exemplo, por produtor ou por percentual de tráfego), e qual critério avança cada uma?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched docs/design/deduplicacao-de-eventos.md:31-35 for risks and mitigations. The only risk is the user's +5ms latency trade-off (line 33). The 'A equipe aceitou esse custo' line restates the user's 'Trade-off aceito'. Line 35 points the remaining risks to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched docs/design/deduplicacao-de-eventos.md:37-39. The section only says \"As fases, os critérios de avanço e os critérios de rollback estão em [Perguntas abertas]\". It states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:24 \"## Alternativas consideradas\"; :28 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :29 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms appears under '## Proposta' (line 22 \"Estimamos +5ms de latência por evento.\") and under the template heading '## Riscos' (line 33). It is not under a dedicated trade-off heading. It is also not under '## Alternativas consideradas', which holds the alternatives."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Seção extra:** acrescentei \"Alternativas consideradas\" depois de Proposta. O template não tem lugar para as duas alternativas... Se a arquitetura não aceitar seção fora do template, mova esse conteúdo para dentro de Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:64 \"Quem são os revisores?\"; reply line 12 \"Quais são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It contains 4%, 24 horas, +5ms/5ms, 0,1% and 'duas vezes'. p50/p99 and '+5ms' at line 60 appear only inside a question. DD-2026-001 and the dates are identifiers, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, financeiro, ingestor/pipeline and 'equipe' (the user's 'we'). 'eviction' appears only in a question (line 51). Nothing new is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block and found none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block and found none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched for actor-action sentences outside the questions. 'o serviço consulta/descarta/grava/repassa ao Kafka' (line 18) matches the user's description of the service. 'A equipe aceitou' (line 33) restates the user's 'Trade-off aceito'. Who generates the key is left as question 5."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:35 \"Os demais riscos da proposta e suas mitigações estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched sections outside Perguntas abertas (lines 12-44) for risks, failure modes and mitigations. Only the +5ms latency cost is stated. Redis failure, key loss and the 24h window appear only as questions (lines 49-52)."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-de-deduplicacao-de-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:76 'O que acontece se o serviço de deduplicação cair? Ele é um ponto único de falha no caminho crítico?' (under the 'Riscos' group in Perguntas abertas)"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:81 'Em quais fases o serviço entra em produção (por exemplo, por produtor ou por tópico)? Qual é o critério de avanço e como fazemos rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:54 'Os demais riscos (indisponibilidade do Redis, perda de chaves, janela de 24h) ainda não foram discutidos' names three risks the user did not give."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Checked doc:56-58. The section says only 'Ainda não definido. As fases, os critérios de avanço e o plano de rollback estão em Perguntas abertas.' It states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:42 '### Alternativas consideradas'; doc:44 '**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartamos.'; doc:45 '**Idempotência nativa do produtor Kafka.** Ela não cobre o reenvio entre reinícios do produtor'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms appears only under '## Riscos' (doc:52, 'Estimamos +5ms de latência por evento. A equipe aceitou esse custo'), which is a general risks heading. It has no heading of its own and is not under 'Alternativas consideradas'."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:3 '**Desvio do template:** ... Acrescentei \"Alternativas consideradas\" como subseção dentro de Proposta ... Se a arquitetura não aceitar subseção extra, é só mover ou tirar.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header. doc:8 '| **Revisores** | |' is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:84 'Quem revisa este doc?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the doc for figures and found only 4%, 0,1%, 24h, +5ms, 'duas vezes' and the doc ID/date. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. doc:84 'Quais times além do de ingestão são afetados (financeiro, consumidores, infraestrutura do Redis e do Kafka)?' names an ingestion team and Redis/Kafka infrastructure teams that the user did not name. The check does not exempt questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL and found none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block (doc:20-38). It has no endpoint, header or status code. The only branch is new key vs existing key (discard), which the user gave. It has no failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actions in Proposta, Mermaid and Riscos. The service checks and stores the key and discards repeats, the ingestor hands events to the service, and the team accepted the cost. All follow from the user's message. Other attributions are inside questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:54 'Os demais riscos ... ainda não foram discutidos e estão em Perguntas abertas.'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:54 'Os demais riscos (indisponibilidade do Redis, perda de chaves, janela de 24h) ainda não foram discutidos' names risks in a not-yet-discussed sentence. doc:40 'Um reenvio depois desse prazo não é reconhecido como duplicata.' states a failure mode outside Perguntas abertas."
+ }
+]

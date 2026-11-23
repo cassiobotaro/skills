@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:67 \"O que acontece quando o Redis está indisponível: o serviço deixa passar eventos (fail-open, com duplicatas) ou bloqueia a ingestão (fail-closed)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:73 \"Como entra em produção: por produtor, por percentual de tráfego, em modo sombra (só contando duplicatas, sem descartar) antes de descartar de fato?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:41 gives a mitigation the user never gave: \"Mitigação: medir a latência real antes de ampliar o tráfego\". Line 43 also names a risk: \"o comportamento quando o Redis estiver indisponível\"."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout, docs/design/DD-2026-001-deduplicacao-de-eventos.md:45-47. It holds only a pending marker, \"Ainda não definido. As fases, os critérios de avanço e de rollback dependem das respostas em Perguntas abertas.\", and states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:27 \"### Alternativas consideradas\"; :31 \"**Deduplicar no consumidor.** Descartada: cada consumidor teria que reimplementar a deduplicação.\"; :32 \"**Idempotência nativa do produtor Kafka.** Descartada: não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:35 \"### Trade-off aceito\"; :37 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5: \"**Desvio do template, para você aceitar ou não:** ele não tem lugar para alternativas nem para o trade-off aceito. Coloquei os dois como subseções dentro de Proposta\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/DD-2026-001-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:81 \"Quem revisa este documento (time de arquitetura e financeiro, outros)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4%, 24 horas, +5ms, 0,1% and \"duas vezes\". The question numbering is not stated as fact. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/DD-2026-001-deduplicacao-de-eventos.md:81 names \"infraestrutura do Redis\" as a team (\"Algum outro time é impactado, como produtores, consumidores ou infraestrutura do Redis?\"). Neither the user nor the template names this team. It sits inside a question, but this check does not exempt questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the assertions outside Perguntas abertas for actors. The service consulting and writing Redis, discarding repeats and delivering to Kafka comes from the user's proposal. \"O time aceita esse custo\" matches the user's \"Trade-off aceito\". The mitigation at :41 names no actor. No unsupported actor assignment was found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:43 \"Os demais riscos desta proposta (...) ainda não foram discutidos e estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:43 names a risk in a sentence that says it was not discussed: \"o comportamento quando o Redis estiver indisponível\". :41 states an invented mitigation: \"medir a latência real antes de ampliar o tráfego\"."
+ }
+]
