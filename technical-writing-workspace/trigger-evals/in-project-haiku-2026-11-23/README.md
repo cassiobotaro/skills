@@ -56,3 +56,35 @@ so on haiku step 5 is reached. Whether it did what step 5 asks was not read.
 At least 12 of the refused calls are Reads of the plugin's `references/`, as in the
 sonnet probe, because the plugins load without `--add-dir`; the others were not
 classified.
+
+## Step 5, read from the transcripts (2026-11-23)
+
+Step 5 says: after the actor pass, invoke `unslop` on the prose written in this turn, and
+treat a fact it finds missing as a question for the user. Read from the transcripts of
+this probe and of `../in-project-2026-11-22/` (sonnet), no new runs.
+
+**How often it is reached.** Of the sessions that invoked `technical-writing` and wrote a
+document, `unslop` was invoked in 3 of 17 on haiku (canary run-1 and run-2, eval 1 run-3)
+and in 1 of 17 on sonnet (eval 3 run-3). On haiku all three are on eval 1; none of evals
+2, 3 and 6 reached it. The earlier note that the step "never ran" was about the A/Bs,
+where `unslop` was not installed; the sonnet probe had one run that nobody read.
+
+**When it is reached, it does what the step asks.** All four call it after the document
+is written, on that file alone, and three pass a scope that keeps every fact, command and
+identifier. In all four the session could not read `unslop`'s vocabulary file (the plugin
+loads without `--add-dir`) and said so, applying the rules of its body only. The edits:
+
+- haiku canary run-1: none; the session said the text had no hits.
+- haiku canary run-2: the opening that announced the page's coverage, rewritten as a
+  statement; "a special case" cut; SES, S3 and AMQP spelled out (the code imports `boto3`
+  and calls `s3` and `ses`, so "Amazon" adds nothing the repository does not give); one
+  Edit whose old and new text are the same.
+- haiku eval 1 run-3: "the request" renamed "the job", the name the page uses for it.
+- sonnet eval 3 run-3: emphasis bold removed from the runbook's bullets, one bullet
+  pair turned into "Se …" conditions; a misspelling the pass introduced ("reprocese")
+  was corrected by the session in the next Edit.
+
+No pass removed an actor, a fact, a command or a TODO, and none surfaced a missing fact,
+so the "question for the user" clause was not exercised. Four sessions, one of them a
+no-op, say the step is safe when reached; they say nothing about what it adds, and the
+rate at which it is reached is low on both models.
