@@ -1,0 +1,375 @@
+{
+ "count": "technical-writing",
+ "plugins": [
+  "technical-writing",
+  "unslop"
+ ],
+ "plugin_src": {},
+ "model": "claude-opus-5-5",
+ "runs": [
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.30764159999999996,
+   "turns": 12,
+   "denials": 1,
+   "reply_start": "I rewrote `docs/pipeline.md` so that every step names the component that does it. There are three components: the gateway, the worker and the notifier. A new table at the top shows each one's file, how to start it and what it does. I kept y"
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.278309,
+   "turns": 10,
+   "denials": 1,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step now says which component does it: the gateway, the worker, or the notifier. I took every one of them from the code in `exporter/`.\n\n- **Your sections are unchanged.** The page now also lists the que"
+  },
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.27619259999999995,
+   "turns": 10,
+   "denials": 2,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step now names the component that does it. Every claim was checked against the code.\n\n- **What changed:** a new table at the top lists the three components (gateway, worker, notifier), with each one's fi"
+  },
+  {
+   "eval": "2",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.35591699999999993,
+   "turns": 20,
+   "denials": 3,
+   "reply_start": "I added `README.md` at the repository root. I wrote it only from the code, the `Makefile` and `pyproject.toml`. It explains what the service does, the gateway / worker / notifier split, prerequisites, environment variables, how to run it lo"
+  },
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.4680812,
+   "turns": 16,
+   "denials": 4,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`. Ele parte do código do worker, do alerta em `deploy/alerts.yaml` e do `scripts/requeue_dead.py`. Supus que quem lê é o plantonista, que conhece RabbitMQ e Prometheus mas nunc"
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.288589,
+   "turns": 10,
+   "denials": 1,
+   "reply_start": "I rewrote `docs/pipeline.md` so that every step names the component that does it.\n\n- **What changed:** The page now starts with a table of the three components (gateway, worker, notifier) and the two RabbitMQ queues (`exports`, `exports.dea"
+  },
+  {
+   "eval": "2",
+   "run": 2,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.3454878,
+   "turns": 19,
+   "denials": 3,
+   "reply_start": "I wrote `README.md` at the repo root. I didn't run any commands, so none of what's in it has been tested. It covers what the service does, what you need before starting (prerequisites), the environment variables, setup and run with the `mak"
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbook-exports-dead-letter-high.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.469457,
+   "turns": 13,
+   "denials": 3,
+   "reply_start": "O runbook está em `docs/runbook-exports-dead-letter-high.md`. Não fiz commit.\n\nEscrevi para quem está de plantão e conhece RabbitMQ, mas não conhece o código do exporter. Todo comando e todo nome no texto vêm do repositório (`worker.py`, `n"
+  },
+  {
+   "eval": "1",
+   "run": 3,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.30182960000000003,
+   "turns": 11,
+   "denials": 2,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step names the component that does it.\n\n- **Who does what:** a new table at the top maps the gateway, worker and notifier to their files and their jobs. Each step in the Request, Processing and Delivery "
+  },
+  {
+   "eval": "2",
+   "run": 3,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.33123620000000004,
+   "turns": 13,
+   "denials": 2,
+   "reply_start": "I wrote `README.md` at the repo root and didn't commit it. I took everything in it from the code, the `Makefile`, `pyproject.toml`, `deploy/alerts.yaml` and the requeue script. I didn't run any commands, including `make test` and the `curl`"
+  },
+  {
+   "eval": "3",
+   "run": 3,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.537443,
+   "turns": 15,
+   "denials": 3,
+   "reply_start": "O runbook está em `docs/runbooks/exports-dead-letter-high.md`. Escrevi para quem está de plantão e conhece a infraestrutura, mas não conhece o código do exporter. Não fiz commit.\n\nEle leva o plantão por quatro passos: ver se as falhas ainda"
+  },
+  {
+   "eval": "1",
+   "run": 4,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.27888480000000004,
+   "turns": 10,
+   "denials": 1,
+   "reply_start": "I rewrote `docs/pipeline.md` so that every step names the component that does it: the gateway, the worker, or the notifier. I checked each statement against the code, and I didn't run anything.\n\n- **What does what:** a short table near the "
+  },
+  {
+   "eval": "2",
+   "run": 4,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.33427899999999994,
+   "turns": 11,
+   "denials": 2,
+   "reply_start": "I wrote `README.md` at the repo root. Everything in it comes from the code, the `Makefile`, `pyproject.toml` and `deploy/alerts.yaml`. I didn't run any commands: `uv sync` changes your environment, and the rest need RabbitMQ and AWS.\n\n**Who"
+  },
+  {
+   "eval": "3",
+   "run": 4,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-opus-5-5"
+   ],
+   "usd": 0.5256884,
+   "turns": 20,
+   "denials": 4,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`. É para quem está de plantão: alguém que sabe operar RabbitMQ e AWS, mas não conhece o código do exporter. Tirei todos os nomes, variáveis e comandos do repositório. Não rodei"
+  }
+ ]
+}
