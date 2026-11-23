@@ -1,0 +1,424 @@
+{
+ "count": "explain",
+ "plugins": [
+  "explain",
+  "unslop"
+ ],
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0742585,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "The code doesn't say why, so this is inference from how it's built. The lazy refill gets the same result as a timer without needing one.\n\nThe bucket only needs the right token count at the moment someone asks. `allow()` computes it on deman"
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07510850000000001,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "`allow()` is the only place anyone can observe the token count, so computing the refill there gives the same answer as a timer without running one. The author's motive isn't written down, so what follows is what the code shows plus my infer"
+  },
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0757757,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "`TokenBucket` refills lazily because the token count is a pure function of elapsed time. `allow()` can compute it exactly when it's asked, so a timer would add machinery without adding information. The code doesn't say what the author inten"
+  },
+  {
+   "eval": "7",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.043691999999999995,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue uma versão pra colar no grupo:\n\n---\n\nSaiu um estudo interessante sobre caminhada e demência (perda de memória e de raciocínio que atrapalha a vida diária).\n\nPesquisadores acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais br"
+  },
+  {
+   "eval": "9",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07692870000000002,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Olá, Paulo, bom dia.\n\nA exportação de notas para o ERP volta a funcionar na quinta-feira, 26/11, quando a correção entra no ar.\n\nO problema começou com a atualização da última versão, que mudou a parte da plataforma que envia as notas ao ER"
+  },
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0751741,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Um mutex (de *mutual exclusion*) é uma trava que garante que só uma goroutine por vez execute um trecho de código. Você precisa dele quando várias goroutines mexem na mesma variável.\n\n**Por que no JavaScript você nunca precisou:** o JS roda"
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0757158,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "The code has no comment explaining the choice, so the reasons below are inferred from how it works. They're also the standard reasons for this design.\n\n**Refilling in `allow()` gives the same answer a timer would, with nothing running in be"
+  },
+  {
+   "eval": "7",
+   "run": 2,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0737974,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue o texto pronto pra colar:\n\n---\nUma prima me mandou o resumo de um estudo bem interessante sobre caminhada e demência.\n\nOs pesquisadores acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, por 8 anos. Quem caminha"
+  },
+  {
+   "eval": "9",
+   "run": 2,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0795369,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Aqui está o texto para colar:\n\n> Olá, Paulo, bom dia.\n>\n> A correção entra no ar na quinta-feira, 26/11. A partir daí, a exportação de notas para o ERP deve voltar a funcionar.\n>\n> A falha veio de uma atualização do conector de exportação. "
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07732800000000001,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Um mutex (de *mutual exclusion*) é uma trava: só uma goroutine por vez pode estar na parte do código que ele protege. As outras esperam até a trava ser liberada.\n\nEstou assumindo que você conhece JavaScript, mas nunca precisou lidar com dua"
+  },
+  {
+   "eval": "3",
+   "run": 3,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0738396,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "`allow()` refills lazily because the bucket's state depends only on the time since the last call, so a timer would add work and no accuracy. The file has no comments, and the git history is a single commit, so the reasons below are inferred"
+  },
+  {
+   "eval": "7",
+   "run": 3,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07767740000000001,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue o texto pronto pra colar:\n\n---\nUma prima me mandou um estudo sobre caminhada e demência. Acompanharam mais de 4 mil pessoas de 60 a 75 anos, em três capitais brasileiras, por 8 anos.\n\nEntre quem caminhava pelo menos 30 minutos por dia"
+  },
+  {
+   "eval": "9",
+   "run": 3,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07687100000000001,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Olá, Paulo.\n\nA correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11. A falha vem do conector de exportação, que foi atualizado na última versão.\n\nPeço desculpas pelo transtorno. Sei que a exportação parada atr"
+  },
+  {
+   "eval": "1",
+   "run": 3,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07578209999999999,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Um mutex (de *mutual exclusion*) é uma trava. Só uma goroutine por vez pode estar na parte do código protegida por ela. As outras esperam a vez.\n\nEstou assumindo que você conhece async/await e Promises, mas não threads.\n\n## Por que você nun"
+  },
+  {
+   "eval": "3",
+   "run": 4,
+   "canary": false,
+   "project": "p15",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0738676,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "`allow()` refills lazily because the bucket's token count is a function of elapsed time. Nothing has to happen between calls, so there's nothing for a timer to do. This is inferred from the code, since I haven't seen the author's reasoning "
+  },
+  {
+   "eval": "7",
+   "run": 4,
+   "canary": false,
+   "project": "p16",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07801150000000001,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue um texto pronto pra colar:\n\n> Saiu um estudo sobre caminhada e demência. Acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, por 8 anos.\n>\n> Entre quem caminhava pelo menos 30 minutos por dia, cerca de 4 em cada "
+  },
+  {
+   "eval": "9",
+   "run": 4,
+   "canary": false,
+   "project": "p17",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0750369,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Olá, Paulo, bom dia.\n\nA correção da exportação de notas para o ERP entra em produção na quinta-feira, 26/11.\n\nO problema começou com a atualização do conector de exportação na última versão da plataforma.\n\nSobre o desconto pelos dias parado"
+  },
+  {
+   "eval": "1",
+   "run": 4,
+   "canary": false,
+   "project": "p18",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.07678209999999999,
+   "turns": 3,
+   "denials": 0,
+   "reply_start": "Um mutex (de *mutual exclusion*) é uma trava que deixa só uma goroutine por vez executar um trecho de código. Você precisa dele quando várias goroutines mexem na mesma variável.\n\nEstou supondo que você conhece `async/await` e o event loop, "
+  }
+ ]
+}
