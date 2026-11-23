@@ -66,6 +66,19 @@ Four splits in 276 judged verdicts: 1.19 three times and 1.27 once, all in 1.0.1
 - **The amended 1.26** is met in every run, the two without the skill included: the
   figures they add are the fixture's.
 
+**Decision of 2026-11-23: the checks change, the rule stays.** The four 1.0.1 replies of
+eval 1 were reread by the maintainer's session, at no cost. The sentence the judges read
+as the pipeline retold says which component now does which action, and that is what eval
+1 asks the edit to do: it is the account of the change. 1.28 and the way 1.27 counts were
+reworded (dated amendment in `../evals/checks-baseline.json`): one sentence mapping actors
+to actions passes, and the line naming the assumed reader, which step 1 requires, is not
+counted. Recounted by hand with the new text, not re-judged: run-2 and run-4 meet 1.27;
+run-1 does not (the mapping split into three sentences, the queue names and "structure
+unchanged" added) and run-3 does not by one line (a fourth for the retry-count
+correction). So the rule can be met and is kept in the skill. Left open: a revision that
+also corrects a fact has more to report than three lines hold, seen once. The table above
+is not revised.
+
 **Limits.** Four runs measure no rate, and the 1.0.0 column is two runs. Only evals 1
 and 2 were run on 1.0.1; the other four evals were not, on the argument that the two
 edits touch the README entry and the reply after a revision. The brief tells the session

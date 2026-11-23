@@ -163,13 +163,13 @@
         "id": "1.27",
         "assertion": 9,
         "kind": "reply",
-        "check": "The reply's account of what it changed in the file takes at most three lines. Count each bullet, numbered item or prose sentence that describes a change as one line; do not count a question to the user or a line that only gives the file path"
+        "check": "The reply's account of what it changed in the file takes at most three lines. Count each bullet, numbered item or prose sentence that describes a change as one line; do not count a question to the user, a line that only gives the file path, the one line that names the assumed reader (step 1 of the skill requires it), or a line that only says what was not run"
       },
       {
         "id": "1.28",
         "assertion": 9,
         "kind": "negative",
-        "check": "The reply does not summarize the document: it does not restate, section by section or step by step, what the pipeline does"
+        "check": "The reply does not summarize the document: it does not walk the document section by section or step by step, and it does not restate content the edit left unchanged (the flow, queue names, figures). One sentence that says which component now performs which action is the account of the change, not a summary, and passes"
       }
     ],
     "2": [
@@ -743,6 +743,7 @@
   },
   "amendments": [
     "2026-11-22, after iteration-1 and before any run of iteration-2: check 1.26 reworded. As frozen it read: 'Every number, limit and duration in docs/pipeline.md is in the fixture: 100,000 rows, three attempts, 24 hours, weekly. No other figure appears'. It listed four figures and failed both runs without the skill for figures that are in the fixture (the alert's threshold and duration from deploy/alerts.yaml, the default of --limit from scripts/requeue_dead.py) and for a count of components, so it measured how much the document grew and not invention, which is what assertion 8 asks ('exists in the fixture code'). The new text accepts any figure a fixture file contains. Applies from iteration-2 on; the iteration-1 table is not revised, and its eval 1 runs are re-judged in the iteration-2 batch because the packet changed.",
-    "2026-11-22, after iteration-2 and before any later run: check 3.21 reworded. As frozen it read: 'The runbook presents no tooling that the fixture does not show as available to the reader: a management UI, a log system, a dashboard, a tracing tool'. In iteration-1 it was unmet in every run of both cells, and the two skill runs split 2/3 on the same two things: a TODO that names the logs or a dashboard in order to say the repository does not show them, and Prometheus, which the fixture's alert file implies and never names. The judges did not agree on whether those 'present tooling as available', so the check measured its own wording. The new text says which side each falls on. Applies from the next iteration on; the iteration-1 table is not revised."
+    "2026-11-22, after iteration-2 and before any later run: check 3.21 reworded. As frozen it read: 'The runbook presents no tooling that the fixture does not show as available to the reader: a management UI, a log system, a dashboard, a tracing tool'. In iteration-1 it was unmet in every run of both cells, and the two skill runs split 2/3 on the same two things: a TODO that names the logs or a dashboard in order to say the repository does not show them, and Prometheus, which the fixture's alert file implies and never names. The judges did not agree on whether those 'present tooling as available', so the check measured its own wording. The new text says which side each falls on. Applies from the next iteration on; the iteration-1 table is not revised.",
+    "2026-11-23, after iteration-2 and before any later run: checks 1.27 and 1.28 reworded. As frozen, 1.27 ended 'do not count a question to the user or a line that only gives the file path', and 1.28 read: 'The reply does not summarize the document: it does not restate, section by section or step by step, what the pipeline does'. Eval 1 asks for an actor on every step, so the sentence that says which component now does which action is the change itself, and the expected output describes the change that way; every reply of both cells and both versions has that sentence, and the judges read it as the pipeline retold (1.28 0/4 on 1.0.1). 1.27 also counted the line naming the assumed reader, which step 1 of the skill requires. Recounted by hand with the new text, two of the four 1.0.1 replies meet 1.27 and the two that do not are long in fact (one splits the mapping into three sentences and adds the queue names; one reports a fact correction in a fourth line). Not re-judged. The rule of the skill is kept. Applies from the next iteration on; the iteration-2 table is not revised."
   ]
 }
