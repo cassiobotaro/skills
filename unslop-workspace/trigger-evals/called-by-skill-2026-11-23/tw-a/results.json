@@ -1,0 +1,362 @@
+{
+ "count": "technical-writing",
+ "plugins": [
+  "technical-writing",
+  "unslop"
+ ],
+ "plugin_src": {},
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.10400680000000001,
+   "turns": 7,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step names the component that does it. I took every actor from the code. I didn't run anything.\n\n- **Components:** The intro now lists the gateway, worker and notifier, and the `exports` and `exports.dea"
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.10532149999999998,
+   "turns": 7,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step names the component that does it. A short table at the top lists the gateway, worker and notifier. I didn't run any code.\n\n- **Actors from the code:** the gateway validates and enqueues, the worker "
+  },
+  {
+   "eval": "1",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1012065,
+   "turns": 7,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/pipeline.md` in place. It keeps your structure and facts, but every step now names what does it. The gateway validates, the worker builds, encrypts, uploads and retries, and the notifier signs the link and sends the email. I"
+  },
+  {
+   "eval": "2",
+   "run": 1,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1097042,
+   "turns": 8,
+   "denials": 1,
+   "reply_start": "I wrote `README.md` at the repo root. It covers setup, configuration, running the gateway and worker, the failed-export requeue, and the file layout. I ran none of the commands, and there are no tests in the repo, so I didn't try `make test"
+  },
+  {
+   "eval": "3",
+   "run": 1,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing",
+    "unslop"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.2117735,
+   "turns": 18,
+   "denials": 1,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`. Não rodei nenhum comando, só li o código.\n\nO leitor que assumi é o plantonista que não conhece o exporter. O texto explica o que o alerta significa e depois segue cinco passo"
+  },
+  {
+   "eval": "1",
+   "run": 2,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.10487270000000001,
+   "turns": 7,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/pipeline.md` so each step names the component that does it.\n\n- **Components:** A table at the top lists the gateway, worker, and notifier, with the file for each. Every step now says which one acts.\n- **Corrections from the "
+  },
+  {
+   "eval": "2",
+   "run": 2,
+   "canary": false,
+   "project": "p07",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1378702,
+   "turns": 16,
+   "denials": 2,
+   "reply_start": "I wrote `README.md` at the repo root. It's in English, like `docs/pipeline.md`. I ran no commands. Everything in it comes from reading the code, `Makefile` and `pyproject.toml`.\n\nIt covers what the service does, prerequisites, the four env "
+  },
+  {
+   "eval": "3",
+   "run": 2,
+   "canary": false,
+   "project": "p08",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbook-exports-dead-letter-high.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1687655,
+   "turns": 8,
+   "denials": 2,
+   "reply_start": "Escrevi o runbook em `docs/runbook-exports-dead-letter-high.md`. Não rodei nenhum comando contra o RabbitMQ. Tudo vem de `deploy/alerts.yaml`, `exporter/worker.py`, `exporter/notifier.py`, `exporter/gateway.py` e `scripts/requeue_dead.py`.\n"
+  },
+  {
+   "eval": "1",
+   "run": 3,
+   "canary": false,
+   "project": "p09",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.10584189999999999,
+   "turns": 7,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/pipeline.md` in place. Each step now names what does it: the gateway, the worker, the notifier, RabbitMQ, S3 and SES. I took every name, status code and value from the code, and I ran nothing.\n\n- **Added:** an intro naming t"
+  },
+  {
+   "eval": "2",
+   "run": 3,
+   "canary": false,
+   "project": "p10",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1233937,
+   "turns": 15,
+   "denials": 2,
+   "reply_start": "I wrote `README.md` at the repo root. I didn't run any commands: I took every command, variable and behavior from the code, and I did not run the app or the tests.\n\nI assumed the reader is a developer who has just cloned the repo and needs "
+  },
+  {
+   "eval": "3",
+   "run": 3,
+   "canary": false,
+   "project": "p11",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1566791,
+   "turns": 13,
+   "denials": 1,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`, em português como você pediu. Não rodei nenhum comando, porque `requeue_dead.py` precisa de um RabbitMQ e de `QUEUE_URL`. Também não consegui ler `references/documents.md` do"
+  },
+  {
+   "eval": "1",
+   "run": 4,
+   "canary": false,
+   "project": "p12",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/pipeline.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0976675,
+   "turns": 7,
+   "denials": 0,
+   "reply_start": "I rewrote `docs/pipeline.md` in place, with every action tied to the component that does it, taken from the code.\n\n- **What changed:** the page now names the gateway, worker and notifier, and gives the checks and queues from the code. That "
+  },
+  {
+   "eval": "2",
+   "run": 4,
+   "canary": false,
+   "project": "p13",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "README.md"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1363952,
+   "turns": 16,
+   "denials": 2,
+   "reply_start": "I wrote `README.md` at the repo root. I haven't committed it.\n\nI wrote it for a developer or on-call engineer who is new to the repo. It's in English, like `docs/pipeline.md`. It covers:\n- what the service does\n- local setup and run steps\n-"
+  },
+  {
+   "eval": "3",
+   "run": 4,
+   "canary": false,
+   "project": "p14",
+   "installed": [
+    "technical-writing:technical-writing",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "technical-writing"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [
+    "docs/runbooks/"
+   ],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.1999992,
+   "turns": 10,
+   "denials": 3,
+   "reply_start": "Escrevi o runbook em `docs/runbooks/exports-dead-letter-high.md`, em português como você pediu. O resto de `docs/` está em inglês. Não rodei nenhum comando contra RabbitMQ, S3 ou SES. O texto sai só do código e de `deploy/alerts.yaml`.\n\nEsc"
+  }
+ ]
+}

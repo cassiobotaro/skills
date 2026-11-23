@@ -1,0 +1,149 @@
+{
+ "count": "explain",
+ "plugins": [
+  "explain",
+  "unslop"
+ ],
+ "plugin_src": {},
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "7",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0792205,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue o texto pra colar no grupo:\n\n> Li o resumo de um estudo sobre caminhada e demência. Acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, por 8 anos.\n>\n> Entre quem caminhava pelo menos 30 minutos por dia, cerca de"
+  },
+  {
+   "eval": "7",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": true,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0786005,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue o texto pronto pra colar:\n\n---\n\nSaiu um estudo que acompanhou 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, por 8 anos. Quem caminhava pelo menos 30 minutos por dia teve menos demência: 4 em cada 100 receberam o diagnós"
+  },
+  {
+   "eval": "7",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0764977,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Aqui vai uma versão pra colar no grupo:\n\n---\nSaiu um estudo com mais de 4 mil pessoas de 60 a 75 anos, em três capitais brasileiras, acompanhadas por 8 anos. Quem caminhava pelo menos 30 minutos por dia teve menos demência: 4 em cada 100 re"
+  },
+  {
+   "eval": "7",
+   "run": 2,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0731477,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Segue o texto pronto para colar:\n\n---\n\nLi um resumo de um estudo bacana sobre caminhada e demência.\n\nPesquisadores acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais brasileiras, por 8 anos. Entre quem caminhava pelo menos 30 minu"
+  },
+  {
+   "eval": "7",
+   "run": 3,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0754277,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Aqui vai uma versão pronta para colar:\n\n---\n\nVi um estudo interessante: quem caminha pelo menos 30 minutos por dia parece ter menos chance de desenvolver demência.\n\nAcompanharam mais de 4 mil pessoas de 60 a 75 anos, em três capitais brasil"
+  },
+  {
+   "eval": "7",
+   "run": 4,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [
+    "explain"
+   ],
+   "hit": true,
+   "first_call": false,
+   "files_changed": [],
+   "models": [
+    "claude-sonnet-5-5"
+   ],
+   "usd": 0.0776059,
+   "turns": 4,
+   "denials": 0,
+   "reply_start": "Aqui está uma versão pro grupo:\n\n> Saiu um estudo brasileiro sobre caminhada e demência. Acompanharam 4.212 pessoas de 60 a 75 anos, em três capitais, por 8 anos.\n>\n> Entre quem caminhava pelo menos 30 minutos por dia, cerca de 4 em cada 10"
+  }
+ ]
+}

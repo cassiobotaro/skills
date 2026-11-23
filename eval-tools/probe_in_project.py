@@ -94,6 +94,8 @@ def main():
     ap.add_argument("--model", default="claude-sonnet-5-5", help="a model id, not an alias")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--timeout", type=int, default=1500)
+    ap.add_argument("--plugin-src", action="append", default=[], metavar="NAME=DIR",
+                    help="load plugin NAME from DIR instead of the repository (a candidate text); repeatable")
     a = ap.parse_args()
     a.scratch, a.out = os.path.abspath(a.scratch), os.path.abspath(a.out)
     if os.path.commonpath([a.scratch, REPO]) == REPO:
@@ -102,8 +104,10 @@ def main():
     ids = a.evals.split(",")
     evals = {str(e["id"]): e for e in json.load(open(os.path.join(REPO, a.workspace, "evals", "evals.json")))["evals"]}
     shutil.rmtree(os.path.join(a.scratch, "plugins"), ignore_errors=True)
+    src = dict(x.split("=", 1) for x in a.plugin_src)
     for name in plugins:
-        shutil.copytree(os.path.join(REPO, name), os.path.join(a.scratch, "plugins", name))
+        shutil.copytree(os.path.abspath(src.get(name, os.path.join(REPO, name))),
+                        os.path.join(a.scratch, "plugins", name))
     canary = a.canary_eval or ids[0]
     jobs = [(canary, 1, True), (canary, 2, True)] + [(ev, n, False) for n in range(1, a.runs + 1) for ev in ids]
     jobs = [(i + 1, *j) for i, j in enumerate(jobs)]
@@ -113,7 +117,7 @@ def main():
         for res in ex.map(lambda j: run(j, a, evals, plugins), jobs):
             out.append(res)
             print(json.dumps({k: v for k, v in res.items() if k != "reply_start"}, ensure_ascii=False), flush=True)
-    json.dump({"count": a.count, "plugins": plugins, "model": a.model, "runs": out},
+    json.dump({"count": a.count, "plugins": plugins, "plugin_src": src, "model": a.model, "runs": out},
               open(os.path.join(a.out, "results.json"), "w"), ensure_ascii=False, indent=1)
     ok = [r for r in out if "error" not in r]
     print("canary", f"{sum(r['hit'] for r in ok if r['canary'])}/{sum(1 for r in ok if r['canary'])}")
