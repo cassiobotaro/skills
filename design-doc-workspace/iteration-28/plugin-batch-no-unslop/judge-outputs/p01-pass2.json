@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:72-73, under the heading \"**Riscos**\" in Perguntas abertas: \"O que acontece com a ingestão se o Redis ficar indisponível: os eventos passam sem deduplicação (fail-open) ou a ingestão para (fail-closed)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:84 \"Como o serviço entra em produção: em fases, por produtor ou por percentual de tráfego? Qual critério avança cada fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, não foram discutidos\". This line names risks the user did not give, inside the Riscos section."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section, docs/design/deduplicacao-de-eventos.md:60-62. It holds only \"Ainda não definido. As perguntas que faltam para escrevê-lo estão em Perguntas abertas.\" It states no phase, no criterion to advance and no rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:46 \"### Alternativas consideradas\"; :50 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :52 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms line (:56 \"Estimamos +5ms de latência. O time aceita esse custo\") sits under the template heading \"## Riscos\". It is introduced by a bold lead-in, not a heading of its own, and it is not under \"Alternativas consideradas\"."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply: \"Acrescentei \\\"Alternativas consideradas\\\" como subseção da Proposta, porque o template não tem lugar para as duas opções descartadas... Se a arquitetura não aceitar, é só mover o conteúdo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:90 \"Quem revisa este documento (arquitetura, financeiro, donos dos produtores)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24h, +5ms, 0,1% and \"duas vezes\", all given by the user. The only other numbers are dates and the ID DD-2026-001, which are header values and not metrics stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/deduplicacao-de-eventos.md:90 names \"donos dos produtores\" as a stakeholder group. The user's message does not name it. It appears inside a question, but this check does not exempt questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for Structurizr DSL. The document has none; its only diagram is Mermaid."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block at :22-40 for endpoints, headers, status codes and failure branches. The only branches are chave nova and chave repetida/descarta, which match the user's description. None found."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the action sentences at :14, :20, :42, :44 and :56. Ingestor→serviço→Redis/Kafka follows from \"fica entre o ingestor e o Kafka\". Discarding and keeping the key are the user's. The team's acceptance at :56 matches \"Trade-off aceito\". No unsupported actor assignment found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, não foram discutidos e estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, não foram discutidos\". This names risks the user did not give, in a sentence that says they were not discussed."
+ }
+]

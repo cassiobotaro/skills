@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão hoje recebe essas duplicatas e as repassa adiante.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. The closest match is :82 \"13. Qual é a mitigação planejada para cada risco listado acima?\" This asks for mitigations of risks the run wrote itself, not for the risks. No other question in the reply or doc asks the user what the risks are."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:79 \"10. Como será o rollout (fases, critério de avanço, critério de rollback)?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": ":55 \"Duplicatas reenviadas depois de 24 horas não são detectadas.\" and :54 \"O serviço e o Redis passam a participar de toda ingestão.\" The user did not give these as risks."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (:59-61). It contains only the pending marker \"Ainda não definido. As fases, os critérios de avanço e os critérios de rollback dependem das respostas em Perguntas abertas.\" It states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": ":39 \"### Alternativas consideradas\"; :43 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :44 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": ":47 \"### Trade-off aceito\"; :49 \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply:6 \"**Alternativas e trade-off:** o template não tem seção para eles, então ficaram como subseções dentro de Proposta. ... Se a arquitetura preferir outro lugar, é só mover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header table. :8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": ":71 \"2. Quem são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the doc for figures. Found only 4%, 0,1%, 5ms, 24h, \"duas vezes\" and the header dates. \"p99\" (:77) appears only inside a question. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the doc for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores and financeiro, all from the user's message. \"infraestrutura do Redis\" appears only in question :81."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block at :20-35. It has only the alt branches chave nova / chave repetida (descarta), which match the user's \"descarta repetidos\". It has no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor statements. The ingestor sends to the service, and the service checks Redis, registers the key, publishes to Kafka and discards repeats. All of these follow from the user's \"fica entre o ingestor e o Kafka, guarda a chave ... e descarta repetidos\". No other actor is assigned an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "Borderline. The section states risks as facts. :57 \"As mitigações de cada risco ainda não foram definidas.\" does not point to the open questions. Only one item (:54) says \"ver Perguntas abertas\". The section as a whole is not marked as pending the user's answer."
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": ":55 \"Duplicatas reenviadas depois de 24 horas não são detectadas.\"; :54 \"O serviço e o Redis passam a participar de toda ingestão.\"; :37 \"um reenvio depois desse prazo passa a ser tratado como evento novo.\""
+ }
+]

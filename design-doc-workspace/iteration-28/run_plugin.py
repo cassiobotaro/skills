@@ -9,6 +9,10 @@ it) and `unslop` are loaded with --plugin-dir from copies outside the project, a
 --add-dir lets the session read their reference files. Outputs land where run.py puts
 them: eval-<id>-<name>/<cell>/run-<n>/.
 
+`pn`, added on 2026-11-23, is `pa` without `unslop`: only `design-doc` is loaded. Each run
+records the skills the session listed at start (`skills_listed` in timing.json), so that
+the absence of `unslop` is read from the session and not assumed.
+
 Usage: run_plugin.py --scratch DIR <eval>:<cell>:<run> [...] [--workers N]
 """
 import argparse, concurrent.futures as cf, datetime, json, os, shutil, subprocess, time
@@ -17,7 +21,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WS = os.path.dirname(HERE)
 REPO = os.path.dirname(WS)
 MODEL = "claude-sonnet-5-5"
-CELLS = {"pa": "skill-a", "pc": "skill-c"}
+CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a"}
+NO_UNSLOP = {"pn"}
 EVALS = {str(e["id"]): e for e in json.load(open(os.path.join(HERE, "evals.json")))["evals"]}
 ALLOWED = ["Skill", "Bash(date:*)", "Bash(ls:*)", "Bash(find:*)", "Bash(mkdir:*)", "Bash(cat:*)", "Bash(pwd)"]
 GIT = ["git", "-c", "user.name=eval", "-c", "user.email=eval@example.invalid", "-c", "commit.gpgsign=false"]
@@ -50,7 +55,8 @@ def run(job, scratch):
     env["SHELL"] = "/bin/bash"
     cmd = ["claude", "-p", EVALS[ev]["prompt"], "--model", MODEL, "--output-format", "stream-json", "--verbose",
            "--permission-mode", "acceptEdits", "--setting-sources", "project,local", "--allowedTools", *ALLOWED,
-           "--plugin-dir", dd, "--plugin-dir", un, "--add-dir", dd, un]
+           "--plugin-dir", dd]
+    cmd += ["--add-dir", dd] if cell in NO_UNSLOP else ["--plugin-dir", un, "--add-dir", dd, un]
     t0, day0 = time.time(), datetime.date.today().isoformat()
     try:
         p = subprocess.run(cmd, cwd=project, env=env, capture_output=True, text=True, timeout=1800,
@@ -59,12 +65,14 @@ def run(job, scratch):
         return {"eval": ev, "cell": cell, "run": n, "error": "timeout"}
     os.makedirs(os.path.join(HERE, "transcripts"), exist_ok=True)
     open(os.path.join(HERE, "transcripts", f"eval-{ev}-{cell}-run-{n}.jsonl"), "w").write(p.stdout)
-    tools, final = [], None
+    tools, final, listed = [], None, []
     for line in p.stdout.splitlines():
         try:
             o = json.loads(line)
         except ValueError:
             continue
+        if o.get("type") == "system" and o.get("subtype") == "init":
+            listed = sorted(o.get("skills") or [])
         if o.get("type") == "assistant":
             for b in (o.get("message") or {}).get("content") or []:
                 if b.get("type") == "tool_use":
@@ -87,11 +95,12 @@ def run(job, scratch):
               "total_duration_seconds": round(time.time() - t0, 1),
               "dates": sorted({day0, datetime.date.today().isoformat()}),
               "models": sorted((final.get("modelUsage") or {}).keys()), "skills_invoked": invoked,
+              "skills_listed": listed,
               "permission_denials": final.get("permission_denials") or [], "tool_calls": tools}
     json.dump(timing, open(os.path.join(rundir, "timing.json"), "w"), indent=2)
     new = sorted(f for d, _, fs in os.walk(os.path.join(project, "docs")) for f in fs if f != "TEMPLATE.md")
     return {"eval": ev, "cell": cell, "run": n, "usd": timing["cost_usd"], "turns": timing["num_turns"],
-            "invoked": invoked, "denials": len(timing["permission_denials"]), "new": new}
+            "invoked": invoked, "unslop_listed": any("unslop" in x for x in listed), "denials": len(timing["permission_denials"]), "new": new}
 
 
 def main():

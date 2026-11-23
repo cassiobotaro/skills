@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:72-73 under \"**Riscos**\": \"O que acontece com a ingestão se o Redis ficar indisponível: os eventos passam sem deduplicação (fail-open) ou a ingestão para (fail-closed)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:84 \"Como o serviço entra em produção: em fases, por produtor ou por percentual de tráfego? Qual critério avança cada fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Riscos section names risks the user never gave. docs/design/deduplicacao-de-eventos.md:58 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, não foram discutidos e estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (docs:60-62) for phases, criteria or rollback steps. Found only a marker: \"Ainda não definido. As perguntas que faltam para escrevê-lo estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs:46 \"### Alternativas consideradas\"; docs:50 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; docs:52 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms cost sits under the template heading \"## Riscos\" (docs:56 \"Estimamos +5ms de latência. O time aceita esse custo...\"), behind a bold label. That is not a heading of its own, and it is not under \"Alternativas consideradas\"."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3-4: \"**Desvios do template** - Acrescentei \"Alternativas consideradas\" como subseção da Proposta... Se a arquitetura não aceitar, é só mover o conteúdo.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header. docs:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs:90 \"Quem revisa este documento (arquitetura, financeiro, donos dos produtores)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4%, 24h/TTL 24h, +5ms, 0,1% and 'duas vezes', all from the user. The remaining numbers are only the date and the doc ID, and none is stated as a measured fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, financeiro and arquitetura, all named by the user. Mermaid is the diagram format, not a system component."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. None is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block (docs:22-40). It has no endpoint, header, status code or failure branch. The only branches are chave nova and chave repetida, which match the user's 'descarta repetidos'."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor assertions. Produtor→ingestor→dedup→Redis/Kafka and the dedup service storing and discarding keys follow from the user's message. Key ownership and the write/publish order are left as questions (docs:42, 79)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, não foram discutidos e estão em Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "A risk is named outside Perguntas abertas in a sentence saying it was not discussed. docs:58 \"Outros riscos, como a indisponibilidade do Redis ou do próprio serviço, não foram discutidos\""
+ }
+]

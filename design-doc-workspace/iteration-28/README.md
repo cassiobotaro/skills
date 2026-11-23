@@ -75,6 +75,50 @@ invoked `unslop` after it.
 One split in the first batch (7.19) and two in the second (7.24, 7.19), counted as not
 met.
 
+**Third batch, 2026-11-23: the skill installed, `unslop` not installed** (`run_plugin.py`,
+cell `pn`, `plugin-batch-no-unslop/`). The question and the rule are the amendment of
+2026-11-23 in `checks.json`, written before the runs: is `unslop` what puts the unstated
+risks in the document? Two answers, one from the transcripts of `pa` and one from four new
+runs.
+
+*From the `pa` transcripts, at no cost.* Each transcript holds the document as the session
+first wrote it, before it invoked `unslop`. In the two `pa` runs that fail 7.8 (run-2,
+run-3) the Riscos section is byte-identical before and after `unslop`. In run-1 the first
+draft said "Mitigação: medir a latência real em cada fase do rollout" and "A análise de
+falha do Redis, da perda de chaves e do próprio serviço ainda não foi feita", and `unslop`
+replaced both with a pointer to Perguntas abertas; the document then met 7.8. The drafts
+were not judged. `unslop` added no risk in any of the four, and in one it removed lines
+of the kind that fail the check in `pn`.
+
+*Cell `pn`*: `pa` with `design-doc` alone loaded with `--plugin-dir`. All four sessions
+invoked `design-doc` through the Skill tool, none listed `unslop` (`skills_listed` in each
+`timing.json`), and all four wrote one document.
+
+| Check | pa (1.9.0, with `unslop`) | pn (1.9.0, without) |
+|---|---|---|
+| 7.8 Riscos states no risk nobody gave | 2/4 | 0/4 |
+| 7.24 no such risk anywhere outside Perguntas abertas | 1/4 | 0/4 |
+| 7.23 Riscos says it awaits the answer | 4/4 | 2/4 |
+| 7.11 the +5 ms cost under a heading of its own | 3/4 | 3/4 |
+| 7.19 no technology, team or stakeholder nobody named | 1/4 | 2/4 |
+| 7.6 asks the user for the risks | 3/4 | 2/4 |
+| 7.22 no actor nobody established | 3/4 | 4/4 |
+| all 24 checks of eval 71 | 85/96 | 81/96 |
+
+Three splits in `pn` (7.23 once, 7.19 twice), counted as not met. The `pa` column is the
+second batch's, judged a day earlier on the same check text.
+
+By the rule, `unslop` is cleared: the defect shows without it in four of four. What fails
+7.8 in `pn`: run-1 and run-2 list the Redis dependency and the 24-hour window as risks
+(run-1 also writes "Aceito como limite do desenho", an acceptance nobody gave), run-3
+gives the +5 ms a mitigation ("medir a latência real antes de avançar de fase"), and
+run-4 names the risk inside the pending line ("Outros riscos, como a indisponibilidade do
+Redis ou do próprio serviço, não foram discutidos"). Run-2 and run-1 then ask only for
+the mitigations or for one failure behaviour, not for the risks, which is 7.6 at 2/4.
+Counting the documents written with the skill invoked through the Skill tool: iteration-27
+0 of 4 met 7.8, `pa` 2 of 4 (one of the two after `unslop` removed the lines), `pn` 0 of
+4. The step that runs `unslop` hides part of the defect; it does not cause it.
+
 **Reading, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -82,7 +126,8 @@ not edited.
   invoked, two of four 1.9.0 documents put a Redis dependency and the 24-hour window into
   Riscos as risks with a pending mitigation; iteration-27 had four of four in a similar
   setup. Told to read the same text from a brief, zero of four did. Nothing in this
-  iteration says why the two harnesses differ; `unslop` runs only in the second.
+  iteration says why the two harnesses differ. `unslop` ran only in the second, and the
+  third batch rules it out: without it the defect shows in four of four.
 - **The second paragraph does not fix it.** 7.8 moves by one run (3/4 against 2/4), which
   is not a finding. 7.24, the check for the same risk moved elsewhere, stays at 1/4:
   the Riscos section gets cleaner and the risk reappears as a clause in Proposta ("um
@@ -106,6 +151,12 @@ saying "I cannot answer now". The first batch ran inside the repository (its `AG
 loads) and without `unslop`; the second outside it and with `unslop`, so the two batches
 differ in more than how the skill is reached. In the second batch every reply that wrote
 a document may name `unslop`, in both cells alike. 7.23 and 7.24 are new checks, not
-tried on an older output.
+tried on an older output. The third batch is one cell of four runs, judged a day after the
+`pa` runs it is set against, and 2/4 against 0/4 is no difference between the cells: it
+says the defect does not need `unslop`, not that `unslop` lowers its rate. Still open is
+what separates the brief from the invoked skill: the first batch ran inside the repository
+with a brief that frames the task and asks for a final reply, the other two outside it
+with the prompt alone.
 
-**Cost.** Executors: 24 sessions, US$ 2.57. Judges: 72 calls, US$ 4.06.
+**Cost.** Executors: 24 sessions, US$ 2.57. Judges: 72 calls, US$ 4.06. Third batch:
+4 sessions, US$ 0.38; 12 judge calls, US$ 0.95.

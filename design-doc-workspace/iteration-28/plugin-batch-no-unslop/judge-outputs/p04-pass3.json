@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão hoje recebe essas duplicatas e as repassa adiante.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. The document lists its own risks and then asks only for their mitigations: deduplicacao-de-eventos.md:81 \"Qual é a mitigação planejada para cada risco listado acima?\" Neither the reply nor the document asks the user which risks exist."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:79 \"Como será o rollout (fases, critério de avanço, critério de rollback)?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "The Riscos section states risks the user did not give. Line 54: \"Nova dependência no caminho crítico. O serviço e o Redis passam a participar de toda ingestão.\" Line 55: \"Janela de 24 horas. Duplicatas reenviadas depois de 24 horas não são detectadas.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section, lines 59-61. It has only a pending marker, \"Ainda não definido. As fases, os critérios de avanço e os critérios de rollback dependem das respostas em Perguntas abertas.\", and states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "Heading at line 39 \"### Alternativas consideradas\". Line 43: \"**Deduplicar no consumidor.** Descartada.\" Line 44: \"**Idempotência nativa do produtor Kafka.** Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "Heading at line 47 \"### Trade-off aceito\". Line 49: \"Estimamos +5ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply: \"**Alternativas e trade-off:** o template não tem seção para eles, então ficaram como subseções dentro de Proposta. ... Se a arquitetura preferir outro lugar, é só mover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header. The Revisores row is empty at line 8: \"| **Revisores** | |\"."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "deduplicacao-de-eventos.md:71 \"Quem são os revisores?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4%, 0,1%, 5ms, 24h, \"duas vezes\" and dates. The only other figure is p99, which appears only inside a question at line 77. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 81 names a stakeholder the user did not name: \"Quais outras equipes são afetadas (produtores, consumidores, financeiro, infraestrutura do Redis)?\" It is phrased as a question, but this check makes no exception for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block, lines 20-35. It has no endpoint, header, status code or failure branch. Its only branches are new key and repeated key, which the user described."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched every actor-action sentence (lines 14, 18, 37, 49, 54). Each action follows from the user's message: producers resend on retry, the service sits between the ingestor and Kafka, stores the key in Redis for 24h and discards repeats."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 57 \"As mitigações de cada risco ainda não foram definidas.\" says mitigations are undefined but does not say the section awaits the user's answer and does not point to the questions. Only line 54 points to \"ver Perguntas abertas\", and only for one item."
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Outside Perguntas abertas, the document states risks the user did not give. Line 55: \"Duplicatas reenviadas depois de 24 horas não são detectadas.\" Line 54: \"O serviço e o Redis passam a participar de toda ingestão.\" Line 37: \"um reenvio depois desse prazo passa a ser tratado como evento novo.\""
+ }
+]

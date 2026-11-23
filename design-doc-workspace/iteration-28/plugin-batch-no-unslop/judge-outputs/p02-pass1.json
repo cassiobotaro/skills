@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. I searched the reply and Perguntas abertas for a question asking the user what the risks are. None asks that. Questions 1 and 3 ask about specific failure behaviours (\"Se o Redis ou o serviço de deduplicação ficar indisponível... deixa os eventos passarem... ou bloqueia a ingestão?\"). They do not ask the user for the risks."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:68 \"**Rollout.** Em quais fases o serviço entra em produção (por produtor, por percentual de tráfego, em modo sombra)? Qual critério permite avançar de fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:48 \"Vamos medir a latência real no rollout e comparar com a estimativa.\" (mitigation not given); doc:49 \"Duplicatas fora da janela: um reenvio após 24 horas não é detectado. | Aceito como limite do desenho.\" (risk not given); doc:50 \"Dependência do Redis e do novo serviço no caminho crítico.\" (risk not given)"
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "I searched doc:52-54 for phases, advance criteria and rollback steps and found none. The section is only a pending marker: \"Em aberto. As fases, os critérios de avanço e os critérios de rollback ainda não foram definidos. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:31 \"### Alternativas consideradas\"; doc:37 \"Deduplicar no consumidor | Cada consumidor teria que reimplementar a deduplicação.\"; doc:38 \"Usar a idempotência nativa do produtor Kafka | Não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:40 \"### Trade-off aceito\"; doc:42 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:5 \"Fiz um desvio: o template não tem seção de alternativas, então coloquei **Alternativas consideradas** e **Trade-off aceito** como subseções da Proposta... Se a arquitetura preferir outro lugar, é só mover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "I checked the header table. doc:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:72 \"Quem revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "I searched the document for figures. It has 4% (mês passado), 24 horas, +5 ms, abaixo de 0,1% and duas vezes. The only other figures are dates and the doc number, which are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "I searched the document for technologies, teams and stakeholders. Outside the open questions it names only Ingestor, Redis, Kafka, produtores, consumidores and financeiro, all from the user's message."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "I searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "I searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "I checked the actor assignments. The service checks and stores keys in Redis and discards repeats (user's own proposal). The ingestor hands events to the service, which follows from the service sitting between ingestor and Kafka. Producers retry (user's words). No actor is assigned an action the user did not establish."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:50 \"Dependência do Redis e do novo serviço no caminho crítico. | Em aberto. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:29 \"um reenvio que chegue depois que a chave expirou não será reconhecido como repetido\"; doc:50 \"Dependência do Redis e do novo serviço no caminho crítico.\"; doc:48 \"Vamos medir a latência real no rollout e comparar com a estimativa.\""
+ }
+]
