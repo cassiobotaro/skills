@@ -1,0 +1,47 @@
+{
+  "skill": "technical-writing",
+  "model": "claude-haiku-5-5",
+  "query": "our docs/architecture/retries.md is full of 'the message is retried' and 'the job is processed' and nobody can tell which service does what. fix it: the consumer is `billing-worker`, the publisher is `orders-api`, retries are done by the worker with backoff 1s/5s/30s",
+  "runs": [
+    {
+      "candidate": "technical-writing-skill-a59dde4f",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(ls docs/architecture/ 2>&1; find / -name retries.md -path \"*docs/archi)",
+        "Bash(ls /home/cassiobotaro/Projetos/skills/docs/architecture/)",
+        "Bash(find /home/cassiobotaro/Projetos -name retries.md -not -path \"*/node_m)",
+        "Bash(find . -name \"retries*\" -not -path \"./.git/*\"; grep -rl \"billing-worke)"
+      ],
+      "first_text": "I couldn't make this fix because `docs/architecture/retries.md` isn't in this repository. `/home/cassiobotaro/Projetos/skills` is the skills marketplace, and it has no `docs/` directory. A search of the repo for `retries*` and for `billing-worker` or `orders-api` found nothing relevant. I also couldn't search the wider `~/Projetos` tree, because the sandbox only allows the skills directory.\n\nTo do",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-haiku-miss-retries-doc/technical-writing-run00.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-96bce7c1",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(ls docs/architecture/ 2>&1; git ls-files | grep -i retr; find / -name )",
+        "Bash(ls docs/architecture/ 2>&1; git ls-files | grep -i retr)",
+        "Bash(find / -name retries.md -not -path \"*/proc/*\" 2>/dev/null | head -20)",
+        "Bash(ls -la /home/cassiobotaro/Projetos/; ls /home/cassiobotaro/Projetos/*/)",
+        "Bash(ls -la /home/cassiobotaro/Projetos/)",
+        "Read(/home/cassiobotaro/Projetos/skills/docs/architecture/retries.md)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-haiku-miss-retries-doc/technical-writing-run01.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-e7515dd7",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(ls docs/architecture/ 2>&1; find / -name retries.md -path \"*docs/archi)",
+        "Bash(ls /home/cassiobotaro/Projetos/skills/docs/architecture/ 2>&1)",
+        "Bash(find /home/cassiobotaro/Projetos -name retries.md 2>/dev/null | head)",
+        "Read(/home/cassiobotaro/Projetos/skills/docs/architecture/retries.md)",
+        "Bash(git grep -l -e \"billing-worker\" -e \"orders-api\" -e \"retries.md\" 2>&1 |)",
+        "Bash(git grep -l -e \"billing-worker\" -e \"orders-api\" -e \"retries.md\")"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-haiku-miss-retries-doc/technical-writing-run02.jsonl"
+    }
+  ]
+}

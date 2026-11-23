@@ -33,10 +33,39 @@ ten positives never fire. The three that do are the README for a project describ
 the message (4/5), the review of a runbook (5/5, which the routine took as its canary)
 and the release notes (2/5). This is the lowest haiku number of the five skills that have one (`adr`,
 `design-doc`, `structurizr` and `mermaid-sequence`, on the trimmed `AGENTS.md`, sit
-between 42% and 80%). No transcript was captured,
-so why haiku does not invoke the skill on the other seven is not known. The number is an
-early warning for hosts that run a small model and not a target: the description was not
-changed.
+between 42% and 80%). The number is an early warning for hosts that run a small model and not a target: the
+description was not changed.
+
+**Why haiku misses, from twelve captured sessions.** Four of the seven queries at 0/5
+were captured three times each on claude-haiku-5-5 (`transcripts-haiku-miss-*/`,
+`eval-tools/capture_trigger_transcripts.py`):
+
+| Query | first tool call is the skill | skill invoked later | never |
+|---|---|---|---|
+| document how to rotate the signing key … put it under docs/ | 0 | 0 | 3 |
+| melhora esse trecho do README … | 1 | 1 | 1 |
+| write the PR description for this change … | 0 | 1 | 2 |
+| our docs/architecture/retries.md is full of … | 0 | 0 | 3 |
+
+No session answered in prose. In eleven of the twelve the first tool call is a search of
+this repository for what the query mentions: `ls docs`, `grep -rn QUEUE_URL`, `git status`
+and `git diff` for the upload handler, `find` for `retries.md`. Nothing of that exists
+here, so the session either invokes the skill after looking (two, which the harness
+counts as misses because it reads the first tool call), tries to write the file straight
+away (two, refused), or reports that the file is not in the repository. This is the bias
+`eval-tools/README.md` describes for queries that make the session touch the repository
+before acting, and haiku does it on queries that sonnet answers at once. The 22% is about
+these queries in this repository and not about the description. A fair haiku number for
+this skill needs the in-project probe (`eval-tools/probe_in_project.py --model
+claude-haiku-5-5`), which was not run.
+
+Two things seen in those sessions that are about the harness: three of them tried to
+search outside the repository (`find / -name retries.md`, `ls /home/…/Projetos`), and
+the permission system refused every one of those commands, so the transcripts hold no
+listing of anything outside it; and a first
+capture of the same twelve was discarded, because it was launched from a script fed by a
+heredoc and `claude -p` appended that script, read from the inherited stdin, to every
+prompt. `capture_trigger_transcripts.py` and `judge.py` now close stdin.
 
 No cost is reported by the harness; at the rates of `eval-tools/README.md` the two sweeps
 are about US$ 3.

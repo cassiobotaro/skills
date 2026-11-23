@@ -479,7 +479,7 @@
         "id": "3.21",
         "assertion": 9,
         "kind": "invention",
-        "check": "The runbook presents no tooling that the fixture does not show as available to the reader: a management UI, a log system, a dashboard, a tracing tool"
+        "check": "The runbook tells the reader to use no tooling that the fixture does not show, as if it were there: a management UI, a log system, a dashboard, a tracing tool. A TODO or a question that says the repository does not show where the logs, a dashboard or a UI are passes; so does naming Prometheus, whose rule format deploy/alerts.yaml uses. A step such as 'open the dashboard' or 'search the worker logs' with nothing marking it as unknown does not pass"
       }
     ],
     "4": [
@@ -742,6 +742,7 @@
     ]
   },
   "amendments": [
-    "2026-11-22, after iteration-1 and before any run of iteration-2: check 1.26 reworded. As frozen it read: 'Every number, limit and duration in docs/pipeline.md is in the fixture: 100,000 rows, three attempts, 24 hours, weekly. No other figure appears'. It listed four figures and failed both runs without the skill for figures that are in the fixture (the alert's threshold and duration from deploy/alerts.yaml, the default of --limit from scripts/requeue_dead.py) and for a count of components, so it measured how much the document grew and not invention, which is what assertion 8 asks ('exists in the fixture code'). The new text accepts any figure a fixture file contains. Applies from iteration-2 on; the iteration-1 table is not revised, and its eval 1 runs are re-judged in the iteration-2 batch because the packet changed."
+    "2026-11-22, after iteration-1 and before any run of iteration-2: check 1.26 reworded. As frozen it read: 'Every number, limit and duration in docs/pipeline.md is in the fixture: 100,000 rows, three attempts, 24 hours, weekly. No other figure appears'. It listed four figures and failed both runs without the skill for figures that are in the fixture (the alert's threshold and duration from deploy/alerts.yaml, the default of --limit from scripts/requeue_dead.py) and for a count of components, so it measured how much the document grew and not invention, which is what assertion 8 asks ('exists in the fixture code'). The new text accepts any figure a fixture file contains. Applies from iteration-2 on; the iteration-1 table is not revised, and its eval 1 runs are re-judged in the iteration-2 batch because the packet changed.",
+    "2026-11-22, after iteration-2 and before any later run: check 3.21 reworded. As frozen it read: 'The runbook presents no tooling that the fixture does not show as available to the reader: a management UI, a log system, a dashboard, a tracing tool'. In iteration-1 it was unmet in every run of both cells, and the two skill runs split 2/3 on the same two things: a TODO that names the logs or a dashboard in order to say the repository does not show them, and Prometheus, which the fixture's alert file implies and never names. The judges did not agree on whether those 'present tooling as available', so the check measured its own wording. The new text says which side each falls on. Applies from the next iteration on; the iteration-1 table is not revised."
   ]
 }

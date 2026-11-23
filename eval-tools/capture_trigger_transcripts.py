@@ -75,6 +75,9 @@ def run_once(query: str, skill_name: str, description: str, model: str, timeout:
              "--include-partial-messages", "--setting-sources", "project,local",
              "--model", model],
             cwd=repo_root, env=env, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+            # `claude -p` appends whatever is on stdin to the prompt: a caller that is itself fed by a
+            # heredoc would leak its own script into every session (2026-11-22, twelve transcripts discarded).
+            stdin=subprocess.DEVNULL,
             text=True,
         )
         deadline = time.time() + timeout

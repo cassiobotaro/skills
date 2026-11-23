@@ -206,7 +206,9 @@ def judge_one(it, pid, k, expected, model, scratch):
            "--model", model, "--output-format", "json", "--tools", "",
            "--system-prompt", "You grade a reply against a list of checks and answer with JSON only.",
            "--setting-sources", "project,local", "--disable-slash-commands", "--max-turns", "1"]
-    p = subprocess.run(cmd, cwd=scratch, env=env, capture_output=True, text=True, timeout=600)
+    # stdin closed: `claude -p` appends piped stdin to the prompt, and a judge must see the packet alone
+    p = subprocess.run(cmd, cwd=scratch, env=env, capture_output=True, text=True, timeout=600,
+                       stdin=subprocess.DEVNULL)
     line = next((l for l in p.stdout.splitlines() if l.startswith("{")), None)
     if line is None:
         raise RuntimeError((p.stderr or p.stdout)[-300:])

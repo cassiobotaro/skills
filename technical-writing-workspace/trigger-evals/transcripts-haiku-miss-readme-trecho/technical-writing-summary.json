@@ -1,0 +1,40 @@
+{
+  "skill": "technical-writing",
+  "model": "claude-haiku-5-5",
+  "query": "melhora esse trecho do README, tá confuso: 'Após a instalação das dependências, deve-se configurar a variável QUEUE_URL e então o worker é iniciado.'",
+  "runs": [
+    {
+      "candidate": "technical-writing-skill-1de699ed",
+      "outcome": "strict_trigger",
+      "tools": [
+        "Skill(technical-writing-skill-1de699ed)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-haiku-miss-readme-trecho/technical-writing-run00.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-06d4153e",
+      "outcome": "late_trigger",
+      "tools": [
+        "Bash(grep -rn \"QUEUE_URL\" --include=*.md . | grep -v workspace | head; grep)",
+        "Skill(technical-writing-skill-06d4153e)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-haiku-miss-readme-trecho/technical-writing-run01.jsonl"
+    },
+    {
+      "candidate": "technical-writing-skill-6166a64a",
+      "outcome": "other_tool",
+      "tools": [
+        "Bash(grep -rn \"QUEUE_URL\" --include=*.md . | grep -v -- \"-workspace/\" | hea)",
+        "Bash(grep -rn \"QUEUE_URL\" . --exclude-dir=.git | head -20; grep -rln \"worke)",
+        "Bash(grep -rn \"worker é iniciado\\|QUEUE_URL\" . --exclude-dir=.git --exclude)",
+        "Bash(grep -rn \"worker é iniciado\\|QUEUE_URL\" . --exclude-dir=.git | grep -v)",
+        "Bash(grep -rni \"worker\\|dependências\\|configurar a vari\" README.md eval-too)",
+        "Bash(grep -rni \"worker\\|dependências\\|configurar a vari\" README.md eval-too)"
+      ],
+      "first_text": "",
+      "transcript": "technical-writing-workspace/trigger-evals/transcripts-haiku-miss-readme-trecho/technical-writing-run02.jsonl"
+    }
+  ]
+}
