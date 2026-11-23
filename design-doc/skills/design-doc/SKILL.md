@@ -65,6 +65,13 @@ the document under review, or an update to a document whose design has changed.
    change happened. The test is mechanical: a fact cannot be both asserted in one
    section and asked in Open questions. If you are asking it, delete the assertion.
 
+   Invention also arrives as a *risk nobody raised*. A failure mode you can see in the
+   design (the store it depends on going down, the case its window does not cover, a
+   mitigation for a cost the team accepted) is a question for the user, never a line of
+   the document: not a risk row, not a mitigation, and not an example in a sentence about
+   what was not discussed yet. "Other risks, such as the cache going down, were not
+   discussed" states that risk as surely as a row does.
+
 3. **The template governs; without one, sections are suggestions.** When the user
    supplies a template — or the repository's design docs already follow one — its
    sections are the document's contract: cover every one, in the template's order, and
