@@ -54,6 +54,36 @@ restating or narrating comment and keeps the file's language (79/86 against 84/8
 one thing only the skill did was to suggest a rename without making it. So the cost of
 the miss is that small difference, on every code change.
 
+## The comments these sessions wrote (2026-11-23)
+
+**Why.** The question behind the skill is whether a session writes bad comments, not
+whether it invokes the skill. The transcripts hold every `Edit` of the 16 sessions, so
+the comments can be read at no cost. They were read by hand against the comment
+assertions of each eval in `../../evals/evals.json`, by the maintainer's session and not
+by a judge; the code-correctness assertions were looked at only as far as the edited
+lines show.
+
+**Isolation.** The probe passes `--setting-sources project,local` and the machine has no
+`~/.claude/CLAUDE.md`, so no user instruction reached these sessions.
+
+| Eval | What the assertions ask of the comments | Met |
+|---|---|---|
+| 1, new function | no restating or narrating comment; a docstring says what the signature does not, in English | 4/4: the suffix scheme and an input/output example in each docstring |
+| 2, fix a bug | the stale "weekends included" comment rewritten or removed; English; the user's reason only; no claim about holidays | 4/4: rewritten with the bank-settles-on-business-days reason; every reply says holidays are not handled |
+| 4, change one constant | no reason for 45, no "was 10" | 4/4: the line alone changed |
+| 5, ignore negative rows | a comment on the condition gives the user's reason, not the condition | 4/4 |
+| 5, the name `d` | the reply suggests a descriptive name without renaming | 0/4 |
+
+One borderline: run-4 of eval 2 writes `# Saturday` and `# Sunday` next to
+`weekday() == 5` and `== 6`. They decode a magic number rather than restate the line; the
+other three runs wrote `>= 5` with no such comment.
+
+**Reading.** Without the skill, on these four requests and on sonnet, the sessions wrote
+no comment the skill exists to prevent. The 0/16 invocations cost the rename suggestion,
+which matches iteration-1 (79/86 without the skill, 84/86 with it). This does not cover
+haiku, nor code that already carries several stale comments near the change, which is
+where a bad comment is most likely and which only eval 2 exercises.
+
 **A first run was discarded** (`results-wrong-paths-DISCARDED.json`, 1/16). The fixtures
 of this workspace are `files/<path>` and not `files/<fixture>/<path>`, and the probe put
 `reports/usage.py` at `usage.py`, so the prompts named paths that did not exist. The
