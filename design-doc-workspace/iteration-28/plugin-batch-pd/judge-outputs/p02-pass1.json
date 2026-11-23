@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:73 \"7. Quais outros riscos a equipe enxerga, e qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:77 \"9. Como o serviço entra em produção (por exemplo, por produtor, por percentual do tráfego ou em modo sombra)? Qual o critério para avançar de fase e qual o critério e o procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Borderline. docs/design/deduplicacao-de-eventos.md:46 \"Os demais riscos (por exemplo, o comportamento diante de falhas do serviço ou do Redis) ainda não foram levantados.\" The section names a failure risk (service or Redis failure) that the user did not give. It is framed as pending, but the risk is still stated in Riscos."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Checked the Plano de rollout section (line 50). It names no phase, advance criterion or rollback step: \"Ainda não definido. As fases, os critérios de avanço e o rollback estão em [Perguntas abertas]\". This is a pending marker."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:30 \"### Alternativas consideradas\"; :34 \"**Deduplicar no consumidor.** Descartada: cada consumidor teria que reimplementar a deduplicação.\"; :35 \"**Idempotência nativa do produtor Kafka.** Descartada: ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:38 \"### Trade-off aceito\"; :40 \"A estimativa é de +5ms de latência por evento. A equipe aceita esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 4: \"**Desvio do template:** ... Criei o bloco \\\"Alternativas consideradas\\\" e o subbloco \\\"Trade-off aceito\\\" dentro de Proposta, antes de Riscos. ... Se o time de arquitetura não aceitar o bloco extra, ele sai sem afetar o resto.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header table. docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:84 \"12. Quem são os revisores deste documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It contains only 4%, 0,1%, 24h, +5ms and the two finance complaints, all from the user, plus the ID and dates, which are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names only Produtores, Ingestor, Kafka, Redis, financeiro, equipe and Rafael Nunes. All appear in the user's message. TTL is the user's 24h retention in Redis. C4 appears only in the reply."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block. The document has none; its only diagram is a plain-text sketch (lines 22-26)."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched for a Mermaid block. The document has none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched for sentences that assign actions to actors. The service consulting, storing and discarding keys, and delivering to Kafka, follows from the user's proposal (between ingestor and Kafka, keeps the key in Redis for 24h, discards repeats). \"A equipe aceita esse custo\" matches the user's accepted trade-off. \"Rafael não pôde responder\" matches the user's message. Other actor claims appear only as questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:46 \"Os demais riscos ... ainda não foram levantados. Eles estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:46 \"(por exemplo, o comportamento diante de falhas do serviço ou do Redis) ainda não foram levantados\" names a failure mode outside Perguntas abertas, in a sentence that says it was not discussed yet."
+ }
+]

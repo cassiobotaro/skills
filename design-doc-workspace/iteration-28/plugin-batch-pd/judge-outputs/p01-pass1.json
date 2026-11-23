@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:55 \"Outros riscos. Além da latência, que riscos o time enxerga (...) e qual a mitigação de cada um?\"; reply line 19 \"Que outros riscos existem além da latência, e qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:56 \"Rollout. Em quais fases o serviço entra em produção, qual critério permite avançar de fase e qual dispara rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 32-36). The only risk is +5 ms latency, which the user gave as an accepted trade-off. \"O time aceitou esse custo\" matches the user's \"Trade-off aceito\". The section states no other risk or mitigation and points to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 38-40). It contains only the pointer \"As fases, os critérios de avanço e o critério de rollback estão em [Perguntas abertas]\". It states no phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:24 \"## Alternativas consideradas\"; :29 \"Deduplicar no consumidor. Descartada: cada consumidor teria que reimplementar a deduplicação.\"; :30 \"Idempotência nativa do produtor Kafka. Descartada: não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:32 \"## Riscos\"; :34 \"Latência no caminho crítico. O serviço adiciona um salto à ingestão, estimado em +5 ms de latência. O time aceitou esse custo em troca da redução de duplicatas.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"Fiz um desvio e ele é seu para aceitar ou tirar. O template não tem lugar para as alternativas, então criei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Reply line 24 \"Quem são os revisores?\"; doc :60 \"Quem revisa este documento pela arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24 horas, +5 ms (marked estimativa), 0,1% and duas vezes, all from the user. The other numbers are DD-2026-001 and the 2026-11-23 dates, which are identifiers and dates, not metrics. The latency baseline is \"n/a\", so no figure is invented."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro, o time and arquitetura, all named by the user. Capacity and backpressure appear only inside open questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No Structurizr DSL block in the document."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "No Mermaid block in the document."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every action sentence outside Perguntas abertas. Lines 18 and 20: the service checks/discards and Redis stores keys for 24h, as the user stated. Line 34: the team accepted the cost, matching \"Trade-off aceito\". Key origin and publish ordering are left as questions (:51, :53)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/servico-de-deduplicacao-de-eventos.md:36 \"Demais riscos e mitigações estão em [Perguntas abertas](#perguntas-abertas).\" This marks the remaining risks as open and points to the questions."
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas. Riscos states only the user's +5 ms. Proposta :22 mentions \"comportamento quando o Redis está indisponível\" only as a detail deferred to open questions, not as a stated risk. Alternatives restate the user's reasons. No other failure mode or mitigation is asserted."
+ }
+]

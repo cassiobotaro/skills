@@ -179,6 +179,43 @@ skill as a file to read and follow rather than through the Skill tool, and asks 
 final reply) and the repository's own files in the tree. Counting every document written
 with the skill invoked through the Skill tool: 4 of 20 keep Riscos clean.
 
+**Sixth batch, 2026-11-23: a third candidate, in the self-review** (`run_plugin.py`, cell
+`pd`, `skill-d`, `plugin-batch-pd/`). The transcripts put the risks in the first Write, so
+the candidate is one bullet in step 4 and not a paragraph in step 2: it reads each section
+the user gave no substance for line by line and deletes every risk, mitigation or example
+the session supplied, naming the forms that leaked before (diff `skill-a/SKILL.md
+skill-d/SKILL.md`). The `pn` setup, four runs on eval 71 and two on eval 7. All six
+invoked `design-doc` through the Skill tool and none listed `unslop`.
+
+| Check | pn setup (pn, pg, pg2: 12 runs) | pd (skill-d) |
+|---|---|---|
+| 7.8 Riscos states no risk nobody gave | 2/12 | 3/4 |
+| 7.24 no such risk anywhere outside Perguntas abertas | 1/12 | 1/4 |
+| 7.6 asks the user for the risks | 7/12 | 4/4 |
+| 7.23 Riscos says it awaits the answer | 7/12 | 4/4 |
+| 7.11 the +5 ms cost under a heading of its own | 8/12 | 2/4 |
+| eval 7, 7.G1 the session wrote no file | 2/2 in pa | 1/2 |
+
+Four splits (7.11 twice, 7.24 twice), counted as not met. The Riscos section is clean in
+three of four, the best count of any cell with the skill invoked; the one miss is the
+form the bullet names, "por exemplo, o comportamento diante de falhas do serviço ou do
+Redis" inside the pending pointer. 7.24 shows where the rest went: run-3 points from
+Proposta to "comportamento quando o Redis está indisponível" in Perguntas abertas (1 of 3
+judges let it pass), run-1 writes in Proposta that "um reenvio depois dele não é coberto
+por esta proposta", a deduction from the 24-hour window (2 of 3). And eval 7 run-2 wrote
+the document on the plain request, with Riscos and Rollout pointing to its questions,
+where the skill asks first.
+
+**Reading, by the rule in `checks.json`.** Not adopted, on two counts: 7.8 at 3/4 with
+7.24 at 1/4 is the defect moving again, as with skill-c, and eval 7 met 7.G1 in one of two
+runs. Two runs do not show the bullet caused the second, but the bullet describes a
+document with pointers to open questions, which is what that run wrote instead of asking.
+What the batch adds: a check in the self-review moves the Riscos section more than either
+paragraph in step 2. Open for the author: whether a pointer that names the topic of an
+open question ("o comportamento quando o Redis está indisponível está em Perguntas
+abertas") states a risk; 7.24 as written lets the judges split on it, as 7.19 did on a
+name inside a question.
+
 **Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -221,4 +258,5 @@ with the prompt alone.
 **Cost.** Executors: 24 sessions, US$ 2.57. Judges: 72 calls, US$ 4.06. Third batch:
 4 sessions, US$ 0.38; 12 judge calls, US$ 0.95. Fourth batch: 4 sessions, US$ 0.50;
 12 judge calls, US$ 1.21; four codeword probes on haiku, a few cents. Fifth batch:
-4 sessions, US$ 0.54; 12 judge calls, US$ 1.05; one probe.
+4 sessions, US$ 0.54; 12 judge calls, US$ 1.05; one probe. Sixth batch: 6 sessions,
+US$ 0.79; 18 judge calls, US$ 1.15.

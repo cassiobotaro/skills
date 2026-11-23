@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, causados por reenvio em retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:58 \"7. Quais outros riscos o time enxerga, e como cada um será mitigado?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:61 \"8. Em quais fases o serviço entra em produção, com que critério para avançar de uma fase para a seguinte e com que critério e procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (doc:33-35). It states only the user's trade-off \"um salto a mais no caminho crítico da ingestão, com latência estimada em +5ms, aceito pelo time\" and defers the other risks to Perguntas abertas. No other risk and no mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (doc:37-39). It contains only \"Ainda não definido. Ver [Perguntas abertas](#perguntas-abertas).\" It states no phase, no criterion to advance and no rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:22 \"### Alternativas consideradas\"; doc:26 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação.\"; doc:27 \"**Idempotência nativa do produtor Kafka.** Não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:29 \"### Trade-off aceito\"; doc:31 \"O serviço adiciona um salto ao caminho crítico da ingestão. A estimativa é de +5ms de latência.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply names one added heading: \"Coloquei uma subseção \\\"Alternativas consideradas\\\" dentro de Proposta, com o aviso de que ela não é do template.\" The run also added a second heading outside the template, \"### Trade-off aceito\" (doc:29). The reply never names that one as a deviation, so the user cannot accept it."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. doc:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:68 \"11. Quem são os revisores do time de arquitetura que devem constar no cabeçalho?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4%, 24 horas, +5ms, 0,1% and \"duas vezes\". All come from the user. The 2026 values are the document ID and dates, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names only Redis, Kafka, ingestor, produtores, consumidores, financeiro, time de arquitetura and Rafael Nunes. All of these appear in the user's message."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched for actor-action assertions. The service consulting, storing and discarding in Redis and delivering to Kafka follows from the user's own description (\"fica entre o ingestor e o Kafka, guarda a chave... descarta repetidos\"). \"O time aceitou esse custo\" matches the user's \"Trade-off aceito\". No other actor is assigned an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:35 \"O único risco discutido até agora é o do trade-off acima... Os demais riscos e suas mitigações estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched every section outside Perguntas abertas for risks, failure modes and mitigations. Found only the user's +5ms trade-off (doc:31, doc:35) and the user's reasons for discarding the alternatives (doc:26-27). No other risk, failure mode or mitigation is stated."
+ }
+]

@@ -1,0 +1,12 @@
+[
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "reply:3 \"**Riscos**: além da latência de +5ms, o que pode dar errado, e como vocês mitigariam?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "reply:4 \"**Plano de rollout**: como entra em produção? ... Qual é o critério para avançar de fase e qual é o gatilho de rollback?\""
+ }
+]

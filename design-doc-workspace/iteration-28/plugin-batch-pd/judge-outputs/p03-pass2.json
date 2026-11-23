@@ -1,0 +1,12 @@
+[
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "Reply line 14: \"**Redis fora do ar:** o serviço descarta, deixa passar ou rejeita os eventos? Há outros riscos além da latência?\"; doc docs/design/DD-2026-001-deduplicacao-de-eventos.md:57: \"Quais outros riscos a proposta traz e como mitigamos cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "Reply line 17: \"**Rollout:** quais são as fases, o critério para avançar e o gatilho de rollback?\"; doc docs/design/DD-2026-001-deduplicacao-de-eventos.md:60: \"Em quais fases o serviço entra em produção, qual critério permite avançar de fase e qual dispara o rollback?\""
+ }
+]

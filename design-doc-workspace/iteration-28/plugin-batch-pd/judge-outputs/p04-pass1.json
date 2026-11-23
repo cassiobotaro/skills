@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:64 \"Quais outros modos de falha a equipe enxerga (por exemplo, a perda dos dados do Redis) e como cada um é mitigado?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:66 \"Em quais fases o serviço entra em produção, com que critério se avança de uma fase para a seguinte e como se faz o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 41-45). It holds only the user's accepted +5ms latency cost (line 43) and a pending marker: \"Os demais riscos da proposta e suas mitigações ainda não foram levantados.\" No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 47-49). It holds only a pending marker: \"O plano de fases, os critérios de avanço e o de rollback ainda não foram definidos. Ver [Perguntas abertas]\". No phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:29 \"### Alternativas consideradas\". :35 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação.\" :37 \"**Idempotência nativa do produtor Kafka.** Não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms appears at :27 under the template heading Proposta, at :43 under the template heading Riscos (behind a bold label, not a heading), and at :56 under Métricas. None of these is a heading of its own for the cost. Under Alternativas consideradas, :39 says only \"ao custo de mais um salto no caminho crítico\", without the +5ms."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply:4 \"**Seção extra:** acrescentei \\\"Alternativas consideradas\\\" como subseção de Proposta... Se a arquitetura só aceita as seções exatas, é só mover o conteúdo para dentro da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/dedup-de-eventos.md:8 reads \"A definir (ver [Perguntas abertas](#perguntas-abertas))\". It names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:71 \"**Revisores.** Quem revisa este documento, e quais equipes são impactadas\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the doc. Found 4%, 0,1%, 24h, +5ms, \"duas vezes\" and DD-2026-001 (a document id, not a metric). The Métricas table uses \"n/a\". No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies and teams. Found Redis, Kafka, ingestor, produtores, consumidores and financeiro, all named by the user. The only other candidate, \"quem opera o Redis\", appears only inside a question (:71) and is not asserted as a team."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for a Structurizr DSL block. None present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the doc for a Mermaid block. None present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the action sentences. Service consulting, writing and discarding keys (:20-23) is the user's proposal. \"A equipe aceitou esse custo\" (:27, :43) matches the user's \"Trade-off aceito\". Producers retry, per the user. No actor is assigned an action without basis."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:45 \"Os demais riscos da proposta e suas mitigações ainda não foram levantados. Ver [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Borderline. :25 \"um reenvio depois dele não é coberto por esta proposta\" states a failure mode outside Perguntas abertas (retries after 24h are not deduplicated). The user did not state it; it is a deduction from the 24h validity."
+ }
+]
