@@ -186,9 +186,19 @@ order (before or after the first `Write`) is listed per session.
 `tw-d/`: 14 sessions, canaries 2/2, US$ 1.64. U = 0/12 (0/4 on each of evals 1, 2 and
 3, eval 3 included, where A had 1/4 and C 4/4): no session invoked `unslop` before or
 after drafting. By the rule, D has no effect, and it lost what C gained on eval 3.
-`explain-d/`: invalid, every session ended with an error and no transcript content
-(canary 0/2, US$ 0), probably the account's usage limit; not re-run.
+`explain-d/`: the first run was invalid, every session ended with an error and no
+transcript content (canary 0/2, US$ 0), probably the account's usage limit; it was moved
+out of the repository and re-run the same day with the same copies. The re-run: canary
+2/2, U = 3/4 on eval 7 (A 0/4, C 0/4), US$ 0.52. In all three the order is `Read`,
+`Skill(explain)`, `Skill(unslop)`, then the reply: `unslop` is loaded before the text is
+written, as D asks. The one session that skipped it opens its text with a walking emoji,
+which `unslop`'s rules remove.
 
-**Standing after A, B, C and D.** Only C moved the count (5/12, between the bounds).
-Nothing is adopted; the skills are unchanged. Open: re-run `explain-d`, and a C variant
-for evals 1 and 2 or more runs of C before any decision.
+**Standing after A, B, C and D.** The two calling skills answer to different orders.
+`explain`, which writes its text in the reply, reached `unslop` only when told to load it
+before drafting (D, 3/4). `technical-writing`, which writes a file after reading the
+repository, reached it most with a pass before the reply (C, 5/12, 4/4 on eval 3) and
+never when told to load it before drafting (D, 0/12). Every count is between the bounds
+of its rule or on four sessions, so nothing is adopted and the skills are unchanged. The
+next step is more runs of the two that moved, `explain` with D and `technical-writing`
+with C, before a version.
