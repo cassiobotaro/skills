@@ -321,6 +321,21 @@ structure, which 7.5 forbids at any level. 7.19 fails in both cells on a team na
 inside an open question ("o time dono do Kafka e do Redis"), the case the 7.19 amendment
 of 2026-11-22 lets pass; it does not separate the cells. Eval 7 was not run on opus.
 
+### Eleventh batch: skill-e on eval 7, on opus
+
+**Written before the runs** (amendment in `checks.json`): four `pe-opus` runs on eval 7,
+read from 7.G1 only, in `plugin-batch-pe-opus-eval7/`; three or four of four means
+skill-e keeps the ask-first rule on opus, none or one calls for a `pn-opus` control.
+
+All four invoked `design-doc` through the Skill tool and none listed `unslop`. 7.G1 is met
+in four of four: each session read the template, wrote no file, and asked for Riscos,
+Plano de rollout and the other missing sections. Run-4 has one permission denial, a Bash
+call that listed `docs/` and `~/.claude/skills` and read the template; it wrote nothing,
+so the run counts.
+
+**Reading, by the rule in `checks.json`.** skill-e keeps the ask-first rule on opus. The
+open question of the tenth batch is closed. These are not the target model's numbers.
+
 **Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -368,3 +383,4 @@ US$ 0.79; 18 judge calls, US$ 1.15. Seventh batch: 12 sessions, US$ 1.49; 12 jud
 calls, US$ 1.13. Eighth batch: 8 sessions, US$ 0.95; 12 judge calls, US$ 1.23.
 Ninth batch: 4 sessions, US$ 0.58; 12 judge calls, US$ 1.11.
 Tenth batch: 8 sessions on opus, US$ 3.29; 24 judge calls, US$ 2.23.
+Eleventh batch: 4 sessions on opus, US$ 0.89; no judges.
