@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. Searched the reply and Perguntas abertas (lines 67-75) for a question asking the user what the risks are. The reply only states \"só o +5 ms entrou em Riscos, sem mitigação\", which is not a question. Questions 2 (falha do Redis) and 3 (teto de latência) ask about specific behaviours. None asks the user for the risks or their mitigations."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:67 \"Em quantas fases o serviço entra em produção? Qual critério permite avançar de uma fase para a próxima, e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Checked Riscos (lines 47-51). The only risk is the user's +5 ms extra hop. The mitigation column reads \"Trade-off aceito pelo time em troca da redução de duplicatas. Nenhuma mitigação definida até aqui.\" This restates the user's accepted trade-off and adds no invented mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Checked Plano de rollout (lines 53-55). It states only \"Ainda não definimos as fases, os critérios de avanço nem o critério de rollback. Ver [Perguntas abertas]\". This is a pending marker, with no invented phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "line 40 \"### Alternativas consideradas\"; line 44 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; line 45 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio que acontece entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "The +5 ms cost appears under the template headings \"## Riscos\" (line 51) and \"## Métricas de sucesso\" (line 63). It has no heading of its own and is not under \"### Alternativas consideradas\" (lines 40-45)."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply line 4: \"**Desvio do template:** ele não tem lugar para as alternativas que vocês discutiram. Coloquei a subseção \"Alternativas consideradas\" dentro de Proposta\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header at line 8: \"| **Revisores** | |\". The row is empty and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "dd-2026-001-deduplicacao-de-eventos.md:75 \"Quem revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It has 4%, 24 horas, +5 ms, 0,1% and duas vezes, all from the user. \"outubro de 2026\" is \"mês passado\" resolved against today's date (2026-11-23). The header dates are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. line 74 names \"plataforma que opera o Redis\" as a team. Neither the user's message nor the template mentions a platform team. It appears inside a question, but this check makes no exception for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. It has none, only a Mermaid block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block (lines 20-37). Its only branches are chave nova / chave repetida, both from the user's description. It has no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the action sentences at lines 18 and 39 and the diagram. The ingestor delivering to the service, the service checking and writing in Redis, and the service forwarding to Kafka or discarding all follow from the user saying the service \"fica entre o ingestor e o Kafka, guarda a chave ... descarta repetidos\". \"Trade-off aceito pelo time\" matches the user's \"Trade-off aceito\"."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "Checked Riscos (lines 47-51). It says \"Nenhuma mitigação definida até aqui.\" but does not point to Perguntas abertas or to the reply. Plano de rollout has such a pointer, but Riscos does not."
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-63 for any risk, failure mode or mitigation. The only risk is the user's +5 ms. Line 39, \"A janela de 24 horas define até quando um reenvio ainda é reconhecido como duplicata\", describes the user's mechanism and is not a stated risk. Redis failure appears only in Perguntas abertas."
+ }
+]

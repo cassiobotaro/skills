@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:63 \"Quais outros riscos o time enxerga nesta proposta, e qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:73 \"Como o serviço entra em produção: em fases ou de uma vez, por produtor ou por tópico? Qual o critério para avançar de fase e qual o gatilho de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 41-47). The only risk is the +5 ms latency the user gave. Its mitigation, \"Custo aceito pelo time. Não há mitigação prevista.\", restates the user's accepted trade-off. The other risks are a pending marker: \"Outros riscos aguardam levantamento nas Perguntas abertas\"."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 49-51). It holds only the marker \"ainda precisa ser definido. Ver Perguntas abertas\". No phases, criteria or rollback steps are stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:34 \"### Alternativas consideradas\"; :38 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :39 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:30 \"### Custo aceito\"; :32 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply names \"Alternativas consideradas\" as a deviation: \"Um desvio do template ... Coloquei uma subseção \\\"Alternativas consideradas\\\" dentro da Proposta\". The run also added the heading \"### Custo aceito\" (doc line 30), and the reply never presents it as a deviation. It only says \"O custo aceito de +5 ms está na Proposta\". The user therefore cannot accept every added heading."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table: docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:80 \"Quem deve revisar este documento além do time de arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\", all given by the user. The only other numbers are the identifier DD-2026-001 and today's date, which are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, consumidores, financeiro and time de arquitetura, all from the user's message. Mermaid is only the diagram format. No other names appear."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-26). It has only the nodes Produtores, Ingestor, Serviço de deduplicação, Redis and Kafka, with plain edges. There are no endpoints, headers, status codes or failure branches."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence. The service consults, stores and discards keys: user. The ingestor hands events to the service: implied by \"fica entre o ingestor e o Kafka\". The cost is accepted: user's \"Trade-off aceito\". Key generation and operation of the service appear only as questions (lines 67, 70)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:47 \"Outros riscos aguardam levantamento nas [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched Motivação, Proposta, Riscos, Plano de rollout and Métricas for risks, failure modes and mitigations. The only one found is the user's +5 ms latency. Line 47 is a pending pointer that names no specific risk. Redis unavailability and the 24 h window appear only under Perguntas abertas."
+ }
+]

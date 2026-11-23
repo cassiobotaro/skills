@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:63 \"Quais outros riscos o time enxerga nesta proposta, e qual a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:73 \"Como o serviço entra em produção: em fases ou de uma vez, por produtor ou por tópico? Qual o critério para avançar de fase e qual o gatilho de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 41-47). The only risk is the +5 ms latency, which the user gave as the accepted trade-off. Its mitigation cell, \"Custo aceito pelo time. Não há mitigação prevista.\", restates the acceptance and invents no mitigation. Line 47 is a pending marker pointing to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 49-51). It has only a pending marker: \"ainda precisa ser definido. Ver [Perguntas abertas]\". No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:34 \"### Alternativas consideradas\"; :38 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :39 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:30 \"### Custo aceito\"; :32 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply flags only one added heading: \"Coloquei uma subseção \\\"Alternativas consideradas\\\" dentro da Proposta\". The document also adds \"### Custo aceito\" (line 30), which is beyond the template, and the reply never names it as a deviation. The user cannot accept a deviation that was not disclosed."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header. docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:80 \"Quem deve revisar este documento além do time de arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the document. Found only 4%, 24 h, +5 ms, 0,1% and \"duas vezes\", all from the user. The document number and dates are header metadata, not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro and time de arquitetura, all named by the user."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for Structurizr DSL. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-26). It has only the nodes Produtores, Ingestor, Serviço de deduplicação, Redis and Kafka, with no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched for sentences that assign actions to actors. The ingestor delivering to the service, the service using Redis and the service forwarding to Kafka all follow from the user's \"fica entre o ingestor e o Kafka\". Questions about who generates the key and who operates the service stay under Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:47 \"Outros riscos aguardam levantamento nas [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas (lines 1-57). The only risk is the user's +5 ms cost. Line 47 is a pointer to Perguntas abertas that names no specific risk. No failure mode or mitigation is stated as fact."
+ }
+]

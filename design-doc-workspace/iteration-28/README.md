@@ -274,6 +274,27 @@ of four. Whether 7.11 at 1/4 is the paragraph's doing (it names "a mitigation fo
 the team accepted", which may pull the cost toward Riscos) or four runs of noise against
 8 of 12 is not known.
 
+**Ninth batch, 2026-11-23: four more `pe` runs** (`plugin-batch-pe2/`, run-5 to run-8,
+eval 71 only), to tell whether 7.11 at 1/4 was noise. All four invoked `design-doc`
+through the Skill tool and none listed `unslop`. Two splits (7.24 in run-6, 7.22 in
+run-7), counted as not met.
+
+| Check | pe, first 4 | pe, these 4 | pe, all 8 | pn setup |
+|---|---|---|---|---|
+| 7.8 Riscos states no risk nobody gave | 4/4 | 4/4 | 8/8 | 2/12 |
+| 7.24 no such risk outside Perguntas abertas | 3/4 | 3/4 | 6/8 | |
+| 7.6 asks the user for the risks | 4/4 | 3/4 | 7/8 | 7/12 |
+| 7.11 the +5 ms cost under a heading of its own | 1/4 | 2/4 | 3/8 | 8/12 |
+| all 24 checks of eval 71 | 92/96 | 88/96 | 180/192 | |
+
+**Reading, by the rule in `checks.json`.** Not adopted: 7.11 at 3 of 8 is the band the
+rule called inconclusive. What the eight runs show is a trade. The defect this iteration
+is about is gone in every document (7.8 8/8, against 2 of 12 without the paragraph), and
+eval 7 asked first in four of four. The accepted +5 ms keeps its own heading in three of
+eight, against eight of twelve: in the others it sits inside Riscos or Proposta, still
+stated, under no heading of its own. Whether that loss is worth the gain is a decision
+about the skill, not a measurement.
+
 **Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -319,3 +340,4 @@ with the prompt alone.
 4 sessions, US$ 0.54; 12 judge calls, US$ 1.05; one probe. Sixth batch: 6 sessions,
 US$ 0.79; 18 judge calls, US$ 1.15. Seventh batch: 12 sessions, US$ 1.49; 12 judge
 calls, US$ 1.13. Eighth batch: 8 sessions, US$ 0.95; 12 judge calls, US$ 1.23.
+Ninth batch: 4 sessions, US$ 0.58; 12 judge calls, US$ 1.11.

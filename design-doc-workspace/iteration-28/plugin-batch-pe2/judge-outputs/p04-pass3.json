@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. I looked for a question asking the user for the risks. The reply only states 'só o +5 ms entrou em Riscos, sem mitigação' (reply:5), which is not a question. The open questions ask about specific topics, such as Redis failure (doc:68) and latency ceiling (doc:69). None asks what the risks are or how to mitigate them."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:67 '**Rollout.** Em quantas fases o serviço entra em produção? Qual critério permite avançar de uma fase para a próxima, e qual dispara o rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "I searched the Riscos section (doc:47-51). Its only risk is the +5 ms extra hop, which the user gave. Its mitigation cell is 'Trade-off aceito pelo time... Nenhuma mitigação definida até aqui.' The user said the trade-off was accepted. No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "I searched Plano de rollout (doc:53-55): 'Ainda não definimos as fases, os critérios de avanço nem o critério de rollback. Ver [Perguntas abertas]'. It is a pending marker with no invented phases."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:40 '### Alternativas consideradas'; doc:44 '**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.'; doc:45 '**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio que acontece entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms cost appears at doc:51 under the template heading '## Riscos' and at doc:63 under '## Métricas de sucesso'. It is not under a heading of its own, such as Trade-offs, and not under 'Alternativas consideradas' (doc:40-45)."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:4 '**Desvio do template:** ele não tem lugar para as alternativas que vocês discutiram. Coloquei a subseção \"Alternativas consideradas\" dentro de Proposta, sem mexer no esqueleto.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "doc:8 '| **Revisores** | |'. The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:75 '**Revisores e numeração.** Quem revisa este documento?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "I searched the doc for figures: 4% (doc:14, 61), 24 horas (doc:18, 31, 39), +5 ms (doc:51, 63), 0,1% (doc:61), duas vezes (doc:14). 'outubro de 2026' is a derivation of 'mês passado' given today's date 2026-11-23. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. doc:74 '(produtores, consumidores, plataforma que opera o Redis)' names a team, a platform team that operates Redis, which the user never mentioned. It is inside a question, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "I searched the document for Structurizr DSL. There is none; only a Mermaid block (doc:20-37)."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "I searched the Mermaid block (doc:20-37) for endpoints, headers, status codes and failure branches. It has only the new-key/repeated-key alt, which matches the user's 'descarta repetidos'. There is no Redis-failure branch and no endpoints or status codes."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "I searched the actor-action sentences. doc:18 and doc:39 have the service consulting Redis, the ingestor delivering to the service, and the service forwarding or discarding. All follow from 'fica entre o ingestor e o Kafka, guarda a chave... no Redis... descarta repetidos'. 'Trade-off aceito pelo time' (doc:51) matches the user's 'Trade-off aceito'. Attribution guesses appear only in open questions (doc:72, 74)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "I searched Riscos (doc:47-51). It says 'Nenhuma mitigação definida até aqui.' but does not say the section awaits the user's answer. It does not point to Perguntas abertas or to the reply."
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "I searched outside Perguntas abertas (doc:1-63) for risks, failure modes and mitigations. Only the user's +5 ms cost appears. doc:39 describes the 24h window as defined by the user and states no failure consequence. Redis failure appears only as a question (doc:68)."
+ }
+]

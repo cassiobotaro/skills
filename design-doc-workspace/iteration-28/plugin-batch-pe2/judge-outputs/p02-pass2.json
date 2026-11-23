@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:63 'Quais outros riscos o time enxerga nesta proposta, e qual a mitigação de cada um?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:73 'Como o serviço entra em produção: em fases ou de uma vez, por produtor ou por tópico? Qual o critério para avançar de fase e qual o gatilho de rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 41-47). The only risk is the user's +5 ms latency trade-off. Its mitigation cell, 'Custo aceito pelo time. Não há mitigação prevista.', restates the user's 'Trade-off aceito'. Line 47 is a pending marker pointing to Perguntas abertas."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 49-51). It holds only a pending marker: 'ainda precisa ser definido. Ver [Perguntas abertas]'. It states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:34 '### Alternativas consideradas'; :38 '**Deduplicar no consumidor.** Descartada.'; :39 '**Idempotência nativa do produtor Kafka.** Descartada.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:30 '### Custo aceito'; :32 'Estimamos +5 ms de latência por evento.'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply names one added heading as a deviation: 'Um desvio do template ... Coloquei uma subseção \"Alternativas consideradas\" dentro da Proposta'. The document also adds '### Custo aceito' (line 30), which is beyond the template, and the reply does not name it as a deviation."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. Line 8 '| **Revisores** | |' is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:80 'Quem deve revisar este documento além do time de arquitetura?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It states only 4%, 24 horas, +5 ms, 0,1% and 'duas vezes', all given by the user. The doc number and dates are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, consumidores, financeiro and time de arquitetura, all named by the user. Mermaid is diagram notation only."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for Structurizr DSL. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-26). It has only nodes Produtores, Ingestor, Serviço de deduplicação, Redis and Kafka with plain arrows. There is no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched every actor assertion outside the questions (lines 14-57). Each follows from the user's message: the service sits between ingestor and Kafka, keeps the key in Redis for 24h and discards repeats; consumers no longer need to deduplicate. 'Custo aceito pelo time' restates the user's 'Trade-off aceito'."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:47 'Outros riscos aguardam levantamento nas [Perguntas abertas](#perguntas-abertas).'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 12-57 for risks, failure modes and mitigations. The only risk is the user's +5 ms cost. Line 47 is a generic pending pointer that names no risk subject. Redis unavailability and the 24h window appear only as questions at lines 62-64."
+ }
+]
