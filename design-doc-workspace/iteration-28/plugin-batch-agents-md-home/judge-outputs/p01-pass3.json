@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. I searched Perguntas abertas (lines 61-68) and the reply for a question asking the user what the risks are. None exists. Q2 (line 62) asks only how the service behaves when Redis fails, which covers one specific risk, not the risks in general."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:64 \"**Rollout.** Quais são as fases (por exemplo, por produtor ou por percentual de tráfego), o critério para avançar de uma fase e o critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "line 46 \"Mitigação: medir a latência real na fase inicial do rollout e comparar com a estimativa.\" The user gave no mitigation. Line 47 \"**Dependência nova.** O Redis passa a participar da ingestão.\" The user did not state this as a risk."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "I checked the Plano de rollout section (line 52) for phases, advance criteria or rollback steps. Line 52 says only \"As fases, os critérios de avanço e o critério de rollback ainda não foram definidos (ver Perguntas abertas).\" Nothing is invented."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "line 36 \"## Alternativas consideradas\"; line 40 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; line 41 \"**Idempotência nativa do produtor Kafka.** Não cobre o reenvio entre reinícios do produtor, que é parte do problema. Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms appears at line 32 under \"## Proposta\" with only a bold lead-in \"**Custo aceito.**\", which is not a heading. It also appears at line 46 under \"## Riscos\". Neither place is a heading of its own or the Alternativas consideradas heading."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply line 11 \"**Desvio do template:** adicionei a seção \\\"Alternativas consideradas\\\" entre Proposta e Riscos, porque o template não tem lugar para elas\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "I checked the header table. Line 8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "line 68 \"**Revisores.** Quem do time de arquitetura e de outros times (financeiro, produtores) revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "I searched the document for figures. It contains only 4%, 24 horas, +5 ms, 0,1% and 'duas vezes', all given by the user. The dates (2026-11-23) and the ID DD-2026-001 are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "I searched the document for technologies, teams and stakeholders. Redis, Kafka, ingestor, produtores, consumidores, financeiro and time de arquitetura all appear in the user's message. Nothing else is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "I searched for a Structurizr DSL block. The document has none; line 22 is a plain text diagram."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "I searched for a ```mermaid block. The document has none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "I checked every actor/action sentence. 'O ingestor entrega o evento ao serviço' (line 28) follows from the service sitting between the ingestor and Kafka. The service checking, storing and discarding keys, the producer resending on retry, and the team accepting the cost all come from the user's message. I found no unsupported attribution."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Riscos section (lines 46-48) states risks as content and does not say the section awaits the user's answer. Only one bullet, line 47, points to the questions: \"ainda não está definido (ver Perguntas abertas)\"."
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "line 47 \"**Dependência nova.** O Redis passa a participar da ingestão.\"; line 48 \"Reenvios após 24 horas não são descartados\"; line 46 \"Mitigação: medir a latência real na fase inicial do rollout\". These are risks and a mitigation the user did not give, stated outside Perguntas abertas."
+ }
+]

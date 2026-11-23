@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-de-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. The questions under **Riscos** (lines 78-80) ask how to handle risks the run itself stated, e.g. \"O que o serviço faz quando o Redis está indisponível\". No question in the document (lines 70-93) or the reply asks the user what the risks are."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:73 \"Em quantas fases o serviço entra em produção (por exemplo, por produtor, por percentual de tráfego ou em modo sombra)?\"; doc:75 \"Qual critério dispara o rollback, e como se faz\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:55 mitigation not given by user: \"Mitigação: medir em staging antes do rollout\"; doc:56 risk not given by user: \"**Dependência do Redis na ingestão.** Todo evento passa pela consulta ao Redis, então a disponibilidade do Redis passa a afetar a ingestão.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (doc:59-61). It only says \"Ainda não definido. As fases, os critérios de avanço e o critério de rollback estão nas Perguntas abertas.\" It states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:45 \"### Alternativas consideradas\"; doc:49 \"**Deduplicar no consumidor.** Descartada.\"; doc:50 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:41 \"### Trade-off aceito\"; doc:43 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:4 \"**Alternativas:** o template não tem seção para elas. Coloquei as duas que você descartou e \\\"não fazer nada\\\" como subseção dentro de **Proposta**, junto com o trade-off dos +5 ms. Se o time de arquitetura não aceitar isso, é só mover o trecho.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header. doc:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:92 \"Quem são os revisores do time de arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Only 4%, 0,1%, 24h, +5 ms, \"duas vezes\", the document number and the dates appear. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. It names Redis, Kafka, ingestor, financeiro and time de arquitetura, all from the user's message. Mermaid is the diagram format and staging is an environment, not a named system."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block (doc:22-37). It has no endpoint, header or status code. Its only branch is the user's own discard of a repeated key: \"else chave já existente\"."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the sentences that name actors (doc:20, 39, 43). Each follows from the user's description of a service between the ingestor and Kafka that stores keys in Redis and discards repeats. Ownership appears only as a question (doc:88)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:56 \"A mitigação depende de uma decisão ainda aberta (ver Perguntas abertas).\"; doc:57 \"Mitigação: nenhuma proposta por enquanto (ver Perguntas abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:55 \"Mitigação: medir em staging antes do rollout\"; doc:56 \"a disponibilidade do Redis passa a afetar a ingestão\"; doc:57 \"Duplicatas que chegam depois de 24h do evento original não são detectadas.\" None of these was given by the user."
+ }
+]

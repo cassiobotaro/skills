@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:55 \"Quais riscos de corrupção ou perda de eventos o time considera?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:65 \"Quais são as fases de entrada em produção (por exemplo, modo sombra, depois porcentagem do tráfego), o critério para avançar entre fases e o critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:39 \"Mitigação: medir a latência real no rollout e comparar com a estimativa.\" The user gave the +5 ms trade-off but no mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 42-44). It only says \"Ainda não definido. Ver Perguntas abertas.\" No phase, advance criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:26 \"### Alternativas consideradas\"; :30 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; :31 \"**Idempotência nativa do produtor Kafka.** Não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:33 \"### Trade-off aceito\"; :35 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "borderline: the reply names one added heading, \"Acrescentei a subseção \"Alternativas consideradas\" dentro de Proposta.\" The document also adds \"### Trade-off aceito\" (line 33). The reply does not flag that heading as a deviation, so the user cannot accept it."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked docs/design/DD-2026-001-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:69 \"Quem são os revisores deste documento (arquitetura, financeiro, donos dos produtores)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It has only 4%, 0,1%, 24 horas, 5 ms and \"duas vezes\". All of them come from the user."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies and teams. It names only Redis and Kafka, plus ingestor, produtores, consumidores, financeiro and arquitetura. The user's message names all of these."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None is present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences outside the questions. The service sits between ingestor and Kafka, stores the key and discards repeats, and the team accepts the cost. Each follows from the user's message, and no unestablished actor is asserted."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:40 \"**Demais riscos.** Ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:39 \"Mitigação: medir a latência real no rollout e comparar com a estimativa.\" This mitigation is stated outside Perguntas abertas, and the user never gave it."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:55 \"Qual é o efeito de perder as chaves do Redis (reinício, eviction, falha)? Quais riscos de corrupção ou perda de eventos o time considera?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:65 \"Quais são as fases de entrada em produção (por exemplo, modo sombra, depois porcentagem do tráfego), o critério para avançar entre fases e o critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:39 \"Mitigação: medir a latência real no rollout e comparar com a estimativa.\" The user accepted the +5 ms as a trade-off but gave no mitigation for it."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (docs/design/DD-2026-001-deduplicacao-de-eventos.md:42-44). It contains only the marker \"Ainda não definido. Ver Perguntas abertas.\" It states no phase, criterion to advance or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:26 \"### Alternativas consideradas\"; :30 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; :31 \"**Idempotência nativa do produtor Kafka.** Não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:33 \"### Trade-off aceito\"; :35 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. Reply line 14 names one added heading as a deviation: \"Acrescentei a subseção \"Alternativas consideradas\" dentro de Proposta. O template não tem lugar para elas\". The run also added the heading \"### Trade-off aceito\" (doc:33), which is beyond the template, and the reply does not name it as a deviation."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/DD-2026-001-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:69 \"Quem são os revisores deste documento (arquitetura, financeiro, donos dos produtores)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24 horas, 5 ms, 0,1% and \"duas vezes\", all given by the user. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, consumidores, financeiro and arquitetura. All of these appear in the user's message."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor-action sentences at doc:20-24 and :35. Each restates the user's description: the service sits between the ingestor and Kafka, keeps the key in Redis and discards repeats, and the team accepts the trade-off. No sentence attributes an action to an actor the user did not establish."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:40 \"**Demais riscos.** Ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:39 \"Mitigação: medir a latência real no rollout e comparar com a estimativa.\" This mitigation is outside Perguntas abertas and was not given by the user."
+ }
+]

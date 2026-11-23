@@ -150,7 +150,36 @@ the repository and with the prompt alone: iteration-27 0 of 4 met 7.8, `pa` 2 of
 in 4 of 4. The question of what separates them is still open, and the harness finding
 above means the next cell has to put its projects under `$HOME`.
 
-**Reading, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
+**Fifth batch, 2026-11-23: `pn` with the repository's AGENTS.md loaded** (`run_plugin.py`,
+cell `pg2`, `plugin-batch-agents-md-home/`). `pg` with the projects under
+`~/.cache/dd-pg2/`. A codeword probe in a project there, holding the repository's
+AGENTS.md, named the file and the repo name it states, so it loads. All four runs invoked
+`design-doc` through the Skill tool, none listed `unslop`, each wrote one document.
+
+| Check | pn + pg (8 runs, no AGENTS.md) | pg2 (AGENTS.md loaded) | brief cell a |
+|---|---|---|---|
+| 7.8 Riscos states no risk nobody gave | 2/8 | 0/4 | 4/4 |
+| 7.24 no such risk anywhere outside Perguntas abertas | 1/8 | 0/4 | |
+| 7.6 asks the user for the risks | 6/8 | 1/4 | |
+| 7.23 Riscos says it awaits the answer | 5/8 | 2/4 | |
+| 7.19 no technology, team or stakeholder nobody named | 3/8 | 4/4 | |
+| all 24 checks of eval 71 | 166/192 | 80/96 | |
+
+Three splits (7.6 twice, 7.23 once), counted as not met. What fails 7.8: run-1 and run-4
+list the Redis dependency and the 24-hour window as risks; run-2 names "indisponibilidade
+do Redis, do próprio serviço, falha entre registrar a chave e publicar no Kafka" as the
+risks not yet analysed; run-3 keeps Riscos to the +5 ms and a pointer, and fails on a
+mitigation nobody gave ("medir a latência real no rollout"). That invented mitigation for
+the +5 ms is in three of the four documents, and in documents of `pa`, `pn` and `pg` too:
+it is the second form of the defect, next to listing the Redis and the window.
+
+**Reading, by the rule in `checks.json`.** 0 of 4: AGENTS.md is not what keeps the brief
+cells clean. What is left between them is the brief itself (it frames the task, hands the
+skill as a file to read and follow rather than through the Skill tool, and asks for a
+final reply) and the repository's own files in the tree. Counting every document written
+with the skill invoked through the Skill tool: 4 of 20 keep Riscos clean.
+
+**Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
 - **The defect is real, partial, and tied to the harness.** With the skill installed and
@@ -191,4 +220,5 @@ with the prompt alone.
 
 **Cost.** Executors: 24 sessions, US$ 2.57. Judges: 72 calls, US$ 4.06. Third batch:
 4 sessions, US$ 0.38; 12 judge calls, US$ 0.95. Fourth batch: 4 sessions, US$ 0.50;
-12 judge calls, US$ 1.21; four codeword probes on haiku, a few cents.
+12 judge calls, US$ 1.21; four codeword probes on haiku, a few cents. Fifth batch:
+4 sessions, US$ 0.54; 12 judge calls, US$ 1.05; one probe.

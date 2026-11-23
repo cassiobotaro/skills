@@ -16,6 +16,8 @@ the absence of `unslop` is read from the session and not assumed.
 `pg`, added on 2026-11-23, is `pn` with a copy of the repository's AGENTS.md at the root
 of the project, committed with the fixture, so that it loads as project instructions.
 It is left out of the copied outputs, so the judge packets match those of `pn`.
+Under /tmp no project instructions file loads, so `pg` did not test that; `pg2` is the
+same cell and must be run with --scratch under $HOME (see eval-tools/README.md).
 
 Usage: run_plugin.py --scratch DIR <eval>:<cell>:<run> [...] [--workers N]
 """
@@ -25,9 +27,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WS = os.path.dirname(HERE)
 REPO = os.path.dirname(WS)
 MODEL = "claude-sonnet-5-5"
-CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a"}
-NO_UNSLOP = {"pn", "pg"}
-WITH_AGENTS = {"pg"}
+CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a", "pg2": "skill-a"}
+NO_UNSLOP = {"pn", "pg", "pg2"}
+WITH_AGENTS = {"pg", "pg2"}
 EVALS = {str(e["id"]): e for e in json.load(open(os.path.join(HERE, "evals.json")))["evals"]}
 ALLOWED = ["Skill", "Bash(date:*)", "Bash(ls:*)", "Bash(find:*)", "Bash(mkdir:*)", "Bash(cat:*)", "Bash(pwd)"]
 GIT = ["git", "-c", "user.name=eval", "-c", "user.email=eval@example.invalid", "-c", "commit.gpgsign=false"]

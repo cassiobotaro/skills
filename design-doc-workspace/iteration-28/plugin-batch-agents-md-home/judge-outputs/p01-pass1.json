@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. No question asks the user to list or confirm the risks. The open questions ask about specific behaviours: line 62 asks about Redis failure, line 63 about the 24h window. Meanwhile the Riscos section (lines 44-48) states its risks as fact instead of asking for them. Searched the reply and Perguntas abertas, lines 59-68."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dd-2026-001-deduplicacao-de-eventos.md:64 \"**Rollout.** Quais são as fases (por exemplo, por produtor ou por percentual de tráfego), o critério para avançar de uma fase e o critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Line 46: \"Mitigação: medir a latência real na fase inicial do rollout e comparar com a estimativa.\" The user gave no mitigation. Line 47: \"**Dependência nova.** O Redis passa a participar da ingestão.\" Line 48: \"**Duplicatas fora da janela.** Reenvios após 24 horas não são descartados\". The user stated neither of these as a risk."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout, lines 50-52. The only text is the pending marker: \"As fases, os critérios de avanço e o critério de rollback ainda não foram definidos (ver Perguntas abertas).\" No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "Line 36 \"## Alternativas consideradas\". Line 40 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\" Line 41 \"**Idempotência nativa do produtor Kafka.** Não cobre o reenvio entre reinícios do produtor, que é parte do problema. Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms is at line 32, under \"## Proposta\", with the bold inline label \"**Custo aceito.**\". A bold label is not a heading, and the line is not under \"## Alternativas consideradas\". It also appears under ## Riscos at line 46."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 11: \"**Desvio do template:** adicionei a seção \"Alternativas consideradas\" entre Proposta e Riscos... Se a arquitetura não aceitar seções extras, dá para mover o conteúdo para dentro da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. Line 8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Line 68: \"**Revisores.** Quem do time de arquitetura e de outros times (financeiro, produtores) revisa este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4% (lines 14, 42, 56), 24 horas (lines 28, 34, 48, 63), 5 ms (lines 32, 46, 57, 66), 0,1% (lines 56, 65) and duas vezes (line 16). The only other numbers are the header dates and the question numbering, and neither is a metric stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtor, consumidor, financeiro and time de arquitetura. The user's message or the template names each of these."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for Structurizr DSL. The document contains none; the only diagram is a plain-text block at lines 22-26."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched for a mermaid block. There is none; the diagram at lines 22-26 is a plain code block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the actor sentences. Line 28 (ingestor hands the event to the service; the service checks and stores the key in Redis and discards or publishes) follows from the user's 'fica entre o ingestor e o Kafka, guarda a chave... e descarta repetidos'. Line 32 'O time aceita esse custo' follows from 'Trade-off aceito'. Line 14 (the producer resends) follows from 'reenvio em retry' by the producers. No unestablished actor was found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Riscos section (lines 44-48) states three risks as fact and does not say that the section awaits the user's answer. Only line 47 points out: \"ainda não está definido (ver Perguntas abertas)\", and that covers one item, not the section."
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Line 46: \"Mitigação: medir a latência real na fase inicial do rollout e comparar com a estimativa.\" Line 47: \"**Dependência nova.** O Redis passa a participar da ingestão.\" Lines 34 and 48 state the failure mode \"Um reenvio que chegue depois disso não é reconhecido como duplicata\". The user gave none of these as a risk or mitigation."
+ }
+]
