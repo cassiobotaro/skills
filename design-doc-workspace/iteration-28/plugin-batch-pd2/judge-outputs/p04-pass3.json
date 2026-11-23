@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:73 \"Quais outros riscos a equipe enxerga (capacidade do Redis, perda de dados do Redis, escala do serviço)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:77 \"Em quais fases o serviço entra em produção (por exemplo, por produtor ou por percentual de tráfego)?\" and :79 \"Qual o critério e o procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 54 is the user's +5 ms cost, which passes. Line 56 names risks the user did not give, as examples: \"Os demais riscos (falhas do novo serviço e do Redis, por exemplo) ainda não foram levantados.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 58-60) for phases, criteria to advance and rollback steps. It contains only \"Ainda não definido. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": ":42 \"### Alternativas consideradas\"; :44 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; :45 \"**Usar a idempotência nativa do produtor Kafka.** Ela não cobre o reenvio que acontece entre reinícios do produtor. Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": ":48 \"### Trade-off aceito\"; :50 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. Reply line 3 mentions the subsections but denies any deviation instead of offering one for acceptance: \"Não criei seção nova. Alternativas e trade-off ficaram como subseções de Proposta\"."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header for reviewer names. :8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": ":95 \"Quem revisa este documento? O campo \\\"Revisores\\\" está vazio.\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found only 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\", all from the user. The document number and the dates are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores and financeiro (all from the user) and a generic \"a equipe\". No other technology, team or stakeholder is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 22-38) for endpoints, headers, status codes and failure branches. The only alt branch, for a new key versus an existing key, matches the user's \"descarta repetidos\"."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched every actor assignment outside the questions. The ingestor delivering to the service, the service consulting and writing Redis, and the team accepting the cost all follow from the user's message. No unsupported actor assignment found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"Os demais riscos (...) ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": ":56 calls failures risks, which matches the failing anchor: \"Os demais riscos (falhas do novo serviço e do Redis, por exemplo) ainda não foram levantados.\""
+ }
+]

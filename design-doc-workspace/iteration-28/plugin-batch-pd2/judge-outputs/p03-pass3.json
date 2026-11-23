@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento em retry.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:77 \"11. **Riscos.** Que outros riscos o time enxerga, e quais as mitigações?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:76 \"10. **Rollout.** Em quantas fases entra em produção (por produtor, por tipo de evento, por percentual de tráfego)? Qual o critério de avanço e de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Riscos section is mostly a pending marker, but doc:54 presents risks the user did not give as examples: \"Os demais riscos (comportamento quando o Redis ou o serviço ficam indisponíveis, por exemplo) ainda não foram levantados.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc:56-58 (Plano de rollout). It contains only a pending marker: \"O plano de fases, critérios de avanço e de rollback ainda não existe. Está em [Perguntas abertas](#perguntas-abertas).\" No phases, criteria or rollback steps are stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:42 \"## Alternativas consideradas\"; doc:47 \"**Deduplicar no consumidor.** Descartada, porque cada consumidor teria que reimplementar a deduplicação.\"; doc:48 \"**Usar a idempotência nativa do produtor Kafka.** Descartada, porque ela não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:38 \"### Trade-off aceito\"; doc:40 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply: \"**Seção extra:** o template não tem lugar para as alternativas que vocês discutiram. Criei \\\"Alternativas consideradas\\\" entre Proposta e Riscos... Se a arquitetura recusar seções fora do template, mova esse conteúdo para dentro de Proposta.\" The H3 \"Trade-off aceito\" inside Proposta is not flagged, but it sits within a template section."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched doc:8 (header): \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:67 \"1. **Revisores.** Quem revisa este documento além do time de arquitetura?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched all figures in the doc: 4%, 24 horas, +5 ms, 0,1%, duas vezes. All come from the user. \"outubro de 2026\" is a date derived from \"mês passado\", not a metric. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. doc:78 names a team the user never mentioned: \"Quais times (produtores, consumidores, financeiro, infraestrutura) precisam ser avisados ou revisar?\" The team is \"infraestrutura\". It appears inside a question, but this check has no exemption for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL. There is none; the only diagram is Mermaid."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block at doc:20-34. It has no endpoints, headers or status codes. The only branch is chave nova/chave repetida → descarta, which the user described. There is no failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the action sentences at doc:18, 36, 40, 44 and 52. The ingestor delivering to the service and the service consulting Redis and forwarding to Kafka follow from the user's description. \"O time aceitou\" and \"discutidas pelo time\" reflect the user's \"discutimos\" and \"Trade-off aceito\". Who generates the key is left as a question (doc:68)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:54 \"Os demais riscos (...) ainda não foram levantados. Estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:54 calls the subject of an open question a risk: \"Os demais riscos (comportamento quando o Redis ou o serviço ficam indisponíveis, por exemplo) ainda não foram levantados.\" This matches the failing pattern 'os demais riscos, como a indisponibilidade do Redis'."
+ }
+]

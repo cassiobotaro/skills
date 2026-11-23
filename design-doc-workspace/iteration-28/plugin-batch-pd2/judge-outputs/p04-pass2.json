@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:73 \"Quais outros riscos a equipe enxerga (capacidade do Redis, perda de dados do Redis, escala do serviço)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:77 \"Em quais fases o serviço entra em produção (por exemplo, por produtor ou por percentual de tráfego)?\"; reply line 13 \"Quais são as fases, os critérios de avanço e o rollback do rollout?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Borderline. The Riscos section names failures the user never mentioned and calls them risks. docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"Os demais riscos (falhas do novo serviço e do Redis, por exemplo) ainda não foram levantados.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 58-60). It contains only \"Ainda não definido. Ver Perguntas abertas.\" and states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:42 \"### Alternativas consideradas\"; :44 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; :45 \"**Usar a idempotência nativa do produtor Kafka.** Ela não cobre o reenvio que acontece entre reinícios do produtor. Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:48 \"### Trade-off aceito\"; :50 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply mentions the subsections but denies any deviation instead of naming one for the user to accept. Reply line 3: \"Não criei seção nova. Alternativas e trade-off ficaram como subseções de Proposta\"."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header. docs/design/DD-2026-001-deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:95 \"Quem revisa este documento? O campo \\\"Revisores\\\" está vazio.\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched all figures in the document. Found only 4%, 24 horas, +5 ms, 0,1%, 'duas vezes', plus the document id and dates, which are not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, financeiro, 'a equipe' and Mermaid. Mermaid is the diagram format, not a system technology. No unnamed technology, team or stakeholder appears."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block. The document has none; only a Mermaid block is present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block at lines 22-38. Its only branches are 'chave nova' and 'chave já existe', which follow the user's 'descarta repetidos'. It has no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor assertion in the document. 'ingestor... entregá-los ao serviço' follows from 'fica entre o ingestor e o Kafka'. 'serviço consulta no Redis' and 'descarta' are the user's proposal. 'A equipe aceita esse custo' is the user's 'Trade-off aceito'. No other actor-action assertion appears."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"...ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "The sentence calls the subject of an open question a risk. docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"Os demais riscos (falhas do novo serviço e do Redis, por exemplo) ainda não foram levantados.\""
+ }
+]

@@ -216,6 +216,34 @@ open question ("o comportamento quando o Redis está indisponível está em Perg
 abertas") states a risk; 7.24 as written lets the judges split on it, as 7.19 did on a
 name inside a question.
 
+**Seventh batch, 2026-11-23: `pd` again, with 7.24 reworded and a control for asking
+first** (`plugin-batch-pd2/`, `plugin-batch-pd2-control/`). By the author's decision, 7.24
+now lets pass a sentence that names the subject of an open question and points there,
+and still fails a subject called a risk (amendment in `checks.json`). Four more `pd` runs
+on eval 71 (run-5 to run-8) and four on eval 7 (run-3 to run-6), and four `pn` runs on
+eval 7 as a control, read from 7.G1 only. All twelve invoked `design-doc` through the
+Skill tool and none listed `unslop`. Only the eval 71 runs went to the judges.
+
+| Check | pd, this batch | pd, both batches | pn setup |
+|---|---|---|---|
+| eval 7, 7.G1 the session wrote no file | 1/4 | 2/6 | 4/4 (control) |
+| 7.8 Riscos states no risk nobody gave | 2/4 | 5/8 | 2/12 |
+| 7.24 (new text) | 2/4 | | |
+| 7.6 asks the user for the risks | 4/4 | 8/8 | 7/12 |
+| 7.11 the +5 ms cost under a heading of its own | 4/4 | 6/8 | 8/12 |
+
+No splits. Both misses of 7.8 here are the pointer the bullet names: "Os demais riscos
+(falhas do novo serviço e do Redis, por exemplo) ainda não foram levantados" (run-6) and
+"(comportamento quando o Redis ou o serviço ficam indisponíveis, por exemplo)" (run-7);
+pd run-4 of the first batch failed on the same form. Run-5 and run-8 meet all 24 checks.
+
+**Reading, by the rule in `checks.json`.** Not adopted. The control decides the eval 7
+question: without the bullet the session asked first in four of four, with it in two of
+six, so the bullet is the likely cause of writing without asking. On eval 71 it cleans
+Riscos more often than anything tried (5 of 8 against 2 of 12), and every miss left is
+the same sentence, a "por exemplo" naming the Redis inside the pending pointer, which
+the bullet forbids by name and the session writes anyway.
+
 **Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -259,4 +287,5 @@ with the prompt alone.
 4 sessions, US$ 0.38; 12 judge calls, US$ 0.95. Fourth batch: 4 sessions, US$ 0.50;
 12 judge calls, US$ 1.21; four codeword probes on haiku, a few cents. Fifth batch:
 4 sessions, US$ 0.54; 12 judge calls, US$ 1.05; one probe. Sixth batch: 6 sessions,
-US$ 0.79; 18 judge calls, US$ 1.15.
+US$ 0.79; 18 judge calls, US$ 1.15. Seventh batch: 12 sessions, US$ 1.49; 12 judge
+calls, US$ 1.13.

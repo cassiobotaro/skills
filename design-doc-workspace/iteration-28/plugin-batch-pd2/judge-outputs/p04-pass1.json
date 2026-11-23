@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:73 \"3. Quais outros riscos a equipe enxerga (capacidade do Redis, perda de dados do Redis, escala do serviço)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:77 \"4. Em quais fases o serviço entra em produção (por exemplo, por produtor ou por percentual de tráfego)?\"; reply line 13 \"Quais são as fases, os critérios de avanço e o rollback do rollout?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "Borderline: the Riscos section names risks the user did not give. docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"Os demais riscos (falhas do novo serviço e do Redis, por exemplo) ainda não foram levantados.\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (lines 58-60) for phases, criteria and rollback steps and found none. It holds only a pending marker: \"Ainda não definido. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:42 \"### Alternativas consideradas\"; :44 \"**Deduplicar no consumidor.** Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; :45 \"**Usar a idempotência nativa do produtor Kafka.** Ela não cobre o reenvio que acontece entre reinícios do produtor. Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:48 \"### Trade-off aceito\"; :50 \"Estimamos +5 ms de latência por evento.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "unmet",
+  "evidence": "The reply does not present the added subsections as a deviation. It denies one: \"Não criei seção nova. Alternativas e trade-off ficaram como subseções de Proposta\". No text offers the headings 'Alternativas consideradas' or 'Trade-off aceito' for the user to accept."
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header table: line 8 \"| **Revisores** | |\" is empty. The reply confirms: \"o campo ficou vazio\"."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:95 \"13. Quem revisa este documento? O campo \"Revisores\" está vazio.\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24 horas, +5 ms, 0,1% and 'duas vezes', all given by the user. The only other numbers are the header dates and the document number, and neither is stated as a metric."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, financeiro and 'a equipe', all from the user. Mermaid is the diagram format and is not part of the system. Question 12 explicitly defers the tech stack."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block and found none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block (lines 22-38). It has no endpoints, headers, status codes or failure branch. Its only alternatives are 'chave nova' and 'chave já existe', which come from the user's description."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked who performs each action. Line 40 has the ingestor delivering events to the service, which follows from the user's 'fica entre o ingestor e o Kafka'. Line 50, 'A equipe aceita esse custo', reflects the user's 'Trade-off aceito'. The key generation by the producer appears only as a question (line 88). No unsupported actor assignment found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"Os demais riscos (...) ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:56 \"Os demais riscos (falhas do novo serviço e do Redis, por exemplo)\". This calls open-question subjects risks, the exact pattern the check excludes."
+ }
+]

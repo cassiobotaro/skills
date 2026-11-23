@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:70 'Que outros riscos existem além da latência (...) e como cada um é mitigado?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:72 'Como o serviço entra em produção: em fases, com qual critério de avanço e qual critério de rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 49-51). The only risk named is the user's +5ms latency trade-off. The rest is a pending marker: 'Os demais riscos e suas mitigações ainda não foram levantados; ver as perguntas 6 e 7'. No mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 53-55). It holds only a pending marker: 'Ainda não definido; ver a pergunta 8 em Perguntas abertas.' No phase or criterion is given."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:39 '### Alternativas consideradas'; :41 '**Deduplicar no consumidor.** Cada consumidor teria que implementar a própria deduplicação.'; :43 '**Usar a idempotência nativa do produtor Kafka.** Descartamos porque ela não cobre o reenvio entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:45 '### Trade-off aceito'; :47 'Estimamos +5ms de latência por evento.'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: 'o template não tem seção para isso. Pus as duas alternativas descartadas e o trade-off dos +5ms como subseções (`###`) dentro de Proposta... Se preferirem seções próprias, é só promover os títulos.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:8 '| **Revisores** | |' (empty)"
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:66 'Quem revisa este documento? O campo Revisores está vazio.'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 0,1%, 24h/24 horas, +5ms/cerca de 5ms and 'duas vezes', all from the user. The other numbers are identifiers and dates (DD-2026-001, 2026-11-23, question numbers), not metrics stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies, teams and stakeholders. Found Redis, Kafka, ingestor, produtores, consumidores and financeiro, all named by the user. Mermaid is diagram syntax, not a system technology."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "No Structurizr DSL in the document."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-35). It has no endpoints, headers or status codes. The only branch, 'chave já vista' → 'descarta o evento repetido', is the discard behavior the user described."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched assertions of who acts. The service consults, stores and discards keys, and the ingestor sends events to the service; both follow from the user's 'fica entre o ingestor e o Kafka... guarda a chave... descarta repetidos'. 'Descartamos' reflects the user's 'discutimos... descartado'. No other actor is assigned an action."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:51 'Os demais riscos e suas mitigações ainda não foram levantados; ver as perguntas 6 e 7 em Perguntas abertas.'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-61 for risks, failure modes and mitigations. The only one is the user's +5ms latency. Line 51 refers to 'os demais riscos' generically without naming any. Redis unavailability and the 24h window appear only as questions (68, 69)."
+ }
+]

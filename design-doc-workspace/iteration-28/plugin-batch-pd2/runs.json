@@ -1,0 +1,38 @@
+{
+  "checks": "../checks.json",
+  "evals": "../evals.json",
+  "runs": [
+    {
+      "key": "71/pd/run-5",
+      "eval": "71",
+      "cell": "pd",
+      "reply": "../eval-71-user-template-governs-write-now/pd/run-5/response.md",
+      "root": "../eval-71-user-template-governs-write-now/pd/run-5/outputs",
+      "fixture": "../fixtures/eval-7"
+    },
+    {
+      "key": "71/pd/run-6",
+      "eval": "71",
+      "cell": "pd",
+      "reply": "../eval-71-user-template-governs-write-now/pd/run-6/response.md",
+      "root": "../eval-71-user-template-governs-write-now/pd/run-6/outputs",
+      "fixture": "../fixtures/eval-7"
+    },
+    {
+      "key": "71/pd/run-7",
+      "eval": "71",
+      "cell": "pd",
+      "reply": "../eval-71-user-template-governs-write-now/pd/run-7/response.md",
+      "root": "../eval-71-user-template-governs-write-now/pd/run-7/outputs",
+      "fixture": "../fixtures/eval-7"
+    },
+    {
+      "key": "71/pd/run-8",
+      "eval": "71",
+      "cell": "pd",
+      "reply": "../eval-71-user-template-governs-write-now/pd/run-8/response.md",
+      "root": "../eval-71-user-template-governs-write-now/pd/run-8/outputs",
+      "fixture": "../fixtures/eval-7"
+    }
+  ]
+}
