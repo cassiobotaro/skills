@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Two headings: \"## Questions for you\" (line 3) and \"## Proposed edits\" (line 20)"
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "\"The page mixes four jobs, so the reader can't act after one pass.\" followed by \"The opening paragraph is Explanation (history and rationale).\" \"Setup is a How-to.\" \"The events table is Reference.\" (lines 22-25)"
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "\"I'd move the history to a separate \"About webhooks\" page and link it. The events table could become a reference page with payloads once you have them.\" (line 28)"
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Under the lead-in \"Each of these sentences hides who acts\", the reply quotes \"First, the endpoint must be registered. It is done in the dashboard…\" (line 35), \"a secret is generated\" (line 37) and \"Each delivery is signed.\" (line 39)."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "\"**Retries:** \"After some attempts\" needs the number of attempts and the schedule.\" (line 8) and \"**The disable email:** who receives it, and how does the reader re-enable the endpoint?\" (line 9)"
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "I searched the whole reply for a retry count. Retries are only asked about (line 8) or deferred with \"with the count and interval from question 2\" (line 42). No number is stated."
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "I searched for who signs and who generates the secret. Each attribution is marked as an assumption: \"The dashboard generates a secret\", assuming the dashboard does it (line 37); \"I assumed \"the platform\", so confirm it.\" (line 36); \"I assumed the reader and the platform actor.\" (line 54). The rewrites on lines 39 and 41 use that same marked placeholder \"the platform\"."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "I searched for retention periods, timeouts and intervals stated as fact. None appear. The timeout is only asked about: \"how long does the platform wait for a response?\" (line 5 of the questions). \"Shows it once\" restates the file and is not a duration."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "I searched for an email recipient stated as fact. The rewrite uses a marked placeholder: \"emails <who>.\" This depends on question 3. (line 43)"
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "\"\"Simply paste the URL\" is flagged by the skill. Use \"Paste the URL\".\" (line 47) and \"\"In this guide you will learn everything about webhooks.\" says nothing and promises too much.\" (line 31)"
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:3 \"Use este runbook quando o alerta `ExportsDeadLetterHigh` disparar.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:7 \"quando a métrica `rabbitmq_queue_messages{queue=\"exports.dead\"}` fica acima de 10 por 5 minutos\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:7 \"fica acima de 10 por 5 minutos\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for every queue name. It names only `exports` (lines 9, 63, 67) and `exports.dead` (lines 7, 9, 13, 65, 95). No other queue appears."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands. It uses only `uv run python scripts/requeue_dead.py --dry-run --limit 1000` (line 27), `--limit 5` (line 72), `--limit 100` (line 82) and `make setup` (line 18). The worker restart is left as a TODO (line 59). There is no rabbitmqctl, kubectl or curl."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for URLs, links and console addresses. None found. The only mention of a RabbitMQ dashboard is inside the TODO at line 40."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "The dry-run comes first at line 27: \"uv run python scripts/requeue_dead.py --dry-run --limit 1000\". The move command comes later at line 72: \"uv run python scripts/requeue_dead.py --limit 5\"."
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "Line 24: \"Conte as mensagens na fila sem mover nenhuma:\". Line 57: \"Corrija a dependência que você achou no passo 2.\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the runbook steps (sections 1–4) for passives with no agent. Every step is in the imperative or the second person (\"Conte\", \"Procure\", \"Corrija\", \"Comece\", \"Espere\", \"Confirme\"). No agentless passive found."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for named people, teams or contacts. The runbook says only the generic \"a equipe dona do `exporter`\" (line 91). The TODO at line 97 says the repository has no contact, and the reply's line 6 says the same: \"não inventei um\"."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for chat channels, mailing lists and phone numbers. None found. The channel is left as a TODO at line 97."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "Searched the runbook for SLAs, response time limits and escalation policies. None found. The time before escalating is left as a TODO at line 97. \"Espere cerca de um minuto\" (line 77) is a verification wait, not an SLA."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched the runbook for a root cause stated as fact. None found. Line 51 says \"Ela mostra onde uma falha pode nascer, e não qual falha está acontecendo agora.\""
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply line 6: \"quem é a equipe dona do `exporter`, qual canal ou escala de plantão chamar e em quanto tempo escalar? Não há nenhum contato no repositório\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched the runbook for claims about the usual course or the usual cause of incidents (\"normalmente\", \"na maioria\", \"geralmente\"). None found."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "\"Procure nos logs do worker\" (line 38) is followed at once by the TODO at line 40, which says where the logs and the RabbitMQ dashboard are is unknown. The only other tool named is Prometheus (lines 7, 87), which the check allows."
+ }
+]

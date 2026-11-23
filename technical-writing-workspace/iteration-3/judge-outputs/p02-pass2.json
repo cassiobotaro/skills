@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Two separate headings: \"**Questions for you (only you or the code know these)**\" (line 14) and \"**Proposed edits (I'll apply them once you answer the questions above)**\" (line 25)"
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "\"**Main problem: the page does three jobs**\" with \"The intro (lines 3-5) is Explanation\", \"Setup is a How-to.\" and \"The events table is Reference.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "\"I'd move the history to a separate \"About webhooks\" page, or cut it.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Three actorless clauses quoted: \"Line 11, \"the endpoint must be registered\": is that the reader's job?\"; \"Line 22, \"a secret is generated\": does the dashboard generate it, or something else?\"; \"Line 27, \"each delivery is signed\": which component signs it?\""
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "\"which component signs it?\" (line 19) and \"who retries, and how many times (\"some attempts\")?\" plus \"who gets the email?\" (line 21)"
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for a stated retry count. It only quotes \"some attempts\" and asks \"how many times\" and \"Please give the real numbers\". No number is stated."
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Searched for statements of who signs or who generates. Both are posed as questions: \"does the dashboard generate it, or something else?\" and \"which component signs it?\". The rewrite \"the dashboard shows it once\" is about display, not generation or signing, and is marked as depending on question 3."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "Searched for retention periods, intervals, timeouts and durations. The reply only asks \"What are the intervals?\" and lists \"timeouts\" as possibly missing. No duration is stated."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "Searched for who receives the email. It appears only as a question, \"who gets the email?\" (line 21). It is not stated anywhere."
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "\"Line 12, \"Simply paste the URL\": drop \"Simply\".\" and \"Line 7, \"learn everything about webhooks\": replace it with the one-line statement\""
+ }
+]

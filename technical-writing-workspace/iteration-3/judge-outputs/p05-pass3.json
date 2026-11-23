@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "First line: \"**Title:** Reject uploads above 1 MiB with 413 (OPS-412)\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "Body sentence 1: \"`upload` in `importer/handler.py` now returns `413` when the `Content-Length` header is above `MAX_BODY_BYTES` (1,048,576 bytes)\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "met",
+  "evidence": "Sentences 1-2: \"and it reads the body in chunks. Before, it called `request.body()` and held the whole body in memory.\""
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Sentence 3: \"A huge CSV upload got prod workers OOM-killed (OPS-412).\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "\"Run `pytest tests/test_handler.py::test_upload_rejects_body_above_limit`. It should pass.\""
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "\"`upload` compares `Content-Length` to `MAX_BODY_BYTES` before it reads anything.\" and \"`upload` iterates `request.stream()` and passes each chunk to `parse_csv_chunk`.\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "met",
+  "evidence": "Searched lines 1-27 for agentless passives about the change (e.g. 'was added', 'was introduced', 'were changed'). Found none. Behavior sentences use active verbs with `upload` or the test as subject."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched for memory sizes or benchmarks. The only number is the 1,048,576-byte limit, which comes from the diff. The peak-memory comment is qualitative and gives no figure."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched for counts of customers, uploads or incidents. Found none. OPS-412 is a ticket ID, not a count."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched for rollout, deploy, flag or staged release. Found none."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched for personal names or reviewer handles in the description. Found none. The only reference is the generic \"a reviewer on the importer service\", which appears in the notes after the --- separator."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched for narration of attempts, commit order or process. Found none. \"I haven't run it\" is a verification status, not branch history."
+ }
+]

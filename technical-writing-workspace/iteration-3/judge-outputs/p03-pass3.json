@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:3 \"Este runbook é para quem está de plantão quando o alerta `ExportsDeadLetterHigh` dispara.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:7 \"**Regra:** `rabbitmq_queue_messages{queue=\"exports.dead\"} > 10` por 5 minutos\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:7 \"`rabbitmq_queue_messages{queue=\"exports.dead\"} > 10` por 5 minutos (`deploy/alerts.yaml`)\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Only `exports.dead` (lines 7, 11, 15, 28, 53, 63) and `exports` (lines 11, 53) appear."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands presented as procedure. Found `make setup` (line 21) and `uv run python scripts/requeue_dead.py --dry-run` / `--limit 1` / `--limit 100` (lines 31, 58, 67). `rabbitmqctl` appears only at line 88, which says the runbook does not include such commands."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook for URLs, links and console addresses. None found. The dashboard is mentioned only inside the TODO at line 24."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:31 \"uv run python scripts/requeue_dead.py --dry-run\" comes before :58 \"uv run python scripts/requeue_dead.py --limit 1\""
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:28 \"Conte as mensagens de `exports.dead` sem mover nenhuma\"; :55 \"Teste com uma mensagem\"; :64 \"Devolva o restante em lotes\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the steps (lines 26-74) for agentless passives. The steps use imperatives (Conte, Corrija, Teste, Espere, Devolva, Repita, Rode) or name an agent (o script, o worker). No agentless passive found."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for people, teams and contacts. None named. Runbook line 84 TODO: \"dizer quem é o dono do serviço exporter\". Reply: \"Não inventei nome nem canal.\""
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for chat channels, mailing lists and phone numbers. None found. The only mention is the TODO at line 84 \"(canal, escala de plantão)\"."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "Searched for SLAs, time limits and escalation policy. No time or SLA appears; line 84 TODO says \"em quanto tempo o plantão deve escalar. Nada no repositório informa.\" The \"Escale se\" conditions (lines 78-82) are procedural triggers tied to the steps, not an invented organizational policy."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for a root cause stated as fact. Step 2 tells the reader to look for the cause (line 40 \"procure a causa nas dependências\"). Line 42 is conditional: \"Uma chave ausente ou inválida faz todo job falhar.\""
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply line 8: \"Quem é o dono do `exporter`, qual canal ou escala de plantão chamar, e em quanto tempo escalar?\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'normalmente', 'na maioria dos casos', 'geralmente' and similar claims about how incidents usually go. None found. \"nesta ordem\" (line 40) is a check order, not a frequency claim."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "Searched for management UIs, log systems, dashboards and tracing tools presented as available. Logs, dashboard and runtime log appear only inside the TODOs at lines 24 and 47. The management UI appears only at line 88, which says it is not included."
+ }
+]

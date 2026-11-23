@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:3 \"Este runbook diz o que fazer quando o alerta `ExportsDeadLetterHigh` dispara: mais de 10 exports falharam três vezes e estão parados na fila `exports.dead`.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:8 \"`rabbitmq_queue_messages{queue=\\\"exports.dead\\\"} > 10` por 5 minutos.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:8 \"> 10` por 5 minutos.\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Only `exports` and `exports.dead` appear (lines 3, 8, 30, 33, 35-36, 40, 62, 68, 96, 100, 107)."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched for commands. Found `make run-worker` / `uv run python -m exporter.worker` (Makefile target), `uv run python scripts/requeue_dead.py --dry-run`, `--limit 10` and `--limit 100`. The PromQL queries come from deploy/alerts.yaml. No rabbitmqctl, kubectl, curl or other absent command."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for URLs, dashboard links and console addresses. None found. The broker URL is a TODO at line 72."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:77 \"uv run python scripts/requeue_dead.py --dry-run\" comes before line 85 \"uv run python scripts/requeue_dead.py --limit 10\""
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:25 \"### 1. Confirme o alerta\"; line 82 \"3. Mova um lote pequeno primeiro:\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the steps section (lines 23-100) for agentless passives. The steps use imperatives: 'Rode', 'Verifique', 'Corrija', 'Defina', 'Conte', 'Mova', 'Espere'. The only agentless passive is line 21 'A causa precisa ser achada fora da fila', which is in the explanatory section, not a step."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for people, teams and contacts. None found. The escalation contact is a TODO at line 110 ('O repositório não traz nenhum contato; não invente um'). Line 15 has a 'quem é dono do serviço' placeholder inside a TODO."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for chat channels, mailing lists and phone numbers. None found. 'canal de incidente' appears only inside the TODO at line 110."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "Searched for an SLA, a response time limit or an escalation tier. None found. Urgency is a TODO (line 15) and so is the contact (line 110). The 'Quando escalar' conditions (lines 104-108) come from the runbook's own steps. They state no time limit and no tier."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for causes stated as fact. Line 48 says \"Cada item é uma causa possível, tirada do código, não uma causa confirmada\". Line 58 says \"Deploy recente é o primeiro suspeito\", which is marked as a suspect."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply line 13: \"**Escalonamento:** não há contato, canal nem rotação de segundo nível no repositório. Isso é o que mais faz falta, então me passe esses dados.\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'na maioria', 'normalmente', 'geralmente', 'costuma' and similar claims about how incidents usually go. None found. 'primeiro suspeito' (line 58) is advice on what to check first, not a claimed frequency."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "Searched for tooling the fixture does not show. The only log step (line 46) follows a TODO that says the repository does not say where the worker logs are. Prometheus is allowed. No management UI, dashboard or tracing tool is mentioned."
+ }
+]

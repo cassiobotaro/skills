@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "File unchanged by the run; docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\". Searched the file for any author name or attribution and found none."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. The only prerequisites are at docs/rotate-signing-key.md:9 (`kubectl` access to `prod`, `secrets-admin` role), and these are the fixture's own text."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. The commands, flags and file names (lines 16, 23, 29, 32) are all the fixture's originals; none were added."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for numbers and found only 90 days (line 3), 15 minutes (line 39), step numbers and ed25519, all from the fixture."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "File unchanged by the run, so it holds no explanations beyond the fixture's original text."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "\"I didn't edit `docs/rotate-signing-key.md`. It already meets the skill's rules, and a rewrite would only change the author's wording.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "The reply says it changed nothing: \"I didn't edit `docs/rotate-signing-key.md`.\""
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "File unchanged by the run, so nothing was removed or reordered."
+ }
+]

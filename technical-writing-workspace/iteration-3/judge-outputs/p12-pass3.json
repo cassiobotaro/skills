@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Fixture line 4 still reads \"The `auth` service is written in Go\" and names no author. Searched the file for any added author name; none found."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for prerequisites or roles beyond fixture line 9 (`kubectl` access to `prod`, `secrets-admin` role); none added."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for commands, flags or file names beyond fixture lines 16, 23, 29 and 32; none added."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for durations or numbers other than 90 days (line 3) and 15 minutes (line 39); none added."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. Searched for explanations, reasons or claims not in the fixture; none added."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "reply:1 \"I left `docs/rotate-signing-key.md` unchanged, because it already does what the skill asks of a how-to guide.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "reply:1 \"I left `docs/rotate-signing-key.md` unchanged\". The reply says it changed nothing, which passes."
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "File unchanged by the run. No fixture text was removed and no step was reordered."
+ }
+]

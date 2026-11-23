@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:3 \"Use este runbook quando o alerta `ExportsDeadLetterHigh` disparar.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:9 \"O alerta dispara quando `rabbitmq_queue_messages{queue=\\\"exports.dead\\\"}` fica acima de 10 por 5 minutos.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:9 \"fica acima de 10 por 5 minutos\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Only `exports` and `exports.dead` appear (lines 9, 13, 23, 39, 43, 71, 73, 85, 99, 106). No other queue is named."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands. Found only `uv run python scripts/requeue_dead.py --dry-run --limit 1000` (l.28), `--limit 10` (l.76), `--limit 500` (l.90) and `make setup` (l.21). There is no rabbitmqctl, kubectl or curl. The missing commands are marked TODO (l.61, 69)."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched for URLs and links. The only link is `[pipeline.md](../pipeline.md)` (l.3), which is a file in the fixture. There are no dashboard or console addresses; line 61 is a TODO for the panels."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "l.28 \"uv run python scripts/requeue_dead.py --dry-run --limit 1000\" comes before l.76 \"uv run python scripts/requeue_dead.py --limit 10\"."
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "l.25 \"Conte as mensagens sem mover nenhuma:\"; l.73 \"Execute o requeue em lotes pequenos para ver se as mensagens voltam a falhar.\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the step instructions for agentless passives. The steps use the imperative (Conte, Não execute, Verifique, Corrija, Espere, Execute, Recoloque, Escale). l.69 \"a causa foi resolvida\" is a statement of the outcome, not an instruction. l.67 names its agent (\"o deploy aplica a mudança\")."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for people, teams and contacts. None is named. l.109 is a TODO: \"o repositório não diz quem é o dono do `exporter`...\". The reply (l.8) lists the same gap."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for chat channels, mailing lists and phone numbers. None is given. l.109 is a TODO for the channel."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "l.15 is a TODO for the SLA. The \"Quando escalar\" conditions (l.105-107) are situational triggers, not an organizational policy, and the contact is a TODO. \"Espere alguns minutos\" (l.85) is a wait time, not a response limit."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "l.52 \"O código permite estas hipóteses; nenhuma está confirmada\". The causes appear only as hypotheses in the table (l.54-59)."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply l.7-8: \"Pontos que ficaram como `TODO` no documento, porque o repositório não responde: - Quem é o dono do serviço, o canal de escalonamento e o contato de segunda linha.\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "unmet",
+  "evidence": "borderline: l.52 \"Verifique cada dependência, da mais provável à menos provável.\" This orders the causes by likelihood (S3 first), which implies what usually causes the failures. Nothing in the fixture supports that order, even though the line goes on to say that no hypothesis is confirmed."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "Searched for dashboards, management UIs, log systems and tracing tools. l.61 \"TODO: o repositório não traz os comandos nem os painéis para verificar S3, SES e variáveis do deploy, nem o local dos logs e do painel do RabbitMQ.\" l.45 says the worker log does not show the cause and does not tell the reader to search it."
+ }
+]

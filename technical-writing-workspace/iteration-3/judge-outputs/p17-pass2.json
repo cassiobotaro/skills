@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"**Title:** Reject uploads above 1 MiB with 413 and parse the body in chunks (OPS-412)\", followed by a fenced markdown block (lines 3-28) ready to paste."
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "Line 4, first sentence: \"`upload` in `importer/handler.py` now returns `413` when the request's `Content-Length` header is above 1 MiB (`MAX_BODY_BYTES = 1_048_576`).\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "The first three body sentences on line 4 are: (1) the 413 rejection; (2) \"Before, it read the whole body into memory with `request.body()`, and production workers were OOM-killed...\"; (3) \"Fixes OPS-412.\" The streaming change first appears in the fourth sentence (line 6: \"The handler now also reads the body with `request.stream()`...\"). Sentence 2 describes only the old behavior."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Line 4, second sentence: \"production workers were OOM-killed when someone uploaded a huge CSV.\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "Lines 8-14: \"## How to verify ... pytest tests/test_handler.py::test_upload_rejects_body_above_limit ... It posts 1,048,577 bytes to `/upload` and expects `413`.\""
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "Line 4: \"`upload` in `importer/handler.py` now returns `413`\"; line 6: \"The handler now also reads the body with `request.stream()`\"."
+ },
+ {
+  "id": "5.10",
+  "verdict": "met",
+  "evidence": "Searched lines 3-28 for agentless passives about the change (\"was added\", \"was introduced\", \"was refactored\", \"were added\"). None found. The only passive, \"workers were OOM-killed\" (line 4), describes the incident, not the change."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched lines 3-28 for memory usage figures or benchmark results. Found only the size limit (1 MiB / 1_048_576) and the test payload size (1,048,577 bytes), both taken from the diff. No memory measurement or benchmark."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched lines 3-28 for counts of customers, uploads or incidents. Found only \"someone uploaded a huge CSV\", with no number."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched lines 3-28 for rollout, deploy, staging, feature flag or phased release. None found."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched lines 3-28 for personal names, @-handles or named reviewers. Found only \"someone\" (line 4) and \"a client\" (line 18), neither of which names a person."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched lines 3-28 for narration of attempts, commit order or how the author arrived at the change (\"first I tried\", \"initially\", \"then\", \"commit\"). None found. \"Before, it read the whole body\" describes the prior code, not the branch history."
+ }
+]

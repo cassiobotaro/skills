@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:3 \"Este runbook diz o que fazer quando o alerta `ExportsDeadLetterHigh` dispara: mais de 10 exports falharam três vezes e estão parados na fila `exports.dead`.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:8 \"`rabbitmq_queue_messages{queue=\\\"exports.dead\\\"} > 10` por 5 minutos.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:8 \"> 10` por 5 minutos.\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. It names only `exports` (e.g. line 33) and `exports.dead` (e.g. lines 3, 30)."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands. Found `make run-worker` (a Makefile target, line 40) and `uv run python scripts/requeue_dead.py` with `--dry-run` (line 77), `--limit 10` (line 85) and `--limit 100` (line 93). The PromQL queries come from deploy/alerts.yaml. There is no rabbitmqctl, kubectl, curl or other shell command."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for URLs, links and console addresses. None found. QUEUE_URL is left as a TODO (line 72)."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "line 77 \"uv run python scripts/requeue_dead.py --dry-run\" comes before line 85 \"uv run python scripts/requeue_dead.py --limit 10\""
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "line 25 \"### 1. Confirme o alerta\"; line 82 \"3. Mova um lote pequeno primeiro:\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the steps for agentless passives (\"são movidas\", \"deve ser executado\", \"é feito\"). None found. All steps are imperative or have an explicit agent (\"O worker sobe com\", \"O script imprime\")."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for people, teams or contacts. Line 110 is a TODO: \"para quem escalar... O repositório não traz nenhum contato; não invente um.\" The reply says there is \"não há contato\"."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for chat channels, mailing lists and phone numbers. None found. Line 110 marks the channel as a TODO."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "Searched for SLAs, time limits and escalation policy. Urgency is a TODO (line 15). The 'Quando escalar' list (lines 104-108) gives situation conditions drawn from the runbook's own steps, with no timing, tiers or contact policy. \"Espere alguns minutos\" (line 88) is a check-wait, not a response deadline."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Line 48 marks the causes as guesses: \"Cada item é uma causa possível, tirada do código, não uma causa confirmada\". Line 58 calls a deploy a \"suspeito\", not a cause. The lines 58 conditionals are diagnostic guidance inside a step that tells the reader to find the cause."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "reply line 13: \"**Escalonamento:** não há contato, canal nem rotação de segundo nível no repositório... me passe esses dados.\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for frequency claims (\"na maioria dos casos\", \"normalmente\", \"geralmente\"). None found. \"Deploy recente é o primeiro suspeito\" (line 58) says what to check first and makes no claim about how often it is the cause."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "The log instruction is marked unknown at line 46: \"TODO: onde ficam os logs do worker e o comando para lê-los. O repositório não diz.\" The only other tool named is Prometheus, which is allowed. No dashboard, management UI or tracing tool is named."
+ }
+]

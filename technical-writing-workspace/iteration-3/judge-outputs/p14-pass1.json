@@ -1,0 +1,42 @@
+[
+ {
+  "id": "6.7",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. docs/rotate-signing-key.md:4 still reads \"The `auth` service is written in Go\". I searched the file for any named author of the service and found none."
+ },
+ {
+  "id": "6.8",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run, so its prerequisites match the fixture exactly. The only prerequisite is at docs/rotate-signing-key.md:9: `kubectl` access to `prod` and the `secrets-admin` role. Nothing was added."
+ },
+ {
+  "id": "6.9",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I compared its commands, flags and file names (openssl genpkey, kubectl create/apply/rollout, signing.pem) with the fixture and found nothing added."
+ },
+ {
+  "id": "6.10",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I searched it for durations and numbers and found only the fixture's 90 days (line 3), 15 minutes (line 39) and the step numbers."
+ },
+ {
+  "id": "6.11",
+  "verdict": "met",
+  "evidence": "The file is unchanged by the run. I compared its explanations, reasons and claims with the fixture and found nothing added."
+ },
+ {
+  "id": "6.12",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I made no edits to `docs/rotate-signing-key.md`. It already does what the skill asks of a how-to guide\". Reply line 7: \"Rewriting it would only change the author's wording.\""
+ },
+ {
+  "id": "6.13",
+  "verdict": "met",
+  "evidence": "Reply line 1: \"I made no edits to `docs/rotate-signing-key.md`.\" The reply says it changed nothing, which the check passes explicitly."
+ },
+ {
+  "id": "6.15",
+  "verdict": "met",
+  "evidence": "The file is marked \"unchanged by the run\". I checked for removed content and reordered steps and found neither; an unchanged file passes."
+ }
+]

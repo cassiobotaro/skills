@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:3 \"Este runbook é para quem está de plantão quando o alerta `ExportsDeadLetterHigh` dispara.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:1 \"# Runbook: `ExportsDeadLetterHigh`\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:9 \"`rabbitmq_queue_messages{queue=\\\"exports.dead\\\"} > 10`\"; :11 \"O alerta dispara quando passam de 10 pedidos nessa fila.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbook-exports-dead-letter-high.md:9 \"durante 5 minutos seguidos.\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Only `exports` and `exports.dead` appear (e.g. lines 11, 59, 94). No other queue is named."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands. Found: `uv run python scripts/requeue_dead.py --dry-run --limit 1000` (line 31), `--limit 5` (line 76) and `--limit 50` (line 89), plus mentions of the Makefile `setup`/`uv sync` and `make run-worker`. There is no rabbitmqctl, kubectl or curl."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook and reply for URLs, dashboard links and console addresses. The only link is the relative link [`docs/pipeline.md`](pipeline.md), which is a fixture file. The dashboard link is a TODO (line 44)."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "Line 31 \"uv run python scripts/requeue_dead.py --dry-run --limit 1000\" comes before line 76 \"uv run python scripts/requeue_dead.py --limit 5\""
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "Line 28 \"Conte as mensagens em `exports.dead` sem mover nenhuma:\"; line 73 \"Reenfileire um lote pequeno para testar:\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the numbered and bulleted steps (lines 28-106) for agentless passives. Steps use the imperative (Conte, Espere, Verifique, Reenfileire, Repita). The worker-step list names the worker as agent (line 50)."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and reply for people, teams and contacts. None is named. Line 108 is a TODO: \"TODO: nome do time dono do serviço `exporter`...\". The reply also lists it as missing."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for Slack channels, mailing lists and phone numbers. These appear only inside the TODO (line 108, \"canal de comunicação (Slack, telefone, ferramenta de plantão)\"). Line 112 \"canal do incidente\" is generic, and it is where to take notes, not where to escalate."
+ },
+ {
+  "id": "3.16",
+  "verdict": "met",
+  "evidence": "Searched for SLA, escalation order and response time limits. The SLA is a TODO (line 17) and the escalation policy is a TODO (line 108). \"Espere 5 minutos\" (line 42) is a recheck wait that matches the alert's `for: 5m`, not a response SLA."
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for root causes stated as fact. Section 2 tells the reader to find the cause and lists the possible failing steps. Line 61 \"Se só alguns pedidos falham, o problema está no conteúdo desses pedidos\" is a conditional diagnostic heuristic, not a claimed cause of this incident."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply lines 8-9: \"porque o repositório não diz e eu não quis inventar: 1. Quem escalar: time dono do `exporter`, ordem de acionamento e canal\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'normalmente', 'na maioria', 'geralmente' and 'costuma'. None found. Line 60 \"Uma falha comum a todas as mensagens\" means a shared failure, not a frequent one."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "Searched for log systems, dashboards and UIs used as if present. The dashboard is a TODO (line 44). Log location and message inspection are a TODO (line 63). Production worker management is a TODO (line 65). Prometheus and RabbitMQ are mentioned only inside a TODO."
+ }
+]

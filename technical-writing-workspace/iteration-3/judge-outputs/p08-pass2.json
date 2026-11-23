@@ -1,0 +1,87 @@
+[
+ {
+  "id": "3.1",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:3 \"Use este runbook quando o alerta `ExportsDeadLetterHigh` chegar ao seu pager.\""
+ },
+ {
+  "id": "3.2",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:1 \"# Runbook: ExportsDeadLetterHigh\""
+ },
+ {
+  "id": "3.3",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:9 \"**Condição:** `rabbitmq_queue_messages{queue=\\\"exports.dead\\\"} > 10` por 5 minutos seguidos.\""
+ },
+ {
+  "id": "3.4",
+  "verdict": "met",
+  "evidence": "docs/runbooks/exports-dead-letter-high.md:9 \"> 10` por 5 minutos seguidos.\""
+ },
+ {
+  "id": "3.5",
+  "verdict": "met",
+  "evidence": "Searched the runbook for queue names. Only `exports.dead` and `exports` appear, e.g. line 73 \"move mensagens de `exports.dead` para `exports`\"."
+ },
+ {
+  "id": "3.6",
+  "verdict": "met",
+  "evidence": "Searched the runbook for commands. Found `uv run python scripts/requeue_dead.py --dry-run` (line 30), `--limit 5` (line 78), `--limit 100` (line 90) and `make setup` (line 22). There is no rabbitmqctl, kubectl or curl. `POST /exports` (line 69) is described as an endpoint inside a TODO, not given as a command."
+ },
+ {
+  "id": "3.7",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for URLs, dashboard links and console addresses. The only link is the relative `../pipeline.md`, which exists in the fixture. Dashboards appear only in TODOs (line 56)."
+ },
+ {
+  "id": "3.8",
+  "verdict": "met",
+  "evidence": "The dry-run command comes first, at line 30: \"uv run python scripts/requeue_dead.py --dry-run\". The command that moves messages comes later, at line 78: \"uv run python scripts/requeue_dead.py --limit 5\"."
+ },
+ {
+  "id": "3.9",
+  "verdict": "met",
+  "evidence": "Line 27 \"Conte as mensagens em `exports.dead` sem mover nenhuma:\" and line 75 \"Comece com um lote pequeno:\""
+ },
+ {
+  "id": "3.13",
+  "verdict": "met",
+  "evidence": "Searched the runbook steps for agentless passives ('são movidas', 'deve ser executado', 'é feito'). None found. 'definido em' (line 7) and 'reenfileirada' (line 73) are adjectival participles, not steps."
+ },
+ {
+  "id": "3.14",
+  "verdict": "met",
+  "evidence": "Searched the runbook and the reply for names, teams and contacts. Every contact is a TODO, lines 109-111, e.g. \"TODO: informar nome ou rotação de plantão\"."
+ },
+ {
+  "id": "3.15",
+  "verdict": "met",
+  "evidence": "Searched for chat channels, mailing lists and phone numbers. Line 110 has only \"**Canal de incidentes:** TODO: informar o canal.\""
+ },
+ {
+  "id": "3.16",
+  "verdict": "unmet",
+  "evidence": "Borderline. The 30-minute limit is marked as a suggestion with a TODO. Other escalation rules and time limits that the fixture does not contain are stated without any marking: line 105 \"O alerta dispara de novo em menos de 1 hora depois de fechado.\", line 104 \"Você reenfileirou as mensagens e `exports.dead` voltou a passar de 10.\", and line 41 \"Acompanhe por 10 minutos e, se ele não voltar, feche o incidente.\""
+ },
+ {
+  "id": "3.17",
+  "verdict": "met",
+  "evidence": "Searched for root causes stated as fact. The only cause given is marked as a guess, line 59 \"a causa provável é o deploy. Essa é uma hipótese a confirmar, não um fato\". Section 2 tells the reader to look for the cause."
+ },
+ {
+  "id": "3.18",
+  "verdict": "met",
+  "evidence": "Reply line 12: \"**Contatos:** quem é o plantão ou o time dono do `exporter`, qual é o canal de incidentes e como acionar o plantão de plataforma (RabbitMQ/AWS).\""
+ },
+ {
+  "id": "3.20",
+  "verdict": "met",
+  "evidence": "Searched for 'na maioria dos casos', 'normalmente', 'geralmente' and similar. None found. The deploy cause at line 59 is explicitly marked as a hypothesis."
+ },
+ {
+  "id": "3.21",
+  "verdict": "met",
+  "evidence": "Searched for logs, dashboards, UIs and tracing tools. All are TODOs: line 56 \"TODO: informar onde ficam os logs do worker e os painéis da AWS (S3, SES) e do RabbitMQ\" and line 57 \"TODO: informar como inspecionar o conteúdo de uma mensagem\"."
+ }
+]

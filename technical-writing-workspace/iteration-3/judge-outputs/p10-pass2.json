@@ -1,0 +1,52 @@
+[
+ {
+  "id": "4.2",
+  "verdict": "met",
+  "evidence": "Two headings: \"## Questions for you\" (line 3) and \"## Proposed edits\" (line 20); lead-in line 1: \"This review is in two groups, questions for you and proposed edits.\""
+ },
+ {
+  "id": "4.3",
+  "verdict": "met",
+  "evidence": "Line 22: \"The page mixes four jobs, so the reader can't act after one pass.\" Lines 23-25: \"The opening paragraph is Explanation (history and rationale).\" / \"Setup is a How-to.\" / \"The events table is Reference.\""
+ },
+ {
+  "id": "4.4",
+  "verdict": "met",
+  "evidence": "Line 28: \"I'd move the history to a separate \\\"About webhooks\\\" page and link it. The events table could become a reference page with payloads once you have them.\""
+ },
+ {
+  "id": "4.5",
+  "verdict": "met",
+  "evidence": "Line 34: \"Each of these sentences hides who acts.\" Quoted: line 35 \"First, the endpoint must be registered. It is done in the dashboard…\"; line 37 \"a secret is generated\"; line 39 \"Each delivery is signed.\"; also line 42 \"it is retried\"."
+ },
+ {
+  "id": "4.6",
+  "verdict": "met",
+  "evidence": "Line 8: \"\\\"After some attempts\\\" needs the number of attempts and the schedule.\" Line 9: \"**The disable email:** who receives it, and how does the reader re-enable the endpoint?\""
+ },
+ {
+  "id": "4.7",
+  "verdict": "met",
+  "evidence": "Searched the whole reply for a retry or attempt count. Line 8 asks for the number, and line 42 says \"with the count and interval from question 2\". No number appears."
+ },
+ {
+  "id": "4.8",
+  "verdict": "met",
+  "evidence": "Searched for the actor that signs the delivery or generates the secret. The rewrites name \"the platform\" and \"the dashboard\", but each is marked as an assumption: line 36 \"I assumed \\\"the platform\\\", so confirm it.\"; line 37 \"assuming the dashboard does it\"; line 54 \"I assumed the reader and the platform actor.\" None is stated as fact."
+ },
+ {
+  "id": "4.9",
+  "verdict": "met",
+  "evidence": "Searched for retention periods, timeouts and intervals. Line 15 asks \"how long does the platform wait for a response?\" and line 8 asks for the schedule. \"shows it once\" is a count, not a duration. No duration is stated."
+ },
+ {
+  "id": "4.10",
+  "verdict": "met",
+  "evidence": "Searched for the email recipient. Line 9 asks who receives it. Line 43 uses the marked placeholder \"emails <who>. This depends on question 3.\""
+ },
+ {
+  "id": "4.11",
+  "verdict": "met",
+  "evidence": "Line 31: \"\\\"In this guide you will learn everything about webhooks.\\\" says nothing and promises too much.\" Line 47: \"\\\"Simply paste the URL\\\" is flagged by the skill. Use \\\"Paste the URL\\\".\""
+ }
+]

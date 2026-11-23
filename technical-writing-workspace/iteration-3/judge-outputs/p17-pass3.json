@@ -1,0 +1,62 @@
+[
+ {
+  "id": "5.1",
+  "verdict": "met",
+  "evidence": "Line 1: \"**Title:** Reject uploads above 1 MiB with 413 and parse the body in chunks (OPS-412)\". A fenced markdown block follows at lines 3-28. Its first line is line 4: \"`upload` in `importer/handler.py` now returns `413` when the request's `Content-Length` header is above 1 MiB\""
+ },
+ {
+  "id": "5.3",
+  "verdict": "met",
+  "evidence": "Sentence 1 of the body, line 4: \"`upload` in `importer/handler.py` now returns `413` when the request's `Content-Length` header is above 1 MiB (`MAX_BODY_BYTES = 1_048_576`).\""
+ },
+ {
+  "id": "5.4",
+  "verdict": "unmet",
+  "evidence": "The first three body sentences are on line 4: (1) \"...now returns `413`...\", (2) \"Before, it read the whole body into memory with `request.body()`, and production workers were OOM-killed...\", (3) \"Fixes OPS-412.\" The streaming statement \"The handler now also reads the body with `request.stream()`\" is on line 6, which makes it the fourth sentence."
+ },
+ {
+  "id": "5.5",
+  "verdict": "met",
+  "evidence": "Sentence 2 of the body, line 4: \"Before, it read the whole body into memory with `request.body()`, and production workers were OOM-killed when someone uploaded a huge CSV.\""
+ },
+ {
+  "id": "5.7",
+  "verdict": "met",
+  "evidence": "Lines 8-14: \"## How to verify ... pytest tests/test_handler.py::test_upload_rejects_body_above_limit ... It posts 1,048,577 bytes to `/upload` and expects `413`.\""
+ },
+ {
+  "id": "5.9",
+  "verdict": "met",
+  "evidence": "Line 4: \"`upload` in `importer/handler.py` now returns `413`\". Line 6: \"The handler now also reads the body with `request.stream()` and calls `parse_csv_chunk` on each chunk\""
+ },
+ {
+  "id": "5.10",
+  "verdict": "met",
+  "evidence": "Searched lines 4-27 for agentless passives about the change (e.g. 'was added', 'was introduced', 'were added'). None found. The only passive is \"production workers were OOM-killed\" on line 4. It describes the prior incident, not the change."
+ },
+ {
+  "id": "5.11",
+  "verdict": "met",
+  "evidence": "Searched lines 4-27 for memory figures and benchmarks. The only numbers are the 1 MiB / 1_048_576 limit taken from the diff and the 1,048,577-byte test payload. Neither is a memory measurement or a benchmark."
+ },
+ {
+  "id": "5.12",
+  "verdict": "met",
+  "evidence": "Searched lines 4-27 for counts of customers, uploads or incidents. None found. Line 4 says only \"when someone uploaded a huge CSV\"."
+ },
+ {
+  "id": "5.13",
+  "verdict": "met",
+  "evidence": "Searched lines 4-27 for rollout, deploy, staged release, feature flag or monitoring plans. None found."
+ },
+ {
+  "id": "5.14",
+  "verdict": "met",
+  "evidence": "Searched lines 4-27 for names of people or reviewers. None found. Only the anonymous 'someone' and 'a client' appear. The word 'reviewer' at line 31 is outside the description."
+ },
+ {
+  "id": "5.16",
+  "verdict": "met",
+  "evidence": "Searched lines 4-27 for branch narration (first attempts, commit order, 'I tried', 'initially'). None found. Line 4 \"Before, it read the whole body\" describes the prior code's behavior, not the author's process."
+ }
+]
