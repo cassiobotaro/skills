@@ -1,0 +1,38 @@
+{
+  "checks": "../checks.json",
+  "evals": "../evals.json",
+  "runs": [
+    {
+      "key": "7/pe/run-1",
+      "eval": "7",
+      "cell": "pe",
+      "reply": "../eval-7-user-template-governs/pe/run-1/response.md",
+      "root": "../eval-7-user-template-governs/pe/run-1/outputs",
+      "fixture": "../fixtures/eval-7"
+    },
+    {
+      "key": "7/pe/run-2",
+      "eval": "7",
+      "cell": "pe",
+      "reply": "../eval-7-user-template-governs/pe/run-2/response.md",
+      "root": "../eval-7-user-template-governs/pe/run-2/outputs",
+      "fixture": "../fixtures/eval-7"
+    },
+    {
+      "key": "7/pe/run-3",
+      "eval": "7",
+      "cell": "pe",
+      "reply": "../eval-7-user-template-governs/pe/run-3/response.md",
+      "root": "../eval-7-user-template-governs/pe/run-3/outputs",
+      "fixture": "../fixtures/eval-7"
+    },
+    {
+      "key": "7/pe/run-4",
+      "eval": "7",
+      "cell": "pe",
+      "reply": "../eval-7-user-template-governs/pe/run-4/response.md",
+      "root": "../eval-7-user-template-governs/pe/run-4/outputs",
+      "fixture": "../fixtures/eval-7"
+    }
+  ]
+}

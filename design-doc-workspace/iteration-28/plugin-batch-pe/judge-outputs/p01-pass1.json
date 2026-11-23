@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:55 \"Há outros riscos que o time já discutiu e que devem entrar na seção Riscos, com a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"Em quais fases o serviço entra em produção (por exemplo, por produtor ou por percentual de tráfego)? Qual o critério para avançar e qual o gatilho de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 34-38). It holds only the user's +5ms latency trade-off ('Estimamos +5ms de latência por evento. O time aceitou esse custo') and a pending marker ('Outros riscos ainda não foram levantados. Ver Perguntas abertas.'). No other risk and no mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 40-42). It contains only 'A definir. Ver Perguntas abertas.', with no phases, criteria or rollback steps."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:26 \"## Alternativas consideradas\"; :30 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :32 \"**Usar a idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "borderline: the +5ms cost sits under the template heading '## Riscos' (line 34) as a bold paragraph label '**Latência no caminho crítico.**' (line 36). That is neither a heading of its own nor the 'Alternativas consideradas' heading."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"**Desvio do template:** ele não tem lugar para as alternativas. Mantive a estrutura e acrescentei uma seção \"Alternativas consideradas\" logo depois da Proposta... Se o time de arquitetura não aceitar a seção extra, é fácil mover esse conteúdo para dentro da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:60 \"Quem deve revisar este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures: 4%, 24 horas, +5ms, 0,1% and 'duas vezes' are the user's. 'outubro de 2026' restates 'mês passado' and the dates are header metadata. The other numbers sit only inside questions. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names only Redis, Kafka, the ingestor, producers, consumers, financeiro, 'o time' and 'time de arquitetura', all of which come from the user or the context."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block: none present."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block: none present."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences on lines 14, 20-24, 30-32 and 36. The service checking Redis, storing the key for 24h and forwarding to Kafka follows from the user's description. 'O time aceitou' matches 'Trade-off aceito'. The remaining actor questions (who generates the key, who operates Redis) appear only as questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:38 \"Outros riscos ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched lines 1-46 for risks, failure modes and mitigations. The only one stated is the user's +5ms accepted cost. Redis failure, the 24h window, atomicity and a single point of failure appear only under Perguntas abertas. Line 38 points to Perguntas abertas without naming or listing any risk."
+ }
+]

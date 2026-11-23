@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 'Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:63 'Além da latência, que outros riscos o time enxerga?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:64 'Em quais fases o serviço entra em produção? Qual critério permite avançar de fase e qual dispara o rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 38-44). The only risk is the user's +5ms trade-off. Its mitigation reads 'Ainda não definida (ver Perguntas abertas).' Line 44 is a pending marker. No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 46-48). It contains only the pending marker 'Ainda não definido: fases, critério de avanço e critério de rollback dependem das respostas em Perguntas abertas.'"
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:32 '### Alternativas consideradas'; :34 '**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.'; :35 '**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio que acontece entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms cost appears at line 30 under '## Proposta', before '### Alternativas consideradas' and outside it. It also appears in the Riscos table at line 42 and under Métricas at line 56. None of these is a heading dedicated to the trade-off or the heading that holds the alternatives."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5-6 '**Desvios do template** - Adicionei **Alternativas consideradas** como subseção de Proposta... Se a arquitetura preferir esse conteúdo em outro lugar, é fácil mover.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. docs/design/DD-2026-001-deduplicacao-de-eventos.md:8 reads 'A definir (ver Perguntas abertas)', so no reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:60 'Quem revisa este documento, e de quais áreas (por exemplo financeiro, quem opera o Kafka e o Redis)?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. It states 4%, 0,1%, 24h, +5ms and 'duas vezes', all given by the user. The ID and the dates are metadata, not metrics. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. The document names Redis, Kafka, ingestor, produtores, consumidores and financeiro, all from the user's message. Mermaid is only the diagram format. Nothing else is named."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for a Structurizr DSL block. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Checked the Mermaid block at lines 20-26. It has only the nodes Produtores, Ingestor, Serviço de deduplicação, Redis and Kafka, with plain arrows. There is no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor assertions. The ingestor delivering events to the service, and the service checking and storing keys in Redis, both follow from the user saying the service sits between ingestor and Kafka and keeps the keys in Redis. 'A equipe aceitou' matches 'Trade-off aceito'. Reviewer questions sit under Perguntas abertas. No unsupported actor assertion was found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:44 'Os demais riscos ainda não foram levantados com o autor (ver Perguntas abertas).'; also :42 'Ainda não definida (ver Perguntas abertas).'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas for risks, failure modes and mitigations. Only the user's +5ms cost appears (lines 30, 42, 56). Line 44 points to Perguntas abertas without naming any risk. The Redis-unavailability and 24h-window issues appear only as questions at lines 62-63."
+ }
+]

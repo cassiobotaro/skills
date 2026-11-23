@@ -244,6 +244,36 @@ Riscos more often than anything tried (5 of 8 against 2 of 12), and every miss l
 the same sentence, a "por exemplo" naming the Redis inside the pending pointer, which
 the bullet forbids by name and the session writes anyway.
 
+**Eighth batch, 2026-11-23: a fifth candidate, in contract 2** (cell `pe`, `skill-e`,
+`plugin-batch-pe/`, `plugin-batch-pe-eval7/`). The rule moves out of the steps that
+describe writing: one paragraph after the one on consequences defines a risk nobody
+raised as invention, never a row, a mitigation, or an example inside a sentence about
+what was not discussed (diff `skill-a/SKILL.md skill-e/SKILL.md`). It says nothing about
+writing before the answers. The `pn` setup, four runs on eval 71 (judged, 7.24 as
+reworded) and four on eval 7 (7.G1 only). All eight invoked `design-doc` through the
+Skill tool and none listed `unslop`.
+
+| Check | pn setup | pd (skill-d, 8 runs) | pe (skill-e) |
+|---|---|---|---|
+| eval 7, 7.G1 the session wrote no file | 4/4 (control) | 2/6 | 4/4 |
+| 7.8 Riscos states no risk nobody gave | 2/12 | 5/8 | 4/4 |
+| 7.24 no such risk outside Perguntas abertas | 1/12 (old text) | 2/4 (new text) | 3/4 |
+| 7.6 asks the user for the risks | 7/12 | 8/8 | 4/4 |
+| 7.11 the +5 ms cost under a heading of its own | 8/12 | 6/8 | 1/4 |
+| all 24 checks of eval 71 | | | 92/96 |
+
+One split (7.24 in run-2, 1 of 3). Run-1 meets all 24 checks. The three misses of 7.11
+put the accepted +5 ms in Riscos (run-4, as a bold label), or in Proposta with a row in
+Riscos (run-2, run-3); two were called borderline. No document has the "por exemplo"
+pointer.
+
+**Reading, by the rule in `checks.json`.** Not adopted, on 7.11 alone (1/4 against a floor
+of 2). Every other condition is met, and on the defect this iteration is about it is the
+best cell so far: Riscos clean in four of four and the plain request asked first in four
+of four. Whether 7.11 at 1/4 is the paragraph's doing (it names "a mitigation for a cost
+the team accepted", which may pull the cost toward Riscos) or four runs of noise against
+8 of 12 is not known.
+
 **Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -288,4 +318,4 @@ with the prompt alone.
 12 judge calls, US$ 1.21; four codeword probes on haiku, a few cents. Fifth batch:
 4 sessions, US$ 0.54; 12 judge calls, US$ 1.05; one probe. Sixth batch: 6 sessions,
 US$ 0.79; 18 judge calls, US$ 1.15. Seventh batch: 12 sessions, US$ 1.49; 12 judge
-calls, US$ 1.13.
+calls, US$ 1.13. Eighth batch: 8 sessions, US$ 0.95; 12 judge calls, US$ 1.23.

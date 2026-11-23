@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:86 \"6. Que outros riscos a equipe enxerga nesta proposta e como pretende mitigá-los?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:90 \"8. Em quais fases o serviço entra em produção?\"; reply line 12 \"Qual é o plano de rollout e o critério de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 53-59). The only risk is the user's +5 ms extra hop. The mitigation is \"A definir (ver Perguntas abertas).\" Line 59 is only a pending marker: \"Outros riscos ainda não foram levantados (ver Perguntas abertas).\""
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 61-63). It holds only a pending marker: \"Ainda não definido. As fases, os critérios de avanço e os critérios de rollback estão nas Perguntas abertas.\" No phase or criterion is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "dedup-de-eventos.md:45 \"## Alternativas consideradas\"; :49 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; :50 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5 ms appears under \"## Proposta\" (:43 \"Esse é o custo aceito da proposta: estimamos **+5 ms**\") and in the Riscos table (:57). Neither is a heading of its own for the trade-off. The Alternativas consideradas section (:45-51) does not mention it."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 4: \"**Seção extra:** acrescentei \\\"Alternativas consideradas\\\" entre Proposta e Riscos, porque o template não tem lugar para as duas opções descartadas... Se a arquitetura não aceitar a seção extra, dá para mover o conteúdo para dentro da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header. dedup-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "dedup-de-eventos.md:98 \"12. Quem revisa este documento (time de arquitetura, financeiro, donos dos produtores)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched all figures in the document. It contains 4%, 24 h, +5 ms, 0,1% and the two complaints, all given by the user. The other values are the document id and dates, and \"n/a\" in the metrics table. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders outside the open questions. The document names only Redis, Kafka, ingestor, produtores, consumidores, financeiro and the team, all from the user's message. The extra stakeholders (donos dos produtores, donas do ingestor/Kafka/Redis) appear only inside the questions at :98."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none; it has only a Mermaid block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (:24-39). It has no endpoint, header or status code. The only branches are \"chave nova\" and \"chave repetida\" (discard), which match the user's description. There is no failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched the assertions outside the open questions. The actors are the ingestor sending to the service, the service checking and storing the key in Redis and delivering to Kafka, and the team accepting the cost. All follow from the user's message (\"fica entre o ingestor e o Kafka, guarda a chave... descarta repetidos\", \"Trade-off aceito\")."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "dedup-de-eventos.md:57 \"A definir (ver Perguntas abertas).\"; :59 \"Outros riscos ainda não foram levantados (ver Perguntas abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "Borderline. dedup-de-eventos.md:41 \"A janela de 24 horas define até quando um reenvio ainda é reconhecido como duplicata.\" This states as fact the limitation that resends after 24 h are not caught, which is close to the anchor's failing example. The user only said the key is kept for 24 h."
+ }
+]

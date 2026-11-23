@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores, que reenviam o mesmo evento quando fazem retry.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:90 '**Riscos adicionais.** Que outros riscos o time enxerga, e qual a mitigação de cada um?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:91 '**Rollout.** Em quais fases o serviço entra em produção? Qual critério avança cada fase e qual dispara rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Checked Riscos, lines 67-71. The only risk is the +5ms latency the user gave, marked as an accepted cost. The rest is a pending marker pointing to Perguntas abertas. No invented mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Checked Plano de rollout, line 75. It holds only a pending marker: 'dependem das respostas em [Perguntas abertas]'. No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:58 '### Alternativas consideradas'. Line 60: '**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.' Line 61: '**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:63 '### Trade-off aceito'. Line 65: 'Estimamos +5ms de latência por evento.'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: 'o template não tem seção para elas. Como você exigiu o formato à risca, não criei seção de topo. Elas entraram como subseções dentro de Proposta (\"Alternativas consideradas\" e \"Trade-off aceito\"). Se o time de arquitetura preferir outro lugar, é só mover.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked docs/design/dedup-de-eventos.md:8. The row reads '| **Revisores** | |' and is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:93 '**Revisores.** Quem do time de arquitetura e de outras equipes (por exemplo, financeiro e donos dos consumidores) deve revisar este documento?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found 4%, 24h, 5ms, 0,1% and 'duas vezes', all from the user. The other numbers are the doc ID and dates, which are not metrics. The latency 'Hoje' cell is 'n/a'."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the document for technologies and teams. The system names only Ingestor, Redis and Kafka. Teams named are 'time de arquitetura', 'financeiro' and 'donos dos consumidores'; the user's message names all of these or the consumers. Structurizr appears only as the diagram notation, not as a system technology."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Checked the DSL at lines 28-51. Every container has only a name and a description, with no technology slot. No relationship carries a protocol."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched for a Mermaid block. The document has none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor assertion. The ingestor delivering to the service and the service using Redis and publishing to Kafka follow from 'fica entre o ingestor e o Kafka'. Producers send to the ingestor, as the user said. 'O time aceita esse custo' matches 'Trade-off aceito'. Key generation and similar points appear only as questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/dedup-de-eventos.md:71 'Outros riscos e suas mitigações dependem das respostas em [Perguntas abertas](#perguntas-abertas).'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched Motivação, Proposta, Riscos, Rollout and Métricas for risks, failure modes and mitigations. Outside Perguntas abertas the only risk is the user's +5ms latency. The Redis outage, atomicity and post-24h resend appear only in Perguntas abertas and in the reply, not elsewhere in the document."
+ }
+]

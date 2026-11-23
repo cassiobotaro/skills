@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:55 \"Há outros riscos que o time já discutiu e que devem entrar na seção Riscos, com a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:58 \"Em quais fases o serviço entra em produção (por exemplo, por produtor ou por percentual de tráfego)? Qual o critério para avançar e qual o gatilho de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "I read Riscos, lines 34-38. The section has only the user's accepted +5ms latency cost and the marker \"Outros riscos ainda não foram levantados. Ver Perguntas abertas.\" I found no invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "I read Plano de rollout, line 42: \"A definir. Ver Perguntas abertas.\" It states no phase, advance criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:26 \"## Alternativas consideradas\"; :30 \"**Deduplicar no consumidor.** Descartada.\"; :32 \"**Usar a idempotência nativa do produtor Kafka.** Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms cost is at line 36, under the template heading \"## Riscos\" with the bold label \"**Latência no caminho crítico.**\". It has no heading of its own and is not under \"Alternativas consideradas\". A bold label is not a heading, so the cost sits inside a shared template section."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 9: \"**Desvio do template:** ele não tem lugar para as alternativas. Mantive a estrutura e acrescentei uma seção \"Alternativas consideradas\" logo depois da Proposta... Se o time de arquitetura não aceitar a seção extra, é fácil mover esse conteúdo para dentro da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:8 \"| **Revisores** | |\" is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:60 \"Quem deve revisar este documento?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "I searched the document for figures. It has 4%, 24 horas, +5ms, 0,1% and 'duas vezes', all from the user. 'outubro de 2026' resolves the user's 'mês passado' against the run date and is not a new metric. DD-2026-001 is an identifier, flagged in the reply as a guess. I found no other figure stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "I searched for technologies, teams and stakeholders. The document names only Redis, Kafka, ingestor, produtores, consumidores, financeiro and time de arquitetura. All of these are in the user's message."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "The document has no Structurizr DSL block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "The document has no Mermaid block."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "I checked the sentences that assign actions. The service checking and storing the key and forwarding to Kafka matches the user's proposal. 'O time aceitou esse custo' matches 'Trade-off aceito'. The pipeline reprocessing a retried event follows from the user's description. Actor questions such as who generates the key appear only under Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/deduplicacao-de-eventos.md:38 \"Outros riscos ainda não foram levantados. Ver Perguntas abertas.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "I searched outside Perguntas abertas for risks, failure modes and mitigations. I found only the user's +5ms cost (line 36) and the user's reasons for rejecting each alternative (lines 30, 32). Redis failure, the 24h window and atomicity appear only as questions (lines 51-54), and Riscos does not call them risks."
+ }
+]

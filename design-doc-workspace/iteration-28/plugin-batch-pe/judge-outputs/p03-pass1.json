@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão recebe essas cópias como se fossem eventos novos.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:63 \"Além da latência, que outros riscos o time enxerga?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:64 \"Em quais fases o serviço entra em produção? Qual critério permite avançar de fase e qual dispara o rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 38-44). The only risk is the user's +5ms extra hop. Its mitigation reads \"Ainda não definida (ver Perguntas abertas).\" Line 44 is a pending marker. No other risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 46-48). It holds only the pending marker \"Ainda não definido: fases, critério de avanço e critério de rollback dependem das respostas em Perguntas abertas.\""
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "line 32 \"### Alternativas consideradas\"; line 34 \"**Deduplicar no consumidor.** Descartada. Cada consumidor teria que reimplementar a deduplicação.\"; line 35 \"**Idempotência nativa do produtor Kafka.** Descartada. Ela não cobre o reenvio que acontece entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "unmet",
+  "evidence": "Borderline. The +5ms appears at line 30 under \"## Proposta\", but before the \"### Alternativas consideradas\" subsection. It also appears in a Riscos table row (line 42) and in Métricas (line 56). None of these is a heading of its own for the trade-off, and none is the heading that holds the alternatives."
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:5-6 \"**Desvios do template** - Adicionei **Alternativas consideradas** como subseção de Proposta... Se a arquitetura preferir esse conteúdo em outro lugar, é fácil mover.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched header line 8: \"| **Revisores** | A definir (ver Perguntas abertas) |\". It names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:60 \"Quem revisa este documento, e de quais áreas...?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the document. Found 4%, 0,1%, 24h, +5ms and the two finance complaints, all from the user. The header dates are metadata fields and DD-2026-001 is an ID. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies and teams. Found Redis, Kafka, ingestor, produtores and financeiro, all named by the user. The only other mention is \"quem opera o Kafka e o Redis\", which sits inside a question (line 60). Mermaid is the diagram format, not a system technology."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 20-26). It has only the nodes Produtores, Ingestor, Serviço de deduplicação, Redis and Kafka with plain arrows. It has no endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched for actor-action sentences. The service checking, storing and discarding keys comes from the user. \"O ingestor... passa a entregar os eventos ao serviço\" follows from the service sitting between ingestor and Kafka. \"A equipe aceitou esse custo\" matches the user's \"Trade-off aceito\". No unestablished actor was found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:44 \"Os demais riscos ainda não foram levantados com o autor (ver Perguntas abertas).\"; line 42 \"Ainda não definida (ver Perguntas abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas (lines 1-56). The only risk is the user's +5ms. Line 44 names no specific risk and points to Perguntas abertas. Line 36 restates the user's 4% status quo. Redis unavailability and post-24h resends appear only as questions (lines 62-63)."
+ }
+]

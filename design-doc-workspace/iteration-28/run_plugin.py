@@ -22,6 +22,9 @@ same cell and must be run with --scratch under $HOME (see eval-tools/README.md).
 `pd`, added on 2026-11-23, is `pn` with skill-d: 1.9.0 plus one self-review bullet
 (diff skill-a/SKILL.md skill-d/SKILL.md).
 
+`pe`, added on 2026-11-23, is `pn` with skill-e: 1.9.0 plus one paragraph in contract 2
+(diff skill-a/SKILL.md skill-e/SKILL.md).
+
 Usage: run_plugin.py --scratch DIR <eval>:<cell>:<run> [...] [--workers N]
 """
 import argparse, concurrent.futures as cf, datetime, json, os, shutil, subprocess, time
@@ -30,8 +33,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WS = os.path.dirname(HERE)
 REPO = os.path.dirname(WS)
 MODEL = "claude-sonnet-5-5"
-CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a", "pg2": "skill-a", "pd": "skill-d"}
-NO_UNSLOP = {"pn", "pg", "pg2", "pd"}
+CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a", "pg2": "skill-a", "pd": "skill-d", "pe": "skill-e"}
+NO_UNSLOP = {"pn", "pg", "pg2", "pd", "pe"}
 WITH_AGENTS = {"pg", "pg2"}
 EVALS = {str(e["id"]): e for e in json.load(open(os.path.join(HERE, "evals.json")))["evals"]}
 ALLOWED = ["Skill", "Bash(date:*)", "Bash(ls:*)", "Bash(find:*)", "Bash(mkdir:*)", "Bash(cat:*)", "Bash(pwd)"]
