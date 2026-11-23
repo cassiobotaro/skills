@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-deduplicacao-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:73 \"Que falhas o time já identificou nesta proposta (no serviço, no Redis, na publicação no Kafka) e como mitiga cada uma?\"; reply:21 \"Quais riscos e mitigações vocês já identificaram\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:74 \"O serviço entra em produção de uma vez ou em fases (...)? Qual o critério para avançar de fase e como se faz o rollback?\"; reply:22 \"Como vai ser o rollout em fases e o rollback.\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched doc:55-57 (Riscos). It names only the user's accepted cost and says \"Os riscos de falha da proposta e as mitigações de cada um ainda não foram levantados; estão em Perguntas abertas\". No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc:59-61 (Plano de rollout). It holds only a pending marker, \"ainda não foram definidos (ver Perguntas abertas)\". No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:46 \"## Alternativas consideradas\"; doc:51 \"Deduplicar no consumidor | Cada consumidor teria que reimplementar a deduplicação. Descartada.\"; doc:52 \"Idempotência nativa do produtor Kafka | Não cobre o reenvio entre reinícios do produtor. Descartada.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:40 \"### Trade-off aceito\"; doc:44 \"A ingestão ganha mais um salto no caminho crítico. Estimamos +5 ms de latência\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:5-7 \"**Um desvio do template, para você aprovar:** ... Criei a seção **Alternativas consideradas** entre Proposta e Riscos\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "doc:8 \"| **Revisores** | |\" (the row is empty)"
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:69 \"Quem revisa este documento, e de quais áreas?\"; reply:17 \"Quem revisa o doc, e se o financeiro entra.\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole doc for figures: 4%, 24 horas, +5 ms, 0,1% and \"duas vezes\" all come from the user. The only extra item is \"outubro de 2026\" (doc:16, 65), a date derived from the user's \"mês passado\" and today's date 2026-11-23. It is not a new figure. The header dates are template fields."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched for technologies, teams and stakeholders. Only Redis, Kafka, ingestor, produtores, consumidores, financeiro and \"o time\" appear, all named by the user. Mermaid is the template's diagram format, not a system technology."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block at doc:21-37. It has no endpoint, header, status code or failure branch. The alt/else branches are the user's new-key/repeat logic, and the order question is marked open."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked each action sentence (doc:14, 19, 39, 42-44, 50). Every actor's action follows from the user's message: the service sits between ingestor and Kafka, stores the key in Redis for 24h and discards repeats; producers retry; the trade-off was accepted. Ownership questions appear only under Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:57 \"Os riscos de falha da proposta e as mitigações de cada um ainda não foram levantados; estão em [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas. doc:57 states no specific risk. doc:33 only points to Perguntas abertas: \"ordem entre guardar e publicar em aberto (ver Perguntas abertas)\". doc:43 restates the user's reason against producer idempotence. No failure consequence is stated as fact."
+ }
+]

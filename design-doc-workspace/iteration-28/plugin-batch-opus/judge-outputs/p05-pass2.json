@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-de-deduplicacao-de-eventos.md:14 \"Quando um produtor faz retry, ele reenvia o evento, e o pipeline de ingestão recebe o reenvio como se fosse um evento novo.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:55 \"3. **Riscos.** Quais riscos o time enxerga nesta proposta, e qual é a mitigação de cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:56 \"4. **Rollout.** Como o serviço entra em produção: em quais fases, com qual critério para avançar de fase e qual critério para fazer rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched the Riscos section (doc:37-39). It holds only a pending marker: \"Os riscos da proposta e as respectivas mitigações ainda não foram levantados.\" No risk or mitigation is stated."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (doc:41-43). It holds only a pending marker: \"Fases, critério de avanço e critério de rollback estão pendentes.\" No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:26 \"## Alternativas consideradas\"; doc:33 \"| Deduplicar no consumidor | Cada consumidor teria que reimplementar a deduplicação. |\"; doc:34 \"| Idempotência nativa do produtor Kafka | Não cobre o reenvio que acontece entre reinícios do produtor. |\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:22 \"### Custo aceito\"; doc:24 \"Estimamos um acréscimo de 5 ms de latência, e o time aceitou esse custo\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:8 \"**Um ponto que foge do template:** ele não tem lugar para alternativas. ... criei a seção **Alternativas consideradas** logo depois da Proposta ... Se a arquitetura recusar a seção extra, dá para mover esse conteúdo para dentro da Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. doc:8 \"| **Revisores** | |\" is empty, so no reviewer is named."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:54 \"2. **Revisores.** Quem deve revisar este documento, e de quais áreas (arquitetura, plataforma, time dono do Redis, financeiro)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4%, 24 horas, 5 ms, 0,1% and the two complaints (\"duas vezes\"). The other numbers are document metadata: the dates 2026-11-23, the ID DD-2026-001 and the question numbering. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "doc:54 \"de quais áreas (arquitetura, plataforma, time dono do Redis, financeiro)\": \"plataforma\" is a team that neither the user's message nor the template names. This is borderline because the name appears inside a question, but the check makes no exception for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block and found none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block and found none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every actor-action sentence outside Perguntas abertas. The service storing keys and discarding repeats, the team accepting the cost and the team discussing alternatives all come from the user's message. Consumers not reimplementing follows from the user's statement. No actor was assigned an action the user did not establish."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:39 \"Os riscos da proposta e as respectivas mitigações ainda não foram levantados. Ver [Perguntas abertas](#perguntas-abertas), item 3.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched the Motivação, Proposta, Custo aceito, Alternativas, Riscos, Rollout and Métricas sections for risks, failure modes or mitigations. Found only the user's +5 ms cost and the user's reasons for discarding the alternatives (including the status quo pain). Riscos is a pending pointer only."
+ }
+]

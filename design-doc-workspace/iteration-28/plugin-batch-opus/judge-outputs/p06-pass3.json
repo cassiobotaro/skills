@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-de-deduplicacao-de-eventos.md:14 'Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão aceita esses reenvios como eventos novos.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:57 'Os demais riscos, e a mitigação de cada um, dependem de respostas do autor (ver [Perguntas abertas](#perguntas-abertas), itens 4 a 7)'; doc:73 '4. Como o serviço se comporta quando o Redis fica indisponível ou lento: deixa passar os eventos sem deduplicar (mais duplicatas) ou bloqueia a ingestão (perda de disponibilidade)?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:77 '8. Como o serviço entra em produção: por produtor, por percentual de tráfego, em modo sombra (só medindo, sem descartar)?'; doc:78 '9. Qual o critério de avanço entre fases e o que dispara o rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "doc:55 presents a risk the user did not give: 'A janela de 24 horas define o alcance da deduplicação: o serviço só reconhece um reenvio que chega enquanto a chave do evento original ainda está no Redis.' doc:57 also treats Redis unavailability as a risk: 'Os demais riscos ... em especial o comportamento do serviço quando o Redis fica indisponível'"
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc:59-61 (Plano de rollout). The section holds only a pending marker: 'O plano depende das respostas aos itens 8 e 9 de [Perguntas abertas](#perguntas-abertas): fases, critério de avanço e critério de rollback.' It states no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:45 '## Alternativas consideradas'; doc:50 '**Deduplicar no consumidor.** Descartada: cada consumidor do Kafka teria que reimplementar a deduplicação.'; doc:51 '**Usar a idempotência nativa do produtor Kafka.** Descartada: ela não cobre o reenvio que acontece entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:41 '### Custo aceito'; doc:43 'Estimamos um aumento de 5 ms na latência de cada evento.'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:3 '**Uma mudança em relação ao template:** acrescentei uma seção **Alternativas consideradas** logo depois de Proposta. ... Se o time de arquitetura não aceitar, dá para passar esse conteúdo para dentro de Proposta.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Searched the header table. doc:8 '| **Revisores** | |' is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:82 '13. Quem deve revisar este documento (arquitetura, financeiro, donos dos produtores, time que opera o Redis)?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4% (doc:14, doc:49, doc:65), 24 horas (doc:18, doc:37, doc:55), 5 ms (doc:43, doc:66), 0,1% (doc:65, doc:80) and 'duas vezes' (doc:14, doc:49). 'p99' appears only inside a question (doc:79), not as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: doc:82 names stakeholders the user did not mention, 'donos dos produtores, time que opera o Redis'. They appear inside a question, but this check does not exempt questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none; the only diagram is Mermaid (doc:20-35)."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (doc:20-35). It has no endpoint, header or status code. Its only branch, 'chave já vista nas últimas 24h ... descarta o evento', is the discard the user described, not a failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched assertions naming actors. The ingestor delivering to the service and the service consulting Redis, storing the key and publishing or discarding all follow from the user's 'fica entre o ingestor e o Kafka, guarda a chave ... descarta repetidos'. 'O time aceitou esse custo' matches the user's 'Trade-off aceito'. Open ownership points (who generates the key) are posed as questions (doc:70)."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:57 'Os demais riscos, e a mitigação de cada um, dependem de respostas do autor (ver [Perguntas abertas](#perguntas-abertas), itens 4 a 7)'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:57 calls an open-question subject a risk: 'Os demais riscos ... em especial o comportamento do serviço quando o Redis fica indisponível'. doc:55 states a consequence as fact: 'o serviço só reconhece um reenvio que chega enquanto a chave do evento original ainda está no Redis.'"
+ }
+]

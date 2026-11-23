@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "DD-2026-001...md:14 'Os produtores reenviam eventos quando fazem retry, e o pipeline de ingestão aceita esses reenvios como eventos novos.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "DD:57 'Os demais riscos, e a mitigação de cada um, dependem de respostas do autor (ver [Perguntas abertas](#perguntas-abertas), itens 4 a 7)'; DD:73 '4. Como o serviço se comporta quando o Redis fica indisponível ou lento: deixa passar os eventos sem deduplicar (mais duplicatas) ou bloqueia a ingestão (perda de disponibilidade)?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "DD:77 '8. Como o serviço entra em produção: por produtor, por percentual de tráfego, em modo sombra (só medindo, sem descartar)?'; DD:78 '9. Qual o critério de avanço entre fases e o que dispara o rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "DD:55 'o serviço só reconhece um reenvio que chega enquanto a chave do evento original ainda está no Redis' presents a coverage limit as a risk the user did not state. DD:57 'Os demais riscos ... em especial o comportamento do serviço quando o Redis fica indisponível' names Redis unavailability as a risk."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section (DD:59-61). It holds only the marker 'O plano depende das respostas aos itens 8 e 9 de [Perguntas abertas]'. No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "DD:45 '## Alternativas consideradas'; DD:50 '**Deduplicar no consumidor.** Descartada: cada consumidor do Kafka teria que reimplementar a deduplicação.'; DD:51 '**Usar a idempotência nativa do produtor Kafka.** Descartada: ela não cobre o reenvio que acontece entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "DD:41 '### Custo aceito'; DD:43 'Estimamos um aumento de 5 ms na latência de cada evento.'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply:3 '**Uma mudança em relação ao template:** acrescentei uma seção **Alternativas consideradas** logo depois de Proposta... Se o time de arquitetura não aceitar, dá para passar esse conteúdo para dentro de Proposta.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "DD:8 '| **Revisores** | |' is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "DD:82 '13. Quem deve revisar este documento (arquitetura, financeiro, donos dos produtores, time que opera o Redis)?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the document for figures. Found 4% (DD:14, 49, 65), 24 horas (DD:18, 37, 55), 5 ms (DD:43, 66), 0,1% (DD:65, 80) and 'duas vezes' (DD:14, 49). 'p99' appears only inside question 10. Dates and DD numbers are header metadata. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: DD:82 names 'donos dos produtores, time que opera o Redis' as stakeholders/teams. The user did not name them. They appear inside a question, but this check does not exempt questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL (workspace/model/container blocks). None found. The only diagram is Mermaid."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (DD:20-35) for endpoint, header, status code and failure branch. It holds only the branches 'chave nova' and 'chave já vista nas últimas 24h', which match the user's description. No endpoint, header, status code or failure branch."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched DD:14-61 for actor-action sentences outside questions. 'O ingestor entrega cada evento ao serviço de deduplicação' (DD:37) follows from 'serviço que fica entre o ingestor e o Kafka'. 'O time aceitou esse custo' (DD:43) follows from 'Trade-off aceito'. The service's consult/write/publish/discard actions follow from the user's proposal. Actor attributions that the user left open (who generates the key) appear only as questions."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "DD:57 'Os demais riscos, e a mitigação de cada um, dependem de respostas do autor (ver [Perguntas abertas](#perguntas-abertas), itens 4 a 7)'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "DD:57 'Os demais riscos, e a mitigação de cada um, ... em especial o comportamento do serviço quando o Redis fica indisponível' calls the open subject a risk. DD:55 'o serviço só reconhece um reenvio que chega enquanto a chave do evento original ainda está no Redis' states a consequence as fact."
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "unmet",
+  "evidence": "Borderline. The reply only states \"você não deu riscos além da latência nem um plano de rollout\", which is not a question. The document's questions 3, 4 and 6 ask for decisions on specific failure modes that the run raised itself. No question asks the user what the risks are."
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:81 \"**Rollout.** O serviço entra de uma vez ou em fases (por produtor, por percentual de tráfego, em modo sombra só contando duplicatas)? Qual o critério para avançar de fase?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:59 \"Os demais riscos da proposta, como o comportamento quando o Redis ou o próprio serviço ficam indisponíveis\". This names Redis or service unavailability as a risk, which the user did not give."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section, file:61-63. It holds only the marker \"As fases, os critérios de avanço e o caminho de rollback dependem das [perguntas 7 e 8]\". No phase, criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "Heading file:43 \"### Alternativas\". file:47 \"**Deduplicar no consumidor.** ... Descartada porque cada consumidor teria que reimplementar a deduplicação.\" file:49 \"**Idempotência nativa do produtor Kafka.** Descartada porque não cobre o reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "Heading file:37 \"### O que a proposta custa\". file:41 \"Acrescenta mais um salto no caminho crítico da ingestão. Estimamos +5ms de latência por evento, e o time aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply:5 \"**Seção a mais:** incluí \\\"Trade-offs e alternativas consideradas\\\" entre Proposta e Riscos. ... Se o time de arquitetura não aceitar seção extra, dá para passar esse conteúdo para dentro de Proposta.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Checked the header row at file:8. It reads \"**Revisores** | (a definir, ver [pergunta 1](#perguntas-abertas))\" and names no reviewer."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "file:75 \"**Revisores.** Quem revisa este documento e de quais áreas?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched every figure in the document. Found 4%, 24h, +5ms, 0,1% and duas reclamações, plus the document ID and the dates required by the template header. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline, because the wording sits inside a suggestion. file:75 \"o time dono do Redis e do Kafka, que recebe a nova carga\" names a team that neither the user's message nor the template names."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences at file:19-27, 35 and 41. The ingestor delivers events, the service reads, writes and publishes, and the team accepted the cost. Each follows from the user's message, which says the service sits between the ingestor and Kafka, stores keys in Redis, and that the team discussed and accepted the trade-off. Reviewer suggestions appear only under Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "file:59 \"Os demais riscos da proposta ... dependem de decisões listadas nas [perguntas abertas](#perguntas-abertas) (3, 4 e 6).\" Also file:57 \"ainda não estão definidos ([pergunta 5](#perguntas-abertas))\"."
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "file:59 \"Os demais riscos da proposta, como o comportamento quando o Redis ou o próprio serviço ficam indisponíveis\" calls the subject a risk. file:29 \"o serviço só reconhece como repetido um reenvio que chegue dentro de 24h do evento original\" states a coverage limit as fact."
+ }
+]

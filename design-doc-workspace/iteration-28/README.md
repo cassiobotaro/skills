@@ -295,6 +295,32 @@ eight, against eight of twelve: in the others it sits inside Riscos or Proposta,
 stated, under no heading of its own. Whether that loss is worth the gain is a decision
 about the skill, not a measurement.
 
+**Tenth batch, 2026-11-23: the same two cells on claude-opus-5-5** (`pn-opus`, `pe-opus`,
+`plugin-batch-opus/`). The author's own sessions run on opus, and no executor of this
+iteration or the last had. Four runs each on eval 71, judged together; all eight ran on
+`claude-opus-5-5` (`models` in each `timing.json`), invoked `design-doc` through the
+Skill tool and did not list `unslop`. Four splits (7.19 twice, 7.6, 7.22), counted as not
+met. These are not the target model's numbers.
+
+| Check | pn-opus (1.9.0) | pe-opus (skill-e) |
+|---|---|---|
+| 7.8 Riscos states no risk nobody gave | 1/4 | 4/4 |
+| 7.24 no such risk outside Perguntas abertas | 0/4 | 4/4 |
+| 7.11 the +5 ms cost under a heading of its own | 4/4 | 4/4 |
+| 7.6 asks the user for the risks | 3/4 | 4/4 |
+| 7.5 no heading from the default catalog | 4/4 | 2/4 |
+| 7.19 no technology, team or stakeholder nobody named | 0/4 | 1/4 |
+| all 24 checks of eval 71 | 84/96 | 90/96 |
+
+**Reading, by the rule in `checks.json`.** The defect shows on opus: 7.8 in one of four
+with 1.9.0, as on sonnet. skill-e removes it there too (7.8 and 7.24 four of four), and on
+opus the accepted +5 ms keeps its own heading in every run of both cells, so the trade
+seen on sonnet does not appear. Two misses are new and are not about risks: two pe-opus
+documents put a `### Visão geral` subheading inside Proposta, under the template's own
+structure, which 7.5 forbids at any level. 7.19 fails in both cells on a team named
+inside an open question ("o time dono do Kafka e do Redis"), the case the 7.19 amendment
+of 2026-11-22 lets pass; it does not separate the cells. Eval 7 was not run on opus.
+
 **Reading of the first two batches, by the rule in `checks.json`.** Neither paragraph is adopted and the skill is
 not edited.
 
@@ -341,3 +367,4 @@ with the prompt alone.
 US$ 0.79; 18 judge calls, US$ 1.15. Seventh batch: 12 sessions, US$ 1.49; 12 judge
 calls, US$ 1.13. Eighth batch: 8 sessions, US$ 0.95; 12 judge calls, US$ 1.23.
 Ninth batch: 4 sessions, US$ 0.58; 12 judge calls, US$ 1.11.
+Tenth batch: 8 sessions on opus, US$ 3.29; 24 judge calls, US$ 2.23.

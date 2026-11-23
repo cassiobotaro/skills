@@ -25,6 +25,9 @@ same cell and must be run with --scratch under $HOME (see eval-tools/README.md).
 `pe`, added on 2026-11-23, is `pn` with skill-e: 1.9.0 plus one paragraph in contract 2
 (diff skill-a/SKILL.md skill-e/SKILL.md).
 
+`pn-opus` and `pe-opus`, added on 2026-11-23, are `pn` and `pe` with the executor on
+claude-opus-5-5 (MODEL_OF); every other cell runs on MODEL.
+
 Usage: run_plugin.py --scratch DIR <eval>:<cell>:<run> [...] [--workers N]
 """
 import argparse, concurrent.futures as cf, datetime, json, os, shutil, subprocess, time
@@ -33,8 +36,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WS = os.path.dirname(HERE)
 REPO = os.path.dirname(WS)
 MODEL = "claude-sonnet-5-5"
-CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a", "pg2": "skill-a", "pd": "skill-d", "pe": "skill-e"}
-NO_UNSLOP = {"pn", "pg", "pg2", "pd", "pe"}
+CELLS = {"pa": "skill-a", "pc": "skill-c", "pn": "skill-a", "pg": "skill-a", "pg2": "skill-a", "pd": "skill-d", "pe": "skill-e",
+         "pn-opus": "skill-a", "pe-opus": "skill-e"}
+NO_UNSLOP = {"pn", "pg", "pg2", "pd", "pe", "pn-opus", "pe-opus"}
+MODEL_OF = {"pn-opus": "claude-opus-5-5", "pe-opus": "claude-opus-5-5"}
 WITH_AGENTS = {"pg", "pg2"}
 EVALS = {str(e["id"]): e for e in json.load(open(os.path.join(HERE, "evals.json")))["evals"]}
 ALLOWED = ["Skill", "Bash(date:*)", "Bash(ls:*)", "Bash(find:*)", "Bash(mkdir:*)", "Bash(cat:*)", "Bash(pwd)"]
@@ -68,7 +73,7 @@ def run(job, scratch):
     dd, un = os.path.join(scratch, "plugins", cell, "design-doc"), os.path.join(scratch, "plugins", "unslop")
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
     env["SHELL"] = "/bin/bash"
-    cmd = ["claude", "-p", EVALS[ev]["prompt"], "--model", MODEL, "--output-format", "stream-json", "--verbose",
+    cmd = ["claude", "-p", EVALS[ev]["prompt"], "--model", MODEL_OF.get(cell, MODEL), "--output-format", "stream-json", "--verbose",
            "--permission-mode", "acceptEdits", "--setting-sources", "project,local", "--allowedTools", *ALLOWED,
            "--plugin-dir", dd]
     cmd += ["--add-dir", dd] if cell in NO_UNSLOP else ["--plugin-dir", un, "--add-dir", dd, un]

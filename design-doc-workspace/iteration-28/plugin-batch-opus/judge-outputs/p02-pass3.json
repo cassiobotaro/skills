@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"Os produtores reenviam eventos quando fazem retry, e esses reenvios chegam ao pipeline de ingestão como eventos duplicados.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:98 \"9. Que riscos a equipe vê nesta proposta, e como pretende mitigar cada um?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:102 \"10. Como o serviço entra em produção? Em fases (por produtor, por percentual de tráfego)? Qual o critério para avançar de fase e qual o critério e o procedimento de rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (lines 66-68). It holds only a reference to the user's accepted latency cost, a statement that no risks or mitigations have been raised, and the marker \"Esta seção será preenchida com as respostas das Perguntas abertas\". No risk or mitigation is invented."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (lines 70-72). It says only \"Ainda não definido: fases, critério de avanço e critério de rollback estão nas Perguntas abertas.\" No phase, advance criterion or rollback step is stated."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "Heading at line 57: \"### Alternativas consideradas\". Line 62: \"| Deduplicar no consumidor | Cada consumidor teria que reimplementar a deduplicação.\" Line 63: \"| Idempotência nativa do produtor Kafka | Não cobre reenvio entre reinícios do produtor.\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "Heading at line 51: \"### Trade-offs\". Line 55: \"✗ Mais um salto no caminho crítico da ingestão. Estimamos +5ms de latência, e a equipe aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 3: \"**Um desvio do template para você aprovar:** ... Coloquei os dois como subseções dentro de **Proposta** (\\\"Trade-offs\\\" e \\\"Alternativas consideradas\\\")\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "Line 8: \"| **Revisores** | |\". The row is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "Line 84: \"1. Quem deve revisar o documento, e de quais áreas (arquitetura, infraestrutura, financeiro, times dos produtores)?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched all figures: 4% (stated as outubro de 2026, which is last month as of 2026-11-23), 24h, +5ms, 0,1%, duas reclamações. Line 106 mentions \"mensal\" only inside a question. The ID and dates are metadata. No other figure is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline. Line 84 names \"infraestrutura\" as a candidate reviewer area, and the user's message and the template do not name an infrastructure team. It appears inside a question, but the check names no exception for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for Structurizr DSL. There is none, only a Mermaid block."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block (lines 28-46). It has no endpoint, header, status code or failure branch. The only branches are new key vs. already-seen key, which the user gave, and the ordering is marked as open."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Searched for actor assertions: producer→ingestor→service follows from the user's 'fica entre o ingestor e o Kafka'; the service storing keys in Redis and discarding repeats is the user's; 'a equipe aceitou esse custo' matches 'Trade-off aceito'. Key origin and operating team are left to questions 3 and 7."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:68 \"Esta seção será preenchida com as respostas das [Perguntas abertas](#perguntas-abertas).\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas for risks, failure modes and mitigations. Line 49 and the Mermaid note only point open subjects to Perguntas abertas. Line 55 is the user's +5ms. Line 68 states no risk. No Redis-failure, Kafka-failure or 24h-gap consequence is stated as fact."
+ }
+]

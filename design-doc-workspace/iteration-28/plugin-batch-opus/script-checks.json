@@ -1,0 +1,74 @@
+{
+  "71/pn-opus/run-1": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": true,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pn-opus/run-2": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": true,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pn-opus/run-3": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": true,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pn-opus/run-4": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": true,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pe-opus/run-1": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": false,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pe-opus/run-2": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": true,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pe-opus/run-3": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": false,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  },
+  "71/pe-opus/run-4": {
+    "7.1": true,
+    "7.3": true,
+    "7.4": true,
+    "7.5": true,
+    "7.13": true,
+    "7.14": true,
+    "7.15": true
+  }
+}

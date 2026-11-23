@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:77 'Se o serviço não conseguir consultar o Redis, ele deixa o evento passar (aceitando duplicatas) ou bloqueia a ingestão até o Redis voltar?' and :59 says the remaining risks 'dependem de decisões listadas nas perguntas abertas (3, 4 e 6)'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:81 'O serviço entra de uma vez ou em fases (...)? Qual o critério para avançar de fase?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:59 'Os demais riscos da proposta, como o comportamento quando o Redis ou o próprio serviço ficam indisponíveis'. This names the unavailability of Redis and of the service as risks, and the user gave neither."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched the Plano de rollout section, lines 61-63. Its only line is 'As fases, os critérios de avanço e o caminho de rollback dependem das perguntas 7 e 8', a pending marker with no phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:43 '### Alternativas'; :47 'Deduplicar no consumidor. ... Descartada porque cada consumidor teria que reimplementar a deduplicação.'; :49 'Idempotência nativa do produtor Kafka. Descartada porque não cobre o reenvio entre reinícios do produtor.'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:37 '### O que a proposta custa'; :41 'Estimamos +5ms de latência por evento, e o time aceitou esse custo.'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "Reply line 5 'Seção a mais: incluí \"Trade-offs e alternativas consideradas\" entre Proposta e Riscos. ... Se o time de arquitetura não aceitar seção extra, dá para passar esse conteúdo para dentro de Proposta.'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:8 '| **Revisores** | (a definir, ver pergunta 1) |'"
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:75 'Quem revisa este documento e de quais áreas?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the whole document for figures. Found only 4%, 24h, +5ms, 0,1% and 'duas vezes', plus the header dates. No other metric is stated as fact."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "Borderline: docs/design/DD-2026-001-deduplicacao-de-eventos.md:75 names 'o time dono do Redis e do Kafka' as a stakeholder. It is phrased as a suggestion, but no such team appears in the user's message or the template."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the document for a Structurizr DSL block. None found."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the document for a Mermaid block. None found."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor sentences at lines 19-27, 35 and 41. Each one (the ingestor delivers to the service, the service checks and stores the key in Redis and publishes to Kafka, the team accepted the cost) follows from the user's message. Actors not given by the user appear only under Perguntas abertas."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:59 'Os demais riscos da proposta ... dependem de decisões listadas nas [perguntas abertas](#perguntas-abertas) (3, 4 e 6).' and :57 'ainda não estão definidos ([pergunta 5])'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:59 'Os demais riscos da proposta, como o comportamento quando o Redis ou o próprio serviço ficam indisponíveis'. This calls the subject of open questions a risk, which matches the failing pattern."
+ }
+]

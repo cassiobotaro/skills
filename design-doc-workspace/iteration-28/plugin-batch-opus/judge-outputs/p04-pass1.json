@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-servico-deduplicacao-eventos.md:14 'O pipeline de ingestão recebe eventos duplicados dos produtores.'"
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:73 'Que falhas o time já identificou nesta proposta (no serviço, no Redis, na publicação no Kafka) e como mitiga cada uma?'"
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:74 'O serviço entra em produção de uma vez ou em fases (por produtor, por percentual de tráfego, em modo só observação)? Qual o critério para avançar de fase e como se faz o rollback?'"
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched doc:55-57, the Riscos section. It names only the user's accepted cost (the extra hop) and says 'Os riscos de falha da proposta e as mitigações de cada um ainda não foram levantados'. No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched doc:59-61, the Plano de rollout section. It contains only the pending marker 'ainda não foram definidos (ver Perguntas abertas)'. No phase, criterion or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:46 '## Alternativas consideradas'; doc:51 '| Deduplicar no consumidor | Cada consumidor teria que reimplementar a deduplicação. Descartada. |'; doc:52 '| Idempotência nativa do produtor Kafka | Não cobre o reenvio entre reinícios do produtor. Descartada. |'"
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:40 '### Trade-off aceito'; doc:44 'A ingestão ganha mais um salto no caminho crítico. Estimamos +5 ms de latência'"
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:5 'Um desvio do template, para você aprovar:'; reply:7 'Criei a seção **Alternativas consideradas** entre Proposta e Riscos'"
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "doc:8 '| **Revisores** | |' is empty."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:69 'Quem revisa este documento, e de quais áreas?'"
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the doc for figures: 4%, 24 horas, +5 ms, 0,1% and 'duas vezes' all come from the user. 'outubro de 2026' restates the user's 'mês passado' given today's date of 2026-11-23. The header dates are document metadata. No other metric is stated."
+ },
+ {
+  "id": "7.19",
+  "verdict": "met",
+  "evidence": "Searched the doc for technologies, teams and stakeholders. Found only Redis, Kafka, ingestor, produtores, consumidores, financeiro and 'o time'. Mermaid is the diagram format. Operators of Redis and Kafka appear only as questions (doc:77)."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched for Structurizr DSL. The document has none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the Mermaid block at doc:21-37. It has no endpoint, header or status code. Its only branches are new key vs. key already seen, which is the user's dedup logic. The ordering note is marked as open."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked every sentence that names an actor. The service consulting, keeping and discarding keys and publishing to Kafka follows from the user's 'fica entre o ingestor e o Kafka, guarda a chave... e descarta repetidos'. 'o time aceitou' follows from 'Trade-off aceito'. The finance complaints are the user's. No unsupported actor assignment found."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:57 'Os riscos de falha da proposta e as mitigações de cada um ainda não foram levantados; estão em [Perguntas abertas](#perguntas-abertas).'"
+ },
+ {
+  "id": "7.24",
+  "verdict": "met",
+  "evidence": "Searched outside Perguntas abertas (doc:1-66). Riscos states only the accepted hop cost and a pending marker, without listing specific risks. The Trade-off and Alternativas sections restate the user's reasons. The diagram note only points to open questions. No failure mode, mitigation or consequence is stated as fact."
+ }
+]

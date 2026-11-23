@@ -1,0 +1,87 @@
+[
+ {
+  "id": "7.2",
+  "verdict": "met",
+  "evidence": "docs/design/DD-2026-001-deduplicacao-de-eventos.md:14 \"O pipeline de ingestão recebe eventos duplicados dos produtores.\""
+ },
+ {
+  "id": "7.6",
+  "verdict": "met",
+  "evidence": "doc:47 \"As perguntas 3, 4 e 5 em [Perguntas abertas](#perguntas-abertas) listam os pontos que esta seção precisa responder antes da revisão.\"; doc:65 \"Se o Redis cair ou ficar lento, o serviço deixa os eventos passarem (aceitando duplicatas) ou bloqueia a ingestão (aceitando perda de disponibilidade)?\""
+ },
+ {
+  "id": "7.7",
+  "verdict": "met",
+  "evidence": "doc:68 \"O serviço entra de uma vez ou em fases (...)? Qual é o critério para avançar de fase e como fazemos rollback?\""
+ },
+ {
+  "id": "7.8",
+  "verdict": "met",
+  "evidence": "Searched Riscos (doc:43-47). The only risk stated is the user's +5 ms latency. Then: \"Os demais riscos e suas mitigações ainda não foram levantados.\" No invented risk or mitigation."
+ },
+ {
+  "id": "7.9",
+  "verdict": "met",
+  "evidence": "Searched Plano de rollout (doc:49-51). It contains only \"Ainda não definido. Ver a pergunta 6\". No phases, criteria or rollback step."
+ },
+ {
+  "id": "7.10",
+  "verdict": "met",
+  "evidence": "doc:34 \"### Alternativas consideradas\"; doc:39 \"Deduplicar no consumidor | Cada consumidor teria que reimplementar a deduplicação.\"; doc:40 \"Idempotência nativa do produtor Kafka | Não cobre reenvio entre reinícios do produtor\""
+ },
+ {
+  "id": "7.11",
+  "verdict": "met",
+  "evidence": "doc:27 \"### Trade-off aceito\"; doc:31 \"Estimamos +5 ms de latência por evento, e o time aceitou esse custo.\""
+ },
+ {
+  "id": "7.12",
+  "verdict": "met",
+  "evidence": "reply:3 \"**Onde fugi do template:** ... coloquei os dois como subseções dentro de **Proposta**. ... Se preferir tirar essas subseções ou mudar de lugar, me avisa.\""
+ },
+ {
+  "id": "7.16",
+  "verdict": "met",
+  "evidence": "doc:8 \"| **Revisores** | A definir (ver [Perguntas abertas](#perguntas-abertas)) |\". The row is marked as pending."
+ },
+ {
+  "id": "7.17",
+  "verdict": "met",
+  "evidence": "doc:70 \"**Revisores.** Quem revisa?\"; reply:18 \"Quem revisa?\""
+ },
+ {
+  "id": "7.18",
+  "verdict": "met",
+  "evidence": "Searched the doc for figures. Found 4%, 24 horas, +5 ms, 0,1% and 'duas vezes', all given by the user. The only other numbers are dates and the doc ID, which are not metrics."
+ },
+ {
+  "id": "7.19",
+  "verdict": "unmet",
+  "evidence": "borderline: doc:70 \"o time dono do Kafka e do Redis\" names a team that neither the user's message nor the template names. It appears as a candidate inside a question, but this check makes no exception for questions."
+ },
+ {
+  "id": "7.20",
+  "verdict": "met",
+  "evidence": "Searched the doc for Structurizr DSL. There is none."
+ },
+ {
+  "id": "7.21",
+  "verdict": "met",
+  "evidence": "Searched the doc for a Mermaid block. There is none."
+ },
+ {
+  "id": "7.22",
+  "verdict": "met",
+  "evidence": "Checked the actor assertions. The service registering, publishing and discarding follows from the user's description of the service. 'o time aceitou' and 'o financeiro já levou ao time' restate the user's accepted trade-off and the complaints. No actor is assigned an action without a basis."
+ },
+ {
+  "id": "7.23",
+  "verdict": "met",
+  "evidence": "doc:47 \"Os demais riscos e suas mitigações ainda não foram levantados. As perguntas 3, 4 e 5 em [Perguntas abertas](#perguntas-abertas) listam os pontos que esta seção precisa responder antes da revisão.\""
+ },
+ {
+  "id": "7.24",
+  "verdict": "unmet",
+  "evidence": "doc:32 \"✗ A janela é de 24 horas. Um reenvio que chegue depois disso passa como evento novo\". This states a consequence as fact outside Perguntas abertas."
+ }
+]
