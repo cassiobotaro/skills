@@ -19,7 +19,7 @@ Usage (from the repo root):
     ./eval-tools/capture_trigger_transcripts.py \
         --skill-path structurizr/skills/structurizr \
         --query "modela em Structurizr DSL ..." \
-        --model haiku --runs 6 --outdir some-workspace/trigger-evals/transcripts
+        --model claude-opus-5-5 --runs 6 --outdir some-workspace/trigger-evals/transcripts
 """
 
 import argparse
@@ -149,7 +149,7 @@ def main() -> int:
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--skill-path", required=True)
     parser.add_argument("--query", required=True)
-    parser.add_argument("--model", default="haiku")
+    parser.add_argument("--model", default="claude-opus-5-5", help="a model id, not an alias")
     parser.add_argument("--runs", type=int, default=6)
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--outdir", required=True)

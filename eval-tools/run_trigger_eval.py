@@ -48,9 +48,8 @@ It defaults to the target model, claude-opus-5-5: the model that reads the user'
 is the one that decides to invoke a skill, and for this repository's skills that is a large
 model. There the positives sit at 98-100%, so they are a regression guard (a warning prints
 under 90%), and the runs go to the negatives, where the only trigger defect ever found on a
-large model was (a false fire at ~17%). Haiku is opt-in (`--model claude-haiku-5-5
---runs-per-query 5`): take one number per release as an early warning, and do not tune a
-description to it.
+large model was (a false fire at ~17%). Another model is measured only for a concrete
+reason, such as a reported failure on it (`--model <id>`), and no description is tuned to it.
 """
 
 import argparse
