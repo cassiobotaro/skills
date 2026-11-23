@@ -104,3 +104,91 @@ section on texts for other people. Not run here. B is not adopted, and the routi
 trigger check that a change to `unslop`'s description would need was not run.
 
 **Cost.** 40 sessions, US$ 4.81.
+
+## Second variable: the calling skill's text (cell C)
+
+**Decided by the author on 2026-11-23:** `unslop` should run when another skill calls it.
+So the next variable is the instruction in the calling skill, with `unslop` as it is.
+
+**Cell C.** `technical-writing` and `explain` loaded from copies (`--plugin-src`) whose
+instruction to invoke `unslop` is reworded and moved; `unslop` from the repository.
+Everything else is the setup of cell A, which is the control: same day, same CLI, same
+evals and counts.
+
+- `technical-writing`, step 5: "invoke it now, before you reply, … The user's request for
+  the document is the request for this step: they will not name `unslop`, and they do not
+  have to. Skip it only when it is not installed or when the turn wrote no prose." The
+  Deliver section opens with "Deliver after step 5, `unslop` included when it is
+  installed."
+- `explain`, section 5: the paragraph that came after **Deliver** becomes step 9 of the
+  numbered pass, before delivering, with the same two sentences about the request and the
+  same exclusions (an explanation, the user's own draft); "Before sending" says "steps 8
+  and 9".
+
+**Rule, written before the runs.** Over the twelve `technical-writing` sessions: the text
+is the fix if C has U ≥ 8 (A had 1); it has no effect if C has U ≤ 3; in between there is
+no claim beyond the count. `explain` eval 7, four sessions: reported apart, named if 0/4
+or 4/4 (A had 0/4). What `unslop` changed is read from the transcripts, not judged; a pass
+that removes a fact, an actor, a command or a TODO is listed. Before a change ships: a
+behavioral run of the affected evals, since a new step now runs on every document.
+
+### Cell C, results
+
+`tw-c/`, `explain-c/`: 20 sessions, no errors, canaries 2/2 and 2/2, US$ 2.39.
+
+| Request | U, A (control) | U, C |
+|---|---|---|
+| `technical-writing` eval 1, revise `docs/pipeline.md` | 0/4 | 0/4 |
+| `technical-writing` eval 2, write the README | 0/4 | 1/4 |
+| `technical-writing` eval 3, write the runbook in Portuguese | 1/4 | 4/4 |
+| `technical-writing`, the twelve | 1/12 | 5/12 |
+| `explain` eval 7 | 0/4 | 0/4 |
+
+**Reading, by the rule.** U = 5 sits between 3 and 8: no claim beyond the count. Eval 3
+is at 4/4 and eval 1 at 0/4.
+
+**The tool sequences.** Every `explain` session of C is `Read`, then `Skill(explain)`,
+then the final reply, which holds the text: the text exists only in the reply, so a pass
+"before delivering" needs a tool call between drafting and replying, and none made it.
+The `technical-writing` sessions that skipped it are the same shape one step longer: one
+`Write` of the document, then the reply ("I didn't run anything, and I didn't run
+`unslop`", eval 1 run-2). The one eval 2 session that called it did so after the `Write`
+and changed nothing ("I checked it against the unslop rules and made no edits").
+
+**What this points at.** A pass placed after the draft asks for one more turn after the
+work looks done. pstack, the source of `unslop`'s catalog, does not schedule one: its
+callers say "Write it through `unslop`" where they define the output
+(`cursor/plugins`, `pstack/skills/teach`, `blast-radius`, `recall`; read on 2026-11-23,
+not measured there). Cell D tests that order: load `unslop` before drafting and write by
+its rules.
+
+## Third variable: unslop before the draft (cell D)
+
+**Cell D.** `technical-writing` and `explain` from copies; `unslop` from the repository;
+setup of cell A, which stays the control.
+
+- `technical-writing`: step 4 opens with "When the `unslop` skill is installed, invoke
+  it before you draft, and write the draft by its rules: the user's request for the
+  document is the request for this, and they will not name `unslop`." Step 5's first
+  paragraph becomes a check that the prose follows those rules, with the same sentences
+  on the catalog and on a missing fact.
+- `explain`: in section 5, the sentence "Then draft, and pass over the draft in this
+  order" is preceded by the same instruction to invoke `unslop` before drafting; the
+  paragraph after **Deliver** is removed, its exclusions moved with it.
+
+**Rule, written before the runs.** U now counts `unslop` invoked after the calling skill
+and before the reply, at any point. Over the twelve `technical-writing` sessions: D is
+the fix if U ≥ 8; no effect if U ≤ 3. `explain` eval 7 apart, named at 0/4 or 4/4. The
+order (before or after the first `Write`) is listed per session.
+
+### Cell D, results
+
+`tw-d/`: 14 sessions, canaries 2/2, US$ 1.64. U = 0/12 (0/4 on each of evals 1, 2 and
+3, eval 3 included, where A had 1/4 and C 4/4): no session invoked `unslop` before or
+after drafting. By the rule, D has no effect, and it lost what C gained on eval 3.
+`explain-d/`: invalid, every session ended with an error and no transcript content
+(canary 0/2, US$ 0), probably the account's usage limit; not re-run.
+
+**Standing after A, B, C and D.** Only C moved the count (5/12, between the bounds).
+Nothing is adopted; the skills are unchanged. Open: re-run `explain-d`, and a C variant
+for evals 1 and 2 or more runs of C before any decision.

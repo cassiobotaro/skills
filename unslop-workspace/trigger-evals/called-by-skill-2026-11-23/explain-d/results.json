@@ -1,0 +1,127 @@
+{
+ "count": "explain",
+ "plugins": [
+  "explain",
+  "unslop"
+ ],
+ "plugin_src": {
+  "explain": "/tmp/claude-1000/-home-cassiobotaro-Projetos-skills/f2ca3aca-a018-4908-9222-cf6d0a350519/scratchpad/explain-d"
+ },
+ "model": "claude-sonnet-5-5",
+ "runs": [
+  {
+   "eval": "7",
+   "run": 1,
+   "canary": true,
+   "project": "p01",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [],
+   "usd": 0,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "You've hit your 5-hour limit · resets 3:30pm (America/Sao_Paulo) · out of usage credits"
+  },
+  {
+   "eval": "7",
+   "run": 2,
+   "canary": true,
+   "project": "p02",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [],
+   "usd": 0,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "You've hit your 5-hour limit · resets 3:30pm (America/Sao_Paulo) · out of usage credits"
+  },
+  {
+   "eval": "7",
+   "run": 1,
+   "canary": false,
+   "project": "p03",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [],
+   "usd": 0,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "You've hit your 5-hour limit · resets 3:30pm (America/Sao_Paulo) · out of usage credits"
+  },
+  {
+   "eval": "7",
+   "run": 2,
+   "canary": false,
+   "project": "p04",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [],
+   "usd": 0,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "You've hit your 5-hour limit · resets 3:30pm (America/Sao_Paulo) · out of usage credits"
+  },
+  {
+   "eval": "7",
+   "run": 3,
+   "canary": false,
+   "project": "p05",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [],
+   "usd": 0,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "You've hit your 5-hour limit · resets 3:30pm (America/Sao_Paulo) · out of usage credits"
+  },
+  {
+   "eval": "7",
+   "run": 4,
+   "canary": false,
+   "project": "p06",
+   "installed": [
+    "explain:explain",
+    "unslop:unslop"
+   ],
+   "invoked": [],
+   "hit": false,
+   "first_call": false,
+   "files_changed": [],
+   "models": [],
+   "usd": 0,
+   "turns": 1,
+   "denials": 0,
+   "reply_start": "You've hit your 5-hour limit · resets 3:30pm (America/Sao_Paulo) · out of usage credits"
+  }
+ ]
+}
