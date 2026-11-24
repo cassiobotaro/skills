@@ -84,8 +84,8 @@ def run(job, a, evals, plugins):
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
     env["SHELL"] = "/bin/bash"   # zsh aliases ls to eza here, which lists nothing without a terminal
     prompts = [(f"Use the {a.count} skill. " if canary else "") + evals[ev]["prompt"]]
-    if evals[ev].get("followup") and not canary:
-        prompts.append(evals[ev]["followup"])
+    if not canary:
+        prompts += evals[ev].get("followups") or ([evals[ev]["followup"]] if evals[ev].get("followup") else [])
     allowed = ALLOWED + (["Agent", "Task"] if a.allow_agent else [])
     os.makedirs(os.path.join(a.out, "transcripts"), exist_ok=True)
     tag = f"{'canary' if canary else 'eval-' + ev}-run-{n}"
@@ -143,8 +143,8 @@ def main():
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--timeout", type=int, default=1500)
     ap.add_argument("--spec", help="an evals.json to read instead of <workspace>/evals/evals.json; its fixture "
-                    "paths are relative to its own directory. An eval may carry a \"followup\" prompt, sent "
-                    "as a second turn of the same session (--resume)")
+                    "paths are relative to its own directory. An eval may carry a \"followup\" prompt, or a list "
+                    "of \"followups\", sent as later turns of the same session (--resume); \"/compact\" is one")
     ap.add_argument("--allow-agent", action="store_true", help="let the session start subagents (Agent tool)")
     ap.add_argument("--plugin-src", action="append", default=[], metavar="NAME=DIR",
                     help="load plugin NAME from DIR instead of the repository (a candidate text); repeatable")
