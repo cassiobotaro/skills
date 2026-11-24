@@ -98,6 +98,10 @@ They cost real runs; each one produced a healthy-looking wrong number.
   project it may edit the file directly (`design-doc` update requests: 3/3 there, 0/16 in a
   project). Use `probe_in_project.py`, which gives each session its own project with the
   fixture and loads the plugins with `--plugin-dir` from outside it, plus a canary.
+- **A second turn follows a skill it already loaded without calling it again.** In a
+  `followup` turn neither the caller nor `unslop` is invoked a second time, yet most sessions
+  still apply the loaded text: a Skill-call count reads 0 there for a reason unrelated to the
+  behavior. Read the turn's edits before counting a skip.
 - **Skills inside the project are read without the Skill tool.** A session finds committed
   `.claude/skills/` files with `git ls-files` and follows them, so an invocation count reads 0
   for a reason unrelated to the description. Load plugins from outside the project.
