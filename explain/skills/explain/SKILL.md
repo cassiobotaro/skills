@@ -11,7 +11,8 @@ description: >
   else, and whenever they ask for help communicating with someone ("write an email to",
   "help me reply to this", "how do I tell my manager", "make this clearer", "simplify this
   for", "responde esse cliente", "melhora essa mensagem"). Use it even when they never say
-  "explain" or "didactic". Do not use it for a fact that fits in one line, for a design
+  "explain", and when the text is one step of a larger task ("change the code and tell the
+  team"). Do not use it for a fact that fits in one line, for a design
   doc, an ADR, a diagram, code comments, a translation, or a request to run unslop by name.
 ---
 
