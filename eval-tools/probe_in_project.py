@@ -19,11 +19,55 @@ and <out>/transcripts/. Skills inside the project (.claude/skills/, committed) a
 by `git ls-files` and read without the Skill tool, which is why the plugins stay outside:
 see eval-tools/README.md.
 """
-import argparse, concurrent.futures as cf, json, os, shutil, subprocess
+import argparse, concurrent.futures as cf, glob, json, os, shutil, subprocess
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALLOWED = ["Skill", "Bash(date:*)", "Bash(ls:*)", "Bash(find:*)", "Bash(mkdir:*)", "Bash(cat:*)", "Bash(pwd)"]
 GIT = ["git", "-c", "user.name=eval", "-c", "user.email=eval@example.invalid", "-c", "commit.gpgsign=false"]
+
+
+def events_of(stdout, turn):
+    """Tool calls of one `claude -p` stream, in order: (turn, tool, skill name or file path)."""
+    ev, final, listed = [], None, None
+    for line in stdout.splitlines():
+        try:
+            o = json.loads(line)
+        except ValueError:
+            continue
+        if o.get("type") == "system" and o.get("subtype") == "init":
+            listed = o.get("skills") or []
+        if o.get("type") == "assistant" and not o.get("parent_tool_use_id"):
+            for b in (o.get("message") or {}).get("content") or []:
+                if b.get("type") == "tool_use":
+                    i = b["input"]
+                    ev.append((turn, b["name"], (i.get("skill") or "").split(":")[-1] or i.get("file_path")
+                               or i.get("description") or ""))
+        if o.get("type") == "result":
+            final = o
+    return ev, final, listed
+
+
+def subagents_of(session_id):
+    """Each subagent of the session, read from the transcripts the CLI keeps under ~/.claude/projects."""
+    out = []
+    for f in sorted(glob.glob(os.path.expanduser(f"~/.claude/projects/*/{session_id}/subagents/agent-*.jsonl"))):
+        skills, writes, models = [], [], set()
+        for line in open(f):
+            try:
+                o = json.loads(line)
+            except ValueError:
+                continue
+            m = o.get("message") or {}
+            if o.get("type") == "assistant" and isinstance(m.get("content"), list):
+                models.add(m.get("model"))
+                for b in m["content"]:
+                    if b.get("type") == "tool_use" and b["name"] == "Skill":
+                        skills.append((b["input"].get("skill") or "").split(":")[-1])
+                    if b.get("type") == "tool_use" and b["name"] in ("Write", "Edit"):
+                        writes.append((b["name"], b["input"].get("file_path")))
+        out.append({"agent": os.path.basename(f)[6:-6], "models": sorted(x for x in models if x),
+                    "skills": skills, "writes": writes})
+    return out
 
 
 def run(job, a, evals, plugins):
@@ -34,48 +78,52 @@ def run(job, a, evals, plugins):
     for rel in evals[ev].get("files") or []:
         out = os.path.join(project, *rel.split("/")[a.strip:])   # files/<fixture>/<path> becomes <path>
         os.makedirs(os.path.dirname(out), exist_ok=True)
-        shutil.copyfile(os.path.join(REPO, a.workspace, "evals", rel), out)
+        shutil.copyfile(os.path.join(a.spec_dir, rel), out)
     for args in (["init", "-q"], ["add", "-A"], ["commit", "-q", "--allow-empty", "-m", "start"]):
         subprocess.run([*GIT, *args], cwd=project, check=True)
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
     env["SHELL"] = "/bin/bash"   # zsh aliases ls to eza here, which lists nothing without a terminal
-    prompt = (f"Use the {a.count} skill. " if canary else "") + evals[ev]["prompt"]
-    cmd = ["claude", "-p", prompt, "--model", a.model, "--output-format", "stream-json", "--verbose",
-           "--permission-mode", "acceptEdits", "--setting-sources", "project,local", "--allowedTools", *ALLOWED]
-    for name in plugins:
-        cmd += ["--plugin-dir", os.path.join(a.scratch, "plugins", name)]
-    try:
-        p = subprocess.run(cmd, cwd=project, env=env, capture_output=True, text=True, timeout=a.timeout,
-                           stdin=subprocess.DEVNULL)
-    except subprocess.TimeoutExpired:
-        return {"eval": ev, "run": n, "canary": canary, "error": "timeout"}
+    prompts = [(f"Use the {a.count} skill. " if canary else "") + evals[ev]["prompt"]]
+    if evals[ev].get("followup") and not canary:
+        prompts.append(evals[ev]["followup"])
+    allowed = ALLOWED + (["Agent", "Task"] if a.allow_agent else [])
     os.makedirs(os.path.join(a.out, "transcripts"), exist_ok=True)
     tag = f"{'canary' if canary else 'eval-' + ev}-run-{n}"
-    open(os.path.join(a.out, "transcripts", tag + ".jsonl"), "w").write(p.stdout)
-    calls, final, listed = [], None, None
-    for line in p.stdout.splitlines():
+    events, finals, listed, session = [], [], None, None
+    for turn, prompt in enumerate(prompts, 1):
+        cmd = ["claude", "-p", prompt, "--model", a.model, "--output-format", "stream-json", "--verbose",
+               "--permission-mode", "acceptEdits", "--setting-sources", "project,local", "--allowedTools", *allowed]
+        if session:
+            cmd += ["--resume", session]
+        for name in plugins:
+            cmd += ["--plugin-dir", os.path.join(a.scratch, "plugins", name)]
         try:
-            o = json.loads(line)
-        except ValueError:
-            continue
-        if o.get("type") == "system" and o.get("subtype") == "init":
-            listed = sorted(s for s in (o.get("skills") or []) if s.split(":")[-1] in plugins)
-        if o.get("type") == "assistant":
-            calls += [(b["name"], (b["input"].get("skill") or "").split(":")[-1])
-                      for b in (o.get("message") or {}).get("content") or [] if b.get("type") == "tool_use"]
-        if o.get("type") == "result":
-            final = o
-    if final is None:
-        return {"eval": ev, "run": n, "canary": canary, "error": (p.stderr or p.stdout)[-300:]}
-    invoked = [s for name, s in calls if name == "Skill"]
-    changed = subprocess.run([*GIT, "status", "--porcelain"], cwd=project, capture_output=True, text=True).stdout
-    return {"eval": ev, "run": n, "canary": canary, "project": f"p{idx:02d}", "installed": listed,
-            "invoked": invoked, "hit": a.count in invoked,
-            "first_call": bool(calls) and calls[0] == ("Skill", a.count),
+            p = subprocess.run(cmd, cwd=project, env=env, capture_output=True, text=True, timeout=a.timeout,
+                               stdin=subprocess.DEVNULL)
+        except subprocess.TimeoutExpired:
+            return {"eval": ev, "run": n, "canary": canary, "error": f"timeout in turn {turn}"}
+        suffix = "" if turn == 1 else f"-turn-{turn}"
+        open(os.path.join(a.out, "transcripts", tag + suffix + ".jsonl"), "w").write(p.stdout)
+        ev_t, final, lst = events_of(p.stdout, turn)
+        if final is None:
+            return {"eval": ev, "run": n, "canary": canary, "error": f"turn {turn}: " + (p.stderr or p.stdout)[-300:]}
+        events += ev_t
+        finals.append(final)
+        listed = listed or lst
+        session = final.get("session_id")
+    listed = sorted(s for s in (listed or []) if s.split(":")[-1] in plugins)
+    invoked = [d for _, name, d in events if name == "Skill"]
+    changed = subprocess.run([*GIT, "status", "--porcelain", "-uall"], cwd=project, capture_output=True, text=True).stdout
+    return {"eval": ev, "run": n, "canary": canary, "project": f"p{idx:02d}", "session": session,
+            "installed": listed, "invoked": invoked, "hit": a.count in invoked,
+            "first_call": bool(events) and events[0][1:] == ("Skill", a.count),
+            "events": events, "subagents": subagents_of(session) if session else [],
             "files_changed": sorted(l[3:] for l in changed.splitlines()),
-            "models": sorted((final.get("modelUsage") or {}).keys()), "usd": final.get("total_cost_usd"),
-            "turns": final.get("num_turns"), "denials": len(final.get("permission_denials") or []),
-            "reply_start": (final.get("result") or "").strip()[:240]}
+            "models": sorted({m for f in finals for m in (f.get("modelUsage") or {})}),
+            "usd": sum(f.get("total_cost_usd") or 0 for f in finals),
+            "turns": [f.get("num_turns") for f in finals],
+            "denials": sum(len(f.get("permission_denials") or []) for f in finals),
+            "replies": [(f.get("result") or "").strip() for f in finals]}
 
 
 def main():
@@ -94,6 +142,10 @@ def main():
     ap.add_argument("--model", default="claude-opus-5-5", help="a model id, not an alias")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--timeout", type=int, default=1500)
+    ap.add_argument("--spec", help="an evals.json to read instead of <workspace>/evals/evals.json; its fixture "
+                    "paths are relative to its own directory. An eval may carry a \"followup\" prompt, sent "
+                    "as a second turn of the same session (--resume)")
+    ap.add_argument("--allow-agent", action="store_true", help="let the session start subagents (Agent tool)")
     ap.add_argument("--plugin-src", action="append", default=[], metavar="NAME=DIR",
                     help="load plugin NAME from DIR instead of the repository (a candidate text); repeatable")
     a = ap.parse_args()
@@ -102,7 +154,9 @@ def main():
         raise SystemExit("--scratch must be outside the repository")
     plugins = a.plugins.split(",")
     ids = a.evals.split(",")
-    spec = json.load(open(os.path.join(REPO, a.workspace, "evals", "evals.json")))
+    spec_path = os.path.abspath(a.spec) if a.spec else os.path.join(REPO, a.workspace, "evals", "evals.json")
+    a.spec_dir = os.path.dirname(spec_path)
+    spec = json.load(open(spec_path))
     evals = {str(e["id"]): e for e in spec["evals"]}
     if a.strip is None:
         a.strip = spec.get("fixture_strip", 2)
@@ -119,7 +173,8 @@ def main():
     with cf.ThreadPoolExecutor(a.workers) as ex:
         for res in ex.map(lambda j: run(j, a, evals, plugins), jobs):
             out.append(res)
-            print(json.dumps({k: v for k, v in res.items() if k != "reply_start"}, ensure_ascii=False), flush=True)
+            print(json.dumps({k: v for k, v in res.items() if k not in ("replies", "events", "subagents")},
+                             ensure_ascii=False), flush=True)
     json.dump({"count": a.count, "plugins": plugins, "plugin_src": src, "model": a.model, "runs": out},
               open(os.path.join(a.out, "results.json"), "w"), ensure_ascii=False, indent=1)
     ok = [r for r in out if "error" not in r]
