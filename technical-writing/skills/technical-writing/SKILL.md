@@ -138,7 +138,9 @@ Portuguese, or when you review a text you did not write.
 When the `unslop` skill is installed, invoke it on the prose you wrote or rewrote in this
 turn, after the actor pass. It owns the catalog of machine-writing patterns, and this
 skill does not repeat that catalog. A fact that skill finds missing is a question for the
-user (contract 2). Then check:
+user (contract 2). When subagents write part of the prose, this pass stays in your session:
+once they return, invoke `unslop` here on what they wrote. You know whether it is installed,
+so never pass the step on as a condition. Then check:
 
 - Every verb has an actor, and each passive left is one of the two that stay.
 - Every command, flag, path, name, and output exists in the repository or came from a run.

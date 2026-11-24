@@ -250,8 +250,9 @@ beliefs, and information is one input.
 
 When the `unslop` skill is installed, invoke it on a text you drafted in this section,
 after step 8 and before delivering. It does not apply to an explanation of section 3,
-where an analogy and a closing question are deliberate, nor to the user's own draft. The
-steps above are the floor for an install without it.
+where an analogy and a closing question are deliberate, nor to the user's own draft. When a
+subagent drafts the text, invoke `unslop` in your session before delivering, never as a
+condition passed on to it. The steps above are the floor for an install without it.
 
 ## Do not
 

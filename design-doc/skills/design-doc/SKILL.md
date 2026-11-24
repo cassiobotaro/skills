@@ -173,7 +173,9 @@ substance is missing.
   floor that holds without it. Headings, a governing template's structure, and diagram
   sources are not prose and stay as they are. A fact it finds missing becomes an open
   question (contract 2). In a review, the author's own text is never run through it: the
-  review names what it found and the author decides.
+  review names what it found and the author decides. When subagents write part of the
+  document, this pass stays in your session: once they return, invoke `unslop` here on what
+  they wrote. You know whether it is installed, so never pass the step on as a condition.
 - The design is not one section but a **series** of sections — the solution overview
   first, then only the details that earn their place. `references/sections.md` holds the
   menu and the two tests (longevity, freedom) for whether a detail belongs in the
@@ -188,8 +190,9 @@ substance is missing.
 
 Before declaring done, check:
 
-- The `unslop` skill, when it is installed, was invoked on this turn's prose (step 3).
-  Reading its file is not running it. If it was not run, run it now.
+- The `unslop` skill, when it is installed, was invoked on this turn's prose (step 3), in
+  this session, prose a subagent wrote included. Reading its file is not running it. If it
+  was not run, run it now.
 - Nothing in the document that the user or the repository didn't establish. Read each
   open question against the body: no section may state as fact what the question asks.
 - The header's state reflects reality, and dates are real (`date +%Y-%m-%d`).

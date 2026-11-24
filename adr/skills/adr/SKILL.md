@@ -219,6 +219,11 @@ not prose and stays exact. The seed of step 4 stays as `references/examples.md` 
 and no existing record is in its reach (rule 4). A fact it finds missing is a question for
 the user (rule 1).
 
+When subagents write some of the records, this pass stays in your session: once they
+return, invoke `unslop` here on every record they wrote, then do the self-review on them.
+You know whether `unslop` is installed, so never pass the step on as a condition ("if it is
+available").
+
 ### 4. Initialize a fresh log
 
 When no ADR log exists anywhere, mirror `adr init`: create `doc/adr/`, seed it with the
@@ -236,8 +241,8 @@ invocations find it.
 
 Before declaring done, check the new file and every edited file:
 
-- The `unslop` skill, when it is installed, was invoked on the new record's prose (step 3).
-  If it was not run, run it now.
+- The `unslop` skill, when it is installed, was invoked on the new record's prose (step 3),
+  in this session, a record a subagent wrote included. If it was not run, run it now.
 - Four sections in order, one-blank-line discipline, scaffolding in canonical English
   whatever the prose language (rule 2); the H1 number matches the filename number and the
   slug derives from the H1 title; the `Date:` value is today's real date.

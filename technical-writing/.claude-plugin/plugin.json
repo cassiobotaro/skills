@@ -1,7 +1,7 @@
 {
   "name": "technical-writing",
   "description": "Write, revise, and review technical documents (README, how-to, tutorial, reference, runbook, release notes, PR description) in the active voice: every verb has a named actor, looked up in the code and never guessed",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": { "name": "Cássio Botaro", "email": "cassiobotaro@gmail.com" },
   "repository": "https://github.com/cassiobotaro/skills",
   "license": "MIT",
