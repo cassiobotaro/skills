@@ -86,7 +86,7 @@ def run(job, a, evals, plugins):
     prompts = [(f"Use the {a.count} skill. " if canary else "") + evals[ev]["prompt"]]
     if not canary:
         prompts += evals[ev].get("followups") or ([evals[ev]["followup"]] if evals[ev].get("followup") else [])
-    allowed = ALLOWED + (["Agent", "Task"] if a.allow_agent else [])
+    allowed = ALLOWED + (["Agent", "Task"] if a.allow_agent else []) + a.allow
     os.makedirs(os.path.join(a.out, "transcripts"), exist_ok=True)
     tag = f"{'canary' if canary else 'eval-' + ev}-run-{n}"
     events, finals, listed, session = [], [], None, None
@@ -145,6 +145,8 @@ def main():
     ap.add_argument("--spec", help="an evals.json to read instead of <workspace>/evals/evals.json; its fixture "
                     "paths are relative to its own directory. An eval may carry a \"followup\" prompt, or a list "
                     "of \"followups\", sent as later turns of the same session (--resume); \"/compact\" is one")
+    ap.add_argument("--allow", action="append", default=[], metavar="TOOL",
+                    help="one more allowed tool, e.g. 'Bash(openspec:*)'; repeatable")
     ap.add_argument("--allow-agent", action="store_true", help="let the session start subagents (Agent tool)")
     ap.add_argument("--plugin-src", action="append", default=[], metavar="NAME=DIR",
                     help="load plugin NAME from DIR instead of the repository (a candidate text); repeatable")
